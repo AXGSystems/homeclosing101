@@ -201,7 +201,7 @@ export default function ClosingOptionsPage() {
               { name: "Escrow Agreement", desc: "Sets up your escrow account for property taxes and insurance, specifying the initial deposit and monthly contributions." },
               { name: "Initial Escrow Disclosure", desc: "Itemizes the amounts going into your escrow account and the projected disbursement schedule." },
             ].map((doc) => (
-              <div key={doc.name} className="p-4 bg-white rounded-xl border border-gray-100 shadow-sm">
+              <div key={doc.name} className="p-4 bg-white rounded-xl border border-gray-100 shadow-sm tile-interactive">
                 <h3 className="text-sm font-bold text-alta-navy mb-1">{doc.name}</h3>
                 <p className="text-xs text-alta-gray leading-relaxed">{doc.desc}</p>
               </div>

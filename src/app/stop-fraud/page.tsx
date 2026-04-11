@@ -125,7 +125,7 @@ export default function StopFraudPage() {
         <h2 className="text-2xl font-bold text-alta-navy mb-6">10 Steps to Prevent Wire Fraud</h2>
         <div className="space-y-4 mb-12">
           {preventionSteps.map((step) => (
-            <div key={step.num} className="flex gap-4 p-5 bg-white rounded-xl border border-gray-100 shadow-sm">
+            <div key={step.num} className="flex gap-4 p-5 bg-white rounded-xl border border-gray-100 shadow-sm tile-interactive">
               <div className="w-10 h-10 rounded-full bg-alta-red text-white flex items-center justify-center font-bold text-sm shrink-0">
                 {step.num}
               </div>

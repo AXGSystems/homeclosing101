@@ -118,7 +118,7 @@ export default function ProtectYourRightsPage() {
               { step: "5", title: "Issue Resolution (Curative Work)", desc: "If the search uncovers problems — missing signatures, unreleased mortgages, boundary disputes, estate issues — the title company works to resolve (cure) them before closing. This is one of the most valuable services title professionals provide." },
               { step: "6", title: "Policy Issuance", desc: "Once all issues are resolved and the transaction closes, the title company issues the final title insurance policy. The owner's policy protects you; the lender's policy protects the bank. Your owner's policy remains in effect for as long as you or your heirs own the property." },
             ].map((s) => (
-              <div key={s.step} className="flex gap-4 items-start p-4 bg-white rounded-xl border border-gray-100 shadow-sm">
+              <div key={s.step} className="flex gap-4 items-start p-4 bg-white rounded-xl border border-gray-100 shadow-sm tile-interactive">
                 <span className="w-8 h-8 rounded-full bg-alta-teal text-white flex items-center justify-center text-xs font-bold shrink-0">{s.step}</span>
                 <div>
                   <h3 className="font-bold text-alta-navy text-sm">{s.title}</h3>
@@ -144,7 +144,7 @@ export default function ProtectYourRightsPage() {
               { risk: "Someone has a lien on your property — such as a mortgage, tax lien, or judgment — that wasn't disclosed", example: "A contractor who did work for the previous owner files a mechanic's lien for unpaid work. Your title insurance defends you and pays the lien if covered." },
               { risk: "Lack of legal access to and from the property", example: "After closing, you discover your driveway crosses a neighbor's property and they demand you stop using it. Title insurance covers the cost of establishing legal access." },
             ].map((item, i) => (
-              <div key={i} className="p-4 bg-white rounded-xl border border-gray-100 shadow-sm">
+              <div key={i} className="p-4 bg-white rounded-xl border border-gray-100 shadow-sm tile-interactive">
                 <div className="flex items-start gap-3">
                   <div className="w-7 h-7 rounded-lg bg-green-100 flex items-center justify-center shrink-0 mt-0.5">
                     <svg className="w-4 h-4 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" /></svg>

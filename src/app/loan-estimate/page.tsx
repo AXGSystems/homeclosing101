@@ -73,7 +73,7 @@ export default function LoanEstimatePage() {
           <h2 className="text-xl font-bold text-alta-navy mb-4">When You&apos;ll Receive It</h2>
           <div className="grid sm:grid-cols-2 gap-3 mb-10">
             {timeline.map((t) => (
-              <div key={t.when} className="p-4 bg-white rounded-xl border border-gray-100 shadow-sm">
+              <div key={t.when} className="p-4 bg-white rounded-xl border border-gray-100 shadow-sm tile-interactive">
                 <p className="text-sm font-semibold text-alta-navy mb-1">{t.when}</p>
                 <p className="text-xs text-alta-gray leading-relaxed">{t.what}</p>
                 <p className="text-[10px] text-alta-teal mt-2 font-medium">Source: {t.source}</p>

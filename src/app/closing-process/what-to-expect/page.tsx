@@ -11,38 +11,45 @@ export const metadata: Metadata = {
 const steps = [
   {
     title: "Learn About Loan Options & Get Pre-Approved",
-    content: "Understanding the types of mortgages available helps you determine what you can afford before you start house hunting. Different loans affect your upfront costs, monthly payments, total interest paid, and level of financial risk. Getting pre-approved gives you a clear budget and shows sellers you're a serious buyer.",
+    content: "Understanding the types of mortgages available is the foundation of your homebuying journey. Each loan type — conventional, FHA, VA, USDA — has different requirements for down payment (3% to 20%), credit score (580 to 740+), and mortgage insurance. Your choice affects not just your monthly payment, but your total cost over the life of the loan.\n\nPre-approval is different from pre-qualification. Pre-qualification is an informal estimate based on what you tell the lender. Pre-approval is a formal process where the lender verifies your income, assets, debts, and credit history, then issues a conditional commitment for a specific loan amount. Sellers take pre-approved buyers far more seriously.\n\nGet pre-approved by at least 2-3 lenders so you can compare Loan Estimates. Under CFPB rules, your lender must provide a Loan Estimate within 3 business days of your application. Compare APRs (not just interest rates) — the APR includes fees and gives you the true cost.",
     image: "https://images.unsplash.com/photo-1560520653-9e0e4c89eb11?w=400&q=80",
+    tip: "Multiple credit inquiries for mortgages within a 14-45 day window (depending on the scoring model) count as a single inquiry on your credit report. Don't be afraid to shop around.",
   },
   {
     title: "Find a Property",
-    content: "Work with a real estate agent and use online resources to find homes that match your needs and budget. Your agent can help you understand neighborhoods, market conditions, and property values in your target area.",
+    content: "Your real estate agent is your advocate throughout this process. They have access to the Multiple Listing Service (MLS), understand local market conditions, can identify properties that match your criteria, and will represent your interests in negotiations.\n\nWhen evaluating properties, look beyond the cosmetics. Consider the neighborhood (schools, commute, crime rates, future development), the age and condition of major systems (roof, HVAC, plumbing, electrical), property tax rates, HOA fees and rules, and resale potential. Attend open houses to get a feel for the market — you'll learn to spot value and avoid overpaying.\n\nYour agent can pull comparable sales ('comps') to help you understand whether a listing price is fair. In a competitive market, you may need to act quickly and make strong offers.",
     image: "https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=400&q=80",
+    tip: "Don't skip the neighborhood research. Visit the area at different times of day — a quiet street at 2 PM might be a traffic nightmare at 5 PM.",
   },
   {
     title: "Make an Offer",
-    content: "Once you find the right home, submit a purchase proposal that includes your offered price and terms. The seller may accept, reject, or counter your offer. Your agent will help you negotiate to reach an agreement that works for both parties.",
+    content: "Your purchase offer is a legally significant document. It includes your offered price, proposed closing date, earnest money deposit amount (typically 1-3% of the price), contingencies (conditions that must be met), and any requests for the seller to pay closing costs or make repairs.\n\nCommon contingencies protect you: financing contingency (you can back out if your loan falls through), inspection contingency (you can renegotiate or exit if the inspection reveals major issues), and appraisal contingency (protects you if the home appraises for less than your offer).\n\nThe seller may accept, reject, or counter your offer. Counteroffers go back and forth until both parties agree. Once both sides sign, you have a binding purchase agreement and the clock starts ticking toward closing. Your earnest money deposit is typically due within a few days.",
     image: "https://images.unsplash.com/photo-1573497620053-ea5300f94f21?w=400&q=80",
+    tip: "In competitive markets, buyers sometimes waive contingencies to make their offer stronger. Be very careful about waiving the inspection contingency — a $400 inspection can uncover $40,000 in problems.",
   },
   {
     title: "Sign the Purchase Agreement",
-    content: "The purchase agreement contains all the details of your transaction — price, contingencies, timeline, and responsibilities. While not required, having an attorney review this document is recommended, especially for complex transactions.",
+    content: "The purchase agreement (also called a sales contract or purchase contract) is the master document governing your entire transaction. It specifies the purchase price, closing date, what's included in the sale (appliances, fixtures, etc.), all contingencies with their deadlines, how disputes will be resolved, and each party's responsibilities.\n\nKey sections to review carefully: the legal property description (must match the deed), the closing date and time, who pays which closing costs, the earnest money amount and where it's held (usually in the title company's escrow account), and the contingency deadlines — if you miss a deadline, you may lose your right to exercise that contingency.\n\nWhile not required in every state, having an attorney review the purchase agreement before you sign is recommended, especially for first-time buyers or complex transactions (short sales, estate sales, new construction).",
     image: "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=400&q=80",
+    tip: "Read every word of the purchase agreement. If you don't understand something, ask your agent or attorney before signing. Once signed, you're legally bound to the terms.",
   },
   {
     title: "Get Funding",
-    content: "After selecting your mortgage type, you'll formally express your intent to proceed. Your lender will then charge fees and begin processing your loan. This includes ordering an appraisal, verifying your finances, and underwriting the loan.",
+    content: "After your offer is accepted, you formally apply for your mortgage (if you haven't already done so through pre-approval). Your lender will order an appraisal to verify the property is worth the purchase price, pull updated credit reports, verify your employment and income, and review your bank statements to confirm your down payment source.\n\nThis phase — called underwriting — is where the lender decides whether to approve your loan. The underwriter reviews everything: your debt-to-income ratio, your credit history, the property's appraised value, and any conditions from the title search. They may ask for additional documentation (tax returns, explanation letters for large deposits, etc.).\n\nOnce the underwriter is satisfied, they issue a 'clear to close' — meaning your loan is fully approved and the lender is ready to fund. This is also when you should lock your interest rate if you haven't already. Rate locks typically last 30-60 days.",
     image: "https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=400&q=80",
+    tip: "Do NOT make large purchases, open new credit accounts, change jobs, or make large cash deposits during the underwriting period. Any of these can delay or derail your loan approval.",
   },
   {
     title: "Get Insurance",
-    content: "Lenders typically require one year of homeowner's insurance prepaid at closing. Many set up escrow accounts for ongoing tax and insurance payments. For a one-time fee, an owner's title insurance policy provides coverage for as long as you own your home — protecting you from hidden defects in title.",
+    content: "You'll need two types of insurance before closing: homeowner's insurance and title insurance.\n\nHomeowner's insurance (hazard insurance) protects against damage from fire, storms, theft, and liability. Most lenders require at least one year's premium paid at closing, and ongoing premiums are usually collected monthly through your escrow account. Shop around — premiums vary significantly between carriers.\n\nTitle insurance protects your ownership rights. There are two types: the lender's policy (required by your mortgage company, protects the bank) and the owner's policy (optional but strongly recommended, protects YOU). The owner's policy is a one-time fee at closing — typically 0.5% to 1% of the purchase price — that covers you and your heirs for as long as you own the property.\n\nTitle searches reveal issues in approximately one out of every three residential transactions (source: ALTA). Without an owner's title insurance policy, you'd be personally responsible for legal defense costs if someone challenges your ownership — even if the claim is baseless. Legal defense alone can cost $50,000 or more.",
     image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=400&q=80",
+    tip: "You have the legal right to choose your own title company (RESPA). Shopping around can save hundreds of dollars. Ask about the simultaneous issue discount when buying both lender's and owner's policies from the same company.",
   },
   {
     title: "Close the Transaction",
-    content: "Your closing agent — which may be a title agent, settlement agent, or attorney depending on your location — gathers all required documents, closes the loan, and manages the transfer of funds. You'll sign your final documents, pay your closing costs, and receive the keys to your new home.",
+    content: "Closing (also called settlement) is the final step. Your closing agent — a title agent, settlement agent, escrow officer, or attorney depending on your state — coordinates the entire process: gathering all required documents, calculating final figures, disbursing funds, and recording the deed.\n\nBefore closing day, you should: receive and review your Closing Disclosure at least 3 business days before closing (compare it line-by-line to your Loan Estimate), verify your wire transfer instructions BY PHONE using a number you already have (never trust emailed wire instructions), complete a final walk-through of the property, and gather your required documents (photo ID, proof of insurance, certified funds).\n\nAt the closing table, you'll sign 50-100+ pages of documents including the promissory note (your promise to repay), the deed of trust (security instrument giving the lender foreclosure rights), the closing disclosure (final costs), and various affidavits and disclosures. Your closing agent will explain each document.\n\nOnce everything is signed, funds are disbursed: the seller receives their proceeds, the real estate agents receive their commissions, and all closing costs are paid. The deed is recorded with the county, officially transferring ownership to you. You receive the keys to your new home.",
     image: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=400&q=80",
+    tip: "Bring more than you think you need: two forms of ID, your checkbook (as backup), and phone numbers for your lender, agent, and insurance company in case any last-minute questions come up.",
   },
 ];
 
@@ -110,7 +117,17 @@ export default function WhatToExpectPage() {
                 {/* Content */}
                 <div className="flex-1">
                   <h3 className="font-bold text-alta-navy text-lg mb-2">{step.title}</h3>
-                  <p className="text-alta-gray leading-relaxed">{step.content}</p>
+                  <div className="space-y-3">
+                    {step.content.split('\n\n').map((paragraph, pIdx) => (
+                      <p key={pIdx} className="text-sm text-alta-gray leading-relaxed">{paragraph}</p>
+                    ))}
+                  </div>
+                  {step.tip && (
+                    <div className="mt-3 p-3 bg-amber-50 rounded-xl border border-amber-100 flex items-start gap-2">
+                      <svg className="w-4 h-4 text-amber-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 18v-5.25m0 0a6.01 6.01 0 001.5-.189m-1.5.189a6.01 6.01 0 01-1.5-.189m3.75 7.478a12.06 12.06 0 01-4.5 0m3.75 2.383a14.406 14.406 0 01-3 0M14.25 18v-.192c0-.983.658-1.823 1.508-2.316a7.5 7.5 0 10-7.517 0c.85.493 1.509 1.333 1.509 2.316V18" /></svg>
+                      <p className="text-xs text-amber-800 leading-relaxed"><strong>Tip:</strong> {step.tip}</p>
+                    </div>
+                  )}
                 </div>
               </div>
             ))}

@@ -130,6 +130,19 @@ html {
   transition: background 0.3s ease, color 0.3s ease;
 }
 
+/* Universal interactive tile — any card with hover feedback */
+.tile-interactive {
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+.tile-interactive:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+  border-color: rgba(10, 142, 188, 0.3);
+}
+.tile-interactive:active {
+  transform: translateY(-1px);
+}
+
 /* Step connector */
 .step-connector::after {
   content: '';
