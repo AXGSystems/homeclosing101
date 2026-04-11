@@ -1,6 +1,7 @@
 import Link from "next/link";
 import PageHero from "@/components/PageHero";
 import PrintButton from "@/components/PrintButton";
+import FraudStats from "@/components/FraudStats";
 import { InlineAd } from "@/components/EliteProviders";
 import type { Metadata } from "next";
 
@@ -110,16 +111,8 @@ export default function StopFraudPage() {
           </div>
         </div>
 
-        {/* Stats grid */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 mb-12">
-          {stats.map((s) => (
-            <div key={s.value} className="bg-red-50 rounded-xl p-4 text-center border border-red-100">
-              <p className="text-xl font-bold text-alta-red">{s.value}</p>
-              <p className="text-[10px] text-alta-gray mt-1 leading-snug">{s.label}</p>
-              <p className="text-[9px] text-alta-teal mt-1 font-medium uppercase">{s.source}</p>
-            </div>
-          ))}
-        </div>
+        {/* Interactive stats — click any tile for deep-dive details */}
+        <FraudStats />
 
         {/* 10 Prevention Steps */}
         <h2 className="text-2xl font-bold text-alta-navy mb-6">10 Steps to Prevent Wire Fraud</h2>
