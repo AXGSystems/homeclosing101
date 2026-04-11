@@ -1,6 +1,7 @@
 import Link from "next/link";
 import PageHero from "@/components/PageHero";
 import { InlineAd } from "@/components/EliteProviders";
+import LoanComparisonChart from "@/components/LoanComparisonChart";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -117,6 +118,9 @@ export default function FirstTimeBuyersPage() {
           <InlineAd />
 
           {/* Loan Types */}
+          {/* Interactive loan comparison chart */}
+          <LoanComparisonChart />
+
           <h2 className="text-2xl font-bold text-alta-navy mb-4">Understanding Loan Types</h2>
           <p className="text-alta-gray mb-6">The type of mortgage you choose affects your down payment, monthly payment, and total cost. Here&apos;s how they compare:</p>
           <div className="overflow-x-auto mb-12">
