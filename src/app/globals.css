@@ -1,26 +1,204 @@
 @import "tailwindcss";
 
 :root {
+  --alta-teal: #0a8ebc;
+  --alta-teal-dark: #077a9e;
+  --alta-navy: #1a2744;
+  --alta-gold: #d4a843;
+  --alta-green: #2d8f5e;
+  --alta-red: #c0392b;
+  --alta-light: #f4f7fa;
+  --alta-gray: #6b7a8d;
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #1a2744;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-alta-teal: var(--alta-teal);
+  --color-alta-teal-dark: var(--alta-teal-dark);
+  --color-alta-navy: var(--alta-navy);
+  --color-alta-gold: var(--alta-gold);
+  --color-alta-green: var(--alta-green);
+  --color-alta-red: var(--alta-red);
+  --color-alta-light: var(--alta-light);
+  --color-alta-gray: var(--alta-gray);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), system-ui, -apple-system, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--alta-light);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--alta-teal);
+  border-radius: 4px;
+}
+
+/* Checklist animations */
+.check-item {
+  transition: all 0.2s ease;
+}
+.check-item.checked {
+  opacity: 0.6;
+}
+.check-item.checked span {
+  text-decoration: line-through;
+}
+
+/* Glossary letter nav */
+.letter-nav a.active {
+  background: var(--alta-teal);
+  color: white;
+}
+
+/* Hero gradient — deep layered look */
+.hero-gradient {
+  background:
+    radial-gradient(ellipse at 20% 50%, rgba(10, 142, 188, 0.3) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 20%, rgba(212, 168, 67, 0.15) 0%, transparent 50%),
+    linear-gradient(135deg, #0f1b33 0%, #1a2744 30%, #0a8ebc 100%);
+}
+
+/* ============================================================
+   FEATURE CARD — rich color hover with per-card accent
+   ============================================================ */
+.feature-card {
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.feature-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 0;
+}
+.feature-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.12);
+}
+.feature-card:hover::before {
+  opacity: 1;
+}
+.feature-card > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Per-card color accents via data attribute */
+.feature-card[data-accent="teal"]::before    { background: linear-gradient(135deg, rgba(10,142,188,0.08) 0%, rgba(10,142,188,0.02) 100%); }
+.feature-card[data-accent="green"]::before   { background: linear-gradient(135deg, rgba(45,143,94,0.08) 0%, rgba(45,143,94,0.02) 100%); }
+.feature-card[data-accent="red"]::before     { background: linear-gradient(135deg, rgba(192,57,43,0.08) 0%, rgba(192,57,43,0.02) 100%); }
+.feature-card[data-accent="gold"]::before    { background: linear-gradient(135deg, rgba(212,168,67,0.10) 0%, rgba(212,168,67,0.02) 100%); }
+.feature-card[data-accent="navy"]::before    { background: linear-gradient(135deg, rgba(26,39,68,0.08) 0%, rgba(26,39,68,0.02) 100%); }
+.feature-card[data-accent="purple"]::before  { background: linear-gradient(135deg, rgba(126,87,194,0.08) 0%, rgba(126,87,194,0.02) 100%); }
+
+.feature-card[data-accent="teal"]:hover    { border-color: rgba(10,142,188,0.4); }
+.feature-card[data-accent="green"]:hover   { border-color: rgba(45,143,94,0.4); }
+.feature-card[data-accent="red"]:hover     { border-color: rgba(192,57,43,0.4); }
+.feature-card[data-accent="gold"]:hover    { border-color: rgba(212,168,67,0.4); }
+.feature-card[data-accent="navy"]:hover    { border-color: rgba(26,39,68,0.3); }
+.feature-card[data-accent="purple"]:hover  { border-color: rgba(126,87,194,0.4); }
+
+/* Icon container color shift on hover */
+.feature-card[data-accent="teal"]:hover  .card-icon { background: #0a8ebc; color: white; }
+.feature-card[data-accent="green"]:hover .card-icon { background: #2d8f5e; color: white; }
+.feature-card[data-accent="red"]:hover   .card-icon { background: #c0392b; color: white; }
+.feature-card[data-accent="gold"]:hover  .card-icon { background: #d4a843; color: white; }
+.feature-card[data-accent="navy"]:hover  .card-icon { background: #1a2744; color: white; }
+.feature-card[data-accent="purple"]:hover .card-icon { background: #7e57c2; color: white; }
+
+.card-icon {
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+/* Step connector */
+.step-connector::after {
+  content: '';
+  position: absolute;
+  left: 1.25rem;
+  top: 3rem;
+  bottom: -1rem;
+  width: 2px;
+  background: var(--alta-teal);
+  opacity: 0.3;
+}
+
+/* Calculator input focus */
+input[type="number"]:focus,
+input[type="text"]:focus,
+select:focus {
+  outline: none;
+  border-color: var(--alta-teal);
+  box-shadow: 0 0 0 3px rgba(10, 142, 188, 0.15);
+}
+
+/* Accordion */
+.accordion-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+.accordion-content.open {
+  max-height: 2000px;
+}
+
+/* ============================================================
+   NEWS TICKER — continuous scroll animation
+   ============================================================ */
+.ticker-scroll {
+  animation: ticker 90s linear infinite;
+}
+.ticker-scroll:hover {
+  animation-play-state: paused;
+}
+@keyframes ticker {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ============================================================
+   STAT CARDS — the big numbers section
+   ============================================================ */
+.stat-card {
+  position: relative;
+  overflow: hidden;
+}
+.stat-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--alta-teal);
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+.stat-card:hover::after {
+  transform: scaleX(1);
+}
+
+/* Print styles */
+@media print {
+  nav, footer, .no-print { display: none; }
+  .print-break { page-break-before: always; }
 }

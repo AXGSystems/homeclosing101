@@ -1,65 +1,379 @@
-import Image from "next/image";
+import Link from "next/link";
+import EliteProviders from "@/components/EliteProviders";
+// AltaMembershipCTA moved to /resources page
 
-export default function Home() {
+const features = [
+  {
+    title: "The Closing Process",
+    description: "Learn what to expect at every step — from pre-approval to getting the keys to your new home.",
+    href: "/closing-process",
+    accent: "teal",
+    image: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=400&q=80",
+    icon: (
+      <svg viewBox="0 0 24 24" className="w-8 h-8" fill="none" stroke="currentColor" strokeWidth={1.5}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 002.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 00-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15a2.25 2.25 0 012.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25zM6.75 12h.008v.008H6.75V12zm0 3h.008v.008H6.75V15zm0 3h.008v.008H6.75V18z" />
+      </svg>
+    ),
+  },
+  {
+    title: "Protect Your Rights",
+    description: "Understand owner's title insurance and how it defends your property from hidden claims and fraud.",
+    href: "/protect-your-rights",
+    accent: "green",
+    image: "https://images.unsplash.com/photo-1573497620053-ea5300f94f21?w=400&q=80",
+    icon: (
+      <svg viewBox="0 0 24 24" className="w-8 h-8" fill="none" stroke="currentColor" strokeWidth={1.5}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
+      </svg>
+    ),
+  },
+  {
+    title: "Protect Your Money",
+    description: "Wire fraud losses topped $275M last year. Learn to recognize scams and safeguard your closing funds.",
+    href: "/protect-your-money",
+    accent: "red",
+    image: "https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=400&q=80",
+    icon: (
+      <svg viewBox="0 0 24 24" className="w-8 h-8" fill="none" stroke="currentColor" strokeWidth={1.5}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
+      </svg>
+    ),
+  },
+  {
+    title: "Closing Cost Calculator",
+    description: "Estimate your closing costs with our interactive calculator. Input your price, see every fee.",
+    href: "/closing-process/closing-costs",
+    accent: "gold",
+    image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=400&q=80",
+    icon: (
+      <svg viewBox="0 0 24 24" className="w-8 h-8" fill="none" stroke="currentColor" strokeWidth={1.5}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 15.75V18m-7.5-6.75h.008v.008H8.25v-.008zm0 2.25h.008v.008H8.25V13.5zm0 2.25h.008v.008H8.25v-.008zm0 2.25h.008v.008H8.25V18zm2.498-6.75h.007v.008h-.007v-.008zm0 2.25h.007v.008h-.007V13.5zm0 2.25h.007v.008h-.007v-.008zm0 2.25h.007v.008h-.007V18zm2.504-6.75h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V13.5zm0 2.25h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V18zm2.498-6.75h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V13.5zM8.25 6h7.5v2.25h-7.5V6zM12 2.25c-1.892 0-3.758.11-5.593.322C5.307 2.7 4.5 3.65 4.5 4.757V19.5a2.25 2.25 0 002.25 2.25h10.5a2.25 2.25 0 002.25-2.25V4.757c0-1.108-.806-2.057-1.907-2.185A48.507 48.507 0 0012 2.25z" />
+      </svg>
+    ),
+  },
+  {
+    title: "Find a Company",
+    description: "Search for ALTA member title insurance and settlement companies in your area.",
+    href: "/find-company",
+    accent: "navy",
+    image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=400&q=80",
+    icon: (
+      <svg viewBox="0 0 24 24" className="w-8 h-8" fill="none" stroke="currentColor" strokeWidth={1.5}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+      </svg>
+    ),
+  },
+  {
+    title: "Real Estate Glossary",
+    description: "80+ searchable terms — from abstract to warranty deed. Instant A-Z lookup.",
+    href: "/glossary",
+    accent: "purple",
+    image: "https://images.unsplash.com/photo-1589829085413-56de8ae18c73?w=400&q=80",
+    icon: (
+      <svg viewBox="0 0 24 24" className="w-8 h-8" fill="none" stroke="currentColor" strokeWidth={1.5}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />
+      </svg>
+    ),
+  },
+];
+
+const stats = [
+  { value: "$275.1M", label: "Wire fraud losses reported in 2025", source: "FBI IC3" },
+  { value: "1 in 4", label: "Buyers received suspicious messages during transactions", source: "CertifID 2026" },
+  { value: "1 in 3", label: "Title searches reveal issues that need resolution", source: "ALTA" },
+  { value: "1,760%", label: "Increase in BEC attacks since AI tools became available", source: "CertifID 2026" },
+];
+
+const steps = [
+  { num: "1", title: "Get Pre-Approved", desc: "Understand your budget and lock in your financing options." },
+  { num: "2", title: "Find Your Home", desc: "Work with a real estate agent to find the right property." },
+  { num: "3", title: "Make an Offer", desc: "Submit your purchase proposal and negotiate terms." },
+  { num: "4", title: "Order Title Search", desc: "A professional reviews public records for any claims on the property." },
+  { num: "5", title: "Get Insurance", desc: "Secure homeowner's insurance and owner's title insurance." },
+  { num: "6", title: "Close & Get Keys", desc: "Sign documents, transfer funds, and officially become a homeowner." },
+];
+
+const resources = [
+  { name: "Consumer Financial Protection Bureau", desc: "Homeownership guides and settlement cost booklet", url: "https://www.consumerfinance.gov/owning-a-home/" },
+  { name: "HUD Housing Counselor Locator", desc: "Find a HUD-approved housing counselor near you", url: "https://www.consumerfinance.gov/housing/" },
+  { name: "Fannie Mae HomePath", desc: "Homebuyer education and resources", url: "https://www.homepath.com/" },
+  { name: "Freddie Mac My Home", desc: "Tools and resources for homebuyers", url: "https://myhome.freddiemac.com/" },
+  { name: "National Association of Realtors", desc: "Find a Realtor and market data", url: "https://www.nar.realtor/" },
+  { name: "Appraisal Institute", desc: "Professional appraisal resources", url: "https://www.appraisalinstitute.org/" },
+];
+
+export default function HomePage() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
+    <>
+      {/* Hero */}
+      <section className="relative text-white py-10 lg:py-14 overflow-hidden">
+        {/* Background image */}
+        <div
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{ backgroundImage: "url('https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1920&q=80')" }}
         />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+        {/* Dark overlay */}
+        <div className="absolute inset-0 bg-gradient-to-r from-[#0f1b33]/95 via-[#1a2744]/90 to-[#0a8ebc]/80" />
+        {/* Radial glow accents */}
+        <div className="absolute top-0 right-0 w-96 h-96 bg-alta-teal/15 rounded-full -translate-y-1/2 translate-x-1/3 blur-3xl" />
+        <div className="absolute bottom-0 left-1/4 w-80 h-80 bg-white/5 rounded-full translate-y-1/3 blur-3xl" />
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            {/* Left — copy */}
+            <div>
+              <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full mb-6 border border-white/20">
+                <span className="text-xs font-medium text-gray-200 uppercase tracking-wider">An ALTA Educational Initiative</span>
+              </div>
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 leading-[1.1]">
+                Your Complete Guide to <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-blue-200">Home Closing</span>
+              </h1>
+              <p className="text-lg text-gray-300 max-w-lg mb-8 leading-relaxed">
+                Buying a home is one of life&apos;s biggest milestones. Understand the closing process, protect your property rights, guard against fraud, and close with confidence.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-3">
+                <Link
+                  href="/closing-process/what-to-expect"
+                  className="inline-flex items-center justify-center px-7 py-3.5 bg-white text-alta-navy font-semibold rounded-lg hover:bg-gray-100 transition-colors shadow-lg shadow-black/10"
+                >
+                  Start Learning
+                  <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </Link>
+                <Link
+                  href="/closing-process/closing-checklist"
+                  className="inline-flex items-center justify-center px-7 py-3.5 border-2 border-white/40 text-white font-semibold rounded-lg hover:bg-white/10 hover:border-white/60 transition-all"
+                >
+                  Closing Checklist
+                </Link>
+                <Link
+                  href="/closing-process/closing-costs"
+                  className="inline-flex items-center justify-center px-7 py-3.5 border-2 border-white/40 text-white font-semibold rounded-lg hover:bg-white/10 hover:border-white/60 transition-all"
+                >
+                  Cost Calculator
+                </Link>
+              </div>
+            </div>
+
+            {/* Right — key stats */}
+            <div className="grid grid-cols-2 gap-4">
+              {stats.map((stat) => (
+                <div key={stat.value} className="stat-card bg-white/10 backdrop-blur-sm rounded-xl p-5 border border-white/10 hover:bg-white/15 transition-colors">
+                  <p className="text-3xl lg:text-4xl font-bold text-white mb-1">{stat.value}</p>
+                  <p className="text-xs text-gray-300 leading-snug">{stat.label}</p>
+                  <p className="text-[10px] text-alta-teal mt-2 font-medium uppercase tracking-wider">{stat.source}</p>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+      </section>
+
+      {/* Feature Cards */}
+      <section className="py-16 lg:py-20 bg-alta-light">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-alta-navy mb-3">Everything You Need to Know</h2>
+            <p className="text-alta-gray max-w-xl mx-auto">From understanding costs to protecting your investment — we&apos;ve got you covered.</p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {features.map((f) => (
+              <Link
+                key={f.href}
+                href={f.href}
+                data-accent={f.accent}
+                className="feature-card bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden"
+              >
+                {/* Card image */}
+                <div className="relative h-36 overflow-hidden">
+                  <div
+                    className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
+                    style={{ backgroundImage: `url('${f.image}')` }}
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+                  <div className="absolute bottom-3 left-4">
+                    <div className="card-icon w-10 h-10 rounded-lg bg-white/90 backdrop-blur-sm flex items-center justify-center text-alta-teal">
+                      {f.icon}
+                    </div>
+                  </div>
+                </div>
+                {/* Card content */}
+                <div className="p-5">
+                  <h3 className="text-lg font-semibold text-alta-navy mb-2">{f.title}</h3>
+                  <p className="text-sm text-alta-gray leading-relaxed">{f.description}</p>
+                  <div className="mt-3 flex items-center text-sm font-medium text-alta-teal">
+                    Learn more
+                    <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                  </div>
+                </div>
+              </Link>
+            ))}
+          </div>
         </div>
-      </main>
-    </div>
+      </section>
+
+      {/* Steps Overview */}
+      <section className="py-16 lg:py-20">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-alta-navy mb-3">The Road to Homeownership</h2>
+            <p className="text-alta-gray">Six key milestones from pre-approval to getting your keys.</p>
+          </div>
+          <div className="space-y-6">
+            {steps.map((step, i) => (
+              <div key={step.num} className={`relative flex gap-4 items-start ${i < steps.length - 1 ? "step-connector" : ""}`}>
+                <div className="w-10 h-10 rounded-full bg-alta-teal text-white flex items-center justify-center font-bold text-sm shrink-0">
+                  {step.num}
+                </div>
+                <div className="pt-1">
+                  <h3 className="font-semibold text-alta-navy">{step.title}</h3>
+                  <p className="text-sm text-alta-gray mt-0.5">{step.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+          <div className="text-center mt-10">
+            <Link href="/closing-process/what-to-expect" className="inline-flex items-center text-alta-teal font-semibold hover:text-alta-teal-dark transition-colors">
+              Detailed walkthrough of each step
+              <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Wire Fraud Warning — expanded */}
+      <section className="py-14 bg-red-50 border-y border-red-100">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6">
+          <div className="grid lg:grid-cols-2 gap-8 items-center">
+            <div>
+              <div className="inline-flex items-center gap-2 bg-red-100 px-3 py-1.5 rounded-full mb-4">
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-alta-red opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-alta-red"></span>
+                </span>
+                <span className="text-xs font-semibold text-alta-red uppercase tracking-wider">Active Threat</span>
+              </div>
+              <h2 className="text-3xl font-bold text-alta-navy mb-3">Wire Fraud Is the #1 Threat to Homebuyers</h2>
+              <p className="text-alta-gray mb-4 leading-relaxed">
+                The FBI reported $275.1 million in real estate wire fraud losses in 2025 — a 59% increase from the prior year. Criminals use AI-generated emails, deepfakes, and hacked accounts to intercept your closing funds.
+              </p>
+              <p className="text-alta-navy font-semibold mb-6">
+                NEVER wire money based solely on email instructions. Always verify by phone using a number you already have.
+              </p>
+              <Link href="/protect-your-money" className="inline-flex items-center px-6 py-3 bg-alta-red text-white font-semibold rounded-lg hover:bg-red-700 transition-colors">
+                Learn How to Protect Yourself
+                <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+              </Link>
+            </div>
+            <div className="grid grid-cols-2 gap-3">
+              {[
+                { num: "$275.1M", text: "Reported losses in 2025" },
+                { num: "59%", text: "Year-over-year increase" },
+                { num: "1 in 4", text: "Buyers received suspicious messages" },
+                { num: "40%", text: "Rise in deepfake scams" },
+              ].map((s) => (
+                <div key={s.num} className="bg-white rounded-xl p-4 border border-red-100 text-center">
+                  <p className="text-2xl font-bold text-alta-red">{s.num}</p>
+                  <p className="text-xs text-alta-gray mt-1">{s.text}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* External Resources */}
+      <section className="py-16 lg:py-20 bg-white">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6">
+          <div className="text-center mb-10">
+            <h2 className="text-3xl font-bold text-alta-navy mb-3">Trusted Resources</h2>
+            <p className="text-alta-gray max-w-xl mx-auto">Verified links to government agencies and industry organizations that support homebuyers.</p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {resources.map((r) => (
+              <a
+                key={r.name}
+                href={r.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="feature-card bg-alta-light rounded-xl p-5 border border-gray-100"
+                data-accent="teal"
+              >
+                <h3 className="text-sm font-semibold text-alta-navy mb-1">{r.name}</h3>
+                <p className="text-xs text-alta-gray">{r.desc}</p>
+                <div className="mt-3 flex items-center text-xs font-medium text-alta-teal">
+                  Visit site
+                  <svg className="w-3 h-3 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                  </svg>
+                </div>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Rotating sponsor logos */}
+      <EliteProviders />
+
+      {/* Full-width CTA */}
+      <section className="relative py-12 lg:py-16 overflow-hidden">
+        <div
+          className="absolute inset-0 bg-cover bg-center"
+          style={{ backgroundImage: "url('https://images.unsplash.com/photo-1582407947092-78b1e4f7e5a3?w=1920&q=80')" }}
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#0f1b33]/95 via-[#1a2744]/90 to-[#0a8ebc]/85" />
+        <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <div>
+              <h2 className="text-4xl lg:text-5xl font-bold text-white mb-4 leading-tight">Ready to Close with Confidence?</h2>
+              <p className="text-gray-300 text-lg leading-relaxed mb-8">
+                Use our interactive tools to track your progress, estimate your costs, and make sure nothing falls through the cracks.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-3">
+                <Link href="/closing-process/closing-checklist" className="px-7 py-3.5 bg-white text-alta-navy font-semibold rounded-lg hover:bg-gray-100 transition-colors text-center">
+                  Interactive Checklist
+                </Link>
+                <Link href="/closing-process/closing-costs" className="px-7 py-3.5 border-2 border-white/40 text-white font-semibold rounded-lg hover:bg-white/10 transition-colors text-center">
+                  Cost Calculator
+                </Link>
+                <Link href="/find-company" className="px-7 py-3.5 border-2 border-white/40 text-white font-semibold rounded-lg hover:bg-white/10 transition-colors text-center">
+                  Find a Company
+                </Link>
+              </div>
+            </div>
+            <div className="grid grid-cols-2 gap-4">
+              <Link href="/faq" className="bg-white/10 backdrop-blur-sm rounded-xl p-5 border border-white/10 hover:bg-white/15 transition-colors text-center">
+                <svg className="w-8 h-8 text-white mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9 5.25h.008v.008H12v-.008z" /></svg>
+                <p className="text-white font-semibold text-sm">FAQ</p>
+                <p className="text-gray-400 text-xs mt-0.5">Common questions</p>
+              </Link>
+              <Link href="/glossary" className="bg-white/10 backdrop-blur-sm rounded-xl p-5 border border-white/10 hover:bg-white/15 transition-colors text-center">
+                <svg className="w-8 h-8 text-white mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" /></svg>
+                <p className="text-white font-semibold text-sm">Glossary</p>
+                <p className="text-gray-400 text-xs mt-0.5">80+ terms</p>
+              </Link>
+              <Link href="/questions-to-ask" className="bg-white/10 backdrop-blur-sm rounded-xl p-5 border border-white/10 hover:bg-white/15 transition-colors text-center">
+                <svg className="w-8 h-8 text-white mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 01-2.555-.337A5.972 5.972 0 015.41 20.97a5.969 5.969 0 01-.474-.065 4.48 4.48 0 00.978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25z" /></svg>
+                <p className="text-white font-semibold text-sm">Questions to Ask</p>
+                <p className="text-gray-400 text-xs mt-0.5">40+ printable</p>
+              </Link>
+              <Link href="/stop-fraud" className="bg-white/10 backdrop-blur-sm rounded-xl p-5 border border-white/10 hover:bg-white/15 transition-colors text-center">
+                <svg className="w-8 h-8 text-white mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" /></svg>
+                <p className="text-white font-semibold text-sm">Stop Fraud 101</p>
+                <p className="text-gray-400 text-xs mt-0.5">10 prevention steps</p>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+    </>
   );
 }
