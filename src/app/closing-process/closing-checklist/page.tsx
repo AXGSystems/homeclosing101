@@ -8,6 +8,9 @@ import { InlineAd } from "@/components/EliteProviders";
 const checklistSections = [
   {
     title: "Before You Start",
+    color: "blue",
+    image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=600&q=80",
+    tip: "Getting your finances in order is the most important first step. Most closings fail because of financing issues.",
     items: [
       "Check your credit score and review your credit report",
       "Determine your budget (including closing costs — typically 2-5% of home price)",
@@ -18,6 +21,9 @@ const checklistSections = [
   },
   {
     title: "Making an Offer",
+    color: "green",
+    image: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=600&q=80",
+    tip: "Your agent will guide you through the offer process. Be prepared to move quickly in a competitive market.",
     items: [
       "Find your home and schedule inspections",
       "Submit a purchase offer through your agent",
@@ -28,6 +34,9 @@ const checklistSections = [
   },
   {
     title: "After Acceptance",
+    color: "amber",
+    image: "https://images.unsplash.com/photo-1573497620053-ea5300f94f21?w=600&q=80",
+    tip: "This is when your title company gets involved. Owner's title insurance is one of the best investments you'll make — protecting your property for life.",
     items: [
       "Formally apply for your mortgage loan",
       "Lock in your mortgage interest rate",
@@ -42,6 +51,9 @@ const checklistSections = [
   },
   {
     title: "One Week Before Closing",
+    color: "red",
+    image: "https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=600&q=80",
+    tip: "CRITICAL: Always verify wiring instructions by phone using a number you already have. Never trust emailed wire instructions.",
     items: [
       "Receive and review your Closing Disclosure (at least 3 days before)",
       "Compare Closing Disclosure to your original Loan Estimate",
@@ -55,6 +67,9 @@ const checklistSections = [
   },
   {
     title: "Closing Day",
+    color: "purple",
+    image: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=600&q=80",
+    tip: "You're almost there! Review everything carefully before signing. Don't be afraid to ask questions — this is your biggest investment.",
     items: [
       "Complete final walk-through of the property",
       "Bring government-issued photo ID",
@@ -88,6 +103,19 @@ export default function ClosingChecklistPage() {
     />
     <div className="py-12 lg:py-16">
       <div className="max-w-4xl mx-auto px-4 sm:px-6">
+        {/* Page intro */}
+        <div className="mb-8 p-5 bg-gradient-to-br from-alta-light to-white rounded-2xl border border-gray-100">
+          <div className="flex items-start gap-4">
+            <div className="w-12 h-12 rounded-xl bg-alta-teal/10 flex items-center justify-center text-alta-teal shrink-0">
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+            </div>
+            <div>
+              <h2 className="font-bold text-alta-navy mb-1">Your Complete Closing Roadmap</h2>
+              <p className="text-sm text-alta-gray leading-relaxed">Check off items as you complete them. Each section includes a pro tip to help you navigate that phase. Print a blank copy to take with you, or use this page on your phone during the process.</p>
+            </div>
+          </div>
+        </div>
+
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-4">
           <h2 className="text-2xl font-bold text-alta-navy">Your Checklist</h2>
           <button
@@ -122,15 +150,39 @@ export default function ClosingChecklistPage() {
         <div className="space-y-10">
           {checklistSections.map((section, sIdx) => {
             const sectionChecked = section.items.filter((_, iIdx) => checked[`${sIdx}-${iIdx}`]).length;
+            const sectionComplete = sectionChecked === section.items.length;
+            const colorMap: Record<string, { border: string; bg: string; badge: string }> = {
+              blue: { border: "border-blue-200", bg: "from-blue-500 to-blue-600", badge: "bg-blue-100 text-blue-700" },
+              green: { border: "border-green-200", bg: "from-green-500 to-green-600", badge: "bg-green-100 text-green-700" },
+              amber: { border: "border-amber-200", bg: "from-amber-500 to-amber-600", badge: "bg-amber-100 text-amber-700" },
+              red: { border: "border-red-200", bg: "from-red-500 to-red-600", badge: "bg-red-100 text-red-700" },
+              purple: { border: "border-purple-200", bg: "from-purple-500 to-purple-600", badge: "bg-purple-100 text-purple-700" },
+            };
+            const c = colorMap[section.color] || colorMap.blue;
             return (
-              <div key={section.title}>
-                <div className="flex items-center justify-between mb-4">
-                  <h2 className="text-xl font-bold text-alta-navy">{section.title}</h2>
-                  <span className="text-xs font-medium text-alta-gray bg-gray-100 px-2 py-1 rounded-full">
-                    {sectionChecked}/{section.items.length}
-                  </span>
+              <div key={section.title} className={`rounded-2xl border ${sectionComplete ? 'border-green-300 bg-green-50/30' : c.border} overflow-hidden`}>
+                {/* Section header with image */}
+                <div className="relative h-28 overflow-hidden">
+                  <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url('${section.image}')` }} />
+                  <div className={`absolute inset-0 bg-gradient-to-r ${c.bg} ${sectionComplete ? 'opacity-40' : 'opacity-70'}`} />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
+                  <div className="relative z-10 flex items-center justify-between h-full px-5">
+                    <div className="flex items-center gap-3">
+                      <span className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center text-white font-bold text-sm">{sIdx + 1}</span>
+                      <h2 className="text-lg font-bold text-white drop-shadow">{section.title}</h2>
+                    </div>
+                    <span className={`text-xs font-bold px-3 py-1 rounded-full ${sectionComplete ? 'bg-green-500 text-white' : 'bg-white/20 text-white'}`}>
+                      {sectionChecked}/{section.items.length}
+                    </span>
+                  </div>
                 </div>
-                <div className="space-y-2">
+                {/* Tip */}
+                <div className={`px-5 py-3 ${c.badge} text-xs flex items-start gap-2`}>
+                  <svg className="w-4 h-4 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                  <span className="font-medium">{section.tip}</span>
+                </div>
+                {/* Items */}
+                <div className="p-4 space-y-2">
                   {section.items.map((item, iIdx) => {
                     const key = `${sIdx}-${iIdx}`;
                     const isChecked = checked[key] || false;
