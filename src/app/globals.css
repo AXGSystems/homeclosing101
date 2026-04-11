@@ -174,19 +174,7 @@ select:focus {
   max-height: 2000px;
 }
 
-/* ============================================================
-   NEWS TICKER — continuous scroll animation
-   ============================================================ */
-.ticker-scroll {
-  animation: ticker 45s linear infinite;
-}
-.ticker-scroll:hover {
-  animation-play-state: paused;
-}
-@keyframes ticker {
-  0%   { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
-}
+/* News ticker styles moved to inline JSX in NewsTicker component */
 
 /* ============================================================
    STAT CARDS — the big numbers section
