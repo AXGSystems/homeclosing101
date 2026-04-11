@@ -12,6 +12,7 @@ const navItems = [
       { label: "Closing Options", href: "/closing-process/closing-options" },
       { label: "Closing Checklist", href: "/closing-process/closing-checklist" },
       { label: "Closing Costs Explained", href: "/closing-process/closing-costs" },
+      { label: "Home Inspection Guide", href: "/home-inspection" },
       { label: "Your Loan Estimate", href: "/loan-estimate" },
       { label: "Your Closing Disclosure", href: "/closing-disclosure" },
       { label: "Document Checklist", href: "/document-checklist" },

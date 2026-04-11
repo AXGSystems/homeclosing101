@@ -26,7 +26,7 @@ export default function PageHero({ title, subtitle, image, breadcrumb }: PageHer
   return (
     <>
       {/* Full hero */}
-      <section ref={heroRef} className="relative py-6 lg:py-10 overflow-hidden">
+      <section ref={heroRef} className="relative py-4 lg:py-7 overflow-hidden">
         <div className="absolute inset-0 bg-cover bg-center scale-105" style={{ backgroundImage: `url('${image}')` }} />
         <div className="absolute inset-0 bg-gradient-to-r from-[#0f1b33]/92 via-[#1a2744]/88 to-[#0a8ebc]/75" />
         {/* Decorative accents */}
@@ -50,8 +50,8 @@ export default function PageHero({ title, subtitle, image, breadcrumb }: PageHer
               </ol>
             </nav>
           )}
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4 leading-tight">{title}</h1>
-          <p className="text-base sm:text-lg text-gray-300 max-w-2xl leading-relaxed">{subtitle}</p>
+          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-3 leading-tight">{title}</h1>
+          <p className="text-sm sm:text-base text-gray-300 max-w-2xl leading-relaxed">{subtitle}</p>
           {/* Subtle bottom border accent */}
           <div className="mt-6 w-20 h-1 bg-gradient-to-r from-alta-teal to-transparent rounded-full" />
         </div>

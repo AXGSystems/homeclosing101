@@ -81,6 +81,65 @@ export default function JoinAltaPage() {
             ))}
           </div>
 
+          {/* About ALTA */}
+          <h2 className="text-2xl font-bold text-alta-navy mb-4">About the American Land Title Association</h2>
+          <div className="grid md:grid-cols-2 gap-5 mb-10">
+            <div className="p-5 bg-white rounded-2xl border border-gray-100 shadow-sm tile-interactive">
+              <h3 className="font-bold text-alta-navy mb-2">Founded in 1907</h3>
+              <p className="text-xs text-alta-gray leading-relaxed">ALTA has represented the title insurance and settlement services industry for over 116 years. From the days of handwritten abstracts to today&apos;s digital closings, ALTA has been the voice of the industry through every era of real estate.</p>
+            </div>
+            <div className="p-5 bg-white rounded-2xl border border-gray-100 shadow-sm tile-interactive">
+              <h3 className="font-bold text-alta-navy mb-2">Washington, D.C. Headquarters</h3>
+              <p className="text-xs text-alta-gray leading-relaxed">Located at 601 Pennsylvania Avenue NW, Suite 750 — steps from the U.S. Capitol. ALTA&apos;s proximity to federal lawmakers enables direct advocacy on policies affecting the title industry and homebuyers.</p>
+            </div>
+            <div className="p-5 bg-white rounded-2xl border border-gray-100 shadow-sm tile-interactive">
+              <h3 className="font-bold text-alta-navy mb-2">ALTA Best Practices</h3>
+              <p className="text-xs text-alta-gray leading-relaxed">The 7-pillar Best Practices framework is the gold standard for title and settlement operations. It covers licensing, escrow handling, data privacy, settlement procedures, title policy production, professional liability, and consumer complaints. Adopted by thousands of member companies.</p>
+            </div>
+            <div className="p-5 bg-white rounded-2xl border border-gray-100 shadow-sm tile-interactive">
+              <h3 className="font-bold text-alta-navy mb-2">TIPAC Political Action</h3>
+              <p className="text-xs text-alta-gray leading-relaxed">The Title Industry Political Action Committee (TIPAC) supports federal candidates who understand the title industry. ALTA&apos;s advocacy efforts have successfully defended against threats to title insurance, protected consumer choice, and promoted fraud prevention legislation.</p>
+            </div>
+          </div>
+
+          {/* Membership tiers */}
+          <h2 className="text-2xl font-bold text-alta-navy mb-4">Who Can Join?</h2>
+          <p className="text-sm text-alta-gray mb-4 leading-relaxed">ALTA membership is open to companies and individuals across the title insurance and settlement services ecosystem. Member types include:</p>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 mb-10">
+            {[
+              { type: "Title Insurance Underwriters", desc: "Companies that issue title insurance policies — the largest underwriters in the country are ALTA members." },
+              { type: "Title Agents & Abstracters", desc: "Local and regional title agents who conduct searches, issue commitments, and facilitate closings." },
+              { type: "Settlement/Escrow Companies", desc: "Companies providing settlement, escrow, and closing services to buyers and sellers." },
+              { type: "Attorneys", desc: "Real estate attorneys who provide title opinions, handle closings, or work in the title insurance space." },
+              { type: "Technology Providers", desc: "Companies providing software, platforms, and tools to the title and settlement industry." },
+              { type: "Associate Members", desc: "Individuals and companies with a professional interest in the title industry — lenders, real estate firms, and more." },
+            ].map((m) => (
+              <div key={m.type} className="p-4 bg-white rounded-xl border border-gray-100 shadow-sm tile-interactive">
+                <h3 className="text-sm font-bold text-alta-navy mb-1">{m.type}</h3>
+                <p className="text-xs text-alta-gray leading-relaxed">{m.desc}</p>
+              </div>
+            ))}
+          </div>
+
+          {/* Key events */}
+          <h2 className="text-2xl font-bold text-alta-navy mb-4">ALTA Events & Education</h2>
+          <div className="grid md:grid-cols-3 gap-4 mb-10">
+            {[
+              { name: "ALTA ONE", desc: "The premier annual conference for the title industry. Thousands of professionals gather for education, networking, and innovation. Held each fall in a major U.S. city.", url: "https://www.alta.org/events/" },
+              { name: "ALTA Advocacy Summit", desc: "Annual event where title professionals meet with their members of Congress on Capitol Hill to advocate for industry priorities and consumer protection.", url: "https://www.alta.org/events/" },
+              { name: "ALTA EDge", desc: "Regional education events held throughout the year providing focused professional development, compliance training, and networking for title professionals.", url: "https://www.alta.org/events/" },
+            ].map((e) => (
+              <a key={e.name} href={e.url} target="_blank" rel="noopener noreferrer" className="p-5 bg-white rounded-2xl border border-gray-100 shadow-sm tile-interactive group">
+                <h3 className="font-bold text-alta-navy mb-2 group-hover:text-alta-teal transition-colors">{e.name}</h3>
+                <p className="text-xs text-alta-gray leading-relaxed mb-2">{e.desc}</p>
+                <span className="text-xs text-alta-teal font-medium flex items-center gap-1">
+                  Learn more
+                  <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
+                </span>
+              </a>
+            ))}
+          </div>
+
           {/* CTA */}
           <div className="relative rounded-2xl overflow-hidden">
             <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=1200&q=80')" }} />

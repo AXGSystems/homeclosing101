@@ -106,7 +106,7 @@ export default function HomePage() {
   return (
     <>
       {/* Hero */}
-      <section className="relative text-white py-10 lg:py-14 overflow-hidden">
+      <section className="relative text-white py-7 lg:py-10 overflow-hidden">
         {/* Background image */}
         <div
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
@@ -125,10 +125,10 @@ export default function HomePage() {
               <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full mb-6 border border-white/20">
                 <span className="text-xs font-medium text-gray-200 uppercase tracking-wider">An ALTA Educational Initiative</span>
               </div>
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 leading-[1.1]">
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 leading-[1.1]">
                 Your Complete Guide to <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-blue-200">Home Closing</span>
               </h1>
-              <p className="text-lg text-gray-300 max-w-lg mb-8 leading-relaxed">
+              <p className="text-sm sm:text-base text-gray-300 max-w-lg mb-6 leading-relaxed">
                 Buying a home is one of life&apos;s biggest milestones. Understand the closing process, protect your property rights, guard against fraud, and close with confidence.
               </p>
               <div className="flex flex-col sm:flex-row gap-3">
@@ -324,7 +324,7 @@ export default function HomePage() {
       <EliteProviders />
 
       {/* Full-width CTA */}
-      <section className="relative py-12 lg:py-16 overflow-hidden">
+      <section className="relative py-8 lg:py-11 overflow-hidden">
         <div
           className="absolute inset-0 bg-cover bg-center"
           style={{ backgroundImage: "url('https://images.unsplash.com/photo-1582407947092-78b1e4f7e5a3?w=1920&q=80')" }}
