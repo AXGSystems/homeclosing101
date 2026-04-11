@@ -158,15 +158,58 @@ export default function FirstTimeBuyersPage() {
             ))}
           </div>
 
+          {/* Down payment assistance */}
+          <h2 className="text-2xl font-bold text-alta-navy mb-4">Down Payment Assistance Programs</h2>
+          <p className="text-sm text-alta-gray mb-4 leading-relaxed">Many first-time buyers don&apos;t realize that thousands of programs exist to help with down payments and closing costs. These programs are offered by state housing finance agencies, counties, cities, and nonprofits. Eligibility typically depends on income, purchase price, and location.</p>
+          <div className="grid sm:grid-cols-2 gap-4 mb-10">
+            {[
+              { type: "State Housing Finance Agencies (HFAs)", desc: "Every state has an HFA that offers down payment assistance, below-market interest rates, and homebuyer education. Programs vary by state but often provide grants or forgivable loans covering 3-5% of the purchase price. Search '[your state] housing finance agency' to find yours.", source: "NCSHA" },
+              { type: "FHA Down Payment Assistance", desc: "FHA loans allow down payment gifts from family members, employers, and approved down payment assistance programs. The 3.5% minimum can come entirely from gift funds — you don't need to contribute your own savings. Gift letters are required documenting the source.", source: "FHA.com" },
+              { type: "VA Loan (Zero Down)", desc: "Active-duty military, veterans, and eligible surviving spouses can purchase with zero down payment and no monthly mortgage insurance. The VA funding fee (2.15% first use) can be financed into the loan or waived entirely for veterans with service-connected disabilities.", source: "VA.gov" },
+              { type: "USDA Rural Development Loans", desc: "Zero-down loans for properties in eligible rural and suburban areas (which covers more areas than you'd expect). Income limits apply — typically 115% of area median income. Lower mortgage insurance than FHA. Check USDA eligibility maps for your area.", source: "USDA.gov" },
+              { type: "Employer-Assisted Housing", desc: "Some employers offer down payment assistance, forgivable loans, or housing stipends as part of their benefits package. Check with your HR department — this benefit is more common than many buyers realize, especially at large companies and hospitals.", source: "Industry" },
+              { type: "Nonprofit & Community Programs", desc: "Organizations like Habitat for Humanity, NeighborWorks, and local CDFIs offer homebuyer assistance including grants, low-interest loans, and sweat equity programs. HUD-approved housing counselors can connect you with programs in your area.", source: "HUD" },
+            ].map((p) => (
+              <div key={p.type} className="p-4 bg-white rounded-xl border border-gray-100 shadow-sm tile-interactive">
+                <h3 className="text-sm font-bold text-alta-navy mb-1">{p.type}</h3>
+                <p className="text-xs text-alta-gray leading-relaxed mb-1">{p.desc}</p>
+                <p className="text-[10px] text-alta-teal font-medium">Source: {p.source}</p>
+              </div>
+            ))}
+          </div>
+
+          {/* Credit score guidance */}
+          <h2 className="text-2xl font-bold text-alta-navy mb-4">Understanding Your Credit Score</h2>
+          <p className="text-sm text-alta-gray mb-4 leading-relaxed">Your credit score is the single biggest factor in the interest rate you&apos;ll receive — and even a small rate difference adds up to thousands over the life of your loan. Here&apos;s what the ranges mean for mortgage eligibility:</p>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-10">
+            {[
+              { range: "740+", label: "Excellent", desc: "Best rates, lowest PMI, all loan types available", color: "bg-green-50 border-green-200 text-green-700" },
+              { range: "700-739", label: "Good", desc: "Competitive rates, standard PMI, conventional eligible", color: "bg-blue-50 border-blue-200 text-blue-700" },
+              { range: "620-699", label: "Fair", desc: "Higher rates, higher PMI, FHA may be better option", color: "bg-amber-50 border-amber-200 text-amber-700" },
+              { range: "580-619", label: "Below Avg", desc: "FHA with 3.5% down, limited conventional options", color: "bg-red-50 border-red-200 text-red-700" },
+            ].map((s) => (
+              <div key={s.range} className={`p-4 ${s.color} rounded-xl border tile-interactive text-center`}>
+                <p className="text-2xl font-bold">{s.range}</p>
+                <p className="text-xs font-semibold mt-0.5">{s.label}</p>
+                <p className="text-[10px] mt-1 opacity-80">{s.desc}</p>
+              </div>
+            ))}
+          </div>
+
+          <InlineAd />
+
           {/* CTAs */}
           <div className="flex flex-col sm:flex-row gap-3">
-            <Link href="/closing-process/closing-checklist" className="px-6 py-3 bg-alta-teal text-white font-semibold rounded-lg hover:bg-alta-teal-dark transition-colors text-center">
+            <Link href="/closing-process/closing-checklist" className="px-5 py-2.5 bg-alta-teal text-white font-semibold rounded-lg hover:bg-alta-teal-dark transition-colors text-center text-sm">
               Interactive Closing Checklist
             </Link>
-            <Link href="/questions-to-ask" className="px-6 py-3 border-2 border-alta-teal text-alta-teal font-semibold rounded-lg hover:bg-alta-teal hover:text-white transition-colors text-center">
-              Questions to Ask Your Title Company
+            <Link href="/mortgage-calculator" className="px-5 py-2.5 border-2 border-alta-teal text-alta-teal font-semibold rounded-lg hover:bg-alta-teal hover:text-white transition-colors text-center text-sm">
+              Mortgage Calculator
             </Link>
-            <Link href="/stop-fraud" className="px-6 py-3 border-2 border-alta-red text-alta-red font-semibold rounded-lg hover:bg-alta-red hover:text-white transition-colors text-center">
+            <Link href="/questions-to-ask" className="px-5 py-2.5 border-2 border-alta-navy text-alta-navy font-semibold rounded-lg hover:bg-alta-navy hover:text-white transition-colors text-center text-sm">
+              Questions to Ask
+            </Link>
+            <Link href="/stop-fraud" className="px-5 py-2.5 border-2 border-alta-red text-alta-red font-semibold rounded-lg hover:bg-alta-red hover:text-white transition-colors text-center text-sm">
               Stop Fraud 101
             </Link>
           </div>

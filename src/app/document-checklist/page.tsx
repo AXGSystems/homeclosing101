@@ -125,6 +125,41 @@ export default function DocumentChecklistPage() {
 
           <InlineAd />
 
+          {/* Pre-closing timeline */}
+          <h2 className="text-xl font-bold text-alta-navy mb-4 mt-6">Pre-Closing Document Timeline</h2>
+          <p className="text-sm text-alta-gray mb-4 leading-relaxed">Documents don&apos;t all arrive at once. Here&apos;s when to expect each one so you&apos;re not scrambling at the last minute:</p>
+          <div className="space-y-3 mb-8">
+            {[
+              { when: "2-4 weeks before closing", what: "Title commitment arrives from your title company. Review Schedule B exceptions carefully — these are items NOT covered by your policy. Ask about removing any that can be cleared.", color: "bg-blue-50 border-blue-200" },
+              { when: "1-2 weeks before closing", what: "Homeowner's insurance binder finalized. Your lender needs proof of coverage effective on or before closing date. Also set up utilities — some require 5-7 business days to activate.", color: "bg-green-50 border-green-200" },
+              { when: "3 business days before closing", what: "Closing Disclosure delivered (required by federal law). Compare EVERY line to your Loan Estimate. If anything increased beyond tolerance limits, ask your lender to explain. This is your last chance to catch errors.", color: "bg-amber-50 border-amber-200" },
+              { when: "1-2 days before closing", what: "Confirm wire transfer amount and instructions BY PHONE using a number you already have. Never trust emailed wire instructions. Contact your bank about wire cutoff times.", color: "bg-red-50 border-red-200" },
+              { when: "Day of closing", what: "Complete final walk-through of the property. Bring all documents listed above, two forms of ID, and your certified funds or wire confirmation. Arrive early — closings typically take 30-90 minutes.", color: "bg-purple-50 border-purple-200" },
+            ].map((t) => (
+              <div key={t.when} className={`p-4 ${t.color} rounded-xl border tile-interactive`}>
+                <p className="text-sm font-bold text-alta-navy mb-1">{t.when}</p>
+                <p className="text-xs text-alta-gray leading-relaxed">{t.what}</p>
+              </div>
+            ))}
+          </div>
+
+          {/* Common mistakes */}
+          <h2 className="text-xl font-bold text-alta-navy mb-4">5 Common Document Mistakes That Delay Closings</h2>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 mb-8">
+            {[
+              { mistake: "Expired ID", fix: "Check your driver's license or passport expiration date NOW. If it expires before your closing date, renew it immediately." },
+              { mistake: "Wrong insurance dates", fix: "Your homeowner's insurance must be effective ON or BEFORE your closing date — not the day after. Double-check the effective date." },
+              { mistake: "Unsigned Closing Disclosure", fix: "If you haven't reviewed and acknowledged your Closing Disclosure at least 3 days before closing, the closing date may need to be pushed." },
+              { mistake: "Wire sent to wrong account", fix: "Always verify wire instructions by phone. If you wired to a fraudulent account, contact your bank within the hour for the best chance of recovery." },
+              { mistake: "Missing earnest money credit", fix: "Verify your earnest money deposit appears as a credit on the Closing Disclosure. If it's missing, alert your settlement agent before closing." },
+            ].map((m) => (
+              <div key={m.mistake} className="p-4 bg-white rounded-xl border border-gray-100 shadow-sm tile-interactive">
+                <h3 className="text-sm font-bold text-alta-red mb-1">{m.mistake}</h3>
+                <p className="text-xs text-alta-gray leading-relaxed">{m.fix}</p>
+              </div>
+            ))}
+          </div>
+
           <div className="mt-8 flex flex-col sm:flex-row gap-3">
             <Link href="/closing-process/closing-checklist" className="px-6 py-3 bg-alta-teal text-white font-semibold rounded-lg hover:bg-alta-teal-dark transition-colors text-center">
               Full Closing Checklist
