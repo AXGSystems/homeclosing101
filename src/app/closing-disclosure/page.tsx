@@ -142,6 +142,29 @@ export default function ClosingDisclosurePage() {
           </div>
           <p className="text-xs text-alta-gray mb-8">Source: CFPB TRID Rule — fee tolerance categories. If a zero-tolerance fee increased, your lender must cure (refund) the difference at or after closing.</p>
 
+          {/* 5-step review process */}
+          <h2 className="text-xl font-bold text-alta-navy mb-4">Your 5-Step Closing Disclosure Review Process</h2>
+          <p className="text-sm text-alta-gray mb-4 leading-relaxed">You have 3 business days. Use them wisely. Follow this process to catch errors before they cost you money:</p>
+          <div className="space-y-3 mb-8">
+            {[
+              { step: "1", title: "Day 1: Compare to Your Loan Estimate", action: "Put your Loan Estimate and Closing Disclosure side by side. Check: interest rate, loan amount, monthly payment, and total closing costs. Flag any differences.", color: "bg-blue-50 border-blue-200" },
+              { step: "2", title: "Day 1: Check the tolerance categories", action: "Zero-tolerance fees (origination, transfer taxes) CANNOT have increased. If they did, your lender owes you a refund. 10%-tolerance fees can increase up to 10% in aggregate. Note any increases.", color: "bg-green-50 border-green-200" },
+              { step: "3", title: "Day 2: Verify your personal details", action: "Check: your name spelling, property address, loan term, rate lock status, and that your earnest money deposit appears as a credit. Errors here can delay recording.", color: "bg-amber-50 border-amber-200" },
+              { step: "4", title: "Day 2: Review the cash to close", action: "Verify the total cash you need at closing. This should match your funds. Confirm wire transfer amount and instructions BY PHONE — not email.", color: "bg-purple-50 border-purple-200" },
+              { step: "5", title: "Day 3: Ask questions before closing", action: "Contact your lender and settlement agent about ANYTHING you don't understand. Don't wait until the closing table — it's much harder to correct issues after you've signed.", color: "bg-red-50 border-red-200" },
+            ].map((s) => (
+              <div key={s.step} className={`p-4 ${s.color} rounded-xl border tile-interactive flex gap-3 items-start`}>
+                <span className="w-7 h-7 rounded-full bg-alta-navy text-white flex items-center justify-center text-xs font-bold shrink-0">{s.step}</span>
+                <div>
+                  <h3 className="text-sm font-bold text-alta-navy">{s.title}</h3>
+                  <p className="text-xs text-alta-gray leading-relaxed mt-0.5">{s.action}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <InlineAd />
+
           <div className="flex flex-col sm:flex-row gap-3">
             <Link href="/loan-estimate" className="px-5 py-2.5 bg-alta-teal text-white font-semibold rounded-lg hover:bg-alta-teal-dark transition-colors text-center text-sm">
               Understanding Your Loan Estimate

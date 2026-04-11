@@ -198,6 +198,25 @@ export default function FirstTimeBuyersPage() {
 
           <InlineAd />
 
+          {/* What buyers wish they knew */}
+          <h2 className="text-2xl font-bold text-alta-navy mb-4">What First-Time Buyers Wish They Knew</h2>
+          <p className="text-sm text-alta-gray mb-4 leading-relaxed">Based on surveys of recent homebuyers by NAR and CFPB, these are the most common regrets and surprises. Learn from their experience.</p>
+          <div className="grid sm:grid-cols-2 gap-3 mb-10">
+            {[
+              { insight: "Closing costs were more than expected", detail: "Many buyers budget only for the down payment and are surprised by 2-5% in closing costs on top of it. On a $350K home, that's $7,000-$17,500 in additional cash needed at closing.", color: "bg-amber-50 border-amber-200" },
+              { insight: "Should have shopped more lenders", detail: "Buyers who compared 3+ Loan Estimates saved an average of $1,500 over the life of their loan compared to those who went with the first lender they talked to. The CFPB recommends comparing at least 3.", color: "bg-blue-50 border-blue-200" },
+              { insight: "Didn't understand the inspection report", detail: "Inspection reports can be 40+ pages of technical findings. Attending the inspection in person and asking the inspector to explain priorities vs cosmetic issues is the single best way to understand what matters.", color: "bg-green-50 border-green-200" },
+              { insight: "Underestimated ongoing homeowner costs", detail: "Beyond the mortgage: property taxes, insurance, HOA fees, maintenance (budget 1-2% of home value per year), utilities, and unexpected repairs. Budget for these BEFORE you buy, not after.", color: "bg-purple-50 border-purple-200" },
+              { insight: "Wish they'd gotten owner's title insurance", detail: "Buyers who skipped owner's title insurance and later faced a title claim had to pay for legal defense out of pocket — often $20,000-$75,000+ even for baseless claims. The one-time premium is a fraction of the risk.", color: "bg-red-50 border-red-200" },
+              { insight: "Didn't know about down payment assistance", detail: "Thousands of programs exist at the state, county, and city level to help with down payments and closing costs. Many first-time buyers qualify but never apply because they don't know the programs exist. Check with your state HFA.", color: "bg-teal-50 border-teal-200" },
+            ].map((item) => (
+              <div key={item.insight} className={`p-4 ${item.color} rounded-xl border tile-interactive`}>
+                <h3 className="text-sm font-bold text-alta-navy mb-1">&ldquo;{item.insight}&rdquo;</h3>
+                <p className="text-xs text-alta-gray leading-relaxed">{item.detail}</p>
+              </div>
+            ))}
+          </div>
+
           {/* CTAs */}
           <div className="flex flex-col sm:flex-row gap-3">
             <Link href="/closing-process/closing-checklist" className="px-5 py-2.5 bg-alta-teal text-white font-semibold rounded-lg hover:bg-alta-teal-dark transition-colors text-center text-sm">

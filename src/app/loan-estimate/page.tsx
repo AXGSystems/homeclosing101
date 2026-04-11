@@ -129,6 +129,50 @@ export default function LoanEstimatePage() {
             ))}
           </div>
 
+          {/* How to compare */}
+          <h2 className="text-xl font-bold text-alta-navy mb-4">How to Compare Loan Estimates Like a Pro</h2>
+          <p className="text-sm text-alta-gray mb-4 leading-relaxed">You should get Loan Estimates from at least 3 lenders. Here&apos;s a step-by-step comparison method:</p>
+          <div className="grid sm:grid-cols-2 gap-3 mb-8">
+            {[
+              { step: "1", title: "Compare APRs first", desc: "The APR includes fees in the true cost — a lower rate with high fees may cost MORE than a slightly higher rate with lower fees. APR is the single best number for comparing total cost.", color: "bg-blue-50 border-blue-200" },
+              { step: "2", title: "Check origination charges", desc: "These are negotiable and vary widely. Some lenders charge 0.5%, others charge 1%+. On a $350K loan, that's $1,750 vs $3,500+ difference.", color: "bg-green-50 border-green-200" },
+              { step: "3", title: "Look at total closing costs", desc: "Page 2, Section J shows total closing costs. Compare this across all estimates. Don't be distracted by low rates if closing costs are inflated.", color: "bg-amber-50 border-amber-200" },
+              { step: "4", title: "Check the total monthly payment", desc: "Page 1 shows projected payments including escrow. Make sure you're comparing total PITI (principal, interest, taxes, insurance) — not just principal and interest.", color: "bg-purple-50 border-purple-200" },
+              { step: "5", title: "Verify the rate lock", desc: "Is the rate locked? For how long? A locked rate protects you if rates rise before closing. An unlocked estimate could change significantly.", color: "bg-red-50 border-red-200" },
+              { step: "6", title: "Look at 5-year cost comparison", desc: "Page 3 shows total costs over the first 5 years. This includes principal, interest, mortgage insurance, AND loan costs — the best long-term comparison.", color: "bg-teal-50 border-teal-200" },
+            ].map((s) => (
+              <div key={s.step} className={`p-4 ${s.color} rounded-xl border tile-interactive`}>
+                <div className="flex items-center gap-2 mb-2">
+                  <span className="w-6 h-6 rounded-full bg-alta-navy text-white flex items-center justify-center text-xs font-bold">{s.step}</span>
+                  <h3 className="text-sm font-bold text-alta-navy">{s.title}</h3>
+                </div>
+                <p className="text-xs text-alta-gray leading-relaxed">{s.desc}</p>
+              </div>
+            ))}
+          </div>
+
+          {/* APR explained with example */}
+          <div className="p-5 bg-gradient-to-br from-alta-light to-white rounded-2xl border border-gray-100 mb-8">
+            <h3 className="font-bold text-alta-navy mb-3">Why APR Matters More Than Interest Rate — A Real Example</h3>
+            <div className="grid md:grid-cols-2 gap-4 mb-4">
+              <div className="p-4 bg-white rounded-xl border border-gray-100 tile-interactive text-center">
+                <p className="text-sm font-bold text-alta-navy mb-1">Lender A</p>
+                <p className="text-xs text-alta-gray">Rate: <strong className="text-blue-600">6.25%</strong></p>
+                <p className="text-xs text-alta-gray">Fees: <strong>$5,200</strong></p>
+                <p className="text-xs text-alta-gray">APR: <strong className="text-blue-600">6.48%</strong></p>
+                <p className="text-xs text-alta-gray mt-1">5-year cost: <strong>$136,800</strong></p>
+              </div>
+              <div className="p-4 bg-white rounded-xl border border-green-200 tile-interactive text-center">
+                <p className="text-sm font-bold text-alta-navy mb-1">Lender B</p>
+                <p className="text-xs text-alta-gray">Rate: <strong className="text-green-600">6.50%</strong> (higher)</p>
+                <p className="text-xs text-alta-gray">Fees: <strong>$2,100</strong> (lower)</p>
+                <p className="text-xs text-alta-gray">APR: <strong className="text-green-600">6.42%</strong> (lower!)</p>
+                <p className="text-xs text-alta-gray mt-1">5-year cost: <strong className="text-green-600">$134,200</strong> (saves $2,600)</p>
+              </div>
+            </div>
+            <p className="text-xs text-alta-gray leading-relaxed">In this example, Lender B has a HIGHER interest rate but a LOWER APR — and saves you $2,600 over 5 years. This is because Lender A&apos;s higher fees offset their lower rate. The APR captures this. Always compare APRs, not just rates. Source: CFPB Know Before You Owe</p>
+          </div>
+
           <div className="p-5 bg-gradient-to-br from-blue-50 to-white rounded-2xl border border-blue-100 mb-6">
             <h3 className="font-bold text-alta-navy mb-2">CFPB Sample Loan Estimate</h3>
             <p className="text-sm text-alta-gray mb-3">The Consumer Financial Protection Bureau provides a complete annotated sample Loan Estimate that walks through every field. We recommend reviewing it before you receive yours.</p>
