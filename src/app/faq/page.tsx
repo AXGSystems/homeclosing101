@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import PageHero from "@/components/PageHero";
+import { InlineAd } from "@/components/EliteProviders";
 
 const faqCategories = [
   { id: "all", label: "All Questions" },
@@ -121,6 +122,8 @@ export default function FAQPage() {
             );
           })}
         </div>
+
+        <InlineAd />
 
         <div className="mt-10 p-6 bg-gradient-to-br from-alta-light to-white rounded-2xl border border-gray-100">
           <h3 className="font-bold text-alta-navy mb-3">Still have questions?</h3>

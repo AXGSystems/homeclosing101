@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import PageHero from "@/components/PageHero";
+import { InlineAd } from "@/components/EliteProviders";
 import { stateInsuranceData, callingScript } from "@/data/stateInsurance";
 import { stateFlags } from "@/data/stateFlags";
 
@@ -257,6 +258,7 @@ export default function FindPolicyPage() {
           {/* Searchable Directory */}
           <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden mb-8">
             <div className="p-5 border-b border-gray-100">
+              <InlineAd />
               <h2 className="text-xl font-bold text-alta-navy mb-2">Full State Insurance Directory</h2>
               <p className="text-xs text-alta-gray mb-3">Verified via the Insurance Information Institute (I.I.I.) and NAIC, updated February 2026.</p>
               <input

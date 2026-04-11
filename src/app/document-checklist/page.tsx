@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import PageHero from "@/components/PageHero";
+import { InlineAd } from "@/components/EliteProviders";
 
 const docSections = [
   {
@@ -121,6 +122,8 @@ export default function DocumentChecklistPage() {
               );
             })}
           </div>
+
+          <InlineAd />
 
           <div className="mt-8 flex flex-col sm:flex-row gap-3">
             <Link href="/closing-process/closing-checklist" className="px-6 py-3 bg-alta-teal text-white font-semibold rounded-lg hover:bg-alta-teal-dark transition-colors text-center">

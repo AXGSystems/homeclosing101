@@ -1,5 +1,6 @@
 import Link from "next/link";
 import PageHero from "@/components/PageHero";
+import { InlineAd } from "@/components/EliteProviders";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -82,6 +83,8 @@ export default function ClosingOptionsPage() {
               </div>
             ))}
           </div>
+
+          <InlineAd />
 
           <div className="p-6 bg-gradient-to-br from-blue-50 to-blue-100/30 rounded-2xl border border-blue-100 mb-8">
             <h3 className="font-bold text-alta-navy mb-2">Important Note</h3>

@@ -2,6 +2,7 @@
 
 import { useState, useMemo } from "react";
 import PageHero from "@/components/PageHero";
+import { InlineAd } from "@/components/EliteProviders";
 
 const glossaryData: Record<string, { term: string; definition: string; example?: string }[]> = {
   A: [
@@ -281,6 +282,8 @@ export default function GlossaryPage() {
               </div>
             ))}
         </div>
+
+        <InlineAd />
 
         {totalTerms === 0 && (
           <div className="text-center py-16">

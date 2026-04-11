@@ -1,6 +1,7 @@
 import Link from "next/link";
 import PageHero from "@/components/PageHero";
 import PrintButton from "@/components/PrintButton";
+import { InlineAd } from "@/components/EliteProviders";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -160,6 +161,8 @@ export default function StopFraudPage() {
         </div>
 
         {/* Reporting Links */}
+        <InlineAd />
+
         <h2 className="text-2xl font-bold text-alta-navy mb-4">Where to Report Fraud</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-12">
           {[

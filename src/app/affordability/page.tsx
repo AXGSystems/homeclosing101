@@ -3,6 +3,7 @@
 import { useState, useMemo } from "react";
 import Link from "next/link";
 import PageHero from "@/components/PageHero";
+import { InlineAd } from "@/components/EliteProviders";
 
 export default function AffordabilityPage() {
   const [annualIncome, setAnnualIncome] = useState(85000);
@@ -156,6 +157,8 @@ export default function AffordabilityPage() {
               </div>
             </div>
           </div>
+
+          <InlineAd />
 
           <div className="mt-8 grid sm:grid-cols-2 gap-3">
             <Link href="/mortgage-calculator" className="p-4 bg-white rounded-xl border border-gray-100 hover:shadow-md hover:border-alta-teal/20 transition-all">
