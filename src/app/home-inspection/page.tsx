@@ -1,6 +1,7 @@
 import Link from "next/link";
 import PageHero from "@/components/PageHero";
 import { InlineAd } from "@/components/EliteProviders";
+import ExpandableInspectionTiles from "@/components/ExpandableInspectionTiles";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -169,19 +170,8 @@ export default function HomeInspectionPage() {
 
           {/* Specialty inspections */}
           <h2 className="text-2xl font-bold text-alta-navy mb-4">Specialty Inspections: When You Need More</h2>
-          <p className="text-sm text-alta-gray mb-4 leading-relaxed">A general home inspection doesn&apos;t cover everything. Based on the property, your location, and your general inspector&apos;s findings, you may need one or more specialty inspections. The general inspector will recommend these if they see red flags.</p>
-          <div className="grid sm:grid-cols-2 gap-3 mb-10">
-            {specialtyInspections.map((si) => (
-              <div key={si.name} className="p-4 bg-white rounded-xl border border-gray-100 shadow-sm tile-interactive">
-                <div className="flex items-start justify-between gap-2 mb-2">
-                  <h3 className="text-sm font-bold text-alta-navy">{si.name}</h3>
-                  <span className="text-[10px] font-medium text-alta-teal bg-alta-light px-2 py-0.5 rounded shrink-0">{si.cost}</span>
-                </div>
-                <p className="text-xs text-alta-gray leading-relaxed mb-1">{si.when}</p>
-                <p className="text-[10px] text-alta-teal font-medium">Source: {si.source}</p>
-              </div>
-            ))}
-          </div>
+          <p className="text-sm text-alta-gray mb-4 leading-relaxed">A general home inspection doesn&apos;t cover everything. Click any inspection below for full details on when it&apos;s needed, what it reveals, and what problems cost to fix.</p>
+          <ExpandableInspectionTiles />
 
           {/* How to choose an inspector */}
           <h2 className="text-2xl font-bold text-alta-navy mb-4">Choosing an Independent Home Inspector</h2>
