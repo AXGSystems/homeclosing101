@@ -9,7 +9,7 @@ const checklistSections = [
   {
     title: "Before You Start",
     color: "blue",
-    image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=600&q=80",
+    image: "https://images.unsplash.com/photo-1560520653-9e0e4c89eb11?w=600&q=80",
     tip: "Getting your finances in order is the most important first step. Most closings fail because of financing issues.",
     items: [
       "Check your credit score and review your credit report",

@@ -12,7 +12,7 @@ const steps = [
   {
     title: "Learn About Loan Options & Get Pre-Approved",
     content: "Understanding the types of mortgages available helps you determine what you can afford before you start house hunting. Different loans affect your upfront costs, monthly payments, total interest paid, and level of financial risk. Getting pre-approved gives you a clear budget and shows sellers you're a serious buyer.",
-    image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=400&q=80",
+    image: "https://images.unsplash.com/photo-1560520653-9e0e4c89eb11?w=400&q=80",
   },
   {
     title: "Find a Property",
@@ -79,6 +79,19 @@ export default function WhatToExpectPage() {
 
       <div className="py-12 lg:py-16">
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
+          {/* Page intro */}
+          <div className="mb-10 p-5 bg-gradient-to-br from-alta-light to-white rounded-2xl border border-gray-100">
+            <div className="flex items-start gap-4">
+              <div className="w-12 h-12 rounded-xl bg-alta-teal/10 flex items-center justify-center text-alta-teal shrink-0">
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M15.75 5.25a3 3 0 013 3m3 0a6 6 0 01-7.029 5.912c-.563-.097-1.159.026-1.563.43L10.5 17.25H8.25v2.25H6v2.25H2.25v-2.818c0-.597.237-1.17.659-1.591l6.499-6.499c.404-.404.527-1 .43-1.563A6 6 0 1121.75 8.25z" /></svg>
+              </div>
+              <div>
+                <h2 className="font-bold text-alta-navy mb-1">Your Step-by-Step Closing Guide</h2>
+                <p className="text-sm text-alta-gray leading-relaxed">Follow these 7 steps from getting pre-approved to receiving your keys. Each step includes what to expect and what to look out for. Bookmark this page and come back as you move through the process.</p>
+              </div>
+            </div>
+          </div>
+
           {/* Steps */}
           <h2 className="text-2xl font-bold text-alta-navy mb-8">7 Steps to Getting the Keys</h2>
           <div className="space-y-6 mb-16">

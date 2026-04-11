@@ -33,7 +33,7 @@ const sections = [
     title: "Closing Costs Explained",
     description: "Understand every fee and use our live calculator to estimate your total closing costs.",
     href: "/closing-process/closing-costs",
-    image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=600&q=80",
+    image: "https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=600&q=80",
     accent: "from-amber-500 to-amber-600",
   },
 ];

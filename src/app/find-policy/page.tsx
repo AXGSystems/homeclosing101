@@ -101,6 +101,19 @@ export default function FindPolicyPage() {
 
       <div className="py-12 lg:py-16">
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
+          {/* Page intro */}
+          <div className="mb-8 p-5 bg-gradient-to-br from-alta-light to-white rounded-2xl border border-gray-100">
+            <div className="flex items-start gap-4">
+              <div className="w-12 h-12 rounded-xl bg-alta-teal/10 flex items-center justify-center text-alta-teal shrink-0">
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m5.231 13.481L15 17.25m-4.5-15H5.625c-.621 0-1.125.504-1.125 1.125v16.5c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9zm3.75 11.625a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z" /></svg>
+              </div>
+              <div>
+                <h2 className="font-bold text-alta-navy mb-1">3 Ways to Locate Your Policy</h2>
+                <p className="text-sm text-alta-gray leading-relaxed">Your owner&apos;s title insurance policy was issued at closing and protects you for as long as you own the property. Follow the steps below, use the interactive state map to find your insurance department, or use our sample calling script to get exactly what you need.</p>
+              </div>
+            </div>
+          </div>
+
           {/* Steps */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-12">
             {[

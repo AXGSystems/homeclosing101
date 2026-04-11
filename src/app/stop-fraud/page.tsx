@@ -96,6 +96,19 @@ export default function StopFraudPage() {
     <div className="py-12 lg:py-16">
       <div className="max-w-5xl mx-auto px-4 sm:px-6">
 
+        {/* Page intro */}
+        <div className="mb-8 p-5 bg-gradient-to-br from-red-50 to-white rounded-2xl border border-red-100">
+          <div className="flex items-start gap-4">
+            <div className="w-12 h-12 rounded-xl bg-red-100 flex items-center justify-center text-alta-red shrink-0">
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m0-10.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.75c0 5.592 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.57-.598-3.75h-.152c-3.196 0-6.1-1.25-8.25-3.286z" /></svg>
+            </div>
+            <div>
+              <h2 className="font-bold text-alta-navy mb-1">Your Fraud Prevention Toolkit</h2>
+              <p className="text-sm text-alta-gray leading-relaxed">Every step below is verified by federal agencies and industry authorities. Print this page, share it with your family, and refer to it throughout your closing process. Wire fraud is preventable — but only if you know what to watch for.</p>
+            </div>
+          </div>
+        </div>
+
         {/* Stats grid */}
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 mb-12">
           {stats.map((s) => (
