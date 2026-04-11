@@ -83,23 +83,25 @@ export default function JoinAltaPage() {
 
           {/* About ALTA */}
           <h2 className="text-2xl font-bold text-alta-navy mb-4">About the American Land Title Association</h2>
-          <div className="grid md:grid-cols-2 gap-5 mb-10">
-            <div className="p-5 bg-white rounded-2xl border border-gray-100 shadow-sm tile-interactive">
-              <h3 className="font-bold text-alta-navy mb-2">Founded in 1907</h3>
-              <p className="text-xs text-alta-gray leading-relaxed">ALTA has represented the title insurance and settlement services industry for over 116 years. From the days of handwritten abstracts to today&apos;s digital closings, ALTA has been the voice of the industry through every era of real estate.</p>
-            </div>
-            <div className="p-5 bg-white rounded-2xl border border-gray-100 shadow-sm tile-interactive">
-              <h3 className="font-bold text-alta-navy mb-2">Washington, D.C. Headquarters</h3>
-              <p className="text-xs text-alta-gray leading-relaxed">Located at 601 Pennsylvania Avenue NW, Suite 750 — steps from the U.S. Capitol. ALTA&apos;s proximity to federal lawmakers enables direct advocacy on policies affecting the title industry and homebuyers.</p>
-            </div>
-            <div className="p-5 bg-white rounded-2xl border border-gray-100 shadow-sm tile-interactive">
-              <h3 className="font-bold text-alta-navy mb-2">ALTA Best Practices</h3>
-              <p className="text-xs text-alta-gray leading-relaxed">The 7-pillar Best Practices framework is the gold standard for title and settlement operations. It covers licensing, escrow handling, data privacy, settlement procedures, title policy production, professional liability, and consumer complaints. Adopted by thousands of member companies.</p>
-            </div>
-            <div className="p-5 bg-white rounded-2xl border border-gray-100 shadow-sm tile-interactive">
-              <h3 className="font-bold text-alta-navy mb-2">TIPAC Political Action</h3>
-              <p className="text-xs text-alta-gray leading-relaxed">The Title Industry Political Action Committee (TIPAC) supports federal candidates who understand the title industry. ALTA&apos;s advocacy efforts have successfully defended against threats to title insurance, protected consumer choice, and promoted fraud prevention legislation.</p>
-            </div>
+          <div className="grid md:grid-cols-2 gap-4 mb-10">
+            {[
+              { title: "Founded in 1907", desc: "ALTA has represented the title insurance and settlement services industry for over 116 years. From handwritten abstracts to digital closings, ALTA has been the voice of the industry through every era.", color: "from-[#1a5276] to-[#154463]", icon: "M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" },
+              { title: "Washington, D.C. Headquarters", desc: "601 Pennsylvania Avenue NW, Suite 750 — steps from the U.S. Capitol. Direct advocacy on policies affecting the title industry and homebuyers.", color: "from-[#2d6b3f] to-[#235532]", icon: "M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0012 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18M12 6.75h.008v.008H12V6.75z" },
+              { title: "ALTA Best Practices", desc: "The 7-pillar framework is the gold standard for title and settlement operations — licensing, escrow, data privacy, settlements, title policies, liability, and complaints.", color: "from-[#5b3a8c] to-[#482d70]", icon: "M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" },
+              { title: "TIPAC Political Action", desc: "The Title Industry Political Action Committee supports candidates who understand the industry. ALTA has defended title insurance, protected consumer choice, and promoted fraud prevention.", color: "from-[#8b6914] to-[#705410]", icon: "M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" },
+            ].map((item) => (
+              <div key={item.title} className="group rounded-2xl overflow-hidden border border-gray-100 shadow-sm bg-white tile-interactive">
+                <div className={`bg-gradient-to-r ${item.color} p-4 flex items-center gap-3`}>
+                  <div className="w-10 h-10 rounded-xl bg-white/15 flex items-center justify-center shrink-0">
+                    <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d={item.icon} /></svg>
+                  </div>
+                  <h3 className="font-bold text-white text-sm">{item.title}</h3>
+                </div>
+                <div className="p-4">
+                  <p className="text-xs text-alta-gray leading-relaxed">{item.desc}</p>
+                </div>
+              </div>
+            ))}
           </div>
 
           {/* Membership tiers */}
@@ -107,14 +109,14 @@ export default function JoinAltaPage() {
           <p className="text-sm text-alta-gray mb-4 leading-relaxed">ALTA membership is open to companies and individuals across the title insurance and settlement services ecosystem. Member types include:</p>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 mb-10">
             {[
-              { type: "Title Insurance Underwriters", desc: "Companies that issue title insurance policies — the largest underwriters in the country are ALTA members." },
-              { type: "Title Agents & Abstracters", desc: "Local and regional title agents who conduct searches, issue commitments, and facilitate closings." },
-              { type: "Settlement/Escrow Companies", desc: "Companies providing settlement, escrow, and closing services to buyers and sellers." },
-              { type: "Attorneys", desc: "Real estate attorneys who provide title opinions, handle closings, or work in the title insurance space." },
-              { type: "Technology Providers", desc: "Companies providing software, platforms, and tools to the title and settlement industry." },
-              { type: "Associate Members", desc: "Individuals and companies with a professional interest in the title industry — lenders, real estate firms, and more." },
+              { type: "Title Insurance Underwriters", desc: "Companies that issue title insurance policies — the largest underwriters in the country are ALTA members.", color: "border-l-[#1a5276]", icon: "bg-[#e8f0f5] text-[#1a5276]" },
+              { type: "Title Agents & Abstracters", desc: "Local and regional title agents who conduct searches, issue commitments, and facilitate closings.", color: "border-l-[#2d6b3f]", icon: "bg-[#e9f5ed] text-[#2d6b3f]" },
+              { type: "Settlement/Escrow Companies", desc: "Companies providing settlement, escrow, and closing services to buyers and sellers.", color: "border-l-[#0a7ea8]", icon: "bg-[#e6f1f5] text-[#0a7ea8]" },
+              { type: "Attorneys", desc: "Real estate attorneys who provide title opinions, handle closings, or work in the title insurance space.", color: "border-l-[#5b3a8c]", icon: "bg-[#f0ecf6] text-[#5b3a8c]" },
+              { type: "Technology Providers", desc: "Companies providing software, platforms, and tools to the title and settlement industry.", color: "border-l-[#8b6914]", icon: "bg-[#faf4e4] text-[#8b6914]" },
+              { type: "Associate Members", desc: "Individuals and companies with a professional interest in the title industry — lenders, real estate firms, and more.", color: "border-l-[#943030]", icon: "bg-[#f5e8e8] text-[#943030]" },
             ].map((m) => (
-              <div key={m.type} className="p-4 bg-white rounded-xl border border-gray-100 shadow-sm tile-interactive">
+              <div key={m.type} className={`p-4 bg-white rounded-xl border border-gray-100 border-l-4 ${m.color} shadow-sm tile-interactive`}>
                 <h3 className="text-sm font-bold text-alta-navy mb-1">{m.type}</h3>
                 <p className="text-xs text-alta-gray leading-relaxed">{m.desc}</p>
               </div>
