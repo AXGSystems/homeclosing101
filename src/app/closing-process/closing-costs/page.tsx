@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import PageHero from "@/components/PageHero";
+import { InlineAd } from "@/components/EliteProviders";
 
 const costCategories = [
   {
@@ -211,6 +212,87 @@ export default function ClosingCostsPage() {
               </div>
             </div>
           ))}
+        </div>
+
+        <InlineAd />
+
+        {/* Who pays what */}
+        <h2 className="text-2xl font-bold text-alta-navy mb-4 mt-10">Who Pays What? It Depends on Your State</h2>
+        <p className="text-sm text-alta-gray mb-4 leading-relaxed">
+          Closing cost responsibilities vary significantly by state and are often negotiable. In some states, the seller traditionally pays for the owner&apos;s title insurance policy. In others, the buyer pays. Your purchase agreement should specify who pays each fee. Here are the general patterns:
+        </p>
+        <div className="grid sm:grid-cols-2 gap-4 mb-10">
+          <div className="p-5 bg-white rounded-2xl border border-gray-100 shadow-sm">
+            <h3 className="font-bold text-alta-navy mb-3">Typically Paid by the Buyer</h3>
+            <ul className="space-y-2 text-sm text-alta-gray">
+              <li className="flex items-start gap-2"><svg className="w-4 h-4 text-alta-teal shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>Loan origination and discount points</li>
+              <li className="flex items-start gap-2"><svg className="w-4 h-4 text-alta-teal shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>Home inspection and appraisal</li>
+              <li className="flex items-start gap-2"><svg className="w-4 h-4 text-alta-teal shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>Lender&apos;s title insurance policy</li>
+              <li className="flex items-start gap-2"><svg className="w-4 h-4 text-alta-teal shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>Homeowner&apos;s insurance (first year)</li>
+              <li className="flex items-start gap-2"><svg className="w-4 h-4 text-alta-teal shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>Prepaid property taxes and interest</li>
+              <li className="flex items-start gap-2"><svg className="w-4 h-4 text-alta-teal shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>Private mortgage insurance (PMI) if applicable</li>
+            </ul>
+          </div>
+          <div className="p-5 bg-white rounded-2xl border border-gray-100 shadow-sm">
+            <h3 className="font-bold text-alta-navy mb-3">Typically Paid by the Seller</h3>
+            <ul className="space-y-2 text-sm text-alta-gray">
+              <li className="flex items-start gap-2"><svg className="w-4 h-4 text-alta-teal shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>Real estate agent commission (typically 5-6%)</li>
+              <li className="flex items-start gap-2"><svg className="w-4 h-4 text-alta-teal shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>Owner&apos;s title insurance (in some states)</li>
+              <li className="flex items-start gap-2"><svg className="w-4 h-4 text-alta-teal shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>Transfer taxes (varies by state/county)</li>
+              <li className="flex items-start gap-2"><svg className="w-4 h-4 text-alta-teal shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>Any agreed-upon repair credits</li>
+              <li className="flex items-start gap-2"><svg className="w-4 h-4 text-alta-teal shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>Prorated property taxes owed</li>
+            </ul>
+          </div>
+        </div>
+
+        {/* How to reduce costs */}
+        <h2 className="text-2xl font-bold text-alta-navy mb-4">7 Ways to Reduce Your Closing Costs</h2>
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 mb-10">
+          {[
+            { title: "Shop for title insurance", tip: "Under RESPA, you can choose your own title company. Get quotes from 2-3 providers. Ask about simultaneous issue discounts." },
+            { title: "Negotiate seller concessions", tip: "Ask the seller to pay a portion of closing costs (common in buyer's markets). This is capped at 3-9% depending on loan type." },
+            { title: "Compare Loan Estimates", tip: "CFPB requires lenders to provide a Loan Estimate within 3 business days. Compare at least 3 to find the best deal." },
+            { title: "Ask about lender credits", tip: "Some lenders offer credits toward closing costs in exchange for a slightly higher interest rate. Do the math on total cost over time." },
+            { title: "Close at end of month", tip: "Closing later in the month reduces prepaid interest charges since you pay interest from closing date through month-end." },
+            { title: "Check for first-time buyer programs", tip: "Many states and counties offer down payment assistance and closing cost grants. Check with your state housing finance agency." },
+            { title: "Review the Closing Disclosure carefully", tip: "Compare every line item to your Loan Estimate. Question any fees that increased or appeared unexpectedly." },
+          ].map((item) => (
+            <div key={item.title} className="p-4 bg-white rounded-xl border border-gray-100 shadow-sm hover:shadow-md hover:border-alta-teal/20 transition-all">
+              <h3 className="font-bold text-alta-navy text-sm mb-1">{item.title}</h3>
+              <p className="text-xs text-alta-gray leading-relaxed">{item.tip}</p>
+            </div>
+          ))}
+        </div>
+
+        {/* Key regulations */}
+        <div className="p-6 bg-gradient-to-br from-blue-50 to-white rounded-2xl border border-blue-100 mb-6">
+          <h3 className="font-bold text-alta-navy mb-3">Key Federal Regulations Protecting You</h3>
+          <div className="space-y-3 text-sm text-alta-gray">
+            <div>
+              <p className="font-semibold text-alta-navy">RESPA (Real Estate Settlement Procedures Act)</p>
+              <p className="leading-relaxed">Requires lenders to disclose all settlement costs. Prohibits kickbacks and referral fees between settlement service providers. Gives you the right to shop for your own title insurance and settlement services. Source: CFPB</p>
+            </div>
+            <div>
+              <p className="font-semibold text-alta-navy">TRID (TILA-RESPA Integrated Disclosure)</p>
+              <p className="leading-relaxed">Requires two standardized disclosure forms: the Loan Estimate (within 3 business days of application) and the Closing Disclosure (at least 3 business days before closing). Limits how much certain fees can increase between estimates. Source: CFPB</p>
+            </div>
+            <div>
+              <p className="font-semibold text-alta-navy">Tolerance Categories</p>
+              <p className="leading-relaxed">Under TRID, some fees cannot increase at all (lender fees, transfer taxes), some can increase up to 10% in aggregate (services you didn&apos;t shop for, recording fees), and some have no limit (services you chose, prepaid items, escrow). Source: CFPB</p>
+            </div>
+          </div>
+        </div>
+
+        <div className="flex flex-col sm:flex-row gap-3">
+          <Link href="/mortgage-calculator" className="px-5 py-2.5 bg-alta-teal text-white font-semibold rounded-lg hover:bg-alta-teal-dark transition-colors text-center text-sm">
+            Mortgage Calculator
+          </Link>
+          <Link href="/document-checklist" className="px-5 py-2.5 border-2 border-alta-teal text-alta-teal font-semibold rounded-lg hover:bg-alta-teal hover:text-white transition-colors text-center text-sm">
+            Document Checklist
+          </Link>
+          <Link href="/sources" className="px-5 py-2.5 border-2 border-alta-navy text-alta-navy font-semibold rounded-lg hover:bg-alta-navy hover:text-white transition-colors text-center text-sm">
+            View All Sources
+          </Link>
         </div>
       </div>
     </div>
