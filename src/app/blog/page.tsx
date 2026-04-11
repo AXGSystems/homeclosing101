@@ -73,6 +73,54 @@ const articles = [
     readTime: "7 min",
     image: "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=600&q=80",
   },
+  {
+    title: "Your Home Inspection: A $400 Investment That Can Save You $40,000",
+    excerpt: "86% of home inspections reveal issues. Learn what inspectors check, what they can't see, and why attending your inspection is the smartest thing you can do as a buyer.",
+    date: "November 2025",
+    category: "Inspections",
+    readTime: "6 min",
+    image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&q=80",
+  },
+  {
+    title: "FHA vs Conventional vs VA: Which Loan Is Right for You?",
+    excerpt: "A detailed comparison of the four major loan types — down payment requirements, mortgage insurance, credit scores, and total cost over the life of the loan.",
+    date: "October 2025",
+    category: "Mortgages",
+    readTime: "8 min",
+    image: "https://images.unsplash.com/photo-1560520653-9e0e4c89eb11?w=600&q=80",
+  },
+  {
+    title: "Down Payment Assistance: Free Money You Didn't Know Existed",
+    excerpt: "Every state has programs to help first-time buyers with down payments and closing costs. Here's how to find and apply for assistance in your area.",
+    date: "September 2025",
+    category: "First-Time Buyers",
+    readTime: "5 min",
+    image: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=600&q=80",
+  },
+  {
+    title: "Understanding Your Property Taxes: State by State",
+    excerpt: "Property tax rates vary from 0.27% in Hawaii to 2.33% in New Jersey. Learn how taxes are calculated, what affects your rate, and how to appeal if your assessment is too high.",
+    date: "August 2025",
+    category: "Costs",
+    readTime: "6 min",
+    image: "https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=600&q=80",
+  },
+  {
+    title: "The Title Search: What Happens Behind the Scenes",
+    excerpt: "One in three title searches reveals an issue that needs resolution. Here's exactly what title professionals look for and how they protect your ownership.",
+    date: "July 2025",
+    category: "Title Insurance",
+    readTime: "5 min",
+    image: "https://images.unsplash.com/photo-1573497620053-ea5300f94f21?w=600&q=80",
+  },
+  {
+    title: "New Construction: 3 Inspections Every Buyer Should Get",
+    excerpt: "Pre-drywall, pre-closing, and 11-month warranty inspections can catch thousands in builder defects before they become your problem.",
+    date: "June 2025",
+    category: "Inspections",
+    readTime: "4 min",
+    image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&q=80",
+  },
 ];
 
 const catColors: Record<string, string> = {
@@ -80,6 +128,9 @@ const catColors: Record<string, string> = {
   "History": "bg-purple-100 text-purple-700",
   "Costs": "bg-amber-100 text-amber-700",
   "Wire Fraud": "bg-red-100 text-red-700",
+  "Inspections": "bg-orange-100 text-orange-700",
+  "Mortgages": "bg-indigo-100 text-indigo-700",
+  "First-Time Buyers": "bg-teal-100 text-teal-700",
   "Closing Process": "bg-blue-100 text-blue-700",
 };
 
