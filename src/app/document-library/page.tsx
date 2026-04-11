@@ -101,20 +101,20 @@ export default function DocumentLibraryPage() {
 
           {/* Document count summary */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-8">
-            <div className="p-4 bg-white rounded-xl border border-gray-100 shadow-sm text-center">
-              <p className="text-2xl font-bold text-alta-teal">{documentSections.reduce((a, s) => a + s.docs.length, 0)}</p>
+            <div className="p-4 bg-white rounded-xl border border-gray-100 shadow-sm text-center tile-interactive">
+              <p className="text-2xl font-bold text-blue-600">{documentSections.reduce((a, s) => a + s.docs.length, 0)}</p>
               <p className="text-[10px] text-alta-gray font-medium mt-1">Total Resources</p>
             </div>
-            <div className="p-4 bg-white rounded-xl border border-gray-100 shadow-sm text-center">
-              <p className="text-2xl font-bold text-alta-teal">{documentSections[0].docs.length}</p>
+            <div className="p-4 bg-white rounded-xl border border-gray-100 shadow-sm text-center tile-interactive">
+              <p className="text-2xl font-bold text-green-600">{documentSections[0].docs.length}</p>
               <p className="text-[10px] text-alta-gray font-medium mt-1">Official CFPB</p>
             </div>
-            <div className="p-4 bg-white rounded-xl border border-gray-100 shadow-sm text-center">
-              <p className="text-2xl font-bold text-alta-teal">{documentSections[1].docs.length}</p>
+            <div className="p-4 bg-white rounded-xl border border-gray-100 shadow-sm text-center tile-interactive">
+              <p className="text-2xl font-bold text-purple-600">{documentSections[1].docs.length}</p>
               <p className="text-[10px] text-alta-gray font-medium mt-1">HC101 Printables</p>
             </div>
-            <div className="p-4 bg-white rounded-xl border border-gray-100 shadow-sm text-center">
-              <p className="text-2xl font-bold text-alta-teal">{documentSections[2].docs.length + documentSections[3].docs.length}</p>
+            <div className="p-4 bg-white rounded-xl border border-gray-100 shadow-sm text-center tile-interactive">
+              <p className="text-2xl font-bold text-amber-600">{documentSections[2].docs.length + documentSections[3].docs.length}</p>
               <p className="text-[10px] text-alta-gray font-medium mt-1">Education & Tools</p>
             </div>
           </div>

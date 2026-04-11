@@ -136,7 +136,7 @@ export default function ClosingCostsPage() {
 
           {/* Results */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-            <div className="bg-white rounded-xl p-4 text-center border border-gray-100">
+            <div className="bg-white rounded-xl p-4 text-center border border-gray-100 tile-interactive">
               <p className="text-xs text-alta-gray uppercase tracking-wider mb-1">Low Estimate (2%)</p>
               <p className="text-2xl font-bold text-alta-navy">${lowEstimate.toLocaleString()}</p>
             </div>
@@ -144,7 +144,7 @@ export default function ClosingCostsPage() {
               <p className="text-xs text-alta-teal uppercase tracking-wider mb-1 font-medium">Calculated Estimate</p>
               <p className="text-2xl font-bold text-alta-teal">${Math.round(calculatedTotal).toLocaleString()}</p>
             </div>
-            <div className="bg-white rounded-xl p-4 text-center border border-gray-100">
+            <div className="bg-white rounded-xl p-4 text-center border border-gray-100 tile-interactive">
               <p className="text-xs text-alta-gray uppercase tracking-wider mb-1">High Estimate (5%)</p>
               <p className="text-2xl font-bold text-alta-navy">${highEstimate.toLocaleString()}</p>
             </div>

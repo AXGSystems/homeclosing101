@@ -116,7 +116,7 @@ export default function AffordabilityPage() {
               </div>
 
               {/* Range */}
-              <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5">
+              <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 tile-interactive">
                 <h3 className="font-bold text-alta-navy mb-3 text-sm">Your Price Range</h3>
                 <div className="grid grid-cols-3 gap-3 text-center">
                   <div className="p-3 bg-green-50 rounded-xl border border-green-100">
@@ -135,7 +135,7 @@ export default function AffordabilityPage() {
               </div>
 
               {/* DTI Gauge */}
-              <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5">
+              <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 tile-interactive">
                 <h3 className="font-bold text-alta-navy mb-3 text-sm">Debt-to-Income Ratio</h3>
                 <div className="relative h-4 bg-gray-100 rounded-full overflow-hidden mb-2">
                   <div className={`h-full rounded-full transition-all ${dtiUsed <= 36 ? 'bg-green-500' : dtiUsed <= 43 ? 'bg-amber-500' : 'bg-red-500'}`} style={{ width: `${Math.min(dtiUsed, 100)}%` }} />
@@ -147,7 +147,7 @@ export default function AffordabilityPage() {
               </div>
 
               {/* Monthly breakdown */}
-              <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5">
+              <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 tile-interactive">
                 <h3 className="font-bold text-alta-navy mb-3 text-sm">Monthly Budget</h3>
                 <div className="space-y-2 text-sm">
                   <div className="flex justify-between"><span className="text-alta-gray">Gross Monthly Income</span><span className="font-medium text-alta-navy">${fmt(calc.monthlyIncome)}</span></div>
