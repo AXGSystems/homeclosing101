@@ -45,6 +45,7 @@ const navItems = [
       { label: "Questions to Ask", href: "/questions-to-ask" },
       { label: "Blog & News", href: "/blog" },
       { label: "Other Resources", href: "/resources" },
+      { label: "Source Index", href: "/sources" },
       { label: "In the Title Industry?", href: "/join-alta" },
     ],
   },

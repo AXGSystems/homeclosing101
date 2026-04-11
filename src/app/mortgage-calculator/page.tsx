@@ -56,7 +56,7 @@ export default function MortgageCalculatorPage() {
         breadcrumb={[{ label: "Tools", href: "/closing-process" }, { label: "Mortgage Calculator", href: "/mortgage-calculator" }]}
       />
 
-      <div className="py-6 lg:py-8">
+      <div className="py-3 lg:py-4">
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
           <div className="mb-6 p-5 bg-gradient-to-br from-alta-light to-white rounded-2xl border border-gray-100">
             <div className="flex items-start gap-4">

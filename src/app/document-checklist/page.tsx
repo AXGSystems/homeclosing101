@@ -76,7 +76,7 @@ export default function DocumentChecklistPage() {
         breadcrumb={[{ label: "The Closing Process", href: "/closing-process" }, { label: "Document Checklist", href: "/document-checklist" }]}
       />
 
-      <div className="py-6 lg:py-8">
+      <div className="py-3 lg:py-4">
         <div className="max-w-4xl mx-auto px-4 sm:px-6">
           <div className="mb-6 p-5 bg-gradient-to-br from-alta-light to-white rounded-2xl border border-gray-100">
             <div className="flex items-start gap-4">

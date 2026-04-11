@@ -34,7 +34,7 @@ export default function ProtectYourRightsPage() {
         breadcrumb={[{ label: "Protect Your Rights", href: "/protect-your-rights" }]}
       />
 
-      <div className="py-6 lg:py-8">
+      <div className="py-3 lg:py-4">
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
           <div className="mb-8 p-5 bg-gradient-to-br from-green-50 to-white rounded-2xl border border-green-100">
             <div className="flex items-start gap-4">

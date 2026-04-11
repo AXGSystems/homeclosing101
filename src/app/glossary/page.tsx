@@ -178,7 +178,7 @@ export default function GlossaryPage() {
       </div>
     )}
 
-    <div className="py-6 lg:py-8">
+    <div className="py-3 lg:py-4">
       <div className="max-w-4xl mx-auto px-4 sm:px-6">
 
         {/* Page intro */}

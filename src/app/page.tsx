@@ -78,10 +78,10 @@ const features = [
 ];
 
 const stats = [
-  { value: "$275.1M", label: "Wire fraud losses reported in 2025", source: "FBI IC3" },
-  { value: "1 in 4", label: "Buyers received suspicious messages during transactions", source: "CertifID 2026" },
-  { value: "1 in 3", label: "Title searches reveal issues that need resolution", source: "ALTA" },
-  { value: "1,760%", label: "Increase in BEC attacks since AI tools became available", source: "CertifID 2026" },
+  { value: "4.2M", label: "Homes sold in the U.S. in 2025", source: "NAR" },
+  { value: "$400K", label: "Median home sale price nationwide", source: "NAR 2025" },
+  { value: "1 in 3", label: "Title searches find issues that get resolved before closing", source: "ALTA" },
+  { value: "6,000+", label: "ALTA member companies protecting homebuyers", source: "ALTA" },
 ];
 
 const steps = [

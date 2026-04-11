@@ -58,7 +58,7 @@ function FindCompanyContent() {
       image="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1920&q=80"
       breadcrumb={[{ label: "Find a Company", href: "/find-company" }]}
     />
-    <div className="py-6 lg:py-8">
+    <div className="py-3 lg:py-4">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <div className="grid lg:grid-cols-[1fr_280px] gap-8">
           {/* Main content */}

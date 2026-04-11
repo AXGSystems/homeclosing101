@@ -85,7 +85,7 @@ export default function ClosingCostsPage() {
       image="https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=1920&q=80"
       breadcrumb={[{ label: "The Closing Process", href: "/closing-process" }, { label: "Closing Costs", href: "/closing-process/closing-costs" }]}
     />
-    <div className="py-6 lg:py-8">
+    <div className="py-3 lg:py-4">
       <div className="max-w-4xl mx-auto px-4 sm:px-6">
 
         {/* Page intro */}

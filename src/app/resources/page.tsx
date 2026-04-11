@@ -93,7 +93,7 @@ export default function ResourcesPage() {
   return (
     <div>
     <PageHero title="Other Resources" subtitle="Trusted links to government agencies, industry organizations, sample documents, and fraud reporting tools." image="https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=1920&q=80" breadcrumb={[{label:"Resources",href:"/resources"}]} />
-    <div className="py-6 lg:py-8">
+    <div className="py-3 lg:py-4">
       <div className="max-w-4xl mx-auto px-4 sm:px-6">
         <div className="mb-8 p-5 bg-gradient-to-br from-alta-light to-white rounded-2xl border border-gray-100">
           <div className="flex items-start gap-4">
