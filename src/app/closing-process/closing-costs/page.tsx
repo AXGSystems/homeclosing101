@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import PageHero from "@/components/PageHero";
+import ClosingCostChart from "@/components/ClosingCostChart";
 import { InlineAd } from "@/components/EliteProviders";
 
 const costCategories = [
@@ -192,6 +193,9 @@ export default function ClosingCostsPage() {
         </div>
 
         {/* Fee Categories */}
+        {/* Interactive cost breakdown chart */}
+        <ClosingCostChart />
+
         <h2 className="text-2xl font-bold text-alta-navy mb-6">All Closing Costs by Category</h2>
         <div className="space-y-8">
           {costCategories.map((cat) => (

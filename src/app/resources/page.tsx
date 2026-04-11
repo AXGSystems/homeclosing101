@@ -107,6 +107,23 @@ export default function ResourcesPage() {
           </div>
         </div>
 
+        {/* Quick start by topic */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-8">
+          {[
+            { label: "250+ FAQ", count: "Answers", href: "/faq", color: "from-[#1a5276] to-[#154463]" },
+            { label: "80+ Terms", count: "Glossary", href: "/glossary", color: "from-[#2d6b3f] to-[#235532]" },
+            { label: "19 Docs", count: "Library", href: "/document-library", color: "from-[#5b3a8c] to-[#482d70]" },
+            { label: "30+ Sources", count: "Index", href: "/sources", color: "from-[#8b6914] to-[#705410]" },
+          ].map((l) => (
+            <Link key={l.label} href={l.href} className="group rounded-xl overflow-hidden tile-interactive">
+              <div className={`bg-gradient-to-r ${l.color} p-3 text-center`}>
+                <p className="text-lg font-bold text-white">{l.label}</p>
+                <p className="text-[10px] text-white/70">{l.count}</p>
+              </div>
+            </Link>
+          ))}
+        </div>
+
         <ResourceSection title="Buying a Home" items={buyingResources} />
         <ResourceSection title="Sample Closing Documents" items={documents} />
         <ResourceSection title="Fraud Reporting & Prevention" items={fraudResources} />

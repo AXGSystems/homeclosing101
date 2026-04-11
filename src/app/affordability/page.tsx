@@ -4,6 +4,7 @@ import { useState, useMemo } from "react";
 import Link from "next/link";
 import PageHero from "@/components/PageHero";
 import { InlineAd } from "@/components/EliteProviders";
+import DTIGauge from "@/components/DTIGauge";
 
 export default function AffordabilityPage() {
   const [annualIncome, setAnnualIncome] = useState(85000);
@@ -136,14 +137,11 @@ export default function AffordabilityPage() {
 
               {/* DTI Gauge */}
               <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 tile-interactive">
-                <h3 className="font-bold text-alta-navy mb-3 text-sm">Debt-to-Income Ratio</h3>
-                <div className="relative h-4 bg-gray-100 rounded-full overflow-hidden mb-2">
-                  <div className={`h-full rounded-full transition-all ${dtiUsed <= 36 ? 'bg-green-500' : dtiUsed <= 43 ? 'bg-amber-500' : 'bg-red-500'}`} style={{ width: `${Math.min(dtiUsed, 100)}%` }} />
+                <h3 className="font-bold text-alta-navy mb-2 text-sm text-center">Debt-to-Income Ratio</h3>
+                <DTIGauge value={dtiUsed} label="of your gross income goes to debt" />
+                <div className="flex justify-between text-[9px] text-alta-gray mt-2 px-2">
+                  <span>0%</span><span className="text-[#2d6b3f]">28%</span><span className="text-[#0a7ea8]">36%</span><span className="text-[#8b6914]">43%</span><span className="text-[#943030]">50%+</span>
                 </div>
-                <div className="flex justify-between text-[10px] text-alta-gray">
-                  <span>0%</span><span className="text-green-600">28% ideal</span><span className="text-amber-600">36%</span><span className="text-red-600">43% FHA</span><span>50%+</span>
-                </div>
-                <p className="text-center mt-2 text-sm"><span className="font-bold text-alta-navy">{Math.round(dtiUsed)}%</span> <span className="text-alta-gray">of your income goes to debt</span></p>
               </div>
 
               {/* Monthly breakdown */}

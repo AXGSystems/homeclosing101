@@ -1,5 +1,6 @@
 import Link from "next/link";
 import EliteProviders from "@/components/EliteProviders";
+import MarketStats from "@/components/MarketStats";
 // AltaMembershipCTA moved to /resources page
 
 const features = [
@@ -222,22 +223,7 @@ export default function HomePage() {
             <h2 className="text-2xl font-bold text-alta-navy mb-2">Homebuying by the Numbers</h2>
             <p className="text-sm text-alta-gray">Real data from NAR, CFPB, Census Bureau, and FBI IC3 to help you understand the market.</p>
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-3">
-            {[
-              { val: "4.2M", label: "Homes sold in 2025", color: "text-white", bg: "bg-gradient-to-br from-[#1a5276] to-[#0d3a5c]", border: "border-transparent", source: "NAR", dark: true },
-              { val: "$400K", label: "Median home price", color: "text-[#2d6b3f]", bg: "bg-[#e9f5ed]", border: "border-[#bddcc7]", source: "NAR 2025", dark: false },
-              { val: "2-5%", label: "Typical closing costs", color: "text-white", bg: "bg-gradient-to-br from-[#0a7ea8] to-[#077a9e]", border: "border-transparent", source: "CFPB", dark: true },
-              { val: "8%", label: "Median first-time buyer down payment", color: "text-[#8b6914]", bg: "bg-[#faf4e4]", border: "border-[#e8d9a8]", source: "NAR", dark: false },
-              { val: "1 in 3", label: "Title searches find issues", color: "text-white", bg: "bg-gradient-to-br from-[#1a2744] to-[#0f1b33]", border: "border-transparent", source: "ALTA", dark: true },
-              { val: "30-45", label: "Days from offer to close", color: "text-[#5b3a8c]", bg: "bg-[#f0ecf6]", border: "border-[#d4c8e4]", source: "CFPB", dark: false },
-            ].map((d) => (
-              <div key={d.val} className={`p-3 ${d.bg} rounded-xl border ${d.border} text-center tile-interactive`}>
-                <p className={`text-xl font-bold ${d.color}`}>{d.val}</p>
-                <p className={`text-[9px] mt-0.5 leading-tight ${d.dark ? "text-white/70" : "text-alta-gray"}`}>{d.label}</p>
-                <p className={`text-[8px] mt-1 ${d.dark ? "text-white/50" : "text-alta-gray opacity-60"}`}>{d.source}</p>
-              </div>
-            ))}
-          </div>
+          <MarketStats />
         </div>
       </section>
 
