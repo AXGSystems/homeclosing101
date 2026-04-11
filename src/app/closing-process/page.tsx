@@ -110,9 +110,11 @@ export default function ClosingProcessPage() {
           <h2 className="text-xl font-bold text-alta-navy mb-4">More Closing Resources</h2>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
             {[
-              { title: "Home Inspection Guide", desc: "What inspectors check, when to inspect, and how to choose an inspector", href: "/home-inspection" },
-              { title: "Your Loan Estimate", desc: "Page-by-page breakdown of the 3-page form your lender must provide", href: "/loan-estimate" },
-              { title: "Your Closing Disclosure", desc: "5-page form review guide with tolerance rules and comparison checklist", href: "/closing-disclosure" },
+              { title: "Home Inspection Guide", desc: "What inspectors check, specialty inspections, and how to choose an inspector", href: "/home-inspection" },
+              { title: "Homeowner's Insurance", desc: "What it covers, how to shop, what lenders require, and typical costs", href: "/homeowners-insurance" },
+              { title: "Understanding Escrow", desc: "How escrow works before, during, and after closing — earnest money to monthly payments", href: "/escrow-guide" },
+              { title: "Your Loan Estimate", desc: "Page-by-page breakdown with comparison tips and red flags to watch for", href: "/loan-estimate" },
+              { title: "Your Closing Disclosure", desc: "5-page review guide with tolerance rules and 5-step review process", href: "/closing-disclosure" },
               { title: "Document Checklist", desc: "Everything to bring on closing day — organized by category", href: "/document-checklist" },
               { title: "Document Library", desc: "Official CFPB forms, sample documents, and education courses", href: "/document-library" },
               { title: "Stop Fraud 101", desc: "10 FBI-sourced prevention steps to protect your closing funds", href: "/stop-fraud" },

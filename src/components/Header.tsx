@@ -13,6 +13,8 @@ const navItems = [
       { label: "Closing Checklist", href: "/closing-process/closing-checklist" },
       { label: "Closing Costs Explained", href: "/closing-process/closing-costs" },
       { label: "Home Inspection Guide", href: "/home-inspection" },
+      { label: "Homeowner's Insurance", href: "/homeowners-insurance" },
+      { label: "Understanding Escrow", href: "/escrow-guide" },
       { label: "Your Loan Estimate", href: "/loan-estimate" },
       { label: "Your Closing Disclosure", href: "/closing-disclosure" },
       { label: "Document Checklist", href: "/document-checklist" },
