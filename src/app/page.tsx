@@ -215,12 +215,68 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Homebuying by the Numbers — real data */}
+      <section className="py-10 bg-white">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6">
+          <div className="text-center mb-8">
+            <h2 className="text-2xl font-bold text-alta-navy mb-2">Homebuying by the Numbers</h2>
+            <p className="text-sm text-alta-gray">Real data from NAR, CFPB, Census Bureau, and FBI IC3 to help you understand the market.</p>
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-3">
+            {[
+              { val: "4.2M", label: "Homes sold in 2025", color: "text-blue-600", bg: "bg-blue-50", border: "border-blue-200", source: "NAR" },
+              { val: "$400K", label: "Median home price", color: "text-green-600", bg: "bg-green-50", border: "border-green-200", source: "NAR 2025" },
+              { val: "2-5%", label: "Typical closing costs", color: "text-amber-600", bg: "bg-amber-50", border: "border-amber-200", source: "CFPB" },
+              { val: "8%", label: "Median first-time buyer down payment", color: "text-purple-600", bg: "bg-purple-50", border: "border-purple-200", source: "NAR" },
+              { val: "1 in 3", label: "Title searches find issues", color: "text-teal-600", bg: "bg-teal-50", border: "border-teal-200", source: "ALTA" },
+              { val: "30-45", label: "Days from offer to close", color: "text-indigo-600", bg: "bg-indigo-50", border: "border-indigo-200", source: "CFPB" },
+            ].map((d) => (
+              <div key={d.val} className={`p-3 ${d.bg} rounded-xl border ${d.border} text-center tile-interactive`}>
+                <p className={`text-xl font-bold ${d.color}`}>{d.val}</p>
+                <p className="text-[9px] text-alta-gray mt-0.5 leading-tight">{d.label}</p>
+                <p className="text-[8px] text-alta-gray mt-1 opacity-60">{d.source}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Quick access tools */}
+      <section className="py-8 bg-alta-light">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6">
+          <div className="text-center mb-6">
+            <h2 className="text-2xl font-bold text-alta-navy mb-2">Interactive Tools</h2>
+            <p className="text-sm text-alta-gray">Calculators, checklists, and search tools to help you through every step.</p>
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+            {[
+              { title: "Mortgage Calculator", desc: "Compare FHA, VA, Conventional & USDA with county tax rates", href: "/mortgage-calculator", icon: "M15.75 15.75V18m-7.5-6.75h.008v.008H8.25v-.008z", color: "from-blue-500 to-blue-600" },
+              { title: "Affordability", desc: "How much home can you afford? DTI gauge included", href: "/affordability", icon: "M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12", color: "from-green-500 to-green-600" },
+              { title: "Closing Checklist", desc: "32-item interactive checklist with progress tracking", href: "/closing-process/closing-checklist", icon: "M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z", color: "from-purple-500 to-purple-600" },
+              { title: "Find a Company", desc: "Search ALTA member title companies by state & city", href: "/find-company", icon: "M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z", color: "from-amber-500 to-amber-600" },
+            ].map((t) => (
+              <Link key={t.title} href={t.href} className="group rounded-2xl overflow-hidden shadow-sm border border-gray-100 bg-white tile-interactive">
+                <div className={`bg-gradient-to-r ${t.color} p-3 flex items-center gap-2`}>
+                  <div className="w-8 h-8 rounded-lg bg-white/20 flex items-center justify-center">
+                    <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d={t.icon} /></svg>
+                  </div>
+                  <h3 className="text-sm font-bold text-white">{t.title}</h3>
+                </div>
+                <div className="p-3">
+                  <p className="text-[11px] text-alta-gray leading-snug">{t.desc}</p>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Steps Overview */}
-      <section className="py-16 lg:py-20">
+      <section className="py-10 lg:py-14">
         <div className="max-w-4xl mx-auto px-4 sm:px-6">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-alta-navy mb-3">The Road to Homeownership</h2>
-            <p className="text-alta-gray">Six key milestones from pre-approval to getting your keys.</p>
+          <div className="text-center mb-8">
+            <h2 className="text-2xl font-bold text-alta-navy mb-2">The Road to Homeownership</h2>
+            <p className="text-sm text-alta-gray">Six key milestones from pre-approval to getting your keys.</p>
           </div>
           <div className="space-y-6">
             {steps.map((step, i) => (
