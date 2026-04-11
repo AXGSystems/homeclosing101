@@ -84,7 +84,7 @@ export default function WhatToExpectPage() {
         ]}
       />
 
-      <div className="py-3 lg:py-4">
+      <div className="py-1.5 lg:py-2">
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
           {/* Page intro */}
           <div className="mb-10 p-5 bg-gradient-to-br from-alta-light to-white rounded-2xl border border-gray-100">

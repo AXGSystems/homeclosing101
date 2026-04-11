@@ -95,11 +95,11 @@ export default function StopFraudPage() {
   return (
     <>
     <PageHero title="Stop Fraud 101" subtitle="10 prevention steps sourced from the FBI, CFPB, NAR, ALTA, and CertifID. Print them out and keep them with your closing documents." image="https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=1920&q=80" breadcrumb={[{label:"Protect Your Money",href:"/protect-your-money"},{label:"Stop Fraud 101",href:"/stop-fraud"}]} />
-    <div className="py-3 lg:py-4">
+    <div className="py-1.5 lg:py-2">
       <div className="max-w-5xl mx-auto px-4 sm:px-6">
 
         {/* Page intro */}
-        <div className="mb-8 p-5 bg-gradient-to-br from-red-50 to-white rounded-2xl border border-red-100">
+        <div className="mb-4 p-4 bg-gradient-to-br from-red-50 to-white rounded-2xl border border-red-100 sticky top-[120px] sm:top-[130px] z-20 shadow-sm">
           <div className="flex items-start gap-4">
             <div className="w-12 h-12 rounded-xl bg-red-100 flex items-center justify-center text-alta-red shrink-0">
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m0-10.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.75c0 5.592 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.57-.598-3.75h-.152c-3.196 0-6.1-1.25-8.25-3.286z" /></svg>

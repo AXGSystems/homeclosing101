@@ -69,9 +69,9 @@ export default function HomeInspectionPage() {
         breadcrumb={[{ label: "The Closing Process", href: "/closing-process" }, { label: "Home Inspection", href: "/home-inspection" }]}
       />
 
-      <div className="py-3 lg:py-4">
+      <div className="py-1.5 lg:py-2">
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
-          <div className="mb-6 p-5 bg-gradient-to-br from-alta-light to-white rounded-2xl border border-gray-100">
+          <div className="mb-4 p-4 bg-gradient-to-br from-alta-light to-white rounded-2xl border border-gray-100 sticky top-[120px] sm:top-[130px] z-20 shadow-sm">
             <div className="flex items-start gap-4">
               <div className="w-12 h-12 rounded-xl bg-alta-teal/10 flex items-center justify-center text-alta-teal shrink-0">
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" /></svg>
