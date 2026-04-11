@@ -147,9 +147,23 @@ export default function HomeClosingAI() {
 
   return (
     <>
-      {/* Collapsed: merged sponsor + AI button */}
+      {/* Collapsed: tab on mobile, full widget on desktop */}
       {!open && (
-        <div className="fixed top-1/2 -translate-y-1/2 right-3 sm:right-6 z-[600] w-[200px] sm:w-[250px] group/widget">
+        <>
+        {/* Mobile: slim side tab */}
+        <button
+          onClick={() => setOpen(true)}
+          className="sm:hidden fixed top-1/2 -translate-y-1/2 right-0 z-[600] bg-gradient-to-b from-alta-navy to-alta-teal text-white rounded-l-xl px-2 py-4 shadow-lg"
+          style={{ writingMode: 'vertical-rl', textOrientation: 'mixed' }}
+        >
+          <span className="text-[10px] font-bold tracking-wider flex items-center gap-1">
+            <Sparkles className="w-3 h-3 rotate-90" />
+            Ask HC101
+          </span>
+        </button>
+
+        {/* Desktop: full sponsor + AI button */}
+        <div className="hidden sm:block fixed top-1/2 -translate-y-1/2 right-6 z-[600] w-[250px] group/widget">
           {/* Sponsor top half */}
           <div className="relative">
             <a
@@ -194,6 +208,7 @@ export default function HomeClosingAI() {
             <span className="font-bold text-sm">Ask HomeClosing101</span>
           </button>
         </div>
+        </>
       )}
 
       {/* Chat panel — with sponsor inside header */}
