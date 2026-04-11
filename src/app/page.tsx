@@ -224,17 +224,17 @@ export default function HomePage() {
           </div>
           <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-3">
             {[
-              { val: "4.2M", label: "Homes sold in 2025", color: "text-alta-teal", bg: "bg-[#edf5f8]", border: "border-[#c5dfe8]", source: "NAR" },
-              { val: "$400K", label: "Median home price", color: "text-alta-navy", bg: "bg-[#eef0f5]", border: "border-[#c8cdd8]", source: "NAR 2025" },
-              { val: "2-5%", label: "Typical closing costs", color: "text-[#0a7ea8]", bg: "bg-[#e8f4f8]", border: "border-[#b8dae6]", source: "CFPB" },
-              { val: "8%", label: "Median first-time buyer down payment", color: "text-[#1e3456]", bg: "bg-[#f0f2f6]", border: "border-[#d0d5de]", source: "NAR" },
-              { val: "1 in 3", label: "Title searches find issues", color: "text-alta-teal", bg: "bg-[#eaf6f9]", border: "border-[#bfe0ea]", source: "ALTA" },
-              { val: "30-45", label: "Days from offer to close", color: "text-alta-navy", bg: "bg-[#eceef3]", border: "border-[#c4c9d5]", source: "CFPB" },
+              { val: "4.2M", label: "Homes sold in 2025", color: "text-white", bg: "bg-gradient-to-br from-[#1a5276] to-[#0d3a5c]", border: "border-transparent", source: "NAR", dark: true },
+              { val: "$400K", label: "Median home price", color: "text-[#2d6b3f]", bg: "bg-[#e9f5ed]", border: "border-[#bddcc7]", source: "NAR 2025", dark: false },
+              { val: "2-5%", label: "Typical closing costs", color: "text-white", bg: "bg-gradient-to-br from-[#0a7ea8] to-[#077a9e]", border: "border-transparent", source: "CFPB", dark: true },
+              { val: "8%", label: "Median first-time buyer down payment", color: "text-[#8b6914]", bg: "bg-[#faf4e4]", border: "border-[#e8d9a8]", source: "NAR", dark: false },
+              { val: "1 in 3", label: "Title searches find issues", color: "text-white", bg: "bg-gradient-to-br from-[#1a2744] to-[#0f1b33]", border: "border-transparent", source: "ALTA", dark: true },
+              { val: "30-45", label: "Days from offer to close", color: "text-[#5b3a8c]", bg: "bg-[#f0ecf6]", border: "border-[#d4c8e4]", source: "CFPB", dark: false },
             ].map((d) => (
               <div key={d.val} className={`p-3 ${d.bg} rounded-xl border ${d.border} text-center tile-interactive`}>
                 <p className={`text-xl font-bold ${d.color}`}>{d.val}</p>
-                <p className="text-[9px] text-alta-gray mt-0.5 leading-tight">{d.label}</p>
-                <p className="text-[8px] text-alta-gray mt-1 opacity-60">{d.source}</p>
+                <p className={`text-[9px] mt-0.5 leading-tight ${d.dark ? "text-white/70" : "text-alta-gray"}`}>{d.label}</p>
+                <p className={`text-[8px] mt-1 ${d.dark ? "text-white/50" : "text-alta-gray opacity-60"}`}>{d.source}</p>
               </div>
             ))}
           </div>
@@ -250,10 +250,10 @@ export default function HomePage() {
           </div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
             {[
-              { title: "Mortgage Calculator", desc: "Compare FHA, VA, Conventional & USDA with county tax rates", href: "/mortgage-calculator", icon: "M15.75 15.75V18m-7.5-6.75h.008v.008H8.25v-.008z", color: "from-alta-navy to-[#0d3a5c]" },
-              { title: "Affordability", desc: "How much home can you afford? DTI gauge included", href: "/affordability", icon: "M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12", color: "from-alta-teal to-alta-teal-dark" },
-              { title: "Closing Checklist", desc: "32-item interactive checklist with progress tracking", href: "/closing-process/closing-checklist", icon: "M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z", color: "from-alta-navy to-alta-teal" },
-              { title: "Find a Company", desc: "Search ALTA member title companies by state & city", href: "/find-company", icon: "M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z", color: "from-[#0d3a5c] to-alta-navy" },
+              { title: "Mortgage Calculator", desc: "Compare FHA, VA, Conventional & USDA with county tax rates", href: "/mortgage-calculator", icon: "M15.75 15.75V18m-7.5-6.75h.008v.008H8.25v-.008z", color: "from-[#1a5276] to-[#154463]" },
+              { title: "Affordability", desc: "How much home can you afford? DTI gauge included", href: "/affordability", icon: "M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12", color: "from-[#2d6b3f] to-[#235532]" },
+              { title: "Closing Checklist", desc: "32-item interactive checklist with progress tracking", href: "/closing-process/closing-checklist", icon: "M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z", color: "from-[#5b3a8c] to-[#482d70]" },
+              { title: "Find a Company", desc: "Search ALTA member title companies by state & city", href: "/find-company", icon: "M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z", color: "from-[#8b6914] to-[#705410]" },
             ].map((t) => (
               <Link key={t.title} href={t.href} className="group rounded-2xl overflow-hidden shadow-sm border border-gray-100 bg-white tile-interactive">
                 <div className={`bg-gradient-to-r ${t.color} p-3 flex items-center gap-2`}>
@@ -280,19 +280,19 @@ export default function HomePage() {
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
             {[
-              { label: "First-Time Buyer", desc: "Complete guide from credit to keys", href: "/first-time-buyers", color: "from-alta-teal to-alta-teal-dark", icon: "M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12" },
-              { label: "Ready to Close", desc: "Checklist, documents & wire safety", href: "/closing-process/closing-checklist", color: "from-alta-navy to-[#0d3a5c]", icon: "M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" },
-              { label: "Shopping for a Lender", desc: "Compare loans & understand costs", href: "/mortgage-calculator", color: "from-alta-teal to-alta-navy", icon: "M15.75 15.75V18m-7.5-6.75h.008v.008H8.25v-.008z" },
-              { label: "Worried About Fraud", desc: "10 prevention steps from the FBI", href: "/stop-fraud", color: "from-alta-red to-[#991b1b]", icon: "M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126z" },
+              { label: "First-Time Buyer", desc: "Complete guide from credit to keys", href: "/first-time-buyers", color: "from-[#0a7ea8] to-[#077a9e]", icon: "M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12" },
+              { label: "Ready to Close", desc: "Checklist, documents & wire safety", href: "/closing-process/closing-checklist", color: "from-[#1a2744] to-[#0f1b33]", icon: "M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" },
+              { label: "Shopping for a Lender", desc: "Compare loans & understand costs", href: "/mortgage-calculator", color: "from-[#2d6b3f] to-[#1e5530]", icon: "M15.75 15.75V18m-7.5-6.75h.008v.008H8.25v-.008z" },
+              { label: "Worried About Fraud", desc: "FBI prevention steps", href: "/stop-fraud", color: "from-[#943030] to-[#7a2020]", icon: "M12 9v3.75m0 3.75h.007v.008H12v-.008z" },
             ].map((s) => (
               <Link key={s.label} href={s.href} className="group rounded-2xl overflow-hidden border border-gray-100 shadow-sm bg-white tile-interactive">
-                <div className={`bg-gradient-to-r ${s.color} p-4 flex items-center gap-3`}>
-                  <div className="w-10 h-10 rounded-xl bg-white/20 flex items-center justify-center">
-                    <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d={s.icon} /></svg>
+                <div className={`bg-gradient-to-r ${s.color} px-4 py-3 flex items-center gap-3`}>
+                  <div className="w-9 h-9 rounded-lg bg-white/15 flex items-center justify-center shrink-0">
+                    <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d={s.icon} /></svg>
                   </div>
-                  <div>
-                    <h3 className="text-sm font-bold text-white">{s.label}</h3>
-                    <p className="text-[10px] text-white/70">{s.desc}</p>
+                  <div className="min-w-0">
+                    <h3 className="text-sm font-bold text-white truncate">{s.label}</h3>
+                    <p className="text-[10px] text-white/70 truncate">{s.desc}</p>
                   </div>
                 </div>
               </Link>
