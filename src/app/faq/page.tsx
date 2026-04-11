@@ -101,34 +101,56 @@ export default function FAQPage() {
           })}
         </div>
 
-        {/* FAQ cards */}
-        <div className="space-y-3">
+        {/* FAQ cards — modern card design */}
+        <div className="grid gap-3 md:grid-cols-2">
           {filtered.map((faq, i) => {
             const globalIdx = faqs.indexOf(faq);
             const colors = catColors[faq.cat] || catColors.basics;
             const isOpen = openIdx === globalIdx;
+            const borderColors: Record<string, string> = {
+              basics: "border-l-blue-500",
+              insurance: "border-l-green-500",
+              costs: "border-l-amber-500",
+              closing: "border-l-purple-500",
+              fraud: "border-l-red-500",
+            };
+            const leftBorder = borderColors[faq.cat] || "border-l-alta-teal";
             return (
-              <div key={globalIdx} className={`rounded-2xl border shadow-sm overflow-hidden transition-all ${isOpen ? `${colors.border} ${colors.bg}` : "border-gray-100 bg-white hover:shadow-md"}`}>
-                <button
-                  onClick={() => setOpenIdx(isOpen ? null : globalIdx)}
-                  className="w-full flex items-center gap-4 p-5 text-left transition-colors"
-                >
-                  <div className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 transition-colors ${isOpen ? `${colors.bg} ${colors.text}` : "bg-alta-light text-alta-teal"}`}>
-                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
+              <div
+                key={globalIdx}
+                className={`rounded-xl border border-gray-100 shadow-sm overflow-hidden transition-all cursor-pointer border-l-4 ${leftBorder} ${
+                  isOpen ? `${colors.bg} shadow-lg ${colors.border} md:col-span-2` : "bg-white hover:shadow-md hover:-translate-y-0.5"
+                }`}
+                onClick={() => setOpenIdx(isOpen ? null : globalIdx)}
+              >
+                <div className="p-4 flex items-start gap-3">
+                  <div className={`w-8 h-8 rounded-lg flex items-center justify-center shrink-0 transition-colors ${
+                    isOpen ? `${colors.text} ${colors.bg}` : "bg-alta-light text-alta-gray"
+                  }`}>
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
                       <path strokeLinecap="round" strokeLinejoin="round" d={faq.icon} />
                     </svg>
                   </div>
-                  <h3 className="font-semibold text-alta-navy flex-1 pr-2">{faq.q}</h3>
-                  <svg
-                    className={`w-5 h-5 text-alta-gray shrink-0 transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`}
-                    fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                  >
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                  </svg>
-                </button>
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-start justify-between gap-2">
+                      <h3 className={`text-sm font-semibold leading-snug ${isOpen ? "text-alta-navy" : "text-alta-navy"}`}>{faq.q}</h3>
+                      <svg
+                        className={`w-4 h-4 text-alta-gray shrink-0 mt-0.5 transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`}
+                        fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                      >
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                      </svg>
+                    </div>
+                    {!isOpen && (
+                      <p className="text-[11px] text-alta-gray mt-1 line-clamp-1">{faq.a.slice(0, 80)}...</p>
+                    )}
+                  </div>
+                </div>
                 {isOpen && (
-                  <div className="px-5 pb-5 pl-[4.5rem]">
-                    <p className="text-sm text-alta-gray leading-relaxed">{faq.a}</p>
+                  <div className="px-4 pb-4 pt-0 ml-11">
+                    <div className="p-4 bg-white/80 rounded-xl">
+                      <p className="text-sm text-alta-gray leading-relaxed">{faq.a}</p>
+                    </div>
                   </div>
                 )}
               </div>
