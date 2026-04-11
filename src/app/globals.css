@@ -178,7 +178,7 @@ select:focus {
    NEWS TICKER — continuous scroll animation
    ============================================================ */
 .ticker-scroll {
-  animation: ticker 90s linear infinite;
+  animation: ticker 45s linear infinite;
 }
 .ticker-scroll:hover {
   animation-play-state: paused;
