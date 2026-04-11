@@ -271,6 +271,36 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Where to start based on your situation */}
+      <section className="py-8 bg-white">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6">
+          <div className="text-center mb-6">
+            <h2 className="text-2xl font-bold text-alta-navy mb-2">Where Should I Start?</h2>
+            <p className="text-sm text-alta-gray">Choose your situation for a personalized starting point.</p>
+          </div>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
+            {[
+              { label: "First-Time Buyer", desc: "Complete guide from credit to keys", href: "/first-time-buyers", color: "from-blue-500 to-blue-600", icon: "M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12" },
+              { label: "Ready to Close", desc: "Checklist, documents & wire safety", href: "/closing-process/closing-checklist", color: "from-green-500 to-green-600", icon: "M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" },
+              { label: "Shopping for a Lender", desc: "Compare loans & understand costs", href: "/mortgage-calculator", color: "from-purple-500 to-purple-600", icon: "M15.75 15.75V18m-7.5-6.75h.008v.008H8.25v-.008z" },
+              { label: "Worried About Fraud", desc: "10 prevention steps from the FBI", href: "/stop-fraud", color: "from-red-500 to-red-600", icon: "M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126z" },
+            ].map((s) => (
+              <Link key={s.label} href={s.href} className="group rounded-2xl overflow-hidden border border-gray-100 shadow-sm bg-white tile-interactive">
+                <div className={`bg-gradient-to-r ${s.color} p-4 flex items-center gap-3`}>
+                  <div className="w-10 h-10 rounded-xl bg-white/20 flex items-center justify-center">
+                    <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d={s.icon} /></svg>
+                  </div>
+                  <div>
+                    <h3 className="text-sm font-bold text-white">{s.label}</h3>
+                    <p className="text-[10px] text-white/70">{s.desc}</p>
+                  </div>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Steps Overview */}
       <section className="py-10 lg:py-14">
         <div className="max-w-4xl mx-auto px-4 sm:px-6">

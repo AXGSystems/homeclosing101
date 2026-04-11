@@ -90,6 +90,39 @@ export default function ClosingProcessPage() {
               </Link>
             ))}
           </div>
+
+          {/* Key closing stats */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mt-8 mb-8">
+            {[
+              { val: "30-45", label: "Days from offer to close (conventional)", color: "text-blue-600", bg: "bg-blue-50", border: "border-blue-200" },
+              { val: "50-100+", label: "Pages of documents you'll sign", color: "text-green-600", bg: "bg-green-50", border: "border-green-200" },
+              { val: "3 days", label: "Minimum CD review period (federal law)", color: "text-purple-600", bg: "bg-purple-50", border: "border-purple-200" },
+              { val: "2-5%", label: "Closing costs as % of home price", color: "text-amber-600", bg: "bg-amber-50", border: "border-amber-200" },
+            ].map((s) => (
+              <div key={s.val} className={`p-3 ${s.bg} rounded-xl border ${s.border} text-center tile-interactive`}>
+                <p className={`text-xl font-bold ${s.color}`}>{s.val}</p>
+                <p className="text-[9px] text-alta-gray mt-0.5 leading-tight">{s.label}</p>
+              </div>
+            ))}
+          </div>
+
+          {/* Additional resources */}
+          <h2 className="text-xl font-bold text-alta-navy mb-4">More Closing Resources</h2>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+            {[
+              { title: "Home Inspection Guide", desc: "What inspectors check, when to inspect, and how to choose an inspector", href: "/home-inspection" },
+              { title: "Your Loan Estimate", desc: "Page-by-page breakdown of the 3-page form your lender must provide", href: "/loan-estimate" },
+              { title: "Your Closing Disclosure", desc: "5-page form review guide with tolerance rules and comparison checklist", href: "/closing-disclosure" },
+              { title: "Document Checklist", desc: "Everything to bring on closing day — organized by category", href: "/document-checklist" },
+              { title: "Document Library", desc: "Official CFPB forms, sample documents, and education courses", href: "/document-library" },
+              { title: "Stop Fraud 101", desc: "10 FBI-sourced prevention steps to protect your closing funds", href: "/stop-fraud" },
+            ].map((r) => (
+              <Link key={r.title} href={r.href} className="p-4 bg-white rounded-xl border border-gray-100 shadow-sm tile-interactive group">
+                <h3 className="text-sm font-bold text-alta-navy group-hover:text-alta-teal transition-colors">{r.title}</h3>
+                <p className="text-[11px] text-alta-gray mt-1 leading-snug">{r.desc}</p>
+              </Link>
+            ))}
+          </div>
         </div>
       </div>
     </>
