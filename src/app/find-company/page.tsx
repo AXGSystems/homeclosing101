@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
+import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import PageHero from "@/components/PageHero";
 import SponsorSidebar from "@/components/SponsorSidebar";
@@ -21,11 +22,23 @@ const states = [
   {code:"WV",name:"West Virginia"},{code:"WI",name:"Wisconsin"},{code:"WY",name:"Wyoming"},
 ];
 
-export default function FindCompanyPage() {
+function FindCompanyContent() {
+  const searchParams = useSearchParams();
   const [selectedState, setSelectedState] = useState("");
   const [city, setCity] = useState("");
   const [iframeUrl, setIframeUrl] = useState("");
   const [hasSearched, setHasSearched] = useState(false);
+
+  // Auto-trigger search if state is passed via URL query param (from Find My Policy page)
+  useEffect(() => {
+    const stateParam = searchParams.get("state");
+    if (stateParam && states.find(s => s.code === stateParam)) {
+      setSelectedState(stateParam);
+      const url = `https://www.homeclosing101.org/companies/?stateCode=${stateParam}`;
+      setIframeUrl(url);
+      setHasSearched(true);
+    }
+  }, [searchParams]);
 
   const handleSearch = () => {
     if (!selectedState) return;
@@ -189,5 +202,13 @@ export default function FindCompanyPage() {
       </div>
     </div>
     </>
+  );
+}
+
+export default function FindCompanyPage() {
+  return (
+    <Suspense fallback={<div className="py-20 text-center text-alta-gray">Loading...</div>}>
+      <FindCompanyContent />
+    </Suspense>
   );
 }

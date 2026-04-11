@@ -200,7 +200,7 @@ export default function FindPolicyPage() {
                       <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
                       Visit Website
                     </a>
-                    <a href="/find-company" className="inline-flex items-center gap-2 px-5 py-2.5 border-2 border-alta-navy text-alta-navy rounded-lg font-semibold text-sm hover:bg-alta-navy hover:text-white transition-colors">
+                    <a href={`/find-company?state=${selectedDept.abbr}`} className="inline-flex items-center gap-2 px-5 py-2.5 border-2 border-alta-navy text-alta-navy rounded-lg font-semibold text-sm hover:bg-alta-navy hover:text-white transition-colors">
                       <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
                       Find Companies in {selectedDept.abbr}
                     </a>
