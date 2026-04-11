@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 const pages = [
   {
     page: "Page 1 — Loan Terms & Projected Payments",
-    color: "from-blue-500 to-blue-600",
+    color: "from-[#1a5276] to-[#154463]",
     sections: [
       { name: "Loan Terms", what: "Shows your loan amount, interest rate (fixed or adjustable), monthly principal and interest payment, and whether there's a prepayment penalty or balloon payment.", lookFor: "Verify the interest rate matches what you were quoted. Check if the rate is locked. If adjustable, note the maximum rate and payment caps." },
       { name: "Projected Payments", what: "Breaks down your estimated total monthly payment including principal, interest, mortgage insurance, and estimated escrow (property taxes and homeowner's insurance).", lookFor: "Compare the total monthly payment to what you can comfortably afford. Note whether escrow is included — if not, you'll pay taxes and insurance separately." },
@@ -20,7 +20,7 @@ const pages = [
   },
   {
     page: "Page 2 — Closing Cost Details",
-    color: "from-green-500 to-green-600",
+    color: "from-[#2d6b3f] to-[#235532]",
     sections: [
       { name: "Loan Costs (Section A-C)", what: "Details all lender fees: origination charges, discount points, underwriting, and services the lender requires (appraisal, credit report, flood determination).", lookFor: "Origination charges are negotiable. Compare these across multiple lenders. Ask if you can reduce fees by paying a higher rate, or vice versa." },
       { name: "Other Costs (Section E-H)", what: "Lists taxes, government fees, prepaids (homeowner's insurance premium, prepaid interest, initial escrow deposits), and optional owner's title insurance.", lookFor: "Owner's title insurance is listed here. Even though it says 'optional,' it's strongly recommended. You can shop for this — don't just accept the lender's suggestion." },
@@ -29,7 +29,7 @@ const pages = [
   },
   {
     page: "Page 3 — Comparisons & Contact Info",
-    color: "from-purple-500 to-purple-600",
+    color: "from-[#5b3a8c] to-[#482d70]",
     sections: [
       { name: "Comparisons", what: "Shows the total you'll pay over the first 5 years (including principal, interest, mortgage insurance, and loan costs) and the Annual Percentage Rate (APR) — which includes fees in the true cost calculation.", lookFor: "The APR is the most important number for comparing lenders. A lower rate with high fees may cost more than a slightly higher rate with lower fees. Compare APRs across your Loan Estimates." },
       { name: "Other Considerations", what: "Discloses whether the lender will service the loan or transfer it, whether the loan is assumable, and late payment policies.", lookFor: "Many loans are sold after closing. This is normal. Check the late payment policy — typically 15 days grace period, then a percentage fee." },

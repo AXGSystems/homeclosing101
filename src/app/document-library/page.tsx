@@ -12,7 +12,7 @@ const documentSections = [
   {
     title: "Official CFPB Forms & Guides",
     desc: "These documents are published by the Consumer Financial Protection Bureau and are the official federal resources for homebuyers.",
-    color: "from-blue-500 to-blue-600",
+    color: "from-[#1a5276] to-[#154463]",
     docs: [
       { name: "Your Home Loan Toolkit", desc: "The CFPB's step-by-step guide to the mortgage process — from budgeting to closing. Includes worksheets, checklists, and conversation starters. 20 pages.", url: "https://files.consumerfinance.gov/f/201503_cfpb_your-home-loan-toolkit-web.pdf", type: "PDF", source: "CFPB" },
       { name: "Sample Loan Estimate (Annotated)", desc: "See what a completed Loan Estimate looks like with explanations for every field. Use this to understand the form before you receive yours.", url: "https://www.consumerfinance.gov/owning-a-home/loan-estimate/", type: "Web Tool", source: "CFPB" },
@@ -24,7 +24,7 @@ const documentSections = [
   {
     title: "HomeClosing101 Printable Resources",
     desc: "These resources are available directly on our site and can be printed for use during your closing process.",
-    color: "from-green-500 to-green-600",
+    color: "from-[#2d6b3f] to-[#235532]",
     docs: [
       { name: "Interactive Closing Checklist", desc: "28-item checklist across 5 phases — from pre-approval to closing day. Track your progress online or print a blank copy.", url: "/closing-process/closing-checklist", type: "Interactive", source: "HomeClosing101" },
       { name: "Questions to Ask Your Title Professional", desc: "40+ questions organized by category: choosing a company, costs, title search, closing process, and after closing.", url: "/questions-to-ask", type: "Printable", source: "HomeClosing101" },
@@ -36,7 +36,7 @@ const documentSections = [
   {
     title: "Homebuyer Education Programs",
     desc: "Free and low-cost courses that provide homebuyer education certificates — often required for certain loan programs.",
-    color: "from-purple-500 to-purple-600",
+    color: "from-[#5b3a8c] to-[#482d70]",
     docs: [
       { name: "Fannie Mae HomeView", desc: "Free, interactive online course covering the entire homebuying process. Provides a certificate of completion. Meets HUD requirements.", url: "https://www.fanniemae.com/education", type: "Free Course", source: "Fannie Mae" },
       { name: "Freddie Mac CreditSmart", desc: "Free online homebuyer education covering credit, budgeting, and the mortgage process. Available in English and Spanish.", url: "https://myhome.freddiemac.com/resources/creditsmart", type: "Free Course", source: "Freddie Mac" },
@@ -47,7 +47,7 @@ const documentSections = [
   {
     title: "Government & Industry Resources",
     desc: "Official tools and calculators from government-sponsored enterprises and industry organizations.",
-    color: "from-amber-500 to-amber-600",
+    color: "from-[#8b6914] to-[#705410]",
     docs: [
       { name: "Fannie Mae Mortgage Calculator", desc: "Calculate monthly payments including taxes, insurance, PMI, and HOA. Official Fannie Mae tool.", url: "https://yourhome.fanniemae.com/calculators-tools/mortgage-calculator", type: "Calculator", source: "Fannie Mae" },
       { name: "Freddie Mac Homebuyer Tools", desc: "Calculators, worksheets, and checklists to prepare for homebuying. Personalized based on your situation.", url: "https://myhome.freddiemac.com/resources/calculators", type: "Tool Suite", source: "Freddie Mac" },

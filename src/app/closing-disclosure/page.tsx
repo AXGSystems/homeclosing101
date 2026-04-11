@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 const pages = [
   {
     page: "Page 1 — Loan Terms & Costs",
-    color: "from-blue-500 to-blue-600",
+    color: "from-[#1a5276] to-[#154463]",
     sections: [
       { name: "Closing Information", what: "Date issued, closing date, property address, sale price, and the settlement agent's information.", lookFor: "Verify the closing date and property address are correct. Confirm the settlement agent is who you expect — especially if you chose your own title company." },
       { name: "Transaction Information", what: "Names of borrower(s), seller(s), and lender.", lookFor: "Check that all names are spelled correctly. Errors here can delay recording of your deed." },
@@ -22,7 +22,7 @@ const pages = [
   },
   {
     page: "Page 2 — Closing Cost Details",
-    color: "from-green-500 to-green-600",
+    color: "from-[#2d6b3f] to-[#235532]",
     sections: [
       { name: "Loan Costs", what: "Origination charges, points, and services required by the lender (appraisal, credit report, flood determination, tax monitoring, title services).", lookFor: "Compare every line to your Loan Estimate. Zero-tolerance fees (origination, transfer taxes) CANNOT increase. 10%-tolerance fees (title services, recording) can increase up to 10% in aggregate." },
       { name: "Other Costs", what: "Government recording fees, transfer taxes, prepaids (homeowner's insurance, mortgage insurance, prepaid interest, property taxes), initial escrow deposit, and owner's title insurance.", lookFor: "Make sure owner's title insurance is included. Verify the prepaid interest calculation — it should cover from your closing date to the end of that month. Check that your homeowner's insurance premium matches your policy." },
@@ -30,7 +30,7 @@ const pages = [
   },
   {
     page: "Page 3 — Cash to Close & Summary",
-    color: "from-amber-500 to-amber-600",
+    color: "from-[#8b6914] to-[#705410]",
     sections: [
       { name: "Calculating Cash to Close", what: "Side-by-side comparison of your Loan Estimate vs. the final Closing Disclosure amounts, showing exactly what changed and why.", lookFor: "This is the most important comparison on the entire document. If any 'Did this change?' column says 'YES,' read the explanation carefully. You have the right to question any increase." },
       { name: "Summaries of Transactions", what: "Detailed accounting of the buyer's and seller's transactions — every credit, debit, adjustment, and proration.", lookFor: "Verify your earnest money deposit is credited. Check that any seller concessions appear. Make sure prorated property taxes are calculated correctly based on your closing date." },
@@ -38,7 +38,7 @@ const pages = [
   },
   {
     page: "Page 4 — Additional Information",
-    color: "from-purple-500 to-purple-600",
+    color: "from-[#5b3a8c] to-[#482d70]",
     sections: [
       { name: "Loan Disclosures", what: "Whether the loan allows assumption, has a demand feature, whether the lender will service the loan or transfer servicing, and escrow account details.", lookFor: "If 'Transfer of servicing' is likely, your loan payments may go to a different company after closing. This is normal — your loan terms don't change." },
       { name: "Adjustable Rate / Interest Rate Table", what: "For adjustable-rate mortgages: the index, margin, adjustment schedule, caps on rate and payment changes.", lookFor: "If you have an adjustable rate, understand when your first adjustment happens and the maximum your rate and payment can increase per adjustment and over the life of the loan." },
@@ -46,7 +46,7 @@ const pages = [
   },
   {
     page: "Page 5 — Loan Calculations & Contact Info",
-    color: "from-red-500 to-red-600",
+    color: "from-[#943030] to-[#7a2020]",
     sections: [
       { name: "Loan Calculations", what: "Total of payments over the life of the loan, finance charge (total interest plus fees), amount financed, and Annual Percentage Rate (APR).", lookFor: "The 'Total of Payments' number can be eye-opening — it shows the true cost of your loan including all interest. Use this to understand the long-term impact of your interest rate." },
       { name: "Other Disclosures", what: "Appraisal information, contract details, and whether you can receive a copy of the appraisal.", lookFor: "You have the right to receive a copy of your appraisal at least 3 days before closing. If you haven't received it, ask." },

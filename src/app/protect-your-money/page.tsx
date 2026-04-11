@@ -57,10 +57,10 @@ export default function ProtectYourMoneyPage() {
           <h2 className="text-2xl font-bold text-alta-navy mb-6">How Wire Fraud Works</h2>
           <div className="grid md:grid-cols-4 gap-4 mb-14">
             {[
-              { step: "1", title: "Criminals Monitor", desc: "Hackers infiltrate email accounts or monitor public listings for pending sales.", color: "from-gray-500 to-gray-600" },
-              { step: "2", title: "Fake Instructions", desc: "Near closing, a spoofed email arrives with 'updated' wire instructions.", color: "from-amber-500 to-amber-600" },
-              { step: "3", title: "Money Wired", desc: "Under pressure to close, the buyer wires funds to the criminal's account.", color: "from-red-500 to-red-600" },
-              { step: "4", title: "Funds Disappear", desc: "Money is moved through multiple accounts within hours. Recovery is rare.", color: "from-red-700 to-red-800" },
+              { step: "1", title: "Criminals Monitor", desc: "Hackers infiltrate email accounts or monitor public listings for pending sales.", color: "from-[#4a5568] to-[#3a4455]" },
+              { step: "2", title: "Fake Instructions", desc: "Near closing, a spoofed email arrives with 'updated' wire instructions.", color: "from-[#8b6914] to-[#705410]" },
+              { step: "3", title: "Money Wired", desc: "Under pressure to close, the buyer wires funds to the criminal's account.", color: "from-[#943030] to-[#7a2020]" },
+              { step: "4", title: "Funds Disappear", desc: "Money is moved through multiple accounts within hours. Recovery is rare.", color: "from-[#7a2020] to-[#5c1818]" },
             ].map((s) => (
               <div key={s.step} className="relative rounded-2xl overflow-hidden shadow-sm">
                 <div className={`bg-gradient-to-br ${s.color} p-5 text-white h-full`}>

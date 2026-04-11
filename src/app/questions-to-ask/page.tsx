@@ -119,11 +119,11 @@ export default function QuestionsToAskPage() {
         <div className="space-y-8">
           {questionSections.map((section) => {
             const colorMap: Record<string, { headerBg: string; headerText: string; checkBorder: string }> = {
-              blue: { headerBg: "bg-blue-600", headerText: "text-white", checkBorder: "border-blue-400" },
-              green: { headerBg: "bg-green-600", headerText: "text-white", checkBorder: "border-green-400" },
-              amber: { headerBg: "bg-amber-500", headerText: "text-white", checkBorder: "border-amber-400" },
-              purple: { headerBg: "bg-purple-600", headerText: "text-white", checkBorder: "border-purple-400" },
-              teal: { headerBg: "bg-teal-600", headerText: "text-white", checkBorder: "border-teal-400" },
+              blue: { headerBg: "bg-[#1a5276]", headerText: "text-white", checkBorder: "border-[#1a5276]/40" },
+              green: { headerBg: "bg-[#2d6b3f]", headerText: "text-white", checkBorder: "border-[#2d6b3f]/40" },
+              amber: { headerBg: "bg-[#8b6914]", headerText: "text-white", checkBorder: "border-[#8b6914]/40" },
+              purple: { headerBg: "bg-[#5b3a8c]", headerText: "text-white", checkBorder: "border-[#5b3a8c]/40" },
+              teal: { headerBg: "bg-[#0a7ea8]", headerText: "text-white", checkBorder: "border-[#0a7ea8]/40" },
             };
             const c = colorMap[section.color] || colorMap.blue;
             return (

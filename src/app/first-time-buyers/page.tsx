@@ -33,11 +33,11 @@ const mistakes = [
 ];
 
 const colorMap: Record<string, { bg: string; badge: string }> = {
-  blue: { bg: "from-blue-500 to-blue-600", badge: "bg-blue-100 text-blue-700" },
-  green: { bg: "from-green-500 to-green-600", badge: "bg-green-100 text-green-700" },
-  amber: { bg: "from-amber-500 to-amber-600", badge: "bg-amber-100 text-amber-700" },
-  purple: { bg: "from-purple-500 to-purple-600", badge: "bg-purple-100 text-purple-700" },
-  red: { bg: "from-red-500 to-red-600", badge: "bg-red-100 text-red-700" },
+  blue: { bg: "from-[#1a5276] to-[#154463]", badge: "bg-blue-100 text-blue-700" },
+  green: { bg: "from-[#2d6b3f] to-[#235532]", badge: "bg-green-100 text-green-700" },
+  amber: { bg: "from-[#8b6914] to-[#705410]", badge: "bg-amber-100 text-amber-700" },
+  purple: { bg: "from-[#5b3a8c] to-[#482d70]", badge: "bg-purple-100 text-purple-700" },
+  red: { bg: "from-[#943030] to-[#7a2020]", badge: "bg-red-100 text-red-700" },
 };
 
 export default function FirstTimeBuyersPage() {

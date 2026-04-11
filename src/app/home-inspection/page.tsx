@@ -104,12 +104,12 @@ export default function HomeInspectionPage() {
           <div className="grid md:grid-cols-2 gap-4 mb-10">
             {inspectionAreas.map((area) => {
               const colors: Record<string, { bg: string; border: string; iconBg: string; iconText: string; check: string }> = {
-                blue: { bg: "hover:bg-blue-50/50", border: "hover:border-blue-300", iconBg: "bg-blue-100 group-hover:bg-blue-500", iconText: "text-blue-600 group-hover:text-white", check: "text-blue-500" },
-                green: { bg: "hover:bg-green-50/50", border: "hover:border-green-300", iconBg: "bg-green-100 group-hover:bg-green-500", iconText: "text-green-600 group-hover:text-white", check: "text-green-500" },
-                teal: { bg: "hover:bg-teal-50/50", border: "hover:border-teal-300", iconBg: "bg-teal-100 group-hover:bg-teal-500", iconText: "text-teal-600 group-hover:text-white", check: "text-teal-500" },
-                amber: { bg: "hover:bg-amber-50/50", border: "hover:border-amber-300", iconBg: "bg-amber-100 group-hover:bg-amber-500", iconText: "text-amber-600 group-hover:text-white", check: "text-amber-500" },
-                red: { bg: "hover:bg-red-50/50", border: "hover:border-red-300", iconBg: "bg-red-100 group-hover:bg-red-500", iconText: "text-red-600 group-hover:text-white", check: "text-red-500" },
-                purple: { bg: "hover:bg-purple-50/50", border: "hover:border-purple-300", iconBg: "bg-purple-100 group-hover:bg-purple-500", iconText: "text-purple-600 group-hover:text-white", check: "text-purple-500" },
+                blue: { bg: "hover:bg-[#e8f0f5]", border: "hover:border-[#1a5276]/30", iconBg: "bg-[#e8f0f5] group-hover:bg-[#1a5276]", iconText: "text-[#1a5276] group-hover:text-white", check: "text-[#1a5276]" },
+                green: { bg: "hover:bg-[#e9f2ec]", border: "hover:border-[#2d6b3f]/30", iconBg: "bg-[#e9f2ec] group-hover:bg-[#2d6b3f]", iconText: "text-[#2d6b3f] group-hover:text-white", check: "text-[#2d6b3f]" },
+                teal: { bg: "hover:bg-[#e6f1f5]", border: "hover:border-[#0a7ea8]/30", iconBg: "bg-[#e6f1f5] group-hover:bg-[#0a7ea8]", iconText: "text-[#0a7ea8] group-hover:text-white", check: "text-[#0a7ea8]" },
+                amber: { bg: "hover:bg-[#f5f0e4]", border: "hover:border-[#8b6914]/30", iconBg: "bg-[#f5f0e4] group-hover:bg-[#8b6914]", iconText: "text-[#8b6914] group-hover:text-white", check: "text-[#8b6914]" },
+                red: { bg: "hover:bg-[#f5e8e8]", border: "hover:border-[#943030]/30", iconBg: "bg-[#f5e8e8] group-hover:bg-[#943030]", iconText: "text-[#943030] group-hover:text-white", check: "text-[#943030]" },
+                purple: { bg: "hover:bg-[#f0ecf5]", border: "hover:border-[#5b3a8c]/30", iconBg: "bg-[#f0ecf5] group-hover:bg-[#5b3a8c]", iconText: "text-[#5b3a8c] group-hover:text-white", check: "text-[#5b3a8c]" },
               };
               const c = colors[area.color] || colors.teal;
               return (

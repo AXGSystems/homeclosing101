@@ -13,28 +13,28 @@ const sections = [
     description: "A step-by-step walkthrough of the entire closing journey, from loan pre-approval to signing day.",
     href: "/closing-process/what-to-expect",
     image: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=600&q=80",
-    accent: "from-blue-500 to-blue-600",
+    accent: "from-[#1a5276] to-[#154463]",
   },
   {
     title: "Closing Options",
     description: "In-person, hybrid, mail-away, and remote digital — choose the closing method that works for you.",
     href: "/closing-process/closing-options",
     image: "https://images.unsplash.com/photo-1553028826-f4804a6dba3b?w=600&q=80",
-    accent: "from-green-500 to-green-600",
+    accent: "from-[#2d6b3f] to-[#235532]",
   },
   {
     title: "Closing Checklist",
     description: "An interactive, printable checklist to track every task leading up to your closing day.",
     href: "/closing-process/closing-checklist",
     image: "https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=600&q=80",
-    accent: "from-purple-500 to-purple-600",
+    accent: "from-[#5b3a8c] to-[#482d70]",
   },
   {
     title: "Closing Costs Explained",
     description: "Understand every fee and use our live calculator to estimate your total closing costs.",
     href: "/closing-process/closing-costs",
     image: "https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=600&q=80",
-    accent: "from-amber-500 to-amber-600",
+    accent: "from-[#8b6914] to-[#705410]",
   },
 ];
 
