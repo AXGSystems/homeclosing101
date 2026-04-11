@@ -62,12 +62,11 @@ export default function JoinAltaPage() {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5 mb-14">
             {benefits.map((b) => (
               <div key={b.title} className="feature-card rounded-2xl overflow-hidden border border-gray-100 shadow-sm bg-white group" data-accent="teal">
-                <div className="relative h-36 overflow-hidden">
+                <div className="relative h-40 overflow-hidden">
                   <div className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110" style={{ backgroundImage: `url('${b.image}')` }} />
-                  <div className={`absolute inset-0 bg-gradient-to-t ${b.color} opacity-60`} />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/10 to-transparent" />
                   <div className="absolute bottom-3 left-4">
-                    <div className="w-10 h-10 rounded-xl bg-white/20 backdrop-blur-sm flex items-center justify-center">
+                    <div className={`w-10 h-10 rounded-xl bg-gradient-to-br ${b.color} flex items-center justify-center shadow-lg`}>
                       <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
                         <path strokeLinecap="round" strokeLinejoin="round" d={b.icon} />
                       </svg>

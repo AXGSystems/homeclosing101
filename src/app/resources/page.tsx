@@ -50,7 +50,7 @@ function ResourceSection({ title, items }: { title: string; items: { name: strin
       {/* Section header with image */}
       <div className="relative rounded-xl overflow-hidden mb-5 h-24">
         <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url('${style.image}')` }} />
-        <div className={`absolute inset-0 bg-gradient-to-r ${style.color} opacity-80`} />
+        <div className={`absolute inset-0 bg-gradient-to-r ${style.color} opacity-30`} />
         <div className="relative z-10 flex items-center gap-3 h-full px-5">
           <div className="w-10 h-10 rounded-xl bg-white/20 flex items-center justify-center">
             <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>

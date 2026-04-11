@@ -74,7 +74,7 @@ export default function ClosingProcessPage() {
                     className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
                     style={{ backgroundImage: `url('${s.image}')` }}
                   />
-                  <div className={`absolute inset-0 bg-gradient-to-t ${s.accent} opacity-60`} />
+                  <div className={`absolute inset-0 bg-gradient-to-t ${s.accent} opacity-25`} />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
                   <div className="absolute bottom-4 left-5 right-5">
                     <h2 className="text-xl font-bold text-white drop-shadow-lg">{s.title}</h2>

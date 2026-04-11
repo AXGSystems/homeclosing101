@@ -164,7 +164,7 @@ export default function ClosingChecklistPage() {
                 {/* Section header with image */}
                 <div className="relative h-28 overflow-hidden">
                   <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url('${section.image}')` }} />
-                  <div className={`absolute inset-0 bg-gradient-to-r ${c.bg} ${sectionComplete ? 'opacity-40' : 'opacity-70'}`} />
+                  <div className={`absolute inset-0 bg-gradient-to-r ${c.bg} ${sectionComplete ? 'opacity-20' : 'opacity-30'}`} />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
                   <div className="relative z-10 flex items-center justify-between h-full px-5">
                     <div className="flex items-center gap-3">
