@@ -63,7 +63,7 @@ export default function PageHero({ title, subtitle, image, breadcrumb }: PageHer
           collapsed ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-2 pointer-events-none"
         }`}
       >
-        <div className="bg-alta-navy/95 backdrop-blur-md border-b border-white/10">
+        <div className="bg-alta-navy/95 backdrop-blur-md border-b border-white/10 shadow-md">
           <div className="max-w-5xl mx-auto px-3 sm:px-6 py-1.5 sm:py-2.5 flex items-center justify-between">
             <div className="flex items-center gap-3 min-w-0">
               {breadcrumb && breadcrumb.length > 0 && (
