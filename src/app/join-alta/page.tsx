@@ -140,6 +140,45 @@ export default function JoinAltaPage() {
             ))}
           </div>
 
+          {/* Why members stay */}
+          <h2 className="text-2xl font-bold text-alta-navy mb-4">Why Members Stay Year After Year</h2>
+          <div className="grid sm:grid-cols-2 gap-4 mb-10">
+            {[
+              { stat: "116+", label: "Years of continuous advocacy for the title industry since 1907", color: "text-[#1a5276]", bg: "bg-[#e8f0f5]", border: "border-[#c5d8e4]" },
+              { stat: "6,000+", label: "Member companies across all 50 states and D.C.", color: "text-[#2d6b3f]", bg: "bg-[#e9f5ed]", border: "border-[#bddcc7]" },
+              { stat: "7", label: "Pillars in the Best Practices framework — the industry gold standard", color: "text-[#5b3a8c]", bg: "bg-[#f0ecf6]", border: "border-[#d4c8e4]" },
+              { stat: "$2.77B", label: "In BEC losses ALTA helps members defend against through education and tools", color: "text-[#943030]", bg: "bg-[#f5e8e8]", border: "border-[#e4c5c5]" },
+            ].map((s) => (
+              <div key={s.stat} className={`p-5 ${s.bg} rounded-xl border ${s.border} tile-interactive`}>
+                <p className={`text-3xl font-bold ${s.color}`}>{s.stat}</p>
+                <p className="text-xs text-alta-gray mt-1 leading-relaxed">{s.label}</p>
+              </div>
+            ))}
+          </div>
+
+          {/* ALTA Best Practices deep dive */}
+          <h2 className="text-2xl font-bold text-alta-navy mb-4">The 7 Pillars of ALTA Best Practices</h2>
+          <p className="text-sm text-alta-gray mb-4 leading-relaxed">Companies that adopt ALTA Best Practices demonstrate a commitment to consumer protection, operational excellence, and regulatory compliance. Here&apos;s what each pillar covers:</p>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 mb-10">
+            {[
+              { num: "1", title: "Licensing", desc: "Maintain proper state licensing for all employees involved in title and settlement operations." },
+              { num: "2", title: "Escrow Controls", desc: "Implement comprehensive escrow account management with regular reconciliation, positive pay, and segregated accounts." },
+              { num: "3", title: "Privacy & Security", desc: "Protect consumer data with encryption, access controls, employee training, and incident response plans. Includes wire fraud prevention." },
+              { num: "4", title: "Settlement Procedures", desc: "Follow documented, auditable procedures for every closing to ensure accuracy, compliance, and consumer protection." },
+              { num: "5", title: "Title Policy Production", desc: "Issue title insurance policies promptly and accurately, with proper documentation and recording verification." },
+              { num: "6", title: "Professional Liability", desc: "Maintain appropriate errors & omissions insurance and fidelity coverage to protect consumers and the company." },
+              { num: "7", title: "Consumer Complaints", desc: "Establish a formal process for receiving, tracking, and resolving consumer complaints in a timely manner." },
+            ].map((p) => (
+              <div key={p.num} className="p-4 bg-white rounded-xl border border-gray-100 shadow-sm tile-interactive">
+                <div className="flex items-center gap-2 mb-2">
+                  <span className="w-7 h-7 rounded-full bg-[#1a5276] text-white flex items-center justify-center text-xs font-bold">{p.num}</span>
+                  <h3 className="text-sm font-bold text-alta-navy">{p.title}</h3>
+                </div>
+                <p className="text-xs text-alta-gray leading-relaxed">{p.desc}</p>
+              </div>
+            ))}
+          </div>
+
           {/* CTA */}
           <div className="relative rounded-2xl overflow-hidden">
             <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=1200&q=80')" }} />
