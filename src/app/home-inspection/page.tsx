@@ -9,12 +9,12 @@ export const metadata: Metadata = {
 };
 
 const inspectionAreas = [
-  { area: "Structural & Foundation", items: ["Foundation cracks, settling, or water damage", "Load-bearing walls and framing condition", "Floor levelness and joist integrity", "Basement/crawlspace moisture and structure"], icon: "M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21M3 3h12m-.75 4.5H21m-3.75 3H21m-3.75 3H21" },
-  { area: "Roof & Exterior", items: ["Roof age, condition, and remaining life expectancy", "Gutters, downspouts, and drainage", "Siding, trim, and exterior paint condition", "Windows and doors (seals, operation, glass condition)"], icon: "M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" },
-  { area: "Plumbing", items: ["Water heater age, condition, and capacity", "Water pressure and flow at all fixtures", "Pipe material (copper, PEX, galvanized, polybutylene)", "Drain function, sewer line condition, signs of leaks"], icon: "M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636" },
-  { area: "Electrical", items: ["Panel capacity (100, 150, or 200 amp service)", "Wiring type and condition (knob-and-tube, aluminum, copper)", "GFCI outlets in wet areas (kitchen, bath, garage, exterior)", "Smoke and CO detector placement and function"], icon: "M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" },
-  { area: "HVAC", items: ["Heating system type, age, and condition", "Air conditioning capacity and function", "Ductwork condition and insulation", "Thermostat operation and programmability"], icon: "M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" },
-  { area: "Interior", items: ["Walls, ceilings, and floors for damage or defects", "Kitchen appliances operation (if included in sale)", "Bathroom fixtures, ventilation, and moisture", "Attic insulation, ventilation, and signs of pests"], icon: "M15.75 10.5l4.72-4.72a.75.75 0 011.28.53v11.38a.75.75 0 01-1.28.53l-4.72-4.72M4.5 18.75h9a2.25 2.25 0 002.25-2.25v-9a2.25 2.25 0 00-2.25-2.25h-9A2.25 2.25 0 002.25 7.5v9a2.25 2.25 0 002.25 2.25z" },
+  { area: "Structural & Foundation", items: ["Foundation cracks, settling, or water damage", "Load-bearing walls and framing condition", "Floor levelness and joist integrity", "Basement/crawlspace moisture and structure"], icon: "M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21M3 3h12m-.75 4.5H21m-3.75 3H21m-3.75 3H21", color: "blue" },
+  { area: "Roof & Exterior", items: ["Roof age, condition, and remaining life expectancy", "Gutters, downspouts, and drainage", "Siding, trim, and exterior paint condition", "Windows and doors (seals, operation, glass condition)"], icon: "M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25", color: "green" },
+  { area: "Plumbing", items: ["Water heater age, condition, and capacity", "Water pressure and flow at all fixtures", "Pipe material (copper, PEX, galvanized, polybutylene)", "Drain function, sewer line condition, signs of leaks"], icon: "M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636", color: "teal" },
+  { area: "Electrical", items: ["Panel capacity (100, 150, or 200 amp service)", "Wiring type and condition (knob-and-tube, aluminum, copper)", "GFCI outlets in wet areas (kitchen, bath, garage, exterior)", "Smoke and CO detector placement and function"], icon: "M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z", color: "amber" },
+  { area: "HVAC", items: ["Heating system type, age, and condition", "Air conditioning capacity and function", "Ductwork condition and insulation", "Thermostat operation and programmability"], icon: "M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z", color: "red" },
+  { area: "Interior", items: ["Walls, ceilings, and floors for damage or defects", "Kitchen appliances operation (if included in sale)", "Bathroom fixtures, ventilation, and moisture", "Attic insulation, ventilation, and signs of pests"], icon: "M15.75 10.5l4.72-4.72a.75.75 0 011.28.53v11.38a.75.75 0 01-1.28.53l-4.72-4.72M4.5 18.75h9a2.25 2.25 0 002.25-2.25v-9a2.25 2.25 0 00-2.25-2.25h-9A2.25 2.25 0 002.25 7.5v9a2.25 2.25 0 002.25 2.25z", color: "purple" },
 ];
 
 const homeTypes = [
@@ -85,46 +85,52 @@ export default function HomeInspectionPage() {
 
           {/* Key stats */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-10">
-            <div className="p-4 bg-white rounded-xl border border-gray-100 shadow-sm tile-interactive text-center">
-              <p className="text-2xl font-bold text-alta-teal">$400</p>
-              <p className="text-[10px] text-alta-gray mt-1">Average inspection cost</p>
-            </div>
-            <div className="p-4 bg-white rounded-xl border border-gray-100 shadow-sm tile-interactive text-center">
-              <p className="text-2xl font-bold text-alta-teal">2-4 hrs</p>
-              <p className="text-[10px] text-alta-gray mt-1">Typical inspection time</p>
-            </div>
-            <div className="p-4 bg-white rounded-xl border border-gray-100 shadow-sm tile-interactive text-center">
-              <p className="text-2xl font-bold text-alta-teal">86%</p>
-              <p className="text-[10px] text-alta-gray mt-1">Of inspections find issues</p>
-            </div>
-            <div className="p-4 bg-white rounded-xl border border-gray-100 shadow-sm tile-interactive text-center">
-              <p className="text-2xl font-bold text-alta-teal">7-10 days</p>
-              <p className="text-[10px] text-alta-gray mt-1">Typical contingency window</p>
-            </div>
+            {[
+              { val: "$400", label: "Average inspection cost", bg: "bg-blue-50", border: "border-blue-200", text: "text-blue-700" },
+              { val: "2-4 hrs", label: "Typical inspection time", bg: "bg-green-50", border: "border-green-200", text: "text-green-700" },
+              { val: "86%", label: "Of inspections find issues", bg: "bg-amber-50", border: "border-amber-200", text: "text-amber-700" },
+              { val: "7-10 days", label: "Typical contingency window", bg: "bg-purple-50", border: "border-purple-200", text: "text-purple-700" },
+            ].map((s) => (
+              <div key={s.val} className={`p-4 ${s.bg} rounded-xl border ${s.border} shadow-sm tile-interactive text-center`}>
+                <p className={`text-2xl font-bold ${s.text}`}>{s.val}</p>
+                <p className="text-[10px] text-alta-gray mt-1">{s.label}</p>
+              </div>
+            ))}
           </div>
 
           {/* What inspectors look at */}
           <h2 className="text-2xl font-bold text-alta-navy mb-4">What a Home Inspector Examines</h2>
           <p className="text-sm text-alta-gray mb-4 leading-relaxed">A general home inspection covers the major visible and accessible systems of the property. The inspector will document their findings in a detailed report — typically 30-50+ pages with photos. Here are the six major areas they evaluate:</p>
           <div className="grid md:grid-cols-2 gap-4 mb-10">
-            {inspectionAreas.map((area) => (
-              <div key={area.area} className="p-5 bg-white rounded-2xl border border-gray-100 shadow-sm tile-interactive">
-                <div className="flex items-center gap-3 mb-3">
-                  <div className="w-10 h-10 rounded-xl bg-alta-teal/10 flex items-center justify-center text-alta-teal">
-                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d={area.icon} /></svg>
+            {inspectionAreas.map((area) => {
+              const colors: Record<string, { bg: string; border: string; iconBg: string; iconText: string; check: string }> = {
+                blue: { bg: "hover:bg-blue-50/50", border: "hover:border-blue-300", iconBg: "bg-blue-100 group-hover:bg-blue-500", iconText: "text-blue-600 group-hover:text-white", check: "text-blue-500" },
+                green: { bg: "hover:bg-green-50/50", border: "hover:border-green-300", iconBg: "bg-green-100 group-hover:bg-green-500", iconText: "text-green-600 group-hover:text-white", check: "text-green-500" },
+                teal: { bg: "hover:bg-teal-50/50", border: "hover:border-teal-300", iconBg: "bg-teal-100 group-hover:bg-teal-500", iconText: "text-teal-600 group-hover:text-white", check: "text-teal-500" },
+                amber: { bg: "hover:bg-amber-50/50", border: "hover:border-amber-300", iconBg: "bg-amber-100 group-hover:bg-amber-500", iconText: "text-amber-600 group-hover:text-white", check: "text-amber-500" },
+                red: { bg: "hover:bg-red-50/50", border: "hover:border-red-300", iconBg: "bg-red-100 group-hover:bg-red-500", iconText: "text-red-600 group-hover:text-white", check: "text-red-500" },
+                purple: { bg: "hover:bg-purple-50/50", border: "hover:border-purple-300", iconBg: "bg-purple-100 group-hover:bg-purple-500", iconText: "text-purple-600 group-hover:text-white", check: "text-purple-500" },
+              };
+              const c = colors[area.color] || colors.teal;
+              return (
+                <div key={area.area} className={`group p-5 bg-white rounded-2xl border border-gray-100 shadow-sm tile-interactive ${c.bg} ${c.border} transition-all`}>
+                  <div className="flex items-center gap-3 mb-3">
+                    <div className={`w-10 h-10 rounded-xl ${c.iconBg} flex items-center justify-center transition-colors`}>
+                      <svg className={`w-5 h-5 ${c.iconText} transition-colors`} fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d={area.icon} /></svg>
+                    </div>
+                    <h3 className="font-bold text-alta-navy">{area.area}</h3>
                   </div>
-                  <h3 className="font-bold text-alta-navy">{area.area}</h3>
+                  <ul className="space-y-1.5">
+                    {area.items.map((item) => (
+                      <li key={item} className="flex items-start gap-2 text-xs text-alta-gray">
+                        <svg className={`w-3.5 h-3.5 ${c.check} shrink-0 mt-0.5`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
                 </div>
-                <ul className="space-y-1.5">
-                  {area.items.map((item) => (
-                    <li key={item} className="flex items-start gap-2 text-xs text-alta-gray">
-                      <svg className="w-3.5 h-3.5 text-alta-green shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
+              );
+            })}
           </div>
 
           <InlineAd />
