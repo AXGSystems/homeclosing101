@@ -4,136 +4,124 @@ import { useState } from "react";
 import Link from "next/link";
 import PageHero from "@/components/PageHero";
 import { InlineAd } from "@/components/EliteProviders";
+import { faqs, faqCategories } from "@/data/faqData";
 
-const faqCategories = [
-  { id: "all", label: "All Questions" },
-  { id: "basics", label: "Title Basics" },
-  { id: "insurance", label: "Insurance & Coverage" },
-  { id: "costs", label: "Costs & Shopping" },
-  { id: "closing", label: "The Closing" },
-  { id: "fraud", label: "Fraud & Safety" },
-];
-
-const faqs = [
-  { q: "What is title?", a: "Title is your legal right to own or use your property. It also establishes any limitations on those rights, such as easements or liens.", cat: "basics", icon: "M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" },
-  { q: "What is a title search?", a: "A title search is a thorough examination of public records performed early in the homebuying process to identify potential problems — such as outstanding liens, unpaid taxes, or ownership disputes — that might restrict your rights. Title professionals resolve most issues before closing, and a title insurance policy becomes available after the search is complete.", cat: "basics", icon: "M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" },
-  { q: "What is title insurance?", a: "Title insurance is a policy that protects your investment and property rights. There are two types: an owner's policy (which protects you) and a lender's policy (which protects the bank). Unlike other insurance that covers future events, title insurance protects against issues that already exist but haven't been discovered yet.", cat: "insurance", icon: "M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" },
-  { q: "Why should I purchase owner's title insurance?", a: "Owner's title insurance provides permanent protection for your property investment against future legal claims regarding ownership. For a one-time fee at closing, you and your heirs receive coverage for as long as you own the home. The policy also covers legal fees and court costs for settling covered claims. Without it, you could be personally responsible for defending your ownership — potentially costing tens of thousands of dollars.", cat: "insurance", icon: "M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" },
-  { q: "What does owner's title insurance cover?", a: "Protection against undiscovered title defects including: unknown mortgages, judgments, and liens; pending legal action against the property; forgery and fraudulent documents; identity theft or unauthorized mortgages; clerical errors and property line discrepancies; unknown heirs with claims to the property; and unmarketable title that prevents you from selling.", cat: "insurance", icon: "M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25H12" },
-  { q: "What does owner's title insurance cost?", a: "The one-time payment for owner's title insurance is relatively low compared to the value of your home. A typical policy costs around 0.5% to 1% of the home's purchase price. For a $350,000 home, that's approximately $1,750 to $3,500 — for lifetime coverage. Rates are regulated by each state's department of insurance.", cat: "costs", icon: "M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z" },
-  { q: "How long am I covered?", a: "Your owner's title insurance policy lasts for as long as you or your heirs own the property. There are no annual premiums — you pay once at closing and you're covered for life.", cat: "insurance", icon: "M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" },
-  { q: "What's the difference between an owner's policy and a lender's policy?", a: "A lender's policy only protects the mortgage lender's investment — it does NOT protect you as the homeowner. An owner's policy protects your equity and ownership rights. Most lenders require a lender's policy as a condition of the mortgage, but the owner's policy is optional (and highly recommended). You often get a discount when purchasing both simultaneously.", cat: "insurance", icon: "M7.5 21L3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5" },
-  { q: "How do I file a title insurance claim?", a: "Contact your title insurance company promptly when you discover any concern about your property's title. Provide your property address, policy number, relevant documentation, and a description of the issue. Your insurer will investigate and handle the claim, including providing legal defense if needed.", cat: "insurance", icon: "M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" },
-  { q: "What happens at closing?", a: "Closing (also called settlement) is the final step in a real estate transaction. You'll sign documents including the Closing Disclosure, promissory note, and deed of trust. Funds are transferred, the deed is recorded, and you receive the keys to your new home. You must receive your Closing Disclosure at least 3 business days before closing.", cat: "closing", icon: "M15.75 5.25a3 3 0 013 3m3 0a6 6 0 01-7.029 5.912c-.563-.097-1.159.026-1.563.43L10.5 17.25H8.25v2.25H6v2.25H2.25v-2.818c0-.597.237-1.17.659-1.591l6.499-6.499c.404-.404.527-1 .43-1.563A6 6 0 1121.75 8.25z" },
-  { q: "Can I choose my own title company?", a: "Yes! Under federal law (RESPA), you have the right to choose your own title insurance company. While your real estate agent or lender may recommend a provider, you are not obligated to use them. Shopping around can save you money and help you find a company you trust.", cat: "costs", icon: "M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" },
-  { q: "What is wire fraud in real estate?", a: "Wire fraud occurs when criminals intercept or impersonate parties in a real estate transaction to redirect closing funds. They hack email accounts, send fake wiring instructions, and steal down payments and closing costs — often hundreds of thousands of dollars. Losses exceeded $275 million in 2025. Always verify wiring instructions by phone using a number you already have.", cat: "fraud", icon: "M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" },
-  { q: "What does ALTA do?", a: "The American Land Title Association (ALTA) is the national trade organization for the title insurance industry with 6,000+ member companies. ALTA advocates for the industry, develops best practices, provides education, and helps consumers understand the importance of title insurance. ALTA does NOT issue policies directly — that's done by member title companies and underwriters.", cat: "basics", icon: "M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0012 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18M12 6.75h.008v.008H12V6.75z" },
-  { q: "What is the Closing Disclosure and when do I get it?", a: "The Closing Disclosure is a 5-page standardized form that details the final terms of your mortgage — every cost, fee, and payment. Under the CFPB's TRID rule, your lender must deliver it at least 3 business days before your closing date. Use that time to compare it line-by-line with your Loan Estimate. If you see fees that increased beyond tolerance limits, your lender may owe you a refund. Don't sign until you understand every number. Source: CFPB", cat: "closing", icon: "M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" },
-  { q: "What is the difference between a Loan Estimate and a Closing Disclosure?", a: "The Loan Estimate is what you receive within 3 days of applying for a mortgage — it's an estimate of your costs. The Closing Disclosure is the final version you receive 3 days before closing with exact numbers. Federal law limits how much certain fees can increase between the two: some fees cannot increase at all (lender charges, transfer taxes), some can increase up to 10% (recording fees, title services you didn't shop for), and some have no limit (services you chose, prepaids). Always compare them side by side. Source: CFPB TRID Rule", cat: "closing", icon: "M7.5 21L3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5" },
-  { q: "What are closing costs and how much will I pay?", a: "Closing costs are the fees and expenses you pay to complete your home purchase — beyond the purchase price itself. They typically range from 2% to 5% of the home price. For a $350,000 home, expect $7,000 to $17,500. Major categories include: loan origination (0.5-1% of loan), appraisal ($300-600), title search ($200-400), title insurance (0.5-1% for owner's policy), settlement fee ($500-2,000), recording fees ($50-250), homeowner's insurance (first year), and prepaid property taxes. You can reduce costs by shopping for title insurance, comparing Loan Estimates from multiple lenders, negotiating seller concessions, and closing near month-end.", cat: "costs", icon: "M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z" },
-  { q: "What is escrow and how does it work?", a: "Escrow serves two purposes in real estate. First, during the transaction, an escrow account holds your earnest money deposit safely until closing — the money goes to a neutral third party (usually the title company) rather than directly to the seller. Second, after closing, your lender may set up a mortgage escrow account that collects a portion of your property taxes and homeowner's insurance with each monthly payment. The lender then pays these bills on your behalf when they come due. This ensures taxes and insurance are always current, protecting both you and the lender.", cat: "basics", icon: "M2.25 18.75a60.07 60.07 0 0115.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 013 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 00-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 01-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 003 15h-.75M15 10.5a3 3 0 11-6 0 3 3 0 016 0zm3 0h.008v.008H18V10.5zm-12 0h.008v.008H6V10.5z" },
-  { q: "What is a title commitment and what are exceptions?", a: "A title commitment (also called a preliminary title report) is the document your title company issues after completing the title search. It states the conditions under which the company is willing to insure your title. Schedule B of the commitment lists 'exceptions' — known issues that will NOT be covered by your policy. Common exceptions include utility easements, HOA covenants, and mineral rights reservations. Review Schedule B carefully with your agent or attorney — some exceptions can be removed before closing if the title company does additional curative work.", cat: "insurance", icon: "M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" },
-  { q: "What is PMI and how can I avoid it?", a: "Private Mortgage Insurance (PMI) is required by most lenders when your down payment is less than 20% of the home's purchase price. PMI protects the lender (not you) in case you default. It typically costs 0.5% to 1.5% of the loan amount per year, added to your monthly payment. You can avoid PMI by putting 20% or more down, choosing a VA loan (no PMI regardless of down payment), or using a piggyback loan structure. Once you reach 20% equity through payments or appreciation, you can request PMI removal. At 22% equity, your lender must automatically cancel it under the Homeowners Protection Act.", cat: "costs", icon: "M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z" },
-  { q: "What is a home appraisal and why does it matter?", a: "A home appraisal is a professional assessment of a property's fair market value, ordered by your lender to verify the home is worth the amount you're borrowing. The appraiser evaluates the property's condition, features, location, and comparable recent sales in the area. If the appraisal comes in lower than your purchase price, you have several options: negotiate a lower price with the seller, make up the difference with a larger down payment, challenge the appraisal with additional comps, or walk away using your appraisal contingency. The appraisal typically costs $300-$600 and is paid by the buyer. Source: Appraisal Institute", cat: "closing", icon: "M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" },
-  { q: "What is RESPA and how does it protect me?", a: "The Real Estate Settlement Procedures Act (RESPA) is a federal law that protects consumers during the home closing process. Key protections: your lender must provide a Loan Estimate within 3 business days of application; you have the right to choose your own title insurance and settlement services; kickbacks and referral fees between settlement providers are prohibited; your lender cannot require you to use a specific title company; and you must receive a Closing Disclosure at least 3 business days before closing. RESPA is enforced by the Consumer Financial Protection Bureau (CFPB). Source: CFPB", cat: "costs", icon: "M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" },
-  { q: "Can I close remotely or do I have to be there in person?", a: "It depends on your state and settlement provider. Four closing methods are available: in-person (traditional, at the title company's office), mail-away/mobile notary (documents sent to you, notary comes to your location), hybrid (most documents signed digitally, brief office visit for key papers), and Remote Online Notarization or RON (fully digital, all documents signed via live video with a commissioned remote notary). The majority of U.S. states now have RON legislation, but availability depends on your county recorder accepting electronic documents and your lender supporting the process. Ask your title company early in the process which options they offer. Source: ALTA", cat: "closing", icon: "M9 17.25v1.007a3 3 0 01-.879 2.122L7.5 21h9l-.621-.621A3 3 0 0115 18.257V17.25m6-12V15a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 15V5.25m18 0A2.25 2.25 0 0018.75 3H5.25A2.25 2.25 0 003 5.25m18 0V12a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 12V5.25" },
-  { q: "What should I NOT do during the closing process?", a: "Once you're under contract, avoid anything that changes your financial picture: don't open new credit cards or take on new debt; don't make large purchases (car, furniture) on credit; don't change jobs or quit your job; don't make large cash deposits without a documented paper trail; don't co-sign on anyone else's loan; and don't close any existing credit accounts. Your lender will pull your credit again before closing, and any changes can delay or kill your loan approval. Even a small new debt can push your debt-to-income ratio past the threshold.", cat: "closing", icon: "M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636" },
-  { q: "How do I verify wiring instructions are legitimate?", a: "ALWAYS verify wiring instructions by calling your title company or settlement agent using a phone number you already have on file — NEVER use a number from an email. Criminals send spoofed emails with fake wiring instructions that look nearly identical to real ones, often timed right before closing when urgency is highest. Legitimate title companies will never send wiring instructions solely by email, will never pressure last-minute changes, and will use wire verification technology like CertifID or Closinglock. If anything about a wire request seems unusual, stop and call. The FBI reports that recovery rates drop from ~20% within the first hour to less than 5% after 48 hours. Source: FBI IC3, CertifID 2026", cat: "fraud", icon: "M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" },
-  { q: "What is a deed and how is it different from a title?", a: "A deed is the physical legal document that transfers property ownership from one person to another — it's what you sign at closing and what gets recorded with the county. Title, on the other hand, is the concept of ownership itself — your legal right to own, use, and dispose of the property. Think of it this way: the deed is the vehicle that delivers title. Types of deeds include warranty deeds (strongest protection — seller guarantees clear title), special warranty deeds (seller only warrants against claims during their ownership), and quitclaim deeds (no warranties at all — transfers whatever interest the grantor has). Most residential transactions use warranty deeds.", cat: "basics", icon: "M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" },
-  { q: "What is earnest money and do I get it back?", a: "Earnest money (also called a good faith deposit) is a deposit you make when your offer is accepted — typically 1% to 3% of the purchase price. It shows the seller you're serious about buying. The money is held in an escrow account by the title company or attorney. If the transaction closes normally, your earnest money is applied toward your down payment and closing costs. If you back out for a reason covered by your contingencies (failed inspection, financing falls through, low appraisal), you typically get it back. If you back out for a reason NOT covered by a contingency, you may forfeit the deposit to the seller. Always understand your contingency deadlines.", cat: "costs", icon: "M2.25 18.75a60.07 60.07 0 0115.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 013 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25" },
-];
-
-const catColors: Record<string, { bg: string; border: string; text: string }> = {
-  basics: { bg: "bg-blue-50", border: "border-blue-200", text: "text-blue-700" },
-  insurance: { bg: "bg-green-50", border: "border-green-200", text: "text-green-700" },
-  costs: { bg: "bg-amber-50", border: "border-amber-200", text: "text-amber-700" },
-  closing: { bg: "bg-purple-50", border: "border-purple-200", text: "text-purple-700" },
-  fraud: { bg: "bg-red-50", border: "border-red-200", text: "text-red-700" },
+const catColors: Record<string, { bg: string; border: string; text: string; leftBorder: string }> = {
+  basics: { bg: "bg-blue-50", border: "border-blue-200", text: "text-blue-700", leftBorder: "border-l-blue-500" },
+  insurance: { bg: "bg-green-50", border: "border-green-200", text: "text-green-700", leftBorder: "border-l-green-500" },
+  costs: { bg: "bg-amber-50", border: "border-amber-200", text: "text-amber-700", leftBorder: "border-l-amber-500" },
+  closing: { bg: "bg-purple-50", border: "border-purple-200", text: "text-purple-700", leftBorder: "border-l-purple-500" },
+  fraud: { bg: "bg-red-50", border: "border-red-200", text: "text-red-700", leftBorder: "border-l-red-500" },
+  mortgage: { bg: "bg-indigo-50", border: "border-indigo-200", text: "text-indigo-700", leftBorder: "border-l-indigo-500" },
+  inspection: { bg: "bg-orange-50", border: "border-orange-200", text: "text-orange-700", leftBorder: "border-l-orange-500" },
+  documents: { bg: "bg-cyan-50", border: "border-cyan-200", text: "text-cyan-700", leftBorder: "border-l-cyan-500" },
+  rights: { bg: "bg-emerald-50", border: "border-emerald-200", text: "text-emerald-700", leftBorder: "border-l-emerald-500" },
+  after: { bg: "bg-slate-50", border: "border-slate-200", text: "text-slate-700", leftBorder: "border-l-slate-500" },
 };
 
 export default function FAQPage() {
   const [openIdx, setOpenIdx] = useState<number | null>(null);
   const [activeCat, setActiveCat] = useState("all");
+  const [searchQuery, setSearchQuery] = useState("");
 
-  const filtered = activeCat === "all" ? faqs : faqs.filter((f) => f.cat === activeCat);
+  const filtered = faqs.filter((f) => {
+    const matchesCat = activeCat === "all" || f.cat === activeCat;
+    const matchesSearch = !searchQuery ||
+      f.q.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      f.a.toLowerCase().includes(searchQuery.toLowerCase());
+    return matchesCat && matchesSearch;
+  });
 
   return (
     <>
     <PageHero
       title="Frequently Asked Questions"
-      subtitle={`${faqs.length} answers about title insurance, closing, costs, and fraud protection.`}
+      subtitle={`${faqs.length} answers about every aspect of buying a home and closing your transaction.`}
       image="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=1920&q=80"
       breadcrumb={[{ label: "Resources", href: "/resources" }, { label: "FAQ", href: "/faq" }]}
     />
 
     <div className="py-3 lg:py-4">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6">
         {/* Page intro */}
-        <div className="mb-8 p-5 bg-gradient-to-br from-alta-light to-white rounded-2xl border border-gray-100">
+        <div className="mb-6 p-5 bg-gradient-to-br from-alta-light to-white rounded-2xl border border-gray-100">
           <div className="flex items-start gap-4">
             <div className="w-12 h-12 rounded-xl bg-alta-teal/10 flex items-center justify-center text-alta-teal shrink-0">
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9 5.25h.008v.008H12v-.008z" /></svg>
             </div>
             <div>
-              <h2 className="font-bold text-alta-navy mb-1">Have a Question About the Closing Process?</h2>
-              <p className="text-sm text-alta-gray leading-relaxed">Browse by category or click any question to expand the answer. Can&apos;t find what you&apos;re looking for? Try our <a href="/glossary" className="text-alta-teal font-medium hover:underline">Real Estate Glossary</a> or ask our <span className="text-alta-teal font-medium">HomeClosing101 AI assistant</span> for instant help.</p>
+              <h2 className="font-bold text-alta-navy mb-1">Find Answers to Any Closing Question</h2>
+              <p className="text-sm text-alta-gray leading-relaxed">Search by keyword, filter by category, or browse all {faqs.length} questions. Every answer is sourced from CFPB, ALTA, FBI, NAR, and other verified authorities. Can&apos;t find what you&apos;re looking for? Try our <a href="/glossary" className="text-alta-teal font-medium hover:underline">Real Estate Glossary</a> or <span className="text-alta-teal font-medium">HomeClosing101 AI assistant</span>.</p>
             </div>
           </div>
         </div>
 
+        {/* Search bar */}
+        <div className="relative mb-4">
+          <svg className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-alta-gray" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
+          <input
+            type="text"
+            placeholder="Search questions and answers..."
+            value={searchQuery}
+            onChange={(e) => { setSearchQuery(e.target.value); setOpenIdx(null); }}
+            className="w-full pl-10 pr-4 py-2.5 border border-gray-200 rounded-xl text-sm"
+          />
+          {searchQuery && (
+            <button onClick={() => setSearchQuery("")} className="absolute right-3 top-1/2 -translate-y-1/2 text-alta-gray hover:text-alta-navy">
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
+            </button>
+          )}
+        </div>
+
         {/* Category filters */}
-        <div className="flex flex-wrap gap-2 mb-8">
+        <div className="flex flex-wrap gap-1.5 mb-6">
           {faqCategories.map((cat) => {
             const count = cat.id === "all" ? faqs.length : faqs.filter((f) => f.cat === cat.id).length;
             return (
               <button
                 key={cat.id}
-                onClick={() => { setActiveCat(cat.id); setOpenIdx(null); }}
-                className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
+                onClick={() => { setActiveCat(cat.id); setOpenIdx(null); setSearchQuery(""); }}
+                className={`px-3 py-1.5 rounded-full text-xs font-medium transition-all ${
                   activeCat === cat.id
                     ? "bg-alta-teal text-white shadow-md"
                     : "bg-alta-light text-alta-gray hover:bg-gray-200"
                 }`}
               >
-                {cat.label} <span className="ml-1 opacity-60">({count})</span>
+                {cat.label} <span className="ml-0.5 opacity-60">({count})</span>
               </button>
             );
           })}
         </div>
 
-        {/* FAQ cards — modern card design */}
-        <div className="grid gap-3 md:grid-cols-2">
+        {/* Results count */}
+        <p className="text-xs text-alta-gray mb-4">
+          Showing <strong className="text-alta-navy">{filtered.length}</strong> of {faqs.length} questions
+          {searchQuery && <span> matching &quot;{searchQuery}&quot;</span>}
+        </p>
+
+        {/* FAQ cards */}
+        <div className="grid gap-2.5 md:grid-cols-2">
           {filtered.map((faq, i) => {
             const globalIdx = faqs.indexOf(faq);
             const colors = catColors[faq.cat] || catColors.basics;
             const isOpen = openIdx === globalIdx;
-            const borderColors: Record<string, string> = {
-              basics: "border-l-blue-500",
-              insurance: "border-l-green-500",
-              costs: "border-l-amber-500",
-              closing: "border-l-purple-500",
-              fraud: "border-l-red-500",
-            };
-            const leftBorder = borderColors[faq.cat] || "border-l-alta-teal";
             return (
               <div
                 key={globalIdx}
-                className={`rounded-xl border border-gray-100 shadow-sm overflow-hidden transition-all cursor-pointer border-l-4 ${leftBorder} ${
+                className={`rounded-xl border border-gray-100 shadow-sm overflow-hidden transition-all cursor-pointer border-l-4 ${colors.leftBorder} ${
                   isOpen ? `${colors.bg} shadow-lg ${colors.border} md:col-span-2` : "bg-white hover:shadow-md hover:-translate-y-0.5"
                 }`}
                 onClick={() => setOpenIdx(isOpen ? null : globalIdx)}
               >
                 <div className="p-4 flex items-start gap-3">
-                  <div className={`w-8 h-8 rounded-lg flex items-center justify-center shrink-0 transition-colors ${
+                  <div className={`w-7 h-7 rounded-lg flex items-center justify-center shrink-0 transition-colors text-xs font-bold ${
                     isOpen ? `${colors.text} ${colors.bg}` : "bg-alta-light text-alta-gray"
                   }`}>
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
-                      <path strokeLinecap="round" strokeLinejoin="round" d={faq.icon} />
-                    </svg>
+                    Q
                   </div>
                   <div className="flex-1 min-w-0">
                     <div className="flex items-start justify-between gap-2">
-                      <h3 className={`text-sm font-semibold leading-snug ${isOpen ? "text-alta-navy" : "text-alta-navy"}`}>{faq.q}</h3>
+                      <h3 className="text-sm font-semibold text-alta-navy leading-snug">{faq.q}</h3>
                       <svg
                         className={`w-4 h-4 text-alta-gray shrink-0 mt-0.5 transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`}
                         fill="none" stroke="currentColor" viewBox="0 0 24 24"
@@ -142,12 +130,12 @@ export default function FAQPage() {
                       </svg>
                     </div>
                     {!isOpen && (
-                      <p className="text-[11px] text-alta-gray mt-1 line-clamp-1">{faq.a.slice(0, 80)}...</p>
+                      <p className="text-[11px] text-alta-gray mt-1 line-clamp-1">{faq.a.slice(0, 90)}...</p>
                     )}
                   </div>
                 </div>
                 {isOpen && (
-                  <div className="px-4 pb-4 pt-0 ml-11">
+                  <div className="px-4 pb-4 pt-0 ml-10">
                     <div className="p-4 bg-white/80 rounded-xl">
                       <p className="text-sm text-alta-gray leading-relaxed">{faq.a}</p>
                     </div>
@@ -158,10 +146,18 @@ export default function FAQPage() {
           })}
         </div>
 
+        {filtered.length === 0 && (
+          <div className="text-center py-12">
+            <svg className="w-12 h-12 text-gray-200 mx-auto mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
+            <p className="text-alta-gray font-medium">No questions match your search.</p>
+            <button onClick={() => { setSearchQuery(""); setActiveCat("all"); }} className="text-sm text-alta-teal mt-2 hover:underline">Clear filters</button>
+          </div>
+        )}
+
         <InlineAd />
 
-        <div className="mt-10 p-6 bg-gradient-to-br from-alta-light to-white rounded-2xl border border-gray-100">
-          <h3 className="font-bold text-alta-navy mb-3">Still have questions?</h3>
+        <div className="mt-6 p-5 bg-gradient-to-br from-alta-light to-white rounded-2xl border border-gray-100">
+          <h3 className="font-bold text-alta-navy mb-3">Need More Help?</h3>
           <div className="flex flex-col sm:flex-row gap-3">
             <Link href="/glossary" className="px-5 py-2.5 bg-alta-teal text-white font-semibold rounded-lg hover:bg-alta-teal-dark transition-colors text-center text-sm">
               Real Estate Glossary
@@ -169,8 +165,8 @@ export default function FAQPage() {
             <Link href="/questions-to-ask" className="px-5 py-2.5 border-2 border-alta-teal text-alta-teal font-semibold rounded-lg hover:bg-alta-teal hover:text-white transition-colors text-center text-sm">
               Questions for Your Title Company
             </Link>
-            <Link href="/find-company" className="px-5 py-2.5 border-2 border-alta-teal text-alta-teal font-semibold rounded-lg hover:bg-alta-teal hover:text-white transition-colors text-center text-sm">
-              Find a Title Company
+            <Link href="/document-library" className="px-5 py-2.5 border-2 border-alta-navy text-alta-navy font-semibold rounded-lg hover:bg-alta-navy hover:text-white transition-colors text-center text-sm">
+              Document Library
             </Link>
           </div>
         </div>
