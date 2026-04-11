@@ -5,6 +5,9 @@ import PageHero from "@/components/PageHero";
 const questionSections = [
   {
     title: "Before Choosing a Title Company",
+    color: "blue",
+    context: "Ask these BEFORE you commit to a provider. You have the right to shop under RESPA. Get answers from 2-3 companies and compare.",
+    goodAnswer: "A good company will proudly confirm ALTA membership, explain their Best Practices certification, and walk you through their wire fraud prevention process without hesitation.",
     questions: [
       "Are you a member of the American Land Title Association (ALTA)?",
       "Have you adopted ALTA's Title Insurance and Settlement Company Best Practices?",
@@ -18,6 +21,9 @@ const questionSections = [
   },
   {
     title: "About Costs & Fees",
+    color: "green",
+    context: "Title insurance rates are regulated by each state, but service fees vary. Getting an itemized estimate in writing lets you compare apples to apples.",
+    goodAnswer: "A transparent company will provide a detailed written estimate immediately and explain each fee. If they're vague or reluctant to put numbers in writing, that's a red flag.",
     questions: [
       "What is the total cost of the owner's title insurance policy?",
       "What is the cost of the lender's title insurance policy?",
@@ -31,6 +37,9 @@ const questionSections = [
   },
   {
     title: "About the Title Search & Policy",
+    color: "amber",
+    context: "The title search is the foundation of your protection. Understanding what was found and what's excluded from your policy is critical.",
+    goodAnswer: "A thorough company will explain the search scope, proactively discuss any exceptions in Schedule B, and offer to remove exceptions through additional curative work when possible.",
     questions: [
       "How far back does your title search go?",
       "What does the title search cover (liens, judgments, easements, encumbrances)?",
@@ -45,6 +54,9 @@ const questionSections = [
   },
   {
     title: "About the Closing Process",
+    color: "purple",
+    context: "Understanding the closing timeline, wire procedures, and document flow prevents surprises on closing day. Ask these early.",
+    goodAnswer: "A professional settlement agent will clearly explain the 3-day Closing Disclosure rule, provide wire instructions through a secure channel (not email), and confirm receipt of funds promptly.",
     questions: [
       "When will I receive my Closing Disclosure?",
       "Will I have at least 3 business days to review it before closing?",
@@ -59,6 +71,9 @@ const questionSections = [
   },
   {
     title: "After Closing",
+    color: "teal",
+    context: "Your relationship with your title company doesn't end at closing. Know how to reach them if you need to file a claim or locate your policy later.",
+    goodAnswer: "A reliable company will keep your records on file, provide clear contact information for claims, and explain that your owner's policy protects you and your heirs for as long as you own the property.",
     questions: [
       "How do I file a claim on my title insurance policy?",
       "What is the time limit for filing a claim?",
@@ -102,19 +117,44 @@ export default function QuestionsToAskPage() {
         </button>
 
         <div className="space-y-8">
-          {questionSections.map((section) => (
-            <div key={section.title}>
-              <h2 className="text-xl font-bold text-alta-navy mb-4 pb-2 border-b border-gray-100">{section.title}</h2>
-              <div className="space-y-2">
-                {section.questions.map((q, i) => (
-                  <div key={i} className="flex gap-3 p-3 bg-alta-light rounded-lg">
-                    <div className="w-5 h-5 rounded border-2 border-gray-300 shrink-0 mt-0.5" />
-                    <p className="text-sm text-alta-navy">{q}</p>
-                  </div>
-                ))}
+          {questionSections.map((section) => {
+            const colorMap: Record<string, { headerBg: string; headerText: string; checkBorder: string }> = {
+              blue: { headerBg: "bg-blue-600", headerText: "text-white", checkBorder: "border-blue-400" },
+              green: { headerBg: "bg-green-600", headerText: "text-white", checkBorder: "border-green-400" },
+              amber: { headerBg: "bg-amber-500", headerText: "text-white", checkBorder: "border-amber-400" },
+              purple: { headerBg: "bg-purple-600", headerText: "text-white", checkBorder: "border-purple-400" },
+              teal: { headerBg: "bg-teal-600", headerText: "text-white", checkBorder: "border-teal-400" },
+            };
+            const c = colorMap[section.color] || colorMap.blue;
+            return (
+              <div key={section.title} className="rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+                <div className={`${c.headerBg} px-5 py-3`}>
+                  <h2 className={`text-base font-bold ${c.headerText}`}>{section.title}</h2>
+                  <p className="text-[10px] text-white/70 mt-0.5">{section.questions.length} questions</p>
+                </div>
+                {/* Context */}
+                <div className="px-5 py-3 bg-alta-light border-b border-gray-100">
+                  <p className="text-xs text-alta-gray leading-relaxed"><strong className="text-alta-navy">Why these matter:</strong> {section.context}</p>
+                </div>
+                {/* Questions */}
+                <div className="p-4 space-y-2 bg-white">
+                  {section.questions.map((q, i) => (
+                    <div key={i} className="flex gap-3 p-3 bg-alta-light/50 rounded-xl hover:bg-alta-light transition-colors">
+                      <div className={`w-5 h-5 rounded border-2 ${c.checkBorder} shrink-0 mt-0.5`} />
+                      <p className="text-sm text-alta-navy">{q}</p>
+                    </div>
+                  ))}
+                </div>
+                {/* Good answer guidance */}
+                <div className="px-5 py-3 bg-green-50 border-t border-green-100">
+                  <p className="text-xs text-green-800 leading-relaxed">
+                    <svg className="w-3.5 h-3.5 text-green-600 inline mr-1 -mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                    <strong>What good answers sound like:</strong> {section.goodAnswer}
+                  </p>
+                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
 
         <div className="mt-10 p-5 bg-blue-50 rounded-xl border border-blue-100 no-print">
