@@ -1,6 +1,7 @@
 import Link from "next/link";
 import PageHero from "@/components/PageHero";
 import { InlineAd } from "@/components/EliteProviders";
+import ExpandableRiskTiles from "@/components/ExpandableRiskTiles";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -131,32 +132,9 @@ export default function ProtectYourRightsPage() {
           {/* The 10 covered risks explained */}
           <h2 className="text-2xl font-bold text-alta-navy mb-4">What Your Owner&apos;s Policy Actually Covers</h2>
           <p className="text-sm text-alta-gray mb-4 leading-relaxed">
-            The current ALTA Owner&apos;s Policy lists specific covered risks. Here&apos;s what each one means in plain language and why it matters to you as a homeowner. Source: ALTA Standard Owner&apos;s Policy
+            The current ALTA Owner&apos;s Policy lists specific covered risks. Click any risk below to see how title insurance protects you in detail. Source: ALTA Standard Owner&apos;s Policy
           </p>
-          <div className="space-y-3 mb-10">
-            {[
-              { risk: "Someone else owns an interest in your title", example: "A previous owner's ex-spouse claims they never signed away their ownership interest in a divorce. Your title insurance pays for the legal defense and covers any loss." },
-              { risk: "A document in the chain of title is forged, improperly executed, or signed by someone under age or mental incapacity", example: "A deed from 1998 was forged by someone impersonating the actual owner. Even though you bought in good faith, the fraud could void your ownership. Title insurance covers this." },
-              { risk: "A document was not properly recorded, filed, or indexed in the public records", example: "A mortgage release was filed but never indexed by the county. The old lender's lien still appears on record. Your title insurance company works to resolve it." },
-              { risk: "There are defects in the title that would permit someone else to refuse to buy the property from you", example: "When you try to sell, the buyer's title search reveals an old judgment that makes your title 'unmarketable.' Title insurance covers the cost to clear the defect." },
-              { risk: "Someone has an easement or right to use your land that wasn't disclosed", example: "A utility company has a recorded easement allowing them to dig across your backyard for maintenance — but nobody told you when you bought. Title insurance protects your interest." },
-              { risk: "You cannot use the land for a single-family residence because of zoning violations by a prior owner", example: "The previous owner converted the garage into a rental unit without permits. The city demands you restore it. Title insurance covers the cost if it was a pre-existing violation." },
-              { risk: "Someone has a lien on your property — such as a mortgage, tax lien, or judgment — that wasn't disclosed", example: "A contractor who did work for the previous owner files a mechanic's lien for unpaid work. Your title insurance defends you and pays the lien if covered." },
-              { risk: "Lack of legal access to and from the property", example: "After closing, you discover your driveway crosses a neighbor's property and they demand you stop using it. Title insurance covers the cost of establishing legal access." },
-            ].map((item, i) => (
-              <div key={i} className="p-4 bg-white rounded-xl border border-gray-100 shadow-sm tile-interactive">
-                <div className="flex items-start gap-3">
-                  <div className="w-7 h-7 rounded-lg bg-green-100 flex items-center justify-center shrink-0 mt-0.5">
-                    <svg className="w-4 h-4 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" /></svg>
-                  </div>
-                  <div>
-                    <p className="text-sm font-semibold text-alta-navy mb-1">{item.risk}</p>
-                    <p className="text-xs text-alta-gray leading-relaxed"><strong className="text-alta-navy">Real-world example:</strong> {item.example}</p>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
+          <ExpandableRiskTiles />
 
           {/* Dollar comparison */}
           <h2 className="text-2xl font-bold text-alta-navy mb-4">The Math: Why Title Insurance is Worth It</h2>
