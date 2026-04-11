@@ -56,48 +56,50 @@ export default function FAQPage() {
           </div>
         </div>
 
-        {/* Search bar */}
-        <div className="relative mb-4">
-          <svg className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-alta-gray" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
-          <input
-            type="text"
-            placeholder="Search questions and answers..."
-            value={searchQuery}
-            onChange={(e) => { setSearchQuery(e.target.value); setOpenIdx(null); }}
-            className="w-full pl-10 pr-4 py-2.5 border border-gray-200 rounded-xl text-sm"
-          />
-          {searchQuery && (
-            <button onClick={() => setSearchQuery("")} className="absolute right-3 top-1/2 -translate-y-1/2 text-alta-gray hover:text-alta-navy">
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
-            </button>
-          )}
-        </div>
-
-        {/* Category filters */}
-        <div className="flex flex-wrap gap-1.5 mb-6">
-          {faqCategories.map((cat) => {
-            const count = cat.id === "all" ? faqs.length : faqs.filter((f) => f.cat === cat.id).length;
-            return (
-              <button
-                key={cat.id}
-                onClick={() => { setActiveCat(cat.id); setOpenIdx(null); setSearchQuery(""); }}
-                className={`px-3 py-1.5 rounded-full text-xs font-medium transition-all ${
-                  activeCat === cat.id
-                    ? "bg-alta-teal text-white shadow-md"
-                    : "bg-alta-light text-alta-gray hover:bg-gray-200"
-                }`}
-              >
-                {cat.label} <span className="ml-0.5 opacity-60">({count})</span>
+        {/* Search + filters — sticky below the intro */}
+        <div className="sticky top-[218px] sm:top-[230px] z-10 bg-white/95 backdrop-blur-sm pb-3 pt-1 -mx-4 px-4 sm:-mx-6 sm:px-6 border-b border-gray-100">
+          <div className="relative mb-3">
+            <svg className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-alta-gray" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
+            <input
+              type="text"
+              placeholder="Search questions and answers..."
+              value={searchQuery}
+              onChange={(e) => { setSearchQuery(e.target.value); setOpenIdx(null); }}
+              className="w-full pl-10 pr-4 py-2 border border-gray-200 rounded-xl text-sm"
+            />
+            {searchQuery && (
+              <button onClick={() => setSearchQuery("")} className="absolute right-3 top-1/2 -translate-y-1/2 text-alta-gray hover:text-alta-navy">
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
               </button>
-            );
-          })}
-        </div>
+            )}
+          </div>
 
-        {/* Results count */}
-        <p className="text-xs text-alta-gray mb-4">
-          Showing <strong className="text-alta-navy">{filtered.length}</strong> of {faqs.length} questions
-          {searchQuery && <span> matching &quot;{searchQuery}&quot;</span>}
-        </p>
+          {/* Category filters */}
+          <div className="flex flex-wrap gap-1.5 mb-2">
+            {faqCategories.map((cat) => {
+              const count = cat.id === "all" ? faqs.length : faqs.filter((f) => f.cat === cat.id).length;
+              return (
+                <button
+                  key={cat.id}
+                  onClick={() => { setActiveCat(cat.id); setOpenIdx(null); setSearchQuery(""); }}
+                  className={`px-2.5 py-1 rounded-full text-[11px] font-medium transition-all ${
+                    activeCat === cat.id
+                      ? "bg-alta-teal text-white shadow-md"
+                      : "bg-alta-light text-alta-gray hover:bg-gray-200"
+                  }`}
+                >
+                  {cat.label} <span className="ml-0.5 opacity-60">({count})</span>
+                </button>
+              );
+            })}
+          </div>
+
+          {/* Results count */}
+          <p className="text-[11px] text-alta-gray">
+            Showing <strong className="text-alta-navy">{filtered.length}</strong> of {faqs.length} questions
+            {searchQuery && <span> matching &quot;{searchQuery}&quot;</span>}
+          </p>
+        </div>
 
         {/* FAQ cards */}
         <div className="grid gap-2.5 md:grid-cols-2">
