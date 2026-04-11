@@ -59,12 +59,12 @@ export default function PageHero({ title, subtitle, image, breadcrumb }: PageHer
 
       {/* Collapsed mini sticky bar */}
       <div
-        className={`sticky top-[98px] z-30 transition-all duration-300 ${
+        className={`sticky top-[88px] sm:top-[98px] z-30 transition-all duration-300 ${
           collapsed ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-2 pointer-events-none"
         }`}
       >
         <div className="bg-alta-navy/95 backdrop-blur-md border-b border-white/10">
-          <div className="max-w-5xl mx-auto px-4 sm:px-6 py-2.5 flex items-center justify-between">
+          <div className="max-w-5xl mx-auto px-3 sm:px-6 py-1.5 sm:py-2.5 flex items-center justify-between">
             <div className="flex items-center gap-3 min-w-0">
               {breadcrumb && breadcrumb.length > 0 && (
                 <nav className="hidden sm:flex items-center gap-1 text-[10px] text-gray-400 shrink-0">

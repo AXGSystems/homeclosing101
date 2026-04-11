@@ -149,7 +149,7 @@ export default function HomeClosingAI() {
     <>
       {/* Collapsed: merged sponsor + AI button */}
       {!open && (
-        <div className="fixed top-1/2 -translate-y-1/2 right-6 z-[600] w-[250px] group/widget">
+        <div className="fixed top-1/2 -translate-y-1/2 right-3 sm:right-6 z-[600] w-[200px] sm:w-[250px] group/widget">
           {/* Sponsor top half */}
           <div className="relative">
             <a
@@ -167,8 +167,8 @@ export default function HomeClosingAI() {
                 <p className="text-[11px] text-alta-navy font-semibold leading-tight mt-0.5 truncate">{sponsor.name}</p>
               </div>
             </a>
-            {/* Hover popup */}
-            <div className="absolute bottom-full right-0 mb-2 w-[280px] bg-white rounded-xl shadow-2xl border border-gray-100 p-4 opacity-0 pointer-events-none peer-hover:opacity-100 peer-hover:pointer-events-auto transition-opacity duration-200 z-[610]">
+            {/* Hover popup — hidden on mobile (no hover support) */}
+            <div className="absolute bottom-full right-0 mb-2 w-[280px] bg-white rounded-xl shadow-2xl border border-gray-100 p-4 opacity-0 pointer-events-none peer-hover:opacity-100 peer-hover:pointer-events-auto transition-opacity duration-200 z-[610] hidden sm:block sm:opacity-0 sm:peer-hover:opacity-100">
               <div className="flex items-center gap-3 mb-3">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src={sponsor.logo} alt={sponsor.name} className="h-10 w-auto object-contain max-w-[100px]" />
@@ -198,7 +198,7 @@ export default function HomeClosingAI() {
 
       {/* Chat panel — with sponsor inside header */}
       {open && (
-        <div className="fixed top-1/2 -translate-y-1/2 right-6 z-[600] w-[420px] max-w-[calc(100vw-2rem)] h-[580px] max-h-[calc(100vh-8rem)] bg-white rounded-2xl shadow-2xl border border-gray-200 flex flex-col overflow-hidden">
+        <div className="fixed top-1/2 -translate-y-1/2 right-2 sm:right-6 z-[600] w-[calc(100vw-1rem)] sm:w-[420px] max-w-[420px] h-[70vh] sm:h-[580px] max-h-[calc(100vh-6rem)] bg-white rounded-2xl shadow-2xl border border-gray-200 flex flex-col overflow-hidden">
           {/* Sponsor banner inside panel — large showcase */}
           <a
             href={sponsor.url}

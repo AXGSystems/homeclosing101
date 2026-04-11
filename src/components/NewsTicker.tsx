@@ -61,12 +61,12 @@ export default function NewsTicker() {
       <div className="max-w-7xl mx-auto">
         <div className="flex items-center">
           {/* Label */}
-          <div className="shrink-0 bg-alta-red px-4 py-2 font-bold text-[11px] uppercase tracking-wider z-10 flex items-center gap-2">
-            <span className="relative flex h-2 w-2">
+          <div className="shrink-0 bg-alta-red px-2 sm:px-4 py-1.5 sm:py-2 font-bold text-[9px] sm:text-[11px] uppercase tracking-wider z-10 flex items-center gap-1.5 sm:gap-2">
+            <span className="relative flex h-1.5 w-1.5 sm:h-2 sm:w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-white"></span>
+              <span className="relative inline-flex rounded-full h-1.5 w-1.5 sm:h-2 sm:w-2 bg-white"></span>
             </span>
-            Industry Alerts
+            <span className="hidden sm:inline">Industry </span>Alerts
           </div>
 
           {/* Scrolling ticker */}
