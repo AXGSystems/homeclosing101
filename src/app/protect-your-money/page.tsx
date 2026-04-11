@@ -26,8 +26,19 @@ export default function ProtectYourMoneyPage() {
         breadcrumb={[{ label: "Protect Your Money", href: "/protect-your-money" }]}
       />
 
-      <div className="py-12 lg:py-16">
+      <div className="py-6 lg:py-8">
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
+          <div className="mb-8 p-5 bg-gradient-to-br from-red-50 to-white rounded-2xl border border-red-100">
+            <div className="flex items-start gap-4">
+              <div className="w-12 h-12 rounded-xl bg-red-100 flex items-center justify-center text-red-600 shrink-0">
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" /></svg>
+              </div>
+              <div>
+                <h2 className="font-bold text-alta-navy mb-1">Don&apos;t Become a Victim</h2>
+                <p className="text-sm text-alta-gray leading-relaxed">Real estate wire fraud is rising fast — fueled by AI, deepfakes, and business email compromise. This page explains how the scam works, the 5 safeguards you must follow, and exactly what to do if you suspect you&apos;re being targeted. Share this with everyone involved in your transaction.</p>
+              </div>
+            </div>
+          </div>
           {/* Big warning */}
           <div className="bg-red-50 border-2 border-red-200 rounded-2xl p-6 lg:p-8 mb-12">
             <div className="flex items-start gap-4">

@@ -47,8 +47,19 @@ export default function ClosingOptionsPage() {
         ]}
       />
 
-      <div className="py-12 lg:py-16">
+      <div className="py-6 lg:py-8">
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
+          <div className="mb-8 p-5 bg-gradient-to-br from-alta-light to-white rounded-2xl border border-gray-100">
+            <div className="flex items-start gap-4">
+              <div className="w-12 h-12 rounded-xl bg-alta-teal/10 flex items-center justify-center text-alta-teal shrink-0">
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M7.5 21L3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5" /></svg>
+              </div>
+              <div>
+                <h2 className="font-bold text-alta-navy mb-1">Choose How You Close</h2>
+                <p className="text-sm text-alta-gray leading-relaxed">Not all closings look the same. Depending on your state and settlement provider, you may be able to close from the comfort of your home. Compare the four options below and ask your title company which are available for your transaction.</p>
+              </div>
+            </div>
+          </div>
           <div className="grid md:grid-cols-2 gap-6 mb-12">
             {options.map((opt) => (
               <div key={opt.title} className="rounded-2xl overflow-hidden shadow-sm border border-gray-100 bg-white hover:shadow-md transition-shadow">

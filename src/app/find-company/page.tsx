@@ -58,11 +58,22 @@ function FindCompanyContent() {
       image="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1920&q=80"
       breadcrumb={[{ label: "Find a Company", href: "/find-company" }]}
     />
-    <div className="py-12 lg:py-16">
+    <div className="py-6 lg:py-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <div className="grid lg:grid-cols-[1fr_280px] gap-8">
           {/* Main content */}
           <div>
+            <div className="mb-6 p-5 bg-gradient-to-br from-alta-light to-white rounded-2xl border border-gray-100">
+              <div className="flex items-start gap-4">
+                <div className="w-12 h-12 rounded-xl bg-alta-teal/10 flex items-center justify-center text-alta-teal shrink-0">
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" /></svg>
+                </div>
+                <div>
+                  <h2 className="font-bold text-alta-navy mb-1">Find a Trusted Title Professional</h2>
+                  <p className="text-sm text-alta-gray leading-relaxed">Under federal law (RESPA), you have the right to choose your own title company. Search by state and city below to find ALTA member companies near you. All listed companies are verified members of the American Land Title Association.</p>
+                </div>
+              </div>
+            </div>
 
             {/* Search controls */}
             <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 mb-6">

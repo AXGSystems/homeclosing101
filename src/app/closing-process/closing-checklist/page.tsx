@@ -101,7 +101,7 @@ export default function ClosingChecklistPage() {
       image="https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=1920&q=80"
       breadcrumb={[{ label: "The Closing Process", href: "/closing-process" }, { label: "Closing Checklist", href: "/closing-process/closing-checklist" }]}
     />
-    <div className="py-12 lg:py-16">
+    <div className="py-6 lg:py-8">
       <div className="max-w-4xl mx-auto px-4 sm:px-6">
         {/* Page intro */}
         <div className="mb-8 p-5 bg-gradient-to-br from-alta-light to-white rounded-2xl border border-gray-100">

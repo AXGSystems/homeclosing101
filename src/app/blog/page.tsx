@@ -92,7 +92,7 @@ export default function BlogPage() {
       image="https://images.unsplash.com/photo-1504711434969-e33886168d6c?w=1920&q=80"
       breadcrumb={[{ label: "News & Advice", href: "/blog" }]}
     />
-    <div className="py-12 lg:py-16">
+    <div className="py-6 lg:py-8">
       <div className="max-w-5xl mx-auto px-4 sm:px-6">
         {/* Page intro */}
         <div className="mb-8 p-5 bg-gradient-to-br from-alta-light to-white rounded-2xl border border-gray-100">
