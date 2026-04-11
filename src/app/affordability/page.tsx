@@ -160,14 +160,55 @@ export default function AffordabilityPage() {
 
           <InlineAd />
 
-          <div className="mt-8 grid sm:grid-cols-2 gap-3">
-            <Link href="/mortgage-calculator" className="p-4 bg-white rounded-xl border border-gray-100 hover:shadow-md hover:border-alta-teal/20 transition-all">
+          {/* Hidden costs of homeownership */}
+          <h2 className="text-xl font-bold text-alta-navy mb-4 mt-6">Hidden Costs Beyond the Mortgage</h2>
+          <p className="text-sm text-alta-gray mb-4 leading-relaxed">Your mortgage payment is just the beginning. Real homeownership costs include ongoing expenses many first-time buyers don&apos;t budget for. Factor these into your affordability calculation:</p>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 mb-8">
+            {[
+              { cost: "Maintenance & Repairs", amount: "1-2% of home value/year", detail: "For a $350K home, budget $3,500-$7,000 annually. HVAC replacement: $5,000-$10,000. Roof: $8,000-$15,000. Water heater: $800-$1,500.", color: "bg-blue-50 border-blue-200" },
+              { cost: "Property Taxes", amount: "0.27%-2.33% of value/year", detail: "Varies dramatically by state and county. Hawaii: 0.27%. New Jersey: 2.33%. Your county assessor sets the assessed value. Can be appealed.", color: "bg-green-50 border-green-200", source: "Tax Foundation" },
+              { cost: "Homeowner's Insurance", amount: "$1,200-$3,000+/year", detail: "Required by lenders. Covers fire, storms, theft, liability. Flood insurance is separate and required in FEMA flood zones. Shop at least 3 providers.", color: "bg-amber-50 border-amber-200" },
+              { cost: "HOA Fees", amount: "$0-$500+/month", detail: "If applicable. Covers shared amenities, exterior maintenance, insurance on common areas. Review the HOA's financial health before buying — weak reserves mean special assessments.", color: "bg-purple-50 border-purple-200" },
+              { cost: "Utilities", amount: "$200-$500+/month", detail: "Electric, gas, water, sewer, trash, internet. Typically 50-100% more than renting because you're paying for an entire house, not an apartment unit.", color: "bg-red-50 border-red-200" },
+              { cost: "PMI (if <20% down)", amount: "0.5-1.5% of loan/year", detail: "For a $300K loan at 0.7%: $2,100/year ($175/month). Removable at 20% equity on conventional loans. FHA MIP is for life on most loans. VA has no PMI.", color: "bg-teal-50 border-teal-200", source: "CFPB" },
+            ].map((c) => (
+              <div key={c.cost} className={`p-4 ${c.color} rounded-xl border tile-interactive`}>
+                <h3 className="text-sm font-bold text-alta-navy">{c.cost}</h3>
+                <p className="text-xs font-semibold text-alta-teal mt-0.5">{c.amount}</p>
+                <p className="text-[10px] text-alta-gray mt-1 leading-relaxed">{c.detail}</p>
+                {c.source && <p className="text-[9px] text-alta-teal mt-1 font-medium">Source: {c.source}</p>}
+              </div>
+            ))}
+          </div>
+
+          {/* The real budget */}
+          <div className="p-5 bg-gradient-to-br from-alta-light to-white rounded-2xl border border-gray-100 mb-8">
+            <h3 className="font-bold text-alta-navy mb-3">What Your Real Monthly Budget Looks Like</h3>
+            <p className="text-xs text-alta-gray mb-3 leading-relaxed">Example for a $350,000 home with 10% down, 6.5% rate, 30-year conventional loan in a state with 1% property tax:</p>
+            <div className="space-y-1.5 text-xs">
+              <div className="flex justify-between p-2 bg-white rounded-lg"><span className="text-alta-gray">Principal & Interest</span><span className="font-medium text-alta-navy">$1,991</span></div>
+              <div className="flex justify-between p-2 bg-white rounded-lg"><span className="text-alta-gray">Property Tax (1%)</span><span className="font-medium text-alta-navy">$292</span></div>
+              <div className="flex justify-between p-2 bg-white rounded-lg"><span className="text-alta-gray">Homeowner&apos;s Insurance</span><span className="font-medium text-alta-navy">$150</span></div>
+              <div className="flex justify-between p-2 bg-white rounded-lg"><span className="text-alta-gray">PMI (0.7% — under 20% down)</span><span className="font-medium text-amber-600">$184</span></div>
+              <div className="flex justify-between p-2 bg-white rounded-lg"><span className="text-alta-gray">Maintenance Reserve (1.5%)</span><span className="font-medium text-alta-gray">$438</span></div>
+              <div className="flex justify-between p-2 bg-white rounded-lg"><span className="text-alta-gray">Utilities (avg)</span><span className="font-medium text-alta-gray">$300</span></div>
+              <div className="flex justify-between p-2 bg-alta-teal/10 rounded-lg border border-alta-teal/20"><span className="font-semibold text-alta-navy">True Monthly Cost</span><span className="font-bold text-alta-teal">$3,355</span></div>
+            </div>
+            <p className="text-[10px] text-alta-gray mt-3">The mortgage payment alone is $1,991 — but the true cost of owning the home is $3,355/month when you include everything. Budget for the REAL number, not just the mortgage.</p>
+          </div>
+
+          <div className="grid sm:grid-cols-3 gap-3">
+            <Link href="/mortgage-calculator" className="p-4 bg-white rounded-xl border border-gray-100 tile-interactive text-center">
               <h3 className="text-sm font-semibold text-alta-navy">Mortgage Calculator</h3>
-              <p className="text-[10px] text-alta-gray mt-1">Calculate exact monthly payments with taxes and insurance</p>
+              <p className="text-[10px] text-alta-gray mt-1">Exact monthly payments with taxes and PMI</p>
             </Link>
-            <Link href="/closing-process/closing-costs" className="p-4 bg-white rounded-xl border border-gray-100 hover:shadow-md hover:border-alta-teal/20 transition-all">
-              <h3 className="text-sm font-semibold text-alta-navy">Closing Costs Calculator</h3>
-              <p className="text-[10px] text-alta-gray mt-1">Estimate your total closing fees by home price</p>
+            <Link href="/closing-process/closing-costs" className="p-4 bg-white rounded-xl border border-gray-100 tile-interactive text-center">
+              <h3 className="text-sm font-semibold text-alta-navy">Closing Costs</h3>
+              <p className="text-[10px] text-alta-gray mt-1">Estimate 2-5% in upfront closing fees</p>
+            </Link>
+            <Link href="/first-time-buyers" className="p-4 bg-white rounded-xl border border-gray-100 tile-interactive text-center">
+              <h3 className="text-sm font-semibold text-alta-navy">First-Time Guide</h3>
+              <p className="text-[10px] text-alta-gray mt-1">Complete roadmap to homeownership</p>
             </Link>
           </div>
 

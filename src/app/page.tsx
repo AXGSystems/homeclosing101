@@ -224,12 +224,12 @@ export default function HomePage() {
           </div>
           <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-3">
             {[
-              { val: "4.2M", label: "Homes sold in 2025", color: "text-blue-600", bg: "bg-blue-50", border: "border-blue-200", source: "NAR" },
-              { val: "$400K", label: "Median home price", color: "text-green-600", bg: "bg-green-50", border: "border-green-200", source: "NAR 2025" },
-              { val: "2-5%", label: "Typical closing costs", color: "text-amber-600", bg: "bg-amber-50", border: "border-amber-200", source: "CFPB" },
-              { val: "8%", label: "Median first-time buyer down payment", color: "text-purple-600", bg: "bg-purple-50", border: "border-purple-200", source: "NAR" },
-              { val: "1 in 3", label: "Title searches find issues", color: "text-teal-600", bg: "bg-teal-50", border: "border-teal-200", source: "ALTA" },
-              { val: "30-45", label: "Days from offer to close", color: "text-indigo-600", bg: "bg-indigo-50", border: "border-indigo-200", source: "CFPB" },
+              { val: "4.2M", label: "Homes sold in 2025", color: "text-alta-teal", bg: "bg-[#edf5f8]", border: "border-[#c5dfe8]", source: "NAR" },
+              { val: "$400K", label: "Median home price", color: "text-alta-navy", bg: "bg-[#eef0f5]", border: "border-[#c8cdd8]", source: "NAR 2025" },
+              { val: "2-5%", label: "Typical closing costs", color: "text-[#0a7ea8]", bg: "bg-[#e8f4f8]", border: "border-[#b8dae6]", source: "CFPB" },
+              { val: "8%", label: "Median first-time buyer down payment", color: "text-[#1e3456]", bg: "bg-[#f0f2f6]", border: "border-[#d0d5de]", source: "NAR" },
+              { val: "1 in 3", label: "Title searches find issues", color: "text-alta-teal", bg: "bg-[#eaf6f9]", border: "border-[#bfe0ea]", source: "ALTA" },
+              { val: "30-45", label: "Days from offer to close", color: "text-alta-navy", bg: "bg-[#eceef3]", border: "border-[#c4c9d5]", source: "CFPB" },
             ].map((d) => (
               <div key={d.val} className={`p-3 ${d.bg} rounded-xl border ${d.border} text-center tile-interactive`}>
                 <p className={`text-xl font-bold ${d.color}`}>{d.val}</p>
@@ -250,10 +250,10 @@ export default function HomePage() {
           </div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
             {[
-              { title: "Mortgage Calculator", desc: "Compare FHA, VA, Conventional & USDA with county tax rates", href: "/mortgage-calculator", icon: "M15.75 15.75V18m-7.5-6.75h.008v.008H8.25v-.008z", color: "from-blue-500 to-blue-600" },
-              { title: "Affordability", desc: "How much home can you afford? DTI gauge included", href: "/affordability", icon: "M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12", color: "from-green-500 to-green-600" },
-              { title: "Closing Checklist", desc: "32-item interactive checklist with progress tracking", href: "/closing-process/closing-checklist", icon: "M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z", color: "from-purple-500 to-purple-600" },
-              { title: "Find a Company", desc: "Search ALTA member title companies by state & city", href: "/find-company", icon: "M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z", color: "from-amber-500 to-amber-600" },
+              { title: "Mortgage Calculator", desc: "Compare FHA, VA, Conventional & USDA with county tax rates", href: "/mortgage-calculator", icon: "M15.75 15.75V18m-7.5-6.75h.008v.008H8.25v-.008z", color: "from-alta-navy to-[#0d3a5c]" },
+              { title: "Affordability", desc: "How much home can you afford? DTI gauge included", href: "/affordability", icon: "M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12", color: "from-alta-teal to-alta-teal-dark" },
+              { title: "Closing Checklist", desc: "32-item interactive checklist with progress tracking", href: "/closing-process/closing-checklist", icon: "M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z", color: "from-alta-navy to-alta-teal" },
+              { title: "Find a Company", desc: "Search ALTA member title companies by state & city", href: "/find-company", icon: "M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z", color: "from-[#0d3a5c] to-alta-navy" },
             ].map((t) => (
               <Link key={t.title} href={t.href} className="group rounded-2xl overflow-hidden shadow-sm border border-gray-100 bg-white tile-interactive">
                 <div className={`bg-gradient-to-r ${t.color} p-3 flex items-center gap-2`}>
@@ -280,10 +280,10 @@ export default function HomePage() {
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
             {[
-              { label: "First-Time Buyer", desc: "Complete guide from credit to keys", href: "/first-time-buyers", color: "from-blue-500 to-blue-600", icon: "M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12" },
-              { label: "Ready to Close", desc: "Checklist, documents & wire safety", href: "/closing-process/closing-checklist", color: "from-green-500 to-green-600", icon: "M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" },
-              { label: "Shopping for a Lender", desc: "Compare loans & understand costs", href: "/mortgage-calculator", color: "from-purple-500 to-purple-600", icon: "M15.75 15.75V18m-7.5-6.75h.008v.008H8.25v-.008z" },
-              { label: "Worried About Fraud", desc: "10 prevention steps from the FBI", href: "/stop-fraud", color: "from-red-500 to-red-600", icon: "M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126z" },
+              { label: "First-Time Buyer", desc: "Complete guide from credit to keys", href: "/first-time-buyers", color: "from-alta-teal to-alta-teal-dark", icon: "M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12" },
+              { label: "Ready to Close", desc: "Checklist, documents & wire safety", href: "/closing-process/closing-checklist", color: "from-alta-navy to-[#0d3a5c]", icon: "M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" },
+              { label: "Shopping for a Lender", desc: "Compare loans & understand costs", href: "/mortgage-calculator", color: "from-alta-teal to-alta-navy", icon: "M15.75 15.75V18m-7.5-6.75h.008v.008H8.25v-.008z" },
+              { label: "Worried About Fraud", desc: "10 prevention steps from the FBI", href: "/stop-fraud", color: "from-alta-red to-[#991b1b]", icon: "M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126z" },
             ].map((s) => (
               <Link key={s.label} href={s.href} className="group rounded-2xl overflow-hidden border border-gray-100 shadow-sm bg-white tile-interactive">
                 <div className={`bg-gradient-to-r ${s.color} p-4 flex items-center gap-3`}>
