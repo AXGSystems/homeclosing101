@@ -5,6 +5,7 @@ import Link from "next/link";
 import PageHero from "@/components/PageHero";
 import { InlineAd } from "@/components/EliteProviders";
 import { propertyTaxRates, loanTypes } from "@/data/propertyTaxRates";
+import { countyTaxRates } from "@/data/countyTaxRates";
 
 const stateOptions = Object.entries(propertyTaxRates)
   .sort(([, a], [, b]) => a.name.localeCompare(b.name))
@@ -17,15 +18,17 @@ export default function MortgageCalculatorPage() {
   const [loanTermYears, setLoanTermYears] = useState(30);
   const [loanType, setLoanType] = useState<keyof typeof loanTypes>("conventional");
   const [selectedState, setSelectedState] = useState("TX");
-  const [customTaxRate, setCustomTaxRate] = useState<string>("");
+  const [selectedCounty, setSelectedCounty] = useState("");
   const [homeInsurance, setHomeInsurance] = useState(1500);
   const [hoa, setHoa] = useState(0);
 
   const config = loanTypes[loanType];
   const effectiveDown = Math.max(downPaymentPct, config.minDown);
-  const stateTaxRate = customTaxRate ? parseFloat(customTaxRate) : (propertyTaxRates[selectedState]?.rate || 0.9);
-  const propertyTax = Math.round(homePrice * (stateTaxRate / 100));
-  const usingCustomRate = customTaxRate !== "" && !isNaN(parseFloat(customTaxRate));
+  const counties = countyTaxRates[selectedState] || [];
+  const countyData = counties.find(c => c.county === selectedCounty);
+  const taxRate = countyData ? countyData.rate : (propertyTaxRates[selectedState]?.rate || 0.9);
+  const propertyTax = Math.round(homePrice * (taxRate / 100));
+  const usingCountyRate = !!countyData;
 
   const calc = useMemo(() => {
     const downPayment = homePrice * (effectiveDown / 100);
@@ -175,47 +178,37 @@ export default function MortgageCalculatorPage() {
                 <div className="space-y-3">
                   <div>
                     <label className="text-xs font-medium text-alta-navy block mb-1">State (for base property tax rate)</label>
-                    <select value={selectedState} onChange={(e) => { setSelectedState(e.target.value); setCustomTaxRate(""); }} className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm bg-white">
+                    <select value={selectedState} onChange={(e) => { setSelectedState(e.target.value); setSelectedCounty(""); }} className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm bg-white">
                       {stateOptions.map((s) => (
                         <option key={s.code} value={s.code}>{s.name} — {s.rate}% avg effective rate</option>
                       ))}
                     </select>
                   </div>
                   <div>
-                    <label className="text-xs font-medium text-alta-navy block mb-1">
-                      Custom Tax Rate (%) — <span className="text-alta-teal font-normal">enter your county/municipality rate for accuracy</span>
-                    </label>
-                    <input
-                      type="number"
-                      step={0.01}
-                      placeholder={`State avg: ${propertyTaxRates[selectedState]?.rate}% — enter your local rate`}
-                      value={customTaxRate}
-                      onChange={(e) => setCustomTaxRate(e.target.value)}
-                      className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm"
-                    />
-                    <div className="mt-1.5 text-[10px] text-alta-gray space-y-1">
+                    <label className="text-xs font-medium text-alta-navy block mb-1">County</label>
+                    <select
+                      value={selectedCounty}
+                      onChange={(e) => setSelectedCounty(e.target.value)}
+                      className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm bg-white"
+                    >
+                      <option value="">Use state average ({propertyTaxRates[selectedState]?.rate}%)</option>
+                      {counties.map((c) => (
+                        <option key={c.county} value={c.county}>{c.county} County — {c.rate}%</option>
+                      ))}
+                    </select>
+                    <div className="mt-1.5 text-[10px] text-alta-gray">
                       <p>
-                        {usingCustomRate ? (
-                          <span className="text-alta-teal font-medium">Using your custom rate: {stateTaxRate}%</span>
+                        {usingCountyRate ? (
+                          <span className="text-green-600 font-medium">Using {selectedCounty} County rate: {taxRate}%</span>
                         ) : (
-                          <span>Using state average: {propertyTaxRates[selectedState]?.rate}%</span>
+                          <span>Using {propertyTaxRates[selectedState]?.name} state average: {propertyTaxRates[selectedState]?.rate}%</span>
                         )}
                         {" "}= <strong>${fmt(propertyTax)}/year</strong> (${fmt(propertyTax / 12)}/mo)
                       </p>
-                      <p className="text-amber-600">
-                        <strong>Important:</strong> Property taxes are set at the county and municipality level, not the state level. The state average is a rough estimate. Your actual rate could be 50-200% higher or lower depending on your county, city, school district, and special assessments.
-                      </p>
+                      {!usingCountyRate && counties.length > 0 && (
+                        <p className="text-amber-600 mt-1">Select your county above for a more accurate property tax estimate. Rates vary significantly by county.</p>
+                      )}
                     </div>
-                  </div>
-                  <div className="p-3 bg-amber-50 rounded-lg border border-amber-100 mt-1">
-                    <p className="text-[10px] text-amber-800 font-medium mb-1">How to find your actual property tax rate:</p>
-                    <ul className="text-[10px] text-amber-700 space-y-0.5">
-                      <li>1. Search &quot;[your county name] property tax rate&quot; online</li>
-                      <li>2. Check your county tax assessor&apos;s website</li>
-                      <li>3. Ask your real estate agent for the tax rate on the specific property</li>
-                      <li>4. Look at the property listing — many include the annual tax amount</li>
-                      <li>5. If you know the annual tax, divide by the home value to get the rate</li>
-                    </ul>
                   </div>
                   <div className="grid grid-cols-2 gap-3">
                     <div>
@@ -286,7 +279,7 @@ export default function MortgageCalculatorPage() {
                     <div className="flex justify-between"><span className="text-alta-gray">Upfront {loanType === "va" ? "Funding Fee" : "MIP/Fee"} ({config.upfrontMIP}%)</span><span className="font-medium text-amber-600">+${fmt(calc.upfrontMIPAmount)}</span></div>
                   )}
                   <div className="flex justify-between border-t border-gray-100 pt-1.5"><span className="text-alta-navy font-semibold">Total Loan</span><span className="font-bold text-alta-teal">${fmt(calc.loanAmount)}</span></div>
-                  <div className="flex justify-between mt-2"><span className="text-alta-gray">Property Tax ({stateTaxRate}%)</span><span className="font-medium text-alta-navy">${fmt(propertyTax)}/yr</span></div>
+                  <div className="flex justify-between mt-2"><span className="text-alta-gray">Property Tax ({taxRate}%)</span><span className="font-medium text-alta-navy">${fmt(propertyTax)}/yr</span></div>
                   <div className="flex justify-between"><span className="text-alta-gray">Total Interest Over Life</span><span className="font-medium text-alta-red">${fmt(calc.totalInterest)}</span></div>
                   <div className="flex justify-between"><span className="text-alta-gray">Est. Closing Costs (3%)</span><span className="font-medium text-alta-navy">${fmt(calc.closingCostEstimate)}</span></div>
                   <div className="flex justify-between border-t border-gray-100 pt-1.5"><span className="text-alta-navy font-semibold">Total Cost of Home</span><span className="font-bold text-alta-teal">${fmt(calc.totalCost + calc.downPayment + calc.closingCostEstimate)}</span></div>
@@ -338,13 +331,12 @@ export default function MortgageCalculatorPage() {
             {/* Property tax context */}
             <div className="p-4 bg-white rounded-xl border border-gray-100 tile-interactive mb-6">
               <h3 className="text-sm font-bold text-alta-navy mb-2">
-                Property Tax: {propertyTaxRates[selectedState]?.name}
-                {usingCustomRate && <span className="text-alta-teal ml-1">(custom rate)</span>}
+                Property Tax: {usingCountyRate ? `${selectedCounty} County, ` : ""}{propertyTaxRates[selectedState]?.name}
               </h3>
               <div className="grid grid-cols-3 gap-3 mb-3">
                 <div className="text-center">
-                  <p className="text-lg font-bold text-alta-teal">{stateTaxRate}%</p>
-                  <p className="text-[10px] text-alta-gray">{usingCustomRate ? "Your Local Rate" : "State Avg Rate"}</p>
+                  <p className="text-lg font-bold text-alta-teal">{taxRate}%</p>
+                  <p className="text-[10px] text-alta-gray">{usingCountyRate ? "County Rate" : "State Avg Rate"}</p>
                 </div>
                 <div className="text-center">
                   <p className="text-lg font-bold text-alta-navy">${fmt(propertyTax)}</p>
@@ -356,13 +348,12 @@ export default function MortgageCalculatorPage() {
                 </div>
               </div>
               <div className="text-[10px] text-alta-gray space-y-1">
-                {!usingCustomRate && (
-                  <p className="text-amber-600"><strong>Note:</strong> This uses the {propertyTaxRates[selectedState]?.name} state average ({propertyTaxRates[selectedState]?.rate}%). Property taxes are actually set by your county, city, and school district. Rates within a state can vary dramatically — for example, in Texas, rates range from ~1.2% in some rural counties to over 2.5% in suburban counties near major cities. Enter your actual county rate above for a more accurate estimate.</p>
+                {usingCountyRate ? (
+                  <p className="text-green-600"><strong>Using {selectedCounty} County rate:</strong> {taxRate}% — more accurate than the state average of {propertyTaxRates[selectedState]?.rate}%. Note: your actual tax may still vary based on city, school district, and special assessment districts within the county.</p>
+                ) : (
+                  <p className="text-amber-600"><strong>Using state average.</strong> Select your county above for a more accurate estimate. County rates in {propertyTaxRates[selectedState]?.name} range from {counties.length > 0 ? `${Math.min(...counties.map(c => c.rate))}% to ${Math.max(...counties.map(c => c.rate))}%` : 'varies'}.</p>
                 )}
-                {usingCustomRate && (
-                  <p className="text-green-600"><strong>Using your local rate:</strong> {stateTaxRate}% — this is more accurate than the state average of {propertyTaxRates[selectedState]?.rate}%.</p>
-                )}
-                <p>Source: State averages from Tax Foundation / Census Bureau ACS (2024 data). County rates from local tax assessor offices.</p>
+                <p>Sources: Tax Foundation, Census Bureau ACS (2024), county tax assessor data via tax-rates.org</p>
               </div>
             </div>
 
