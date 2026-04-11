@@ -104,31 +104,126 @@ export default function ProtectYourRightsPage() {
             ))}
           </div>
 
+          {/* How the title search works */}
+          <h2 className="text-2xl font-bold text-alta-navy mb-4">How the Title Search Process Works</h2>
+          <p className="text-sm text-alta-gray mb-4 leading-relaxed">
+            Before your title insurance policy can be issued, a title professional conducts a thorough examination of public records related to your property. This process — called a title search or title examination — is one of the most important steps in the closing process. According to ALTA, title searches reveal issues that need resolution in approximately one out of every three residential transactions.
+          </p>
+          <div className="space-y-3 mb-10">
+            {[
+              { step: "1", title: "Public Records Review", desc: "The title examiner searches county recorder's office records, court records, and tax records going back decades — often to the original land patent. They trace every deed, mortgage, lien, judgment, easement, and encumbrance that has ever been recorded against the property." },
+              { step: "2", title: "Chain of Title Verification", desc: "The examiner verifies an unbroken chain of ownership from the current seller back through every previous owner. Any gaps, irregularities, or missing links in the chain must be investigated and resolved before the title can be considered clear." },
+              { step: "3", title: "Lien and Judgment Search", desc: "Outstanding debts attached to the property are identified: unpaid property taxes, mechanic's liens from contractors, HOA liens, federal tax liens, and civil judgments against current or previous owners. These must be paid off or released before closing." },
+              { step: "4", title: "Title Commitment Issued", desc: "Based on the search results, the title company issues a title commitment (also called a preliminary title report). This document lists the conditions under which the company is willing to issue a title insurance policy, including any exceptions — known issues that won't be covered." },
+              { step: "5", title: "Issue Resolution (Curative Work)", desc: "If the search uncovers problems — missing signatures, unreleased mortgages, boundary disputes, estate issues — the title company works to resolve (cure) them before closing. This is one of the most valuable services title professionals provide." },
+              { step: "6", title: "Policy Issuance", desc: "Once all issues are resolved and the transaction closes, the title company issues the final title insurance policy. The owner's policy protects you; the lender's policy protects the bank. Your owner's policy remains in effect for as long as you or your heirs own the property." },
+            ].map((s) => (
+              <div key={s.step} className="flex gap-4 items-start p-4 bg-white rounded-xl border border-gray-100 shadow-sm">
+                <span className="w-8 h-8 rounded-full bg-alta-teal text-white flex items-center justify-center text-xs font-bold shrink-0">{s.step}</span>
+                <div>
+                  <h3 className="font-bold text-alta-navy text-sm">{s.title}</h3>
+                  <p className="text-xs text-alta-gray leading-relaxed mt-1">{s.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* The 10 covered risks explained */}
+          <h2 className="text-2xl font-bold text-alta-navy mb-4">What Your Owner&apos;s Policy Actually Covers</h2>
+          <p className="text-sm text-alta-gray mb-4 leading-relaxed">
+            The current ALTA Owner&apos;s Policy lists specific covered risks. Here&apos;s what each one means in plain language and why it matters to you as a homeowner. Source: ALTA Standard Owner&apos;s Policy
+          </p>
+          <div className="space-y-3 mb-10">
+            {[
+              { risk: "Someone else owns an interest in your title", example: "A previous owner's ex-spouse claims they never signed away their ownership interest in a divorce. Your title insurance pays for the legal defense and covers any loss." },
+              { risk: "A document in the chain of title is forged, improperly executed, or signed by someone under age or mental incapacity", example: "A deed from 1998 was forged by someone impersonating the actual owner. Even though you bought in good faith, the fraud could void your ownership. Title insurance covers this." },
+              { risk: "A document was not properly recorded, filed, or indexed in the public records", example: "A mortgage release was filed but never indexed by the county. The old lender's lien still appears on record. Your title insurance company works to resolve it." },
+              { risk: "There are defects in the title that would permit someone else to refuse to buy the property from you", example: "When you try to sell, the buyer's title search reveals an old judgment that makes your title 'unmarketable.' Title insurance covers the cost to clear the defect." },
+              { risk: "Someone has an easement or right to use your land that wasn't disclosed", example: "A utility company has a recorded easement allowing them to dig across your backyard for maintenance — but nobody told you when you bought. Title insurance protects your interest." },
+              { risk: "You cannot use the land for a single-family residence because of zoning violations by a prior owner", example: "The previous owner converted the garage into a rental unit without permits. The city demands you restore it. Title insurance covers the cost if it was a pre-existing violation." },
+              { risk: "Someone has a lien on your property — such as a mortgage, tax lien, or judgment — that wasn't disclosed", example: "A contractor who did work for the previous owner files a mechanic's lien for unpaid work. Your title insurance defends you and pays the lien if covered." },
+              { risk: "Lack of legal access to and from the property", example: "After closing, you discover your driveway crosses a neighbor's property and they demand you stop using it. Title insurance covers the cost of establishing legal access." },
+            ].map((item, i) => (
+              <div key={i} className="p-4 bg-white rounded-xl border border-gray-100 shadow-sm">
+                <div className="flex items-start gap-3">
+                  <div className="w-7 h-7 rounded-lg bg-green-100 flex items-center justify-center shrink-0 mt-0.5">
+                    <svg className="w-4 h-4 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" /></svg>
+                  </div>
+                  <div>
+                    <p className="text-sm font-semibold text-alta-navy mb-1">{item.risk}</p>
+                    <p className="text-xs text-alta-gray leading-relaxed"><strong className="text-alta-navy">Real-world example:</strong> {item.example}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Dollar comparison */}
+          <h2 className="text-2xl font-bold text-alta-navy mb-4">The Math: Why Title Insurance is Worth It</h2>
+          <div className="p-6 bg-gradient-to-br from-green-50 to-white rounded-2xl border border-green-200 mb-10">
+            <div className="grid md:grid-cols-3 gap-4 text-center mb-4">
+              <div className="p-4 bg-white rounded-xl shadow-sm">
+                <p className="text-2xl font-bold text-alta-teal">$1,750</p>
+                <p className="text-xs text-alta-gray mt-1">Typical owner&apos;s policy cost<br />(on a $350K home at 0.5%)</p>
+              </div>
+              <div className="p-4 bg-white rounded-xl shadow-sm">
+                <p className="text-2xl font-bold text-alta-navy">$350,000</p>
+                <p className="text-xs text-alta-gray mt-1">What your policy protects<br />(your full home value)</p>
+              </div>
+              <div className="p-4 bg-white rounded-xl shadow-sm">
+                <p className="text-2xl font-bold text-alta-red">$50,000+</p>
+                <p className="text-xs text-alta-gray mt-1">Average legal defense cost<br />for a title dispute (without insurance)</p>
+              </div>
+            </div>
+            <p className="text-sm text-alta-gray text-center leading-relaxed">
+              For a one-time payment of approximately 0.5% of your home&apos;s value, you get coverage for the entire time you own the property — including full legal defense costs. Without title insurance, a single title dispute could cost you tens of thousands in legal fees, even if you ultimately win. If you lose, you could lose your entire investment.
+            </p>
+          </div>
+
           {/* Cost and shopping */}
-          <div className="grid md:grid-cols-2 gap-5 mb-10">
+          <div className="grid md:grid-cols-2 gap-5 mb-6">
             <div className="p-6 bg-gradient-to-br from-blue-50 to-blue-100/30 rounded-2xl border border-blue-100">
               <h3 className="font-bold text-alta-navy mb-2 text-lg">Cost & Your Right to Shop</h3>
-              <p className="text-sm text-alta-gray mb-3">
-                Typically 0.5%–1% of the purchase price — a one-time fee for lifetime coverage. Rates are regulated by state insurance departments.
+              <p className="text-sm text-alta-gray mb-2 leading-relaxed">
+                Owner&apos;s title insurance typically costs between 0.5% and 1% of the purchase price — a one-time fee for lifetime coverage. Rates are regulated by each state&apos;s department of insurance. In some states (like Texas), rates are set by the state and are the same everywhere. In others, rates vary by company — which is why shopping matters.
               </p>
-              <p className="text-sm font-semibold text-alta-navy">
-                You have the right to choose your own title company under RESPA.
+              <p className="text-sm text-alta-gray mb-2 leading-relaxed">
+                Under the federal Real Estate Settlement Procedures Act (RESPA), you have the legal right to choose your own title insurance company. Your lender or real estate agent may recommend a provider, but <strong className="text-alta-navy">you are not obligated to use them</strong>.
+              </p>
+              <p className="text-sm text-alta-gray leading-relaxed">
+                <strong className="text-alta-navy">Tip:</strong> Ask about the simultaneous issue rate — when you purchase both an owner&apos;s and lender&apos;s policy from the same company at the same time, you typically get a significant discount on the second policy.
               </p>
             </div>
             <div className="p-6 bg-gradient-to-br from-amber-50 to-amber-100/30 rounded-2xl border border-amber-100">
               <h3 className="font-bold text-alta-navy mb-2 text-lg">Filing a Claim</h3>
-              <p className="text-sm text-alta-gray">
-                Promptly notify your title insurer if you discover any concern about your property&apos;s title. Provide your property address, documentation, and policy information. Your insurer handles investigation and legal defense.
+              <p className="text-sm text-alta-gray mb-2 leading-relaxed">
+                If you discover a concern about your property&apos;s title at any point during your ownership, contact your title insurance company promptly. Common triggers for claims include:
+              </p>
+              <ul className="text-sm text-alta-gray space-y-1.5 mb-2">
+                <li className="flex items-start gap-2"><span className="text-alta-teal">-</span>Someone claims ownership or an interest in your property</li>
+                <li className="flex items-start gap-2"><span className="text-alta-teal">-</span>A lien or judgment appears that wasn&apos;t disclosed at closing</li>
+                <li className="flex items-start gap-2"><span className="text-alta-teal">-</span>A boundary dispute arises with a neighbor</li>
+                <li className="flex items-start gap-2"><span className="text-alta-teal">-</span>You discover an easement that restricts your use of the property</li>
+                <li className="flex items-start gap-2"><span className="text-alta-teal">-</span>You try to sell and the buyer&apos;s title search reveals a defect</li>
+              </ul>
+              <p className="text-sm text-alta-gray leading-relaxed">
+                <strong className="text-alta-navy">What to provide:</strong> Your property address, policy number (if available), description of the issue, and any relevant documents. Your insurer will investigate, provide legal defense if needed, and pay covered losses up to your policy amount.
               </p>
             </div>
           </div>
 
-          <div className="flex flex-col sm:flex-row gap-4">
-            <Link href="/find-company" className="px-6 py-3 bg-alta-teal text-white font-semibold rounded-lg hover:bg-alta-teal-dark transition-colors text-center">
+          <div className="flex flex-col sm:flex-row gap-3">
+            <Link href="/find-company" className="px-5 py-2.5 bg-alta-teal text-white font-semibold rounded-lg hover:bg-alta-teal-dark transition-colors text-center text-sm">
               Find a Title Company
             </Link>
-            <Link href="/find-policy" className="px-6 py-3 border-2 border-alta-teal text-alta-teal font-semibold rounded-lg hover:bg-alta-teal hover:text-white transition-colors text-center">
+            <Link href="/find-policy" className="px-5 py-2.5 border-2 border-alta-teal text-alta-teal font-semibold rounded-lg hover:bg-alta-teal hover:text-white transition-colors text-center text-sm">
               Find My Existing Policy
+            </Link>
+            <Link href="/faq" className="px-5 py-2.5 border-2 border-alta-navy text-alta-navy font-semibold rounded-lg hover:bg-alta-navy hover:text-white transition-colors text-center text-sm">
+              Title Insurance FAQ
+            </Link>
+            <Link href="/sources" className="px-5 py-2.5 border-2 border-gray-300 text-alta-gray font-semibold rounded-lg hover:bg-gray-100 transition-colors text-center text-sm">
+              View Sources
             </Link>
           </div>
         </div>
