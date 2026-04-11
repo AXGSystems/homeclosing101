@@ -175,12 +175,65 @@ export default function StopFraudPage() {
           ))}
         </div>
 
-        <div className="flex flex-col sm:flex-row gap-4">
-          <Link href="/protect-your-money" className="px-6 py-3 bg-alta-red text-white font-semibold rounded-lg hover:bg-red-700 transition-colors text-center">
-            More on Wire Fraud Protection
+        {/* Real-world fraud scenarios */}
+        <h2 className="text-2xl font-bold text-alta-navy mb-4">How Fraud Actually Happens: 3 Real Scenarios</h2>
+        <div className="space-y-4 mb-10">
+          {[
+            { title: "The Spoofed Email", scenario: "A buyer receives an email that appears to be from their title company with 'updated' wiring instructions. The email uses the same logo, signature block, and formatting as previous legitimate emails. The only difference: one letter in the domain name (e.g., @titIe-company.com with a capital I instead of lowercase L). The buyer wires $287,000 to the criminal's account. By the time the title company calls to ask where the funds are, the money has been moved through three accounts and is unrecoverable.", lesson: "Always call your title company at a number YOU already have — never a number from an email. Verify the domain character by character.", source: "Based on patterns reported to FBI IC3" },
+            { title: "The Hacked Agent", scenario: "A real estate agent's email account is compromised through a phishing attack. The criminal monitors the inbox for weeks, learning the details of pending transactions. Three days before closing, the criminal — using the agent's actual email account — sends the buyer 'corrected' wire instructions. Because the email comes from the real agent's verified address, the buyer complies without calling to verify.", lesson: "Even emails from verified, known contacts can be compromised. ALWAYS verify wire instructions by phone, regardless of who the email appears to come from. Multi-factor authentication on all email accounts is essential.", source: "CertifID 2026 Report" },
+            { title: "The After-Hours Rush", scenario: "A buyer receives a call at 5:45 PM on Thursday — their closing is Friday morning. The caller, impersonating the settlement agent, says the wire must be sent tonight because 'the bank processes overnight and the closing will be delayed.' The buyer panics and wires $165,000 without verifying through the proper channels. Friday morning, the real settlement agent has no record of the call.", lesson: "Legitimate settlement agents don't create last-minute urgency around wire transfers. If you feel rushed, stop. Real closings can be rescheduled — your money can't be unwired.", source: "FBI IC3 advisory" },
+          ].map((s, i) => (
+            <div key={i} className="rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+              <div className="bg-[#943030] px-5 py-3">
+                <h3 className="text-white font-bold text-sm">Scenario {i + 1}: {s.title}</h3>
+              </div>
+              <div className="p-5 bg-white space-y-3">
+                <div>
+                  <p className="text-[10px] font-semibold text-alta-gray uppercase tracking-wider mb-1">What Happened</p>
+                  <p className="text-sm text-alta-gray leading-relaxed">{s.scenario}</p>
+                </div>
+                <div className="p-3 bg-amber-50 rounded-xl border border-amber-100">
+                  <p className="text-[10px] font-semibold text-[#8b6914] uppercase tracking-wider mb-1">The Lesson</p>
+                  <p className="text-xs text-alta-gray leading-relaxed">{s.lesson}</p>
+                </div>
+                <p className="text-[9px] text-alta-teal font-medium">{s.source}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Wire transfer safety checklist */}
+        <h2 className="text-2xl font-bold text-alta-navy mb-4">Your Wire Transfer Safety Checklist</h2>
+        <p className="text-sm text-alta-gray mb-4">Before you wire ANY money for your closing, verify every item on this list. Print it and check each box:</p>
+        <div className="grid sm:grid-cols-2 gap-2 mb-10">
+          {[
+            "I received wiring instructions through a secure portal or in person — NOT solely by email",
+            "I called my settlement agent at a phone number I already had on file to verify the instructions",
+            "I confirmed the bank name, routing number, and account number match what I was told by phone",
+            "The account name on the wire matches my title company's name — not an individual's name",
+            "I verified the exact dollar amount to wire with my settlement agent by phone",
+            "I checked with my bank about their wire cutoff time (many stop at 3-4 PM)",
+            "I will call my settlement agent immediately after the wire processes to confirm receipt",
+            "I have NOT received any last-minute emails changing the wiring instructions",
+            "I have NOT been pressured to wire urgently or 'the closing will be delayed'",
+            "I have my settlement agent's direct phone number saved — not from an email",
+          ].map((item, i) => (
+            <div key={i} className="flex items-start gap-2 p-3 bg-white rounded-xl border border-gray-100 tile-interactive">
+              <div className="w-4 h-4 rounded border-2 border-[#943030]/40 shrink-0 mt-0.5" />
+              <p className="text-xs text-alta-navy leading-relaxed">{item}</p>
+            </div>
+          ))}
+        </div>
+
+        <div className="flex flex-col sm:flex-row gap-3">
+          <Link href="/protect-your-money" className="px-5 py-2.5 bg-[#943030] text-white font-semibold rounded-lg hover:bg-[#7a2020] transition-colors text-center text-sm">
+            Wire Fraud Overview
           </Link>
-          <Link href="/closing-process/closing-checklist" className="px-6 py-3 border-2 border-alta-teal text-alta-teal font-semibold rounded-lg hover:bg-alta-teal hover:text-white transition-colors text-center">
+          <Link href="/closing-process/closing-checklist" className="px-5 py-2.5 border-2 border-alta-teal text-alta-teal font-semibold rounded-lg hover:bg-alta-teal hover:text-white transition-colors text-center text-sm">
             Closing Checklist
+          </Link>
+          <Link href="/questions-to-ask" className="px-5 py-2.5 border-2 border-alta-navy text-alta-navy font-semibold rounded-lg hover:bg-alta-navy hover:text-white transition-colors text-center text-sm">
+            Questions to Ask
           </Link>
           <PrintButton />
         </div>
