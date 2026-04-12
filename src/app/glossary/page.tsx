@@ -346,12 +346,16 @@ ${terms.map(t => `<div class="term"><h2>${t.term}</h2><p>${t.definition}</p>${t.
 
 /* ─── Sticky Glossary Ad ─── */
 const adSponsors = [
-  { name: "CertifID", logo: "https://www.alta.org/images/wplogos/1165795.png", url: "https://certifid.com/", tagline: "Wire Fraud Prevention", blurb: "Verify identities. Protect every wire.", gradient: "from-[#0a2540] to-[#1a4a7a]", accent: "#4da6ff" },
-  { name: "Qualia", logo: "https://www.alta.org/images/wplogos/1141461.png", url: "https://www.qualia.com/", tagline: "Digital Closing Platform", blurb: "Faster closings. Fewer surprises.", gradient: "from-[#1a1a2e] to-[#16213e]", accent: "#6c63ff" },
-  { name: "SoftPro", logo: "https://www.alta.org/images/wplogos/0005926.png", url: "https://www.softprocorp.com/", tagline: "Closing & Title Software", blurb: "Trusted by thousands of title pros.", gradient: "from-[#1b4332] to-[#2d6a4f]", accent: "#52b788" },
-  { name: "Closinglock", logo: "https://www.alta.org/images/wplogos/1168010.png", url: "https://www.closinglock.com/", tagline: "Secure Payment Platform", blurb: "Stop fraud before it starts.", gradient: "from-[#3d0c02] to-[#7a2020]", accent: "#ff6b6b" },
-  { name: "First American Title", logo: "https://www.alta.org/images/wplogos/0000226.png", url: "https://www.firstam.com/", tagline: "Title Insurance Leader", blurb: "Protecting property rights since 1889.", gradient: "from-[#0f2b46] to-[#1a5276]", accent: "#0a8ebc" },
-  { name: "WFG National Title", logo: "https://www.alta.org/images/wplogos/0002642.png", url: "https://wfgtitle.com/", tagline: "Innovation in Title", blurb: "Technology-driven title solutions.", gradient: "from-[#2c1654] to-[#5b3a8c]", accent: "#b794f4" },
+  { name: "CertifID", logo: "https://www.alta.org/images/wplogos/1165795.png", url: "https://certifid.com/", blurb: "Wire fraud prevention and identity verification platform protecting real estate transactions from cyber threats.", shade: "bg-blue-50/80 border-blue-200/60" },
+  { name: "Qualia", logo: "https://www.alta.org/images/wplogos/1141461.png", url: "https://www.qualia.com/", blurb: "Digital real estate closing platform connecting title, lending, and real estate professionals for faster closings.", shade: "bg-indigo-50/80 border-indigo-200/60" },
+  { name: "SoftPro", logo: "https://www.alta.org/images/wplogos/0005926.png", url: "https://www.softprocorp.com/", blurb: "Leading closing, title, and escrow software for real estate professionals — trusted by thousands nationwide.", shade: "bg-green-50/80 border-green-200/60" },
+  { name: "Closinglock", logo: "https://www.alta.org/images/wplogos/1168010.png", url: "https://www.closinglock.com/", blurb: "Secure payment platform for the real estate industry — protecting wire transfers and preventing fraud.", shade: "bg-red-50/80 border-red-200/60" },
+  { name: "First American Title", logo: "https://www.alta.org/images/wplogos/0000226.png", url: "https://www.firstam.com/", blurb: "Nation's leading provider of title insurance, settlement services, and risk solutions for real estate transactions.", shade: "bg-cyan-50/80 border-cyan-200/60" },
+  { name: "WFG National Title", logo: "https://www.alta.org/images/wplogos/0002642.png", url: "https://wfgtitle.com/", blurb: "Technology-driven title insurance and settlement services company focused on innovation and agent support.", shade: "bg-purple-50/80 border-purple-200/60" },
+  { name: "Old Republic National Title", logo: "https://www.alta.org/images/wplogos/0004443.png", url: "https://www.oldrepublictitle.com/", blurb: "One of the largest title insurance groups in the nation, providing title and escrow services since 1907.", shade: "bg-amber-50/80 border-amber-200/60" },
+  { name: "Stewart Title", logo: "https://www.alta.org/images/wplogos/0002809.png", url: "https://www.stewart.com/", blurb: "Global real estate services company providing title insurance and settlement solutions worldwide.", shade: "bg-teal-50/80 border-teal-200/60" },
+  { name: "FNF Family of Companies", logo: "https://www.alta.org/images/wplogos/0000218.png", url: "https://www.fnf.com/", blurb: "Fidelity National Financial — the nation's largest group of title insurance companies and a Fortune 500 leader.", shade: "bg-sky-50/80 border-sky-200/60" },
+  { name: "DataTrace", logo: "https://www.alta.org/images/wplogos/0003471.png", url: "https://www.datatracetitle.com/", blurb: "Title data solutions and automation technology powering faster, more accurate title searches and decisions.", shade: "bg-orange-50/80 border-orange-200/60" },
 ];
 
 function StickyGlossaryAd() {
@@ -366,45 +370,39 @@ function StickyGlossaryAd() {
         setIdx((prev) => (prev + 1) % adSponsors.length);
         setFading(false);
       }, 400);
-    }, 20000);
+    }, 15000);
     return () => clearInterval(interval);
   }, []);
 
-  const sponsor = adSponsors[idx];
+  const s = adSponsors[idx];
 
   return (
     <div className="sticky top-[195px] sm:top-[205px] z-20 mb-6">
       <a
-        href={sponsor.url}
+        href={s.url}
         target="_blank"
         rel="noopener noreferrer"
-        className={`block rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all hover:scale-[1.01] ${fading ? "opacity-0" : "opacity-100"}`}
-        style={{ transition: "opacity 400ms ease, box-shadow 200ms ease, transform 200ms ease" }}
+        className={`block rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all border ${s.shade} ${fading ? "opacity-0" : "opacity-100"}`}
+        style={{ transition: "opacity 400ms ease, box-shadow 200ms ease" }}
       >
-        <div className={`bg-gradient-to-r ${sponsor.gradient} p-3 sm:p-4`}>
-          <div className="flex items-center gap-4">
-            {/* Logo */}
-            <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-white/15 backdrop-blur-sm flex items-center justify-center shrink-0 border border-white/10">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={sponsor.logo} alt={sponsor.name} className="h-8 sm:h-10 w-auto object-contain brightness-0 invert opacity-90" />
-            </div>
-            {/* Content */}
-            <div className="flex-1 min-w-0">
-              <div className="flex items-center gap-2 mb-0.5">
-                <span className="text-[9px] font-bold uppercase tracking-widest" style={{ color: sponsor.accent }}>ALTA Member</span>
-                <span className="text-white/30">|</span>
-                <span className="text-[9px] text-white/50 font-medium">{sponsor.tagline}</span>
-              </div>
-              <p className="text-sm sm:text-base font-bold text-white truncate">{sponsor.name}</p>
-              <p className="text-xs text-white/60 hidden sm:block">{sponsor.blurb}</p>
-            </div>
-            {/* CTA */}
-            <div className="shrink-0 hidden sm:block">
-              <span className="inline-flex items-center gap-1 px-4 py-2 rounded-lg text-xs font-bold border transition-colors" style={{ borderColor: sponsor.accent, color: sponsor.accent }}>
-                Visit
-                <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
-              </span>
-            </div>
+        <div className="flex items-center gap-4 p-3 sm:p-4">
+          {/* Logo — full color, same style as InlineAd */}
+          <div className="w-28 sm:w-36 shrink-0 flex items-center justify-center">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={s.logo} alt={s.name} className="h-10 sm:h-12 w-auto object-contain max-w-[130px]" />
+          </div>
+          {/* Content */}
+          <div className="flex-1 min-w-0">
+            <p className="text-[9px] font-semibold text-alta-teal uppercase tracking-widest mb-0.5">ALTA Member Spotlight</p>
+            <p className="text-sm font-bold text-alta-navy truncate">{s.name}</p>
+            <p className="text-xs text-alta-gray leading-relaxed line-clamp-2 hidden sm:block mt-0.5">{s.blurb}</p>
+          </div>
+          {/* CTA */}
+          <div className="shrink-0">
+            <span className="inline-flex items-center gap-1 px-4 py-2 bg-alta-teal text-white rounded-lg text-xs font-semibold hover:bg-alta-teal-dark transition-colors">
+              Learn More
+              <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
+            </span>
           </div>
         </div>
       </a>
