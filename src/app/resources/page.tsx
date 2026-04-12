@@ -4,8 +4,8 @@ import AltaMembershipCTA from "@/components/AltaMembershipCTA";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Other Resources",
-  description: "Trusted external resources for homebuyers — government agencies, industry organizations, and sample documents.",
+  title: "Resources & Tools",
+  description: "HC101 interactive tools, checklists, calculators, and trusted external resources for homebuyers.",
 };
 
 const buyingResources = [
@@ -92,7 +92,7 @@ function ResourceSection({ title, items }: { title: string; items: { name: strin
 export default function ResourcesPage() {
   return (
     <div>
-    <PageHero title="Other Resources" subtitle="Trusted links to government agencies, industry organizations, sample documents, and fraud reporting tools." image="https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=1920&q=80" breadcrumb={[{label:"Resources",href:"/resources"}]} />
+    <PageHero title="Resources & Tools" subtitle="Everything HC101 offers — interactive calculators, printable checklists, 200+ glossary terms, and trusted external links — all in one place." image="https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=1920&q=80" breadcrumb={[{label:"Resources",href:"/resources"}]} />
     <div className="py-1.5 lg:py-2">
       <div className="max-w-4xl mx-auto px-4 sm:px-6">
         <div className="mb-6 p-4 bg-white rounded-2xl border border-gray-100 sm:sticky sm:top-[142px] z-20 shadow-md">
@@ -101,28 +101,61 @@ export default function ResourcesPage() {
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" /></svg>
             </div>
             <div>
-              <h2 className="font-bold text-alta-navy mb-1">Verified External Resources</h2>
-              <p className="text-sm text-alta-gray leading-relaxed">Every link below is to a trusted government agency, industry organization, or verified reporting tool. Use these resources alongside HomeClosing101 to prepare for your closing.</p>
+              <h2 className="font-bold text-alta-navy mb-1">Your Complete Resource Hub</h2>
+              <p className="text-sm text-alta-gray leading-relaxed">Every tool built into HC101, plus verified external links to government agencies, industry organizations, and official documents. Use this page as your home base throughout the closing process.</p>
             </div>
           </div>
         </div>
 
-        {/* Quick start by topic */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-8">
-          {[
-            { label: "250+ FAQ", count: "Answers", href: "/faq", color: "from-[#1a5276] to-[#154463]" },
-            { label: "80+ Terms", count: "Glossary", href: "/glossary", color: "from-[#2d6b3f] to-[#235532]" },
-            { label: "19 Docs", count: "Library", href: "/document-library", color: "from-[#5b3a8c] to-[#482d70]" },
-            { label: "30+ Sources", count: "Index", href: "/sources", color: "from-[#8b6914] to-[#705410]" },
-          ].map((l) => (
-            <Link key={l.label} href={l.href} className="group rounded-xl overflow-hidden tile-interactive">
-              <div className={`bg-gradient-to-r ${l.color} p-3 text-center`}>
-                <p className="text-lg font-bold text-white">{l.label}</p>
-                <p className="text-[10px] text-white/70">{l.count}</p>
+        {/* HC101 Tools & Downloads */}
+        <div className="mb-12">
+          <div className="relative rounded-xl overflow-hidden mb-5 h-24">
+            <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=600&q=80')" }} />
+            <div className="absolute inset-0 bg-gradient-to-r from-[#0a7ea8] to-[#077a9e] opacity-30" />
+            <div className="relative z-10 flex items-center gap-3 h-full px-5">
+              <div className="w-10 h-10 rounded-xl bg-white/20 flex items-center justify-center">
+                <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M11.42 15.17l-5.1-5.1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
               </div>
-            </Link>
-          ))}
+              <div>
+                <h2 className="text-lg font-bold text-white">HC101 Tools & Downloads</h2>
+                <p className="text-xs text-white/70">Interactive tools, checklists, and guides built into this site</p>
+              </div>
+            </div>
+          </div>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+            {[
+              { name: "Mortgage Payment Calculator", desc: "Compare Conventional, FHA, VA & USDA with county-level property tax rates and detailed payment breakdowns.", href: "/mortgage-calculator", badge: "Calculator" },
+              { name: "Closing Cost Estimator", desc: "Interactive calculator that estimates your total closing costs with itemized fees based on home price and location.", href: "/closing-process/closing-costs", badge: "Calculator" },
+              { name: "Interactive Closing Checklist", desc: "32-item checklist with progress tracking across 5 phases. Check off items and print a blank copy for closing day.", href: "/closing-process/closing-checklist", badge: "Checklist" },
+              { name: "Document Checklist", desc: "Everything to bring on closing day organized by category — ID, insurance, funds, and supporting documents.", href: "/document-checklist", badge: "Checklist" },
+              { name: "Questions to Ask", desc: "40+ printable questions organized by who you're asking — your lender, agent, title company, and inspector.", href: "/questions-to-ask", badge: "Printable" },
+              { name: "Real Estate Glossary", desc: "200+ searchable terms with real-world closing examples. Save terms to build a custom printable list.", href: "/glossary", badge: "Reference" },
+              { name: "250+ FAQ Knowledge Base", desc: "Every answer verified and sourced from CFPB, FBI, NAR, ALTA, IRS, FHA, VA, and other authorities.", href: "/faq", badge: "Reference" },
+              { name: "First-Time Buyer Timeline", desc: "5-phase, 27-item expandable timeline — each step with detailed breakdown, action items, and source citations.", href: "/first-time-buyers", badge: "Guide" },
+              { name: "Document Library", desc: "Links to official CFPB forms, sample documents, homebuyer education courses, and state-specific resources.", href: "/document-library", badge: "Library" },
+              { name: "State Insurance Directory", desc: "Contact information for all 50 state insurance departments + DC — verified addresses, phone numbers, and websites.", href: "/homeowners-insurance", badge: "Directory" },
+              { name: "Wire Fraud Prevention Guide", desc: "How the scam works, 5 safeguards, and what to do if you're a victim — with FBI IC3 recovery data.", href: "/protect-your-money", badge: "Guide" },
+              { name: "Source Index", desc: "Complete list of every data source cited across the site — CFPB, FBI, NAR, ALTA, IRS, and more.", href: "/sources", badge: "Reference" },
+            ].map((t) => (
+              <Link key={t.name} href={t.href} className="flex items-start gap-3 p-4 bg-white rounded-xl border border-gray-100 shadow-sm hover:shadow-md hover:border-alta-teal/30 transition-all group">
+                <div className="w-9 h-9 rounded-lg bg-alta-teal/10 flex items-center justify-center text-alta-teal shrink-0 group-hover:bg-alta-teal group-hover:text-white transition-colors">
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M11.42 15.17l-5.1-5.1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                </div>
+                <div className="min-w-0">
+                  <div className="flex items-center gap-2 mb-0.5">
+                    <h3 className="text-sm font-semibold text-alta-navy group-hover:text-alta-teal transition-colors truncate">{t.name}</h3>
+                    <span className="text-[9px] font-bold bg-alta-light text-alta-teal px-1.5 py-0.5 rounded shrink-0">{t.badge}</span>
+                  </div>
+                  <p className="text-xs text-alta-gray leading-relaxed line-clamp-2">{t.desc}</p>
+                </div>
+              </Link>
+            ))}
+          </div>
         </div>
+
+        {/* External Resources header */}
+        <h2 className="text-xl font-bold text-alta-navy mb-2">External Resources</h2>
+        <p className="text-sm text-alta-gray mb-6 leading-relaxed">Trusted links to government agencies, industry organizations, and official documents. All links open in a new tab.</p>
 
         <ResourceSection title="Buying a Home" items={buyingResources} />
         <ResourceSection title="Sample Closing Documents" items={documents} />

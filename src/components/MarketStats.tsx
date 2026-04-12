@@ -48,27 +48,32 @@ export default function MarketStats() {
         {currentStats.map((d, i) => (
           <div
             key={`${activeSet}-${i}`}
-            className="relative h-[240px] rounded-2xl overflow-hidden shadow-lg group"
+            className="relative rounded-2xl overflow-hidden shadow-lg group"
           >
-            {/* Background image */}
-            <div className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" style={{ backgroundImage: `url('${d.image}')` }} />
-            {/* Color overlay */}
-            <div className={`absolute inset-0 bg-gradient-to-t ${d.color} opacity-85`} />
-            {/* Content */}
-            <div className="absolute inset-0 flex flex-col justify-end p-5">
-              <div className="bg-white/10 backdrop-blur-md rounded-xl p-4 border border-white/20">
-                <p className="text-3xl font-bold text-white mb-1">
-                  {d.end === 50 ? (
-                    <span>50-100+</span>
-                  ) : d.end === 1 && d.suffix === " in 3" ? (
-                    <span>1 in 3</span>
-                  ) : (
-                    <AnimatedCounter end={d.end} prefix={d.prefix} suffix={d.suffix} decimals={d.decimals} />
-                  )}
-                </p>
-                <p className="text-sm text-white/90 leading-snug font-medium mb-2">{d.label}</p>
-                <p className="text-xs text-white/60 leading-relaxed">{d.detail}</p>
-                <p className="text-[9px] text-white/40 mt-2 font-medium uppercase tracking-wider">{d.source}</p>
+            {/* Background image — fixed aspect ratio */}
+            <div className="aspect-[4/3] relative">
+              <div className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" style={{ backgroundImage: `url('${d.image}')` }} />
+              <div className={`absolute inset-0 bg-gradient-to-t ${d.color} opacity-85`} />
+              {/* Content — positioned absolutely to fill evenly */}
+              <div className="absolute inset-0 flex flex-col justify-between p-5">
+                {/* Stat number at top */}
+                <div>
+                  <p className="text-4xl font-bold text-white">
+                    {d.end === 50 ? (
+                      <span>50-100+</span>
+                    ) : d.end === 1 && d.suffix === " in 3" ? (
+                      <span>1 in 3</span>
+                    ) : (
+                      <AnimatedCounter end={d.end} prefix={d.prefix} suffix={d.suffix} decimals={d.decimals} />
+                    )}
+                  </p>
+                  <p className="text-sm text-white/90 leading-snug font-medium mt-1">{d.label}</p>
+                </div>
+                {/* Detail in glass panel at bottom */}
+                <div className="bg-white/10 backdrop-blur-md rounded-lg p-3 border border-white/20">
+                  <p className="text-xs text-white/70 leading-relaxed line-clamp-3">{d.detail}</p>
+                  <p className="text-[9px] text-white/40 mt-1.5 font-medium uppercase tracking-wider">{d.source}</p>
+                </div>
               </div>
             </div>
           </div>
