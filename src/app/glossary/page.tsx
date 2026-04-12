@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import PageHero from "@/components/PageHero";
 import { InlineAd } from "@/components/EliteProviders";
 import { glossaryData, type GlossaryTerm } from "@/data/glossaryData";
@@ -179,7 +179,7 @@ ${terms.map(t => `<div class="term"><h2>${t.term}</h2><p>${t.definition}</p>${t.
     <div className="py-1.5 lg:py-2">
       <div className="max-w-4xl mx-auto px-4 sm:px-6">
         {/* Page intro */}
-        <div className="mb-6 p-4 bg-white rounded-2xl border border-gray-100 sm:sticky sm:top-[142px] z-20 shadow-md">
+        <div className="mb-6 p-4 bg-white rounded-2xl border border-gray-100 shadow-md">
           <div className="flex items-start gap-4">
             <div className="w-12 h-12 rounded-xl bg-alta-teal/10 flex items-center justify-center text-alta-teal shrink-0">
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" /></svg>
@@ -191,8 +191,8 @@ ${terms.map(t => `<div class="term"><h2>${t.term}</h2><p>${t.definition}</p>${t.
           </div>
         </div>
 
-        {/* Search + controls */}
-        <div className="sticky top-[90px] sm:top-[100px] z-40 bg-white/95 backdrop-blur-sm pb-3 mb-4 -mx-4 px-4 sm:-mx-6 sm:px-6">
+        {/* Search + controls — sticky under header */}
+        <div className="sticky top-[88px] sm:top-[98px] z-30 bg-white/95 backdrop-blur-sm pb-3 mb-4 -mx-4 px-4 sm:-mx-6 sm:px-6 pt-3 border-b border-gray-100">
           <div className="flex gap-2 mb-3">
             <div className="relative flex-1">
               <svg className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-alta-gray" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -260,6 +260,9 @@ ${terms.map(t => `<div class="term"><h2>${t.term}</h2><p>${t.definition}</p>${t.
             </p>
           </div>
         </div>
+
+        {/* Sticky sponsor ad */}
+        <StickyGlossaryAd />
 
         {/* Terms */}
         <div className="space-y-8">
@@ -338,5 +341,73 @@ ${terms.map(t => `<div class="term"><h2>${t.term}</h2><p>${t.definition}</p>${t.
       </div>
     </div>
     </>
+  );
+}
+
+/* ─── Sticky Glossary Ad ─── */
+const adSponsors = [
+  { name: "CertifID", logo: "https://www.alta.org/images/wplogos/1165795.png", url: "https://certifid.com/", tagline: "Wire Fraud Prevention", blurb: "Verify identities. Protect every wire.", gradient: "from-[#0a2540] to-[#1a4a7a]", accent: "#4da6ff" },
+  { name: "Qualia", logo: "https://www.alta.org/images/wplogos/1141461.png", url: "https://www.qualia.com/", tagline: "Digital Closing Platform", blurb: "Faster closings. Fewer surprises.", gradient: "from-[#1a1a2e] to-[#16213e]", accent: "#6c63ff" },
+  { name: "SoftPro", logo: "https://www.alta.org/images/wplogos/0005926.png", url: "https://www.softprocorp.com/", tagline: "Closing & Title Software", blurb: "Trusted by thousands of title pros.", gradient: "from-[#1b4332] to-[#2d6a4f]", accent: "#52b788" },
+  { name: "Closinglock", logo: "https://www.alta.org/images/wplogos/1168010.png", url: "https://www.closinglock.com/", tagline: "Secure Payment Platform", blurb: "Stop fraud before it starts.", gradient: "from-[#3d0c02] to-[#7a2020]", accent: "#ff6b6b" },
+  { name: "First American Title", logo: "https://www.alta.org/images/wplogos/0000226.png", url: "https://www.firstam.com/", tagline: "Title Insurance Leader", blurb: "Protecting property rights since 1889.", gradient: "from-[#0f2b46] to-[#1a5276]", accent: "#0a8ebc" },
+  { name: "WFG National Title", logo: "https://www.alta.org/images/wplogos/0002642.png", url: "https://wfgtitle.com/", tagline: "Innovation in Title", blurb: "Technology-driven title solutions.", gradient: "from-[#2c1654] to-[#5b3a8c]", accent: "#b794f4" },
+];
+
+function StickyGlossaryAd() {
+  const [idx, setIdx] = useState(0);
+  const [fading, setFading] = useState(false);
+
+  useEffect(() => {
+    setIdx(Math.floor(Math.random() * adSponsors.length));
+    const interval = setInterval(() => {
+      setFading(true);
+      setTimeout(() => {
+        setIdx((prev) => (prev + 1) % adSponsors.length);
+        setFading(false);
+      }, 400);
+    }, 20000);
+    return () => clearInterval(interval);
+  }, []);
+
+  const sponsor = adSponsors[idx];
+
+  return (
+    <div className="sticky top-[195px] sm:top-[205px] z-20 mb-6">
+      <a
+        href={sponsor.url}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={`block rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all hover:scale-[1.01] ${fading ? "opacity-0" : "opacity-100"}`}
+        style={{ transition: "opacity 400ms ease, box-shadow 200ms ease, transform 200ms ease" }}
+      >
+        <div className={`bg-gradient-to-r ${sponsor.gradient} p-3 sm:p-4`}>
+          <div className="flex items-center gap-4">
+            {/* Logo */}
+            <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-white/15 backdrop-blur-sm flex items-center justify-center shrink-0 border border-white/10">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={sponsor.logo} alt={sponsor.name} className="h-8 sm:h-10 w-auto object-contain brightness-0 invert opacity-90" />
+            </div>
+            {/* Content */}
+            <div className="flex-1 min-w-0">
+              <div className="flex items-center gap-2 mb-0.5">
+                <span className="text-[9px] font-bold uppercase tracking-widest" style={{ color: sponsor.accent }}>ALTA Member</span>
+                <span className="text-white/30">|</span>
+                <span className="text-[9px] text-white/50 font-medium">{sponsor.tagline}</span>
+              </div>
+              <p className="text-sm sm:text-base font-bold text-white truncate">{sponsor.name}</p>
+              <p className="text-xs text-white/60 hidden sm:block">{sponsor.blurb}</p>
+            </div>
+            {/* CTA */}
+            <div className="shrink-0 hidden sm:block">
+              <span className="inline-flex items-center gap-1 px-4 py-2 rounded-lg text-xs font-bold border transition-colors" style={{ borderColor: sponsor.accent, color: sponsor.accent }}>
+                Visit
+                <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
+              </span>
+            </div>
+          </div>
+        </div>
+      </a>
+    </div>
   );
 }
