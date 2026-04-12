@@ -30,24 +30,33 @@ export default function NewsTicker() {
   const [animDuration, setAnimDuration] = useState(0);
 
   useEffect(() => {
-    if (scrollRef.current) {
-      // Measure actual content width and set animation speed based on it
-      const scrollWidth = scrollRef.current.scrollWidth / 2; // half because content is doubled
-      const pixelsPerSecond = 80; // readable scroll speed
-      setAnimDuration(scrollWidth / pixelsPerSecond);
-    }
+    const measure = () => {
+      if (scrollRef.current) {
+        const scrollWidth = scrollRef.current.scrollWidth / 2;
+        const pixelsPerSecond = 80;
+        if (scrollWidth > 0) {
+          setAnimDuration(scrollWidth / pixelsPerSecond);
+        } else {
+          // Fallback: retry measurement after fonts/layout settle
+          requestAnimationFrame(measure);
+        }
+      }
+    };
+    // Delay initial measure to ensure layout is complete on mobile
+    const timer = setTimeout(measure, 100);
+    return () => clearTimeout(timer);
   }, []);
 
   return (
     <div className="bg-alta-navy text-white border-b border-white/10 overflow-hidden">
       <div className="flex items-center">
         {/* Label */}
-        <div className="shrink-0 bg-alta-red px-2 sm:px-4 py-1.5 sm:py-2 font-bold text-[9px] sm:text-[11px] uppercase tracking-wider z-10 flex items-center gap-1.5 sm:gap-2">
+        <div className="shrink-0 bg-alta-teal px-2 sm:px-4 py-1.5 sm:py-2 font-bold text-[9px] sm:text-[11px] uppercase tracking-wider z-10 flex items-center gap-1.5 sm:gap-2">
           <span className="relative flex h-1.5 w-1.5 sm:h-2 sm:w-2">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
             <span className="relative inline-flex rounded-full h-1.5 w-1.5 sm:h-2 sm:w-2 bg-white"></span>
           </span>
-          <span className="hidden sm:inline">Industry </span>Alerts
+          <span className="hidden sm:inline">Industry </span>News
         </div>
 
         {/* Scrolling content */}
@@ -56,9 +65,7 @@ export default function NewsTicker() {
             ref={scrollRef}
             className="flex items-center whitespace-nowrap hover:[animation-play-state:paused]"
             style={{
-              animation: animDuration > 0
-                ? `tickerScroll ${animDuration}s linear infinite`
-                : 'none',
+              animation: `tickerScroll ${animDuration > 0 ? animDuration : 120}s linear infinite`,
             }}
           >
             {/* Render headlines twice for seamless loop */}

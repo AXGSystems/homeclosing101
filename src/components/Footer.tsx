@@ -30,6 +30,9 @@ export default function Footer() {
               alta.org
             </a>
           </div>
+          <div className="hidden sm:flex items-center">
+            <span className="text-[10px]" style={{ color: '#d4a843' }}>Designed by <strong>AXG Systems</strong></span>
+          </div>
         </div>
       </div>
     </footer>
