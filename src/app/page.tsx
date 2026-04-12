@@ -79,10 +79,10 @@ const features = [
 ];
 
 const stats = [
-  { value: "4.2M", label: "American families bought homes in 2025", source: "NAR" },
-  { value: "$400K", label: "Median purchase price nationwide", source: "NAR 2025" },
-  { value: "25+", label: "In-depth guides on this site, all free", source: "HC101" },
-  { value: "250+", label: "Verified FAQ answers with source citations", source: "HC101" },
+  { value: "25+", label: "In-depth guides covering every step from pre-approval to keys", color: "from-[#0a7ea8]/30 to-[#0a7ea8]/10", accent: "text-[#5ec4e6]" },
+  { value: "250+", label: "FAQ answers with verified source citations from CFPB, FBI & more", color: "from-[#2d6b3f]/30 to-[#2d6b3f]/10", accent: "text-[#6fcf97]" },
+  { value: "200+", label: "Glossary terms with real-world closing examples you can save & print", color: "from-[#5b3a8c]/30 to-[#5b3a8c]/10", accent: "text-[#b794f4]" },
+  { value: "4", label: "Interactive calculators — mortgage, affordability, closing costs & more", color: "from-[#8b6914]/30 to-[#8b6914]/10", accent: "text-[#f0d06e]" },
 ];
 
 const steps = [
@@ -163,10 +163,13 @@ export default function HomePage() {
             {/* Right — key stats */}
             <div className="grid grid-cols-2 gap-4">
               {stats.map((stat) => (
-                <div key={stat.value} className="stat-card bg-white/10 backdrop-blur-sm rounded-xl p-5 border border-white/10 hover:bg-white/15 transition-colors">
-                  <p className="text-3xl lg:text-4xl font-bold text-white mb-1">{stat.value}</p>
-                  <p className="text-xs text-gray-300 leading-snug">{stat.label}</p>
-                  <p className="text-[10px] text-alta-teal mt-2 font-medium uppercase tracking-wider">{stat.source}</p>
+                <div key={stat.value} className={`stat-card relative overflow-hidden backdrop-blur-sm rounded-xl p-5 border border-white/15 hover:border-white/30 transition-all hover:scale-[1.03]`}>
+                  <div className={`absolute inset-0 bg-gradient-to-br ${stat.color}`} />
+                  <div className="absolute inset-0 bg-white/5" />
+                  <div className="relative">
+                    <p className={`text-3xl lg:text-4xl font-bold mb-1.5 ${stat.accent}`}>{stat.value}</p>
+                    <p className="text-xs text-gray-300 leading-snug">{stat.label}</p>
+                  </div>
                 </div>
               ))}
             </div>
