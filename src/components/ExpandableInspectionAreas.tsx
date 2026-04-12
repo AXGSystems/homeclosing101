@@ -129,23 +129,30 @@ export default function ExpandableInspectionAreas() {
             <div className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" style={{ backgroundImage: `url('${area.image}')` }} />
             <div className="absolute inset-0 bg-gradient-to-t opacity-90 group-hover:opacity-80 transition-opacity" style={{ background: `linear-gradient(to top, ${area.color}ee, ${area.color}cc)` }} />
 
-            <div className="relative p-5 min-h-[180px] flex flex-col justify-between">
-              <div className="flex items-center gap-3 mb-3">
-                <div className="w-10 h-10 rounded-xl bg-white/15 backdrop-blur-sm flex items-center justify-center border border-white/20">
+            <div className="relative p-5 min-h-[200px] flex flex-col justify-between">
+              {/* Expand button — always visible */}
+              <div className="absolute top-3 right-3 w-8 h-8 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center border border-white/30 group-hover:bg-white/40 transition-colors">
+                <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" /></svg>
+              </div>
+              <div className="flex items-center gap-3 mb-3 pr-10">
+                <div className="w-10 h-10 rounded-xl bg-white/20 backdrop-blur-sm flex items-center justify-center border border-white/30">
                   <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d={area.icon} /></svg>
                 </div>
-                <h3 className="font-bold text-white text-lg">{area.area}</h3>
+                <h3 className="font-bold text-white text-lg drop-shadow-md">{area.area}</h3>
               </div>
               <div>
-                <ul className="space-y-1 mb-3">
+                <ul className="space-y-1.5 mb-3">
                   {area.items.map((item) => (
-                    <li key={item} className="flex items-start gap-2 text-xs text-white/80">
-                      <svg className="w-3 h-3 text-white/60 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
+                    <li key={item} className="flex items-start gap-2 text-[13px] text-white font-medium drop-shadow-sm">
+                      <svg className="w-3.5 h-3.5 text-white/80 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
                       {item}
                     </li>
                   ))}
                 </ul>
-                <span className="text-[10px] text-white/50 opacity-0 group-hover:opacity-100 transition-opacity font-medium">Click for red flags, costs & questions to ask</span>
+                <div className="flex items-center gap-1 text-[10px] text-white/70 font-medium">
+                  <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" /></svg>
+                  Red flags, repair costs & questions to ask
+                </div>
               </div>
             </div>
           </button>
@@ -159,8 +166,8 @@ export default function ExpandableInspectionAreas() {
           <div className="fixed inset-0 z-[700] flex items-center justify-center p-4" onClick={() => setSelected(null)}>
             <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" />
             <div className="relative bg-white rounded-2xl shadow-2xl max-w-2xl w-full max-h-[85vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
-              <button onClick={() => setSelected(null)} className="absolute top-3 right-3 p-1.5 text-white/60 hover:text-white bg-black/20 rounded-full z-10">
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
+              <button onClick={() => setSelected(null)} className="absolute top-3 right-3 p-2 text-white hover:text-white bg-black/40 hover:bg-black/60 rounded-full z-10 transition-colors">
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12" /></svg>
               </button>
 
               {/* Header */}

@@ -116,7 +116,10 @@ export default function WhatToExpectPage() {
                 </div>
                 {/* Content */}
                 <div className="flex-1">
-                  <h3 className="font-bold text-alta-navy text-lg mb-2">{step.title}</h3>
+                  <div className="flex items-center gap-2.5 mb-3">
+                    <div className="w-8 h-8 rounded-lg bg-alta-teal flex items-center justify-center text-white font-bold text-sm shrink-0">{i + 1}</div>
+                    <h3 className="font-bold text-alta-navy text-lg">{step.title}</h3>
+                  </div>
                   <div className="space-y-3">
                     {step.content.split('\n\n').map((paragraph, pIdx) => (
                       <p key={pIdx} className="text-sm text-alta-gray leading-relaxed">{paragraph}</p>

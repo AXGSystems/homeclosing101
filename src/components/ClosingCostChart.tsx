@@ -39,11 +39,9 @@ export default function ClosingCostChart() {
               onMouseLeave={() => setHoveredIdx(null)}
               onClick={() => setHoveredIdx(hoveredIdx === i ? null : i)}
             >
-              {width > 12 && (
-                <span className="absolute inset-0 flex items-center justify-center text-[9px] font-bold text-white">
-                  {d.pct}%
-                </span>
-              )}
+              <span className="absolute inset-0 flex items-center justify-center text-[8px] sm:text-[9px] font-bold text-white whitespace-nowrap">
+                {d.pct}%
+              </span>
             </div>
           );
         })}
