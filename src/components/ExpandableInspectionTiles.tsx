@@ -23,16 +23,25 @@ export default function ExpandableInspectionTiles() {
           <div
             key={si.name}
             onClick={() => setExpandedIdx(i)}
-            className="p-4 bg-white rounded-xl border border-gray-100 shadow-sm tile-interactive cursor-pointer group"
+            className="rounded-xl overflow-hidden border border-gray-100 shadow-sm tile-interactive cursor-pointer group"
           >
-            <div className="flex items-start justify-between gap-2 mb-2">
-              <h3 className="text-sm font-bold text-alta-navy group-hover:text-alta-teal transition-colors">{si.name}</h3>
-              <span className="text-[10px] font-medium text-alta-teal bg-alta-light px-2 py-0.5 rounded shrink-0">{si.cost}</span>
-            </div>
-            <p className="text-xs text-alta-gray leading-relaxed line-clamp-2">{si.detail.slice(0, 120)}...</p>
-            <div className="flex items-center justify-between mt-2">
-              <p className="text-[9px] text-alta-teal font-medium">Source: {si.source}</p>
-              <p className="text-[9px] text-alta-teal opacity-0 group-hover:opacity-100 transition-opacity">Click for full details</p>
+            {/* Colored top bar */}
+            <div className="h-1.5" style={{ backgroundColor: si.color }} />
+            <div className="p-4 bg-white">
+              <div className="flex items-start justify-between gap-2 mb-2">
+                <div className="flex items-center gap-2">
+                  <div className="w-8 h-8 rounded-lg flex items-center justify-center text-white text-xs font-bold shrink-0 group-hover:scale-110 transition-transform" style={{ backgroundColor: si.color }}>
+                    {i + 1}
+                  </div>
+                  <h3 className="text-sm font-bold text-alta-navy group-hover:text-alta-teal transition-colors">{si.name}</h3>
+                </div>
+                <span className="text-[10px] font-bold px-2 py-0.5 rounded-full text-white shrink-0" style={{ backgroundColor: si.color }}>{si.cost}</span>
+              </div>
+              <p className="text-xs text-alta-gray leading-relaxed line-clamp-2">{si.detail.slice(0, 100)}...</p>
+              <div className="flex items-center justify-between mt-2">
+                <p className="text-[9px] font-medium" style={{ color: si.color }}>Source: {si.source}</p>
+                <p className="text-[9px] text-alta-teal opacity-0 group-hover:opacity-100 transition-opacity font-medium">Click for details</p>
+              </div>
             </div>
           </div>
         ))}
