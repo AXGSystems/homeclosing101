@@ -1,6 +1,7 @@
 "use client";
 
 import PageHero from "@/components/PageHero";
+import { InlineAd } from "@/components/EliteProviders";
 
 const questionSections = [
   {
@@ -117,7 +118,7 @@ export default function QuestionsToAskPage() {
         </button>
 
         <div className="space-y-8">
-          {questionSections.map((section) => {
+          {questionSections.map((section, sIdx) => {
             const colorMap: Record<string, { headerBg: string; headerText: string; checkBorder: string }> = {
               blue: { headerBg: "bg-[#1a5276]", headerText: "text-white", checkBorder: "border-[#1a5276]/40" },
               green: { headerBg: "bg-[#2d6b3f]", headerText: "text-white", checkBorder: "border-[#2d6b3f]/40" },
@@ -127,7 +128,9 @@ export default function QuestionsToAskPage() {
             };
             const c = colorMap[section.color] || colorMap.blue;
             return (
-              <div key={section.title} className="rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+              <div key={section.title}>
+              {sIdx === 3 && <InlineAd />}
+              <div className="rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
                 <div className={`${c.headerBg} px-5 py-3`}>
                   <h2 className={`text-base font-bold ${c.headerText}`}>{section.title}</h2>
                   <p className="text-[10px] text-white/70 mt-0.5">{section.questions.length} questions</p>
@@ -153,9 +156,12 @@ export default function QuestionsToAskPage() {
                   </p>
                 </div>
               </div>
+              </div>
             );
           })}
         </div>
+
+        <InlineAd />
 
         <div className="mt-10 p-5 bg-blue-50 rounded-xl border border-blue-100 no-print">
           <h3 className="font-semibold text-alta-navy mb-2">Tips for Your Conversation</h3>
