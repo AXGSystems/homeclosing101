@@ -107,11 +107,11 @@ export default function HomePage() {
   return (
     <>
       {/* Hero */}
-      <section className="relative text-white py-5 lg:py-8 overflow-hidden">
+      <section className="relative text-white py-8 lg:py-14 overflow-hidden">
         {/* Background image */}
         <div
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{ backgroundImage: "url('https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1920&q=80')" }}
+          style={{ backgroundImage: "url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1920&q=80')" }}
         />
         {/* Dark overlay */}
         <div className="absolute inset-0 bg-gradient-to-r from-[#0f1b33]/95 via-[#1a2744]/90 to-[#0a8ebc]/80" />
@@ -120,24 +120,27 @@ export default function HomePage() {
         <div className="absolute bottom-0 left-1/4 w-80 h-80 bg-white/5 rounded-full translate-y-1/3 blur-3xl" />
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
-          <div className="grid lg:grid-cols-2 gap-6 lg:gap-12 items-center">
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-14 items-center">
             {/* Left — copy */}
             <div>
               <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full mb-6 border border-white/20">
                 <span className="text-xs font-medium text-gray-200 uppercase tracking-wider">An ALTA Educational Initiative</span>
               </div>
-              <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-3 leading-[1.1]">
-                Your Complete Guide to <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-blue-200">Home Closing</span>
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 leading-[1.08]">
+                The Homebuyer&apos;s Guide to <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-blue-200">Closing with Confidence</span>
               </h1>
-              <p className="text-sm sm:text-base text-gray-300 max-w-lg mb-6 leading-relaxed">
-                Buying a home is one of life&apos;s biggest milestones. Understand the closing process, protect your property rights, guard against fraud, and close with confidence.
+              <p className="text-base sm:text-lg text-gray-300 max-w-lg mb-4 leading-relaxed">
+                Every year, millions of Americans buy a home — and most walk into the closing process with no idea what they&apos;re signing, what they&apos;re paying for, or how to protect themselves.
+              </p>
+              <p className="text-sm text-gray-400 max-w-lg mb-8 leading-relaxed">
+                HomeClosing101 changes that. Built by the <strong className="text-white">American Land Title Association</strong>, this is your free, comprehensive, no-nonsense guide to understanding closing costs, protecting your property rights, avoiding wire fraud, and making informed decisions at every step — backed by verified data from the CFPB, FBI, NAR, and ALTA.
               </p>
               <div className="flex flex-col sm:flex-row gap-3">
                 <Link
-                  href="/closing-process/what-to-expect"
+                  href="/first-time-buyers"
                   className="inline-flex items-center justify-center px-7 py-3.5 bg-white text-alta-navy font-semibold rounded-lg hover:bg-gray-100 transition-colors shadow-lg shadow-black/10"
                 >
-                  Start Learning
+                  Start Here
                   <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                   </svg>
@@ -171,12 +174,76 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Why This Matters — the hook */}
+      <section className="py-12 lg:py-16 bg-white">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6">
+          <div className="text-center mb-10">
+            <h2 className="text-3xl font-bold text-alta-navy mb-3">Why Every Homebuyer Needs This</h2>
+            <p className="text-alta-gray max-w-2xl mx-auto leading-relaxed">The closing process is the most consequential financial event most people will ever experience — yet it&apos;s the one they prepare for the least. Here&apos;s what the data says.</p>
+          </div>
+
+          {/* Compelling data points */}
+          <div className="grid md:grid-cols-3 gap-5 mb-10">
+            <div className="relative rounded-2xl overflow-hidden shadow-md group">
+              <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=400&q=80')" }} />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0f1b33]/90 via-[#0f1b33]/60 to-transparent" />
+              <div className="relative p-6 pt-28">
+                <p className="text-3xl font-bold text-white mb-1">$13,357</p>
+                <p className="text-sm text-gray-300 mb-2">Average closing costs on a $400K home</p>
+                <p className="text-xs text-gray-400 leading-relaxed">Most buyers don&apos;t budget for this. Closing costs typically run 2-5% of the purchase price — on top of your down payment. That&apos;s thousands of dollars in fees many buyers don&apos;t see coming.</p>
+                <p className="text-[10px] text-alta-teal mt-3 font-medium">Source: CFPB</p>
+              </div>
+            </div>
+            <div className="relative rounded-2xl overflow-hidden shadow-md group">
+              <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=400&q=80')" }} />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#3d1010]/90 via-[#3d1010]/60 to-transparent" />
+              <div className="relative p-6 pt-28">
+                <p className="text-3xl font-bold text-white mb-1">$275.1M</p>
+                <p className="text-sm text-gray-300 mb-2">Lost to real estate wire fraud in 2025</p>
+                <p className="text-xs text-gray-400 leading-relaxed">Criminals use AI, deepfakes, and hacked emails to intercept closing funds. The average victim loses their entire down payment — approximately $150,000. Recovery rates drop below 5% after 48 hours.</p>
+                <p className="text-[10px] text-red-400 mt-3 font-medium">Source: FBI IC3 2024 Report</p>
+              </div>
+            </div>
+            <div className="relative rounded-2xl overflow-hidden shadow-md group">
+              <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1560520653-9e0e4c89eb11?w=400&q=80')" }} />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#1e5530]/90 via-[#1e5530]/60 to-transparent" />
+              <div className="relative p-6 pt-28">
+                <p className="text-3xl font-bold text-white mb-1">1 in 3</p>
+                <p className="text-sm text-gray-300 mb-2">Title searches find issues before closing</p>
+                <p className="text-xs text-gray-400 leading-relaxed">Liens, errors, missing heirs, forged documents — title professionals catch problems in roughly one-third of transactions. Owner&apos;s title insurance protects you from what even the search can&apos;t find.</p>
+                <p className="text-[10px] text-green-400 mt-3 font-medium">Source: ALTA</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Pull quote */}
+          <div className="p-6 bg-alta-light rounded-2xl border border-gray-100 mb-10">
+            <div className="flex items-start gap-4">
+              <div className="w-10 h-10 rounded-full bg-alta-teal/10 flex items-center justify-center shrink-0 mt-1">
+                <svg className="w-5 h-5 text-alta-teal" fill="currentColor" viewBox="0 0 24 24"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10H14.017zM0 21v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151C7.563 6.068 6 8.789 6 11h4v10H0z" /></svg>
+              </div>
+              <div>
+                <p className="text-alta-navy leading-relaxed italic">&ldquo;The closing table is no place to learn what you&apos;re signing. Homebuyers who prepare — who understand their Loan Estimate, their Closing Disclosure, their title insurance, and their rights — save money, avoid scams, and close with confidence.&rdquo;</p>
+                <p className="text-sm text-alta-gray mt-3 font-medium">— HomeClosing101 Mission</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Animated market stats */}
+          <div className="text-center mb-6">
+            <h3 className="text-xl font-bold text-alta-navy mb-2">The 2025 Housing Market at a Glance</h3>
+            <p className="text-sm text-alta-gray">Real data from NAR, CFPB, Census Bureau, and FBI IC3.</p>
+          </div>
+          <MarketStats />
+        </div>
+      </section>
+
       {/* Feature Cards */}
-      <section className="py-16 lg:py-20 bg-alta-light">
+      <section className="py-14 lg:py-18 bg-alta-light">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-alta-navy mb-3">Everything You Need to Know</h2>
-            <p className="text-alta-gray max-w-xl mx-auto">From understanding costs to protecting your investment — we&apos;ve got you covered.</p>
+            <p className="text-alta-gray max-w-xl mx-auto">From understanding costs to protecting your investment — 25+ pages of deep, verified guides.</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {features.map((f) => (
@@ -213,17 +280,6 @@ export default function HomePage() {
               </Link>
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* Homebuying by the Numbers — real data */}
-      <section className="py-10 bg-white">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6">
-          <div className="text-center mb-8">
-            <h2 className="text-2xl font-bold text-alta-navy mb-2">Homebuying by the Numbers</h2>
-            <p className="text-sm text-alta-gray">Real data from NAR, CFPB, Census Bureau, and FBI IC3 to help you understand the market.</p>
-          </div>
-          <MarketStats />
         </div>
       </section>
 
