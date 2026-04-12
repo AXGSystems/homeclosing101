@@ -207,54 +207,165 @@ select:focus {
   transform: scaleX(1);
 }
 
-/* Print styles */
+/* Print styles — clean, content-only output */
 @media print {
-  /* Hide all site chrome */
-  nav, footer, .no-print,
-  [class*="sticky"], [class*="NewsTicker"],
-  [class*="HomeClosingAI"], [class*="EliteProviders"],
-  [class*="InlineAd"], [class*="SponsorSidebar"] {
+
+  /* ── 1. HIDE everything that isn't content ── */
+
+  /* Site chrome: header block, footer block, disclaimer */
+  body > div.sticky,                     /* sticky header (ticker + nav) */
+  body > .fixed,                         /* fixed footer (disclaimer + footer) */
+  div[class*="fixed bottom"],            /* fixed bottom bar */
+  footer,
+  nav {
     display: none !important;
   }
 
-  /* Clean print layout */
-  body {
+  /* Page heroes: full hero image + collapsed mini bar */
+  section[class*="overflow-hidden"]:first-of-type,  /* hero sections */
+  div[class*="bg-alta-navy"][class*="backdrop-blur"], /* mini hero bar */
+  .no-print {
+    display: none !important;
+  }
+
+  /* Interactive elements & widgets */
+  button[class*="no-print"],
+  div[class*="HomeClosingAI"],           /* AI chat widget */
+  div[class*="StickyGlossaryAd"],        /* sticky ads */
+  a[class*="InlineAd"],                  /* inline sponsor ads */
+  div[class*="my-10"] > a[target="_blank"], /* InlineAd wrapper */
+  section[class*="bg-alta-light/50"],    /* EliteProviders bar */
+  div[class*="letter-nav"],              /* glossary letter pills */
+  div[class*="animate-ping"],            /* pulsing dots */
+  div[class*="backdrop-blur"],           /* glassmorphic overlays */
+  div[class*="sm:sticky"],              /* sticky intro boxes */
+  div[class*="stat-card"],              /* hero stat cards */
+  div[class*="bg-amber-50"][class*="rounded-xl"][class*="border-amber-200"], /* session warnings */
+  div[class*="bg-white/95"][class*="backdrop-blur"], /* sticky search bars */
+  div.sticky {                          /* all remaining sticky elements */
+    display: none !important;
+  }
+
+  /* Background images on section headers (checklist phases, etc.) */
+  div[class*="bg-cover"],
+  div[class*="bg-center"],
+  div[style*="backgroundImage"] {
+    background-image: none !important;
+    background: transparent !important;
+  }
+
+  /* Gradient overlays */
+  div[class*="bg-gradient-to"] {
+    background: transparent !important;
+    opacity: 1 !important;
+  }
+
+  /* ── 2. CLEAN layout ── */
+
+  html, body {
     background: white !important;
+    color: #1a1a1a !important;
+    font-size: 12px !important;
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
   }
 
   main {
-    padding-top: 0 !important;
-    margin-top: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
   }
 
+  /* Remove all shadows, rounded corners excess, transforms */
+  * {
+    box-shadow: none !important;
+    text-shadow: none !important;
+    transform: none !important;
+    transition: none !important;
+    animation: none !important;
+  }
+
+  /* ── 3. COMPACT content for print ── */
+
+  /* Reduce spacing */
+  .py-1\.5, .py-2, .py-3, .py-4, .py-5, .py-6 {
+    padding-top: 4px !important;
+    padding-bottom: 4px !important;
+  }
+
+  .mb-4, .mb-6, .mb-8, .mb-10, .mb-12, .mb-14 {
+    margin-bottom: 8px !important;
+  }
+
+  .space-y-6 > * + *, .space-y-8 > * + *, .space-y-10 > * + * {
+    margin-top: 8px !important;
+  }
+
+  /* Make section headers text-only (no image backgrounds) */
+  div[class*="relative h-28"],
+  div[class*="relative h-32"],
+  div[class*="relative h-36"],
+  div[class*="relative h-48"] {
+    height: auto !important;
+    position: relative !important;
+    background: #f3f4f6 !important;
+    padding: 8px 12px !important;
+  }
+
+  /* Make text in image headers visible without the image */
+  div[class*="relative h-28"] .text-white,
+  div[class*="relative h-32"] .text-white,
+  div[class*="relative h-36"] .text-white,
+  div[class*="relative h-48"] .text-white,
+  div[class*="relative h-28"] [class*="text-white"],
+  div[class*="relative h-32"] [class*="text-white"],
+  div[class*="relative h-36"] [class*="text-white"],
+  div[class*="relative h-48"] [class*="text-white"] {
+    color: #0f2b46 !important;
+  }
+
+  /* Ensure all text is dark and readable */
+  .text-white, .text-gray-300, .text-gray-400, .text-white\/90, .text-white\/80, .text-white\/70, .text-white\/60 {
+    color: #1a1a1a !important;
+  }
+
+  /* Checklist items: compact and clean */
+  .check-item {
+    padding: 4px 8px !important;
+    border: 1px solid #e5e7eb !important;
+    margin-bottom: 2px !important;
+    break-inside: avoid;
+  }
+
+  .check-item.checked {
+    border-color: #2d6b3f !important;
+    background: #f0fdf4 !important;
+  }
+
+  /* Page breaks */
   .print-break { page-break-before: always; }
 
-  /* Show print-only elements */
+  .rounded-2xl, .rounded-xl, .check-item {
+    break-inside: avoid;
+  }
+
+  /* ── 4. PRINT-ONLY branding ── */
+
   .print-header {
     display: flex !important;
     align-items: center;
     justify-content: center;
     gap: 12px;
-    padding: 16px 0;
-    margin-bottom: 16px;
+    padding: 12px 0;
+    margin-bottom: 12px;
     border-bottom: 2px solid #0a8ebc;
   }
 
-  .print-header img {
-    height: 32px;
-    width: auto;
-  }
-
   .print-header span {
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 700;
     color: #0f2b46;
-    letter-spacing: -0.01em;
   }
 
-  /* Print footer */
   .print-footer {
     display: block !important;
     position: fixed;
@@ -262,26 +373,14 @@ select:focus {
     left: 0;
     right: 0;
     text-align: center;
-    padding: 8px 0;
+    padding: 6px 0;
     border-top: 1px solid #e5e7eb;
-    font-size: 9px;
+    font-size: 8px;
     color: #9ca3af;
   }
 
-  /* Remove shadows and unnecessary styling in print */
-  * {
-    box-shadow: none !important;
-    text-shadow: none !important;
-  }
-
-  /* Ensure content doesn't break awkwardly */
-  .rounded-2xl, .rounded-xl {
-    break-inside: avoid;
-  }
-
-  /* Make checked items show checkmarks in print */
-  .check-item.checked {
-    border-color: #2d6b3f !important;
-    background: #f0fdf4 !important;
+  /* Page title — print a clean title from the content */
+  h1, h2 {
+    break-after: avoid;
   }
 }
