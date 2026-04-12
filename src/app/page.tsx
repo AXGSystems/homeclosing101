@@ -94,12 +94,18 @@ const steps = [
 ];
 
 const resources = [
-  { name: "Consumer Financial Protection Bureau", desc: "Homeownership guides and settlement cost booklet", url: "https://www.consumerfinance.gov/owning-a-home/" },
-  { name: "HUD Housing Counselor Locator", desc: "Find a HUD-approved housing counselor near you", url: "https://www.consumerfinance.gov/housing/" },
-  { name: "Fannie Mae HomePath", desc: "Homebuyer education and resources", url: "https://www.homepath.com/" },
-  { name: "Freddie Mac My Home", desc: "Tools and resources for homebuyers", url: "https://myhome.freddiemac.com/" },
-  { name: "National Association of Realtors", desc: "Find a Realtor and market data", url: "https://www.nar.realtor/" },
-  { name: "Appraisal Institute", desc: "Professional appraisal resources", url: "https://www.appraisalinstitute.org/" },
+  { name: "American Land Title Association (ALTA)", desc: "The national trade organization for the title insurance industry — best practices, advocacy, and consumer protection", url: "https://www.alta.org/" },
+  { name: "Consumer Financial Protection Bureau", desc: "Homeownership guides, settlement cost booklet, and complaint filing", url: "https://www.consumerfinance.gov/owning-a-home/" },
+  { name: "HUD Housing Counselor Locator", desc: "Find a HUD-approved housing counselor near you — free guidance", url: "https://www.consumerfinance.gov/housing/" },
+  { name: "FBI Internet Crime Complaint Center", desc: "Report wire fraud and internet crimes — real estate fraud prevention resources", url: "https://www.ic3.gov/" },
+  { name: "Fannie Mae HomePath", desc: "Free homebuyer education course with certificate of completion", url: "https://www.homepath.com/" },
+  { name: "Freddie Mac My Home", desc: "Tools, calculators, and educational resources for homebuyers", url: "https://myhome.freddiemac.com/" },
+  { name: "National Association of Realtors", desc: "Find a Realtor, market data, and consumer guides", url: "https://www.nar.realtor/" },
+  { name: "Appraisal Institute", desc: "Professional appraisal resources and find-an-appraiser tool", url: "https://www.appraisalinstitute.org/" },
+  { name: "National Assoc. of Insurance Commissioners", desc: "State insurance regulator directory and consumer complaint resources", url: "https://content.naic.org/" },
+  { name: "Federal Housing Finance Agency", desc: "Conforming loan limits, housing data, and GSE oversight", url: "https://www.fhfa.gov/" },
+  { name: "IRS Homeowner Tax Benefits", desc: "Mortgage interest deduction, property tax deduction, and capital gains exclusion guides", url: "https://www.irs.gov/publications/p530" },
+  { name: "FEMA Flood Map Service Center", desc: "Check if your property is in a flood zone — affects insurance requirements", url: "https://msc.fema.gov/" },
 ];
 
 export default function HomePage() {
@@ -426,7 +432,7 @@ export default function HomePage() {
             <h2 className="text-3xl font-bold text-alta-navy mb-3">Trusted Resources</h2>
             <p className="text-alta-gray max-w-xl mx-auto">Verified links to government agencies and industry organizations that support homebuyers.</p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
             {resources.map((r) => (
               <a
                 key={r.name}
