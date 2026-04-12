@@ -109,8 +109,9 @@ export default function ProtectYourMoneyPage() {
                   </div>
                   <h3 className="font-bold text-alta-navy mb-1">{sg.title}</h3>
                   <p className="text-xs text-alta-gray leading-relaxed">{sg.description}</p>
-              </div>
-            ))}
+                </div>
+              );
+            })}
           </div>
 
           <InlineAd />
