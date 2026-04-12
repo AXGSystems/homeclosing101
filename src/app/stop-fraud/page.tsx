@@ -2,6 +2,7 @@ import Link from "next/link";
 import PageHero from "@/components/PageHero";
 import PrintButton from "@/components/PrintButton";
 import FraudStats from "@/components/FraudStats";
+import ExpandableFraudSteps from "@/components/ExpandableFraudSteps";
 import { InlineAd } from "@/components/EliteProviders";
 import type { Metadata } from "next";
 
@@ -115,21 +116,9 @@ export default function StopFraudPage() {
         <FraudStats />
 
         {/* 10 Prevention Steps */}
-        <h2 className="text-2xl font-bold text-alta-navy mb-6">10 Steps to Prevent Wire Fraud</h2>
-        <div className="space-y-4 mb-12">
-          {preventionSteps.map((step) => (
-            <div key={step.num} className="flex gap-4 p-5 bg-white rounded-xl border border-gray-100 shadow-sm tile-interactive">
-              <div className="w-10 h-10 rounded-full bg-alta-red text-white flex items-center justify-center font-bold text-sm shrink-0">
-                {step.num}
-              </div>
-              <div className="flex-1">
-                <h3 className="font-semibold text-alta-navy">{step.title}</h3>
-                <p className="text-sm text-alta-gray mt-1">{step.desc}</p>
-                <p className="text-[10px] text-alta-teal mt-2 font-medium uppercase tracking-wider">Source: {step.source}</p>
-              </div>
-            </div>
-          ))}
-        </div>
+        <h2 className="text-2xl font-bold text-alta-navy mb-4">10 Steps to Prevent Wire Fraud</h2>
+        <p className="text-sm text-alta-gray mb-4">Click any step for a detailed explanation of why it matters and how to implement it.</p>
+        <ExpandableFraudSteps />
 
         {/* If You're a Victim */}
         <h2 className="text-2xl font-bold text-alta-navy mb-4">If You Suspect You&apos;re a Victim</h2>
