@@ -50,7 +50,16 @@ export default function RootLayout({
           <NewsTicker />
           <Header />
         </div>
+        {/* Print-only header */}
+        <div className="print-header hidden">
+          <span>HomeClosing101</span>
+          <span style={{ fontSize: '11px', fontWeight: 400, color: '#6b7280' }}>| An ALTA Educational Initiative</span>
+        </div>
         <main className="flex-1 pb-16 sm:pb-14">{children}</main>
+        {/* Print-only footer */}
+        <div className="print-footer hidden">
+          HomeClosing101.org — An educational initiative of the American Land Title Association (ALTA) — homeclosing101.org
+        </div>
         <div className="fixed bottom-0 left-0 right-0 z-50">
           <AltaDisclaimer />
           <Footer />

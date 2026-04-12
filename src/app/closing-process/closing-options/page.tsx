@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 const options = [
   {
     title: "In-Person Closing",
-    image: "https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?w=600&q=80",
+    image: "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=600&q=80",
     summary: "All parties meet at the settlement provider's office to review and sign transfer documents together.",
     howItWorks: [
       "You, your real estate agent, and possibly the seller meet at the title company or attorney's office",
@@ -29,7 +29,7 @@ const options = [
   },
   {
     title: "Mail-Away / Mobile Notary",
-    image: "https://images.unsplash.com/photo-1586769852044-692d6e3703f0?w=600&q=80",
+    image: "https://images.unsplash.com/photo-1568792923760-d70635a89fdc?w=600&q=80",
     summary: "The settlement provider sends closing documents to you via courier. A notary meets you at a location of your choice to witness your signing.",
     howItWorks: [
       "Your settlement agent prepares all closing documents and sends them to you via overnight courier or secure delivery",
@@ -47,7 +47,7 @@ const options = [
   },
   {
     title: "Hybrid Closing",
-    image: "https://images.unsplash.com/photo-1553028826-f4804a6dba3b?w=600&q=80",
+    image: "https://images.unsplash.com/photo-1573497620053-ea5300f94f21?w=600&q=80",
     summary: "You pre-sign most documents electronically through a secure portal, then visit the office briefly to execute only the key transfer documents that require wet signatures.",
     howItWorks: [
       "Your settlement agent sends you a secure link to a digital signing portal (like Qualia, SoftPro, or Notarize)",
@@ -64,8 +64,8 @@ const options = [
   },
   {
     title: "Remote Online Notarization (RON)",
-    image: "https://images.unsplash.com/photo-1588702547923-7093a6c3ba33?w=600&q=80",
-    summary: "A fully digital closing where all documents — including the deed and note — are signed electronically and notarized via a live audio-video session with a commissioned remote notary.",
+    image: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=600&q=80",
+    summary: "A fully digital closing where all documents — including the deed and note — are signed electronically and notarized via a live audio-video session with a commissioned remote notary. As of 2026, 45 states and the District of Columbia have enacted permanent RON legislation — a milestone made possible in large part by the advocacy of the American Land Title Association (ALTA) and the Mortgage Bankers Association (MBA), who partnered in 2017 to develop model legislation and have since worked with state officials across the country to bring this secure, accessible closing method to homebuyers nationwide. At the federal level, the bipartisan SECURE Notarization Act aims to establish national standards and enable RON in the remaining states.",
     howItWorks: [
       "Your settlement agent sets up a secure video session on a RON platform (such as Notarize, Nexsys, or Pavaso)",
       "You verify your identity through knowledge-based authentication (KBA) questions and credential analysis — the platform verifies your ID in real time",
@@ -78,7 +78,7 @@ const options = [
     whoAttends: "Buyer and a remote online notary (via live video). No one needs to be in the same physical location.",
     duration: "Typically 30-60 minutes for the video session",
     pros: ["Complete the entire closing from anywhere with internet", "No travel, no office visit, no scheduling around business hours", "Full recording of the session for security and dispute resolution", "Identity verification is often MORE rigorous than in-person", "Accessible for buyers with disabilities or in remote areas"],
-    cons: ["Requires reliable internet connection and a device with camera/microphone", "Not available in all states (see state availability below)", "Some county recorders don't yet accept electronically notarized documents", "Some lenders don't support RON closings", "Less personal — you're interacting through a screen"],
+    cons: ["Requires reliable internet connection and a device with camera/microphone", "Available in 45 states + DC as of 2026, with federal legislation pending for the remaining states", "Some county recorders don't yet accept electronically notarized documents", "Some lenders don't support RON closings", "Less personal — you're interacting through a screen"],
     bestFor: "Tech-savvy buyers, remote workers, military personnel overseas, or anyone in a state that permits RON who wants maximum convenience.",
   },
 ];
@@ -212,10 +212,13 @@ export default function ClosingOptionsPage() {
           <div className="p-5 bg-gradient-to-br from-amber-50 to-white rounded-2xl border border-amber-200 mb-6">
             <h3 className="font-bold text-alta-navy mb-2">RON State Availability</h3>
             <p className="text-sm text-alta-gray leading-relaxed mb-3">
-              Remote Online Notarization (RON) laws vary by state. As of 2026, the majority of U.S. states have enacted permanent RON legislation, but availability depends on your specific county recorder&apos;s office accepting electronically notarized documents, and your lender supporting the process. States that were early adopters include Virginia, Texas, Florida, Michigan, and Nevada. Source: ALTA
+              As of 2026, <strong className="text-alta-navy">45 states and the District of Columbia</strong> have enacted permanent RON legislation — up from just one state (Virginia) in 2011. This rapid expansion was driven by the joint advocacy of the <strong className="text-alta-navy">American Land Title Association (ALTA)</strong> and the Mortgage Bankers Association (MBA), who developed model legislation in 2017 and worked with lawmakers in every state to pass it. Early adopters include Virginia (2011), Texas, Florida, Michigan, and Nevada. Source: ALTA, MBA
+            </p>
+            <p className="text-sm text-alta-gray leading-relaxed mb-3">
+              At the federal level, the <strong className="text-alta-navy">SECURE Notarization Act</strong> (HR 1777) has bipartisan support and would establish national minimum standards for RON, enabling interstate recognition and opening RON to homebuyers in the remaining states. ALTA, MBA, and the National Association of Realtors are among its strongest advocates.
             </p>
             <p className="text-sm text-alta-gray leading-relaxed">
-              <strong className="text-alta-navy">Important:</strong> Even if your state allows RON, your lender or settlement provider may not offer it. Always ask about available closing methods early in the process so you can plan accordingly.
+              <strong className="text-alta-navy">Important:</strong> Even if your state allows RON, your lender or settlement provider may not offer it. Some county recorder&apos;s offices do not yet accept electronically notarized documents for recording. Always ask about available closing methods early in the process so you can plan accordingly.
             </p>
           </div>
 
