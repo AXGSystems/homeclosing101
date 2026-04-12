@@ -24,8 +24,8 @@ export default function JoinAltaPage() {
   return (
     <>
       <PageHero
-        title="In the Title Industry?"
-        subtitle="Join 6,000+ member companies in the American Land Title Association — the voice of the title insurance and settlement services industry since 1907."
+        title="In the Title Industry? Join ALTA."
+        subtitle="6,000+ member companies. 50 states. 117 years of advocacy. The voice of the title insurance and settlement services industry."
         image="https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=1920&q=80"
         breadcrumb={[{ label: "Resources", href: "/resources" }, { label: "Join ALTA", href: "/join-alta" }]}
       />
@@ -122,29 +122,58 @@ export default function JoinAltaPage() {
             ))}
           </div>
 
-          {/* Key events */}
-          <h2 className="text-2xl font-bold text-alta-navy mb-4">ALTA Events, Webinars & Education</h2>
-          <p className="text-sm text-alta-gray mb-6 leading-relaxed">ALTA hosts events throughout the year — from the flagship annual conference to weekly webinars and regional education. These are where the industry connects, learns, and leads.</p>
+          {/* ALTA Events & Conferences */}
+          <h2 className="text-2xl font-bold text-alta-navy mb-2">Events & Conferences</h2>
+          <p className="text-sm text-alta-gray mb-6 leading-relaxed">ALTA brings the title industry together through flagship conferences, education events, and grassroots advocacy.</p>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 mb-10">
             {[
-              { name: "ALTA ONE", desc: "The premier annual conference for the title industry — keynotes, breakout sessions, networking, and an expo hall with thousands of professionals. Held each fall in a major U.S. city.", badge: "Flagship Event", color: "from-[#1a5276] to-[#154463]", url: "https://www.alta.org/altaone/" },
-              { name: "ALTA Advocacy Summit", desc: "Title professionals travel to Washington, D.C. to meet with their members of Congress and advocate for policies that protect the industry and consumers.", badge: "Annual", color: "from-[#943030] to-[#7a2020]", url: "https://www.alta.org/advocacy/" },
-              { name: "ALTA EDge", desc: "Regional education events providing focused professional development, compliance training, and networking in cities across the country.", badge: "Regional", color: "from-[#2d6b3f] to-[#235532]", url: "https://www.alta.org/education/" },
-              { name: "Webinar Series", desc: "Free and member-exclusive webinars covering regulatory updates, technology trends, cybersecurity, fraud prevention, and business strategy — typically weekly.", badge: "Ongoing", color: "from-[#0a7ea8] to-[#077a9e]", url: "https://www.alta.org/education/webinars/" },
-              { name: "NTP Designation Program", desc: "The National Title Professional designation recognizes title industry professionals who demonstrate knowledge, experience, and commitment to best practices.", badge: "Certification", color: "from-[#5b3a8c] to-[#482d70]", url: "https://www.alta.org/ntp/" },
-              { name: "Title Topics Podcast", desc: "ALTA's official podcast featuring interviews with industry leaders, regulatory updates, and discussions on technology, fraud, and market trends.", badge: "Media", color: "from-[#8b6914] to-[#705410]", url: "https://www.alta.org/publications/" },
+              { name: "ALTA ONE 2026", desc: "The ultimate gathering of title professionals. Network, collaborate, and be inspired by industry leaders. Keynotes, breakout sessions, and expo hall.", when: "Oct 12-15, 2026 | Scottsdale, AZ", image: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=400&q=80", badge: "Flagship", color: "from-[#1a5276] to-[#154463]", url: "https://www.alta.org/altaone/" },
+              { name: "ALTA EDge 2026", desc: "Education-first experience with Business Operations and Technology tracks — AI, automation, leadership, and operational excellence.", when: "Mar 18-20, 2026 | Frisco, TX", image: "https://images.unsplash.com/photo-1523580494863-6f3031224c94?w=400&q=80", badge: "Education", color: "from-[#2d6b3f] to-[#235532]", url: "https://meetings.alta.org/edge2026/" },
+              { name: "Advocacy Summit 2026", desc: "Title professionals meet with their members of Congress on Capitol Hill to advocate for the industry and consumer protection.", when: "Washington, D.C.", image: "https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?w=400&q=80", badge: "Advocacy", color: "from-[#943030] to-[#7a2020]", url: "https://www.alta.org/advocacy/" },
             ].map((e) => (
-              <a key={e.name} href={e.url} target="_blank" rel="noopener noreferrer" className="rounded-2xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-md transition-shadow group bg-white">
-                <div className={`bg-gradient-to-r ${e.color} px-4 py-2.5 flex items-center justify-between`}>
-                  <h3 className="font-bold text-white text-sm">{e.name}</h3>
-                  <span className="text-[9px] font-bold text-white/70 bg-white/15 px-2 py-0.5 rounded-full">{e.badge}</span>
+              <a key={e.name} href={e.url} target="_blank" rel="noopener noreferrer" className="rounded-2xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-lg transition-shadow group bg-white">
+                <div className="relative h-36 overflow-hidden">
+                  <div className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105" style={{ backgroundImage: `url('${e.image}')` }} />
+                  <div className={`absolute inset-0 bg-gradient-to-t ${e.color} opacity-70`} />
+                  <div className="absolute top-3 right-3">
+                    <span className="text-[9px] font-bold text-white bg-white/20 backdrop-blur-sm px-2.5 py-1 rounded-full border border-white/20">{e.badge}</span>
+                  </div>
+                  <div className="absolute bottom-3 left-4 right-4">
+                    <h3 className="font-bold text-white text-base drop-shadow">{e.name}</h3>
+                    <p className="text-[10px] text-white/70 mt-0.5">{e.when}</p>
+                  </div>
                 </div>
                 <div className="p-4">
                   <p className="text-xs text-alta-gray leading-relaxed mb-2">{e.desc}</p>
-                  <span className="text-xs text-alta-teal font-medium flex items-center gap-1">
-                    Learn more
-                    <svg className="w-3 h-3 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
-                  </span>
+                  <span className="text-xs text-alta-teal font-medium flex items-center gap-1">Learn more <svg className="w-3 h-3 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg></span>
+                </div>
+              </a>
+            ))}
+          </div>
+
+          {/* Programs & Initiatives */}
+          <h2 className="text-2xl font-bold text-alta-navy mb-2">Programs & Initiatives</h2>
+          <p className="text-sm text-alta-gray mb-6 leading-relaxed">Beyond events, ALTA drives impact through grassroots advocacy, charitable giving, professional recognition, and political engagement.</p>
+          <div className="grid md:grid-cols-2 gap-4 mb-10">
+            {[
+              { name: "Title Action Network (TAN)", desc: "The industry's free grassroots advocacy network. TAN sends action alerts on state and federal issues that affect your business and customers — enabling you to contact your legislators with one click. Free for members and non-members.", stat: "Free to join", url: "https://www.alta.org/tan/", color: "from-[#943030] to-[#7a2020]", icon: "M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" },
+              { name: "ALTA Good Deeds Foundation", desc: "Founded in 2020 to bolster the charitable efforts of title professionals. Awards grants to 501(c)(3) organizations supported by title industry members. You don't need to be an ALTA member to apply.", stat: "$982K awarded to 169 charities in 41 states + DC", url: "https://www.altagooddeeds.org/", color: "from-[#2d6b3f] to-[#235532]", icon: "M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" },
+              { name: "TIPAC", desc: "Title Industry Political Action Committee — the collective political voice of the title insurance industry. TIPAC builds relationships with members of Congress who champion property rights, consumer protection, and smart regulation.", stat: "Official ALTA PAC", url: "https://www.alta.org/advocacy/tipac/", color: "from-[#1a5276] to-[#154463]", icon: "M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0012 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18M12 6.75h.008v.008H12V6.75z" },
+              { name: "NTP Designation", desc: "The National Title Professional designation recognizes professionals who demonstrate the knowledge, experience, and dedication essential to the safe and efficient transfer of real property. Includes Credly digital badge and industry recognition.", stat: "Career distinction", url: "https://www.alta.org/career-and-learning/national-title-professional/", color: "from-[#5b3a8c] to-[#482d70]", icon: "M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.697 50.697 0 0112 13.489a50.702 50.702 0 017.74-3.342M6.75 15a.75.75 0 100-1.5.75.75 0 000 1.5zm0 0v-3.675A55.378 55.378 0 0112 8.443m-7.007 11.55A5.981 5.981 0 006.75 15.75v-1.5" },
+            ].map((p) => (
+              <a key={p.name} href={p.url} target="_blank" rel="noopener noreferrer" className="rounded-2xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-md transition-shadow group bg-white">
+                <div className={`bg-gradient-to-r ${p.color} px-4 py-3 flex items-center gap-3`}>
+                  <div className="w-9 h-9 rounded-lg bg-white/15 flex items-center justify-center shrink-0">
+                    <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d={p.icon} /></svg>
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-white text-sm">{p.name}</h3>
+                    <p className="text-[9px] text-white/60">{p.stat}</p>
+                  </div>
+                </div>
+                <div className="p-4">
+                  <p className="text-xs text-alta-gray leading-relaxed mb-2">{p.desc}</p>
+                  <span className="text-xs text-alta-teal font-medium flex items-center gap-1">Learn more <svg className="w-3 h-3 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg></span>
                 </div>
               </a>
             ))}
@@ -152,24 +181,27 @@ export default function JoinAltaPage() {
 
           <InlineAd />
 
-          {/* Testimonials */}
-          <MemberTestimonials />
-
-          {/* ALTA Publications & Resources */}
-          <h2 className="text-2xl font-bold text-alta-navy mb-4">Publications & Resources</h2>
-          <div className="grid sm:grid-cols-2 gap-3 mb-14">
+          {/* Education & Learning */}
+          <h2 className="text-2xl font-bold text-alta-navy mb-2">Education & Publications</h2>
+          <p className="text-sm text-alta-gray mb-6 leading-relaxed">ALTA provides industry-leading education, publications, and policy forms that keep your team current and your operations compliant.</p>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 mb-10">
             {[
-              { name: "TitleNews Magazine", desc: "ALTA's flagship publication covering industry trends, regulatory developments, technology, and member success stories. Published bi-monthly.", color: "border-l-[#1a5276]" },
-              { name: "ALTA Policy Forms", desc: "Access to standardized title insurance policy forms used industry-wide — owner's policies, loan policies, endorsements, and commitments.", color: "border-l-[#2d6b3f]" },
-              { name: "Advocacy Resources", desc: "Stay current on federal and state legislation, regulatory changes, and ALTA's positions on policies that affect the industry.", color: "border-l-[#5b3a8c]" },
-              { name: "HomeClosing101", desc: "ALTA's consumer education platform — the site you're on right now. Helping homebuyers understand closing, protect their rights, and avoid fraud.", color: "border-l-[#0a7ea8]" },
+              { name: "ALTA Learning (Elevate)", desc: "Online courses designed by LTI and the ALTA Education Committee — learn virtually about title insurance, compliance, and operations.", url: "https://elevate.alta.org/", color: "border-l-[#0a7ea8]" },
+              { name: "Free Webinars", desc: "Regular webinars on regulatory updates, cybersecurity, technology, and business strategy. Open to both members and non-members.", url: "https://www.alta.org/education/", color: "border-l-[#2d6b3f]" },
+              { name: "TitleNews Online", desc: "ALTA's industry newsletter emailed twice weekly with the top stories impacting title insurance — stay ahead of regulatory and market changes.", url: "https://www.alta.org/publications/title-news-online.cfm", color: "border-l-[#1a5276]" },
+              { name: "ALTA Policy Forms", desc: "Standardized title insurance policy forms used industry-wide — owner's policies, loan policies, endorsements, and commitments.", url: "https://www.alta.org/policy-forms/", color: "border-l-[#5b3a8c]" },
+              { name: "HomeClosing101", desc: "ALTA's consumer education platform — the site you're on now. Helps homebuyers understand closing, protect their rights, and avoid fraud.", url: "/", color: "border-l-[#0a7ea8]" },
+              { name: "Advocacy Resources", desc: "Federal and state legislation tracking, regulatory change alerts, ALTA position papers, and talking points for engaging your legislators.", url: "https://www.alta.org/advocacy/", color: "border-l-[#943030]" },
             ].map((p) => (
-              <div key={p.name} className={`p-4 bg-white rounded-xl border border-gray-100 border-l-4 ${p.color} shadow-sm tile-interactive`}>
-                <h3 className="text-sm font-bold text-alta-navy mb-1">{p.name}</h3>
+              <a key={p.name} href={p.url} target={p.url.startsWith('/') ? undefined : "_blank"} rel={p.url.startsWith('/') ? undefined : "noopener noreferrer"} className={`p-4 bg-white rounded-xl border border-gray-100 border-l-4 ${p.color} shadow-sm tile-interactive group`}>
+                <h3 className="text-sm font-bold text-alta-navy mb-1 group-hover:text-alta-teal transition-colors">{p.name}</h3>
                 <p className="text-xs text-alta-gray leading-relaxed">{p.desc}</p>
-              </div>
+              </a>
             ))}
           </div>
+
+          {/* Testimonials */}
+          <MemberTestimonials />
 
           {/* Why members stay */}
           <h2 className="text-2xl font-bold text-alta-navy mb-4">Why Members Stay Year After Year</h2>
