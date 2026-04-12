@@ -2,20 +2,13 @@ import Link from "next/link";
 import PageHero from "@/components/PageHero";
 import { InlineAd } from "@/components/EliteProviders";
 import LoanComparisonChart from "@/components/LoanComparisonChart";
+import ExpandableTimeline from "@/components/ExpandableTimeline";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "First-Time Homebuyer Guide",
   description: "Complete guide for first-time homebuyers — timeline, budget, mortgage types, and everything you need to know.",
 };
-
-const timeline = [
-  { month: "6-12 Months Before", title: "Get Your Finances Ready", items: ["Check and improve your credit score (aim for 620+, ideally 740+)", "Pay down existing debts to lower your DTI ratio", "Start saving for down payment (3-20% of home price)", "Research mortgage pre-approval requirements", "Set a realistic budget using our affordability calculator"], color: "blue", image: "https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=400&q=80" },
-  { month: "3-6 Months Before", title: "Build Your Team", items: ["Get pre-approved for a mortgage (not just pre-qualified)", "Choose a real estate agent you trust", "Research neighborhoods, schools, commute times", "Understand the difference between FHA, VA, conventional, and USDA loans", "Start attending open houses to learn the market"], color: "green", image: "https://images.unsplash.com/photo-1573497620053-ea5300f94f21?w=400&q=80" },
-  { month: "1-3 Months Before", title: "Find & Secure Your Home", items: ["Submit offers on homes you love (be prepared to compete)", "Negotiate price, repairs, and closing date", "Sign the purchase agreement", "Pay earnest money deposit (typically 1-3%)", "Lock in your mortgage interest rate"], color: "amber", image: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=400&q=80" },
-  { month: "2-4 Weeks Before", title: "Due Diligence", items: ["Schedule home inspection ($300-$500)", "Order home appraisal (lender arranges this)", "Shop for homeowner's insurance", "Shop for owner's title insurance (protects YOU)", "Review title commitment for any issues", "Set up utilities and mail forwarding"], color: "purple", image: "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=400&q=80" },
-  { month: "Final Week", title: "Prepare to Close", items: ["Receive and review Closing Disclosure (3 days before)", "Compare to your original Loan Estimate", "Verify wire transfer instructions BY PHONE (never email)", "Schedule and complete final walk-through", "Gather ID, insurance proof, and certified funds", "Confirm closing date, time, and location"], color: "red", image: "https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=400&q=80" },
-];
 
 const loanTypes = [
   { type: "Conventional", down: "3-20%", credit: "620+", best: "Strong credit, 20% down avoids PMI", pmi: "Required if < 20% down" },
@@ -33,13 +26,6 @@ const mistakes = [
   { title: "Not Understanding Closing Costs", desc: "Budget 2-5% of the home price for closing costs on top of your down payment." },
 ];
 
-const colorMap: Record<string, { bg: string; badge: string }> = {
-  blue: { bg: "from-[#1a5276] to-[#154463]", badge: "bg-blue-100 text-blue-700" },
-  green: { bg: "from-[#2d6b3f] to-[#235532]", badge: "bg-green-100 text-green-700" },
-  amber: { bg: "from-[#8b6914] to-[#705410]", badge: "bg-amber-100 text-amber-700" },
-  purple: { bg: "from-[#5b3a8c] to-[#482d70]", badge: "bg-purple-100 text-purple-700" },
-  red: { bg: "from-[#943030] to-[#7a2020]", badge: "bg-red-100 text-red-700" },
-};
 
 export default function FirstTimeBuyersPage() {
   return (
@@ -83,36 +69,10 @@ export default function FirstTimeBuyersPage() {
           </div>
 
           {/* Timeline */}
-          <h2 className="text-2xl font-bold text-alta-navy mb-6">Your Homebuying Timeline</h2>
-          <div className="space-y-6 mb-12">
-            {timeline.map((phase, i) => {
-              const c = colorMap[phase.color];
-              return (
-                <div key={i} className="rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
-                  <div className="relative h-32 overflow-hidden">
-                    <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url('${phase.image}')` }} />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
-                    <div className="absolute bottom-4 left-5 right-5 flex items-end justify-between">
-                      <div>
-                        <span className={`text-[10px] font-bold px-2.5 py-1 rounded-full ${c.badge}`}>{phase.month}</span>
-                        <h3 className="text-lg font-bold text-white mt-1 drop-shadow">{phase.title}</h3>
-                      </div>
-                      <span className="text-xs text-white/60">Step {i + 1} of {timeline.length}</span>
-                    </div>
-                  </div>
-                  <div className="p-5 bg-white">
-                    <ul className="space-y-2">
-                      {phase.items.map((item, j) => (
-                        <li key={j} className="flex items-start gap-2 text-sm text-alta-gray">
-                          <svg className="w-4 h-4 text-alta-green shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
-                          {item}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-              );
-            })}
+          <h2 className="text-2xl font-bold text-alta-navy mb-2">Your Homebuying Timeline</h2>
+          <p className="text-sm text-alta-gray mb-6 leading-relaxed">Click any item to expand the full breakdown — what it means, why it matters, and exactly what to do.</p>
+          <div className="mb-12">
+            <ExpandableTimeline />
           </div>
 
           <InlineAd />
