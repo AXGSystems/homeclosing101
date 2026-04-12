@@ -1,12 +1,36 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 
 const fraudFlow = [
-  { step: "1", title: "Criminals Monitor", desc: "Hackers infiltrate email accounts or monitor public listings for pending sales.", color: "from-[#4a5568] to-[#3a4455]", severity: "bg-gray-200", detail: "Criminals use two primary methods to identify targets: (1) Hacking into real estate agent, lender, or title company email accounts through phishing attacks — they then silently monitor conversations for weeks, learning details of pending transactions. (2) Monitoring public real estate listings and county records for pending sales, then impersonating the title company or agent. The average time a criminal spends monitoring before striking is 2-4 weeks. They learn your name, the property address, the closing date, and the settlement agent — making their fake communications highly convincing." },
-  { step: "2", title: "Fake Instructions", desc: "Near closing, a spoofed email arrives with 'updated' wire instructions.", color: "from-[#8b6914] to-[#705410]", severity: "bg-amber-200", detail: "The criminal sends an email that appears identical to legitimate communications — same logo, same signature block, same writing style. The email typically says wire instructions have 'changed' or been 'updated' and provides new bank routing and account numbers pointing to the criminal's account. The timing is deliberate: 1-3 days before closing when urgency is highest and you're least likely to question changes. The sender address may be the real agent's hacked account, or a look-alike domain (e.g., @titIe-company.com with a capital I instead of lowercase L)." },
-  { step: "3", title: "Money Wired", desc: "Under pressure to close, the buyer wires funds to the criminal's account.", color: "from-[#943030] to-[#7a2020]", severity: "bg-red-200", detail: "The buyer, feeling pressure to meet the closing deadline and trusting the email, initiates a wire transfer to the fraudulent account. The average individual loss in a real estate wire fraud case is approximately $150,000 — often the buyer's entire down payment and closing costs. The wire processes within minutes, and the buyer typically doesn't realize anything is wrong until the real settlement agent asks where the funds are — often hours later." },
-  { step: "4", title: "Funds Disappear", desc: "Money is moved through multiple accounts within hours. Recovery is rare.", color: "from-[#5c1818] to-[#3d1010]", severity: "bg-red-400", detail: "Within 30 minutes of receiving the wire, criminals begin moving funds through multiple domestic accounts using 'money mules.' Within hours, funds are often converted to cryptocurrency or wired internationally. Recovery rates: approximately 20% if reported within 1 hour, 10% within 24 hours, and less than 5% after 48 hours. The FBI's Recovery Asset Team (RAT) has successfully frozen funds in many cases when notified quickly — but speed is absolutely critical. After 72 hours, recovery becomes nearly impossible." },
+  {
+    step: "1", title: "Criminals Monitor", desc: "Hackers infiltrate email accounts or monitor public listings for pending sales.",
+    color: "from-[#1a2744] to-[#0f1b33]", severity: 1,
+    image: "https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=600&q=80",
+    icon: "M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z M15 12a3 3 0 11-6 0 3 3 0 016 0z",
+    detail: "Criminals use two primary methods to identify targets: (1) Hacking into real estate agent, lender, or title company email accounts through phishing attacks — they then silently monitor conversations for weeks, learning details of pending transactions. (2) Monitoring public real estate listings and county records for pending sales, then impersonating the title company or agent. The average time a criminal spends monitoring before striking is 2-4 weeks. They learn your name, the property address, the closing date, and the settlement agent — making their fake communications highly convincing.",
+  },
+  {
+    step: "2", title: "Fake Instructions Sent", desc: "Near closing, a spoofed email arrives with 'updated' wire instructions.",
+    color: "from-[#705410] to-[#8b6914]", severity: 2,
+    image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&q=80",
+    icon: "M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75",
+    detail: "The criminal sends an email that appears identical to legitimate communications — same logo, same signature block, same writing style. The email typically says wire instructions have 'changed' or been 'updated' and provides new bank routing and account numbers pointing to the criminal's account. The timing is deliberate: 1-3 days before closing when urgency is highest and you're least likely to question changes. The sender address may be the real agent's hacked account, or a look-alike domain (e.g., @titIe-company.com with a capital I instead of lowercase L).",
+  },
+  {
+    step: "3", title: "Money Wired to Criminal", desc: "Under pressure to close, the buyer wires funds to the criminal's account.",
+    color: "from-[#7a2020] to-[#943030]", severity: 3,
+    image: "https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=600&q=80",
+    icon: "M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z",
+    detail: "The buyer, feeling pressure to meet the closing deadline and trusting the email, initiates a wire transfer to the fraudulent account. The average individual loss in a real estate wire fraud case is approximately $150,000 — often the buyer's entire down payment and closing costs. The wire processes within minutes, and the buyer typically doesn't realize anything is wrong until the real settlement agent asks where the funds are — often hours later.",
+  },
+  {
+    step: "4", title: "Funds Disappear Forever", desc: "Money is moved through multiple accounts within hours. Recovery is rare.",
+    color: "from-[#3d1010] to-[#5c1818]", severity: 4,
+    image: "https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=600&q=80",
+    icon: "M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z",
+    detail: "Within 30 minutes of receiving the wire, criminals begin moving funds through multiple domestic accounts using 'money mules.' Within hours, funds are often converted to cryptocurrency or wired internationally. Recovery rates: approximately 20% if reported within 1 hour, 10% within 24 hours, and less than 5% after 48 hours. The FBI's Recovery Asset Team (RAT) has successfully frozen funds in many cases when notified quickly — but speed is absolutely critical. After 72 hours, recovery becomes nearly impossible.",
+  },
 ];
 
 const safeguards = [
@@ -17,42 +41,183 @@ const safeguards = [
   { title: "Confirm Receipt Immediately", icon: "M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z", description: "After wiring, call your title company right away. Recovery drops from 20% to under 5% after 48 hours.", detail: "The moment your bank confirms the wire has been sent, call your settlement agent to verify receipt. Don't wait for them to call you. Don't send an email asking for confirmation. CALL. If they say they haven't received it within 30 minutes, contact your bank's wire fraud department immediately and request a recall. The FBI's data is clear: recovery rates drop from approximately 20% within the first hour to less than 5% after 48 hours. Every minute matters. Have your bank's wire fraud hotline number saved in your phone before closing day.", color: { bg: "bg-[#e6f1f5]", border: "border-[#b4d8e8]", icon: "bg-[#0a7ea8]", num: "bg-[#0a7ea8]" } },
 ];
 
+/* ── Animated Fraud Flow Card ── */
+function FraudFlowCard({ item, index, isVisible }: { item: typeof fraudFlow[0]; index: number; isVisible: boolean }) {
+  const [expanded, setExpanded] = useState(false);
+  const severityWidth = `${item.severity * 25}%`;
+
+  return (
+    <div className="flex items-stretch flex-1">
+      <button
+        onClick={() => setExpanded(true)}
+        className="relative rounded-2xl overflow-hidden flex-1 group cursor-pointer text-left"
+        style={{
+          opacity: isVisible ? 1 : 0,
+          transform: isVisible ? 'translateY(0) scale(1)' : 'translateY(30px) scale(0.95)',
+          transition: `all 0.6s cubic-bezier(0.16, 1, 0.3, 1) ${index * 0.2}s`,
+        }}
+      >
+        {/* Background image */}
+        <div className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110" style={{ backgroundImage: `url('${item.image}')` }} />
+        <div className={`absolute inset-0 bg-gradient-to-t ${item.color} opacity-90 group-hover:opacity-80 transition-opacity`} />
+
+        {/* Escalation bar — grows with severity */}
+        <div className="absolute bottom-0 left-0 right-0 h-1">
+          <div
+            className="h-full rounded-full transition-all duration-1000"
+            style={{
+              width: isVisible ? severityWidth : '0%',
+              background: `linear-gradient(90deg, #f59e0b, #ef4444, #7f1d1d)`,
+              transitionDelay: `${index * 0.2 + 0.5}s`,
+            }}
+          />
+        </div>
+
+        <div className="relative p-5 min-h-[220px] flex flex-col justify-between">
+          {/* Top: step + icon */}
+          <div className="flex items-center justify-between mb-3">
+            <div className="flex items-center gap-2.5">
+              <span
+                className="w-9 h-9 rounded-full bg-white/15 backdrop-blur-sm flex items-center justify-center text-white font-bold text-sm border border-white/20"
+                style={{
+                  opacity: isVisible ? 1 : 0,
+                  transform: isVisible ? 'scale(1)' : 'scale(0)',
+                  transition: `all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) ${index * 0.2 + 0.3}s`,
+                }}
+              >
+                {item.step}
+              </span>
+              <h3 className="font-bold text-white text-sm drop-shadow">{item.title}</h3>
+            </div>
+            <div className="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+              <svg className="w-4 h-4 text-white/70" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d={item.icon} /></svg>
+            </div>
+          </div>
+
+          {/* Middle: description */}
+          <p className="text-xs text-white/70 leading-relaxed flex-1">{item.desc}</p>
+
+          {/* Bottom: threat level + CTA */}
+          <div className="flex items-center justify-between mt-3">
+            <div className="flex items-center gap-1">
+              {Array.from({ length: 4 }).map((_, i) => (
+                <div
+                  key={i}
+                  className="h-1.5 rounded-full transition-all duration-500"
+                  style={{
+                    width: i < item.severity ? '16px' : '8px',
+                    backgroundColor: i < item.severity
+                      ? `rgba(239, 68, 68, ${0.4 + i * 0.2})`
+                      : 'rgba(255,255,255,0.1)',
+                    transitionDelay: `${index * 0.2 + 0.6 + i * 0.1}s`,
+                  }}
+                />
+              ))}
+              <span className="text-[9px] text-white/40 ml-1.5 uppercase tracking-wider font-medium">
+                {item.severity === 1 ? 'Recon' : item.severity === 2 ? 'Attack' : item.severity === 3 ? 'Critical' : 'Loss'}
+              </span>
+            </div>
+            <span className="text-[9px] text-white/40 opacity-0 group-hover:opacity-100 transition-opacity font-medium">Click for details</span>
+          </div>
+        </div>
+      </button>
+
+      {/* Arrow between cards */}
+      {index < 3 && (
+        <>
+          <div className="hidden md:flex items-center justify-center w-8 shrink-0">
+            <svg
+              className="w-6 h-6 text-[#943030]"
+              fill="none" stroke="currentColor" viewBox="0 0 24 24"
+              style={{
+                opacity: isVisible ? 1 : 0,
+                transform: isVisible ? 'translateX(0)' : 'translateX(-10px)',
+                transition: `all 0.4s ease ${index * 0.2 + 0.5}s`,
+              }}
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
+            </svg>
+          </div>
+          <div className="md:hidden flex justify-center py-2">
+            <svg
+              className="w-5 h-5 text-[#943030]"
+              fill="none" stroke="currentColor" viewBox="0 0 24 24"
+              style={{
+                opacity: isVisible ? 1 : 0,
+                transition: `opacity 0.4s ease ${index * 0.2 + 0.5}s`,
+              }}
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 9l-7 7-7-7" />
+            </svg>
+          </div>
+        </>
+      )}
+
+      {/* Detail modal */}
+      {expanded && (
+        <div className="fixed inset-0 z-[700] flex items-center justify-center p-4" onClick={() => setExpanded(false)}>
+          <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
+          <div className="relative bg-white rounded-2xl shadow-2xl max-w-lg w-full max-h-[80vh] overflow-y-auto animate-in" onClick={(e) => e.stopPropagation()}>
+            <button onClick={() => setExpanded(false)} className="absolute top-3 right-3 p-1.5 text-white/60 hover:text-white bg-black/20 rounded-full z-10">
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
+            </button>
+            {/* Header */}
+            <div className="relative h-36 overflow-hidden rounded-t-2xl">
+              <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url('${item.image}')` }} />
+              <div className={`absolute inset-0 bg-gradient-to-t ${item.color} opacity-85`} />
+              <div className="absolute bottom-4 left-5 flex items-center gap-3">
+                <span className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center text-white font-bold text-lg">{item.step}</span>
+                <div>
+                  <p className="text-[10px] text-white/60 uppercase tracking-wider">Step {item.step} of 4</p>
+                  <h3 className="text-xl font-bold text-white">{item.title}</h3>
+                </div>
+              </div>
+            </div>
+            {/* Threat indicator */}
+            <div className="px-6 py-3 bg-gradient-to-r from-red-50 to-white border-b border-red-100 flex items-center gap-3">
+              <div className="flex items-center gap-1">
+                {Array.from({ length: 4 }).map((_, i) => (
+                  <div key={i} className={`w-6 h-2 rounded-full ${i < item.severity ? 'bg-[#943030]' : 'bg-gray-200'}`} />
+                ))}
+              </div>
+              <span className="text-xs font-bold text-[#943030] uppercase tracking-wider">
+                Threat Level: {item.severity === 1 ? 'Reconnaissance' : item.severity === 2 ? 'Active Attack' : item.severity === 3 ? 'Critical' : 'Irreversible Loss'}
+              </span>
+            </div>
+            <div className="p-6">
+              <p className="text-sm text-alta-gray leading-relaxed">{item.detail}</p>
+              <p className="text-[10px] text-alta-teal mt-4 font-medium">Source: FBI IC3 2024 Report, CertifID</p>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
 export default function ExpandableSafeguards() {
-  const [expandedFlow, setExpandedFlow] = useState<number | null>(null);
   const [expandedSafeguard, setExpandedSafeguard] = useState<number | null>(null);
+  const [flowVisible, setFlowVisible] = useState(false);
+  const flowRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) setFlowVisible(true); },
+      { threshold: 0.15 }
+    );
+    if (flowRef.current) observer.observe(flowRef.current);
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <>
       {/* Fraud flow tiles */}
-      <h2 className="text-2xl font-bold text-alta-navy mb-6">How Wire Fraud Works</h2>
-      <div className="flex flex-col md:flex-row items-stretch gap-0 mb-14">
+      <h2 className="text-2xl font-bold text-alta-navy mb-2">How Wire Fraud Works</h2>
+      <p className="text-sm text-alta-gray mb-6 leading-relaxed">Click any step to see the full breakdown. Each stage escalates — once funds are wired, recovery becomes nearly impossible.</p>
+
+      <div ref={flowRef} className="flex flex-col md:flex-row items-stretch gap-0 mb-14">
         {fraudFlow.map((s, i) => (
-          <div key={s.step} className="flex items-stretch flex-1">
-            <div
-              onClick={() => setExpandedFlow(i)}
-              className="relative rounded-2xl md:rounded-none md:first:rounded-l-2xl md:last:rounded-r-2xl overflow-hidden shadow-sm flex-1 tile-interactive cursor-pointer group"
-            >
-              <div className={`h-1.5 ${s.severity}`} />
-              <div className={`bg-gradient-to-br ${s.color} p-4 text-white h-full`}>
-                <div className="flex items-center gap-2 mb-2">
-                  <span className="w-7 h-7 rounded-full bg-white/20 flex items-center justify-center text-sm font-bold">{s.step}</span>
-                  <h3 className="font-bold text-sm">{s.title}</h3>
-                </div>
-                <p className="text-xs text-white/80 leading-relaxed">{s.desc}</p>
-                <p className="text-[9px] text-white/50 mt-2 opacity-0 group-hover:opacity-100 transition-opacity">Click for details</p>
-              </div>
-            </div>
-            {i < 3 && (
-              <>
-                <div className="hidden md:flex items-center justify-center w-6 shrink-0 text-alta-red">
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" /></svg>
-                </div>
-                <div className="md:hidden flex justify-center py-1 text-alta-red">
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 9l-7 7-7-7" /></svg>
-                </div>
-              </>
-            )}
-          </div>
+          <FraudFlowCard key={s.step} item={s} index={i} isVisible={flowVisible} />
         ))}
       </div>
 
@@ -75,30 +240,6 @@ export default function ExpandableSafeguards() {
           </div>
         ))}
       </div>
-
-      {/* Fraud flow modal */}
-      {expandedFlow !== null && (
-        <div className="fixed inset-0 z-[700] flex items-center justify-center p-4" onClick={() => setExpandedFlow(null)}>
-          <div className="absolute inset-0 bg-black/40 backdrop-blur-sm" />
-          <div className="relative bg-white rounded-2xl shadow-2xl max-w-lg w-full max-h-[80vh] overflow-y-auto animate-in" onClick={(e) => e.stopPropagation()}>
-            <button onClick={() => setExpandedFlow(null)} className="absolute top-3 right-3 p-1.5 text-white/60 hover:text-white bg-black/20 rounded-full z-10">
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
-            </button>
-            <div className={`bg-gradient-to-r ${fraudFlow[expandedFlow].color} px-6 py-5 rounded-t-2xl`}>
-              <div className="flex items-center gap-3">
-                <span className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center text-white font-bold text-lg">{fraudFlow[expandedFlow].step}</span>
-                <div>
-                  <p className="text-[10px] text-white/60 uppercase tracking-wider">Step {fraudFlow[expandedFlow].step} of 4</p>
-                  <h3 className="text-xl font-bold text-white">{fraudFlow[expandedFlow].title}</h3>
-                </div>
-              </div>
-            </div>
-            <div className="p-6">
-              <p className="text-sm text-alta-gray leading-relaxed">{fraudFlow[expandedFlow].detail}</p>
-            </div>
-          </div>
-        </div>
-      )}
 
       {/* Safeguard modal */}
       {expandedSafeguard !== null && (
