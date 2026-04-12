@@ -79,10 +79,10 @@ const features = [
 ];
 
 const stats = [
-  { value: "4.2M", label: "Homes sold in the U.S. in 2025", source: "NAR" },
-  { value: "$400K", label: "Median home sale price nationwide", source: "NAR 2025" },
-  { value: "1 in 3", label: "Title searches find issues that get resolved before closing", source: "ALTA" },
-  { value: "6,000+", label: "ALTA member companies protecting homebuyers", source: "ALTA" },
+  { value: "4.2M", label: "American families bought homes in 2025", source: "NAR" },
+  { value: "$400K", label: "Median purchase price nationwide", source: "NAR 2025" },
+  { value: "25+", label: "In-depth guides on this site, all free", source: "HC101" },
+  { value: "250+", label: "Verified FAQ answers with source citations", source: "HC101" },
 ];
 
 const steps = [

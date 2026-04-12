@@ -265,10 +265,13 @@ ${terms.map(t => `<div class="term"><h2>${t.term}</h2><p>${t.definition}</p>${t.
         <div className="space-y-8">
           {Object.entries(filteredData)
             .sort(([a], [b]) => a.localeCompare(b))
-            .map(([letter, terms]) => {
+            .map(([letter, terms], groupIdx) => {
               const color = letterColors[letter] || '#0a8ebc';
+              const showAd = !activeLetter && !search && groupIdx > 0 && groupIdx % 4 === 0;
               return (
-                <div key={letter} id={`letter-${letter}`}>
+                <div key={letter}>
+                {showAd && <div className="py-2"><InlineAd /></div>}
+                <div id={`letter-${letter}`}>
                   <div className="flex items-center gap-3 mb-3">
                     <div className="w-11 h-11 rounded-2xl flex items-center justify-center text-white font-bold text-lg shadow-md" style={{ backgroundColor: color }}>
                       {letter}
@@ -317,6 +320,7 @@ ${terms.map(t => `<div class="term"><h2>${t.term}</h2><p>${t.definition}</p>${t.
                       );
                     })}
                   </div>
+                </div>
                 </div>
               );
             })}
