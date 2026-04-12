@@ -100,7 +100,7 @@ export default function WhatToExpectPage() {
           </div>
 
           {/* Steps */}
-          <h2 className="text-2xl font-bold text-alta-navy mb-8">7 Steps to Getting the Keys</h2>
+          <h2 className="text-2xl font-bold text-alta-navy mb-8 flex items-center gap-2">7 Keys to Getting the Keys <svg className="w-7 h-7 text-[#d4a843]" fill="currentColor" viewBox="0 0 24 24"><path d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" /></svg></h2>
           <div className="space-y-6 mb-16">
             {steps.map((step, i) => (
               <div key={i} className={`flex flex-col ${i % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'} gap-5 items-center`}>

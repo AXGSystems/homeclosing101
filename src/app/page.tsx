@@ -90,7 +90,7 @@ const steps = [
   { num: "3", title: "Make an Offer", desc: "Submit your purchase proposal and negotiate terms." },
   { num: "4", title: "Order Title Search", desc: "A professional reviews public records for any claims on the property." },
   { num: "5", title: "Get Insurance", desc: "Secure homeowner's insurance and owner's title insurance." },
-  { num: "6", title: "Close & Get Keys", desc: "Sign documents, transfer funds, and officially become a homeowner." },
+  { num: "6", title: "Close & Get Your Keys", desc: "Sign documents, transfer funds, and officially become a homeowner.", keys: true },
 ];
 
 const resources = [
@@ -299,13 +299,15 @@ export default function HomePage() {
             <p className="text-sm text-alta-gray">Six key milestones from pre-approval to getting your keys.</p>
           </div>
           <div className="space-y-6">
-            {steps.map((step, i) => (
+            {steps.map((step: { num: string; title: string; desc: string; keys?: boolean }, i: number) => (
               <div key={step.num} className={`relative flex gap-4 items-start ${i < steps.length - 1 ? "step-connector" : ""}`}>
-                <div className="w-10 h-10 rounded-full bg-alta-teal text-white flex items-center justify-center font-bold text-sm shrink-0">
-                  {step.num}
+                <div className={`w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm shrink-0 ${step.keys ? 'bg-[#d4a843] text-white' : 'bg-alta-teal text-white'}`}>
+                  {step.keys ? (
+                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M15.75 5.25a3 3 0 013 3m3 0a6 6 0 01-7.029 5.912c-.563-.097-1.159.026-1.563.43L10.5 17.25H8.25v2.25H6v2.25H2.25v-2.818c0-.597.237-1.17.659-1.591l6.499-6.499c.404-.404.527-1 .43-1.563A6 6 0 1121.75 8.25z" /></svg>
+                  ) : step.num}
                 </div>
                 <div className="pt-1">
-                  <h3 className="font-semibold text-alta-navy">{step.title}</h3>
+                  <h3 className={`font-semibold ${step.keys ? 'text-[#d4a843]' : 'text-alta-navy'}`}>{step.title}</h3>
                   <p className="text-sm text-alta-gray mt-0.5">{step.desc}</p>
                 </div>
               </div>
