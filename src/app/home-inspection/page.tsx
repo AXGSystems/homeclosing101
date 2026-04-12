@@ -2,21 +2,13 @@ import Link from "next/link";
 import PageHero from "@/components/PageHero";
 import { InlineAd } from "@/components/EliteProviders";
 import ExpandableInspectionTiles from "@/components/ExpandableInspectionTiles";
+import ExpandableInspectionAreas from "@/components/ExpandableInspectionAreas";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Home Inspection Guide",
   description: "Complete guide to home inspections — when to get one, what inspectors look for, how to choose an inspector, and why it matters for every type of home.",
 };
-
-const inspectionAreas = [
-  { area: "Structural & Foundation", items: ["Foundation cracks, settling, or water damage", "Load-bearing walls and framing condition", "Floor levelness and joist integrity", "Basement/crawlspace moisture and structure"], icon: "M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21M3 3h12m-.75 4.5H21m-3.75 3H21m-3.75 3H21", color: "blue" },
-  { area: "Roof & Exterior", items: ["Roof age, condition, and remaining life expectancy", "Gutters, downspouts, and drainage", "Siding, trim, and exterior paint condition", "Windows and doors (seals, operation, glass condition)"], icon: "M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25", color: "green" },
-  { area: "Plumbing", items: ["Water heater age, condition, and capacity", "Water pressure and flow at all fixtures", "Pipe material (copper, PEX, galvanized, polybutylene)", "Drain function, sewer line condition, signs of leaks"], icon: "M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636", color: "teal" },
-  { area: "Electrical", items: ["Panel capacity (100, 150, or 200 amp service)", "Wiring type and condition (knob-and-tube, aluminum, copper)", "GFCI outlets in wet areas (kitchen, bath, garage, exterior)", "Smoke and CO detector placement and function"], icon: "M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z", color: "amber" },
-  { area: "HVAC", items: ["Heating system type, age, and condition", "Air conditioning capacity and function", "Ductwork condition and insulation", "Thermostat operation and programmability"], icon: "M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z", color: "red" },
-  { area: "Interior", items: ["Walls, ceilings, and floors for damage or defects", "Kitchen appliances operation (if included in sale)", "Bathroom fixtures, ventilation, and moisture", "Attic insulation, ventilation, and signs of pests"], icon: "M15.75 10.5l4.72-4.72a.75.75 0 011.28.53v11.38a.75.75 0 01-1.28.53l-4.72-4.72M4.5 18.75h9a2.25 2.25 0 002.25-2.25v-9a2.25 2.25 0 00-2.25-2.25h-9A2.25 2.25 0 002.25 7.5v9a2.25 2.25 0 002.25 2.25z", color: "purple" },
-];
 
 const homeTypes = [
   {
@@ -99,40 +91,10 @@ export default function HomeInspectionPage() {
             ))}
           </div>
 
-          {/* What inspectors look at */}
-          <h2 className="text-2xl font-bold text-alta-navy mb-4">What a Home Inspector Examines</h2>
-          <p className="text-sm text-alta-gray mb-4 leading-relaxed">A general home inspection covers the major visible and accessible systems of the property. The inspector will document their findings in a detailed report — typically 30-50+ pages with photos. Here are the six major areas they evaluate:</p>
-          <div className="grid md:grid-cols-2 gap-4 mb-10">
-            {inspectionAreas.map((area) => {
-              const colors: Record<string, { bg: string; border: string; iconBg: string; iconText: string; check: string }> = {
-                blue: { bg: "hover:bg-[#e8f0f5]", border: "hover:border-[#1a5276]/30", iconBg: "bg-[#e8f0f5] group-hover:bg-[#1a5276]", iconText: "text-[#1a5276] group-hover:text-white", check: "text-[#1a5276]" },
-                green: { bg: "hover:bg-[#e9f2ec]", border: "hover:border-[#2d6b3f]/30", iconBg: "bg-[#e9f2ec] group-hover:bg-[#2d6b3f]", iconText: "text-[#2d6b3f] group-hover:text-white", check: "text-[#2d6b3f]" },
-                teal: { bg: "hover:bg-[#e6f1f5]", border: "hover:border-[#0a7ea8]/30", iconBg: "bg-[#e6f1f5] group-hover:bg-[#0a7ea8]", iconText: "text-[#0a7ea8] group-hover:text-white", check: "text-[#0a7ea8]" },
-                amber: { bg: "hover:bg-[#f5f0e4]", border: "hover:border-[#8b6914]/30", iconBg: "bg-[#f5f0e4] group-hover:bg-[#8b6914]", iconText: "text-[#8b6914] group-hover:text-white", check: "text-[#8b6914]" },
-                red: { bg: "hover:bg-[#f5e8e8]", border: "hover:border-[#943030]/30", iconBg: "bg-[#f5e8e8] group-hover:bg-[#943030]", iconText: "text-[#943030] group-hover:text-white", check: "text-[#943030]" },
-                purple: { bg: "hover:bg-[#f0ecf5]", border: "hover:border-[#5b3a8c]/30", iconBg: "bg-[#f0ecf5] group-hover:bg-[#5b3a8c]", iconText: "text-[#5b3a8c] group-hover:text-white", check: "text-[#5b3a8c]" },
-              };
-              const c = colors[area.color] || colors.teal;
-              return (
-                <div key={area.area} className={`group p-5 bg-white rounded-2xl border border-gray-100 shadow-sm tile-interactive ${c.bg} ${c.border} transition-all`}>
-                  <div className="flex items-center gap-3 mb-3">
-                    <div className={`w-10 h-10 rounded-xl ${c.iconBg} flex items-center justify-center transition-colors`}>
-                      <svg className={`w-5 h-5 ${c.iconText} transition-colors`} fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d={area.icon} /></svg>
-                    </div>
-                    <h3 className="font-bold text-alta-navy">{area.area}</h3>
-                  </div>
-                  <ul className="space-y-1.5">
-                    {area.items.map((item) => (
-                      <li key={item} className="flex items-start gap-2 text-xs text-alta-gray">
-                        <svg className={`w-3.5 h-3.5 ${c.check} shrink-0 mt-0.5`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              );
-            })}
-          </div>
+          {/* What inspectors look at — expandable deep-dive tiles */}
+          <h2 className="text-2xl font-bold text-alta-navy mb-2">What a Home Inspector Examines</h2>
+          <p className="text-sm text-alta-gray mb-6 leading-relaxed">Click any area below for the full breakdown — what inspectors look for, red flags that could cost thousands, and what questions to ask. A general inspection covers all six of these areas in a 2-4 hour visit.</p>
+          <ExpandableInspectionAreas />
 
           <InlineAd />
 
