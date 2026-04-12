@@ -39,14 +39,30 @@ export default function FirstTimeBuyersPage() {
 
       <div className="py-1.5 lg:py-2">
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
+          {/* Welcome intro */}
+          <div className="mb-10">
+            <div className="grid md:grid-cols-[1fr_280px] gap-6 items-center mb-6">
+              <div>
+                <h2 className="text-2xl font-bold text-alta-navy mb-3">Welcome, Future Homeowner</h2>
+                <p className="text-sm text-alta-gray leading-relaxed mb-3">Buying your first home is one of the biggest financial decisions you&apos;ll ever make — and one of the most rewarding. But between pre-approval, inspections, appraisals, title searches, and closing day, it&apos;s easy to feel overwhelmed by a process you&apos;ve never been through before.</p>
+                <p className="text-sm text-alta-gray leading-relaxed mb-3">That&apos;s exactly why this guide exists. We&apos;ve broken the entire homebuying journey into <strong className="text-alta-navy">5 clear phases</strong> with <strong className="text-alta-navy">27 detailed action items</strong> — each one expandable with everything you need to know: what it means, why it matters, what to watch out for, and exactly what to do. Every piece of advice is sourced from the CFPB, NAR, ALTA, FHA, VA, and other authoritative sources.</p>
+                <p className="text-sm text-alta-gray leading-relaxed">Whether you&apos;re 12 months out or weeks from closing, start with the timeline below and work through each step at your own pace. Use the quick-access tools to run the numbers, then come back here to stay on track.</p>
+              </div>
+              <div className="relative h-48 md:h-full min-h-[200px] rounded-2xl overflow-hidden shadow-md">
+                <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=600&q=80')" }} />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
+              </div>
+            </div>
+          </div>
+
           <div className="mb-6 p-4 bg-white rounded-2xl border border-gray-100 sm:sticky sm:top-[142px] z-20 shadow-md">
             <div className="flex items-start gap-4">
               <div className="w-12 h-12 rounded-xl bg-alta-teal/10 flex items-center justify-center text-alta-teal shrink-0">
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" /></svg>
               </div>
               <div>
-                <h2 className="font-bold text-alta-navy mb-1">Your Roadmap to Homeownership</h2>
-                <p className="text-sm text-alta-gray leading-relaxed">Buying your first home is exciting but complex. This guide breaks the entire process into a clear timeline so you know exactly what to do and when. Bookmark this page and refer to it throughout your journey.</p>
+                <h2 className="font-bold text-alta-navy mb-1">Quick-Access Tools</h2>
+                <p className="text-sm text-alta-gray leading-relaxed">Run the numbers before you dive in — these calculators help you set a realistic budget.</p>
               </div>
             </div>
           </div>
@@ -167,16 +183,22 @@ export default function FirstTimeBuyersPage() {
           <p className="text-sm text-alta-gray mb-4 leading-relaxed">Based on surveys of recent homebuyers by NAR and CFPB, these are the most common regrets and surprises. Learn from their experience.</p>
           <div className="grid sm:grid-cols-2 gap-3 mb-10">
             {[
-              { insight: "Closing costs were more than expected", detail: "Many buyers budget only for the down payment and are surprised by 2-5% in closing costs on top of it. On a $350K home, that's $7,000-$17,500 in additional cash needed at closing.", color: "bg-amber-50 border-amber-200" },
-              { insight: "Should have shopped more lenders", detail: "Buyers who compared 3+ Loan Estimates saved an average of $1,500 over the life of their loan compared to those who went with the first lender they talked to. The CFPB recommends comparing at least 3.", color: "bg-blue-50 border-blue-200" },
-              { insight: "Didn't understand the inspection report", detail: "Inspection reports can be 40+ pages of technical findings. Attending the inspection in person and asking the inspector to explain priorities vs cosmetic issues is the single best way to understand what matters.", color: "bg-green-50 border-green-200" },
-              { insight: "Underestimated ongoing homeowner costs", detail: "Beyond the mortgage: property taxes, insurance, HOA fees, maintenance (budget 1-2% of home value per year), utilities, and unexpected repairs. Budget for these BEFORE you buy, not after.", color: "bg-purple-50 border-purple-200" },
-              { insight: "Wish they'd gotten owner's title insurance", detail: "Buyers who skipped owner's title insurance and later faced a title claim had to pay for legal defense out of pocket — often $20,000-$75,000+ even for baseless claims. The one-time premium is a fraction of the risk.", color: "bg-red-50 border-red-200" },
-              { insight: "Didn't know about down payment assistance", detail: "Thousands of programs exist at the state, county, and city level to help with down payments and closing costs. Many first-time buyers qualify but never apply because they don't know the programs exist. Check with your state HFA.", color: "bg-teal-50 border-teal-200" },
+              { insight: "Closing costs were more than expected", detail: "Many buyers budget only for the down payment and are surprised by 2-5% in closing costs on top of it. On a $350K home, that's $7,000-$17,500 in additional cash needed at closing.", image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=400&q=80" },
+              { insight: "Should have shopped more lenders", detail: "Buyers who compared 3+ Loan Estimates saved an average of $1,500 over the life of their loan compared to those who went with the first lender they talked to. The CFPB recommends comparing at least 3.", image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=400&q=80" },
+              { insight: "Didn't understand the inspection report", detail: "Inspection reports can be 40+ pages of technical findings. Attending the inspection in person and asking the inspector to explain priorities vs cosmetic issues is the single best way to understand what matters.", image: "https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=400&q=80" },
+              { insight: "Underestimated ongoing homeowner costs", detail: "Beyond the mortgage: property taxes, insurance, HOA fees, maintenance (budget 1-2% of home value per year), utilities, and unexpected repairs. Budget for these BEFORE you buy, not after.", image: "https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=400&q=80" },
+              { insight: "Wish they'd gotten owner's title insurance", detail: "Buyers who skipped owner's title insurance and later faced a title claim had to pay for legal defense out of pocket — often $20,000-$75,000+ even for baseless claims. The one-time premium is a fraction of the risk.", image: "https://images.unsplash.com/photo-1589829085413-56de8ae18c73?w=400&q=80" },
+              { insight: "Didn't know about down payment assistance", detail: "Thousands of programs exist at the state, county, and city level to help with down payments and closing costs. Many first-time buyers qualify but never apply because they don't know the programs exist. Check with your state HFA.", image: "https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=400&q=80" },
             ].map((item) => (
-              <div key={item.insight} className={`p-4 ${item.color} rounded-xl border tile-interactive`}>
-                <h3 className="text-sm font-bold text-alta-navy mb-1">&ldquo;{item.insight}&rdquo;</h3>
-                <p className="text-xs text-alta-gray leading-relaxed">{item.detail}</p>
+              <div key={item.insight} className="rounded-xl border border-gray-100 overflow-hidden shadow-sm hover:shadow-md transition-all bg-white">
+                <div className="relative h-32 overflow-hidden">
+                  <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url('${item.image}')` }} />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+                </div>
+                <div className="p-4">
+                  <h3 className="text-sm font-bold text-alta-navy mb-1">&ldquo;{item.insight}&rdquo;</h3>
+                  <p className="text-xs text-alta-gray leading-relaxed">{item.detail}</p>
+                </div>
               </div>
             ))}
           </div>

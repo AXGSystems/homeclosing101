@@ -9,7 +9,7 @@ const features = [
     description: "Learn what to expect at every step — from pre-approval to getting the keys to your new home.",
     href: "/closing-process",
     accent: "teal",
-    image: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=400&q=80",
+    image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=400&q=80",
     icon: (
       <svg viewBox="0 0 24 24" className="w-8 h-8" fill="none" stroke="currentColor" strokeWidth={1.5}>
         <path strokeLinecap="round" strokeLinejoin="round" d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 002.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 00-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15a2.25 2.25 0 012.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25zM6.75 12h.008v.008H6.75V12zm0 3h.008v.008H6.75V15zm0 3h.008v.008H6.75V18z" />
@@ -21,7 +21,7 @@ const features = [
     description: "Understand owner's title insurance and how it defends your property from hidden claims and fraud.",
     href: "/protect-your-rights",
     accent: "green",
-    image: "https://images.unsplash.com/photo-1573497620053-ea5300f94f21?w=400&q=80",
+    image: "https://images.unsplash.com/photo-1560520653-9e0e4c89eb11?w=400&q=80",
     icon: (
       <svg viewBox="0 0 24 24" className="w-8 h-8" fill="none" stroke="currentColor" strokeWidth={1.5}>
         <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
@@ -33,7 +33,7 @@ const features = [
     description: "Wire fraud losses topped $275M last year. Learn to recognize scams and safeguard your closing funds.",
     href: "/protect-your-money",
     accent: "red",
-    image: "https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=400&q=80",
+    image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=400&q=80",
     icon: (
       <svg viewBox="0 0 24 24" className="w-8 h-8" fill="none" stroke="currentColor" strokeWidth={1.5}>
         <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
@@ -57,7 +57,7 @@ const features = [
     description: "Search for ALTA member title insurance and settlement companies in your area.",
     href: "/find-company",
     accent: "navy",
-    image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=400&q=80",
+    image: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=400&q=80",
     icon: (
       <svg viewBox="0 0 24 24" className="w-8 h-8" fill="none" stroke="currentColor" strokeWidth={1.5}>
         <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
@@ -69,7 +69,7 @@ const features = [
     description: "80+ searchable terms — from abstract to warranty deed. Instant A-Z lookup.",
     href: "/glossary",
     accent: "purple",
-    image: "https://images.unsplash.com/photo-1589829085413-56de8ae18c73?w=400&q=80",
+    image: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=400&q=80",
     icon: (
       <svg viewBox="0 0 24 24" className="w-8 h-8" fill="none" stroke="currentColor" strokeWidth={1.5}>
         <path strokeLinecap="round" strokeLinejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />
