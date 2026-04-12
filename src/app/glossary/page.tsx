@@ -80,7 +80,7 @@ ${terms.map(t => `<div class="term"><h2>${t.term}</h2><p>${t.definition}</p>${t.
       title="Real Estate Glossary"
       subtitle={`${totalAllTerms} searchable terms — from abstract to zoning. Click any term for details and closing examples.`}
       image="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=1920&q=80"
-      breadcrumb={[{ label: "Resources", href: "/faq" }, { label: "Glossary", href: "/glossary" }]}
+      breadcrumb={[{ label: "Resources", href: "/resources" }, { label: "Glossary", href: "/glossary" }]}
     />
 
     {/* Term detail modal */}
@@ -165,7 +165,7 @@ ${terms.map(t => `<div class="term"><h2>${t.term}</h2><p>${t.definition}</p>${t.
                       <p className="text-sm font-bold text-alta-navy">{t.term}</p>
                       <p className="text-xs text-alta-gray leading-relaxed line-clamp-2">{t.definition}</p>
                     </div>
-                    <button onClick={() => toggleClip(t)} className="p-1 text-alta-gray hover:text-red-500 shrink-0 opacity-0 group-hover:opacity-100 transition-opacity" title="Remove">
+                    <button onClick={() => toggleClip(t)} className="p-1 text-alta-gray hover:text-[#943030] shrink-0 opacity-0 group-hover:opacity-100 transition-opacity" title="Remove">
                       <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
                     </button>
                   </div>

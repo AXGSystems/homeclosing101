@@ -60,7 +60,7 @@ export default function EscrowGuidePage() {
                 items: [
                   { title: "Monthly Collection", desc: "Each month, a portion of your mortgage payment goes into your escrow account to cover property taxes and homeowner's insurance. Your total monthly payment (PITI) = Principal + Interest + Taxes + Insurance. The tax and insurance portions are held in escrow until the bills are due." },
                   { title: "Bill Payment", desc: "Your mortgage servicer pays your property tax and insurance bills directly from your escrow account when they come due — typically property taxes 1-2 times per year and insurance annually. You don't have to remember to pay these yourself." },
-                  { title: "Annual Escrow Analysis", desc: "Every year, your servicer performs an escrow analysis to verify the account has the right balance. If there's a shortage (not enough to cover upcoming bills), your monthly payment may increase. If there's a surplus (more than a 2-month cushion), you may receive a refund. Your servicer must notify you at least 30 days before any payment change. Source: CFPB" },
+                  { title: "Annual Escrow Analysis", desc: "Every year, your servicer performs an escrow analysis to verify the account has the right balance. If there's a shortage (not enough to cover upcoming bills), your monthly payment may increase. If there's a surplus (more than a 2-month cushion), you may receive a refund. Your servicer must notify you at least 30 days before any payment change." },
                 ],
               },
             ].map((phase) => (
@@ -73,6 +73,7 @@ export default function EscrowGuidePage() {
                     <div key={item.title}>
                       <h4 className="font-bold text-alta-navy text-sm mb-1">{item.title}</h4>
                       <p className="text-xs text-alta-gray leading-relaxed">{item.desc}</p>
+                      {item.title === "Annual Escrow Analysis" && <p className="text-[10px] text-alta-teal mt-1 font-medium">Source: CFPB</p>}
                     </div>
                   ))}
                 </div>
@@ -94,6 +95,52 @@ export default function EscrowGuidePage() {
               <div className="flex justify-between p-2 bg-alta-navy text-white rounded-lg"><span className="font-semibold">Total Monthly Payment (PITI)</span><span className="font-bold">$2,788</span></div>
             </div>
             <p className="text-[10px] text-alta-gray mt-3">Of your $2,788 monthly payment, only $1,991 goes to your actual loan. The remaining $797 is held in escrow for taxes, insurance, and PMI. This is why your mortgage payment is significantly more than just principal and interest.</p>
+          </div>
+
+          {/* Escrow waivers */}
+          <h2 className="text-xl font-bold text-alta-navy mb-4">Escrow Waivers: Paying Taxes & Insurance Yourself</h2>
+          <div className="p-5 bg-white rounded-2xl border border-gray-100 shadow-sm mb-10">
+            <p className="text-xs text-alta-gray leading-relaxed mb-4">Some borrowers prefer to pay property taxes and insurance directly rather than through an escrow account. This is called an escrow waiver (or escrow exemption). Here is what you need to know:</p>
+            <div className="space-y-3">
+              <div className="p-3 bg-[#e8f0f5] rounded-lg border border-[#c5d8e4]">
+                <h4 className="text-sm font-bold text-alta-navy mb-1">Eligibility Requirements</h4>
+                <p className="text-xs text-alta-gray leading-relaxed">Most lenders require at least 20% equity (80% LTV or less) to waive escrow. FHA, VA, and USDA loans generally do not allow escrow waivers. Conventional loans are the most flexible, but each lender sets its own policy. Some lenders also require a strong credit score (720+) and a clean payment history.</p>
+              </div>
+              <div className="p-3 bg-[#faf4e4] rounded-lg border border-[#e8d9a8]">
+                <h4 className="text-sm font-bold text-alta-navy mb-1">The Escrow Waiver Fee</h4>
+                <p className="text-xs text-alta-gray leading-relaxed">Lenders typically charge a fee for waiving escrow -- usually 0.25% of the loan amount (e.g., $625 on a $250,000 loan). This fee may be paid upfront or added to your interest rate. The fee compensates the lender for the increased risk that you could miss a tax or insurance payment, which would put their collateral at risk.</p>
+              </div>
+              <div className="p-3 bg-[#f5e8e8] rounded-lg border border-[#e4c5c5]">
+                <h4 className="text-sm font-bold text-alta-navy mb-1">Risks of Waiving Escrow</h4>
+                <p className="text-xs text-alta-gray leading-relaxed">If you miss a property tax payment, your county can place a tax lien on your home -- which takes priority over your mortgage. If your insurance lapses, your lender will buy force-placed insurance on your behalf (at a much higher cost) and add it to your loan balance. You are responsible for budgeting and paying large lump-sum bills (property taxes are typically due 1-2 times per year; insurance annually).</p>
+              </div>
+              <div className="p-3 bg-[#e9f5ed] rounded-lg border border-[#bddcc7]">
+                <h4 className="text-sm font-bold text-alta-navy mb-1">When It Makes Sense</h4>
+                <p className="text-xs text-alta-gray leading-relaxed">An escrow waiver can make sense if you are disciplined about saving, want to earn interest on your own funds, or live in a state where escrow accounts do not earn interest. However, most financial advisors recommend keeping escrow for the convenience and protection it provides -- especially for first-time buyers.</p>
+              </div>
+            </div>
+            <p className="text-[10px] text-alta-teal font-medium mt-3">Source: CFPB -- Escrow accounts are regulated under the Real Estate Settlement Procedures Act (RESPA), 12 CFR Part 1024</p>
+          </div>
+
+          {/* RESPA escrow limits */}
+          <h2 className="text-xl font-bold text-alta-navy mb-4">Federal Escrow Protections (RESPA)</h2>
+          <div className="p-5 bg-gradient-to-br from-amber-50 to-white rounded-2xl border border-amber-200 mb-10">
+            <p className="text-xs text-alta-gray leading-relaxed mb-3">The Real Estate Settlement Procedures Act (RESPA) sets federal rules that protect you from excessive escrow collections:</p>
+            <div className="space-y-2">
+              {[
+                { rule: "2-Month Cushion Maximum", detail: "Your servicer cannot maintain a cushion of more than 2 months of escrow payments beyond what is needed to pay your upcoming bills. If the surplus exceeds this limit, the servicer must refund the excess within 30 days of the annual analysis." },
+                { rule: "Annual Analysis Required", detail: "Your servicer must perform an escrow analysis at least once per year and send you a statement showing: the current balance, all payments received, all disbursements made, the projected balance for the coming year, and any changes to your monthly payment." },
+                { rule: "30-Day Notice of Changes", detail: "If your monthly escrow payment is changing (up or down), your servicer must notify you at least 30 days before the new payment amount takes effect." },
+                { rule: "Shortage Repayment Options", detail: "If your escrow analysis reveals a shortage, your servicer must offer you the option to pay the shortage as a lump sum or spread it over 12 months. They cannot demand immediate full payment." },
+                { rule: "Surplus Refund Threshold", detail: "If your escrow account has a surplus of $50 or more, your servicer must refund it to you within 30 days. Surpluses under $50 may be credited to your next escrow payment." },
+              ].map((r) => (
+                <div key={r.rule} className="p-3 bg-white rounded-lg border border-amber-100">
+                  <h4 className="text-xs font-bold text-alta-navy mb-0.5">{r.rule}</h4>
+                  <p className="text-[11px] text-alta-gray leading-relaxed">{r.detail}</p>
+                </div>
+              ))}
+            </div>
+            <p className="text-[10px] text-alta-teal font-medium mt-3">Source: 12 U.S.C. Section 2609; 12 CFR Part 1024 (Regulation X); CFPB Escrow Account Rules</p>
           </div>
 
           {/* Common escrow questions */}

@@ -43,7 +43,7 @@ export default function AffordabilityPage() {
         title="How Much Home Can I Afford?"
         subtitle="Calculate your maximum home price based on your income, debts, and savings. Understand your debt-to-income ratio and buying power."
         image="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1920&q=80"
-        breadcrumb={[{ label: "Tools", href: "/closing-process" }, { label: "Affordability", href: "/affordability" }]}
+        breadcrumb={[{ label: "Resources", href: "/resources" }, { label: "Affordability", href: "/affordability" }]}
       />
 
       <div className="py-1.5 lg:py-2">

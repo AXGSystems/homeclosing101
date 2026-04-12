@@ -24,7 +24,7 @@ export default function ProtectYourMoneyPage() {
         title="Protect Your Money"
         subtitle="Wire fraud is the #1 financial threat facing homebuyers. Criminals stole $275.1 million from real estate transactions in 2025 alone."
         image="https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=1920&q=80"
-        breadcrumb={[{ label: "Protect Your Money", href: "/protect-your-money" }, { label: "Wire Fraud Overview", href: "/protect-your-money" }]}
+        breadcrumb={[{ label: "Protect Your Money", href: "/protect-your-money" }]}
       />
 
       <div className="py-1.5 lg:py-2">

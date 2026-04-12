@@ -274,15 +274,18 @@ export default function ClosingCostsPage() {
           <div className="space-y-3 text-sm text-alta-gray">
             <div>
               <p className="font-semibold text-alta-navy">RESPA (Real Estate Settlement Procedures Act)</p>
-              <p className="leading-relaxed">Requires lenders to disclose all settlement costs. Prohibits kickbacks and referral fees between settlement service providers. Gives you the right to shop for your own title insurance and settlement services. Source: CFPB</p>
+              <p className="leading-relaxed">Requires lenders to disclose all settlement costs. Prohibits kickbacks and referral fees between settlement service providers. Gives you the right to shop for your own title insurance and settlement services.</p>
+              <p className="text-[10px] text-alta-teal mt-1 font-medium">Source: CFPB</p>
             </div>
             <div>
               <p className="font-semibold text-alta-navy">TRID (TILA-RESPA Integrated Disclosure)</p>
-              <p className="leading-relaxed">Requires two standardized disclosure forms: the Loan Estimate (within 3 business days of application) and the Closing Disclosure (at least 3 business days before closing). Limits how much certain fees can increase between estimates. Source: CFPB</p>
+              <p className="leading-relaxed">Requires two standardized disclosure forms: the Loan Estimate (within 3 business days of application) and the Closing Disclosure (at least 3 business days before closing). Limits how much certain fees can increase between estimates.</p>
+              <p className="text-[10px] text-alta-teal mt-1 font-medium">Source: CFPB</p>
             </div>
             <div>
               <p className="font-semibold text-alta-navy">Tolerance Categories</p>
-              <p className="leading-relaxed">Under TRID, some fees cannot increase at all (lender fees, transfer taxes), some can increase up to 10% in aggregate (services you didn&apos;t shop for, recording fees), and some have no limit (services you chose, prepaid items, escrow). Source: CFPB</p>
+              <p className="leading-relaxed">Under TRID, some fees cannot increase at all (lender fees, transfer taxes), some can increase up to 10% in aggregate (services you didn&apos;t shop for, recording fees), and some have no limit (services you chose, prepaid items, escrow).</p>
+              <p className="text-[10px] text-alta-teal mt-1 font-medium">Source: CFPB</p>
             </div>
           </div>
         </div>

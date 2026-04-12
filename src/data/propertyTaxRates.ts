@@ -81,7 +81,7 @@ export const loanTypes: Record<string, LoanTypeConfig> = {
     mipRemovable: true,
     mipRemovalNote: "PMI can be removed at 20% equity by request, or automatically at 22% equity under the Homeowners Protection Act.",
     maxDTI: 45,
-    loanLimit2026: 806500,   // 2025 conforming limit
+    loanLimit2026: 806500,   // 2025 conforming limit (2026 not yet announced by FHFA)
     description: "Standard mortgage backed by Fannie Mae or Freddie Mac. Best rates with 20%+ down and 740+ credit. PMI required below 20% down.",
   },
   fha: {
@@ -93,7 +93,7 @@ export const loanTypes: Record<string, LoanTypeConfig> = {
     mipRemovable: false,
     mipRemovalNote: "For loans with LTV > 90% at origination, annual MIP is required for the LIFE of the loan. For LTV ≤ 90%, MIP drops off after 11 years. The only way to remove FHA MIP early is to refinance into a conventional loan.",
     maxDTI: 43,
-    loanLimit2026: 524225,   // FHA floor limit 2025
+    loanLimit2026: 524225,   // FHA floor limit 2025 (2026 not yet announced by FHFA)
     description: "Government-insured loan through the Federal Housing Administration. Lower credit and down payment requirements. MIP required for the life of most loans.",
   },
   va: {

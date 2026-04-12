@@ -54,7 +54,7 @@ export default function ProtectYourRightsPage() {
               <div className="absolute inset-0 bg-gradient-to-br from-red-50 to-red-100/50" />
               <div className="relative">
                 <div className="w-10 h-10 rounded-lg bg-red-100 flex items-center justify-center mb-3">
-                  <svg className="w-5 h-5 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
+                  <svg className="w-5 h-5 text-[#943030]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
                 </div>
                 <h3 className="font-bold text-alta-navy mb-2 text-lg">Lender&apos;s Policy</h3>
                 <p className="text-sm text-alta-gray">Protects only the <strong>lender&apos;s</strong> investment. Required by most mortgage companies. Does NOT protect you as the homeowner.</p>
@@ -132,8 +132,9 @@ export default function ProtectYourRightsPage() {
           {/* The 10 covered risks explained */}
           <h2 className="text-2xl font-bold text-alta-navy mb-4">What Your Owner&apos;s Policy Actually Covers</h2>
           <p className="text-sm text-alta-gray mb-4 leading-relaxed">
-            The current ALTA Owner&apos;s Policy lists specific covered risks. Click any risk below to see how title insurance protects you in detail. Source: ALTA Standard Owner&apos;s Policy
+            The current ALTA Owner&apos;s Policy lists specific covered risks. Click any risk below to see how title insurance protects you in detail.
           </p>
+          <p className="text-[10px] text-alta-teal font-medium mb-4">Source: ALTA Standard Owner&apos;s Policy</p>
           <ExpandableRiskTiles />
 
           {/* Dollar comparison */}

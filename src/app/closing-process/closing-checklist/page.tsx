@@ -177,7 +177,7 @@ export default function ClosingChecklistPage() {
                       <span className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center text-white font-bold text-sm">{sIdx + 1}</span>
                       <h2 className="text-lg font-bold text-white drop-shadow">{section.title}</h2>
                     </div>
-                    <span className={`text-xs font-bold px-3 py-1 rounded-full ${sectionComplete ? 'bg-green-500 text-white' : 'bg-white/20 text-white'}`}>
+                    <span className={`text-xs font-bold px-3 py-1 rounded-full ${sectionComplete ? 'bg-[#2d6b3f] text-white' : 'bg-white/20 text-white'}`}>
                       {sectionChecked}/{section.items.length}
                     </span>
                   </div>

@@ -1,7 +1,6 @@
 import Link from "next/link";
 import EliteProviders from "@/components/EliteProviders";
 import MarketStats from "@/components/MarketStats";
-// AltaMembershipCTA moved to /resources page
 
 const features = [
   {

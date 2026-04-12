@@ -86,7 +86,8 @@ export default function ClosingDisclosurePage() {
               <svg className="w-5 h-5 text-amber-600 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" /></svg>
               <div>
                 <p className="text-sm font-bold text-alta-navy mb-1">The 3-Business-Day Rule</p>
-                <p className="text-xs text-alta-gray leading-relaxed">Federal law requires you to receive the Closing Disclosure at least 3 business days before closing. If there are certain changes after delivery (APR increases by more than 1/8%, a prepayment penalty is added, or the loan product changes), a new 3-day waiting period begins. This is your protection — use the time to review every number carefully. Source: CFPB TRID Rule</p>
+                <p className="text-xs text-alta-gray leading-relaxed">Federal law requires you to receive the Closing Disclosure at least 3 business days before closing. If there are certain changes after delivery (APR increases by more than 1/8%, a prepayment penalty is added, or the loan product changes), a new 3-day waiting period begins. This is your protection — use the time to review every number carefully.</p>
+                <p className="text-[10px] text-alta-teal mt-2 font-medium">Source: CFPB TRID Rule</p>
               </div>
             </div>
           </div>
@@ -140,7 +141,8 @@ export default function ClosingDisclosurePage() {
               </tbody>
             </table>
           </div>
-          <p className="text-xs text-alta-gray mb-8">Source: CFPB TRID Rule — fee tolerance categories. If a zero-tolerance fee increased, your lender must cure (refund) the difference at or after closing.</p>
+          <p className="text-xs text-alta-gray mb-1">If a zero-tolerance fee increased, your lender must cure (refund) the difference at or after closing.</p>
+          <p className="text-[10px] text-alta-teal font-medium mb-8">Source: CFPB TRID Rule — fee tolerance categories</p>
 
           {/* 5-step review process */}
           <h2 className="text-xl font-bold text-alta-navy mb-4">Your 5-Step Closing Disclosure Review Process</h2>

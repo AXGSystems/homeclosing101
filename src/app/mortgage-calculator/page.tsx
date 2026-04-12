@@ -85,7 +85,7 @@ export default function MortgageCalculatorPage() {
         title="Mortgage Payment Calculator"
         subtitle="Estimate your monthly payment by loan type with real state property tax rates. Compare Conventional, FHA, VA, and USDA side by side."
         image="https://images.unsplash.com/photo-1560520653-9e0e4c89eb11?w=1920&q=80"
-        breadcrumb={[{ label: "Tools", href: "/mortgage-calculator" }, { label: "Mortgage Calculator", href: "/mortgage-calculator" }]}
+        breadcrumb={[{ label: "Resources", href: "/resources" }, { label: "Mortgage Calculator", href: "/mortgage-calculator" }]}
       />
 
       <div className="py-1.5 lg:py-2">

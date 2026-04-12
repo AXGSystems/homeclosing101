@@ -192,7 +192,7 @@ export default function ClosingOptionsPage() {
           <p className="text-sm text-alta-gray mb-4 leading-relaxed">Regardless of which closing method you choose, you&apos;ll sign essentially the same set of documents. The method only changes HOW and WHERE you sign them — not what you sign. Key documents include:</p>
           <div className="grid sm:grid-cols-2 gap-3 mb-10">
             {[
-              { name: "Closing Disclosure", desc: "Final terms and costs of your mortgage. You should have reviewed this 3+ days before closing. Source: CFPB TRID Rule" },
+              { name: "Closing Disclosure", desc: "Final terms and costs of your mortgage. You should have reviewed this 3+ days before closing." },
               { name: "Promissory Note", desc: "Your legal promise to repay the loan. Specifies amount, rate, term, and consequences of default." },
               { name: "Deed of Trust / Mortgage", desc: "Gives the lender a security interest in your property. If you default, this is what allows foreclosure." },
               { name: "Deed", desc: "Transfers legal ownership of the property from the seller to you. Recorded with the county after closing." },
@@ -212,8 +212,9 @@ export default function ClosingOptionsPage() {
           <div className="p-5 bg-gradient-to-br from-amber-50 to-white rounded-2xl border border-amber-200 mb-6">
             <h3 className="font-bold text-alta-navy mb-2">RON State Availability</h3>
             <p className="text-sm text-alta-gray leading-relaxed mb-3">
-              As of 2026, <strong className="text-alta-navy">45 states and the District of Columbia</strong> have enacted permanent RON legislation — up from just one state (Virginia) in 2011. This rapid expansion was driven by the joint advocacy of the <strong className="text-alta-navy">American Land Title Association (ALTA)</strong> and the Mortgage Bankers Association (MBA), who developed model legislation in 2017 and worked with lawmakers in every state to pass it. Early adopters include Virginia (2011), Texas, Florida, Michigan, and Nevada. Source: ALTA, MBA
+              As of 2026, <strong className="text-alta-navy">45 states and the District of Columbia</strong> have enacted permanent RON legislation — up from just one state (Virginia) in 2011. This rapid expansion was driven by the joint advocacy of the <strong className="text-alta-navy">American Land Title Association (ALTA)</strong> and the Mortgage Bankers Association (MBA), who developed model legislation in 2017 and worked with lawmakers in every state to pass it. Early adopters include Virginia (2011), Texas, Florida, Michigan, and Nevada.
             </p>
+            <p className="text-[10px] text-alta-teal font-medium mb-3">Source: ALTA, MBA</p>
             <p className="text-sm text-alta-gray leading-relaxed mb-3">
               At the federal level, the <strong className="text-alta-navy">SECURE Notarization Act</strong> (HR 1777) has bipartisan support and would establish national minimum standards for RON, enabling interstate recognition and opening RON to homebuyers in the remaining states. ALTA, MBA, and the National Association of Realtors are among its strongest advocates.
             </p>

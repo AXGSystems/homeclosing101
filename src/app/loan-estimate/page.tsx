@@ -191,7 +191,8 @@ export default function LoanEstimatePage() {
                 <p className="text-xs text-alta-gray mt-1">5-year cost: <strong className="text-green-600">$134,200</strong> (saves $2,600)</p>
               </div>
             </div>
-            <p className="text-xs text-alta-gray leading-relaxed">In this example, Lender B has a HIGHER interest rate but a LOWER APR — and saves you $2,600 over 5 years. This is because Lender A&apos;s higher fees offset their lower rate. The APR captures this. Always compare APRs, not just rates. Source: CFPB Know Before You Owe</p>
+            <p className="text-xs text-alta-gray leading-relaxed">In this example, Lender B has a HIGHER interest rate but a LOWER APR — and saves you $2,600 over 5 years. This is because Lender A&apos;s higher fees offset their lower rate. The APR captures this. Always compare APRs, not just rates.</p>
+            <p className="text-[10px] text-alta-teal mt-2 font-medium">Source: CFPB Know Before You Owe</p>
           </div>
 
           <div className="p-5 bg-gradient-to-br from-blue-50 to-white rounded-2xl border border-blue-100 mb-6">

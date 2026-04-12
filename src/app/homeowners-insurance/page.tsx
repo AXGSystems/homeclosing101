@@ -143,6 +143,53 @@ export default function HomeownersInsurancePage() {
             <p className="text-xs text-alta-gray leading-relaxed">Factors affecting your premium: location (weather risk, crime rate), home age and construction type, coverage amount, deductible, claims history, credit score (in most states), and proximity to fire stations/hydrants. Rates vary dramatically by state — Florida and Louisiana are among the most expensive due to hurricane risk.</p>
           </div>
 
+          {/* The Declarations Page */}
+          <h2 className="text-xl font-bold text-alta-navy mb-4">Understanding Your Declarations Page</h2>
+          <div className="p-5 bg-white rounded-2xl border border-gray-100 shadow-sm mb-10">
+            <p className="text-xs text-alta-gray leading-relaxed mb-4">The declarations page (or &quot;dec page&quot;) is the summary page of your insurance policy. Your lender will require a copy before closing. It is typically 1-2 pages and contains all the key details of your coverage:</p>
+            <div className="grid sm:grid-cols-2 gap-3">
+              {[
+                { field: "Named Insured", detail: "Your full legal name (and co-borrower if applicable). Must match the name on your mortgage documents exactly." },
+                { field: "Property Address", detail: "The address of the insured property. Verify it matches your purchase agreement and loan documents." },
+                { field: "Policy Period", detail: "The effective date and expiration date of coverage. Must be active on or before your closing date." },
+                { field: "Dwelling Coverage Amount", detail: "The maximum the insurer will pay to rebuild your home. Should equal or exceed your home's estimated replacement cost." },
+                { field: "Deductible", detail: "What you pay out of pocket before insurance kicks in. Common amounts: $1,000, $2,500, or a percentage of dwelling coverage." },
+                { field: "Annual Premium", detail: "The total cost for one year of coverage. This is the amount your lender collects through escrow." },
+                { field: "Lender/Mortgagee Clause", detail: "Your lender's name and address as the loss payee. The lender must be listed so they are notified of any claims, cancellations, or lapses." },
+                { field: "Coverage Limits (A-F)", detail: "The specific dollar limits for each coverage area: dwelling, other structures, personal property, loss of use, liability, and medical payments." },
+              ].map((f) => (
+                <div key={f.field} className="p-3 bg-[#e8f0f5] rounded-lg border border-[#c5d8e4]">
+                  <h4 className="text-xs font-bold text-alta-navy mb-0.5">{f.field}</h4>
+                  <p className="text-[11px] text-alta-gray leading-relaxed">{f.detail}</p>
+                </div>
+              ))}
+            </div>
+            <p className="text-[10px] text-alta-teal font-medium mt-3">Tip: Request your declarations page from your insurance agent at least 1 week before closing. Your lender and title company both need a copy.</p>
+          </div>
+
+          {/* How to File a Claim */}
+          <h2 className="text-xl font-bold text-alta-navy mb-4">How to File a Homeowner&apos;s Insurance Claim</h2>
+          <div className="space-y-3 mb-10">
+            {[
+              { step: "1", title: "Document the damage immediately", desc: "Take photos and video of all damage before making any temporary repairs. Make a detailed list of damaged or lost items with estimated values. If there was a break-in or vandalism, file a police report -- your insurer will need the report number.", color: "bg-[#e8f0f5] border-[#c5d8e4]" },
+              { step: "2", title: "Prevent further damage", desc: "Take reasonable steps to prevent additional damage (tarp a leaking roof, board up broken windows, turn off water to a burst pipe). Keep receipts for any emergency repairs -- these are typically reimbursable. Do NOT make permanent repairs until the adjuster has inspected.", color: "bg-[#e9f5ed] border-[#bddcc7]" },
+              { step: "3", title: "Contact your insurance company", desc: "Call your insurer's claims line (found on your declarations page or their website) as soon as possible. Most policies require prompt reporting -- some within 24-72 hours of the loss. Have your policy number ready. They will assign a claims adjuster.", color: "bg-[#faf4e4] border-[#e8d9a8]" },
+              { step: "4", title: "Meet with the claims adjuster", desc: "The adjuster will inspect the damage, review your documentation, and estimate repair costs. Be present during the inspection if possible. Provide your inventory list and all photos. If you disagree with the estimate, you can hire a public adjuster (they typically charge 10-15% of the settlement).", color: "bg-[#f0ecf6] border-[#d4c8e4]" },
+              { step: "5", title: "Review and receive your settlement", desc: "Your insurer will issue a settlement based on your policy terms. Replacement cost policies pay the full cost to repair or replace. Actual cash value policies deduct depreciation. If your claim exceeds your deductible, you pay the deductible and insurance covers the rest. If you have a mortgage, claim checks over a certain amount are typically made payable to both you and your lender.", color: "bg-[#f5e8e8] border-[#e4c5c5]" },
+            ].map((s) => (
+              <div key={s.step} className={`p-4 ${s.color} rounded-xl border tile-interactive flex gap-3 items-start`}>
+                <span className="w-7 h-7 rounded-full bg-alta-navy text-white flex items-center justify-center text-xs font-bold shrink-0">{s.step}</span>
+                <div>
+                  <h3 className="text-sm font-bold text-alta-navy">{s.title}</h3>
+                  <p className="text-xs text-alta-gray leading-relaxed mt-0.5">{s.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+          <p className="text-xs text-alta-gray mb-8">Source: Insurance Information Institute (III) -- Filing a homeowner's insurance claim. Note: Filing a claim may affect your future premiums. For damage under $2,000-$3,000, consider whether filing is worth a potential rate increase.</p>
+
+          <InlineAd />
+
           <div className="flex flex-col sm:flex-row gap-3">
             <Link href="/protect-your-rights" className="px-5 py-2.5 bg-alta-teal text-white font-semibold rounded-lg hover:bg-alta-teal-dark transition-colors text-center text-sm">
               Title Insurance Guide
