@@ -1,5 +1,6 @@
 import Link from "next/link";
 import PageHero from "@/components/PageHero";
+import { InlineAd } from "@/components/EliteProviders";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -106,6 +107,8 @@ export default function ClosingProcessPage() {
               </Link>
             ))}
           </div>
+
+          <InlineAd />
 
           {/* Key closing stats */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mt-8 mb-8">

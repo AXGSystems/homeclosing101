@@ -1,5 +1,6 @@
 import Link from "next/link";
 import PageHero from "@/components/PageHero";
+import { InlineAd } from "@/components/EliteProviders";
 import AltaMembershipCTA from "@/components/AltaMembershipCTA";
 import type { Metadata } from "next";
 
@@ -152,6 +153,8 @@ export default function ResourcesPage() {
             ))}
           </div>
         </div>
+
+        <InlineAd />
 
         {/* External Resources header */}
         <h2 className="text-xl font-bold text-alta-navy mb-2">External Resources</h2>
