@@ -57,15 +57,15 @@ export default function GlossaryPage() {
 
   const printClipList = () => {
     const terms = Object.values(clipped).sort((a, b) => a.term.localeCompare(b.term));
-    const html = `<!DOCTYPE html><html><head><title>My Glossary — HomeClosing101</title>
-<style>body{font-family:system-ui,sans-serif;max-width:700px;margin:0 auto;padding:40px 20px;color:#1a1a1a}
+    const html = `<!DOCTYPE html><html><head><title>My Glossary</title>
+<style>@page{margin:0.5in;size:auto}body{font-family:system-ui,sans-serif;max-width:700px;margin:0 auto;padding:20px;color:#1a1a1a}
 .header{text-align:center;padding-bottom:16px;margin-bottom:24px;border-bottom:2px solid #0a8ebc}
 .header h1{font-size:20px;color:#0f2b46;margin:0 0 4px}.header p{font-size:11px;color:#9ca3af;margin:0}
-.term{margin-bottom:20px;padding:12px 16px;border-left:3px solid #0a8ebc;background:#f8fafb;border-radius:0 8px 8px 0}
-.term h2{font-size:15px;color:#0f2b46;margin:0 0 4px}.term p{font-size:13px;color:#4a5568;margin:0;line-height:1.5}
-.term .ex{font-size:12px;color:#0a7ea8;margin-top:8px;font-style:italic}
-.footer{text-align:center;margin-top:32px;padding-top:12px;border-top:1px solid #e5e7eb;font-size:10px;color:#9ca3af}
-@media print{body{padding:20px}}</style></head><body>
+.term{margin-bottom:16px;padding:10px 14px;border-left:3px solid #0a8ebc;background:#f8fafb;border-radius:0 8px 8px 0;break-inside:avoid}
+.term h2{font-size:14px;color:#0f2b46;margin:0 0 4px}.term p{font-size:12px;color:#4a5568;margin:0;line-height:1.5}
+.term .ex{font-size:11px;color:#0a7ea8;margin-top:6px;font-style:italic}
+.footer{text-align:center;margin-top:24px;padding-top:12px;border-top:1px solid #e5e7eb;font-size:9px;color:#9ca3af}
+</style></head><body>
 <div class="header"><h1>My Glossary</h1><p>HomeClosing101.org — An ALTA Educational Initiative — ${terms.length} saved terms</p></div>
 ${terms.map(t => `<div class="term"><h2>${t.term}</h2><p>${t.definition}</p>${t.example ? `<p class="ex">${t.example}</p>` : ''}</div>`).join('')}
 <div class="footer">HomeClosing101.org — An educational initiative of the American Land Title Association (ALTA)</div>

@@ -207,6 +207,12 @@ select:focus {
   transform: scaleX(1);
 }
 
+/* Suppress browser print headers/footers */
+@page {
+  margin: 0.5in 0.5in 0.75in 0.5in;
+  size: auto;
+}
+
 /* Print styles — clean, content-only output */
 @media print {
 
