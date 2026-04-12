@@ -79,8 +79,6 @@ export default function MortgageCalculatorPage() {
   const total = slices.reduce((a, s) => a + s.value, 0);
   let cumAngle = 0;
 
-  const dti28 = (calc.totalMonthly / (homePrice * 0.004)) * 100; // rough estimate
-
   return (
     <>
       <PageHero
@@ -158,7 +156,7 @@ export default function MortgageCalculatorPage() {
                   <div className="grid grid-cols-2 gap-3">
                     <div>
                       <label className="text-xs font-medium text-alta-navy block mb-1">Interest Rate (%)</label>
-                      <input type="number" step={0.125} value={interestRate} onChange={(e) => setInterestRate(Number(e.target.value))} className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm" />
+                      <input type="number" step={0.125} min={0} max={15} value={interestRate} onChange={(e) => { const v = Number(e.target.value); if (!isNaN(v) && v >= 0 && v <= 15) setInterestRate(v); }} className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm" />
                     </div>
                     <div>
                       <label className="text-xs font-medium text-alta-navy block mb-1">Loan Term</label>

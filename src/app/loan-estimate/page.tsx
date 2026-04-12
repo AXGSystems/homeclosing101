@@ -22,8 +22,8 @@ const pages = [
     page: "Page 2 — Closing Cost Details",
     color: "from-[#2d6b3f] to-[#235532]",
     sections: [
-      { name: "Loan Costs (Section A-C)", what: "Details all lender fees: origination charges, discount points, underwriting, and services the lender requires (appraisal, credit report, flood determination).", lookFor: "Origination charges are negotiable. Compare these across multiple lenders. Ask if you can reduce fees by paying a higher rate, or vice versa." },
-      { name: "Other Costs (Section E-H)", what: "Lists taxes, government fees, prepaids (homeowner's insurance premium, prepaid interest, initial escrow deposits), and optional owner's title insurance.", lookFor: "Owner's title insurance is listed here. Even though it says 'optional,' it's strongly recommended. You can shop for this — don't just accept the lender's suggestion." },
+      { name: "Loan Costs (Sections A-C: Origination, Services You Cannot Shop For, Services You Can Shop For)", what: "Section A lists origination charges (the lender's own fees and any discount points you're paying to buy down your rate). Section B lists services the lender requires from specific providers (appraisal, credit report, flood determination). Section C lists services you're allowed to shop for yourself — like title search, settlement agent, and pest inspection.", lookFor: "Origination charges (Section A) are negotiable. Compare these across multiple lenders. Section C is where your consumer power matters most — you can choose your own providers for these services and potentially save hundreds." },
+      { name: "Other Costs (Sections E-H: Taxes, Prepaids, Escrow, Other)", what: "Section E lists recording fees and transfer taxes charged by your local government. Section F covers prepaids — items you pay upfront like homeowner's insurance premium, prepaid daily interest, and initial property tax. Section G details your escrow account setup (monthly reserves your lender holds for taxes and insurance). Section H includes optional items like owner's title insurance.", lookFor: "Owner's title insurance is in Section H. Even though it says 'optional,' it's strongly recommended — it protects YOUR ownership rights for life. You can shop for this independently; don't just accept the lender's suggestion." },
       { name: "Calculating Cash to Close", what: "Line-by-line calculation: total closing costs, minus any lender credits, plus down payment, minus deposit, minus seller credits.", lookFor: "If you negotiated seller concessions, verify they appear here. Check that your earnest money deposit is credited correctly." },
     ],
   },
@@ -67,6 +67,27 @@ export default function LoanEstimatePage() {
                 <p className="text-sm text-alta-gray leading-relaxed">The Loan Estimate replaced the old Good Faith Estimate (GFE) in 2015 under the CFPB&apos;s TRID rule. Its standardized format makes it easy to compare offers from different lenders. Get at least 3 Loan Estimates before choosing a lender — comparing APRs, not just interest rates. <a href="https://www.consumerfinance.gov/owning-a-home/loan-estimate/" target="_blank" rel="noopener noreferrer" className="text-alta-teal font-medium hover:underline">See a sample Loan Estimate at CFPB.gov</a></p>
               </div>
             </div>
+          </div>
+
+          {/* TRID/TILA/RESPA explainer */}
+          <div className="p-5 bg-gradient-to-br from-blue-50 to-white rounded-2xl border border-blue-100 mb-8">
+            <h3 className="font-bold text-alta-navy mb-3">What Are TRID, TILA, and RESPA?</h3>
+            <p className="text-sm text-alta-gray leading-relaxed mb-3">You&apos;ll see these acronyms referenced throughout the closing process. Here&apos;s what they mean in plain English:</p>
+            <div className="space-y-3">
+              <div className="flex items-start gap-3">
+                <span className="text-xs font-bold text-white bg-[#1a5276] px-2 py-0.5 rounded shrink-0 mt-0.5">TRID</span>
+                <p className="text-sm text-alta-gray leading-relaxed"><strong className="text-alta-navy">TILA-RESPA Integrated Disclosure rule</strong> — A 2015 CFPB regulation that combined two older disclosure forms into the standardized Loan Estimate and Closing Disclosure you&apos;ll receive. It ensures you get clear, consistent information so you can compare lenders and understand your costs before committing.</p>
+              </div>
+              <div className="flex items-start gap-3">
+                <span className="text-xs font-bold text-white bg-[#2d6b3f] px-2 py-0.5 rounded shrink-0 mt-0.5">TILA</span>
+                <p className="text-sm text-alta-gray leading-relaxed"><strong className="text-alta-navy">Truth in Lending Act (1968)</strong> — Requires lenders to clearly disclose the APR, total interest cost, and all loan terms so you can make an informed borrowing decision. This is why your Loan Estimate must show the APR — not just the interest rate.</p>
+              </div>
+              <div className="flex items-start gap-3">
+                <span className="text-xs font-bold text-white bg-[#5b3a8c] px-2 py-0.5 rounded shrink-0 mt-0.5">RESPA</span>
+                <p className="text-sm text-alta-gray leading-relaxed"><strong className="text-alta-navy">Real Estate Settlement Procedures Act (1974)</strong> — Protects you from inflated closing costs and kickback schemes. It gives you the legal right to choose your own title company, requires good-faith cost estimates upfront, and prohibits anyone from receiving a fee for a referral. If someone pressures you to use a specific provider, RESPA is on your side.</p>
+              </div>
+            </div>
+            <p className="text-[10px] text-alta-teal mt-3 font-medium">Source: CFPB Know Before You Owe | 12 CFR 1026 (Regulation Z) | 12 CFR 1024 (Regulation X)</p>
           </div>
 
           {/* When you'll receive it */}
