@@ -23,7 +23,7 @@ export default function ProtectYourMoneyPage() {
         title="Protect Your Money"
         subtitle="Wire fraud is the #1 financial threat facing homebuyers. Criminals stole $275.1 million from real estate transactions in 2025 alone."
         image="https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=1920&q=80"
-        breadcrumb={[{ label: "Protect Your Money", href: "/protect-your-money" }]}
+        breadcrumb={[{ label: "Protect Your Money", href: "/protect-your-money" }, { label: "Wire Fraud Overview", href: "/protect-your-money" }]}
       />
 
       <div className="py-1.5 lg:py-2">
@@ -53,35 +53,62 @@ export default function ProtectYourMoneyPage() {
             </div>
           </div>
 
-          {/* How it works — visual flow */}
+          {/* How it works — escalating flow with arrows */}
           <h2 className="text-2xl font-bold text-alta-navy mb-6">How Wire Fraud Works</h2>
-          <div className="grid md:grid-cols-4 gap-4 mb-14">
+          <div className="flex flex-col md:flex-row items-stretch gap-0 mb-14">
             {[
-              { step: "1", title: "Criminals Monitor", desc: "Hackers infiltrate email accounts or monitor public listings for pending sales.", color: "from-[#4a5568] to-[#3a4455]" },
-              { step: "2", title: "Fake Instructions", desc: "Near closing, a spoofed email arrives with 'updated' wire instructions.", color: "from-[#8b6914] to-[#705410]" },
-              { step: "3", title: "Money Wired", desc: "Under pressure to close, the buyer wires funds to the criminal's account.", color: "from-[#943030] to-[#7a2020]" },
-              { step: "4", title: "Funds Disappear", desc: "Money is moved through multiple accounts within hours. Recovery is rare.", color: "from-[#7a2020] to-[#5c1818]" },
-            ].map((s) => (
-              <div key={s.step} className="relative rounded-2xl overflow-hidden shadow-sm">
-                <div className={`bg-gradient-to-br ${s.color} p-5 text-white h-full`}>
-                  <span className="text-3xl font-bold opacity-30 absolute top-2 right-3">{s.step}</span>
-                  <h3 className="font-bold text-lg mb-2">{s.title}</h3>
-                  <p className="text-sm text-white/80 leading-relaxed">{s.desc}</p>
+              { step: "1", title: "Criminals Monitor", desc: "Hackers infiltrate email accounts or monitor public listings for pending sales.", color: "from-[#4a5568] to-[#3a4455]", severity: "bg-gray-200" },
+              { step: "2", title: "Fake Instructions", desc: "Near closing, a spoofed email arrives with 'updated' wire instructions.", color: "from-[#8b6914] to-[#705410]", severity: "bg-amber-200" },
+              { step: "3", title: "Money Wired", desc: "Under pressure to close, the buyer wires funds to the criminal's account.", color: "from-[#943030] to-[#7a2020]", severity: "bg-red-200" },
+              { step: "4", title: "Funds Disappear", desc: "Money is moved through multiple accounts within hours. Recovery is rare.", color: "from-[#5c1818] to-[#3d1010]", severity: "bg-red-400" },
+            ].map((s, i) => (
+              <div key={s.step} className="flex items-stretch flex-1">
+                <div className="relative rounded-2xl md:rounded-none md:first:rounded-l-2xl md:last:rounded-r-2xl overflow-hidden shadow-sm flex-1 tile-interactive">
+                  {/* Severity bar at top */}
+                  <div className={`h-1.5 ${s.severity}`} />
+                  <div className={`bg-gradient-to-br ${s.color} p-4 text-white h-full`}>
+                    <div className="flex items-center gap-2 mb-2">
+                      <span className="w-7 h-7 rounded-full bg-white/20 flex items-center justify-center text-sm font-bold">{s.step}</span>
+                      <h3 className="font-bold text-sm">{s.title}</h3>
+                    </div>
+                    <p className="text-xs text-white/80 leading-relaxed">{s.desc}</p>
+                  </div>
                 </div>
+                {/* Arrow between steps */}
+                {i < 3 && (
+                  <div className="hidden md:flex items-center justify-center w-6 shrink-0 text-alta-red">
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" /></svg>
+                  </div>
+                )}
+                {i < 3 && (
+                  <div className="md:hidden flex justify-center py-1 text-alta-red">
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 9l-7 7-7-7" /></svg>
+                  </div>
+                )}
               </div>
             ))}
           </div>
 
-          {/* Safeguards */}
+          {/* Safeguards — colorized with numbered badges */}
           <h2 className="text-2xl font-bold text-alta-navy mb-6">5 Safeguards to Protect Yourself</h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 mb-12">
-            {safeguards.map((sg, i) => (
-              <div key={i} className="feature-card p-5 bg-white rounded-2xl border border-gray-100 shadow-sm" data-accent="teal">
-                <div className="w-11 h-11 rounded-xl bg-alta-light flex items-center justify-center text-alta-teal mb-3">
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d={sg.icon} /></svg>
-                </div>
-                <h3 className="font-bold text-alta-navy mb-1">{sg.title}</h3>
-                <p className="text-xs text-alta-gray leading-relaxed">{sg.description}</p>
+            {safeguards.map((sg, i) => {
+              const colors = [
+                { bg: "bg-[#e8f0f5]", border: "border-[#c5d8e4]", icon: "bg-[#1a5276]", num: "bg-[#1a5276]" },
+                { bg: "bg-[#e9f5ed]", border: "border-[#bddcc7]", icon: "bg-[#2d6b3f]", num: "bg-[#2d6b3f]" },
+                { bg: "bg-[#faf4e4]", border: "border-[#e8d9a8]", icon: "bg-[#8b6914]", num: "bg-[#8b6914]" },
+                { bg: "bg-[#f0ecf6]", border: "border-[#d4c8e4]", icon: "bg-[#5b3a8c]", num: "bg-[#5b3a8c]" },
+                { bg: "bg-[#e6f1f5]", border: "border-[#b4d8e8]", icon: "bg-[#0a7ea8]", num: "bg-[#0a7ea8]" },
+              ];
+              const c = colors[i];
+              return (
+                <div key={i} className={`p-5 ${c.bg} rounded-2xl border ${c.border} tile-interactive group relative`}>
+                  <span className={`absolute top-3 right-3 w-6 h-6 rounded-full ${c.num} text-white flex items-center justify-center text-xs font-bold`}>{i + 1}</span>
+                  <div className={`w-11 h-11 rounded-xl ${c.icon} flex items-center justify-center text-white mb-3 group-hover:scale-110 transition-transform`}>
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d={sg.icon} /></svg>
+                  </div>
+                  <h3 className="font-bold text-alta-navy mb-1">{sg.title}</h3>
+                  <p className="text-xs text-alta-gray leading-relaxed">{sg.description}</p>
               </div>
             ))}
           </div>
