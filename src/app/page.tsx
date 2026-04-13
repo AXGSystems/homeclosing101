@@ -491,29 +491,33 @@ export default function HomePage() {
             <h2 className="text-3xl font-bold text-alta-navy mb-3">Trusted Resources</h2>
             <p className="text-alta-gray max-w-xl mx-auto">Verified links to government agencies and industry organizations that support homebuyers.</p>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
             {resources.map((r, i) => (
               <a
                 key={r.name}
                 href={r.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`group rounded-xl p-4 sm:p-5 border tile-interactive ${resourceBgs[i % resourceBgs.length]}`}
-                style={{ borderLeftWidth: '4px', borderLeftColor: resourceColors[i % resourceColors.length] }}
+                className="group rounded-2xl bg-white border border-gray-100 shadow-sm tile-interactive overflow-hidden"
               >
-                <div className="flex items-center gap-2.5 mb-2">
-                  <div className="w-8 h-8 rounded-lg bg-white flex items-center justify-center shrink-0 border border-gray-100 shadow-sm overflow-hidden">
+                {/* Logo area with halo glow */}
+                <div className="flex items-center justify-center py-6 px-4 relative">
+                  <div className="absolute inset-0 opacity-[0.07] rounded-t-2xl" style={{ backgroundColor: resourceColors[i % resourceColors.length] }} />
+                  <div className="w-16 h-16 rounded-2xl bg-white flex items-center justify-center shadow-md border border-gray-100 relative z-10 overflow-hidden" style={{ boxShadow: `0 0 20px ${resourceColors[i % resourceColors.length]}25, 0 4px 12px rgba(0,0,0,0.08)` }}>
                     {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src={r.logo} alt="" className="w-5 h-5 object-contain" />
+                    <img src={r.logo} alt={r.name} className="w-10 h-10 object-contain" />
                   </div>
-                  <h3 className="text-sm font-semibold text-alta-navy group-hover:text-alta-teal transition-colors leading-tight">{r.name}</h3>
                 </div>
-                <p className="text-xs text-alta-gray">{r.desc}</p>
-                <div className="mt-3 flex items-center text-xs font-medium text-alta-teal">
-                  Visit site
-                  <svg className="w-3 h-3 ml-1 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                  </svg>
+                {/* Content */}
+                <div className="px-4 pb-5 text-center">
+                  <h3 className="text-sm font-bold text-alta-navy mb-1.5 group-hover:text-alta-teal transition-colors leading-tight">{r.name}</h3>
+                  <p className="text-[11px] text-alta-gray leading-relaxed mb-3">{r.desc}</p>
+                  <span className="inline-flex items-center gap-1 text-xs font-semibold" style={{ color: resourceColors[i % resourceColors.length] }}>
+                    Visit site
+                    <svg className="w-3 h-3 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                    </svg>
+                  </span>
                 </div>
               </a>
             ))}
