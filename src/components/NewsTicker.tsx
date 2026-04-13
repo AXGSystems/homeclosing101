@@ -40,7 +40,7 @@ export default function NewsTicker() {
         <div className="overflow-hidden flex-1">
           <div
             className="flex items-center whitespace-nowrap hover:[animation-play-state:paused]"
-            style={{ animation: "tickerScroll 10s linear infinite" }}
+            style={{ animation: "tickerScroll 35s linear infinite" }}
           >
             {/* Render headlines twice for seamless loop */}
             {[...headlines, ...headlines].map((item, i) => (
