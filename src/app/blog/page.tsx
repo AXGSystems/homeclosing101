@@ -196,9 +196,9 @@ export default function BlogPage() {
 
     <div className="py-1.5 lg:py-2">
       <div className="max-w-5xl mx-auto px-4 sm:px-6">
-        <div className="mb-6 p-4 bg-white rounded-2xl border border-gray-100 sm:sticky sm:top-[142px] z-20 shadow-md">
+        <div className="mb-6 p-4 bg-white rounded-2xl border border-[#c5d8e4] border-l-4 border-l-[#0a7ea8] sm:sticky sm:top-[142px] z-20 shadow-md">
           <div className="flex items-start gap-4">
-            <div className="w-12 h-12 rounded-xl bg-alta-teal/10 flex items-center justify-center text-alta-teal shrink-0">
+            <div className="w-12 h-12 rounded-xl bg-[#0a7ea8]/10 flex items-center justify-center text-[#0a7ea8] shrink-0">
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M12 7.5h1.5m-1.5 3h1.5m-7.5 3h7.5m-7.5 3h7.5m3-9h3.375c.621 0 1.125.504 1.125 1.125V18a2.25 2.25 0 01-2.25 2.25M16.5 7.5V18a2.25 2.25 0 002.25 2.25M16.5 7.5V4.875c0-.621-.504-1.125-1.125-1.125H4.125C3.504 3.75 3 4.254 3 4.875V18a2.25 2.25 0 002.25 2.25h13.5M6 7.5h3v3H6v-3z" /></svg>
             </div>
             <div>
@@ -289,30 +289,30 @@ export default function BlogPage() {
         <div className="p-6 bg-gradient-to-br from-alta-light to-white rounded-2xl border border-gray-100">
           <h2 className="text-xl font-bold text-alta-navy mb-4">Explore More</h2>
           <div className="grid sm:grid-cols-3 gap-3">
-            <Link href="/faq" className="flex items-center gap-3 p-3 bg-white rounded-xl border border-gray-100 hover:shadow-sm hover:border-alta-teal/20 transition-all">
-              <div className="w-9 h-9 rounded-lg bg-alta-teal/10 flex items-center justify-center text-alta-teal shrink-0">
+            <Link href="/faq" className="group flex items-center gap-3 p-3 bg-[#f0ecf6] rounded-xl border border-[#d4c8e4] border-l-4 border-l-[#5b3a8c] tile-interactive">
+              <div className="w-9 h-9 rounded-lg bg-[#5b3a8c]/10 flex items-center justify-center text-[#5b3a8c] shrink-0">
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9 5.25h.008v.008H12v-.008z" /></svg>
               </div>
               <div>
-                <h3 className="text-xs font-semibold text-alta-navy">250+ FAQ</h3>
+                <h3 className="text-xs font-semibold text-alta-navy group-hover:text-alta-teal transition-colors">250+ FAQ</h3>
                 <p className="text-[10px] text-alta-gray">Verified answers</p>
               </div>
             </Link>
-            <Link href="/glossary" className="flex items-center gap-3 p-3 bg-white rounded-xl border border-gray-100 hover:shadow-sm hover:border-alta-teal/20 transition-all">
-              <div className="w-9 h-9 rounded-lg bg-alta-teal/10 flex items-center justify-center text-alta-teal shrink-0">
+            <Link href="/glossary" className="group flex items-center gap-3 p-3 bg-[#e8f0f5] rounded-xl border border-[#c5d8e4] border-l-4 border-l-[#1a5276] tile-interactive">
+              <div className="w-9 h-9 rounded-lg bg-[#1a5276]/10 flex items-center justify-center text-[#1a5276] shrink-0">
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" /></svg>
               </div>
               <div>
-                <h3 className="text-xs font-semibold text-alta-navy">450+ Glossary</h3>
+                <h3 className="text-xs font-semibold text-alta-navy group-hover:text-alta-teal transition-colors">450+ Glossary</h3>
                 <p className="text-[10px] text-alta-gray">Real estate terms</p>
               </div>
             </Link>
-            <Link href="/stop-fraud" className="flex items-center gap-3 p-3 bg-white rounded-xl border border-gray-100 hover:shadow-sm hover:border-alta-teal/20 transition-all">
+            <Link href="/stop-fraud" className="group flex items-center gap-3 p-3 bg-[#f5e8e8] rounded-xl border border-[#e4c5c5] border-l-4 border-l-[#943030] tile-interactive">
               <div className="w-9 h-9 rounded-lg bg-red-100 flex items-center justify-center text-[#943030] shrink-0">
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" /></svg>
               </div>
               <div>
-                <h3 className="text-xs font-semibold text-alta-navy">Stop Fraud 101</h3>
+                <h3 className="text-xs font-semibold text-alta-navy group-hover:text-alta-teal transition-colors">Stop Fraud 101</h3>
                 <p className="text-[10px] text-alta-gray">Prevention guide</p>
               </div>
             </Link>

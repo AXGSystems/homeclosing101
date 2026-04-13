@@ -383,7 +383,7 @@ export default function QuestionsToAskPage() {
             return (
               <div key={section.title}>
               {sIdx === 3 && <InlineAd />}
-              <div className="rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+              <div className="rounded-2xl border border-gray-200 overflow-hidden shadow-sm tile-interactive">
                 <div className={`${c.headerBg} px-5 py-3`}>
                   <h2 className={`text-base font-bold ${c.headerText}`}>{section.title}</h2>
                   <p className="text-[10px] text-white/70 mt-0.5">{section.questions.length} questions &mdash; tap any question for expert guidance</p>

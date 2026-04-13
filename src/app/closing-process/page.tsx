@@ -68,9 +68,9 @@ export default function ClosingProcessPage() {
             </div>
           </div>
 
-          <div className="mb-6 p-4 bg-white rounded-2xl border border-gray-100 sm:sticky sm:top-[142px] z-20 shadow-md">
+          <div className="mb-6 p-4 bg-[#e6f1f5] rounded-2xl border border-[#b4d8e8] border-l-4 border-l-[#0a7ea8] sm:sticky sm:top-[142px] z-20 shadow-md">
             <div className="flex items-start gap-4">
-              <div className="w-12 h-12 rounded-xl bg-alta-teal/10 flex items-center justify-center text-alta-teal shrink-0">
+              <div className="w-12 h-12 rounded-xl bg-[#0a7ea8]/15 flex items-center justify-center text-[#0a7ea8] shrink-0">
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 002.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 00-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15" /></svg>
               </div>
               <div>
@@ -130,16 +130,16 @@ export default function ClosingProcessPage() {
           <h2 className="text-xl font-bold text-alta-navy mb-4">More Closing Resources</h2>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
             {[
-              { title: "Home Inspection Guide", desc: "What inspectors check, specialty inspections, and how to choose an inspector", href: "/home-inspection" },
-              { title: "Homeowner's Insurance", desc: "What it covers, how to shop, what lenders require, and typical costs", href: "/homeowners-insurance" },
-              { title: "Understanding Escrow", desc: "How escrow works before, during, and after closing — earnest money to monthly payments", href: "/escrow-guide" },
-              { title: "Your Loan Estimate", desc: "Page-by-page breakdown with comparison tips and red flags to watch for", href: "/loan-estimate" },
-              { title: "Your Closing Disclosure", desc: "5-page review guide with tolerance rules and 5-step review process", href: "/closing-disclosure" },
-              { title: "Document Checklist", desc: "Everything to bring on closing day — organized by category", href: "/document-checklist" },
-              { title: "Document Library", desc: "Official CFPB forms, sample documents, and education courses", href: "/document-library" },
-              { title: "Stop Fraud 101", desc: "10 FBI-sourced prevention steps to protect your closing funds", href: "/stop-fraud" },
+              { title: "Home Inspection Guide", desc: "What inspectors check, specialty inspections, and how to choose an inspector", href: "/home-inspection", bg: "bg-[#e8f0f5]", border: "border-[#c5d8e4]", accent: "border-l-[#1a5276]" },
+              { title: "Homeowner's Insurance", desc: "What it covers, how to shop, what lenders require, and typical costs", href: "/homeowners-insurance", bg: "bg-[#e9f5ed]", border: "border-[#bddcc7]", accent: "border-l-[#2d6b3f]" },
+              { title: "Understanding Escrow", desc: "How escrow works before, during, and after closing — earnest money to monthly payments", href: "/escrow-guide", bg: "bg-[#f0ecf6]", border: "border-[#d4c8e4]", accent: "border-l-[#5b3a8c]" },
+              { title: "Your Loan Estimate", desc: "Page-by-page breakdown with comparison tips and red flags to watch for", href: "/loan-estimate", bg: "bg-[#faf4e4]", border: "border-[#e8d9a8]", accent: "border-l-[#8b6914]" },
+              { title: "Your Closing Disclosure", desc: "5-page review guide with tolerance rules and 5-step review process", href: "/closing-disclosure", bg: "bg-[#f5e8e8]", border: "border-[#e4c5c5]", accent: "border-l-[#943030]" },
+              { title: "Document Checklist", desc: "Everything to bring on closing day — organized by category", href: "/document-checklist", bg: "bg-[#e6f1f5]", border: "border-[#b4d8e8]", accent: "border-l-[#0a7ea8]" },
+              { title: "Document Library", desc: "Official CFPB forms, sample documents, and education courses", href: "/document-library", bg: "bg-[#e8f0f5]", border: "border-[#c5d8e4]", accent: "border-l-[#1a5276]" },
+              { title: "Stop Fraud 101", desc: "10 FBI-sourced prevention steps to protect your closing funds", href: "/stop-fraud", bg: "bg-[#f5e8e8]", border: "border-[#e4c5c5]", accent: "border-l-[#943030]" },
             ].map((r) => (
-              <Link key={r.title} href={r.href} className="p-4 bg-white rounded-xl border border-gray-100 shadow-sm tile-interactive group">
+              <Link key={r.title} href={r.href} className={`p-4 ${r.bg} rounded-xl border ${r.border} border-l-4 ${r.accent} shadow-sm tile-interactive group`}>
                 <h3 className="text-sm font-bold text-alta-navy group-hover:text-alta-teal transition-colors">{r.title}</h3>
                 <p className="text-[11px] text-alta-gray mt-1 leading-snug">{r.desc}</p>
               </Link>

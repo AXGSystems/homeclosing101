@@ -532,9 +532,9 @@ export default function ClosingCostsPage() {
       <div className="max-w-4xl mx-auto px-4 sm:px-6">
 
         {/* Page intro */}
-        <div className="mb-6 p-4 bg-white rounded-2xl border border-gray-100 sm:sticky sm:top-[142px] z-20 shadow-md">
+        <div className="mb-6 p-4 bg-[#faf4e4] rounded-2xl border border-[#e8d9a8] border-l-4 border-l-[#8b6914] sm:sticky sm:top-[142px] z-20 shadow-md">
           <div className="flex items-start gap-4">
-            <div className="w-12 h-12 rounded-xl bg-alta-teal/10 flex items-center justify-center text-alta-teal shrink-0">
+            <div className="w-12 h-12 rounded-xl bg-[#8b6914]/15 flex items-center justify-center text-[#8b6914] shrink-0">
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M15.75 15.75V18m-7.5-6.75h.008v.008H8.25v-.008zm0 2.25h.008v.008H8.25V13.5zm0 2.25h.008v.008H8.25v-.008zm0 2.25h.008v.008H8.25V18zm2.498-6.75h.007v.008h-.007v-.008zm0 2.25h.007v.008h-.007V13.5z" /></svg>
             </div>
             <div>
@@ -633,6 +633,8 @@ export default function ClosingCostsPage() {
           </p>
         </div>
 
+        <InlineAd />
+
         {/* Fee Categories */}
         {/* Interactive cost breakdown chart */}
         <ClosingCostChart />
@@ -648,7 +650,7 @@ export default function ClosingCostsPage() {
                   <button
                     key={item.name}
                     onClick={() => openFeeDetail(item)}
-                    className="w-full text-left flex flex-col sm:flex-row sm:items-start gap-1 sm:gap-4 p-3 rounded-xl border border-gray-100 hover:border-alta-teal/30 hover:shadow-md transition-all cursor-pointer bg-white group"
+                    className="w-full text-left flex flex-col sm:flex-row sm:items-start gap-1 sm:gap-4 p-3 rounded-xl border border-[#c5d8e4] border-l-4 border-l-[#1a5276] hover:border-alta-teal/30 hover:shadow-md transition-all cursor-pointer bg-[#e8f0f5] group tile-interactive"
                   >
                     <div className="flex-1">
                       <p className="text-sm font-medium text-alta-navy group-hover:text-alta-teal transition-colors flex items-center gap-1.5">
@@ -675,7 +677,7 @@ export default function ClosingCostsPage() {
           Closing cost responsibilities vary significantly by state and are often negotiable. In some states, the seller traditionally pays for the owner&apos;s title insurance policy. In others, the buyer pays. Your purchase agreement should specify who pays each fee. Here are the general patterns:
         </p>
         <div className="grid sm:grid-cols-2 gap-4 mb-10">
-          <div className="p-5 bg-white rounded-2xl border border-gray-100 shadow-sm tile-interactive">
+          <div className="p-5 bg-[#e6f1f5] rounded-2xl border border-[#b4d8e8] border-l-4 border-l-[#0a7ea8] shadow-sm tile-interactive">
             <h3 className="font-bold text-alta-navy mb-3">Typically Paid by the Buyer</h3>
             <ul className="space-y-2 text-sm text-alta-gray">
               <li className="flex items-start gap-2"><svg className="w-4 h-4 text-alta-teal shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>Loan origination and discount points</li>
@@ -686,7 +688,7 @@ export default function ClosingCostsPage() {
               <li className="flex items-start gap-2"><svg className="w-4 h-4 text-alta-teal shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>Private mortgage insurance (PMI) if applicable</li>
             </ul>
           </div>
-          <div className="p-5 bg-white rounded-2xl border border-gray-100 shadow-sm tile-interactive">
+          <div className="p-5 bg-[#e9f5ed] rounded-2xl border border-[#bddcc7] border-l-4 border-l-[#2d6b3f] shadow-sm tile-interactive">
             <h3 className="font-bold text-alta-navy mb-3">Typically Paid by the Seller</h3>
             <ul className="space-y-2 text-sm text-alta-gray">
               <li className="flex items-start gap-2"><svg className="w-4 h-4 text-alta-teal shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>Real estate agent commissions (negotiated separately — no standard rate since 2024 NAR settlement)</li>
@@ -706,7 +708,7 @@ export default function ClosingCostsPage() {
             <button
               key={item.title}
               onClick={() => openReductionDetail(item)}
-              className="text-left p-4 bg-white rounded-xl border border-gray-100 shadow-sm hover:shadow-md hover:border-[#2d6b3f]/30 transition-all cursor-pointer group"
+              className="text-left p-4 bg-[#e9f5ed] rounded-xl border border-[#bddcc7] border-l-4 border-l-[#2d6b3f] shadow-sm hover:shadow-md hover:border-[#2d6b3f]/50 transition-all cursor-pointer group tile-interactive"
             >
               <h3 className="font-bold text-alta-navy text-sm mb-1 group-hover:text-[#2d6b3f] transition-colors flex items-center gap-1.5">
                 {item.title}

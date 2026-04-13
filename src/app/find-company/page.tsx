@@ -6,6 +6,7 @@ import Link from "next/link";
 import PageHero from "@/components/PageHero";
 import SponsorSidebar from "@/components/SponsorSidebar";
 import FirstTimeBuyerCTA from "@/components/FirstTimeBuyerCTA";
+import { InlineAd } from "@/components/EliteProviders";
 
 const states = [
   {code:"AL",name:"Alabama"},{code:"AK",name:"Alaska"},{code:"AZ",name:"Arizona"},{code:"AR",name:"Arkansas"},
@@ -201,9 +202,9 @@ function FindCompanyContent() {
         <div className="grid lg:grid-cols-[1fr_280px] gap-8">
           {/* Main content */}
           <div>
-            <div className="mb-6 p-4 bg-white rounded-2xl border border-gray-100 sm:sticky sm:top-[142px] z-20 shadow-md">
+            <div className="mb-6 p-4 bg-white rounded-2xl border border-[#c5d8e4] sm:sticky sm:top-[142px] z-20 shadow-md">
               <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-xl bg-alta-teal/10 flex items-center justify-center text-alta-teal shrink-0">
+                <div className="w-12 h-12 rounded-xl bg-[#1a5276]/10 flex items-center justify-center text-[#1a5276] shrink-0">
                   <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" /></svg>
                 </div>
                 <div>
@@ -214,7 +215,7 @@ function FindCompanyContent() {
             </div>
 
             {/* Search controls */}
-            <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 mb-6">
+            <div className="bg-[#e8f0f5] rounded-2xl border border-[#c5d8e4] shadow-sm p-5 mb-6">
               <h2 className="text-lg font-bold text-alta-navy mb-4">Search ALTA Member Directory</h2>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mb-4">
                 {/* State */}
@@ -266,8 +267,8 @@ function FindCompanyContent() {
 
             {/* Results iframe */}
             {hasSearched && iframeUrl && (
-              <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden mb-8">
-                <div className="px-5 py-3 border-b border-gray-100 flex items-center justify-between">
+              <div className="bg-white rounded-2xl border border-[#c5d8e4] shadow-sm overflow-hidden mb-8">
+                <div className="px-5 py-3 border-b border-[#c5d8e4] flex items-center justify-between">
                   <h3 className="text-sm font-semibold text-alta-navy">
                     Results for {states.find(s => s.code === selectedState)?.name}{city ? `, ${city}` : ''}
                   </h3>
@@ -347,7 +348,15 @@ function FindCompanyContent() {
                       </div>
                     )
                   })}
-                  className="flex items-start gap-2 p-3 bg-alta-light rounded-lg cursor-pointer group relative hover:bg-alta-light/80 transition-colors"
+                  className={`flex items-start gap-2 p-3 rounded-lg cursor-pointer group relative tile-interactive border-l-4 ${
+                    tip.gradient.includes('1a5276') && !tip.gradient.includes('2d6b3f') && !tip.gradient.includes('5b3a8c') && !tip.gradient.includes('0a7ea8') ? 'bg-[#e8f0f5] border-l-[#1a5276]' :
+                    tip.gradient.includes('2d6b3f') ? 'bg-[#e9f5ed] border-l-[#2d6b3f]' :
+                    tip.gradient.includes('8b6914') ? 'bg-[#faf4e4] border-l-[#8b6914]' :
+                    tip.gradient.includes('943030') && !tip.gradient.includes('5b3a8c') ? 'bg-[#f5e8e8] border-l-[#943030]' :
+                    tip.gradient.includes('5b3a8c') ? 'bg-[#f0ecf6] border-l-[#5b3a8c]' :
+                    tip.gradient.includes('0a7ea8') ? 'bg-[#e6f1f5] border-l-[#0a7ea8]' :
+                    'bg-alta-light border-l-[#0a7ea8]'
+                  }`}
                 >
                   <svg className="w-4 h-4 text-alta-teal shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -362,6 +371,8 @@ function FindCompanyContent() {
                 </div>
               ))}
             </div>
+
+            <InlineAd />
 
             <div className="p-5 bg-blue-50 rounded-xl border border-blue-100">
               <h3 className="font-semibold text-alta-navy mb-2">Your Right to Shop</h3>

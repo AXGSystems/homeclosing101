@@ -78,11 +78,11 @@ export default function ProtectYourRightsPage() {
           <p className="text-alta-gray mb-6">Title searches reveal problems in more than <strong className="text-alta-navy">one-third</strong> of residential transactions:</p>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 mb-14">
             {protections.map((item) => (
-              <div key={item.text} className="flex items-start gap-3 p-4 bg-white rounded-xl border border-gray-100 shadow-sm hover:shadow-md hover:border-alta-teal/20 transition-all">
-                <div className="w-9 h-9 rounded-lg bg-alta-light flex items-center justify-center text-alta-teal shrink-0">
+              <div key={item.text} className="group flex items-start gap-3 p-4 bg-[#e9f5ed] rounded-xl border border-[#bddcc7] border-l-4 border-l-[#2d6b3f] shadow-sm tile-interactive">
+                <div className="w-9 h-9 rounded-lg bg-[#2d6b3f]/10 flex items-center justify-center text-[#2d6b3f] shrink-0">
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d={item.icon} /></svg>
                 </div>
-                <span className="text-sm text-alta-navy leading-snug">{item.text}</span>
+                <span className="text-sm text-alta-navy leading-snug group-hover:text-alta-teal transition-colors">{item.text}</span>
               </div>
             ))}
           </div>
@@ -93,7 +93,7 @@ export default function ProtectYourRightsPage() {
           <h2 className="text-2xl font-bold text-alta-navy mb-6">Real-Life Cases</h2>
           <div className="grid md:grid-cols-2 gap-5 mb-14">
             {caseStudies.map((cs) => (
-              <div key={cs.location} className="rounded-2xl overflow-hidden shadow-sm border border-gray-100 bg-white">
+              <div key={cs.location} className="rounded-2xl overflow-hidden shadow-sm border border-gray-100 bg-white tile-interactive">
                 <div className="relative h-36">
                   <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url('${cs.image}')` }} />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
@@ -120,7 +120,7 @@ export default function ProtectYourRightsPage() {
               { step: "5", title: "Issue Resolution (Curative Work)", desc: "If the search uncovers problems — missing signatures, unreleased mortgages, boundary disputes, estate issues — the title company works to resolve (cure) them before closing. This is one of the most valuable services title professionals provide." },
               { step: "6", title: "Policy Issuance", desc: "Once all issues are resolved and the transaction closes, the title company issues the final title insurance policy. The owner's policy protects you; the lender's policy protects the bank. Your owner's policy remains in effect for as long as you or your heirs own the property." },
             ].map((s) => (
-              <div key={s.step} className="flex gap-4 items-start p-4 bg-white rounded-xl border border-gray-100 shadow-sm tile-interactive">
+              <div key={s.step} className="flex gap-4 items-start p-4 bg-[#e8f0f5] rounded-xl border border-[#c5d8e4] shadow-sm tile-interactive">
                 <span className="w-8 h-8 rounded-full bg-alta-teal text-white flex items-center justify-center text-xs font-bold shrink-0">{s.step}</span>
                 <div>
                   <h3 className="font-bold text-alta-navy text-sm">{s.title}</h3>

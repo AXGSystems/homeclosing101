@@ -443,9 +443,9 @@ export default function ClosingOptionsPage() {
 
       <div className="py-1.5 lg:py-2">
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
-          <div className="mb-6 p-4 bg-white rounded-2xl border border-gray-100 sm:sticky sm:top-[142px] z-20 shadow-md">
+          <div className="mb-6 p-4 bg-[#e9f5ed] rounded-2xl border border-[#bddcc7] border-l-4 border-l-[#2d6b3f] sm:sticky sm:top-[142px] z-20 shadow-md">
             <div className="flex items-start gap-4">
-              <div className="w-12 h-12 rounded-xl bg-alta-teal/10 flex items-center justify-center text-alta-teal shrink-0">
+              <div className="w-12 h-12 rounded-xl bg-[#2d6b3f]/15 flex items-center justify-center text-[#2d6b3f] shrink-0">
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M7.5 21L3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5" /></svg>
               </div>
               <div>
@@ -458,7 +458,7 @@ export default function ClosingOptionsPage() {
           {/* Detailed option breakdowns */}
           <div className="space-y-8 mb-10">
             {options.map((opt, i) => (
-              <div key={opt.title} className="rounded-2xl border border-gray-100 overflow-hidden shadow-sm bg-white">
+              <div key={opt.title} className="rounded-2xl border border-[#c5d8e4] overflow-hidden shadow-sm bg-white tile-interactive">
                 {/* Header with image */}
                 <div className="relative h-48 overflow-hidden">
                   <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url('${opt.image}')` }} />
@@ -541,6 +541,8 @@ export default function ClosingOptionsPage() {
 
           <InlineAd />
 
+          <InlineAd />
+
           {/* What documents you'll sign */}
           <h2 className="text-xl font-bold text-alta-navy mb-4">Documents You&apos;ll Sign at Closing</h2>
           <p className="text-sm text-alta-gray mb-4 leading-relaxed">Regardless of which closing method you choose, you&apos;ll sign essentially the same set of documents. The method only changes HOW and WHERE you sign them — not what you sign. Tap any document to learn what it is, what to look for, and what questions to ask.</p>
@@ -549,7 +551,7 @@ export default function ClosingOptionsPage() {
               <button
                 key={doc.name}
                 onClick={() => openDocDetail(doc)}
-                className="text-left p-4 bg-white rounded-xl border border-gray-100 shadow-sm hover:shadow-md hover:border-[#5b3a8c]/30 transition-all cursor-pointer group"
+                className="text-left p-4 bg-[#f0ecf6] rounded-xl border border-[#d4c8e4] border-l-4 border-l-[#5b3a8c] shadow-sm hover:shadow-md hover:border-[#5b3a8c]/50 transition-all cursor-pointer group tile-interactive"
               >
                 <h3 className="text-sm font-bold text-alta-navy mb-1 group-hover:text-[#5b3a8c] transition-colors flex items-center gap-1.5">
                   {doc.name}

@@ -154,8 +154,8 @@ export default function StopFraudPage() {
             { name: "CFPB Complaint Portal", desc: "File complaints about financial services", url: "https://www.consumerfinance.gov/complaint/" },
             { name: "FTC Report Fraud", desc: "Federal Trade Commission fraud reporting", url: "https://reportfraud.ftc.gov/" },
           ].map((r) => (
-            <a key={r.name} href={r.url} target="_blank" rel="noopener noreferrer" className="feature-card p-4 bg-white rounded-xl border border-gray-100" data-accent="red">
-              <h3 className="text-sm font-semibold text-alta-navy">{r.name}</h3>
+            <a key={r.name} href={r.url} target="_blank" rel="noopener noreferrer" className="group p-4 bg-[#f5e8e8] rounded-xl border border-[#e4c5c5] border-l-4 border-l-[#943030] tile-interactive" data-accent="red">
+              <h3 className="text-sm font-semibold text-alta-navy group-hover:text-alta-teal transition-colors">{r.name}</h3>
               <p className="text-xs text-alta-gray mt-0.5">{r.desc}</p>
               <span className="text-xs text-alta-teal font-medium mt-2 inline-flex items-center gap-1">
                 Visit site
@@ -173,7 +173,7 @@ export default function StopFraudPage() {
             { title: "The Hacked Agent", scenario: "A real estate agent's email account is compromised through a phishing attack. The criminal monitors the inbox for weeks, learning the details of pending transactions. Three days before closing, the criminal — using the agent's actual email account — sends the buyer 'corrected' wire instructions. Because the email comes from the real agent's verified address, the buyer complies without calling to verify.", lesson: "Even emails from verified, known contacts can be compromised. ALWAYS verify wire instructions by phone, regardless of who the email appears to come from. Multi-factor authentication on all email accounts is essential.", source: "CertifID 2026 Report" },
             { title: "The After-Hours Rush", scenario: "A buyer receives a call at 5:45 PM on Thursday — their closing is Friday morning. The caller, impersonating the settlement agent, says the wire must be sent tonight because 'the bank processes overnight and the closing will be delayed.' The buyer panics and wires $165,000 without verifying through the proper channels. Friday morning, the real settlement agent has no record of the call.", lesson: "Legitimate settlement agents don't create last-minute urgency around wire transfers. If you feel rushed, stop. Real closings can be rescheduled — your money can't be unwired.", source: "FBI IC3 advisory" },
           ].map((s, i) => (
-            <div key={i} className="rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+            <div key={i} className="rounded-2xl border border-gray-100 overflow-hidden shadow-sm tile-interactive">
               <div className="bg-[#943030] px-5 py-3">
                 <h3 className="text-white font-bold text-sm">Scenario {i + 1}: {s.title}</h3>
               </div>

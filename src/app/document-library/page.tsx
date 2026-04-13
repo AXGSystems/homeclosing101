@@ -132,7 +132,7 @@ export default function DocumentLibraryPage() {
 
       <div className="py-1.5 lg:py-2">
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
-          <div className="mb-6 p-4 bg-white rounded-2xl border border-gray-100 sm:sticky sm:top-[142px] z-20 shadow-md">
+          <div className="mb-6 p-4 bg-white rounded-2xl border border-[#c5d8e4] sm:sticky sm:top-[142px] z-20 shadow-md">
             <div className="flex items-start gap-4">
               <div className="w-12 h-12 rounded-xl bg-alta-teal/10 flex items-center justify-center text-alta-teal shrink-0">
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" /></svg>
@@ -146,20 +146,20 @@ export default function DocumentLibraryPage() {
 
           {/* Document count summary */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-8">
-            <div className="p-4 bg-white rounded-xl border border-gray-100 shadow-sm text-center tile-interactive">
-              <p className="text-2xl font-bold text-blue-600">{documentSections.reduce((a, s) => a + s.docs.length, 0)}</p>
+            <div className="p-4 bg-[#e8f0f5] rounded-xl border border-[#c5d8e4] shadow-sm text-center tile-interactive">
+              <p className="text-2xl font-bold text-[#1a5276]">{documentSections.reduce((a, s) => a + s.docs.length, 0)}</p>
               <p className="text-[10px] text-alta-gray font-medium mt-1">Total Resources</p>
             </div>
-            <div className="p-4 bg-white rounded-xl border border-gray-100 shadow-sm text-center tile-interactive">
-              <p className="text-2xl font-bold text-green-600">{documentSections[0].docs.length}</p>
+            <div className="p-4 bg-[#e9f5ed] rounded-xl border border-[#bddcc7] shadow-sm text-center tile-interactive">
+              <p className="text-2xl font-bold text-[#2d6b3f]">{documentSections[0].docs.length}</p>
               <p className="text-[10px] text-alta-gray font-medium mt-1">Official CFPB</p>
             </div>
-            <div className="p-4 bg-white rounded-xl border border-gray-100 shadow-sm text-center tile-interactive">
-              <p className="text-2xl font-bold text-purple-600">{documentSections[1].docs.length}</p>
+            <div className="p-4 bg-[#f0ecf6] rounded-xl border border-[#d4c8e4] shadow-sm text-center tile-interactive">
+              <p className="text-2xl font-bold text-[#5b3a8c]">{documentSections[1].docs.length}</p>
               <p className="text-[10px] text-alta-gray font-medium mt-1">HC101 Printables</p>
             </div>
-            <div className="p-4 bg-white rounded-xl border border-gray-100 shadow-sm text-center tile-interactive">
-              <p className="text-2xl font-bold text-amber-600">{documentSections[2].docs.length + documentSections[3].docs.length}</p>
+            <div className="p-4 bg-[#faf4e4] rounded-xl border border-[#e8d9a8] shadow-sm text-center tile-interactive">
+              <p className="text-2xl font-bold text-[#8b6914]">{documentSections[2].docs.length + documentSections[3].docs.length}</p>
               <p className="text-[10px] text-alta-gray font-medium mt-1">Education & Tools</p>
             </div>
           </div>
@@ -222,7 +222,7 @@ export default function DocumentLibraryPage() {
                           </div>
                         )
                       })}
-                      className="flex items-start gap-4 p-4 bg-white rounded-xl border border-gray-100 shadow-sm hover:shadow-md hover:border-alta-teal/20 transition-all group cursor-pointer"
+                      className="flex items-start gap-4 p-4 bg-white rounded-xl border border-gray-200 shadow-sm tile-interactive group cursor-pointer border-l-4 border-l-[#0a7ea8]"
                     >
                       <div className="w-10 h-10 rounded-lg bg-alta-light flex items-center justify-center text-alta-teal shrink-0 group-hover:bg-alta-teal group-hover:text-white transition-colors">
                         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" /></svg>

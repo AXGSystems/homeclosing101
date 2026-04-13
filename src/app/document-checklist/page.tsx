@@ -229,8 +229,8 @@ export default function DocumentChecklistPage() {
               { mistake: "Wire sent to wrong account", fix: "Always verify wire instructions by phone. If you wired to a fraudulent account, contact your bank within the hour for the best chance of recovery." },
               { mistake: "Missing earnest money credit", fix: "Verify your earnest money deposit appears as a credit on the Closing Disclosure. If it's missing, alert your settlement agent before closing." },
             ].map((m) => (
-              <div key={m.mistake} className="p-4 bg-white rounded-xl border border-gray-100 shadow-sm tile-interactive">
-                <h3 className="text-sm font-bold text-alta-red mb-1">{m.mistake}</h3>
+              <div key={m.mistake} className="p-4 bg-[#f5e8e8] rounded-xl border border-[#e4c5c5] shadow-sm tile-interactive border-l-4 border-l-[#943030]">
+                <h3 className="text-sm font-bold text-[#943030] mb-1">{m.mistake}</h3>
                 <p className="text-xs text-alta-gray leading-relaxed">{m.fix}</p>
               </div>
             ))}

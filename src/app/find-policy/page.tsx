@@ -153,7 +153,7 @@ export default function FindPolicyPage() {
       <div className="py-1.5 lg:py-2">
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
           {/* Page intro */}
-          <div className="mb-6 p-4 bg-white rounded-2xl border border-gray-100 sm:sticky sm:top-[142px] z-20 shadow-md">
+          <div className="mb-6 p-4 bg-white rounded-2xl border border-[#d4c8e4] sm:sticky sm:top-[142px] z-20 shadow-md">
             <div className="flex items-start gap-4">
               <div className="w-12 h-12 rounded-xl bg-alta-teal/10 flex items-center justify-center text-alta-teal shrink-0">
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m5.231 13.481L15 17.25m-4.5-15H5.625c-.621 0-1.125.504-1.125 1.125v16.5c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9zm3.75 11.625a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z" /></svg>
@@ -193,7 +193,7 @@ export default function FindPolicyPage() {
                     </div>
                   )
                 })}
-                className="rounded-2xl overflow-hidden shadow-sm border border-gray-100 bg-white cursor-pointer group"
+                className="rounded-2xl overflow-hidden shadow-sm border border-gray-200 bg-white cursor-pointer group tile-interactive"
               >
                 <div className="relative h-28">
                   <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url('${s.image}')` }} />
@@ -212,7 +212,7 @@ export default function FindPolicyPage() {
           </div>
 
           {/* Interactive Map */}
-          <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 mb-8">
+          <div className="bg-[#e8f0f5] rounded-2xl border border-[#c5d8e4] shadow-sm p-6 mb-8">
             <h2 className="text-xl font-bold text-alta-navy mb-4">Click Your State</h2>
             <div className="relative w-full" style={{ paddingBottom: "60%" }}>
               <svg viewBox="0 0 95 58" className="absolute inset-0 w-full h-full">
@@ -300,8 +300,10 @@ export default function FindPolicyPage() {
             })()}
           </div>
 
+          <InlineAd />
+
           {/* Calling Script */}
-          <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden mb-8">
+          <div className="bg-[#f0ecf6] rounded-2xl border border-[#d4c8e4] shadow-sm overflow-hidden mb-8">
             <button
               onClick={() => setShowScript(!showScript)}
               className="w-full flex items-center justify-between p-5 hover:bg-alta-light/50 transition-colors"
@@ -331,9 +333,8 @@ export default function FindPolicyPage() {
           </div>
 
           {/* Searchable Directory */}
-          <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden mb-8">
-            <div className="p-5 border-b border-gray-100">
-              <InlineAd />
+          <div className="bg-white rounded-2xl border border-[#bddcc7] shadow-sm overflow-hidden mb-8">
+            <div className="p-5 border-b border-[#bddcc7]">
               <h2 className="text-xl font-bold text-alta-navy mb-2">Full State Insurance Directory</h2>
               <p className="text-xs text-alta-gray mb-3">Verified via the Insurance Information Institute (I.I.I.) and NAIC, updated February 2026.</p>
               <input

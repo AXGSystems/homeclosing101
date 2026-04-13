@@ -65,16 +65,22 @@ const documents = [
     title: "Closing Disclosure",
     description: "Contains all the terms of your transaction and itemized costs. Must be provided at least 3 business days before your closing date so you can review it carefully.",
     icon: (<svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" /></svg>),
+    color: "from-[#1a5276] to-[#0a7ea8]", bg: "bg-[#e8f0f5]", border: "border-[#c5d8e4]", accent: "text-[#1a5276]",
+    href: "/closing-disclosure",
   },
   {
     title: "Promissory Note",
     description: "Your written promise to repay the mortgage loan. Includes the amount borrowed, interest rate, payment schedule, and consequences of default.",
     icon: (<svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>),
+    color: "from-[#2d6b3f] to-[#1a5276]", bg: "bg-[#e9f5ed]", border: "border-[#bddcc7]", accent: "text-[#2d6b3f]",
+    href: "/document-library",
   },
   {
     title: "Deed of Trust / Security Instrument",
     description: "Transfers conditional ownership of the property to secure your loan. If you fail to make payments, the lender has the right to foreclose.",
     icon: (<svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" /></svg>),
+    color: "from-[#5b3a8c] to-[#1a5276]", bg: "bg-[#f0ecf6]", border: "border-[#d4c8e4]", accent: "text-[#5b3a8c]",
+    href: "/document-library",
   },
 ];
 
@@ -149,13 +155,21 @@ export default function WhatToExpectPage() {
           <h2 className="text-2xl font-bold text-alta-navy mb-6">Key Closing Documents</h2>
           <div className="grid md:grid-cols-3 gap-4 mb-12">
             {documents.map((doc) => (
-              <div key={doc.title} className="p-5 bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
-                <div className="w-12 h-12 rounded-xl bg-alta-light flex items-center justify-center text-alta-teal mb-4">
-                  {doc.icon}
+              <Link key={doc.title} href={doc.href} className={`group rounded-2xl overflow-hidden border ${doc.border} shadow-sm tile-interactive`}>
+                <div className={`bg-gradient-to-r ${doc.color} px-5 py-3 flex items-center gap-3`}>
+                  <div className="w-9 h-9 rounded-lg bg-white/20 flex items-center justify-center text-white shrink-0">
+                    {doc.icon}
+                  </div>
+                  <h3 className="font-bold text-white text-sm">{doc.title}</h3>
                 </div>
-                <h3 className="font-semibold text-alta-navy mb-2">{doc.title}</h3>
-                <p className="text-sm text-alta-gray leading-relaxed">{doc.description}</p>
-              </div>
+                <div className={`p-5 ${doc.bg}`}>
+                  <p className="text-xs text-alta-gray leading-relaxed mb-3">{doc.description}</p>
+                  <span className={`text-[11px] ${doc.accent} font-semibold flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity`}>
+                    Learn more
+                    <svg className="w-3 h-3 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
+                  </span>
+                </div>
+              </Link>
             ))}
           </div>
 

@@ -108,8 +108,8 @@ export default function ProtectYourMoneyPage() {
               { title: "Cyber Insurance", desc: "Ask if the company carries errors & omissions insurance and cybersecurity insurance that covers wire fraud incidents." },
               { title: "Verbal Verification Policy", desc: "A good company will have a documented process requiring phone verification of wire instructions using a pre-established number." },
             ].map((item) => (
-              <div key={item.title} className="p-4 bg-white rounded-xl border border-gray-100 shadow-sm hover:shadow-md hover:border-alta-teal/20 transition-all">
-                <h3 className="text-sm font-bold text-alta-navy mb-1">{item.title}</h3>
+              <div key={item.title} className="group p-4 bg-[#e8f0f5] rounded-xl border border-[#c5d8e4] border-l-4 border-l-[#1a5276] shadow-sm tile-interactive">
+                <h3 className="text-sm font-bold text-alta-navy mb-1 group-hover:text-alta-teal transition-colors">{item.title}</h3>
                 <p className="text-xs text-alta-gray leading-relaxed">{item.desc}</p>
               </div>
             ))}

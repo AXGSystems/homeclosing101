@@ -104,7 +104,7 @@ export default function HomeInspectionPage() {
           <p className="text-sm text-alta-gray mb-4 leading-relaxed">The type of home you&apos;re buying determines what inspections you need, when to schedule them, and what to focus on. Each type presents different risks:</p>
           <div className="space-y-5 mb-10">
             {homeTypes.map((ht) => (
-              <div key={ht.type} className="rounded-2xl border border-gray-100 overflow-hidden shadow-sm bg-white">
+              <div key={ht.type} className="rounded-2xl border border-gray-100 overflow-hidden shadow-sm bg-white tile-interactive">
                 <div className="bg-alta-navy px-5 py-3">
                   <h3 className="text-white font-bold">{ht.type}</h3>
                 </div>

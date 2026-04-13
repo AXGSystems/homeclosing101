@@ -90,9 +90,9 @@ export default function MortgageCalculatorPage() {
 
       <div className="py-1.5 lg:py-2">
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
-          <div className="mb-6 p-4 bg-white rounded-2xl border border-gray-100 sm:sticky sm:top-[142px] z-20 shadow-md">
+          <div className="mb-6 p-4 bg-white rounded-2xl border border-[#c5d8e4] border-l-4 border-l-[#0a7ea8] sm:sticky sm:top-[142px] z-20 shadow-md">
             <div className="flex items-start gap-4">
-              <div className="w-12 h-12 rounded-xl bg-alta-teal/10 flex items-center justify-center text-alta-teal shrink-0">
+              <div className="w-12 h-12 rounded-xl bg-[#0a7ea8]/10 flex items-center justify-center text-[#0a7ea8] shrink-0">
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M15.75 15.75V18m-7.5-6.75h.008v.008H8.25v-.008zm0 2.25h.008v.008H8.25V13.5zm0 2.25h.008v.008H8.25v-.008zm0 2.25h.008v.008H8.25V18z" /></svg>
               </div>
               <div>
@@ -399,16 +399,16 @@ export default function MortgageCalculatorPage() {
           </div>
 
           <div className="mt-8 grid sm:grid-cols-3 gap-3">
-            <Link href="/affordability" className="p-4 bg-white rounded-xl border border-gray-100 hover:shadow-md hover:border-alta-teal/20 transition-all text-center tile-interactive">
-              <h3 className="text-sm font-semibold text-alta-navy">Affordability Calculator</h3>
+            <Link href="/affordability" className="group p-4 bg-[#e8f0f5] rounded-xl border border-[#c5d8e4] border-l-4 border-l-[#1a5276] tile-interactive text-center">
+              <h3 className="text-sm font-semibold text-alta-navy group-hover:text-alta-teal transition-colors">Affordability Calculator</h3>
               <p className="text-[10px] text-alta-gray mt-1">How much home can you afford?</p>
             </Link>
-            <Link href="/closing-process/closing-costs" className="p-4 bg-white rounded-xl border border-gray-100 hover:shadow-md hover:border-alta-teal/20 transition-all text-center tile-interactive">
-              <h3 className="text-sm font-semibold text-alta-navy">Closing Costs Calculator</h3>
+            <Link href="/closing-process/closing-costs" className="group p-4 bg-[#faf4e4] rounded-xl border border-[#e8d9a8] border-l-4 border-l-[#8b6914] tile-interactive text-center">
+              <h3 className="text-sm font-semibold text-alta-navy group-hover:text-alta-teal transition-colors">Closing Costs Calculator</h3>
               <p className="text-[10px] text-alta-gray mt-1">Estimate all your closing fees</p>
             </Link>
-            <Link href="/first-time-buyers" className="p-4 bg-white rounded-xl border border-gray-100 hover:shadow-md hover:border-alta-teal/20 transition-all text-center tile-interactive">
-              <h3 className="text-sm font-semibold text-alta-navy">First-Time Buyer Guide</h3>
+            <Link href="/first-time-buyers" className="group p-4 bg-[#e9f5ed] rounded-xl border border-[#bddcc7] border-l-4 border-l-[#2d6b3f] tile-interactive text-center">
+              <h3 className="text-sm font-semibold text-alta-navy group-hover:text-alta-teal transition-colors">First-Time Buyer Guide</h3>
               <p className="text-[10px] text-alta-gray mt-1">Complete homebuying roadmap</p>
             </Link>
           </div>

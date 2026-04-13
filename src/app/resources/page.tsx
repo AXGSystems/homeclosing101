@@ -135,7 +135,7 @@ function ResourceSection({ title, items, onOpenModal }: { title: string; items: 
                 </div>
               )
             })}
-            className="feature-card flex items-start gap-3 p-4 bg-white rounded-xl border border-gray-100 group cursor-pointer"
+            className="feature-card flex items-start gap-3 p-4 bg-white rounded-xl border border-gray-200 border-l-4 border-l-[#0a7ea8] group cursor-pointer tile-interactive"
             data-accent="teal"
           >
             <div className="w-9 h-9 rounded-lg bg-alta-light flex items-center justify-center text-alta-teal shrink-0 group-hover:bg-alta-teal group-hover:text-white transition-colors">
@@ -207,7 +207,7 @@ export default function ResourcesPage() {
               { name: "Wire Fraud Prevention Guide", desc: "How the scam works, 5 safeguards, and what to do if you're a victim — with FBI IC3 recovery data.", href: "/protect-your-money", badge: "Guide" },
               { name: "Source Index", desc: "Complete list of every data source cited across the site — CFPB, FBI, NAR, ALTA, IRS, and more.", href: "/sources", badge: "Reference" },
             ].map((t) => (
-              <Link key={t.name} href={t.href} className="flex items-start gap-3 p-4 bg-white rounded-xl border border-gray-100 shadow-sm hover:shadow-md hover:border-alta-teal/30 transition-all group">
+              <Link key={t.name} href={t.href} className="flex items-start gap-3 p-4 bg-white rounded-xl border border-gray-200 border-l-4 border-l-[#0a7ea8] shadow-sm tile-interactive group">
                 <div className="w-9 h-9 rounded-lg bg-alta-teal/10 flex items-center justify-center text-alta-teal shrink-0 group-hover:bg-alta-teal group-hover:text-white transition-colors">
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M11.42 15.17l-5.1-5.1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
                 </div>
@@ -231,6 +231,7 @@ export default function ResourcesPage() {
 
         <ResourceSection title="Buying a Home" items={buyingResources} onOpenModal={setActiveModal} />
         <ResourceSection title="Sample Closing Documents" items={documents} onOpenModal={setActiveModal} />
+        <InlineAd />
         <ResourceSection title="Fraud Reporting & Prevention" items={fraudResources} onOpenModal={setActiveModal} />
         <ResourceSection title="Industry & Real Estate Organizations" items={industryResources} onOpenModal={setActiveModal} />
 

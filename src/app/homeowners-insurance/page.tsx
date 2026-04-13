@@ -361,9 +361,9 @@ export default function HomeownersInsurancePage() {
                     </div>
                   )
                 })}
-                className="p-4 bg-white rounded-xl border border-gray-100 shadow-sm tile-interactive cursor-pointer group relative"
+                className="p-4 bg-[#f5e8e8] rounded-xl border border-[#e4c5c5] shadow-sm tile-interactive cursor-pointer group relative border-l-4 border-l-[#943030]"
               >
-                <div className="absolute top-2 right-2 w-6 h-6 rounded-full bg-alta-light flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                <div className="absolute top-2 right-2 w-6 h-6 rounded-full bg-white/80 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
                   <svg className="w-3.5 h-3.5 text-[#1a5276]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" /></svg>
                 </div>
                 <h3 className="text-sm font-bold text-[#943030] mb-1">{g.gap}</h3>
@@ -395,7 +395,7 @@ export default function HomeownersInsurancePage() {
 
           {/* Cost breakdown */}
           <h2 className="text-xl font-bold text-alta-navy mb-4">What Does Homeowner&apos;s Insurance Cost?</h2>
-          <div className="p-5 bg-white rounded-2xl border border-gray-100 shadow-sm mb-10">
+          <div className="p-5 bg-[#e8f0f5] rounded-2xl border border-[#c5d8e4] shadow-sm mb-10">
             <div className="grid grid-cols-3 gap-4 text-center mb-4">
               <div className="p-3 bg-[#e8f0f5] rounded-xl tile-interactive">
                 <p className="text-xl font-bold text-[#1a5276]">$1,200</p>
@@ -415,7 +415,7 @@ export default function HomeownersInsurancePage() {
 
           {/* The Declarations Page */}
           <h2 className="text-xl font-bold text-alta-navy mb-4">Understanding Your Declarations Page</h2>
-          <div className="p-5 bg-white rounded-2xl border border-gray-100 shadow-sm mb-10">
+          <div className="p-5 bg-[#faf4e4] rounded-2xl border border-[#e8d9a8] shadow-sm mb-10">
             <p className="text-xs text-alta-gray leading-relaxed mb-4">The declarations page (or &quot;dec page&quot;) is the summary page of your insurance policy. Your lender will require a copy before closing. It is typically 1-2 pages and contains all the key details of your coverage:</p>
             <div className="grid sm:grid-cols-2 gap-3">
               {[

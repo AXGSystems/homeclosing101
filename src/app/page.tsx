@@ -1,5 +1,5 @@
 import Link from "next/link";
-import EliteProviders from "@/components/EliteProviders";
+import EliteProviders, { InlineAd } from "@/components/EliteProviders";
 import MarketStats from "@/components/MarketStats";
 
 const features = [
@@ -85,15 +85,17 @@ const stats = [
 ];
 
 const steps = [
-  { num: "1", title: "Get Your Finances Ready", desc: "Check your credit, pay down debts, save for your down payment and closing costs." },
-  { num: "2", title: "Get Pre-Approved", desc: "Compare lenders and lock in your financing options." },
-  { num: "3", title: "Find Your Home", desc: "Work with a real estate agent to find the right property." },
-  { num: "4", title: "Make an Offer", desc: "Submit your purchase proposal and negotiate terms." },
-  { num: "5", title: "Order Title Search", desc: "A professional reviews public records for any claims on the property." },
-  { num: "6", title: "Get Insurance", desc: "Secure homeowner's insurance and owner's title insurance." },
-  { num: "7", title: "Close & Get Your Keys", desc: "Sign documents, transfer funds, and officially become a homeowner.", keys: true },
+  { num: "1", title: "Get Your Finances Ready", desc: "Check your credit, pay down debts, save for your down payment and closing costs.", bg: "bg-[#e8f0f5]", borderColor: "border-[#1a5276]" },
+  { num: "2", title: "Get Pre-Approved", desc: "Compare lenders and lock in your financing options.", bg: "bg-[#e9f5ed]", borderColor: "border-[#2d6b3f]" },
+  { num: "3", title: "Find Your Home", desc: "Work with a real estate agent to find the right property.", bg: "bg-[#f0ecf6]", borderColor: "border-[#5b3a8c]" },
+  { num: "4", title: "Make an Offer", desc: "Submit your purchase proposal and negotiate terms.", bg: "bg-[#faf4e4]", borderColor: "border-[#8b6914]" },
+  { num: "5", title: "Order Title Search", desc: "A professional reviews public records for any claims on the property.", bg: "bg-[#e6f1f5]", borderColor: "border-[#0a7ea8]" },
+  { num: "6", title: "Get Insurance", desc: "Secure homeowner's insurance and owner's title insurance.", bg: "bg-[#e9f5ed]", borderColor: "border-[#2d6b3f]" },
+  { num: "7", title: "Close & Get Your Keys", desc: "Sign documents, transfer funds, and officially become a homeowner.", keys: true, bg: "bg-[#faf4e4]", borderColor: "border-[#d4a843]" },
 ];
 
+const resourceColors = ["#1a5276", "#2d6b3f", "#5b3a8c", "#8b6914", "#943030", "#0a7ea8"];
+const resourceBgs = ["bg-[#e8f0f5] border-[#c5d8e4]", "bg-[#e9f5ed] border-[#bddcc7]", "bg-[#f0ecf6] border-[#d4c8e4]", "bg-[#faf4e4] border-[#e8d9a8]", "bg-[#f5e8e8] border-[#e4c5c5]", "bg-[#e6f1f5] border-[#c0dbe6]"];
 const resources = [
   { name: "American Land Title Association (ALTA)", desc: "The national trade organization for the title insurance industry — best practices, advocacy, and consumer protection", url: "https://www.alta.org/" },
   { name: "Consumer Financial Protection Bureau", desc: "Homeownership guides, settlement cost booklet, and complaint filing", url: "https://www.consumerfinance.gov/owning-a-home/" },
@@ -292,6 +294,9 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Ad between features and roadmap */}
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 py-4"><InlineAd /></div>
+
       {/* The Road to Homeownership — steps */}
       <section className="py-10 lg:py-14">
         <div className="max-w-4xl mx-auto px-4 sm:px-6">
@@ -300,14 +305,14 @@ export default function HomePage() {
             <p className="text-sm text-alta-gray">Six key milestones from pre-approval to getting your keys.</p>
           </div>
           <div className="space-y-6">
-            {steps.map((step: { num: string; title: string; desc: string; keys?: boolean }, i: number) => (
+            {steps.map((step: { num: string; title: string; desc: string; keys?: boolean; bg: string; borderColor: string }, i: number) => (
               <div key={step.num} className={`relative flex gap-4 items-start ${i < steps.length - 1 ? "step-connector" : ""}`}>
                 <div className={`w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm shrink-0 ${step.keys ? 'bg-[#d4a843] text-white' : 'bg-alta-teal text-white'}`}>
                   {step.keys ? (
                     <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M15.75 5.25a3 3 0 013 3m3 0a6 6 0 01-7.029 5.912c-.563-.097-1.159.026-1.563.43L10.5 17.25H8.25v2.25H6v2.25H2.25v-2.818c0-.597.237-1.17.659-1.591l6.499-6.499c.404-.404.527-1 .43-1.563A6 6 0 1121.75 8.25z" /></svg>
                   ) : step.num}
                 </div>
-                <div className="pt-1">
+                <div className={`pt-1 flex-1 p-3 ${step.bg} rounded-xl border-l-4 ${step.borderColor}`}>
                   <h3 className={`font-semibold ${step.keys ? 'text-[#d4a843]' : 'text-alta-navy'}`}>{step.title}</h3>
                   <p className="text-sm text-alta-gray mt-0.5">{step.desc}</p>
                 </div>
@@ -399,6 +404,9 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Ad between fraud warning and resources */}
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 py-4"><InlineAd /></div>
+
       {/* External Resources */}
       <section className="py-16 lg:py-20 bg-white">
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
@@ -407,20 +415,20 @@ export default function HomePage() {
             <p className="text-alta-gray max-w-xl mx-auto">Verified links to government agencies and industry organizations that support homebuyers.</p>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
-            {resources.map((r) => (
+            {resources.map((r, i) => (
               <a
                 key={r.name}
                 href={r.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="feature-card bg-alta-light rounded-xl p-5 border border-gray-100"
-                data-accent="teal"
+                className={`group rounded-xl p-5 border tile-interactive ${resourceBgs[i % resourceBgs.length]}`}
+                style={{ borderLeftWidth: '4px', borderLeftColor: resourceColors[i % resourceColors.length] }}
               >
-                <h3 className="text-sm font-semibold text-alta-navy mb-1">{r.name}</h3>
+                <h3 className="text-sm font-semibold text-alta-navy mb-1 group-hover:text-alta-teal transition-colors">{r.name}</h3>
                 <p className="text-xs text-alta-gray">{r.desc}</p>
                 <div className="mt-3 flex items-center text-xs font-medium text-alta-teal">
                   Visit site
-                  <svg className="w-3 h-3 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-3 h-3 ml-1 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                   </svg>
                 </div>
