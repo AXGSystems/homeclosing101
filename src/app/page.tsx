@@ -99,16 +99,17 @@ const resourceColors = ["#1a5276", "#2d6b3f", "#5b3a8c", "#8b6914", "#943030", "
 const resourceBgs = ["bg-[#e8f0f5] border-[#c5d8e4]", "bg-[#e9f5ed] border-[#bddcc7]", "bg-[#f0ecf6] border-[#d4c8e4]", "bg-[#faf4e4] border-[#e8d9a8]", "bg-[#f5e8e8] border-[#e4c5c5]", "bg-[#e6f1f5] border-[#c0dbe6]"];
 const resources = [
   { name: "American Land Title Association (ALTA)", desc: "The national trade organization for the title insurance industry — best practices, advocacy, and consumer protection", url: "https://www.alta.org/", logo: "/logos/alta.svg", halo: "#0a8ebc" },
-  { name: "Consumer Financial Protection Bureau", desc: "Homeownership guides, settlement cost booklet, and complaint filing", url: "https://www.consumerfinance.gov/owning-a-home/", logo: "/logos/cfpb.png", halo: "#20aa3f" },
+  { name: "Consumer Financial Protection Bureau", desc: "Homeownership guides, settlement cost booklet, and complaint filing", url: "https://www.consumerfinance.gov/owning-a-home/", logo: "/logos/cfpb.svg", halo: "#20aa3f" },
   { name: "HUD Housing Counselor Locator", desc: "Find a HUD-approved housing counselor near you — free guidance", url: "https://www.consumerfinance.gov/housing/", logo: "/logos/hud.svg", halo: "#003A70" },
   { name: "FBI Internet Crime Complaint Center", desc: "Report wire fraud and internet crimes — real estate fraud prevention resources", url: "https://www.ic3.gov/", logo: "/logos/fbi-ic3.png", halo: "#002868" },
   { name: "Fannie Mae HomePath", desc: "Free homebuyer education course with certificate of completion", url: "https://www.homepath.com/", logo: "/logos/fanniemae.png", halo: "#003DA5" },
   { name: "Freddie Mac My Home", desc: "Tools, calculators, and educational resources for homebuyers", url: "https://myhome.freddiemac.com/", logo: "/logos/freddiemac.png", halo: "#00703C" },
   { name: "National Association of Realtors", desc: "Find a Realtor, market data, and consumer guides", url: "https://www.nar.realtor/", logo: "/logos/nar.svg", halo: "#006BB6" },
+
   { name: "Appraisal Institute", desc: "Professional appraisal resources and find-an-appraiser tool", url: "https://www.appraisalinstitute.org/", logo: "/logos/appraisal-institute.svg", halo: "#1B3A5C" },
   { name: "National Assoc. of Insurance Commissioners", desc: "State insurance regulator directory and consumer complaint resources", url: "https://content.naic.org/", logo: "/logos/naic.svg", halo: "#003366" },
-  { name: "Federal Housing Finance Agency", desc: "Conforming loan limits, housing data, and GSE oversight", url: "https://www.fhfa.gov/", logo: "/logos/fhfa.svg", halo: "#003A70" },
-  { name: "IRS Homeowner Tax Benefits", desc: "Mortgage interest deduction, property tax deduction, and capital gains exclusion guides", url: "https://www.irs.gov/publications/p530", logo: "/logos/irs.svg", halo: "#003366" },
+  { name: "Federal Housing Finance Agency", desc: "Conforming loan limits, housing data, and GSE oversight", url: "https://www.fhfa.gov/", logo: "/logos/fhfa-mark.svg", halo: "#003A70" },
+  { name: "IRS Homeowner Tax Benefits", desc: "Mortgage interest deduction, property tax deduction, and capital gains exclusion guides", url: "https://www.irs.gov/publications/p530", logo: "/logos/irs-mark.svg", halo: "#003366" },
   { name: "FEMA Flood Map Service Center", desc: "Check if your property is in a flood zone — affects insurance requirements", url: "https://msc.fema.gov/", logo: "/logos/fema.svg", halo: "#003366" },
 ];
 
