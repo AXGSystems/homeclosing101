@@ -150,6 +150,15 @@ html {
   transform: translateY(-1px);
 }
 
+/* Resource card hover halo — uses --halo-color CSS custom property */
+.resource-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+.resource-card:hover {
+  border-color: var(--halo-color, #0a7ea8) !important;
+  box-shadow: 0 0 28px color-mix(in srgb, var(--halo-color, #0a7ea8) 35%, transparent), 0 8px 24px rgba(0,0,0,0.1);
+}
+
 /* Expandable tile zoom animation */
 @keyframes zoomIn95 {
   from { transform: scale(0.95); opacity: 0; }
