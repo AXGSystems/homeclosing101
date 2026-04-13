@@ -294,6 +294,32 @@ function FindCompanyContent() {
               </div>
             )}
 
+            {/* ALTA Best Practices callout after search results */}
+            {hasSearched && (
+              <div className="mb-8 p-4 bg-[#e9f5ed] rounded-xl border border-[#bddcc7]">
+                <div className="flex items-start gap-3 mb-3">
+                  <svg className="w-5 h-5 text-[#2d6b3f] shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" /></svg>
+                  <div>
+                    <p className="text-xs font-semibold text-[#2d6b3f] mb-1">These Companies Use ALTA Best Practices</p>
+                    <p className="text-[11px] text-alta-gray leading-relaxed">ALTA member companies follow the industry&apos;s highest standards for escrow handling, data security, and consumer protection. Look for companies that have adopted the <strong className="text-alta-navy">ALTA Best Practices Framework</strong>.</p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-5 flex-wrap pl-8">
+                  {[
+                    { name: "First American Title", logo: "https://www.alta.org/images/wplogos/0000226.png", url: "https://www.firstam.com/" },
+                    { name: "FNF Family of Companies", logo: "https://www.alta.org/images/wplogos/0000218.png", url: "https://www.fnf.com/" },
+                    { name: "Stewart Title", logo: "https://www.alta.org/images/wplogos/0002809.png", url: "https://www.stewart.com/" },
+                    { name: "Old Republic National Title", logo: "https://www.alta.org/images/wplogos/0004443.png", url: "https://www.oldrepublictitle.com/" },
+                  ].map((s) => (
+                    <a key={s.name} href={s.url} target="_blank" rel="noopener noreferrer" title={s.name} className="grayscale hover:grayscale-0 opacity-50 hover:opacity-100 transition-all">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img src={s.logo} alt={s.name} className="h-6 w-auto object-contain" />
+                    </a>
+                  ))}
+                </div>
+              </div>
+            )}
+
             {/* Empty state */}
             {!hasSearched && (
               <div className="p-12 bg-alta-light rounded-2xl text-center mb-8">
