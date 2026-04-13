@@ -62,7 +62,7 @@ export default function Header() {
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
 
   return (
-    <header className="bg-white shadow-sm z-50">
+    <header className="bg-white shadow-sm z-50 border-b-2 border-transparent" style={{ borderImage: 'linear-gradient(to right, #0a7ea8, #2d6b3f, #5b3a8c, #d4a843) 1' }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
@@ -90,7 +90,7 @@ export default function Header() {
               >
                 <Link
                   href={item.href}
-                  className="px-3 py-2 text-sm font-medium text-alta-navy hover:text-alta-teal rounded-md transition-colors"
+                  className="relative px-3 py-2 text-sm font-medium text-alta-navy hover:text-alta-teal rounded-md transition-colors group/nav after:absolute after:bottom-0 after:left-3 after:right-3 after:h-0.5 after:bg-alta-teal after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:origin-left"
                 >
                   {item.label}
                   {item.children && (
@@ -137,7 +137,7 @@ export default function Header() {
 
       {/* Mobile Nav */}
       {mobileOpen && (
-        <div className="lg:hidden border-t border-gray-100 bg-white max-h-[70vh] overflow-y-auto">
+        <div className="lg:hidden border-t border-gray-100 bg-gradient-to-b from-white to-[#f4f7fa] max-h-[70vh] overflow-y-auto shadow-inner">
           <div className="px-4 py-3 space-y-0.5">
             {navItems.map((item) => (
               <div key={item.label}>

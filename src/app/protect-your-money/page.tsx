@@ -30,9 +30,9 @@ export default function ProtectYourMoneyPage() {
 
       <div className="py-1.5 lg:py-2">
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
-          <div className="mb-6 p-4 bg-white rounded-2xl border border-red-100 sm:sticky sm:top-[142px] z-20 shadow-md">
+          <div className="mb-6 p-4 bg-[#f5e8e8] rounded-2xl border border-[#e4c5c5] border-l-4 border-l-[#943030] sm:sticky sm:top-[142px] z-20 shadow-md">
             <div className="flex items-start gap-4">
-              <div className="w-12 h-12 rounded-xl bg-red-100 flex items-center justify-center text-red-600 shrink-0">
+              <div className="w-12 h-12 rounded-xl bg-[#943030]/10 flex items-center justify-center text-[#943030] shrink-0">
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" /></svg>
               </div>
               <div>
@@ -180,6 +180,24 @@ export default function ProtectYourMoneyPage() {
             <Link href="/sources" className="px-5 py-2.5 border-2 border-gray-300 text-alta-gray font-semibold rounded-lg hover:bg-gray-100 transition-colors text-center text-sm">
               View Sources
             </Link>
+          </div>
+
+          <div className="mt-8 mb-4">
+            <h2 className="text-lg font-bold text-alta-navy mb-4">Related Topics</h2>
+            <div className="grid sm:grid-cols-3 gap-3">
+              <Link href="/stop-fraud" className="p-4 bg-[#e8f0f5] rounded-xl border border-[#c5d8e4] border-l-4 border-l-[#1a5276] tile-interactive group">
+                <h3 className="text-sm font-bold text-alta-navy group-hover:text-alta-teal transition-colors">Stop Fraud 101</h3>
+                <p className="text-[10px] text-alta-gray mt-1">10 FBI-sourced prevention steps to protect your closing funds</p>
+              </Link>
+              <Link href="/protect-your-rights" className="p-4 bg-[#e9f5ed] rounded-xl border border-[#bddcc7] border-l-4 border-l-[#2d6b3f] tile-interactive group">
+                <h3 className="text-sm font-bold text-alta-navy group-hover:text-alta-teal transition-colors">Protect Your Property Rights</h3>
+                <p className="text-[10px] text-alta-gray mt-1">How owner's title insurance shields you from hidden title defects</p>
+              </Link>
+              <Link href="/find-company" className="p-4 bg-[#f0ecf6] rounded-xl border border-[#d4c8e4] border-l-4 border-l-[#5b3a8c] tile-interactive group">
+                <h3 className="text-sm font-bold text-alta-navy group-hover:text-alta-teal transition-colors">Find a Title Company</h3>
+                <p className="text-[10px] text-alta-gray mt-1">Search for ALTA member title and settlement companies near you</p>
+              </Link>
+            </div>
           </div>
 
           <FirstTimeBuyerCTA />

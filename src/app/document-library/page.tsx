@@ -256,6 +256,24 @@ export default function DocumentLibraryPage() {
             </Link>
           </div>
 
+          <div className="mt-8 mb-4">
+            <h2 className="text-lg font-bold text-alta-navy mb-4">Related Topics</h2>
+            <div className="grid sm:grid-cols-3 gap-3">
+              <Link href="/document-checklist" className="p-4 bg-[#faf4e4] rounded-xl border border-[#e8d9a8] border-l-4 border-l-[#8b6914] tile-interactive group">
+                <h3 className="text-sm font-bold text-alta-navy group-hover:text-alta-teal transition-colors">Document Checklist</h3>
+                <p className="text-[10px] text-alta-gray mt-1">Everything you need to bring to your closing appointment</p>
+              </Link>
+              <Link href="/closing-disclosure" className="p-4 bg-[#e8f0f5] rounded-xl border border-[#c5d8e4] border-l-4 border-l-[#1a5276] tile-interactive group">
+                <h3 className="text-sm font-bold text-alta-navy group-hover:text-alta-teal transition-colors">Closing Disclosure Guide</h3>
+                <p className="text-[10px] text-alta-gray mt-1">Review your final loan terms and costs before signing at closing</p>
+              </Link>
+              <Link href="/loan-estimate" className="p-4 bg-[#e9f5ed] rounded-xl border border-[#bddcc7] border-l-4 border-l-[#2d6b3f] tile-interactive group">
+                <h3 className="text-sm font-bold text-alta-navy group-hover:text-alta-teal transition-colors">Loan Estimate Guide</h3>
+                <p className="text-[10px] text-alta-gray mt-1">Learn how to read and compare Loan Estimates from multiple lenders</p>
+              </Link>
+            </div>
+          </div>
+
           <FirstTimeBuyerCTA />
         </div>
       </div>

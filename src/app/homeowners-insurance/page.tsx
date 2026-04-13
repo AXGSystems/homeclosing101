@@ -472,6 +472,24 @@ export default function HomeownersInsurancePage() {
             </Link>
           </div>
 
+          <div className="mt-8 mb-4">
+            <h2 className="text-lg font-bold text-alta-navy mb-4">Related Topics</h2>
+            <div className="grid sm:grid-cols-3 gap-3">
+              <Link href="/protect-your-rights" className="p-4 bg-[#e9f5ed] rounded-xl border border-[#bddcc7] border-l-4 border-l-[#2d6b3f] tile-interactive group">
+                <h3 className="text-sm font-bold text-alta-navy group-hover:text-alta-teal transition-colors">Title Insurance Guide</h3>
+                <p className="text-[10px] text-alta-gray mt-1">How owner's title insurance protects your property rights</p>
+              </Link>
+              <Link href="/closing-process/closing-costs" className="p-4 bg-[#f0ecf6] rounded-xl border border-[#d4c8e4] border-l-4 border-l-[#5b3a8c] tile-interactive group">
+                <h3 className="text-sm font-bold text-alta-navy group-hover:text-alta-teal transition-colors">Closing Costs Calculator</h3>
+                <p className="text-[10px] text-alta-gray mt-1">Estimate your total closing costs including insurance premiums</p>
+              </Link>
+              <Link href="/closing-process/closing-checklist" className="p-4 bg-[#faf4e4] rounded-xl border border-[#e8d9a8] border-l-4 border-l-[#8b6914] tile-interactive group">
+                <h3 className="text-sm font-bold text-alta-navy group-hover:text-alta-teal transition-colors">Closing Checklist</h3>
+                <p className="text-[10px] text-alta-gray mt-1">Track every step from offer to keys with our interactive checklist</p>
+              </Link>
+            </div>
+          </div>
+
           <FirstTimeBuyerCTA />
         </div>
       </div>

@@ -79,29 +79,50 @@ export default function ClosingProcessPage() {
               </div>
             </div>
           </div>
-          <div className="grid md:grid-cols-2 gap-6">
-            {sections.map((s) => (
+          {/* Visual flow timeline */}
+          <div className="relative mb-10">
+            {/* Connecting line (desktop only) */}
+            <div className="hidden md:block absolute top-[38px] left-[calc(12.5%+20px)] right-[calc(12.5%+20px)] h-1 bg-gradient-to-r from-[#1a5276] via-[#2d6b3f] via-[#5b3a8c] to-[#8b6914] rounded-full opacity-20" />
+
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 relative z-10">
+              {sections.map((s, i) => (
+                <Link
+                  key={s.href}
+                  href={s.href}
+                  className="group flex flex-col items-center text-center"
+                >
+                  {/* Numbered circle */}
+                  <div className={`w-[76px] h-[76px] rounded-full bg-gradient-to-br ${s.accent} flex items-center justify-center text-white font-bold text-2xl shadow-lg group-hover:scale-110 transition-transform duration-300 mb-3 ring-4 ring-white`}>
+                    {i + 1}
+                  </div>
+                  <span className="text-xs font-semibold text-alta-navy group-hover:text-alta-teal transition-colors">{s.title}</span>
+                </Link>
+              ))}
+            </div>
+          </div>
+
+          {/* Step cards */}
+          <div className="space-y-5">
+            {sections.map((s, i) => (
               <Link
                 key={s.href}
                 href={s.href}
-                className="feature-card group rounded-2xl overflow-hidden shadow-sm border border-gray-100 bg-white"
+                className="feature-card group flex flex-col md:flex-row rounded-2xl overflow-hidden shadow-sm border border-gray-100 bg-white hover:shadow-lg transition-shadow duration-300"
                 data-accent="teal"
               >
-                <div className="relative h-40 overflow-hidden">
-                  <div
-                    className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
-                    style={{ backgroundImage: `url('${s.image}')` }}
-                  />
-                  <div className={`absolute inset-0 bg-gradient-to-t ${s.accent} opacity-25`} />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
-                  <div className="absolute bottom-4 left-5 right-5">
-                    <h2 className="text-xl font-bold text-white drop-shadow-lg">{s.title}</h2>
+                {/* Gradient header with step number */}
+                <div className={`relative md:w-64 shrink-0 bg-gradient-to-br ${s.accent} flex items-center justify-center p-6 md:p-8`}>
+                  <div className="absolute inset-0 bg-cover bg-center opacity-20" style={{ backgroundImage: `url('${s.image}')` }} />
+                  <div className="relative text-center">
+                    <div className="text-5xl font-black text-white/30 mb-1">0{i + 1}</div>
+                    <h2 className="text-lg font-bold text-white drop-shadow-lg">{s.title}</h2>
                   </div>
                 </div>
-                <div className="p-5">
-                  <p className="text-sm text-alta-gray leading-relaxed mb-3">{s.description}</p>
-                  <span className="text-sm font-medium text-alta-teal flex items-center gap-1">
-                    Explore
+                {/* Content */}
+                <div className="flex-1 p-5 md:p-6 flex flex-col justify-center">
+                  <p className="text-sm text-alta-gray leading-relaxed mb-4">{s.description}</p>
+                  <span className="text-sm font-semibold text-alta-teal flex items-center gap-1 group-hover:gap-2 transition-all">
+                    Start Step {i + 1}
                     <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
                   </span>
                 </div>

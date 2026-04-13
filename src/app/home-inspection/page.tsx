@@ -216,6 +216,24 @@ export default function HomeInspectionPage() {
             </Link>
           </div>
 
+          <div className="mt-8 mb-4">
+            <h2 className="text-lg font-bold text-alta-navy mb-4">Related Topics</h2>
+            <div className="grid sm:grid-cols-3 gap-3">
+              <Link href="/closing-process/closing-checklist" className="p-4 bg-[#e8f0f5] rounded-xl border border-[#c5d8e4] border-l-4 border-l-[#1a5276] tile-interactive group">
+                <h3 className="text-sm font-bold text-alta-navy group-hover:text-alta-teal transition-colors">Closing Checklist</h3>
+                <p className="text-[10px] text-alta-gray mt-1">Track every step from offer to keys with our interactive checklist</p>
+              </Link>
+              <Link href="/questions-to-ask" className="p-4 bg-[#e9f5ed] rounded-xl border border-[#bddcc7] border-l-4 border-l-[#2d6b3f] tile-interactive group">
+                <h3 className="text-sm font-bold text-alta-navy group-hover:text-alta-teal transition-colors">Questions to Ask</h3>
+                <p className="text-[10px] text-alta-gray mt-1">Essential questions for your agent, lender, and title company</p>
+              </Link>
+              <Link href="/first-time-buyers" className="p-4 bg-[#faf4e4] rounded-xl border border-[#e8d9a8] border-l-4 border-l-[#8b6914] tile-interactive group">
+                <h3 className="text-sm font-bold text-alta-navy group-hover:text-alta-teal transition-colors">First-Time Buyers Guide</h3>
+                <p className="text-[10px] text-alta-gray mt-1">Step-by-step guidance for navigating your first home purchase</p>
+              </Link>
+            </div>
+          </div>
+
           <FirstTimeBuyerCTA />
         </div>
       </div>

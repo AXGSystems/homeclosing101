@@ -6,6 +6,7 @@ import PageHero from "@/components/PageHero";
 import ClosingCostChart from "@/components/ClosingCostChart";
 import { InlineAd } from "@/components/EliteProviders";
 import FirstTimeBuyerCTA from "@/components/FirstTimeBuyerCTA";
+import ClosingFlowNav from "@/components/ClosingFlowNav";
 
 const costCategories = [
   {
@@ -752,6 +753,8 @@ export default function ClosingCostsPage() {
             View All Sources
           </Link>
         </div>
+
+        <ClosingFlowNav currentStep={4} />
 
         <FirstTimeBuyerCTA />
       </div>

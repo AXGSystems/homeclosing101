@@ -5,6 +5,7 @@ import { useState } from "react";
 import PageHero from "@/components/PageHero";
 import { InlineAd } from "@/components/EliteProviders";
 import FirstTimeBuyerCTA from "@/components/FirstTimeBuyerCTA";
+import ClosingFlowNav from "@/components/ClosingFlowNav";
 
 const options = [
   {
@@ -588,6 +589,8 @@ export default function ClosingOptionsPage() {
               Find a Company
             </Link>
           </div>
+
+          <ClosingFlowNav currentStep={2} />
 
           <FirstTimeBuyerCTA />
         </div>

@@ -152,7 +152,7 @@ html {
   animation: zoomIn95 0.2s ease-out forwards;
 }
 
-/* Step connector */
+/* Step connector (legacy — kept for subpages) */
 .step-connector::after {
   content: '';
   position: absolute;
@@ -162,6 +162,16 @@ html {
   width: 2px;
   background: var(--alta-teal);
   opacity: 0.3;
+}
+
+/* Feature card image zoom on hover */
+.feature-card:hover .absolute.bg-cover {
+  transform: scale(1.08);
+}
+
+/* Gradient divider pulse */
+.h-1[class*="bg-gradient"] {
+  opacity: 0.85;
 }
 
 /* Calculator input focus */

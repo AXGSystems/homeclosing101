@@ -499,6 +499,24 @@ export default function ClosingDisclosurePage() {
             </Link>
           </div>
 
+          <div className="mt-8 mb-4">
+            <h2 className="text-lg font-bold text-alta-navy mb-4">Related Topics</h2>
+            <div className="grid sm:grid-cols-3 gap-3">
+              <Link href="/loan-estimate" className="p-4 bg-[#e8f0f5] rounded-xl border border-[#c5d8e4] border-l-4 border-l-[#1a5276] tile-interactive group">
+                <h3 className="text-sm font-bold text-alta-navy group-hover:text-alta-teal transition-colors">Understanding Your Loan Estimate</h3>
+                <p className="text-[10px] text-alta-gray mt-1">Learn how to read and compare Loan Estimates from multiple lenders</p>
+              </Link>
+              <Link href="/escrow-guide" className="p-4 bg-[#e9f5ed] rounded-xl border border-[#bddcc7] border-l-4 border-l-[#2d6b3f] tile-interactive group">
+                <h3 className="text-sm font-bold text-alta-navy group-hover:text-alta-teal transition-colors">Escrow Guide</h3>
+                <p className="text-[10px] text-alta-gray mt-1">How escrow accounts work and what your monthly payments cover</p>
+              </Link>
+              <Link href="/closing-process/closing-costs" className="p-4 bg-[#f0ecf6] rounded-xl border border-[#d4c8e4] border-l-4 border-l-[#5b3a8c] tile-interactive group">
+                <h3 className="text-sm font-bold text-alta-navy group-hover:text-alta-teal transition-colors">Closing Costs Calculator</h3>
+                <p className="text-[10px] text-alta-gray mt-1">Estimate your total closing costs and understand each line item</p>
+              </Link>
+            </div>
+          </div>
+
           <FirstTimeBuyerCTA />
         </div>
       </div>

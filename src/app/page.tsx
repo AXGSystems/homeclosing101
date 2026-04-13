@@ -249,6 +249,9 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Gradient divider */}
+      <div className="h-1 bg-gradient-to-r from-[#0a7ea8] via-[#5b3a8c] to-[#d4a843]" />
+
       {/* Feature Cards */}
       <section className="py-14 lg:py-18 bg-alta-light">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
@@ -262,7 +265,7 @@ export default function HomePage() {
                 key={f.href}
                 href={f.href}
                 data-accent={f.accent}
-                className="feature-card bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden"
+                className="feature-card group bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden"
               >
                 {/* Card image */}
                 <div className="relative h-36 overflow-hidden">
@@ -297,38 +300,66 @@ export default function HomePage() {
       {/* Ad between features and roadmap */}
       <div className="max-w-5xl mx-auto px-4 sm:px-6 py-4"><InlineAd /></div>
 
-      {/* The Road to Homeownership — steps */}
-      <section className="py-10 lg:py-14">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6">
-          <div className="text-center mb-8">
-            <h2 className="text-2xl font-bold text-alta-navy mb-2">The Road to Homeownership</h2>
-            <p className="text-sm text-alta-gray">Six key milestones from pre-approval to getting your keys.</p>
+      {/* The Road to Homeownership — alternating timeline */}
+      <section className="py-12 lg:py-16">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-alta-navy mb-3">The Road to Homeownership</h2>
+            <p className="text-alta-gray max-w-lg mx-auto">Seven key milestones from getting your finances ready to getting the keys.</p>
           </div>
-          <div className="space-y-6">
-            {steps.map((step: { num: string; title: string; desc: string; keys?: boolean; bg: string; borderColor: string }, i: number) => (
-              <div key={step.num} className={`relative flex gap-4 items-start ${i < steps.length - 1 ? "step-connector" : ""}`}>
-                <div className={`w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm shrink-0 ${step.keys ? 'bg-[#d4a843] text-white' : 'bg-alta-teal text-white'}`}>
-                  {step.keys ? (
-                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M15.75 5.25a3 3 0 013 3m3 0a6 6 0 01-7.029 5.912c-.563-.097-1.159.026-1.563.43L10.5 17.25H8.25v2.25H6v2.25H2.25v-2.818c0-.597.237-1.17.659-1.591l6.499-6.499c.404-.404.527-1 .43-1.563A6 6 0 1121.75 8.25z" /></svg>
-                  ) : step.num}
+          {/* Timeline */}
+          <div className="relative">
+            {/* Center line */}
+            <div className="absolute left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-alta-teal via-alta-teal/60 to-[#d4a843] hidden md:block" style={{ transform: 'translateX(-50%)' }} />
+            <div className="space-y-6 md:space-y-0">
+              {steps.map((step: { num: string; title: string; desc: string; keys?: boolean; bg: string; borderColor: string }, i: number) => (
+                <div key={step.num} className={`relative md:flex md:items-center md:gap-8 ${i % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'} md:mb-8`}>
+                  {/* Content card — desktop only */}
+                  <div className={`flex-1 hidden md:block ${i % 2 === 0 ? 'md:text-right' : 'md:text-left'}`}>
+                    <div className={`inline-block ${step.bg} rounded-xl p-4 shadow-sm hover:shadow-md transition-shadow ${i % 2 === 0 ? 'border-r-4' : 'border-l-4'} ${step.borderColor} max-w-sm ${i % 2 === 0 ? 'ml-auto' : ''}`}>
+                      <h3 className={`font-semibold text-base ${step.keys ? 'text-[#d4a843]' : 'text-alta-navy'}`}>{step.title}</h3>
+                      <p className="text-sm text-alta-gray mt-1 leading-relaxed">{step.desc}</p>
+                    </div>
+                  </div>
+                  {/* Center node */}
+                  <div className="hidden md:flex items-center justify-center shrink-0 z-10">
+                    <div className={`w-12 h-12 rounded-full flex items-center justify-center font-bold text-sm shadow-lg ring-4 ring-white ${step.keys ? 'bg-gradient-to-br from-[#d4a843] to-[#b8922e] text-white' : 'bg-gradient-to-br from-alta-teal to-[#077a9e] text-white'}`}>
+                      {step.keys ? (
+                        <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M15.75 5.25a3 3 0 013 3m3 0a6 6 0 01-7.029 5.912c-.563-.097-1.159.026-1.563.43L10.5 17.25H8.25v2.25H6v2.25H2.25v-2.818c0-.597.237-1.17.659-1.591l6.499-6.499c.404-.404.527-1 .43-1.563A6 6 0 1121.75 8.25z" /></svg>
+                      ) : step.num}
+                    </div>
+                  </div>
+                  {/* Spacer for opposite side — desktop only */}
+                  <div className="flex-1 hidden md:block" />
+                  {/* Mobile-only: inline step number */}
+                  <div className={`md:hidden flex gap-3 items-start mb-4`}>
+                    <div className={`w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm shrink-0 ${step.keys ? 'bg-[#d4a843] text-white' : 'bg-alta-teal text-white'}`}>
+                      {step.keys ? (
+                        <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M15.75 5.25a3 3 0 013 3m3 0a6 6 0 01-7.029 5.912c-.563-.097-1.159.026-1.563.43L10.5 17.25H8.25v2.25H6v2.25H2.25v-2.818c0-.597.237-1.17.659-1.591l6.499-6.499c.404-.404.527-1 .43-1.563A6 6 0 1121.75 8.25z" /></svg>
+                      ) : step.num}
+                    </div>
+                    <div className={`${step.bg} rounded-xl p-3 flex-1 border-l-4 ${step.borderColor}`}>
+                      <h3 className={`font-semibold ${step.keys ? 'text-[#d4a843]' : 'text-alta-navy'}`}>{step.title}</h3>
+                      <p className="text-sm text-alta-gray mt-0.5">{step.desc}</p>
+                    </div>
+                  </div>
                 </div>
-                <div className={`pt-1 flex-1 p-3 ${step.bg} rounded-xl border-l-4 ${step.borderColor}`}>
-                  <h3 className={`font-semibold ${step.keys ? 'text-[#d4a843]' : 'text-alta-navy'}`}>{step.title}</h3>
-                  <p className="text-sm text-alta-gray mt-0.5">{step.desc}</p>
-                </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
-          <div className="text-center mt-10">
-            <Link href="/closing-process/what-to-expect" className="inline-flex items-center text-alta-teal font-semibold hover:text-alta-teal-dark transition-colors">
-              Detailed walkthrough of each step
-              <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div className="text-center mt-12">
+            <Link href="/closing-process/what-to-expect" className="inline-flex items-center px-6 py-3 bg-alta-teal text-white font-semibold rounded-lg hover:bg-[#077a9e] transition-colors shadow-md">
+              Detailed Walkthrough of Each Step
+              <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
               </svg>
             </Link>
           </div>
         </div>
       </section>
+
+      {/* Gradient divider */}
+      <div className="h-1 bg-gradient-to-r from-[#1a5276] via-[#0a7ea8] to-[#2d6b3f]" />
 
       {/* Where to start — large photo-backed cards */}
       <section className="py-10 bg-alta-light">
@@ -360,6 +391,46 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* Why Title Insurance? — ALTA core product callout */}
+      <section className="py-14 lg:py-18 bg-white relative overflow-hidden">
+        {/* Subtle background pattern */}
+        <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, #1a5276 1px, transparent 0)', backgroundSize: '24px 24px' }} />
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 relative">
+          <div className="text-center mb-10">
+            <div className="inline-flex items-center gap-2 bg-[#2d6b3f]/10 px-4 py-1.5 rounded-full mb-4">
+              <svg className="w-4 h-4 text-[#2d6b3f]" fill="currentColor" viewBox="0 0 24 24"><path d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" /></svg>
+              <span className="text-xs font-semibold text-[#2d6b3f] uppercase tracking-wider">Protect Your Investment</span>
+            </div>
+            <h2 className="text-3xl font-bold text-alta-navy mb-3">Why Title Insurance Matters</h2>
+            <p className="text-alta-gray max-w-2xl mx-auto leading-relaxed">Your home is likely the biggest purchase you will ever make. Title insurance is a one-time cost that protects your ownership rights for as long as you own the property.</p>
+          </div>
+          <div className="grid md:grid-cols-3 gap-6 mb-10">
+            {[
+              { title: "What It Covers", desc: "Forgery, undisclosed heirs, recording errors, liens, encroachments, and other defects that could threaten your ownership.", color: "#2d6b3f", bg: "bg-[#e9f5ed]", icon: "M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" },
+              { title: "One-Time Premium", desc: "Unlike other insurance, you pay once at closing. No monthly premiums, no annual renewals. Protection lasts as long as you or your heirs own the property.", color: "#0a7ea8", bg: "bg-[#e6f1f5]", icon: "M2.25 18.75a60.07 60.07 0 0115.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 013 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 00-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 01-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 003 15h-.75M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" },
+              { title: "Owner's vs. Lender's", desc: "Your lender requires a policy to protect their loan — but only an owner's policy protects you. It is optional, but strongly recommended by ALTA and the CFPB.", color: "#5b3a8c", bg: "bg-[#f0ecf6]", icon: "M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" },
+            ].map((item) => (
+              <div key={item.title} className={`${item.bg} rounded-2xl p-6 border border-transparent hover:border-[${item.color}]/20 transition-all hover:shadow-md`}>
+                <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-4" style={{ backgroundColor: `${item.color}15` }}>
+                  <svg className="w-6 h-6" style={{ color: item.color }} fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d={item.icon} /></svg>
+                </div>
+                <h3 className="text-lg font-semibold text-alta-navy mb-2">{item.title}</h3>
+                <p className="text-sm text-alta-gray leading-relaxed">{item.desc}</p>
+              </div>
+            ))}
+          </div>
+          <div className="text-center">
+            <Link href="/protect-your-rights" className="inline-flex items-center px-7 py-3.5 bg-[#2d6b3f] text-white font-semibold rounded-lg hover:bg-[#245a34] transition-colors shadow-md">
+              Learn About Title Insurance
+              <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Gradient divider */}
+      <div className="h-1 bg-gradient-to-r from-[#2d6b3f] via-[#0a7ea8] to-[#943030]" />
 
       {/* Wire Fraud Warning — expanded */}
       <section className="py-14 bg-red-50 border-y border-red-100">
@@ -406,6 +477,9 @@ export default function HomePage() {
 
       {/* Ad between fraud warning and resources */}
       <div className="max-w-5xl mx-auto px-4 sm:px-6 py-4"><InlineAd /></div>
+
+      {/* Gradient divider */}
+      <div className="h-1 bg-gradient-to-r from-[#943030] via-[#d4a843] to-[#1a5276]" />
 
       {/* External Resources */}
       <section className="py-16 lg:py-20 bg-white">
