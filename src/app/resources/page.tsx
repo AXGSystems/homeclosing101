@@ -209,6 +209,7 @@ export default function ResourcesPage() {
               { name: "State Insurance Directory", desc: "Contact information for all 50 state insurance departments + DC — verified addresses, phone numbers, and websites.", href: "/homeowners-insurance", badge: "Directory" },
               { name: "Wire Fraud Prevention Guide", desc: "How the scam works, 5 safeguards, and what to do if you're a victim — with FBI IC3 recovery data.", href: "/protect-your-money", badge: "Guide" },
               { name: "Source Index", desc: "Complete list of every data source cited across the site — CFPB, FBI, NAR, ALTA, IRS, and more.", href: "/sources", badge: "Reference" },
+              { name: "HC101 Trivia Challenge", desc: "Jeopardy-style homebuying trivia — 25 questions across 5 categories. Test your knowledge and earn your title!", href: "/trivia", badge: "Game" },
             ].map((t) => (
               <Link key={t.name} href={t.href} className="flex items-start gap-3 p-4 bg-white rounded-xl border border-gray-200 border-l-4 border-l-[#0a7ea8] shadow-sm tile-interactive group">
                 <div className="w-9 h-9 rounded-lg bg-alta-teal/10 flex items-center justify-center text-alta-teal shrink-0 group-hover:bg-alta-teal group-hover:text-white transition-colors">
