@@ -311,7 +311,7 @@ export default function LoanEstimatePage() {
             {timeline.map((t) => (
               <div
                 key={t.when}
-                className="p-4 bg-white rounded-xl border border-gray-100 shadow-sm tile-interactive cursor-pointer group"
+                className="p-4 bg-[#e8f0f5] rounded-xl border border-[#c5d8e4] shadow-sm tile-interactive cursor-pointer group"
                 onClick={() => setActiveModal({
                   title: t.when,
                   gradient: "from-[#1a5276] to-[#154463]",

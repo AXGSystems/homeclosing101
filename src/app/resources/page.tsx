@@ -165,7 +165,7 @@ export default function ResourcesPage() {
     <PageHero title="Resources & Tools" subtitle="Everything HC101 offers — interactive calculators, printable checklists, 450+ glossary terms, and trusted external links — all in one place." image="https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=1920&q=80" breadcrumb={[{label:"Resources",href:"/resources"}]} />
     <div className="py-1.5 lg:py-2">
       <div className="max-w-4xl mx-auto px-4 sm:px-6">
-        <div className="mb-6 p-4 bg-white rounded-2xl border border-gray-100 sm:sticky sm:top-[142px] z-20 shadow-md">
+        <div className="mb-6 p-4 bg-white rounded-2xl border border-[#c5d8e4] sm:sticky sm:top-[142px] z-20 shadow-md">
           <div className="flex items-start gap-4">
             <div className="w-12 h-12 rounded-xl bg-alta-teal/10 flex items-center justify-center text-alta-teal shrink-0">
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" /></svg>

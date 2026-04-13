@@ -204,11 +204,11 @@ export default function EscrowGuidePage() {
           <p className="text-sm text-alta-gray mb-4">Click any item for a detailed explanation, common questions, and what to watch for.</p>
           <div className="space-y-6 mb-10">
             {phases.map((phase) => (
-              <div key={phase.phase} className="rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+              <div key={phase.phase} className="rounded-2xl border border-[#c5d8e4] overflow-hidden shadow-sm tile-interactive">
                 <div className={`bg-gradient-to-r ${phase.color} px-5 py-3`}>
                   <h3 className="text-white font-bold text-sm">{phase.phase}</h3>
                 </div>
-                <div className="p-5 bg-white space-y-4">
+                <div className="p-5 bg-[#fafcfe] space-y-4">
                   {phase.items.map((item) => (
                     <div
                       key={item.title}
@@ -257,7 +257,7 @@ export default function EscrowGuidePage() {
 
           {/* Escrow math example */}
           <h2 className="text-xl font-bold text-alta-navy mb-4">Escrow Math: What Your Monthly Payment Includes</h2>
-          <div className="p-5 bg-white rounded-2xl border border-gray-100 shadow-sm mb-10">
+          <div className="p-5 bg-[#faf4e4] rounded-2xl border border-[#e8d9a8] border-l-4 border-l-[#8b6914] shadow-sm mb-10 tile-interactive">
             <p className="text-xs text-alta-gray mb-3">Example for a $350,000 home with 10% down, 6.5% rate, 30-year conventional in a county with 1.5% property tax:</p>
             <div className="space-y-1.5 text-xs">
               <div className="flex justify-between p-2 bg-[#e8f0f5] rounded-lg"><span className="text-alta-navy font-medium">Principal & Interest</span><span className="font-bold text-[#1a5276]">$1,991</span></div>
@@ -271,7 +271,7 @@ export default function EscrowGuidePage() {
 
           {/* Escrow waivers */}
           <h2 className="text-xl font-bold text-alta-navy mb-4">Escrow Waivers: Paying Taxes & Insurance Yourself</h2>
-          <div className="p-5 bg-white rounded-2xl border border-gray-100 shadow-sm mb-10">
+          <div className="p-5 bg-[#f0ecf6] rounded-2xl border border-[#d4c8e4] border-l-4 border-l-[#5b3a8c] shadow-sm mb-10 tile-interactive">
             <p className="text-xs text-alta-gray leading-relaxed mb-4">Some borrowers prefer to pay property taxes and insurance directly rather than through an escrow account. This is called an escrow waiver (or escrow exemption). Here is what you need to know:</p>
             <div className="space-y-3">
               <div className="p-3 bg-[#e8f0f5] rounded-lg border border-[#c5d8e4]">
@@ -293,6 +293,8 @@ export default function EscrowGuidePage() {
             </div>
             <p className="text-[10px] text-alta-teal font-medium mt-3">Source: CFPB -- Escrow accounts are regulated under the Real Estate Settlement Procedures Act (RESPA), 12 CFR Part 1024</p>
           </div>
+
+          <InlineAd />
 
           {/* RESPA escrow limits */}
           <h2 className="text-xl font-bold text-alta-navy mb-4">Federal Escrow Protections (RESPA)</h2>
@@ -349,7 +351,7 @@ export default function EscrowGuidePage() {
             {faqItems.map((faq) => (
               <div
                 key={faq.q}
-                className="p-4 bg-white rounded-xl border border-gray-100 shadow-sm tile-interactive cursor-pointer group hover:border-gray-300 transition-colors"
+                className="p-4 bg-[#e6f1f5] rounded-xl border border-[#b4d8e8] border-l-4 border-l-[#0a7ea8] shadow-sm tile-interactive cursor-pointer group hover:border-[#0a7ea8]/50 transition-colors"
                 onClick={() => setActiveModal({
                   title: faq.q,
                   gradient: "from-[#1a5276] to-[#154463]",

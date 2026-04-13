@@ -160,8 +160,10 @@ export default function ProtectYourRightsPage() {
             </p>
           </div>
 
+          <InlineAd />
+
           {/* Cost and shopping */}
-          <div className="grid md:grid-cols-2 gap-5 mb-6">
+          <div className="grid md:grid-cols-2 gap-5 mb-6 mt-6">
             <div className="p-6 bg-gradient-to-br from-blue-50 to-blue-100/30 rounded-2xl border border-blue-100">
               <h3 className="font-bold text-alta-navy mb-2 text-lg">Cost & Your Right to Shop</h3>
               <p className="text-sm text-alta-gray mb-2 leading-relaxed">

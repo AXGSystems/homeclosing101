@@ -165,7 +165,9 @@ export default function ProtectYourMoneyPage() {
 
           <p className="text-xs text-alta-gray mb-8 leading-relaxed">Sources: FBI IC3 2024 Report, CertifID 2026 State of Wire Fraud Report, ALTA Best Practices Pillar 3, NAR Consumer Guide on Wire Fraud</p>
 
-          <div className="flex flex-col sm:flex-row gap-3">
+          <InlineAd />
+
+          <div className="flex flex-col sm:flex-row gap-3 mt-6">
             <Link href="/stop-fraud" className="px-5 py-2.5 bg-alta-red text-white font-semibold rounded-lg hover:bg-red-700 transition-colors text-center text-sm">
               Stop Fraud 101 — 10 Prevention Steps
             </Link>

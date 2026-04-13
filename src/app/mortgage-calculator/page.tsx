@@ -134,7 +134,7 @@ export default function MortgageCalculatorPage() {
           <div className="grid lg:grid-cols-[1fr_380px] gap-6">
             {/* Inputs */}
             <div className="space-y-5">
-              <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5">
+              <div className="bg-white rounded-2xl border border-gray-100 border-l-4 border-l-[#0a7ea8] shadow-sm p-5">
                 <h3 className="font-bold text-alta-navy mb-4">Loan Details</h3>
                 <div className="space-y-4">
                   <div>
@@ -171,7 +171,7 @@ export default function MortgageCalculatorPage() {
                 </div>
               </div>
 
-              <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5">
+              <div className="bg-white rounded-2xl border border-gray-100 border-l-4 border-l-[#2d6b3f] shadow-sm p-5">
                 <h3 className="font-bold text-alta-navy mb-4">Location & Additional Costs</h3>
                 <div className="space-y-3">
                   <div>

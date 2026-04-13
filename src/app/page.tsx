@@ -394,7 +394,7 @@ export default function HomePage() {
                 { num: "1 in 4", text: "Buyers received suspicious messages" },
                 { num: "40%", text: "Rise in deepfake scams" },
               ].map((s) => (
-                <div key={s.num} className="bg-white rounded-xl p-4 border border-red-100 text-center">
+                <div key={s.num} className="bg-white rounded-xl p-4 border border-red-100 text-center tile-interactive">
                   <p className="text-2xl font-bold text-alta-red">{s.num}</p>
                   <p className="text-xs text-alta-gray mt-1">{s.text}</p>
                 </div>
