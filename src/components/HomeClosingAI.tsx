@@ -30,7 +30,7 @@ function generateResponse(question: string): string {
 
   // Closing process
   if (q.includes('closing') && (q.includes('process') || q.includes('what') || q.includes('how'))) {
-    return `**The Home Closing Process**\n\nClosing (also called "settlement") is when you legally commit to your mortgage and become the official homeowner. Here are the key steps:\n\n1. **Get Pre-Approved** — Understand your budget\n2. **Find a Property** — Work with an agent\n3. **Make an Offer** — Negotiate terms\n4. **Sign Purchase Agreement** — Formalize the deal\n5. **Get Funding** — Finalize your mortgage\n6. **Get Insurance** — Homeowner's + title insurance\n7. **Close the Transaction** — Sign docs, get keys!\n\nWant details on any step? Just ask!`;
+    return `**The Home Closing Process**\n\nClosing (also called "settlement") is when you legally commit to your mortgage and become the official homeowner. Here are the 8 key steps:\n\n1. **Get Your Finances Ready** — Credit, debts, savings\n2. **Get Pre-Approved** — Compare lenders, lock in financing\n3. **Find a Property** — Work with an agent\n4. **Make an Offer** — Negotiate terms\n5. **Sign Purchase Agreement** — Formalize the deal\n6. **Get Funding** — Finalize your mortgage\n7. **Get Insurance** — Homeowner's + title insurance\n8. **Close the Transaction** — Sign docs, get keys!\n\nWant details on any step? Just ask!`;
   }
 
   // Title insurance

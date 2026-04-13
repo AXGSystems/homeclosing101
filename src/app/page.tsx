@@ -85,12 +85,13 @@ const stats = [
 ];
 
 const steps = [
-  { num: "1", title: "Get Pre-Approved", desc: "Understand your budget and lock in your financing options." },
-  { num: "2", title: "Find Your Home", desc: "Work with a real estate agent to find the right property." },
-  { num: "3", title: "Make an Offer", desc: "Submit your purchase proposal and negotiate terms." },
-  { num: "4", title: "Order Title Search", desc: "A professional reviews public records for any claims on the property." },
-  { num: "5", title: "Get Insurance", desc: "Secure homeowner's insurance and owner's title insurance." },
-  { num: "6", title: "Close & Get Your Keys", desc: "Sign documents, transfer funds, and officially become a homeowner.", keys: true },
+  { num: "1", title: "Get Your Finances Ready", desc: "Check your credit, pay down debts, save for your down payment and closing costs." },
+  { num: "2", title: "Get Pre-Approved", desc: "Compare lenders and lock in your financing options." },
+  { num: "3", title: "Find Your Home", desc: "Work with a real estate agent to find the right property." },
+  { num: "4", title: "Make an Offer", desc: "Submit your purchase proposal and negotiate terms." },
+  { num: "5", title: "Order Title Search", desc: "A professional reviews public records for any claims on the property." },
+  { num: "6", title: "Get Insurance", desc: "Secure homeowner's insurance and owner's title insurance." },
+  { num: "7", title: "Close & Get Your Keys", desc: "Sign documents, transfer funds, and officially become a homeowner.", keys: true },
 ];
 
 const resources = [
