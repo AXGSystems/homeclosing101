@@ -98,18 +98,18 @@ const steps = [
 const resourceColors = ["#1a5276", "#2d6b3f", "#5b3a8c", "#8b6914", "#943030", "#0a7ea8"];
 const resourceBgs = ["bg-[#e8f0f5] border-[#c5d8e4]", "bg-[#e9f5ed] border-[#bddcc7]", "bg-[#f0ecf6] border-[#d4c8e4]", "bg-[#faf4e4] border-[#e8d9a8]", "bg-[#f5e8e8] border-[#e4c5c5]", "bg-[#e6f1f5] border-[#c0dbe6]"];
 const resources = [
-  { name: "American Land Title Association (ALTA)", desc: "The national trade organization for the title insurance industry — best practices, advocacy, and consumer protection", url: "https://www.alta.org/", logo: "https://www.alta.org/images/alta-logo.svg" },
-  { name: "Consumer Financial Protection Bureau", desc: "Homeownership guides, settlement cost booklet, and complaint filing", url: "https://www.consumerfinance.gov/owning-a-home/", logo: "https://www.google.com/s2/favicons?domain=consumerfinance.gov&sz=64" },
-  { name: "HUD Housing Counselor Locator", desc: "Find a HUD-approved housing counselor near you — free guidance", url: "https://www.consumerfinance.gov/housing/", logo: "https://www.google.com/s2/favicons?domain=hud.gov&sz=64" },
-  { name: "FBI Internet Crime Complaint Center", desc: "Report wire fraud and internet crimes — real estate fraud prevention resources", url: "https://www.ic3.gov/", logo: "https://www.google.com/s2/favicons?domain=fbi.gov&sz=64" },
-  { name: "Fannie Mae HomePath", desc: "Free homebuyer education course with certificate of completion", url: "https://www.homepath.com/", logo: "https://www.google.com/s2/favicons?domain=fanniemae.com&sz=64" },
-  { name: "Freddie Mac My Home", desc: "Tools, calculators, and educational resources for homebuyers", url: "https://myhome.freddiemac.com/", logo: "https://www.google.com/s2/favicons?domain=freddiemac.com&sz=64" },
-  { name: "National Association of Realtors", desc: "Find a Realtor, market data, and consumer guides", url: "https://www.nar.realtor/", logo: "https://www.google.com/s2/favicons?domain=nar.realtor&sz=64" },
-  { name: "Appraisal Institute", desc: "Professional appraisal resources and find-an-appraiser tool", url: "https://www.appraisalinstitute.org/", logo: "https://www.google.com/s2/favicons?domain=appraisalinstitute.org&sz=64" },
-  { name: "National Assoc. of Insurance Commissioners", desc: "State insurance regulator directory and consumer complaint resources", url: "https://content.naic.org/", logo: "https://www.google.com/s2/favicons?domain=naic.org&sz=64" },
-  { name: "Federal Housing Finance Agency", desc: "Conforming loan limits, housing data, and GSE oversight", url: "https://www.fhfa.gov/", logo: "https://www.google.com/s2/favicons?domain=fhfa.gov&sz=64" },
-  { name: "IRS Homeowner Tax Benefits", desc: "Mortgage interest deduction, property tax deduction, and capital gains exclusion guides", url: "https://www.irs.gov/publications/p530", logo: "https://www.google.com/s2/favicons?domain=irs.gov&sz=64" },
-  { name: "FEMA Flood Map Service Center", desc: "Check if your property is in a flood zone — affects insurance requirements", url: "https://msc.fema.gov/", logo: "https://www.google.com/s2/favicons?domain=fema.gov&sz=64" },
+  { name: "American Land Title Association (ALTA)", desc: "The national trade organization for the title insurance industry — best practices, advocacy, and consumer protection", url: "https://www.alta.org/", logo: "https://www.alta.org/images/alta-logo.svg", halo: "#0a8ebc" },
+  { name: "Consumer Financial Protection Bureau", desc: "Homeownership guides, settlement cost booklet, and complaint filing", url: "https://www.consumerfinance.gov/owning-a-home/", logo: "https://files.consumerfinance.gov/f/images/logo_237x50.c7c2ba6c929f.png", halo: "#20aa3f" },
+  { name: "HUD Housing Counselor Locator", desc: "Find a HUD-approved housing counselor near you — free guidance", url: "https://www.consumerfinance.gov/housing/", logo: "https://www.hud.gov/themes/custom/hudcleanup/images/logo.svg", halo: "#003A70" },
+  { name: "FBI Internet Crime Complaint Center", desc: "Report wire fraud and internet crimes — real estate fraud prevention resources", url: "https://www.ic3.gov/", logo: "https://www.ic3.gov/img/fbi_seal_new.png", halo: "#002868" },
+  { name: "Fannie Mae HomePath", desc: "Free homebuyer education course with certificate of completion", url: "https://www.homepath.com/", logo: "https://yourhome.fanniemae.com/sites/g/files/koqyhd251/files/2022-12/fm-logo.png", halo: "#003DA5" },
+  { name: "Freddie Mac My Home", desc: "Tools, calculators, and educational resources for homebuyers", url: "https://myhome.freddiemac.com/", logo: "https://myhome.freddiemac.com/images/freddie-mac-myhome-logo.png", halo: "#00703C" },
+  { name: "National Association of Realtors", desc: "Find a Realtor, market data, and consumer guides", url: "https://www.nar.realtor/", logo: "https://cms.nar.realtor/sites/all/themes/gesso/images/nar-logo-2020-footer.svg", halo: "#006BB6" },
+  { name: "Appraisal Institute", desc: "Professional appraisal resources and find-an-appraiser tool", url: "https://www.appraisalinstitute.org/", logo: "https://www.appraisalinstitute.org/getmedia/33478969-ea9e-4b44-a0b0-50f703f83e39/ai-logo.svg", halo: "#1B3A5C" },
+  { name: "National Assoc. of Insurance Commissioners", desc: "State insurance regulator directory and consumer complaint resources", url: "https://content.naic.org/", logo: "https://content.naic.org/themes/custom/naic/images/logo/naic-blue.svg", halo: "#003366" },
+  { name: "Federal Housing Finance Agency", desc: "Conforming loan limits, housing data, and GSE oversight", url: "https://www.fhfa.gov/", logo: "https://www.fhfa.gov/themes/custom/fhfa/fhfa-logo.svg", halo: "#003A70" },
+  { name: "IRS Homeowner Tax Benefits", desc: "Mortgage interest deduction, property tax deduction, and capital gains exclusion guides", url: "https://www.irs.gov/publications/p530", logo: "https://www.irs.gov/themes/custom/pup_base/IRS-Logo.svg", halo: "#003366" },
+  { name: "FEMA Flood Map Service Center", desc: "Check if your property is in a flood zone — affects insurance requirements", url: "https://msc.fema.gov/", logo: "https://www.fema.gov/profiles/femad8_gov/themes/fema_uswds/images/fema-logo-blue.svg", halo: "#003366" },
 ];
 
 export default function HomePage() {
@@ -492,7 +492,7 @@ export default function HomePage() {
             <p className="text-alta-gray max-w-xl mx-auto">Verified links to government agencies and industry organizations that support homebuyers.</p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-            {resources.map((r, i) => (
+            {resources.map((r) => (
               <a
                 key={r.name}
                 href={r.url}
@@ -500,19 +500,20 @@ export default function HomePage() {
                 rel="noopener noreferrer"
                 className="group rounded-2xl bg-white border border-gray-100 shadow-sm tile-interactive overflow-hidden"
               >
-                {/* Logo area with halo glow */}
-                <div className="flex items-center justify-center py-6 px-4 relative">
-                  <div className="absolute inset-0 opacity-[0.07] rounded-t-2xl" style={{ backgroundColor: resourceColors[i % resourceColors.length] }} />
-                  <div className="w-16 h-16 rounded-2xl bg-white flex items-center justify-center shadow-md border border-gray-100 relative z-10 overflow-hidden" style={{ boxShadow: `0 0 20px ${resourceColors[i % resourceColors.length]}25, 0 4px 12px rgba(0,0,0,0.08)` }}>
+                {/* Large logo at top with halo */}
+                <div className="flex items-center justify-center pt-7 pb-5 px-5">
+                  <div className="w-full h-14 flex items-center justify-center" style={{ filter: `drop-shadow(0 0 12px ${r.halo}30)` }}>
                     {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src={r.logo} alt={r.name} className="w-10 h-10 object-contain" />
+                    <img src={r.logo} alt={r.name} className="max-h-14 max-w-[85%] object-contain" />
                   </div>
                 </div>
+                {/* Thin accent line */}
+                <div className="mx-5 h-0.5 rounded-full opacity-20" style={{ backgroundColor: r.halo }} />
                 {/* Content */}
-                <div className="px-4 pb-5 text-center">
-                  <h3 className="text-sm font-bold text-alta-navy mb-1.5 group-hover:text-alta-teal transition-colors leading-tight">{r.name}</h3>
+                <div className="px-5 pt-3 pb-5">
+                  <h3 className="text-[13px] font-bold text-alta-navy mb-1.5 group-hover:text-alta-teal transition-colors leading-tight">{r.name}</h3>
                   <p className="text-[11px] text-alta-gray leading-relaxed mb-3">{r.desc}</p>
-                  <span className="inline-flex items-center gap-1 text-xs font-semibold" style={{ color: resourceColors[i % resourceColors.length] }}>
+                  <span className="inline-flex items-center gap-1 text-xs font-semibold" style={{ color: r.halo }}>
                     Visit site
                     <svg className="w-3 h-3 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
