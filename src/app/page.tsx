@@ -98,18 +98,18 @@ const steps = [
 const resourceColors = ["#1a5276", "#2d6b3f", "#5b3a8c", "#8b6914", "#943030", "#0a7ea8"];
 const resourceBgs = ["bg-[#e8f0f5] border-[#c5d8e4]", "bg-[#e9f5ed] border-[#bddcc7]", "bg-[#f0ecf6] border-[#d4c8e4]", "bg-[#faf4e4] border-[#e8d9a8]", "bg-[#f5e8e8] border-[#e4c5c5]", "bg-[#e6f1f5] border-[#c0dbe6]"];
 const resources = [
-  { name: "American Land Title Association (ALTA)", desc: "The national trade organization for the title insurance industry — best practices, advocacy, and consumer protection", url: "https://www.alta.org/" },
-  { name: "Consumer Financial Protection Bureau", desc: "Homeownership guides, settlement cost booklet, and complaint filing", url: "https://www.consumerfinance.gov/owning-a-home/" },
-  { name: "HUD Housing Counselor Locator", desc: "Find a HUD-approved housing counselor near you — free guidance", url: "https://www.consumerfinance.gov/housing/" },
-  { name: "FBI Internet Crime Complaint Center", desc: "Report wire fraud and internet crimes — real estate fraud prevention resources", url: "https://www.ic3.gov/" },
-  { name: "Fannie Mae HomePath", desc: "Free homebuyer education course with certificate of completion", url: "https://www.homepath.com/" },
-  { name: "Freddie Mac My Home", desc: "Tools, calculators, and educational resources for homebuyers", url: "https://myhome.freddiemac.com/" },
-  { name: "National Association of Realtors", desc: "Find a Realtor, market data, and consumer guides", url: "https://www.nar.realtor/" },
-  { name: "Appraisal Institute", desc: "Professional appraisal resources and find-an-appraiser tool", url: "https://www.appraisalinstitute.org/" },
-  { name: "National Assoc. of Insurance Commissioners", desc: "State insurance regulator directory and consumer complaint resources", url: "https://content.naic.org/" },
-  { name: "Federal Housing Finance Agency", desc: "Conforming loan limits, housing data, and GSE oversight", url: "https://www.fhfa.gov/" },
-  { name: "IRS Homeowner Tax Benefits", desc: "Mortgage interest deduction, property tax deduction, and capital gains exclusion guides", url: "https://www.irs.gov/publications/p530" },
-  { name: "FEMA Flood Map Service Center", desc: "Check if your property is in a flood zone — affects insurance requirements", url: "https://msc.fema.gov/" },
+  { name: "American Land Title Association (ALTA)", desc: "The national trade organization for the title insurance industry — best practices, advocacy, and consumer protection", url: "https://www.alta.org/", logo: "https://www.alta.org/images/alta-logo.svg" },
+  { name: "Consumer Financial Protection Bureau", desc: "Homeownership guides, settlement cost booklet, and complaint filing", url: "https://www.consumerfinance.gov/owning-a-home/", logo: "https://www.google.com/s2/favicons?domain=consumerfinance.gov&sz=64" },
+  { name: "HUD Housing Counselor Locator", desc: "Find a HUD-approved housing counselor near you — free guidance", url: "https://www.consumerfinance.gov/housing/", logo: "https://www.google.com/s2/favicons?domain=hud.gov&sz=64" },
+  { name: "FBI Internet Crime Complaint Center", desc: "Report wire fraud and internet crimes — real estate fraud prevention resources", url: "https://www.ic3.gov/", logo: "https://www.google.com/s2/favicons?domain=fbi.gov&sz=64" },
+  { name: "Fannie Mae HomePath", desc: "Free homebuyer education course with certificate of completion", url: "https://www.homepath.com/", logo: "https://www.google.com/s2/favicons?domain=fanniemae.com&sz=64" },
+  { name: "Freddie Mac My Home", desc: "Tools, calculators, and educational resources for homebuyers", url: "https://myhome.freddiemac.com/", logo: "https://www.google.com/s2/favicons?domain=freddiemac.com&sz=64" },
+  { name: "National Association of Realtors", desc: "Find a Realtor, market data, and consumer guides", url: "https://www.nar.realtor/", logo: "https://www.google.com/s2/favicons?domain=nar.realtor&sz=64" },
+  { name: "Appraisal Institute", desc: "Professional appraisal resources and find-an-appraiser tool", url: "https://www.appraisalinstitute.org/", logo: "https://www.google.com/s2/favicons?domain=appraisalinstitute.org&sz=64" },
+  { name: "National Assoc. of Insurance Commissioners", desc: "State insurance regulator directory and consumer complaint resources", url: "https://content.naic.org/", logo: "https://www.google.com/s2/favicons?domain=naic.org&sz=64" },
+  { name: "Federal Housing Finance Agency", desc: "Conforming loan limits, housing data, and GSE oversight", url: "https://www.fhfa.gov/", logo: "https://www.google.com/s2/favicons?domain=fhfa.gov&sz=64" },
+  { name: "IRS Homeowner Tax Benefits", desc: "Mortgage interest deduction, property tax deduction, and capital gains exclusion guides", url: "https://www.irs.gov/publications/p530", logo: "https://www.google.com/s2/favicons?domain=irs.gov&sz=64" },
+  { name: "FEMA Flood Map Service Center", desc: "Check if your property is in a flood zone — affects insurance requirements", url: "https://msc.fema.gov/", logo: "https://www.google.com/s2/favicons?domain=fema.gov&sz=64" },
 ];
 
 export default function HomePage() {
@@ -501,7 +501,13 @@ export default function HomePage() {
                 className={`group rounded-xl p-4 sm:p-5 border tile-interactive ${resourceBgs[i % resourceBgs.length]}`}
                 style={{ borderLeftWidth: '4px', borderLeftColor: resourceColors[i % resourceColors.length] }}
               >
-                <h3 className="text-sm font-semibold text-alta-navy mb-1 group-hover:text-alta-teal transition-colors">{r.name}</h3>
+                <div className="flex items-center gap-2.5 mb-2">
+                  <div className="w-8 h-8 rounded-lg bg-white flex items-center justify-center shrink-0 border border-gray-100 shadow-sm overflow-hidden">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img src={r.logo} alt="" className="w-5 h-5 object-contain" />
+                  </div>
+                  <h3 className="text-sm font-semibold text-alta-navy group-hover:text-alta-teal transition-colors leading-tight">{r.name}</h3>
+                </div>
                 <p className="text-xs text-alta-gray">{r.desc}</p>
                 <div className="mt-3 flex items-center text-xs font-medium text-alta-teal">
                   Visit site
