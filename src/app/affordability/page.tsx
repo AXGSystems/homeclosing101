@@ -234,6 +234,10 @@ export default function AffordabilityPage() {
 
           <InlineAd />
 
+          <div className="p-4 bg-[#faf4e4] rounded-xl border border-[#e8d9a8] border-l-4 border-l-[#8b6914] my-6">
+            <p className="text-xs text-alta-gray"><strong className="text-[#8b6914]">Did you know?</strong> The FBI&apos;s Internet Crime Complaint Center (IC3) reports that Americans lost over $12.5 billion to internet crime in 2023, with real estate and rental fraud among the top categories. Always verify wire instructions by phone before sending closing funds.</p>
+          </div>
+
           {/* Hidden costs of homeownership */}
           <h2 className="text-xl font-bold text-alta-navy mb-4 mt-6">Hidden Costs Beyond the Mortgage</h2>
           <p className="text-sm text-alta-gray mb-4 leading-relaxed">Your mortgage payment is just the beginning. Real homeownership costs include ongoing expenses many first-time buyers don&apos;t budget for. Factor these into your affordability calculation. <span className="text-alta-teal font-medium">Click any card for detailed guidance.</span></p>

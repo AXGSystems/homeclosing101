@@ -96,6 +96,8 @@ export default function ProtectYourMoneyPage() {
             </div>
           </div>
 
+          <div className="h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent my-8" />
+
           {/* What your title company should do */}
           <h2 className="text-2xl font-bold text-alta-navy mb-4">What Your Title Company Should Be Doing</h2>
           <p className="text-sm text-alta-gray mb-4 leading-relaxed">When choosing a title company, ask about their fraud prevention practices. Companies that follow ALTA Best Practices (Pillar 3: Privacy and Data Security) should have robust measures in place. Here&apos;s what to look for:</p>
@@ -114,6 +116,8 @@ export default function ProtectYourMoneyPage() {
               </div>
             ))}
           </div>
+
+          <div className="h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent my-8" />
 
           {/* Recovery timeline */}
           <h2 className="text-2xl font-bold text-alta-navy mb-4">If You&apos;re a Victim: Recovery Timeline</h2>
@@ -163,7 +167,7 @@ export default function ProtectYourMoneyPage() {
             </div>
           </div>
 
-          <p className="text-xs text-alta-gray mb-8 leading-relaxed">Sources: FBI IC3 2024 Report, CertifID 2026 State of Wire Fraud Report, ALTA Best Practices Pillar 3, NAR Consumer Guide on Wire Fraud</p>
+          <p className="text-[10px] text-alta-teal font-medium mb-8">Source: FBI IC3 2024 Report, CertifID 2026 State of Wire Fraud Report, ALTA Best Practices Pillar 3, NAR Consumer Guide on Wire Fraud</p>
 
           <InlineAd />
 

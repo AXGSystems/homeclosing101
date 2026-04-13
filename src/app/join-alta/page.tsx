@@ -22,19 +22,19 @@ interface ModalData {
    ═══════════════════════════════════════════════════════ */
 function DetailModal({ data, onClose }: { data: ModalData; onClose: () => void }) {
   return (
-    <div className="fixed inset-0 z-[700] flex items-center justify-center p-4" onClick={onClose}>
+    <div className="fixed inset-0 z-[700] flex items-end sm:items-center justify-center sm:p-4" onClick={onClose}>
       <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" />
-      <div className="relative bg-white rounded-2xl shadow-2xl max-w-2xl w-full max-h-[85vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
+      <div className="relative bg-white rounded-t-2xl sm:rounded-2xl shadow-2xl max-w-2xl w-full max-h-[90vh] sm:max-h-[85vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
         <button onClick={onClose} className="absolute top-3 right-3 p-2 text-white hover:text-white bg-black/40 hover:bg-black/60 rounded-full z-10 transition-colors">
           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12" /></svg>
         </button>
         {/* Header */}
-        <div className={`bg-gradient-to-r ${data.gradient} px-6 py-5`}>
-          <h2 className="text-xl font-bold text-white pr-10">{data.title}</h2>
-          {data.subtitle && <p className="text-sm text-white/70 mt-1">{data.subtitle}</p>}
+        <div className={`bg-gradient-to-r ${data.gradient} px-4 sm:px-6 py-4 sm:py-5`}>
+          <h2 className="text-lg sm:text-xl font-bold text-white pr-10">{data.title}</h2>
+          {data.subtitle && <p className="text-xs sm:text-sm text-white/70 mt-1">{data.subtitle}</p>}
         </div>
         {/* Body */}
-        <div className="p-6">
+        <div className="p-4 sm:p-6">
           {/* Stats row */}
           {data.stats && data.stats.length > 0 && (
             <div className={`grid ${data.stats.length <= 2 ? 'grid-cols-2' : data.stats.length === 3 ? 'grid-cols-3' : 'grid-cols-2 sm:grid-cols-4'} gap-3 mb-5`}>

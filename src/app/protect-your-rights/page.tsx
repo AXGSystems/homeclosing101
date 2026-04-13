@@ -106,6 +106,8 @@ export default function ProtectYourRightsPage() {
             ))}
           </div>
 
+          <div className="h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent my-8" />
+
           {/* How the title search works */}
           <h2 className="text-2xl font-bold text-alta-navy mb-4">How the Title Search Process Works</h2>
           <p className="text-sm text-alta-gray mb-4 leading-relaxed">
@@ -129,6 +131,8 @@ export default function ProtectYourRightsPage() {
               </div>
             ))}
           </div>
+
+          <div className="h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent my-8" />
 
           {/* The 10 covered risks explained */}
           <h2 className="text-2xl font-bold text-alta-navy mb-4">What Your Owner&apos;s Policy Actually Covers</h2>

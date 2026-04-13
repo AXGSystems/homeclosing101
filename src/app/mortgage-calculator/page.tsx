@@ -288,6 +288,10 @@ export default function MortgageCalculatorPage() {
 
           <InlineAd />
 
+          <div className="p-4 bg-[#faf4e4] rounded-xl border border-[#e8d9a8] border-l-4 border-l-[#8b6914] my-6">
+            <p className="text-xs text-alta-gray"><strong className="text-[#8b6914]">Did you know?</strong> According to the CFPB, a 0.5% difference in your mortgage interest rate on a $350,000 loan adds up to more than $37,000 in additional interest over 30 years. Shopping multiple lenders is one of the most impactful financial decisions you can make.</p>
+          </div>
+
           {/* Detailed Analysis */}
           <div className="mt-8 p-6 bg-gradient-to-br from-alta-light to-white rounded-2xl border border-gray-100">
             <h2 className="text-xl font-bold text-alta-navy mb-4">Detailed Analysis: Your {config.name} Loan</h2>

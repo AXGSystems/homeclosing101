@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import PageHero from "@/components/PageHero";
 import { InlineAd } from "@/components/EliteProviders";
@@ -109,54 +109,13 @@ export default function FAQPage() {
             const colors = catColors[faq.cat] || catColors.basics;
             const isOpen = openIdx === globalIdx;
             return (
-              <div
+              <FaqCard
                 key={globalIdx}
-                className={`rounded-xl border border-gray-100 shadow-sm overflow-hidden transition-all cursor-pointer border-l-4 ${colors.leftBorder} ${
-                  isOpen ? `${colors.bg} shadow-lg ${colors.border} md:col-span-2` : "bg-white hover:shadow-md hover:-translate-y-0.5"
-                }`}
-                onClick={() => setOpenIdx(isOpen ? null : globalIdx)}
-              >
-                <div className="p-4 flex items-start gap-3">
-                  <div className={`w-7 h-7 rounded-lg flex items-center justify-center shrink-0 transition-colors text-xs font-bold ${
-                    isOpen ? `${colors.text} ${colors.bg}` : "bg-alta-light text-alta-gray"
-                  }`}>
-                    Q
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <div className="flex items-start justify-between gap-2">
-                      <h3 className="text-sm font-semibold text-alta-navy leading-snug">{faq.q}</h3>
-                      <svg
-                        className={`w-4 h-4 text-alta-gray shrink-0 mt-0.5 transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`}
-                        fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                      >
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                      </svg>
-                    </div>
-                    {!isOpen && (
-                      <p className="text-[11px] text-alta-gray mt-1 line-clamp-1">{faq.a.slice(0, 90)}...</p>
-                    )}
-                  </div>
-                </div>
-                {isOpen && (
-                  <div className="px-4 pb-4 pt-0 ml-10">
-                    <div className="p-4 bg-white/80 rounded-xl">
-                      <p className="text-sm text-alta-gray leading-relaxed mb-3">{faq.a}</p>
-                      {faq.source && (
-                        <a
-                          href={faq.sourceUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          onClick={(e) => e.stopPropagation()}
-                          className="inline-flex items-center gap-1 text-[10px] font-semibold text-alta-teal hover:text-alta-teal-dark transition-colors bg-alta-teal/5 px-2.5 py-1 rounded-full"
-                        >
-                          Source: {faq.source}
-                          <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
-                        </a>
-                      )}
-                    </div>
-                  </div>
-                )}
-              </div>
+                faq={faq}
+                colors={colors}
+                isOpen={isOpen}
+                onToggle={() => setOpenIdx(isOpen ? null : globalIdx)}
+              />
             );
           })}
         </div>
@@ -190,5 +149,76 @@ export default function FAQPage() {
       </div>
     </div>
     </>
+  );
+}
+
+/* ─── Animated FAQ Card ─── */
+function FaqCard({ faq, colors, isOpen, onToggle }: {
+  faq: { q: string; a: string; cat: string; source?: string; sourceUrl?: string };
+  colors: { bg: string; border: string; text: string; leftBorder: string };
+  isOpen: boolean;
+  onToggle: () => void;
+}) {
+  const contentRef = useRef<HTMLDivElement>(null);
+  const [height, setHeight] = useState(0);
+
+  useEffect(() => {
+    if (contentRef.current) {
+      setHeight(isOpen ? contentRef.current.scrollHeight : 0);
+    }
+  }, [isOpen, faq.a]);
+
+  return (
+    <div
+      className={`rounded-xl border border-gray-100 shadow-sm overflow-hidden transition-all duration-300 cursor-pointer border-l-4 ${colors.leftBorder} ${
+        isOpen ? `${colors.bg} shadow-lg ${colors.border} md:col-span-2` : "bg-white hover:shadow-md hover:-translate-y-0.5"
+      }`}
+      onClick={onToggle}
+    >
+      <div className="p-4 flex items-start gap-3">
+        <div className={`w-7 h-7 rounded-lg flex items-center justify-center shrink-0 transition-colors text-xs font-bold ${
+          isOpen ? `${colors.text} ${colors.bg}` : "bg-alta-light text-alta-gray"
+        }`}>
+          Q
+        </div>
+        <div className="flex-1 min-w-0">
+          <div className="flex items-start justify-between gap-2">
+            <h3 className="text-sm font-semibold text-alta-navy leading-snug">{faq.q}</h3>
+            <svg
+              className={`w-4 h-4 text-alta-gray shrink-0 mt-0.5 transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`}
+              fill="none" stroke="currentColor" viewBox="0 0 24 24"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+            </svg>
+          </div>
+          <p className={`text-[11px] text-alta-gray mt-1 line-clamp-1 transition-opacity duration-200 ${isOpen ? "opacity-0 h-0 mt-0" : "opacity-100"}`}>
+            {faq.a.slice(0, 90)}...
+          </p>
+        </div>
+      </div>
+      <div
+        ref={contentRef}
+        className="transition-[height] duration-300 ease-in-out overflow-hidden"
+        style={{ height }}
+      >
+        <div className="px-4 pb-4 pt-0 ml-10">
+          <div className="p-4 bg-white/80 rounded-xl">
+            <p className="text-sm text-alta-gray leading-relaxed mb-3">{faq.a}</p>
+            {faq.source && (
+              <a
+                href={faq.sourceUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={(e) => e.stopPropagation()}
+                className="inline-flex items-center gap-1 text-[10px] font-semibold text-alta-teal hover:text-alta-teal-dark transition-colors bg-alta-teal/5 px-2.5 py-1 rounded-full"
+              >
+                Source: {faq.source}
+                <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
+              </a>
+            )}
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }

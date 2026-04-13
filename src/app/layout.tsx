@@ -5,6 +5,7 @@ import AltaDisclaimer from "@/components/AltaDisclaimer";
 import Footer from "@/components/Footer";
 import NewsTicker from "@/components/NewsTicker";
 import HomeClosingAI from "@/components/HomeClosingAI";
+import ScrollToTop from "@/components/ScrollToTop";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -64,6 +65,7 @@ export default function RootLayout({
           <AltaDisclaimer />
           <Footer />
         </div>
+        <ScrollToTop />
         <HomeClosingAI />
       </body>
     </html>

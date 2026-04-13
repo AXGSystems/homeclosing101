@@ -1,6 +1,7 @@
 import Link from "next/link";
 import PageHero from "@/components/PageHero";
 import { InlineAd } from "@/components/EliteProviders";
+import TrustedALTAMembers from "@/components/TrustedALTAMembers";
 import LoanComparisonChart from "@/components/LoanComparisonChart";
 import ExpandableTimeline from "@/components/ExpandableTimeline";
 import type { Metadata } from "next";
@@ -93,6 +94,10 @@ export default function FirstTimeBuyersPage() {
 
           <InlineAd />
 
+          <div className="p-4 bg-[#faf4e4] rounded-xl border border-[#e8d9a8] border-l-4 border-l-[#8b6914] my-6">
+            <p className="text-xs text-alta-gray"><strong className="text-[#8b6914]">Did you know?</strong> According to NAR, 32% of homebuyers in 2024 were first-time buyers — the lowest share since NAR began tracking in 1981. Rising prices and mortgage rates have made it harder, but down payment assistance programs helped more than 300,000 buyers close in 2024 alone (NCSHA).</p>
+          </div>
+
           {/* Loan Types */}
           {/* Interactive loan comparison chart */}
           <LoanComparisonChart />
@@ -124,6 +129,8 @@ export default function FirstTimeBuyersPage() {
             </table>
           </div>
 
+          <div className="h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent my-8" />
+
           {/* Common Mistakes */}
           <h2 className="text-2xl font-bold text-alta-navy mb-4">6 Costly Mistakes First-Time Buyers Make</h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 mb-10">
@@ -136,6 +143,12 @@ export default function FirstTimeBuyersPage() {
                 <p className="text-xs text-alta-gray leading-relaxed">{m.desc}</p>
               </div>
             ))}
+          </div>
+
+          <TrustedALTAMembers />
+
+          <div className="p-4 bg-[#faf4e4] rounded-xl border border-[#e8d9a8] border-l-4 border-l-[#8b6914] my-6">
+            <p className="text-xs text-alta-gray"><strong className="text-[#8b6914]">Did you know?</strong> The CFPB found that buyers who compared Loan Estimates from 3 or more lenders saved an average of $1,500 over the life of their loan compared to those who went with the first lender they contacted.</p>
           </div>
 
           {/* Down payment assistance */}
@@ -158,6 +171,8 @@ export default function FirstTimeBuyersPage() {
             ))}
           </div>
 
+          <div className="h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent my-8" />
+
           {/* Credit score guidance */}
           <h2 className="text-2xl font-bold text-alta-navy mb-4">Understanding Your Credit Score</h2>
           <p className="text-sm text-alta-gray mb-4 leading-relaxed">Your credit score is the single biggest factor in the interest rate you&apos;ll receive — and even a small rate difference adds up to thousands over the life of your loan. Here&apos;s what the ranges mean for mortgage eligibility:</p>
@@ -177,6 +192,8 @@ export default function FirstTimeBuyersPage() {
           </div>
 
           <InlineAd />
+
+          <div className="h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent my-8" />
 
           {/* What buyers wish they knew */}
           <h2 className="text-2xl font-bold text-alta-navy mb-4">What First-Time Buyers Wish They Knew</h2>

@@ -1,4 +1,5 @@
 import PageHero from "@/components/PageHero";
+import { InlineAd } from "@/components/EliteProviders";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -120,6 +121,8 @@ export default function SourcesPage() {
               </div>
             ))}
           </div>
+
+          <InlineAd />
 
           <div className="mt-10 p-5 bg-gradient-to-br from-blue-50 to-white rounded-2xl border border-blue-100">
             <h3 className="font-bold text-alta-navy mb-2">Report an Error</h3>

@@ -136,33 +136,31 @@ export default function Header() {
       </div>
 
       {/* Mobile Nav */}
-      {mobileOpen && (
-        <div className="lg:hidden border-t border-gray-100 bg-gradient-to-b from-white to-[#f4f7fa] max-h-[70vh] overflow-y-auto shadow-inner">
-          <div className="px-4 py-3 space-y-0.5">
-            {navItems.map((item) => (
-              <div key={item.label}>
+      <div className={`lg:hidden border-t border-gray-100 bg-gradient-to-b from-white to-[#f4f7fa] overflow-y-auto shadow-inner transition-all duration-300 ease-in-out ${mobileOpen ? 'max-h-[70vh] opacity-100' : 'max-h-0 opacity-0 overflow-hidden border-t-0'}`}>
+        <div className="px-4 py-3 space-y-0.5">
+          {navItems.map((item) => (
+            <div key={item.label}>
+              <Link
+                href={item.href}
+                className="block px-3 py-2.5 text-sm font-semibold text-alta-navy hover:text-alta-teal hover:bg-alta-light rounded-lg"
+                onClick={() => setMobileOpen(false)}
+              >
+                {item.label}
+              </Link>
+              {item.children?.map((child) => (
                 <Link
-                  href={item.href}
-                  className="block px-3 py-2.5 text-sm font-semibold text-alta-navy hover:text-alta-teal hover:bg-alta-light rounded-lg"
+                  key={child.href}
+                  href={child.href}
+                  className="block px-6 py-2 text-sm text-alta-gray hover:text-alta-teal hover:bg-alta-light/50 rounded-lg"
                   onClick={() => setMobileOpen(false)}
                 >
-                  {item.label}
+                  {child.label}
                 </Link>
-                {item.children?.map((child) => (
-                  <Link
-                    key={child.href}
-                    href={child.href}
-                    className="block px-6 py-2 text-sm text-alta-gray hover:text-alta-teal hover:bg-alta-light/50 rounded-lg"
-                    onClick={() => setMobileOpen(false)}
-                  >
-                    {child.label}
-                  </Link>
-                ))}
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          ))}
         </div>
-      )}
+      </div>
     </header>
   );
 }

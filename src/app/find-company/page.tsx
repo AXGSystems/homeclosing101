@@ -307,6 +307,26 @@ function FindCompanyContent() {
               </div>
             )}
 
+            <div className="p-4 bg-[#faf4e4] rounded-xl border border-[#e8d9a8] border-l-4 border-l-[#8b6914] my-6">
+              <p className="text-xs text-alta-gray"><strong className="text-[#8b6914]">Did you know?</strong> Under federal law (RESPA Section 9), you have the right to choose your own title insurance company. The seller cannot require you to use a specific provider as a condition of sale. Shopping around can save you hundreds of dollars in settlement fees.</p>
+            </div>
+
+            {/* ALTA Membership Callout */}
+            <div className="p-5 bg-gradient-to-br from-[#e8f0f5] to-white rounded-2xl border border-[#c5d8e4] mb-8">
+              <div className="flex items-start gap-3">
+                <div className="w-10 h-10 rounded-xl bg-[#1a5276]/10 flex items-center justify-center text-[#1a5276] shrink-0">
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" /></svg>
+                </div>
+                <div>
+                  <h3 className="text-sm font-bold text-alta-navy mb-1">Why ALTA Membership Matters</h3>
+                  <p className="text-xs text-alta-gray leading-relaxed mb-2">ALTA members voluntarily commit to higher professional standards, including the ALTA Best Practices Framework — a rigorous set of standards covering escrow account security, data privacy, and consumer protection. Companies that invest in ALTA membership and Best Practices certification demonstrate a commitment to safeguarding your transaction that goes beyond minimum regulatory requirements.</p>
+                  <Link href="/join-alta" className="inline-flex items-center gap-1 text-xs font-semibold text-alta-teal hover:text-alta-teal-dark">
+                    Learn about ALTA membership <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
+                  </Link>
+                </div>
+              </div>
+            </div>
+
             {/* Tips */}
             <h2 className="text-2xl font-bold text-alta-navy mb-2">Tips for Choosing a Title Company</h2>
             <p className="text-sm text-alta-gray mb-4 leading-relaxed"><span className="text-alta-teal font-medium">Click any tip for deeper guidance, questions to ask, and red flags to watch for.</span></p>

@@ -92,10 +92,10 @@ export default function ClosingProcessPage() {
                   className="group flex flex-col items-center text-center"
                 >
                   {/* Numbered circle */}
-                  <div className={`w-[76px] h-[76px] rounded-full bg-gradient-to-br ${s.accent} flex items-center justify-center text-white font-bold text-2xl shadow-lg group-hover:scale-110 transition-transform duration-300 mb-3 ring-4 ring-white`}>
+                  <div className={`w-14 h-14 md:w-[76px] md:h-[76px] rounded-full bg-gradient-to-br ${s.accent} flex items-center justify-center text-white font-bold text-xl md:text-2xl shadow-lg group-hover:scale-110 transition-transform duration-300 mb-2 md:mb-3 ring-4 ring-white`}>
                     {i + 1}
                   </div>
-                  <span className="text-xs font-semibold text-alta-navy group-hover:text-alta-teal transition-colors">{s.title}</span>
+                  <span className="text-[11px] md:text-xs font-semibold text-alta-navy group-hover:text-alta-teal transition-colors">{s.title}</span>
                 </Link>
               ))}
             </div>

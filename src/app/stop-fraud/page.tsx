@@ -121,6 +121,8 @@ export default function StopFraudPage() {
         <p className="text-sm text-alta-gray mb-4">Click any step for a detailed explanation of why it matters and how to implement it.</p>
         <ExpandableFraudSteps />
 
+        <div className="h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent my-8" />
+
         {/* If You're a Victim */}
         <h2 className="text-2xl font-bold text-alta-navy mb-4">If You Suspect You&apos;re a Victim</h2>
         <p className="text-alta-gray mb-6">Speed is everything. Follow these steps in order — the first hour is your best window for recovery.</p>
@@ -165,6 +167,8 @@ export default function StopFraudPage() {
           ))}
         </div>
 
+        <div className="h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent my-8" />
+
         {/* Real-world fraud scenarios */}
         <h2 className="text-2xl font-bold text-alta-navy mb-4">How Fraud Actually Happens: 3 Real Scenarios</h2>
         <div className="space-y-4 mb-10">
@@ -191,6 +195,8 @@ export default function StopFraudPage() {
             </div>
           ))}
         </div>
+
+        <div className="h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent my-8" />
 
         {/* Wire transfer safety checklist */}
         <h2 className="text-2xl font-bold text-alta-navy mb-4">Your Wire Transfer Safety Checklist</h2>

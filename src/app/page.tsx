@@ -1,6 +1,7 @@
 import Link from "next/link";
 import EliteProviders, { InlineAd } from "@/components/EliteProviders";
 import MarketStats from "@/components/MarketStats";
+import AnimatedCounter from "@/components/AnimatedCounter";
 
 const features = [
   {
@@ -78,10 +79,10 @@ const features = [
 ];
 
 const stats = [
-  { value: "30+", label: "In-depth guides covering every step from pre-approval to keys", color: "from-[#0a7ea8]/30 to-[#0a7ea8]/10", accent: "text-[#5ec4e6]" },
-  { value: "250+", label: "FAQ answers with verified source citations from CFPB, FBI & more", color: "from-[#2d6b3f]/30 to-[#2d6b3f]/10", accent: "text-[#6fcf97]" },
-  { value: "450+", label: "Glossary terms with real-world closing examples you can save & print", color: "from-[#5b3a8c]/30 to-[#5b3a8c]/10", accent: "text-[#b794f4]" },
-  { value: "4", label: "Interactive calculators — mortgage, affordability, closing costs & more", color: "from-[#8b6914]/30 to-[#8b6914]/10", accent: "text-[#f0d06e]" },
+  { value: "30+", end: 30, suffix: "+", label: "In-depth guides covering every step from pre-approval to keys", color: "from-[#0a7ea8]/30 to-[#0a7ea8]/10", accent: "text-[#5ec4e6]" },
+  { value: "250+", end: 250, suffix: "+", label: "FAQ answers with verified source citations from CFPB, FBI & more", color: "from-[#2d6b3f]/30 to-[#2d6b3f]/10", accent: "text-[#6fcf97]" },
+  { value: "450+", end: 450, suffix: "+", label: "Glossary terms with real-world closing examples you can save & print", color: "from-[#5b3a8c]/30 to-[#5b3a8c]/10", accent: "text-[#b794f4]" },
+  { value: "4", end: 4, suffix: "", label: "Interactive calculators — mortgage, affordability, closing costs & more", color: "from-[#8b6914]/30 to-[#8b6914]/10", accent: "text-[#f0d06e]" },
 ];
 
 const steps = [
@@ -175,7 +176,9 @@ export default function HomePage() {
                   <div className={`absolute inset-0 bg-gradient-to-br ${stat.color}`} />
                   <div className="absolute inset-0 bg-white/5" />
                   <div className="relative">
-                    <p className={`text-3xl lg:text-4xl font-bold mb-1.5 ${stat.accent}`}>{stat.value}</p>
+                    <p className={`text-3xl lg:text-4xl font-bold mb-1.5 ${stat.accent}`}>
+                      <AnimatedCounter end={stat.end} suffix={stat.suffix} duration={1800} />
+                    </p>
                     <p className="text-xs text-gray-300 leading-snug">{stat.label}</p>
                   </div>
                 </div>
@@ -488,14 +491,14 @@ export default function HomePage() {
             <h2 className="text-3xl font-bold text-alta-navy mb-3">Trusted Resources</h2>
             <p className="text-alta-gray max-w-xl mx-auto">Verified links to government agencies and industry organizations that support homebuyers.</p>
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
             {resources.map((r, i) => (
               <a
                 key={r.name}
                 href={r.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`group rounded-xl p-5 border tile-interactive ${resourceBgs[i % resourceBgs.length]}`}
+                className={`group rounded-xl p-4 sm:p-5 border tile-interactive ${resourceBgs[i % resourceBgs.length]}`}
                 style={{ borderLeftWidth: '4px', borderLeftColor: resourceColors[i % resourceColors.length] }}
               >
                 <h3 className="text-sm font-semibold text-alta-navy mb-1 group-hover:text-alta-teal transition-colors">{r.name}</h3>

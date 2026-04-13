@@ -152,6 +152,8 @@ export default function WhatToExpectPage() {
 
           <InlineAd />
 
+          <div className="h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent my-8" />
+
           {/* Key Documents */}
           <h2 className="text-2xl font-bold text-alta-navy mb-6">Key Closing Documents</h2>
           <div className="grid md:grid-cols-3 gap-4 mb-12">

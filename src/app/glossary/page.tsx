@@ -203,8 +203,17 @@ ${terms.map(t => `<div class="term"><h2>${t.term}</h2><p>${t.definition}</p>${t.
                 placeholder="Search terms or definitions..."
                 value={search}
                 onChange={(e) => { setSearch(e.target.value); setActiveLetter(null); }}
-                className="w-full pl-9 pr-4 py-2.5 border border-gray-200 rounded-lg text-sm text-alta-navy"
+                className="w-full pl-9 pr-9 py-2.5 border border-gray-200 rounded-lg text-sm text-alta-navy"
               />
+              {search && (
+                <button
+                  onClick={() => setSearch("")}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-alta-gray hover:text-alta-navy transition-colors"
+                  aria-label="Clear search"
+                >
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
+                </button>
+              )}
             </div>
             <button
               onClick={() => setShowClipList(true)}
@@ -256,7 +265,7 @@ ${terms.map(t => `<div class="term"><h2>${t.term}</h2><p>${t.definition}</p>${t.
           {/* Count + sponsor ad strip */}
           <div className="flex items-center justify-between">
             <p className="text-[11px] text-alta-gray">
-              {search ? `${totalTerms} result${totalTerms !== 1 ? 's' : ''} for "${search}"` : activeLetter ? `${totalTerms} term${totalTerms !== 1 ? 's' : ''} starting with ${activeLetter}` : `Showing all ${totalTerms} terms`}
+              {search ? `Showing ${totalTerms} of ${totalAllTerms} terms for "${search}"` : activeLetter ? `Showing ${totalTerms} of ${totalAllTerms} terms starting with ${activeLetter}` : `Showing all ${totalTerms} terms`}
             </p>
           </div>
 
@@ -333,9 +342,21 @@ ${terms.map(t => `<div class="term"><h2>${t.term}</h2><p>${t.definition}</p>${t.
 
         {totalTerms === 0 && (
           <div className="text-center py-16">
-            <svg className="w-16 h-16 text-gray-200 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1}><path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" /></svg>
-            <p className="text-alta-gray font-medium">No terms match your search.</p>
-            <p className="text-sm text-alta-gray mt-1">Try a different keyword or browse by letter.</p>
+            <div className="w-20 h-20 mx-auto mb-5 rounded-2xl bg-alta-light flex items-center justify-center">
+              <svg className="w-10 h-10 text-alta-gray/40" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />
+              </svg>
+            </div>
+            <p className="text-alta-navy font-semibold text-lg mb-1">No terms found</p>
+            <p className="text-sm text-alta-gray max-w-xs mx-auto">
+              We couldn&apos;t find any terms matching &quot;{search || activeLetter}&quot;. Try a different keyword or browse by letter.
+            </p>
+            <button
+              onClick={() => { setSearch(""); setActiveLetter(null); }}
+              className="mt-4 px-5 py-2 bg-alta-teal text-white text-sm font-semibold rounded-lg hover:bg-alta-teal-dark transition-colors"
+            >
+              Clear &amp; Show All Terms
+            </button>
           </div>
         )}
 
