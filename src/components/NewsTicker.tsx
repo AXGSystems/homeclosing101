@@ -33,20 +33,21 @@ export default function NewsTicker() {
     const measure = () => {
       if (scrollRef.current) {
         const scrollWidth = scrollRef.current.scrollWidth / 2;
-        // Faster on mobile where the viewport is narrow and text feels sluggish
         const isMobile = window.innerWidth < 768;
-        const pixelsPerSecond = isMobile ? 140 : 100;
+        // Mobile needs to be MUCH faster — the narrow viewport makes slow text feel frozen
+        const pixelsPerSecond = isMobile ? 300 : 120;
         if (scrollWidth > 0) {
           setAnimDuration(scrollWidth / pixelsPerSecond);
         } else {
-          // Fallback: retry measurement after fonts/layout settle
           requestAnimationFrame(measure);
         }
       }
     };
-    // Delay initial measure to ensure layout is complete on mobile
     const timer = setTimeout(measure, 100);
-    return () => clearTimeout(timer);
+    // Re-measure on resize (rotation, etc.)
+    const onResize = () => { clearTimeout(timer); setTimeout(measure, 100); };
+    window.addEventListener("resize", onResize);
+    return () => { clearTimeout(timer); window.removeEventListener("resize", onResize); };
   }, []);
 
   return (
