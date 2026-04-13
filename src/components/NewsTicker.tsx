@@ -1,7 +1,5 @@
 "use client";
 
-import { useRef, useEffect, useState } from "react";
-
 const headlines = [
   { text: "4.2 million homes sold in the U.S. in 2025 — median price $400K", source: "NAR" },
   { text: "Wire fraud losses hit $275.1M in 2025 — always verify wiring by phone", source: "FBI IC3" },
@@ -26,30 +24,6 @@ const headlines = [
 ];
 
 export default function NewsTicker() {
-  const scrollRef = useRef<HTMLDivElement>(null);
-  const [animDuration, setAnimDuration] = useState(0);
-
-  useEffect(() => {
-    const measure = () => {
-      if (scrollRef.current) {
-        const scrollWidth = scrollRef.current.scrollWidth / 2;
-        const isMobile = window.innerWidth < 768;
-        // Mobile needs to be MUCH faster — the narrow viewport makes slow text feel frozen
-        const pixelsPerSecond = isMobile ? 3000 : 1200;
-        if (scrollWidth > 0) {
-          setAnimDuration(scrollWidth / pixelsPerSecond);
-        } else {
-          requestAnimationFrame(measure);
-        }
-      }
-    };
-    const timer = setTimeout(measure, 100);
-    // Re-measure on resize (rotation, etc.)
-    const onResize = () => { clearTimeout(timer); setTimeout(measure, 100); };
-    window.addEventListener("resize", onResize);
-    return () => { clearTimeout(timer); window.removeEventListener("resize", onResize); };
-  }, []);
-
   return (
     <div className="news-ticker print:hidden bg-alta-navy text-white border-b border-white/10 overflow-hidden">
       <div className="flex items-center">
@@ -65,11 +39,8 @@ export default function NewsTicker() {
         {/* Scrolling content */}
         <div className="overflow-hidden flex-1">
           <div
-            ref={scrollRef}
             className="flex items-center whitespace-nowrap hover:[animation-play-state:paused]"
-            style={{
-              animation: `tickerScroll ${animDuration > 0 ? animDuration : 12}s linear infinite`,
-            }}
+            style={{ animation: "tickerScroll 10s linear infinite" }}
           >
             {/* Render headlines twice for seamless loop */}
             {[...headlines, ...headlines].map((item, i) => (
