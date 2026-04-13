@@ -459,6 +459,11 @@ export default function TriviaPage() {
             </div>
           )}
 
+          {/* Gradient divider */}
+          {!gameOver && answered.size === 0 && (
+            <div className="h-px bg-gradient-to-r from-transparent via-alta-teal/30 to-transparent mb-8" />
+          )}
+
           {/* How to play */}
           {!gameOver && answered.size === 0 && (
             <div className="p-5 bg-gradient-to-br from-alta-light to-white rounded-2xl border border-gray-100 mb-8">

@@ -79,7 +79,7 @@ function generateResponse(question: string): string {
     if (q.includes('deed')) return `**Deed** — A written document that legally conveys real estate title from one party to another. A **Warranty Deed** is the strongest form, guaranteeing clear title. A **Quit Claim Deed** transfers whatever interest the grantor may have without any guarantees.`;
     if (q.includes('lien')) return `**Lien** — A legal claim against real estate used as security for the payment of a debt. Common types include mortgage liens, tax liens, mechanic's liens (for unpaid construction work), and judgment liens.`;
     if (q.includes('appraisal')) return `**Appraisal** — A professional assessment of a property's fair market value, typically required by your lender. An appraiser evaluates the property's condition, features, and comparable recent sales. Cost: typically $300–$600.`;
-    return `I can define real estate terms for you! Try asking:\n- "What is escrow?"\n- "What does lien mean?"\n- "Define appraisal"\n\nOr browse our full **Real Estate Glossary** at /glossary with 80+ searchable terms.`;
+    return `I can define real estate terms for you! Try asking:\n- "What is escrow?"\n- "What does lien mean?"\n- "Define appraisal"\n\nOr browse our full **Real Estate Glossary** at /glossary with 450+ searchable terms.`;
   }
 
   // First-time buyer

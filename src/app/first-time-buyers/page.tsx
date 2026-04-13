@@ -85,6 +85,8 @@ export default function FirstTimeBuyersPage() {
             ))}
           </div>
 
+          <div className="h-1 bg-gradient-to-r from-transparent via-alta-teal/20 to-transparent my-10" />
+
           {/* Timeline */}
           <h2 className="text-2xl font-bold text-alta-navy mb-2">Your Homebuying Timeline</h2>
           <p className="text-sm text-alta-gray mb-6 leading-relaxed">Click any item to expand the full breakdown — what it means, why it matters, and exactly what to do.</p>
@@ -97,6 +99,8 @@ export default function FirstTimeBuyersPage() {
           <div className="p-4 bg-[#faf4e4] rounded-xl border border-[#e8d9a8] border-l-4 border-l-[#8b6914] my-6">
             <p className="text-xs text-alta-gray"><strong className="text-[#8b6914]">Did you know?</strong> According to NAR, 32% of homebuyers in 2024 were first-time buyers — the lowest share since NAR began tracking in 1981. Rising prices and mortgage rates have made it harder, but down payment assistance programs helped more than 300,000 buyers close in 2024 alone (NCSHA).</p>
           </div>
+
+          <div className="h-1 bg-gradient-to-r from-transparent via-alta-teal/20 to-transparent my-10" />
 
           {/* Loan Types */}
           {/* Interactive loan comparison chart */}
@@ -219,6 +223,8 @@ export default function FirstTimeBuyersPage() {
               </div>
             ))}
           </div>
+
+          <div className="h-1 bg-gradient-to-r from-transparent via-alta-teal/20 to-transparent my-10" />
 
           {/* CTAs */}
           <div className="flex flex-col sm:flex-row gap-3">

@@ -132,6 +132,8 @@ export default function ClosingProcessPage() {
 
           <InlineAd />
 
+          <div className="h-1 bg-gradient-to-r from-transparent via-alta-teal/20 to-transparent my-10" />
+
           {/* Key closing stats */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mt-8 mb-8">
             {[
@@ -146,6 +148,8 @@ export default function ClosingProcessPage() {
               </div>
             ))}
           </div>
+
+          <div className="h-1 bg-gradient-to-r from-transparent via-alta-teal/20 to-transparent my-10" />
 
           <div className="h-1 bg-gradient-to-r from-transparent via-alta-teal/20 to-transparent my-10" />
 
