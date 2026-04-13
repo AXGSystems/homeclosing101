@@ -37,7 +37,7 @@ export default function EliteProviders() {
   const currentSponsors = sponsors.slice(activeSet * 3, activeSet * 3 + 3);
 
   return (
-    <section className="py-6 bg-alta-light/50 border-t border-gray-100">
+    <section className="print:hidden py-6 bg-alta-light/50 border-t border-gray-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <div className={`flex items-center justify-center gap-8 md:gap-16 transition-opacity duration-500 ${fading ? "opacity-0" : "opacity-100"}`}>
           {currentSponsors.map((s) => (
@@ -84,7 +84,7 @@ export function InlineAd() {
   }, []);
 
   return (
-    <div className="my-10">
+    <div className="inline-ad print:hidden my-10">
       <a
         href={sponsor.url}
         target="_blank"

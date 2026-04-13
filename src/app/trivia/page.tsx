@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 import PageHero from "@/components/PageHero";
 import FirstTimeBuyerCTA from "@/components/FirstTimeBuyerCTA";
+import SaveToFolderBtn from "@/components/SaveToFolderBtn";
 
 /* ═══════════════════════════════════════════════════════
    CONFETTI SYSTEM
@@ -305,6 +306,15 @@ export default function TriviaPage() {
 
               {/* Share Your Score */}
               <ShareScore score={score} />
+
+              <div className="flex justify-center mb-4">
+                <SaveToFolderBtn
+                  type="note"
+                  title={`Trivia Score: ${getGrade().label}`}
+                  content={`Score: $${score.toLocaleString()} | Correct: ${correct}/${totalQuestions} | Accuracy: ${Math.round((correct / totalQuestions) * 100)}%`}
+                  label="Save Score to Folder"
+                />
+              </div>
 
               <div className="flex flex-wrap gap-3 justify-center">
                 <button onClick={resetGame} className="px-6 py-3 bg-alta-teal text-white font-semibold rounded-lg hover:bg-alta-teal-dark transition-colors">

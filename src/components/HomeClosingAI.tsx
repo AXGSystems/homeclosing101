@@ -186,7 +186,7 @@ export default function HomeClosingAI() {
   const sponsor = sponsors[sponsorIdx];
 
   return (
-    <>
+    <div id="home-closing-ai" className="print:hidden">
       {/* Collapsed: tab on mobile, full widget on desktop */}
       {!open && (
         <>
@@ -390,6 +390,6 @@ export default function HomeClosingAI() {
           </div>
         </div>
       )}
-    </>
+    </div>
   );
 }

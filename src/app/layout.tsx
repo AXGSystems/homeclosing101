@@ -6,6 +6,8 @@ import Footer from "@/components/Footer";
 import NewsTicker from "@/components/NewsTicker";
 import HomeClosingAI from "@/components/HomeClosingAI";
 import ScrollToTop from "@/components/ScrollToTop";
+import ClosingFolderProvider from "@/components/ClosingFolderProvider";
+import ClosingFolderButton from "@/components/ClosingFolderButton";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -83,30 +85,33 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-white text-alta-navy">
-        <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-[9999] focus:bg-alta-navy focus:text-white focus:px-4 focus:py-2 focus:rounded-lg focus:text-sm focus:font-semibold">
-          Skip to main content
-        </a>
-        {/* Sticky header block: ticker + nav locked together */}
-        <div className="sticky top-0 z-50">
-          <NewsTicker />
-          <Header />
-        </div>
-        {/* Print-only header */}
-        <div className="print-header hidden">
-          <span>HomeClosing101</span>
-          <span style={{ fontSize: '11px', fontWeight: 400, color: '#6b7280' }}>| An ALTA Educational Initiative</span>
-        </div>
-        <main id="main-content" className="flex-1 pb-16 sm:pb-14">{children}</main>
-        {/* Print-only footer */}
-        <div className="print-footer hidden">
-          HomeClosing101.org — An educational initiative of the American Land Title Association (ALTA) — homeclosing101.org
-        </div>
-        <div className="fixed bottom-0 left-0 right-0 z-50">
-          <AltaDisclaimer />
-          <Footer />
-        </div>
-        <ScrollToTop />
-        <HomeClosingAI />
+        <ClosingFolderProvider>
+          <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-[9999] focus:bg-alta-navy focus:text-white focus:px-4 focus:py-2 focus:rounded-lg focus:text-sm focus:font-semibold">
+            Skip to main content
+          </a>
+          {/* Sticky header block: ticker + nav locked together */}
+          <div className="sticky top-0 z-50">
+            <NewsTicker />
+            <Header />
+          </div>
+          {/* Print-only header */}
+          <div className="print-header hidden">
+            <span>HomeClosing101</span>
+            <span style={{ fontSize: '11px', fontWeight: 400, color: '#6b7280' }}>| An ALTA Educational Initiative</span>
+          </div>
+          <main id="main-content" className="flex-1 pb-16 sm:pb-14">{children}</main>
+          {/* Print-only footer */}
+          <div className="print-footer hidden">
+            HomeClosing101.org — An educational initiative of the American Land Title Association (ALTA) — homeclosing101.org
+          </div>
+          <div className="fixed bottom-0 left-0 right-0 z-50">
+            <AltaDisclaimer />
+            <Footer />
+          </div>
+          <ScrollToTop />
+          <HomeClosingAI />
+          <ClosingFolderButton />
+        </ClosingFolderProvider>
       </body>
     </html>
   );

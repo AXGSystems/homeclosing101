@@ -137,6 +137,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly" as const,
     },
     { path: "/trivia", priority: 0.6, changeFrequency: "monthly" as const },
+    {
+      path: "/my-folder",
+      priority: 0.5,
+      changeFrequency: "monthly" as const,
+    },
 
     // ALTA
     {

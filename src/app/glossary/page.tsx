@@ -5,6 +5,7 @@ import PageHero from "@/components/PageHero";
 import { InlineAd } from "@/components/EliteProviders";
 import { glossaryData, type GlossaryTerm } from "@/data/glossaryData";
 import FirstTimeBuyerCTA from "@/components/FirstTimeBuyerCTA";
+import { useClosingFolder } from "@/components/ClosingFolderProvider";
 
 const allLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
 
@@ -25,6 +26,8 @@ export default function GlossaryPage() {
   const [clipped, setClipped] = useState<Record<string, GlossaryTerm>>({});
   const [selectedTerm, setSelectedTerm] = useState<GlossaryTerm | null>(null);
   const [showClipList, setShowClipList] = useState(false);
+  const { addItem: addFolderItem } = useClosingFolder();
+  const [folderSaved, setFolderSaved] = useState<string | null>(null);
 
   const filteredData = useMemo(() => {
     if (!search && !activeLetter) return glossaryData;
@@ -108,19 +111,38 @@ ${terms.map(t => `<div class="term"><h2>${t.term}</h2><p>${t.definition}</p>${t.
               <p className="text-sm text-alta-gray leading-relaxed">{selectedTerm.example}</p>
             </div>
           )}
-          <button
-            onClick={() => toggleClip(selectedTerm)}
-            className={`w-full py-2.5 rounded-lg font-semibold text-sm transition-colors flex items-center justify-center gap-2 ${
-              clipped[selectedTerm.term]
-                ? "bg-alta-teal text-white"
-                : "bg-alta-light text-alta-navy hover:bg-alta-teal/10"
-            }`}
-          >
-            <svg className="w-4 h-4" fill={clipped[selectedTerm.term] ? "currentColor" : "none"} stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0z" />
-            </svg>
-            {clipped[selectedTerm.term] ? "Saved to My List" : "Save to My List"}
-          </button>
+          <div className="flex gap-2">
+            <button
+              onClick={() => toggleClip(selectedTerm)}
+              className={`flex-1 py-2.5 rounded-lg font-semibold text-sm transition-colors flex items-center justify-center gap-2 ${
+                clipped[selectedTerm.term]
+                  ? "bg-alta-teal text-white"
+                  : "bg-alta-light text-alta-navy hover:bg-alta-teal/10"
+              }`}
+            >
+              <svg className="w-4 h-4" fill={clipped[selectedTerm.term] ? "currentColor" : "none"} stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0z" />
+              </svg>
+              {clipped[selectedTerm.term] ? "Saved to My List" : "Save to My List"}
+            </button>
+            <button
+              onClick={() => {
+                addFolderItem({
+                  type: "glossary",
+                  title: selectedTerm.term,
+                  content: selectedTerm.definition + (selectedTerm.example ? `\n\nClosing Example: ${selectedTerm.example}` : ""),
+                });
+                setFolderSaved(selectedTerm.term);
+                setTimeout(() => setFolderSaved(null), 2000);
+              }}
+              className="px-4 py-2.5 rounded-lg font-semibold text-sm bg-[#0a8ebc] text-white hover:bg-[#087da5] transition-colors flex items-center gap-2 shrink-0"
+            >
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 9.776c.112-.017.227-.026.344-.026h15.812c.117 0 .232.009.344.026m-16.5 0a2.25 2.25 0 00-1.883 2.542l.857 6a2.25 2.25 0 002.227 1.932H19.05a2.25 2.25 0 002.227-1.932l.857-6a2.25 2.25 0 00-1.883-2.542m-16.5 0V6A2.25 2.25 0 016 3.75h3.879a1.5 1.5 0 011.06.44l2.122 2.12a1.5 1.5 0 001.06.44H18A2.25 2.25 0 0120.25 9v.776" />
+              </svg>
+              {folderSaved === selectedTerm.term ? "Saved!" : "My Folder"}
+            </button>
+          </div>
         </div>
       </div>
     )}

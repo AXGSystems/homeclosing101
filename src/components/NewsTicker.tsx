@@ -50,7 +50,7 @@ export default function NewsTicker() {
   }, []);
 
   return (
-    <div className="bg-alta-navy text-white border-b border-white/10 overflow-hidden">
+    <div className="news-ticker print:hidden bg-alta-navy text-white border-b border-white/10 overflow-hidden">
       <div className="flex items-center">
         {/* Label */}
         <div className="shrink-0 bg-alta-teal px-2 sm:px-4 py-1.5 sm:py-2 font-bold text-[9px] sm:text-[11px] uppercase tracking-wider z-10 flex items-center gap-1.5 sm:gap-2">

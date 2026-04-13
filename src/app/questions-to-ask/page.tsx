@@ -4,6 +4,7 @@ import { useState } from "react";
 import PageHero from "@/components/PageHero";
 import { InlineAd } from "@/components/EliteProviders";
 import FirstTimeBuyerCTA from "@/components/FirstTimeBuyerCTA";
+import { useClosingFolder } from "@/components/ClosingFolderProvider";
 
 type QuestionData = {
   q: string;
@@ -345,6 +346,8 @@ const colorConfig: Record<string, { headerBg: string; headerText: string; checkB
 
 export default function QuestionsToAskPage() {
   const [activeQuestion, setActiveQuestion] = useState<{ question: QuestionData; color: string } | null>(null);
+  const { addItem: addFolderItem } = useClosingFolder();
+  const [folderSaved, setFolderSaved] = useState<string | null>(null);
 
   return (
     <>
@@ -503,6 +506,25 @@ export default function QuestionsToAskPage() {
                 </div>
                 <p className="text-sm text-blue-800 leading-relaxed ml-9">{activeQuestion.question.followUp}</p>
               </div>
+
+              {/* Save to Folder */}
+              <button
+                onClick={() => {
+                  addFolderItem({
+                    type: "question",
+                    title: activeQuestion.question.q,
+                    content: `Good Answer: ${activeQuestion.question.goodAnswer}\n\nRed Flag: ${activeQuestion.question.redFlag}\n\nFollow-Up: ${activeQuestion.question.followUp}`,
+                  });
+                  setFolderSaved(activeQuestion.question.q);
+                  setTimeout(() => setFolderSaved(null), 2000);
+                }}
+                className="w-full py-2.5 rounded-lg font-semibold text-sm bg-[#0a8ebc] text-white hover:bg-[#087da5] transition-colors flex items-center justify-center gap-2"
+              >
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 9.776c.112-.017.227-.026.344-.026h15.812c.117 0 .232.009.344.026m-16.5 0a2.25 2.25 0 00-1.883 2.542l.857 6a2.25 2.25 0 002.227 1.932H19.05a2.25 2.25 0 002.227-1.932l.857-6a2.25 2.25 0 00-1.883-2.542m-16.5 0V6A2.25 2.25 0 016 3.75h3.879a1.5 1.5 0 011.06.44l2.122 2.12a1.5 1.5 0 001.06.44H18A2.25 2.25 0 0120.25 9v.776" />
+                </svg>
+                {folderSaved === activeQuestion.question.q ? "Saved!" : "Save Question to My Folder"}
+              </button>
             </div>
           </div>
         </div>

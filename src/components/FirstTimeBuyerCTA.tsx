@@ -4,7 +4,7 @@ export default function FirstTimeBuyerCTA() {
   return (
     <Link
       href="/first-time-buyers"
-      className="flex items-center gap-3 p-4 bg-gradient-to-r from-alta-teal/10 to-alta-navy/5 rounded-2xl border border-alta-teal/20 hover:border-alta-teal/40 hover:shadow-md transition-all group mt-8 mb-2"
+      className="first-time-buyer-cta print:hidden flex items-center gap-3 p-4 bg-gradient-to-r from-alta-teal/10 to-alta-navy/5 rounded-2xl border border-alta-teal/20 hover:border-alta-teal/40 hover:shadow-md transition-all group mt-8 mb-2"
     >
       <div className="w-10 h-10 rounded-xl bg-alta-teal flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
         <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>

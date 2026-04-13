@@ -6,6 +6,7 @@ import PageHero from "@/components/PageHero";
 import { InlineAd } from "@/components/EliteProviders";
 import FirstTimeBuyerCTA from "@/components/FirstTimeBuyerCTA";
 import ClosingFlowNav from "@/components/ClosingFlowNav";
+import { useClosingFolder } from "@/components/ClosingFolderProvider";
 
 const checklistSections = [
   {
@@ -251,6 +252,8 @@ const checklistSections = [
 export default function ClosingChecklistPage() {
   const [checked, setChecked] = useState<Record<string, boolean>>({});
   const [activeDetail, setActiveDetail] = useState<{title: string; gradient: string; content: React.ReactNode} | null>(null);
+  const { addItem: addFolderItem } = useClosingFolder();
+  const [folderSaved, setFolderSaved] = useState(false);
 
   const toggleItem = (sectionIdx: number, itemIdx: number) => {
     const key = `${sectionIdx}-${itemIdx}`;
@@ -326,15 +329,41 @@ export default function ClosingChecklistPage() {
 
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-4">
           <h2 className="text-2xl font-bold text-alta-navy">Your Checklist</h2>
-          <button
-            onClick={() => window.print()}
-            className="no-print inline-flex items-center gap-2 px-5 py-2.5 bg-alta-navy text-white font-semibold rounded-lg hover:bg-alta-teal transition-colors text-sm shrink-0"
-          >
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
-            </svg>
-            Print Checklist
-          </button>
+          <div className="flex gap-2 shrink-0">
+            <button
+              onClick={() => window.print()}
+              className="no-print inline-flex items-center gap-2 px-5 py-2.5 bg-alta-navy text-white font-semibold rounded-lg hover:bg-alta-teal transition-colors text-sm"
+            >
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
+              </svg>
+              Print Checklist
+            </button>
+            <button
+              onClick={() => {
+                const summary = checklistSections.map((section, sIdx) => {
+                  const items = section.items.map((item, iIdx) => {
+                    const key = `${sIdx}-${iIdx}`;
+                    return `${checked[key] ? "[x]" : "[ ]"} ${item.text}`;
+                  }).join("\n");
+                  return `${section.title}\n${items}`;
+                }).join("\n\n");
+                addFolderItem({
+                  type: "checklist",
+                  title: `Closing Checklist (${checkedCount}/${totalItems} complete)`,
+                  content: summary,
+                });
+                setFolderSaved(true);
+                setTimeout(() => setFolderSaved(false), 2000);
+              }}
+              className="no-print inline-flex items-center gap-2 px-4 py-2.5 bg-[#0a8ebc] text-white font-semibold rounded-lg hover:bg-[#087da5] transition-colors text-sm"
+            >
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 9.776c.112-.017.227-.026.344-.026h15.812c.117 0 .232.009.344.026m-16.5 0a2.25 2.25 0 00-1.883 2.542l.857 6a2.25 2.25 0 002.227 1.932H19.05a2.25 2.25 0 002.227-1.932l.857-6a2.25 2.25 0 00-1.883-2.542m-16.5 0V6A2.25 2.25 0 016 3.75h3.879a1.5 1.5 0 011.06.44l2.122 2.12a1.5 1.5 0 001.06.44H18A2.25 2.25 0 0120.25 9v.776" />
+              </svg>
+              {folderSaved ? "Saved!" : "Save to My Folder"}
+            </button>
+          </div>
         </div>
         <p className="text-lg text-alta-gray mb-8 max-w-2xl">
           Track your progress through the home closing process. Check off items as you complete them. Print a blank copy to take with you.

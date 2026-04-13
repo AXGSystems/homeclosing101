@@ -5,6 +5,7 @@ import Link from "next/link";
 import PageHero from "@/components/PageHero";
 import { InlineAd } from "@/components/EliteProviders";
 import FirstTimeBuyerCTA from "@/components/FirstTimeBuyerCTA";
+import SaveToFolderBtn from "@/components/SaveToFolderBtn";
 
 const docSections = [
   {
@@ -112,6 +113,21 @@ const colorMap: Record<string, { border: string; badge: string; icon: string; gr
 
 export default function DocumentChecklistPage() {
   const [activeModal, setActiveModal] = useState<{title: string; gradient: string; content: React.ReactNode} | null>(null);
+  const [checkedDocs, setCheckedDocs] = useState<Set<string>>(new Set());
+
+  const toggleDoc = (name: string) => {
+    setCheckedDocs(prev => {
+      const next = new Set(prev);
+      if (next.has(name)) next.delete(name); else next.add(name);
+      return next;
+    });
+  };
+
+  const allDocNames = docSections.flatMap(s => s.docs.map(d => d.name));
+  const checkedItems = allDocNames.filter(n => checkedDocs.has(n));
+  const checkedSummary = checkedItems.length > 0
+    ? checkedItems.join(', ')
+    : 'No items checked';
 
   return (
     <>
@@ -136,10 +152,18 @@ export default function DocumentChecklistPage() {
             </div>
           </div>
 
-          <button onClick={() => window.print()} className="no-print inline-flex items-center gap-2 px-5 py-2.5 bg-alta-navy text-white font-semibold rounded-lg hover:bg-alta-teal transition-colors text-sm mb-8">
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" /></svg>
-            Print This Checklist
-          </button>
+          <div className="flex flex-wrap items-center gap-3 mb-8">
+            <button onClick={() => window.print()} className="no-print inline-flex items-center gap-2 px-5 py-2.5 bg-alta-navy text-white font-semibold rounded-lg hover:bg-alta-teal transition-colors text-sm">
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" /></svg>
+              Print This Checklist
+            </button>
+            <SaveToFolderBtn
+              type="checklist"
+              title={`Document Checklist (${checkedItems.length}/${allDocNames.length} checked)`}
+              content={checkedSummary}
+              label="Save Checklist to Folder"
+            />
+          </div>
 
           <div className="space-y-8">
             {docSections.map((section) => {
@@ -180,7 +204,18 @@ export default function DocumentChecklistPage() {
                         })}
                         className="flex items-start gap-3 p-3 bg-alta-light/50 rounded-xl hover:bg-alta-light transition-colors cursor-pointer group"
                       >
-                        <div className="w-5 h-5 rounded border-2 border-gray-300 shrink-0 mt-0.5" />
+                        <div
+                          onClick={(e) => { e.stopPropagation(); toggleDoc(doc.name); }}
+                          className={`w-5 h-5 rounded border-2 shrink-0 mt-0.5 flex items-center justify-center transition-colors cursor-pointer ${
+                            checkedDocs.has(doc.name)
+                              ? 'bg-alta-teal border-alta-teal'
+                              : 'border-gray-300 hover:border-alta-teal'
+                          }`}
+                        >
+                          {checkedDocs.has(doc.name) && (
+                            <svg className="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={3}><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>
+                          )}
+                        </div>
                         <div className="flex-1 min-w-0">
                           <div className="flex items-center gap-2">
                             <p className="text-sm font-semibold text-alta-navy">{doc.name}</p>

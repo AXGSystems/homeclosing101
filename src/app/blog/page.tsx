@@ -5,6 +5,7 @@ import Link from "next/link";
 import PageHero from "@/components/PageHero";
 import { InlineAd } from "@/components/EliteProviders";
 import FirstTimeBuyerCTA from "@/components/FirstTimeBuyerCTA";
+import SaveToFolderBtn from "@/components/SaveToFolderBtn";
 
 interface Article {
   title: string;
@@ -182,12 +183,20 @@ export default function BlogPage() {
             {selectedArticle.content.split('\n\n').map((para, i) => (
               <p key={i} className="text-sm text-alta-gray leading-relaxed mb-4">{para}</p>
             ))}
-            <div className="flex items-center justify-between pt-4 border-t border-gray-100">
+            <div className="flex items-center justify-between flex-wrap gap-2 pt-4 border-t border-gray-100">
               <p className="text-[10px] text-alta-teal font-medium">Source: {selectedArticle.source}</p>
-              <a href={selectedArticle.sourceUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 px-4 py-2 bg-alta-teal text-white text-xs font-semibold rounded-lg hover:bg-alta-teal-dark transition-colors">
-                Read at source
-                <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
-              </a>
+              <div className="flex items-center gap-2">
+                <SaveToFolderBtn
+                  type="note"
+                  title={selectedArticle.title}
+                  content={selectedArticle.excerpt}
+                  label="Save Article"
+                />
+                <a href={selectedArticle.sourceUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 px-4 py-2 bg-alta-teal text-white text-xs font-semibold rounded-lg hover:bg-alta-teal-dark transition-colors">
+                  Read at source
+                  <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
+                </a>
+              </div>
             </div>
           </div>
         </div>

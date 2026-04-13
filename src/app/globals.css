@@ -233,52 +233,72 @@ select:focus {
   transform: scaleX(1);
 }
 
-/* Suppress browser print headers/footers */
+/* ============================================================
+   PRINT FORMATTING SYSTEM
+   Professional print output — clean white pages, no chrome
+   ============================================================ */
+
 @page {
-  margin: 0.5in 0.5in 0.75in 0.5in;
-  size: auto;
+  margin: 0.75in;
+  @bottom-center {
+    content: "HomeClosing101 | homeclosing101.vercel.app";
+    font-size: 8pt;
+    color: #999;
+  }
 }
 
-/* Print styles — clean, content-only output */
 @media print {
 
-  /* ── 1. HIDE everything that isn't content ── */
+  /* ── 1. HIDE all site chrome ── */
+
+  header, footer, nav,
+  .no-print, [data-no-print],
+  .fixed, .sticky,
+  .tile-interactive:hover { all: unset; }
+
+  /* Hide specific components */
+  #home-closing-ai,
+  .news-ticker,
+  .scroll-to-top,
+  .closing-folder-btn,
+  .inline-ad,
+  .first-time-buyer-cta { display: none !important; }
 
   /* Site chrome: header block, footer block, disclaimer */
-  body > div.sticky,                     /* sticky header (ticker + nav) */
-  body > .fixed,                         /* fixed footer (disclaimer + footer) */
-  div[class*="fixed bottom"],            /* fixed bottom bar */
+  body > div.sticky,
+  body > .fixed,
+  div[class*="fixed bottom"],
   footer,
   nav {
     display: none !important;
   }
 
   /* Page heroes: full hero image + collapsed mini bar */
-  section[class*="overflow-hidden"]:first-of-type,  /* hero sections */
-  div[class*="bg-alta-navy"][class*="backdrop-blur"], /* mini hero bar */
+  section[class*="overflow-hidden"]:first-of-type,
+  div[class*="bg-alta-navy"][class*="backdrop-blur"],
   .no-print {
     display: none !important;
   }
 
   /* Interactive elements & widgets */
   button[class*="no-print"],
-  div[class*="HomeClosingAI"],           /* AI chat widget */
-  div[class*="StickyGlossaryAd"],        /* sticky ads */
-  a[class*="InlineAd"],                  /* inline sponsor ads */
-  div[class*="my-10"] > a[target="_blank"], /* InlineAd wrapper */
-  section[class*="bg-alta-light/50"],    /* EliteProviders bar */
-  div[class*="letter-nav"],              /* glossary letter pills */
-  div[class*="animate-ping"],            /* pulsing dots */
-  div[class*="backdrop-blur"],           /* glassmorphic overlays */
-  div[class*="sm:sticky"],              /* sticky intro boxes */
-  div[class*="stat-card"],              /* hero stat cards */
-  div[class*="bg-amber-50"][class*="rounded-xl"][class*="border-amber-200"], /* session warnings */
-  div[class*="bg-white/95"][class*="backdrop-blur"], /* sticky search bars */
-  div.sticky {                          /* all remaining sticky elements */
+  div[class*="HomeClosingAI"],
+  div[class*="StickyGlossaryAd"],
+  a[class*="InlineAd"],
+  div[class*="my-10"] > a[target="_blank"],
+  section[class*="bg-alta-light/50"],
+  div[class*="letter-nav"],
+  div[class*="animate-ping"],
+  div[class*="backdrop-blur"],
+  div[class*="sm:sticky"],
+  div[class*="stat-card"],
+  div[class*="bg-amber-50"][class*="rounded-xl"][class*="border-amber-200"],
+  div[class*="bg-white/95"][class*="backdrop-blur"],
+  div.sticky {
     display: none !important;
   }
 
-  /* Background images on section headers (checklist phases, etc.) */
+  /* Background images on section headers */
   div[class*="bg-cover"],
   div[class*="bg-center"],
   div[style*="backgroundImage"] {
@@ -286,18 +306,17 @@ select:focus {
     background: transparent !important;
   }
 
-  /* Gradient overlays */
-  div[class*="bg-gradient-to"] {
-    background: transparent !important;
-    opacity: 1 !important;
+  /* ── 2. CLEAN body ── */
+
+  body {
+    font-size: 11pt !important;
+    line-height: 1.5 !important;
+    color: #1a1a1a !important;
+    background: white !important;
   }
 
-  /* ── 2. CLEAN layout ── */
-
-  html, body {
+  html {
     background: white !important;
-    color: #1a1a1a !important;
-    font-size: 12px !important;
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
   }
@@ -307,13 +326,20 @@ select:focus {
     margin: 0 !important;
   }
 
-  /* Remove all shadows, rounded corners excess, transforms */
+  /* Remove all shadows, transforms, animations */
   * {
     box-shadow: none !important;
     text-shadow: none !important;
     transform: none !important;
     transition: none !important;
     animation: none !important;
+  }
+
+  /* Links show URL */
+  a[href^="http"]:after {
+    content: " (" attr(href) ")";
+    font-size: 8pt;
+    color: #666;
   }
 
   /* ── 3. COMPACT content for print ── */
@@ -374,10 +400,22 @@ select:focus {
   }
 
   /* Page breaks */
+  h2 { page-break-after: avoid; }
+  .page-break-before { page-break-before: always; }
   .print-break { page-break-before: always; }
 
   .rounded-2xl, .rounded-xl, .check-item {
     break-inside: avoid;
+  }
+
+  /* Cards become flat */
+  .rounded-2xl, .rounded-xl { border-radius: 4px !important; }
+  .bg-gradient-to-r, .bg-gradient-to-br, .bg-gradient-to-b { background: #f5f5f5 !important; }
+
+  /* Gradient overlays */
+  div[class*="bg-gradient-to"] {
+    background: transparent !important;
+    opacity: 1 !important;
   }
 
   /* ── 4. PRINT-ONLY branding ── */
