@@ -6,6 +6,7 @@ import Footer from "@/components/Footer";
 import NewsTicker from "@/components/NewsTicker";
 import HomeClosingAI from "@/components/HomeClosingAI";
 import ScrollToTop from "@/components/ScrollToTop";
+import RouteScrollToTop from "@/components/RouteScrollToTop";
 import ClosingFolderProvider from "@/components/ClosingFolderProvider";
 import ClosingFolderButton from "@/components/ClosingFolderButton";
 import "./globals.css";
@@ -86,6 +87,7 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col bg-white text-alta-navy">
         <ClosingFolderProvider>
+          <RouteScrollToTop />
           <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-[9999] focus:bg-alta-navy focus:text-white focus:px-4 focus:py-2 focus:rounded-lg focus:text-sm focus:font-semibold">
             Skip to main content
           </a>
