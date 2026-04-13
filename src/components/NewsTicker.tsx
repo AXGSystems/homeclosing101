@@ -68,7 +68,7 @@ export default function NewsTicker() {
             ref={scrollRef}
             className="flex items-center whitespace-nowrap hover:[animation-play-state:paused]"
             style={{
-              animation: `tickerScroll ${animDuration > 0 ? animDuration : 120}s linear infinite`,
+              animation: `tickerScroll ${animDuration > 0 ? animDuration : 12}s linear infinite`,
             }}
           >
             {/* Render headlines twice for seamless loop */}
@@ -85,13 +85,6 @@ export default function NewsTicker() {
           </div>
         </div>
       </div>
-
-      <style jsx>{`
-        @keyframes tickerScroll {
-          0% { transform: translateX(0); }
-          100% { transform: translateX(-50%); }
-        }
-      `}</style>
     </div>
   );
 }
