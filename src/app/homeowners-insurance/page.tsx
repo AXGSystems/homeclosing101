@@ -285,6 +285,8 @@ export default function HomeownersInsurancePage() {
             </div>
           </div>
 
+          <div className="h-1 bg-gradient-to-r from-transparent via-alta-teal/20 to-transparent my-10" />
+
           {/* What homeowner's insurance covers */}
           <h2 className="text-xl font-bold text-alta-navy mb-4">What Homeowner&apos;s Insurance Covers</h2>
           <p className="text-sm text-alta-gray mb-4 leading-relaxed">A standard homeowner&apos;s policy (HO-3) has six coverage areas. Understanding each helps you choose the right policy and avoid gaps. <span className="text-alta-teal font-medium">Click any coverage for full details.</span></p>
@@ -328,6 +330,8 @@ export default function HomeownersInsurancePage() {
           </div>
 
           <InlineAd />
+
+          <div className="h-1 bg-gradient-to-r from-transparent via-alta-teal/20 to-transparent my-10" />
 
           {/* What it does NOT cover */}
           <h2 className="text-xl font-bold text-alta-navy mb-4">What It Does NOT Cover</h2>
@@ -373,6 +377,8 @@ export default function HomeownersInsurancePage() {
             ))}
           </div>
 
+          <div className="h-1 bg-gradient-to-r from-transparent via-alta-teal/20 to-transparent my-10" />
+
           {/* How to shop */}
           <h2 className="text-xl font-bold text-alta-navy mb-4">How to Shop for Homeowner&apos;s Insurance</h2>
           <div className="space-y-3 mb-10">
@@ -392,6 +398,8 @@ export default function HomeownersInsurancePage() {
               </div>
             ))}
           </div>
+
+          <div className="h-1 bg-gradient-to-r from-transparent via-alta-teal/20 to-transparent my-10" />
 
           {/* Cost breakdown */}
           <h2 className="text-xl font-bold text-alta-navy mb-4">What Does Homeowner&apos;s Insurance Cost?</h2>
@@ -436,6 +444,8 @@ export default function HomeownersInsurancePage() {
             </div>
             <p className="text-[10px] text-alta-teal font-medium mt-3">Tip: Request your declarations page from your insurance agent at least 1 week before closing. Your lender and title company both need a copy.</p>
           </div>
+
+          <div className="h-1 bg-gradient-to-r from-transparent via-alta-teal/20 to-transparent my-10" />
 
           {/* How to File a Claim */}
           <h2 className="text-xl font-bold text-alta-navy mb-4">How to File a Homeowner&apos;s Insurance Claim</h2>

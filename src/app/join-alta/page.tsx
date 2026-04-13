@@ -1213,6 +1213,8 @@ export default function JoinAltaPage() {
             ))}
           </div>
 
+          <div className="h-1 bg-gradient-to-r from-transparent via-alta-teal/20 to-transparent my-10" />
+
           {/* ── ABOUT ALTA ── */}
           <h2 className="text-2xl font-bold text-alta-navy mb-4">About the American Land Title Association</h2>
           <div className="grid md:grid-cols-2 gap-4 mb-10">
@@ -1254,6 +1256,8 @@ export default function JoinAltaPage() {
             ))}
           </div>
 
+          <div className="h-1 bg-gradient-to-r from-transparent via-alta-teal/20 to-transparent my-10" />
+
           {/* ── EVENTS ── */}
           <h2 className="text-2xl font-bold text-alta-navy mb-2">Events & Conferences</h2>
           <p className="text-sm text-alta-gray mb-6 leading-relaxed">ALTA brings the title industry together through flagship conferences, education events, and grassroots advocacy. Click any event to explore.</p>
@@ -1284,6 +1288,8 @@ export default function JoinAltaPage() {
               </button>
             ))}
           </div>
+
+          <div className="h-1 bg-gradient-to-r from-transparent via-alta-teal/20 to-transparent my-10" />
 
           {/* ── PROGRAMS ── */}
           <h2 className="text-2xl font-bold text-alta-navy mb-2">Programs & Initiatives</h2>
@@ -1316,6 +1322,8 @@ export default function JoinAltaPage() {
 
           <InlineAd />
 
+          <div className="h-1 bg-gradient-to-r from-transparent via-alta-teal/20 to-transparent my-10" />
+
           {/* ── EDUCATION ── */}
           <h2 className="text-2xl font-bold text-alta-navy mb-2">Education & Publications</h2>
           <p className="text-sm text-alta-gray mb-6 leading-relaxed">ALTA provides industry-leading education, publications, and policy forms that keep your team current and your operations compliant. Click any to explore.</p>
@@ -1334,6 +1342,8 @@ export default function JoinAltaPage() {
 
           {/* ── TESTIMONIALS ── */}
           <MemberTestimonials />
+
+          <div className="h-1 bg-gradient-to-r from-transparent via-alta-teal/20 to-transparent my-10" />
 
           {/* ── WHY MEMBERS STAY ── */}
           <h2 className="text-2xl font-bold text-alta-navy mb-4">Why Members Stay Year After Year</h2>

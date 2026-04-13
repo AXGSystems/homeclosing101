@@ -129,7 +129,7 @@ export default function FirstTimeBuyersPage() {
             </table>
           </div>
 
-          <div className="h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent my-8" />
+          <div className="h-1 bg-gradient-to-r from-transparent via-alta-teal/20 to-transparent my-10" />
 
           {/* Common Mistakes */}
           <h2 className="text-2xl font-bold text-alta-navy mb-4">6 Costly Mistakes First-Time Buyers Make</h2>
@@ -171,7 +171,7 @@ export default function FirstTimeBuyersPage() {
             ))}
           </div>
 
-          <div className="h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent my-8" />
+          <div className="h-1 bg-gradient-to-r from-transparent via-alta-teal/20 to-transparent my-10" />
 
           {/* Credit score guidance */}
           <h2 className="text-2xl font-bold text-alta-navy mb-4">Understanding Your Credit Score</h2>
@@ -193,7 +193,7 @@ export default function FirstTimeBuyersPage() {
 
           <InlineAd />
 
-          <div className="h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent my-8" />
+          <div className="h-1 bg-gradient-to-r from-transparent via-alta-teal/20 to-transparent my-10" />
 
           {/* What buyers wish they knew */}
           <h2 className="text-2xl font-bold text-alta-navy mb-4">What First-Time Buyers Wish They Knew</h2>

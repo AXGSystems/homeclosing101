@@ -147,6 +147,8 @@ export default function ClosingProcessPage() {
             ))}
           </div>
 
+          <div className="h-1 bg-gradient-to-r from-transparent via-alta-teal/20 to-transparent my-10" />
+
           {/* Additional resources */}
           <h2 className="text-xl font-bold text-alta-navy mb-4">More Closing Resources</h2>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
