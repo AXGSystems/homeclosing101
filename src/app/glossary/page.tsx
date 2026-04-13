@@ -412,7 +412,7 @@ function StickyGlossaryAd() {
           {/* Logo — full color, same style as InlineAd */}
           <div className="w-28 sm:w-36 shrink-0 flex items-center justify-center">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={s.logo} alt={s.name} className="h-10 sm:h-12 w-auto object-contain max-w-[130px]" />
+            <img src={s.logo} alt={s.name} className="h-10 sm:h-12 w-auto object-contain max-w-[130px]" onError={(e) => { e.currentTarget.style.display = 'none'; }} />
           </div>
           {/* Content */}
           <div className="flex-1 min-w-0">

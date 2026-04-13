@@ -28,6 +28,11 @@ interface Message {
 function generateResponse(question: string): string {
   const q = question.toLowerCase();
 
+  // What happens at the closing table (must be before general closing process)
+  if (q.includes('closing table') || q.includes('closing day') || q.includes('signing day') || q.includes('settlement day')) {
+    return `**What Happens at the Closing Table**\n\nClosing day is when you sign the final documents and officially become a homeowner.\n\n**Who's typically there:**\n- You (the buyer)\n- The seller (or their representative)\n- A settlement/closing agent\n- A notary public\n- Sometimes your real estate agent and/or attorney\n\n**What you'll sign:**\n- **Closing Disclosure** — Final costs and loan terms\n- **Promissory Note** — Your promise to repay the mortgage\n- **Deed of Trust/Mortgage** — Secures the loan with the property\n- **Deed** — Transfers ownership from seller to you\n- Various affidavits and disclosures\n\n**What to bring:**\n- Government-issued photo ID\n- Certified/cashier's check or wire confirmation\n- Proof of homeowner's insurance\n\n**How long it takes:** Usually 1-2 hours.\n\n**After signing:** The deed is recorded with the county, and you get the keys!\n\nUse our **Closing Checklist** at /closing-process/closing-checklist to prepare.`;
+  }
+
   // Closing process
   if (q.includes('closing') && (q.includes('process') || q.includes('what') || q.includes('how'))) {
     return `**The Home Closing Process**\n\nClosing (also called "settlement") is when you legally commit to your mortgage and become the official homeowner. Here are the 8 key steps:\n\n1. **Get Your Finances Ready** — Credit, debts, savings\n2. **Get Pre-Approved** — Compare lenders, lock in financing\n3. **Find a Property** — Work with an agent\n4. **Make an Offer** — Negotiate terms\n5. **Sign Purchase Agreement** — Formalize the deal\n6. **Get Funding** — Finalize your mortgage\n7. **Get Insurance** — Homeowner's + title insurance\n8. **Close the Transaction** — Sign docs, get keys!\n\nWant details on any step? Just ask!`;
@@ -77,13 +82,48 @@ function generateResponse(question: string): string {
     return `I can define real estate terms for you! Try asking:\n- "What is escrow?"\n- "What does lien mean?"\n- "Define appraisal"\n\nOr browse our full **Real Estate Glossary** at /glossary with 80+ searchable terms.`;
   }
 
+  // First-time buyer
+  if (q.includes('first time') || q.includes('first-time') || q.includes('new buyer') || q.includes('never bought')) {
+    return `**First-Time Homebuyer Advice**\n\nBuying your first home is exciting — and a little overwhelming. Here's where to start:\n\n1. **Check your credit score** — Aim for 620+ (conventional) or 580+ (FHA)\n2. **Set a realistic budget** — Factor in down payment, closing costs (2-5%), and monthly payments\n3. **Get pre-approved** — Shows sellers you're serious and locks your rate\n4. **Research assistance programs** — Many states offer down payment grants for first-time buyers\n5. **Hire a buyer's agent** — They represent YOUR interests, not the seller's\n6. **Get a home inspection** — Never skip this step\n7. **Understand your Closing Disclosure** — Review it carefully before signing\n\nVisit our **First-Time Buyers Guide** at /first-time-buyers for a complete walkthrough!`;
+  }
+
+  // Down payment assistance
+  if (q.includes('down payment') || q.includes('downpayment') || q.includes('assistance program') || q.includes('dpa')) {
+    return `**Down Payment Assistance Programs**\n\nMany buyers don't realize there are programs that can help cover your down payment and closing costs.\n\n**Types of assistance:**\n- **Grants** — Free money that doesn't need to be repaid\n- **Forgivable loans** — Forgiven after you live in the home for a set period (often 5-10 years)\n- **Deferred loans** — No payments until you sell, refinance, or pay off the mortgage\n- **Matched savings** — Programs that match your savings dollar-for-dollar\n\n**Where to look:**\n- Your state housing finance agency (HFA)\n- HUD's list of local homebuyer programs at hud.gov\n- FHA loans require as little as 3.5% down\n- VA loans and USDA loans may require 0% down\n\n**Tip:** Ask your lender about programs you may qualify for — many buyers leave money on the table.`;
+  }
+
+  // DTI ratio
+  if (q.includes('dti') || q.includes('debt-to-income') || q.includes('debt to income')) {
+    return `**Debt-to-Income (DTI) Ratio Explained**\n\nYour DTI ratio is one of the most important numbers in your mortgage application. It measures how much of your gross monthly income goes toward debt payments.\n\n**How to calculate:**\nTotal Monthly Debts / Gross Monthly Income = DTI%\n\n**Example:** $2,000 in debts / $6,000 income = 33% DTI\n\n**What counts as debt:**\n- Future mortgage payment (PITI)\n- Car loans\n- Student loans\n- Credit card minimum payments\n- Child support / alimony\n\n**What does NOT count:**\n- Utilities, groceries, insurance premiums\n- Cell phone, subscriptions\n\n**Lender guidelines:**\n- **Conventional:** 43-45% max DTI (some allow up to 50%)\n- **FHA:** Up to 57% with compensating factors\n- **VA:** No hard cap, but 41% is the benchmark\n\n**Tip:** Paying down credit cards before applying can dramatically improve your DTI and help you qualify for a better rate.`;
+  }
+
+  // Escrow process (full response, not just glossary definition)
+  if (q.includes('escrow') && !q.includes('what is') && !q.includes('define') && !q.includes('mean')) {
+    return `**The Escrow Process**\n\nEscrow is a neutral third party that holds money and documents until all conditions of the real estate transaction are met.\n\n**Before closing:**\n- Your **earnest money deposit** goes into an escrow account when your offer is accepted\n- The escrow agent holds it safely until closing\n- If the deal falls through for a valid reason, you typically get it back\n\n**At closing:**\n- The escrow/settlement agent coordinates document signing\n- They collect funds from the buyer and lender\n- They distribute payments to the seller, agents, and service providers\n- They record the deed with the county\n\n**After closing:**\n- Your lender may set up an **escrow account** for property taxes and homeowner's insurance\n- A portion of each mortgage payment goes into this account\n- The lender pays your taxes and insurance on your behalf\n\nLearn more in our **Escrow Guide** at /escrow-guide.`;
+  }
+
+  // Home inspection
+  if (q.includes('inspection') || q.includes('inspector')) {
+    return `**Home Inspection Tips**\n\nA home inspection is your chance to uncover problems BEFORE you buy. Never skip it.\n\n**What inspectors check:**\n- Roof, gutters, and exterior\n- Foundation and structural elements\n- Plumbing, electrical, and HVAC systems\n- Windows, doors, and insulation\n- Attic, basement, and crawl spaces\n\n**Specialty inspections to consider:**\n- **Radon testing** — Odorless gas, #2 cause of lung cancer\n- **Termite/pest inspection** — Often required by lenders\n- **Sewer scope** — Can reveal costly pipe damage\n- **Mold testing** — Especially in humid climates\n\n**Tips:**\n- Attend the inspection in person if possible\n- Ask questions — good inspectors love to teach\n- Review the report carefully before your inspection contingency deadline\n- Negotiate repairs or credits based on findings\n\n**Cost:** Typically $300-$500 depending on home size.\n\nSee our full **Home Inspection Guide** at /home-inspection.`;
+  }
+
+  // Homeowner's vs title insurance
+  if ((q.includes('homeowner') && q.includes('insurance') && !q.includes('title')) || (q.includes('difference') && q.includes('insurance')) || (q.includes('homeowner') && q.includes('title'))) {
+    return `**Homeowner's Insurance vs. Title Insurance**\n\nThese are two completely different types of protection:\n\n**Homeowner's Insurance:**\n- Protects against **future** damage (fire, storms, theft, liability)\n- **Paid annually** (or monthly through escrow)\n- **Required** by your lender\n- Covers the physical structure and your belongings\n\n**Title Insurance:**\n- Protects against **past** issues with ownership (liens, forgery, errors)\n- **One-time payment** at closing\n- **Owner's policy** is optional but strongly recommended\n- **Lender's policy** is required by your lender\n- Covers you for as long as you own the home\n\n**Bottom line:** You need BOTH. Homeowner's insurance protects the house itself. Title insurance protects your legal right to own it.\n\nLearn more at /homeowners-insurance and /protect-your-rights.`;
+  }
+
+  // ALTA Best Practices
+  if (q.includes('alta') || q.includes('best practice') || q.includes('american land title')) {
+    return `**ALTA Best Practices**\n\nThe American Land Title Association (ALTA) developed a set of **Best Practices** — a framework of policies and procedures that title and settlement companies follow to protect consumers.\n\n**The 7 Pillars:**\n1. **Licensing** — Maintain proper state licenses\n2. **Escrow Trust Accounting** — Safeguard client funds\n3. **Privacy & Information Security** — Protect personal data\n4. **Settlement Procedures** — Follow proper closing protocols\n5. **Title Policy Production** — Ensure accurate title policies\n6. **Insurance & Fidelity Coverage** — Carry appropriate insurance\n7. **Consumer Complaints** — Have a process to handle issues\n\n**Why it matters to you:**\nCompanies that follow ALTA Best Practices have been assessed for strong consumer protections. When choosing a title company, ask if they are ALTA Best Practices certified.\n\nFind ALTA members at alta.org/find-a-company or visit /find-company.`;
+  }
+
   // Help
   if (q.includes('help') || q.includes('what can you')) {
-    return `**HomeClosing101 AI — I can help with:**\n\n- **Closing process:** "How does closing work?"\n- **Title insurance:** "What is title insurance?"\n- **Wire fraud:** "How do I avoid wire fraud?"\n- **Costs:** "How much are closing costs?"\n- **Documents:** "What documents do I need?"\n- **Closing options:** "Can I close remotely?"\n- **Finding companies:** "How do I find a title company?"\n- **Checklist:** "What should I prepare?"\n- **Definitions:** "What is escrow?"\n\nI'm here to help you close with confidence!`;
+    return `**HomeClosing101 AI — I can help with:**\n\n- **Closing process:** "How does closing work?"\n- **Title insurance:** "What is title insurance?"\n- **Wire fraud:** "How do I avoid wire fraud?"\n- **Costs:** "How much are closing costs?"\n- **Documents:** "What documents do I need?"\n- **Closing options:** "Can I close remotely?"\n- **Finding companies:** "How do I find a title company?"\n- **Checklist:** "What should I prepare?"\n- **First-time buyers:** "I've never bought a home before"\n- **Down payment help:** "What is down payment assistance?"\n- **DTI ratio:** "What is debt-to-income?"\n- **Escrow:** "How does escrow work?"\n- **Home inspection:** "What should I know about inspections?"\n- **Insurance types:** "Homeowner's vs title insurance"\n- **ALTA Best Practices:** "What are ALTA Best Practices?"\n- **Closing day:** "What happens at the closing table?"\n- **Definitions:** "What is escrow?"\n\nI'm here to help you close with confidence!`;
   }
 
   // Default
-  return `Great question! I can help with:\n\n- **"How does closing work?"** — Step-by-step process\n- **"What is title insurance?"** — Why you need it\n- **"How do I avoid wire fraud?"** — Protection tips\n- **"How much are closing costs?"** — Fee breakdown\n- **"What documents do I need?"** — Key paperwork\n- **"Can I close remotely?"** — Closing options\n\nTry asking one of these, or say **"help"** for a full list!`;
+  return `I'm not sure I understood that, but I can help with a wide range of closing topics!\n\n**Popular questions:**\n- **"How does closing work?"** — Step-by-step process\n- **"What is title insurance?"** — Why you need it\n- **"How much are closing costs?"** — Fee breakdown\n- **"How do I avoid wire fraud?"** — Protection tips\n- **"I'm a first-time buyer"** — Where to start\n- **"What is DTI?"** — Debt-to-income explained\n- **"How does escrow work?"** — The escrow process\n- **"What happens at the closing table?"** — Signing day walkthrough\n- **"What are ALTA Best Practices?"** — Consumer protections\n\nSay **"help"** for my full list of topics.\n\nYou can also browse our **FAQ** at /faq for 250+ answered questions, or search 450+ terms in our **Glossary** at /glossary.`;
 }
 
 export default function HomeClosingAI() {
@@ -175,7 +215,7 @@ export default function HomeClosingAI() {
               style={{ transition: 'opacity 350ms ease' }}
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={sponsor.logo} alt={sponsor.name} className="h-7 w-auto object-contain max-w-[90px] shrink-0" />
+              <img src={sponsor.logo} alt={sponsor.name} className="h-7 w-auto object-contain max-w-[90px] shrink-0" onError={(e) => { e.currentTarget.style.display = 'none'; }} />
               <div className="border-l border-gray-100 pl-2.5 min-w-0">
                 <p className="text-[8px] text-alta-gray uppercase tracking-wider font-semibold leading-none">Sponsor</p>
                 <p className="text-[11px] text-alta-navy font-semibold leading-tight mt-0.5 truncate">{sponsor.name}</p>
@@ -185,7 +225,7 @@ export default function HomeClosingAI() {
             <div className="absolute bottom-full right-0 mb-2 w-[280px] bg-white rounded-xl shadow-2xl border border-gray-100 p-4 opacity-0 pointer-events-none peer-hover:opacity-100 peer-hover:pointer-events-auto transition-opacity duration-200 z-[610] hidden sm:block sm:opacity-0 sm:peer-hover:opacity-100">
               <div className="flex items-center gap-3 mb-3">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={sponsor.logo} alt={sponsor.name} className="h-10 w-auto object-contain max-w-[100px]" />
+                <img src={sponsor.logo} alt={sponsor.name} className="h-10 w-auto object-contain max-w-[100px]" onError={(e) => { e.currentTarget.style.display = 'none'; }} />
                 <div>
                   <p className="text-sm font-bold text-alta-navy">{sponsor.name}</p>
                   <p className="text-[10px] text-alta-teal font-medium">ALTA Member</p>
@@ -226,7 +266,7 @@ export default function HomeClosingAI() {
             <div className="sm:hidden flex items-center gap-2.5 px-3 py-2 bg-gray-50">
               <p className="text-[8px] text-alta-gray font-semibold uppercase tracking-wider shrink-0">Sponsor</p>
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={sponsor.logo} alt={sponsor.name} className="h-5 w-auto object-contain max-w-[70px] shrink-0" />
+              <img src={sponsor.logo} alt={sponsor.name} className="h-5 w-auto object-contain max-w-[70px] shrink-0" onError={(e) => { e.currentTarget.style.display = 'none'; }} />
               <p className="text-[10px] text-alta-navy font-semibold truncate flex-1">{sponsor.name}</p>
               <svg className="w-3 h-3 text-alta-teal shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
             </div>
@@ -235,7 +275,7 @@ export default function HomeClosingAI() {
               <p className="text-[9px] text-alta-gray font-semibold uppercase tracking-widest text-center mb-3">Sponsored by</p>
               <div className="flex items-center justify-center mb-3">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={sponsor.logo} alt={sponsor.name} className="h-12 w-auto object-contain max-w-[180px]" />
+                <img src={sponsor.logo} alt={sponsor.name} className="h-12 w-auto object-contain max-w-[180px]" onError={(e) => { e.currentTarget.style.display = 'none'; }} />
               </div>
               <p className="text-[11px] text-alta-gray text-center leading-relaxed mb-2">{sponsor.blurb}</p>
               <p className="text-[10px] text-alta-teal font-medium text-center flex items-center justify-center gap-1">
@@ -262,10 +302,10 @@ export default function HomeClosingAI() {
                 const url = URL.createObjectURL(blob);
                 const a = document.createElement('a');
                 a.href = url; a.download = 'HomeClosing101_Conversation.txt'; a.click();
-              }} className="p-1.5 rounded-lg bg-white/10 hover:bg-white/20 transition-colors" title="Download conversation">
+              }} className="p-1.5 rounded-lg bg-white/10 hover:bg-white/20 transition-colors" title="Download conversation" aria-label="Download conversation">
                 <Download className="w-4 h-4" />
               </button>
-              <button onClick={() => setOpen(false)} className="p-1.5 rounded-lg bg-white/10 hover:bg-white/20 transition-colors">
+              <button onClick={() => setOpen(false)} className="p-1.5 rounded-lg bg-white/10 hover:bg-white/20 transition-colors" aria-label="Close chat">
                 <X className="w-4 h-4" />
               </button>
             </div>
@@ -342,6 +382,7 @@ export default function HomeClosingAI() {
             <button
               onClick={handleSend}
               disabled={!input.trim() || loading}
+              aria-label="Send message"
               className="p-2.5 rounded-xl bg-alta-navy text-white hover:bg-alta-teal disabled:opacity-40 transition-colors"
             >
               <Send className="w-4 h-4" />

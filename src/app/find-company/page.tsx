@@ -313,7 +313,7 @@ function FindCompanyContent() {
                   ].map((s) => (
                     <a key={s.name} href={s.url} target="_blank" rel="noopener noreferrer" title={s.name} className="grayscale hover:grayscale-0 opacity-50 hover:opacity-100 transition-all">
                       {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img src={s.logo} alt={s.name} className="h-6 w-auto object-contain" />
+                      <img src={s.logo} alt={s.name} className="h-6 w-auto object-contain" onError={(e) => { e.currentTarget.style.display = 'none'; }} />
                     </a>
                   ))}
                 </div>

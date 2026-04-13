@@ -114,7 +114,7 @@ export default function WhatToExpectPage() {
           </div>
 
           {/* Steps */}
-          <h2 className="text-2xl font-bold text-alta-navy mb-8 flex items-center gap-2">8 Keys to Getting the Keys {/* eslint-disable-next-line @next/next/no-img-element */}<img src="https://images.unsplash.com/photo-1582139329536-e7284fece509?w=80&q=80" alt="House keys" className="w-9 h-9 rounded-lg object-cover shadow-sm" /></h2>
+          <h2 className="text-2xl font-bold text-alta-navy mb-8 flex items-center gap-2">8 Keys to Getting the Keys {/* eslint-disable-next-line @next/next/no-img-element */}<img src="https://images.unsplash.com/photo-1582139329536-e7284fece509?w=80&q=80" alt="House keys" className="w-9 h-9 rounded-lg object-cover shadow-sm" loading="lazy" /></h2>
           <div className="space-y-6 mb-16">
             {steps.map((step, i) => (
               <div key={i} className={`flex flex-col ${i % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'} gap-5 items-center`}>

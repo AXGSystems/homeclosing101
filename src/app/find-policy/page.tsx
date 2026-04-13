@@ -260,7 +260,7 @@ export default function FindPolicyPage() {
                   {/* Flag */}
                   <div className="w-28 sm:w-36 shrink-0 bg-white flex items-center justify-center p-3 border-r border-gray-100">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src={sf?.flag || ""} alt={`Flag of ${selectedDept.state}`} className="w-full h-auto max-h-16 object-contain" />
+                    <img src={sf?.flag || ""} alt={`Flag of ${selectedDept.state}`} className="w-full h-auto max-h-16 object-contain" onError={(e) => { e.currentTarget.style.display = 'none'; }} />
                   </div>
                   {/* Info */}
                   <div className="flex-1 px-5 py-4 text-white min-w-0">
@@ -360,6 +360,7 @@ export default function FindPolicyPage() {
                         src={stateFlags[dept.abbr]?.flag || ""}
                         alt={`${dept.state} flag`}
                         className="w-full h-full object-cover"
+                        onError={(e) => { e.currentTarget.style.display = 'none'; }}
                       />
                     </div>
                     <div className="flex-1 min-w-0">

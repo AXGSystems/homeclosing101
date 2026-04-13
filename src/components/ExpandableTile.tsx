@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, ReactNode } from "react";
+import { useState, useRef, useEffect, useCallback, ReactNode } from "react";
 
 interface ExpandableTileProps {
   children: ReactNode;
@@ -11,6 +11,35 @@ interface ExpandableTileProps {
 
 export default function ExpandableTile({ children, expandedContent, expandedTitle, className = "" }: ExpandableTileProps) {
   const [expanded, setExpanded] = useState(false);
+  const triggerRef = useRef<HTMLDivElement>(null);
+  const modalRef = useRef<HTMLDivElement>(null);
+
+  const handleClose = useCallback(() => {
+    setExpanded(false);
+    triggerRef.current?.focus();
+  }, []);
+
+  // Focus trap and Escape key
+  useEffect(() => {
+    if (!expanded || !modalRef.current) return;
+    modalRef.current.focus();
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") { handleClose(); return; }
+      if (e.key !== "Tab" || !modalRef.current) return;
+      const focusable = modalRef.current.querySelectorAll<HTMLElement>(
+        'a[href], button, textarea, input, select, [tabindex]:not([tabindex="-1"])'
+      );
+      if (focusable.length === 0) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [expanded, handleClose]);
 
   if (!expandedContent) {
     // No expanded content — just render as a regular tile with hover effects
@@ -20,7 +49,11 @@ export default function ExpandableTile({ children, expandedContent, expandedTitl
   return (
     <>
       <div
+        ref={triggerRef}
         onClick={() => setExpanded(true)}
+        onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); setExpanded(true); } }}
+        role="button"
+        tabIndex={0}
         className={`tile-interactive cursor-pointer group relative ${className}`}
       >
         {children}
@@ -32,14 +65,17 @@ export default function ExpandableTile({ children, expandedContent, expandedTitl
 
       {/* Expanded modal */}
       {expanded && (
-        <div className="fixed inset-0 z-[700] flex items-center justify-center p-4" onClick={() => setExpanded(false)}>
+        <div className="fixed inset-0 z-[700] flex items-center justify-center p-4" role="dialog" aria-modal="true" aria-label={expandedTitle || "Detail"} onClick={handleClose}>
           <div className="absolute inset-0 bg-black/40 backdrop-blur-sm" />
           <div
+            ref={modalRef}
+            tabIndex={-1}
             className="relative bg-white rounded-2xl shadow-2xl max-w-lg w-full max-h-[80vh] overflow-y-auto animate-in zoom-in-95 duration-200"
             onClick={(e) => e.stopPropagation()}
           >
             <button
-              onClick={() => setExpanded(false)}
+              onClick={handleClose}
+              aria-label="Close"
               className="absolute top-3 right-3 p-1.5 text-alta-gray hover:text-alta-navy bg-white/80 rounded-full z-10"
             >
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
