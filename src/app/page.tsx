@@ -78,9 +78,9 @@ const features = [
 ];
 
 const stats = [
-  { value: "25+", label: "In-depth guides covering every step from pre-approval to keys", color: "from-[#0a7ea8]/30 to-[#0a7ea8]/10", accent: "text-[#5ec4e6]" },
+  { value: "30+", label: "In-depth guides covering every step from pre-approval to keys", color: "from-[#0a7ea8]/30 to-[#0a7ea8]/10", accent: "text-[#5ec4e6]" },
   { value: "250+", label: "FAQ answers with verified source citations from CFPB, FBI & more", color: "from-[#2d6b3f]/30 to-[#2d6b3f]/10", accent: "text-[#6fcf97]" },
-  { value: "200+", label: "Glossary terms with real-world closing examples you can save & print", color: "from-[#5b3a8c]/30 to-[#5b3a8c]/10", accent: "text-[#b794f4]" },
+  { value: "450+", label: "Glossary terms with real-world closing examples you can save & print", color: "from-[#5b3a8c]/30 to-[#5b3a8c]/10", accent: "text-[#b794f4]" },
   { value: "4", label: "Interactive calculators — mortgage, affordability, closing costs & more", color: "from-[#8b6914]/30 to-[#8b6914]/10", accent: "text-[#f0d06e]" },
 ];
 

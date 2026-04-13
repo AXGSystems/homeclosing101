@@ -5,6 +5,7 @@ import PageHero from "@/components/PageHero";
 import { InlineAd } from "@/components/EliteProviders";
 import { stateInsuranceData, callingScript } from "@/data/stateInsurance";
 import { stateFlags } from "@/data/stateFlags";
+import FirstTimeBuyerCTA from "@/components/FirstTimeBuyerCTA";
 
 // State colors inspired by state flags/identity
 const stateColors: Record<string, { bg: string; accent: string; text: string }> = {
@@ -75,10 +76,59 @@ const stateCoords: Record<string, { x: number; y: number }> = {
   AK:{x:8,y:50},HI:{x:22,y:52},
 };
 
+const steps = [
+  {
+    step: "1", title: "Check Closing Documents", desc: "Look for \"Owner's Title Insurance Policy\" in your closing packet.",
+    image: "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=400&q=80",
+    gradient: "from-[#1a5276] to-[#0a7ea8]",
+    modalContent: {
+      walkthrough: "Your owner's title insurance policy should be in the closing packet you received at your closing appointment. This packet typically contains 50-100+ pages of documents. The title policy itself is usually a separate document — not part of the deed or mortgage. Look for a document titled 'Owner's Policy of Title Insurance' or 'ALTA Owner's Policy.' It will include the name of the title insurance underwriter (the company backing the policy), the policy number, the effective date (your closing date), the insured amount (typically the purchase price), and Schedule A (basic policy details) and Schedule B (exceptions to coverage).",
+      scenarios: [
+        "If you purchased your home recently (within the last few years), the closing packet may be stored electronically. Check your email from the settlement agent or title company for a secure link to download documents.",
+        "If you used a real estate attorney, their office may have copies of all closing documents in your file.",
+        "If your home was purchased by a spouse or family member, the policy may be in their name. Contact the title company that handled the closing.",
+        "If you refinanced after purchase, a new lender's title policy was issued at the refi, but your original owner's policy from the purchase is still valid. Look for the ORIGINAL closing packet, not the refinance documents.",
+        "If you cannot find the physical documents, your county recorder's office will have a record of the deed, which can help you trace back to the title company that handled the transaction."
+      ]
+    }
+  },
+  {
+    step: "2", title: "Contact Your Settlement Agent", desc: "The title company or attorney who handled your closing can provide a copy.",
+    image: "https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?w=400&q=80",
+    gradient: "from-[#2d6b3f] to-[#1a5276]",
+    modalContent: {
+      walkthrough: "Your settlement agent (also called closing agent) is the title company or attorney who conducted your closing. They are required to maintain records of the transaction and can provide a copy of your owner's title insurance policy. To identify your settlement agent: check your Closing Disclosure (formerly HUD-1 Settlement Statement) — the settlement agent's name and contact information are listed on the first page. You can also check the deed recorded with your county — it often references the title company. If you used a real estate agent, they will know which title company handled the closing.",
+      scenarios: [
+        "If the title company has changed names or been acquired by another company, the successor company should still have your records. Search online for the company name to find their current contact information.",
+        "If the company has gone out of business entirely, contact the title insurance underwriter (the large company that backs the policy, such as Fidelity National, First American, Old Republic, or Stewart). They maintain records of all policies issued under their name.",
+        "If you closed with an attorney rather than a title company, the attorney's office should have your file. Attorneys are required to maintain client records for a specified period (varies by state, but typically 5-7 years minimum).",
+        "When you call, have your property address, closing date, and full legal name ready. Ask them to email or mail a copy of the owner's title insurance policy.",
+        "There should be no charge for obtaining a copy of your own policy. If a company tries to charge you, escalate to management or contact the underwriter directly."
+      ]
+    }
+  },
+  {
+    step: "3", title: "Call Your State Insurance Dept.", desc: "Use the interactive map below to find your state's contact info.",
+    image: "https://images.unsplash.com/photo-1423666639041-f56000c27a9a?w=400&q=80",
+    gradient: "from-[#5b3a8c] to-[#943030]",
+    modalContent: {
+      walkthrough: "Every state has a Department of Insurance (or equivalent regulatory body) that oversees title insurance companies operating in that state. These departments maintain records of licensed insurers and can help you track down your policy if the other methods fail. Use the interactive map below to find your state's insurance department contact information, or use our full state directory at the bottom of this page. When you call, use our sample calling script (available below the map) to efficiently get the information you need.",
+      scenarios: [
+        "If your state insurance department cannot locate your policy, ask them for a list of title insurance underwriters licensed in your state. You can then contact each underwriter to search for your policy by property address.",
+        "If you purchased title insurance through an attorney rather than a title company, the state bar association may be able to help you locate the attorney's records.",
+        "If your property has been through multiple ownership changes, the most recent owner's policy is yours (from when you purchased). Prior owners' policies are separate and do not transfer to you.",
+        "If you are filing a claim on your title insurance policy and cannot locate the policy document, the title insurance underwriter can still process your claim using their records — having the policy document is helpful but not always required.",
+        "Some states maintain online databases where you can search for title insurance policies by property address or policy number. Ask your state insurance department if such a tool is available."
+      ]
+    }
+  },
+];
+
 export default function FindPolicyPage() {
   const [search, setSearch] = useState("");
   const [selectedState, setSelectedState] = useState<string | null>(null);
   const [showScript, setShowScript] = useState(false);
+  const [activeModal, setActiveModal] = useState<{title: string; gradient: string; content: React.ReactNode} | null>(null);
 
   const filtered = stateInsuranceData.filter((s) =>
     s.state.toLowerCase().includes(search.toLowerCase()) ||
@@ -110,23 +160,48 @@ export default function FindPolicyPage() {
               </div>
               <div>
                 <h2 className="font-bold text-alta-navy mb-1">3 Ways to Locate Your Policy</h2>
-                <p className="text-sm text-alta-gray leading-relaxed">Your owner&apos;s title insurance policy was issued at closing and protects you for as long as you own the property. Follow the steps below, use the interactive state map to find your insurance department, or use our sample calling script to get exactly what you need.</p>
+                <p className="text-sm text-alta-gray leading-relaxed">Your owner&apos;s title insurance policy was issued at closing and protects you for as long as you own the property. Follow the steps below, use the interactive state map to find your insurance department, or use our sample calling script to get exactly what you need. <span className="text-alta-teal font-medium">Click any step for a detailed walkthrough.</span></p>
               </div>
             </div>
           </div>
 
           {/* Steps */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-12">
-            {[
-              { step: "1", title: "Check Closing Documents", desc: "Look for \"Owner's Title Insurance Policy\" in your closing packet.", image: "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=400&q=80" },
-              { step: "2", title: "Contact Your Settlement Agent", desc: "The title company or attorney who handled your closing can provide a copy.", image: "https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?w=400&q=80" },
-              { step: "3", title: "Call Your State Insurance Dept.", desc: "Use the interactive map below to find your state's contact info.", image: "https://images.unsplash.com/photo-1423666639041-f56000c27a9a?w=400&q=80" },
-            ].map((s) => (
-              <div key={s.step} className="rounded-2xl overflow-hidden shadow-sm border border-gray-100 bg-white">
+            {steps.map((s) => (
+              <div
+                key={s.step}
+                onClick={() => setActiveModal({
+                  title: `Step ${s.step}: ${s.title}`,
+                  gradient: s.gradient,
+                  content: (
+                    <div className="space-y-5">
+                      <div>
+                        <h3 className="text-sm font-bold text-[#1a5276] mb-2">Detailed Walkthrough</h3>
+                        <p className="text-sm text-gray-600 leading-relaxed">{s.modalContent.walkthrough}</p>
+                      </div>
+                      <div>
+                        <h3 className="text-sm font-bold text-[#2d6b3f] mb-2">Common Scenarios</h3>
+                        <ul className="space-y-3">
+                          {s.modalContent.scenarios.map((scenario, i) => (
+                            <li key={i} className="flex items-start gap-2 text-sm text-gray-600">
+                              <span className="w-5 h-5 rounded-full bg-[#0a7ea8]/10 text-[#0a7ea8] flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">{i + 1}</span>
+                              <span className="leading-relaxed">{scenario}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+                  )
+                })}
+                className="rounded-2xl overflow-hidden shadow-sm border border-gray-100 bg-white cursor-pointer group"
+              >
                 <div className="relative h-28">
                   <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url('${s.image}')` }} />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
                   <div className="absolute top-3 left-3 w-8 h-8 rounded-full bg-alta-teal text-white flex items-center justify-center font-bold text-sm shadow">{s.step}</div>
+                  <div className="absolute top-3 right-3 w-6 h-6 rounded-full bg-white/80 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                    <svg className="w-3.5 h-3.5 text-[#1a5276]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" /></svg>
+                  </div>
                 </div>
                 <div className="p-4 text-center">
                   <h3 className="font-semibold text-alta-navy text-sm mb-1">{s.title}</h3>
@@ -271,7 +346,6 @@ export default function FindPolicyPage() {
             </div>
             <div className="max-h-[500px] overflow-y-auto">
               {filtered.map((dept) => {
-                const sc = stateColors[dept.abbr];
                 return (
                   <button
                     key={dept.abbr}
@@ -313,8 +387,26 @@ export default function FindPolicyPage() {
               <strong className="text-alta-navy">Disclaimer:</strong> We recommend confirming contact details via your state&apos;s official .gov website before calling.
             </p>
           </div>
+
+          <FirstTimeBuyerCTA />
         </div>
       </div>
+
+      {/* Modal */}
+      {activeModal && (
+        <div className="fixed inset-0 z-[700] flex items-center justify-center p-4" onClick={() => setActiveModal(null)}>
+          <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" />
+          <div className="relative bg-white rounded-2xl shadow-2xl max-w-2xl w-full max-h-[85vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
+            <button onClick={() => setActiveModal(null)} className="absolute top-3 right-3 p-2 text-white hover:text-white bg-black/40 hover:bg-black/60 rounded-full z-10">
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12" /></svg>
+            </button>
+            <div className={`bg-gradient-to-r ${activeModal.gradient} px-6 py-5`}>
+              <h2 className="text-xl font-bold text-white pr-10">{activeModal.title}</h2>
+            </div>
+            <div className="p-6">{activeModal.content}</div>
+          </div>
+        </div>
+      )}
     </>
   );
 }

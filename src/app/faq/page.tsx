@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import PageHero from "@/components/PageHero";
 import { InlineAd } from "@/components/EliteProviders";
+import FirstTimeBuyerCTA from "@/components/FirstTimeBuyerCTA";
 import { faqs, faqCategories } from "@/data/faqData";
 
 const catColors: Record<string, { bg: string; border: string; text: string; leftBorder: string }> = {
@@ -184,6 +185,8 @@ export default function FAQPage() {
             </Link>
           </div>
         </div>
+
+        <FirstTimeBuyerCTA />
       </div>
     </div>
     </>

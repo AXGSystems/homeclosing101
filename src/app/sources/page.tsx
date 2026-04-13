@@ -21,7 +21,7 @@ const sources = [
   {
     category: "Industry Trade Associations",
     items: [
-      { name: "American Land Title Association (ALTA)", url: "https://www.alta.org/", used: "Title search issue rates (1 in 3 transactions), Best Practices framework, member directory data, title insurance policy structure, industry statistics, 6,000+ member count, RON state availability" },
+      { name: "American Land Title Association (ALTA)", url: "https://www.alta.org/", used: "Title search issue rates (1 in 3 transactions), Best Practices framework v4.2 (Aug 2025), member directory data, title insurance policy forms, industry statistics, 6,000+ member count, RON state availability, ALTA ONE/EDge conference data, Good Deeds Foundation ($1.3M+ awarded), TAN (5,159 members), NTP designation requirements, membership dues, 2026 advocacy priorities, TIPAC" },
       { name: "National Association of Realtors (NAR)", url: "https://www.nar.realtor/", used: "Home sales volume (4.2M in 2025), median home prices ($400K), wire fraud consumer guide, deepfake scam consumer guide, Code of Ethics" },
       { name: "National Association of Insurance Commissioners (NAIC)", url: "https://content.naic.org/", used: "State insurance department directory (all 51 jurisdictions), regulatory framework, insurance department contact verification" },
       { name: "Insurance Information Institute (I.I.I.)", url: "https://www.iii.org/", used: "State insurance department addresses, phone numbers, and website URLs — verified February 2026" },

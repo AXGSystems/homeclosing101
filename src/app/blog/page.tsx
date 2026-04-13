@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import PageHero from "@/components/PageHero";
 import { InlineAd } from "@/components/EliteProviders";
+import FirstTimeBuyerCTA from "@/components/FirstTimeBuyerCTA";
 
 interface Article {
   title: string;
@@ -27,7 +28,7 @@ const articles: Article[] = [
     readTime: "4 min",
     image: "https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=600&q=80",
     source: "FBI IC3 2024 Internet Crime Report",
-    sourceUrl: "https://www.ic3.gov/",
+    sourceUrl: "https://www.ic3.gov/Media/PDF/AnnualReport/2024_IC3Report.pdf",
   },
   {
     title: "CFPB: Understanding Your Closing Disclosure",
@@ -49,7 +50,7 @@ const articles: Article[] = [
     readTime: "4 min",
     image: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=600&q=80",
     source: "American Land Title Association",
-    sourceUrl: "https://www.alta.org/",
+    sourceUrl: "https://www.alta.org/advocacy/title-insurance-consumer-protections/",
   },
   {
     title: "NAR: Median Home Price Reaches $400,000 — What Buyers Need to Know",
@@ -93,7 +94,7 @@ const articles: Article[] = [
     readTime: "6 min",
     image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&q=80",
     source: "ASHI, InterNACHI",
-    sourceUrl: "https://www.homeinspector.org/",
+    sourceUrl: "https://www.homeinspector.org/For-Homebuyers",
   },
   {
     title: "FHA vs VA vs Conventional: Choosing the Right Mortgage",
@@ -317,6 +318,8 @@ export default function BlogPage() {
             </Link>
           </div>
         </div>
+
+        <FirstTimeBuyerCTA />
       </div>
     </div>
     </>

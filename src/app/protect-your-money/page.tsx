@@ -2,6 +2,7 @@ import Link from "next/link";
 import PageHero from "@/components/PageHero";
 import { InlineAd } from "@/components/EliteProviders";
 import ExpandableSafeguards from "@/components/ExpandableSafeguards";
+import FirstTimeBuyerCTA from "@/components/FirstTimeBuyerCTA";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -178,6 +179,8 @@ export default function ProtectYourMoneyPage() {
               View Sources
             </Link>
           </div>
+
+          <FirstTimeBuyerCTA />
         </div>
       </div>
     </>

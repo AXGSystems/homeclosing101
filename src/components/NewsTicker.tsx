@@ -33,7 +33,9 @@ export default function NewsTicker() {
     const measure = () => {
       if (scrollRef.current) {
         const scrollWidth = scrollRef.current.scrollWidth / 2;
-        const pixelsPerSecond = 80;
+        // Faster on mobile where the viewport is narrow and text feels sluggish
+        const isMobile = window.innerWidth < 768;
+        const pixelsPerSecond = isMobile ? 140 : 100;
         if (scrollWidth > 0) {
           setAnimDuration(scrollWidth / pixelsPerSecond);
         } else {

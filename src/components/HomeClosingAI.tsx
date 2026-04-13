@@ -153,7 +153,7 @@ export default function HomeClosingAI() {
         {/* Mobile: slim side tab */}
         <button
           onClick={() => setOpen(true)}
-          className="sm:hidden fixed top-1/2 -translate-y-1/2 right-0 z-[600] bg-gradient-to-b from-alta-navy to-alta-teal text-white rounded-l-xl px-2 py-4 shadow-lg"
+          className="sm:hidden fixed bottom-28 right-0 z-[600] bg-gradient-to-b from-alta-navy to-alta-teal text-white rounded-l-xl px-2 py-4 shadow-lg"
           style={{ writingMode: 'vertical-rl', textOrientation: 'mixed' }}
         >
           <span className="text-[10px] font-bold tracking-wider flex items-center gap-1">
@@ -214,24 +214,35 @@ export default function HomeClosingAI() {
       {/* Chat panel — with sponsor inside header */}
       {open && (
         <div className="fixed top-1/2 -translate-y-1/2 right-2 sm:right-6 z-[600] w-[calc(100vw-1rem)] sm:w-[420px] max-w-[420px] h-[70vh] sm:h-[580px] max-h-[calc(100vh-6rem)] bg-white rounded-2xl shadow-2xl border border-gray-200 flex flex-col overflow-hidden">
-          {/* Sponsor banner inside panel — large showcase */}
+          {/* Sponsor banner — compact on mobile, full showcase on desktop */}
           <a
             href={sponsor.url}
             target="_blank"
             rel="noopener noreferrer"
-            className={`flex-shrink-0 block bg-gradient-to-b from-gray-50 to-white border-b border-gray-100 px-5 py-4 hover:from-gray-100 transition-all ${sponsorFading ? 'opacity-0' : 'opacity-100'}`}
+            className={`flex-shrink-0 block border-b border-gray-100 hover:bg-gray-50 transition-all ${sponsorFading ? 'opacity-0' : 'opacity-100'}`}
             style={{ transition: 'opacity 350ms ease' }}
           >
-            <p className="text-[9px] text-alta-gray font-semibold uppercase tracking-widest text-center mb-3">Sponsored by</p>
-            <div className="flex items-center justify-center mb-3">
+            {/* Mobile: slim inline bar */}
+            <div className="sm:hidden flex items-center gap-2.5 px-3 py-2 bg-gray-50">
+              <p className="text-[8px] text-alta-gray font-semibold uppercase tracking-wider shrink-0">Sponsor</p>
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={sponsor.logo} alt={sponsor.name} className="h-12 w-auto object-contain max-w-[180px]" />
+              <img src={sponsor.logo} alt={sponsor.name} className="h-5 w-auto object-contain max-w-[70px] shrink-0" />
+              <p className="text-[10px] text-alta-navy font-semibold truncate flex-1">{sponsor.name}</p>
+              <svg className="w-3 h-3 text-alta-teal shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
             </div>
-            <p className="text-[11px] text-alta-gray text-center leading-relaxed mb-2">{sponsor.blurb}</p>
-            <p className="text-[10px] text-alta-teal font-medium text-center flex items-center justify-center gap-1">
-              {sponsor.url.replace('https://', '').replace('http://', '').replace(/\/$/, '')}
-              <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
-            </p>
+            {/* Desktop: full showcase */}
+            <div className="hidden sm:block px-5 py-4 bg-gradient-to-b from-gray-50 to-white">
+              <p className="text-[9px] text-alta-gray font-semibold uppercase tracking-widest text-center mb-3">Sponsored by</p>
+              <div className="flex items-center justify-center mb-3">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={sponsor.logo} alt={sponsor.name} className="h-12 w-auto object-contain max-w-[180px]" />
+              </div>
+              <p className="text-[11px] text-alta-gray text-center leading-relaxed mb-2">{sponsor.blurb}</p>
+              <p className="text-[10px] text-alta-teal font-medium text-center flex items-center justify-center gap-1">
+                {sponsor.url.replace('https://', '').replace('http://', '').replace(/\/$/, '')}
+                <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
+              </p>
+            </div>
           </a>
           {/* Header */}
           <div className="bg-gradient-to-r from-alta-navy to-[#0d3a5c] text-white px-5 py-3 flex items-center justify-between flex-shrink-0">

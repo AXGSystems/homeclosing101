@@ -4,6 +4,7 @@ import { useState, useMemo, useEffect } from "react";
 import PageHero from "@/components/PageHero";
 import { InlineAd } from "@/components/EliteProviders";
 import { glossaryData, type GlossaryTerm } from "@/data/glossaryData";
+import FirstTimeBuyerCTA from "@/components/FirstTimeBuyerCTA";
 
 const allLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
 
@@ -337,6 +338,8 @@ ${terms.map(t => `<div class="term"><h2>${t.term}</h2><p>${t.definition}</p>${t.
             <p className="text-sm text-alta-gray mt-1">Try a different keyword or browse by letter.</p>
           </div>
         )}
+
+        <FirstTimeBuyerCTA />
       </div>
     </div>
     </>

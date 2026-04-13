@@ -3,6 +3,7 @@ import PageHero from "@/components/PageHero";
 import { InlineAd } from "@/components/EliteProviders";
 import ExpandableInspectionTiles from "@/components/ExpandableInspectionTiles";
 import ExpandableInspectionAreas from "@/components/ExpandableInspectionAreas";
+import FirstTimeBuyerCTA from "@/components/FirstTimeBuyerCTA";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -214,6 +215,8 @@ export default function HomeInspectionPage() {
               Closing Costs Calculator
             </Link>
           </div>
+
+          <FirstTimeBuyerCTA />
         </div>
       </div>
     </>

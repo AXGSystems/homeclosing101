@@ -4,6 +4,7 @@ import PrintButton from "@/components/PrintButton";
 import FraudStats from "@/components/FraudStats";
 import ExpandableFraudSteps from "@/components/ExpandableFraudSteps";
 import { InlineAd } from "@/components/EliteProviders";
+import FirstTimeBuyerCTA from "@/components/FirstTimeBuyerCTA";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -226,6 +227,8 @@ export default function StopFraudPage() {
           </Link>
           <PrintButton />
         </div>
+
+        <FirstTimeBuyerCTA />
       </div>
     </div>
     </>

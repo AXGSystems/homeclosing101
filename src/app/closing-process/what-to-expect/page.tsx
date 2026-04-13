@@ -1,6 +1,7 @@
 import Link from "next/link";
 import PageHero from "@/components/PageHero";
 import { InlineAd } from "@/components/EliteProviders";
+import FirstTimeBuyerCTA from "@/components/FirstTimeBuyerCTA";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -9,6 +10,12 @@ export const metadata: Metadata = {
 };
 
 const steps = [
+  {
+    title: "Get Your Finances Ready",
+    content: "Before you even look at houses, you need to get your financial foundation in order. This preparation phase — ideally 6–12 months before you plan to buy — is what separates buyers who close smoothly from buyers who get derailed.\n\nCheck your credit score and understand what it means for your mortgage options. A 620 score gets you into an FHA loan; a 740+ score unlocks the best conventional rates. If your score needs work, dispute errors on your credit report, pay down credit card balances below 30% utilization, and avoid opening new accounts.\n\nPay down existing debts to lower your debt-to-income ratio (DTI). Lenders want your total monthly debt payments — including your future mortgage — to be below 43% of your gross monthly income. Every $500/month in debt you eliminate adds roughly $100,000 to your purchasing power.\n\nStart saving aggressively for your down payment (3–20% of the purchase price depending on loan type) plus closing costs (2–5% of the price) plus reserves (2–3 months of mortgage payments). On a $400,000 home, that means $20,000–$100,000+ in cash at closing.\n\nResearch mortgage pre-approval requirements so you know exactly what documents you'll need: 2 years of W-2s and tax returns, 2 months of bank statements, pay stubs, and employment verification. Having these organized before you apply speeds up the process significantly.",
+    image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=400&q=80",
+    tip: "Use our affordability calculator to set a realistic budget before you start shopping. Know your DTI ratio, understand your credit score, and have your down payment saved BEFORE you get pre-approved.",
+  },
   {
     title: "Learn About Loan Options & Get Pre-Approved",
     content: "Understanding the types of mortgages available is the foundation of your homebuying journey. Each loan type — conventional, FHA, VA, USDA — has different requirements for down payment (3% to 20%), credit score (580 to 740+), and mortgage insurance. Your choice affects not just your monthly payment, but your total cost over the life of the loan.\n\nPre-approval is different from pre-qualification. Pre-qualification is an informal estimate based on what you tell the lender. Pre-approval is a formal process where the lender verifies your income, assets, debts, and credit history, then issues a conditional commitment for a specific loan amount. Sellers take pre-approved buyers far more seriously.\n\nGet pre-approved by at least 2-3 lenders so you can compare Loan Estimates. Under CFPB rules, your lender must provide a Loan Estimate within 3 business days of your application. Compare APRs (not just interest rates) — the APR includes fees and gives you the true cost.",
@@ -94,13 +101,13 @@ export default function WhatToExpectPage() {
               </div>
               <div>
                 <h2 className="font-bold text-alta-navy mb-1">Your Step-by-Step Closing Guide</h2>
-                <p className="text-sm text-alta-gray leading-relaxed">Follow these 7 steps from getting pre-approved to receiving your keys. Each step includes what to expect and what to look out for. Bookmark this page and come back as you move through the process.</p>
+                <p className="text-sm text-alta-gray leading-relaxed">Follow these 8 steps from getting financially ready to receiving your keys. Each step includes what to expect and what to look out for. Bookmark this page and come back as you move through the process.</p>
               </div>
             </div>
           </div>
 
           {/* Steps */}
-          <h2 className="text-2xl font-bold text-alta-navy mb-8 flex items-center gap-2">7 Keys to Getting the Keys <svg className="w-7 h-7 text-[#d4a843]" fill="currentColor" viewBox="0 0 24 24"><path d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" /></svg></h2>
+          <h2 className="text-2xl font-bold text-alta-navy mb-8 flex items-center gap-2">8 Keys to Getting the Keys {/* eslint-disable-next-line @next/next/no-img-element */}<img src="https://images.unsplash.com/photo-1582139329536-e7284fece509?w=80&q=80" alt="House keys" className="w-9 h-9 rounded-lg object-cover shadow-sm" /></h2>
           <div className="space-y-6 mb-16">
             {steps.map((step, i) => (
               <div key={i} className={`flex flex-col ${i % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'} gap-5 items-center`}>
@@ -161,6 +168,8 @@ export default function WhatToExpectPage() {
               Get Your Checklist
             </Link>
           </div>
+
+          <FirstTimeBuyerCTA />
         </div>
       </div>
     </>
