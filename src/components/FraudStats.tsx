@@ -95,9 +95,9 @@ export default function FraudStats() {
 
       {/* Detail modal */}
       {selectedStat !== null && (
-        <div className="fixed inset-0 z-[700] flex items-center justify-center p-4" onClick={() => setSelectedStat(null)}>
+        <div className="fixed inset-0 z-[700] flex items-end sm:items-center justify-center sm:p-4" onClick={() => setSelectedStat(null)}>
           <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" />
-          <div className="relative bg-white rounded-2xl shadow-2xl max-w-lg w-full overflow-hidden" onClick={(e) => e.stopPropagation()}>
+          <div className="relative bg-white rounded-t-2xl sm:rounded-2xl shadow-2xl max-w-lg w-full overflow-hidden" onClick={(e) => e.stopPropagation()}>
             {/* Header */}
             <div className={`bg-gradient-to-r ${stats[selectedStat].color} px-6 py-5 text-white`}>
               <button onClick={() => setSelectedStat(null)} className="absolute top-3 right-3 p-1 text-white/60 hover:text-white">

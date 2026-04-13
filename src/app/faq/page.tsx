@@ -145,6 +145,19 @@ export default function FAQPage() {
           </div>
         </div>
 
+        {/* Still Have Questions? */}
+        <div className="mt-6 p-5 bg-gradient-to-br from-[#f0ecf6] to-white rounded-2xl border border-[#d4c8e4] shadow-sm">
+          <div className="flex items-start gap-4">
+            <div className="w-12 h-12 rounded-xl bg-[#5b3a8c]/10 flex items-center justify-center text-[#5b3a8c] shrink-0">
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 01-2.555-.337A5.972 5.972 0 015.41 20.97a5.969 5.969 0 01-.474-.065 4.48 4.48 0 00.978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25z" /></svg>
+            </div>
+            <div>
+              <h3 className="font-bold text-alta-navy mb-1">Still Have Questions?</h3>
+              <p className="text-sm text-alta-gray leading-relaxed">Our AI assistant can help! Click the <span className="font-semibold text-[#5b3a8c]">&quot;Ask HC101&quot;</span> button to get instant answers.</p>
+            </div>
+          </div>
+        </div>
+
         <FirstTimeBuyerCTA />
       </div>
     </div>

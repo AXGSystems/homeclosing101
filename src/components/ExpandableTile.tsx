@@ -65,12 +65,12 @@ export default function ExpandableTile({ children, expandedContent, expandedTitl
 
       {/* Expanded modal */}
       {expanded && (
-        <div className="fixed inset-0 z-[700] flex items-center justify-center p-4" role="dialog" aria-modal="true" aria-label={expandedTitle || "Detail"} onClick={handleClose}>
+        <div className="fixed inset-0 z-[700] flex items-end sm:items-center justify-center sm:p-4" role="dialog" aria-modal="true" aria-label={expandedTitle || "Detail"} onClick={handleClose}>
           <div className="absolute inset-0 bg-black/40 backdrop-blur-sm" />
           <div
             ref={modalRef}
             tabIndex={-1}
-            className="relative bg-white rounded-2xl shadow-2xl max-w-lg w-full max-h-[80vh] overflow-y-auto animate-in zoom-in-95 duration-200"
+            className="relative bg-white rounded-t-2xl sm:rounded-2xl shadow-2xl max-w-lg w-full max-h-[90vh] sm:max-h-[80vh] overflow-y-auto animate-in zoom-in-95 duration-200"
             onClick={(e) => e.stopPropagation()}
           >
             <button

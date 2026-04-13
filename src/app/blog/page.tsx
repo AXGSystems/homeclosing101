@@ -157,9 +157,9 @@ export default function BlogPage() {
 
     {/* Article detail modal */}
     {selectedArticle && (
-      <div className="fixed inset-0 z-[700] flex items-center justify-center p-4" onClick={() => setSelectedArticle(null)}>
+      <div className="fixed inset-0 z-[700] flex items-end sm:items-center justify-center sm:p-4" onClick={() => setSelectedArticle(null)}>
         <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" />
-        <div className="relative bg-white rounded-2xl shadow-2xl max-w-2xl w-full max-h-[85vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
+        <div className="relative bg-white rounded-t-2xl sm:rounded-2xl shadow-2xl max-w-2xl w-full max-h-[90vh] sm:max-h-[85vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
           <button onClick={() => setSelectedArticle(null)} className="absolute top-3 right-3 p-2 text-white hover:text-white bg-black/40 hover:bg-black/60 rounded-full z-10 transition-colors">
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12" /></svg>
           </button>
@@ -316,6 +316,33 @@ export default function BlogPage() {
                 <p className="text-[10px] text-alta-gray">Prevention guide</p>
               </div>
             </Link>
+          </div>
+        </div>
+
+        {/* Subscribe callout */}
+        <div className="mt-6 p-6 bg-gradient-to-br from-[#e6f1f5] to-white rounded-2xl border border-[#b4d8e8] shadow-sm">
+          <div className="flex items-start gap-4">
+            <div className="w-12 h-12 rounded-xl bg-[#0a7ea8]/10 flex items-center justify-center text-[#0a7ea8] shrink-0">
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" /></svg>
+            </div>
+            <div className="flex-1">
+              <h3 className="font-bold text-alta-navy mb-1">Subscribe to Industry Updates</h3>
+              <p className="text-sm text-alta-gray leading-relaxed mb-3">Coming soon — subscribe to get the latest industry news and homebuyer tips delivered to your inbox.</p>
+              <div className="flex gap-2">
+                <input
+                  type="email"
+                  placeholder="you@example.com"
+                  disabled
+                  className="flex-1 px-4 py-2 border border-gray-200 rounded-lg text-sm bg-gray-50 text-gray-400 cursor-not-allowed"
+                />
+                <button
+                  disabled
+                  className="px-5 py-2 bg-gray-300 text-white text-sm font-semibold rounded-lg cursor-not-allowed"
+                >
+                  Coming Soon
+                </button>
+              </div>
+            </div>
           </div>
         </div>
 

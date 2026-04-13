@@ -232,6 +232,38 @@ export default function AffordabilityPage() {
             </div>
           </div>
 
+          {/* Budget Reality Check */}
+          <div className="p-5 bg-[#e9f5ed] rounded-2xl border border-[#bddcc7] border-l-4 border-l-[#2d6b3f] my-6">
+            <div className="flex items-start gap-3">
+              <div className="w-10 h-10 rounded-xl bg-[#2d6b3f]/10 flex items-center justify-center text-[#2d6b3f] shrink-0">
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" /></svg>
+              </div>
+              <div>
+                <h3 className="font-bold text-[#2d6b3f] mb-1.5">Budget Reality Check</h3>
+                <p className="text-sm text-alta-gray leading-relaxed mb-3">Your mortgage payment is just the start. Before committing to a home price, make sure you can comfortably cover these additional monthly costs:</p>
+                <div className="grid sm:grid-cols-2 gap-2 text-xs">
+                  <div className="flex items-center gap-2 p-2 bg-white rounded-lg">
+                    <div className="w-1.5 h-1.5 rounded-full bg-[#2d6b3f] shrink-0" />
+                    <span className="text-alta-navy"><strong>Utilities:</strong> $200-400/mo (electric, gas, water, internet)</span>
+                  </div>
+                  <div className="flex items-center gap-2 p-2 bg-white rounded-lg">
+                    <div className="w-1.5 h-1.5 rounded-full bg-[#2d6b3f] shrink-0" />
+                    <span className="text-alta-navy"><strong>Maintenance:</strong> 1-2% of home value per year</span>
+                  </div>
+                  <div className="flex items-center gap-2 p-2 bg-white rounded-lg">
+                    <div className="w-1.5 h-1.5 rounded-full bg-[#2d6b3f] shrink-0" />
+                    <span className="text-alta-navy"><strong>HOA fees:</strong> $0-500+/mo if applicable</span>
+                  </div>
+                  <div className="flex items-center gap-2 p-2 bg-white rounded-lg">
+                    <div className="w-1.5 h-1.5 rounded-full bg-[#2d6b3f] shrink-0" />
+                    <span className="text-alta-navy"><strong>Emergency fund:</strong> 3-6 months of expenses saved</span>
+                  </div>
+                </div>
+                <p className="text-[10px] text-alta-gray mt-2">A good rule of thumb: if your total housing costs (mortgage + all the above) exceed 35-40% of your take-home pay, you may be stretching too thin.</p>
+              </div>
+            </div>
+          </div>
+
           <InlineAd />
 
           <div className="p-4 bg-[#faf4e4] rounded-xl border border-[#e8d9a8] border-l-4 border-l-[#8b6914] my-6">
@@ -324,9 +356,9 @@ export default function AffordabilityPage() {
 
       {/* Modal */}
       {activeModal && (
-        <div className="fixed inset-0 z-[700] flex items-center justify-center p-4" onClick={() => setActiveModal(null)}>
+        <div className="fixed inset-0 z-[700] flex items-end sm:items-center justify-center sm:p-4" onClick={() => setActiveModal(null)}>
           <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" />
-          <div className="relative bg-white rounded-2xl shadow-2xl max-w-2xl w-full max-h-[85vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
+          <div className="relative bg-white rounded-t-2xl sm:rounded-2xl shadow-2xl max-w-2xl w-full max-h-[90vh] sm:max-h-[85vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
             <button onClick={() => setActiveModal(null)} className="absolute top-3 right-3 p-2 text-white hover:text-white bg-black/40 hover:bg-black/60 rounded-full z-10">
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12" /></svg>
             </button>

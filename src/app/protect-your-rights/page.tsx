@@ -49,6 +49,61 @@ export default function ProtectYourRightsPage() {
               </div>
             </div>
           </div>
+          {/* Your Rights Checklist */}
+          <div className="mb-8 p-5 bg-gradient-to-br from-[#e9f5ed] to-white rounded-2xl border-2 border-[#2d6b3f]/20 shadow-sm">
+            <div className="flex items-start gap-3 mb-4">
+              <div className="w-10 h-10 rounded-lg bg-[#2d6b3f] flex items-center justify-center shrink-0">
+                <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" /></svg>
+              </div>
+              <div>
+                <h2 className="font-bold text-alta-navy text-lg">Your Rights Checklist</h2>
+                <p className="text-xs text-alta-gray mt-0.5">Federal law protects homebuyers at every stage. Know these rights before you close.</p>
+              </div>
+            </div>
+            <div className="grid sm:grid-cols-2 gap-3">
+              <div className="flex items-start gap-3 p-3 bg-white rounded-xl border border-[#bddcc7]">
+                <div className="w-5 h-5 rounded border-2 border-[#2d6b3f] flex items-center justify-center shrink-0 mt-0.5">
+                  <svg className="w-3 h-3 text-[#2d6b3f]" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={3}><path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
+                </div>
+                <div>
+                  <p className="text-sm font-bold text-alta-navy">Right to Choose Your Title Company</p>
+                  <p className="text-xs text-alta-gray leading-relaxed mt-0.5">Under the Real Estate Settlement Procedures Act (RESPA), Section 9, no seller can require a buyer to use a specific title company as a condition of sale. You can shop for the provider that best fits your needs.</p>
+                  <p className="text-[10px] text-alta-teal font-medium mt-1">12 U.S.C. 2608 (RESPA Section 9)</p>
+                </div>
+              </div>
+              <div className="flex items-start gap-3 p-3 bg-white rounded-xl border border-[#bddcc7]">
+                <div className="w-5 h-5 rounded border-2 border-[#2d6b3f] flex items-center justify-center shrink-0 mt-0.5">
+                  <svg className="w-3 h-3 text-[#2d6b3f]" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={3}><path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
+                </div>
+                <div>
+                  <p className="text-sm font-bold text-alta-navy">Right to 3-Business-Day CD Review</p>
+                  <p className="text-xs text-alta-gray leading-relaxed mt-0.5">The TILA-RESPA Integrated Disclosure (TRID) rule requires your lender to provide the Closing Disclosure at least 3 business days before closing. Use this time to compare it to your Loan Estimate.</p>
+                  <p className="text-[10px] text-alta-teal font-medium mt-1">12 CFR 1026.19(f) (TRID Rule / Reg Z)</p>
+                </div>
+              </div>
+              <div className="flex items-start gap-3 p-3 bg-white rounded-xl border border-[#bddcc7]">
+                <div className="w-5 h-5 rounded border-2 border-[#2d6b3f] flex items-center justify-center shrink-0 mt-0.5">
+                  <svg className="w-3 h-3 text-[#2d6b3f]" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={3}><path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
+                </div>
+                <div>
+                  <p className="text-sm font-bold text-alta-navy">Right to Shop for Settlement Services</p>
+                  <p className="text-xs text-alta-gray leading-relaxed mt-0.5">Your Loan Estimate includes a &quot;Services You Can Shop For&quot; section. You have the right to select your own providers for those services, including title insurance, pest inspections, and surveys.</p>
+                  <p className="text-[10px] text-alta-teal font-medium mt-1">12 CFR 1026.19(e)(1)(vi) (TRID Rule)</p>
+                </div>
+              </div>
+              <div className="flex items-start gap-3 p-3 bg-white rounded-xl border border-[#bddcc7]">
+                <div className="w-5 h-5 rounded border-2 border-[#2d6b3f] flex items-center justify-center shrink-0 mt-0.5">
+                  <svg className="w-3 h-3 text-[#2d6b3f]" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={3}><path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
+                </div>
+                <div>
+                  <p className="text-sm font-bold text-alta-navy">Right to File Complaints</p>
+                  <p className="text-xs text-alta-gray leading-relaxed mt-0.5">If you believe a settlement service provider violated RESPA, you can file a complaint with the Consumer Financial Protection Bureau (CFPB) at <a href="https://www.consumerfinance.gov/complaint/" target="_blank" rel="noopener noreferrer" className="text-alta-teal underline font-semibold">consumerfinance.gov/complaint</a> or your state&apos;s department of insurance.</p>
+                  <p className="text-[10px] text-alta-teal font-medium mt-1">12 U.S.C. 2607 (RESPA Section 8)</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
           {/* Key distinction */}
           <div className="grid md:grid-cols-2 gap-4 mb-14">
             <div className="relative p-6 rounded-2xl overflow-hidden border border-red-200">

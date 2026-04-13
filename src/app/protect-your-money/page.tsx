@@ -41,6 +41,63 @@ export default function ProtectYourMoneyPage() {
               </div>
             </div>
           </div>
+          {/* Real Wire Fraud Timeline */}
+          <div className="mb-8">
+            <h2 className="text-lg font-bold text-alta-navy mb-3">Real Wire Fraud Timeline: How Fast It Happens</h2>
+            <div className="relative bg-white rounded-2xl border border-gray-200 shadow-sm p-5 overflow-hidden">
+              {/* Connecting line */}
+              <div className="hidden sm:block absolute top-1/2 left-[calc(10%+12px)] right-[calc(10%+12px)] h-0.5 bg-gradient-to-r from-amber-300 via-red-400 to-red-700 -translate-y-1/2 z-0" />
+              <div className="grid grid-cols-1 sm:grid-cols-5 gap-4 sm:gap-2 relative z-10">
+                <div className="flex sm:flex-col items-center sm:items-center gap-3 sm:gap-2 text-center">
+                  <div className="w-10 h-10 rounded-full bg-amber-100 border-2 border-amber-400 flex items-center justify-center shrink-0">
+                    <span className="text-xs font-black text-amber-700">0h</span>
+                  </div>
+                  <div>
+                    <p className="text-xs font-bold text-alta-navy">Fake Email Sent</p>
+                    <p className="text-[10px] text-alta-gray leading-tight mt-0.5">Criminal sends spoofed wiring instructions</p>
+                  </div>
+                </div>
+                <div className="flex sm:flex-col items-center sm:items-center gap-3 sm:gap-2 text-center">
+                  <div className="w-10 h-10 rounded-full bg-orange-100 border-2 border-orange-400 flex items-center justify-center shrink-0">
+                    <span className="text-xs font-black text-orange-700">1h</span>
+                  </div>
+                  <div>
+                    <p className="text-xs font-bold text-alta-navy">Funds Wired</p>
+                    <p className="text-[10px] text-alta-gray leading-tight mt-0.5">Buyer wires money to fraudulent account</p>
+                  </div>
+                </div>
+                <div className="flex sm:flex-col items-center sm:items-center gap-3 sm:gap-2 text-center">
+                  <div className="w-10 h-10 rounded-full bg-red-100 border-2 border-red-400 flex items-center justify-center shrink-0">
+                    <span className="text-xs font-black text-red-700">2h</span>
+                  </div>
+                  <div>
+                    <p className="text-xs font-bold text-alta-navy">Money Moved Overseas</p>
+                    <p className="text-[10px] text-alta-gray leading-tight mt-0.5">Funds layered through multiple accounts internationally</p>
+                  </div>
+                </div>
+                <div className="flex sm:flex-col items-center sm:items-center gap-3 sm:gap-2 text-center">
+                  <div className="w-10 h-10 rounded-full bg-red-200 border-2 border-red-500 flex items-center justify-center shrink-0">
+                    <span className="text-xs font-black text-red-800">24h</span>
+                  </div>
+                  <div>
+                    <p className="text-xs font-bold text-alta-navy">Recovery Drops to ~10%</p>
+                    <p className="text-[10px] text-alta-gray leading-tight mt-0.5">Most funds are already beyond reach</p>
+                  </div>
+                </div>
+                <div className="flex sm:flex-col items-center sm:items-center gap-3 sm:gap-2 text-center">
+                  <div className="w-10 h-10 rounded-full bg-red-600 border-2 border-red-800 flex items-center justify-center shrink-0">
+                    <span className="text-xs font-black text-white">48h</span>
+                  </div>
+                  <div>
+                    <p className="text-xs font-bold text-alta-navy">Less Than 5% Recovery</p>
+                    <p className="text-[10px] text-alta-gray leading-tight mt-0.5">Funds are effectively gone</p>
+                  </div>
+                </div>
+              </div>
+              <p className="text-[10px] text-alta-teal font-medium mt-4 text-center">Source: FBI IC3 2024 Internet Crime Report, CertifID 2026 State of Wire Fraud Report</p>
+            </div>
+          </div>
+
           {/* Big warning */}
           <div className="bg-red-50 border-2 border-red-200 rounded-2xl p-6 lg:p-8 mb-12">
             <div className="flex items-start gap-4">

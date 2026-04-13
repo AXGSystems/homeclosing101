@@ -265,6 +265,33 @@ function FindCompanyContent() {
               </p>
             </div>
 
+            {/* 5 Questions to Ask */}
+            <div className="bg-white rounded-2xl border border-gray-100 border-l-4 border-l-[#1a5276] shadow-sm p-5 mb-6">
+              <h3 className="text-sm font-bold text-alta-navy mb-3">5 Questions to Ask Your Title Company</h3>
+              <div className="space-y-2.5">
+                <div className="flex items-start gap-2.5">
+                  <span className="w-5 h-5 rounded-full bg-[#1a5276] text-white text-[10px] font-bold flex items-center justify-center shrink-0 mt-0.5">1</span>
+                  <p className="text-xs text-alta-gray leading-relaxed"><strong className="text-alta-navy">Have you adopted ALTA Best Practices?</strong> — Companies assessed against ALTA&apos;s seven-pillar framework have verified standards for escrow security, data privacy, and consumer protection.</p>
+                </div>
+                <div className="flex items-start gap-2.5">
+                  <span className="w-5 h-5 rounded-full bg-[#1a5276] text-white text-[10px] font-bold flex items-center justify-center shrink-0 mt-0.5">2</span>
+                  <p className="text-xs text-alta-gray leading-relaxed"><strong className="text-alta-navy">Can you provide an itemized fee estimate?</strong> — Get a written breakdown of every fee before you commit. Title insurance premiums vs. service fees should be clearly separated.</p>
+                </div>
+                <div className="flex items-start gap-2.5">
+                  <span className="w-5 h-5 rounded-full bg-[#1a5276] text-white text-[10px] font-bold flex items-center justify-center shrink-0 mt-0.5">3</span>
+                  <p className="text-xs text-alta-gray leading-relaxed"><strong className="text-alta-navy">How do you protect against wire fraud?</strong> — Ask about their callback verification process and whether they use a secure wire verification platform like CertifID.</p>
+                </div>
+                <div className="flex items-start gap-2.5">
+                  <span className="w-5 h-5 rounded-full bg-[#1a5276] text-white text-[10px] font-bold flex items-center justify-center shrink-0 mt-0.5">4</span>
+                  <p className="text-xs text-alta-gray leading-relaxed"><strong className="text-alta-navy">What closing options do you offer?</strong> — Ask if they support in-person, hybrid, or Remote Online Notarization (RON) so you can choose what works for your schedule.</p>
+                </div>
+                <div className="flex items-start gap-2.5">
+                  <span className="w-5 h-5 rounded-full bg-[#1a5276] text-white text-[10px] font-bold flex items-center justify-center shrink-0 mt-0.5">5</span>
+                  <p className="text-xs text-alta-gray leading-relaxed"><strong className="text-alta-navy">How do you handle title defects?</strong> — A good company will explain their process for resolving liens, encumbrances, or ownership disputes discovered during the title search.</p>
+                </div>
+              </div>
+            </div>
+
             {/* Results iframe */}
             {hasSearched && iframeUrl && (
               <div className="bg-white rounded-2xl border border-[#c5d8e4] shadow-sm overflow-hidden mb-8">
@@ -446,9 +473,9 @@ function FindCompanyContent() {
 
     {/* Modal */}
     {activeModal && (
-      <div className="fixed inset-0 z-[700] flex items-center justify-center p-4" onClick={() => setActiveModal(null)}>
+      <div className="fixed inset-0 z-[700] flex items-end sm:items-center justify-center sm:p-4" onClick={() => setActiveModal(null)}>
         <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" />
-        <div className="relative bg-white rounded-2xl shadow-2xl max-w-2xl w-full max-h-[85vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
+        <div className="relative bg-white rounded-t-2xl sm:rounded-2xl shadow-2xl max-w-2xl w-full max-h-[90vh] sm:max-h-[85vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
           <button onClick={() => setActiveModal(null)} className="absolute top-3 right-3 p-2 text-white hover:text-white bg-black/40 hover:bg-black/60 rounded-full z-10">
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12" /></svg>
           </button>

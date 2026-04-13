@@ -86,9 +86,9 @@ ${terms.map(t => `<div class="term"><h2>${t.term}</h2><p>${t.definition}</p>${t.
 
     {/* Term detail modal */}
     {selectedTerm && (
-      <div className="fixed inset-0 z-[700] flex items-center justify-center p-4" onClick={() => setSelectedTerm(null)}>
+      <div className="fixed inset-0 z-[700] flex items-end sm:items-center justify-center sm:p-4" onClick={() => setSelectedTerm(null)}>
         <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" />
-        <div className="relative bg-white rounded-2xl shadow-2xl max-w-lg w-full p-6 sm:p-8 max-h-[80vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
+        <div className="relative bg-white rounded-t-2xl sm:rounded-2xl shadow-2xl max-w-lg w-full p-6 sm:p-8 max-h-[90vh] sm:max-h-[80vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
           <button onClick={() => setSelectedTerm(null)} className="absolute top-4 right-4 p-1 text-alta-gray hover:text-alta-navy">
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
           </button>
@@ -127,9 +127,9 @@ ${terms.map(t => `<div class="term"><h2>${t.term}</h2><p>${t.definition}</p>${t.
 
     {/* Clip list modal */}
     {showClipList && (
-      <div className="fixed inset-0 z-[700] flex items-center justify-center p-4" onClick={() => setShowClipList(false)}>
+      <div className="fixed inset-0 z-[700] flex items-end sm:items-center justify-center sm:p-4" onClick={() => setShowClipList(false)}>
         <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" />
-        <div className="relative bg-white rounded-2xl shadow-2xl max-w-lg w-full max-h-[80vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
+        <div className="relative bg-white rounded-t-2xl sm:rounded-2xl shadow-2xl max-w-lg w-full max-h-[90vh] sm:max-h-[80vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
           <div className="sticky top-0 bg-white px-6 py-4 border-b border-gray-100 flex items-center justify-between rounded-t-2xl">
             <div>
               <h3 className="text-lg font-bold text-alta-navy">My Saved Terms</h3>
@@ -272,6 +272,35 @@ ${terms.map(t => `<div class="term"><h2>${t.term}</h2><p>${t.definition}</p>${t.
           {/* Inline sponsor ad inside sticky */}
           <StickyGlossaryAd />
         </div>
+
+        {/* Most Searched Terms */}
+        {!search && !activeLetter && (
+          <div className="mt-4 mb-6">
+            <p className="text-xs font-semibold text-alta-navy mb-2">Most Searched Terms</p>
+            <div className="flex flex-wrap gap-2">
+              {[
+                "Escrow", "Title Insurance", "Closing Costs", "Deed", "Lien",
+                "Appraisal", "Earnest Money", "Amortization", "PMI", "Cloud on Title"
+              ].map((term) => {
+                const found = Object.values(glossaryData).flat().find(t => t.term === term);
+                if (!found) return null;
+                const color = letterColors[term.charAt(0)] || '#0a8ebc';
+                return (
+                  <button
+                    key={term}
+                    onClick={() => setSelectedTerm(found)}
+                    className="px-3 py-1.5 rounded-full text-xs font-medium border transition-all hover:shadow-sm"
+                    style={{ borderColor: `${color}40`, color: color, backgroundColor: `${color}08` }}
+                    onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = color; e.currentTarget.style.color = 'white'; }}
+                    onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = `${color}08`; e.currentTarget.style.color = color; }}
+                  >
+                    {term}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+        )}
 
         {/* Terms */}
         <div className="space-y-8">

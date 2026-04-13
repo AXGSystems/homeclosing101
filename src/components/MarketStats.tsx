@@ -116,9 +116,9 @@ export default function MarketStats() {
 
       {/* Detail modal */}
       {selectedStat && (
-        <div className="fixed inset-0 z-[700] flex items-center justify-center p-4" onClick={() => setSelectedStat(null)}>
+        <div className="fixed inset-0 z-[700] flex items-end sm:items-center justify-center sm:p-4" onClick={() => setSelectedStat(null)}>
           <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" />
-          <div className="relative bg-white rounded-2xl shadow-2xl max-w-lg w-full max-h-[80vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
+          <div className="relative bg-white rounded-t-2xl sm:rounded-2xl shadow-2xl max-w-lg w-full max-h-[90vh] sm:max-h-[80vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
             {/* Header with image */}
             <div className="relative h-36 overflow-hidden rounded-t-2xl">
               <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url('${selectedStat.image}')` }} />

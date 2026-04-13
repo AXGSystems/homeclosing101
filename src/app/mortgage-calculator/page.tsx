@@ -404,6 +404,38 @@ export default function MortgageCalculatorPage() {
             <p className="text-[10px] text-alta-gray mt-2">* FHA MIP is permanent for most loans (LTV &gt; 90% at origination). USDA guarantee fees are for the life of the loan. Sources: FHA.com, VA.gov, USDA Rural Development, Fannie Mae</p>
           </div>
 
+          {/* Quick Scenarios */}
+          <div className="mt-8">
+            <h2 className="text-xl font-bold text-alta-navy mb-2">Quick Scenarios</h2>
+            <p className="text-sm text-alta-gray mb-4">Click a scenario to instantly populate the calculator and see estimated payments.</p>
+            <div className="grid sm:grid-cols-3 gap-3">
+              <button
+                onClick={() => { setHomePrice(300000); setDownPaymentPct(3.5); setLoanType("fha"); setInterestRate(6.5); setLoanTermYears(30); }}
+                className="p-4 bg-[#e6f1f5] rounded-xl border border-[#b4d8e8] border-l-4 border-l-[#0a7ea8] text-left tile-interactive hover:shadow-md transition-all"
+              >
+                <p className="text-sm font-bold text-alta-navy">First-Time Buyer</p>
+                <p className="text-xs text-alta-teal font-semibold mt-1">$300K | 3.5% Down | FHA</p>
+                <p className="text-[10px] text-alta-gray mt-1.5 leading-relaxed">Low down payment option for buyers with limited savings. FHA loans accept credit scores as low as 580.</p>
+              </button>
+              <button
+                onClick={() => { setHomePrice(500000); setDownPaymentPct(20); setLoanType("conventional"); setInterestRate(6.5); setLoanTermYears(30); }}
+                className="p-4 bg-[#e9f5ed] rounded-xl border border-[#bddcc7] border-l-4 border-l-[#2d6b3f] text-left tile-interactive hover:shadow-md transition-all"
+              >
+                <p className="text-sm font-bold text-alta-navy">Move-Up Buyer</p>
+                <p className="text-xs text-alta-teal font-semibold mt-1">$500K | 20% Down | Conv</p>
+                <p className="text-[10px] text-alta-gray mt-1.5 leading-relaxed">Using equity from a previous home to avoid PMI. Conventional loan with the best rates available.</p>
+              </button>
+              <button
+                onClick={() => { setHomePrice(400000); setDownPaymentPct(0); setLoanType("va"); setInterestRate(6.0); setLoanTermYears(30); }}
+                className="p-4 bg-[#faf4e4] rounded-xl border border-[#e8d9a8] border-l-4 border-l-[#8b6914] text-left tile-interactive hover:shadow-md transition-all"
+              >
+                <p className="text-sm font-bold text-alta-navy">VA Veteran</p>
+                <p className="text-xs text-alta-teal font-semibold mt-1">$400K | 0% Down | VA</p>
+                <p className="text-[10px] text-alta-gray mt-1.5 leading-relaxed">Zero down payment, no monthly PMI. Available to eligible veterans, active duty, and surviving spouses.</p>
+              </button>
+            </div>
+          </div>
+
           <div className="mt-8 grid sm:grid-cols-3 gap-3">
             <Link href="/affordability" className="group p-4 bg-[#e8f0f5] rounded-xl border border-[#c5d8e4] border-l-4 border-l-[#1a5276] tile-interactive text-center">
               <h3 className="text-sm font-semibold text-alta-navy group-hover:text-alta-teal transition-colors">Affordability Calculator</h3>

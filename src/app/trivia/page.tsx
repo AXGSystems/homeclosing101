@@ -9,11 +9,11 @@ import FirstTimeBuyerCTA from "@/components/FirstTimeBuyerCTA";
    CONFETTI SYSTEM
    ═══════════════════════════════════════════════════════ */
 function Confetti() {
-  const [particles, setParticles] = useState<{ id: number; x: number; y: number; color: string; rotation: number; scale: number; dx: number; dy: number; dr: number }[]>([]);
+  const [particles, setParticles] = useState<{ id: number; x: number; y: number; color: string; rotation: number; scale: number; dx: number; dy: number; dr: number; shape: "circle" | "rect" }[]>([]);
 
   useEffect(() => {
-    const colors = ["#0a7ea8", "#2d6b3f", "#5b3a8c", "#8b6914", "#943030", "#d4a843", "#1a5276", "#ff6b6b", "#ffd93d", "#6bcb77"];
-    const newParticles = Array.from({ length: 120 }, (_, i) => ({
+    const colors = ["#0a7ea8", "#2d6b3f", "#5b3a8c", "#8b6914", "#943030", "#d4a843", "#1a5276", "#ff6b6b", "#ffd93d", "#6bcb77", "#e74c3c", "#f39c12", "#2ecc71", "#9b59b6", "#1abc9c"];
+    const newParticles = Array.from({ length: 150 }, (_, i) => ({
       id: i,
       x: Math.random() * 100,
       y: -10 - Math.random() * 40,
@@ -23,6 +23,7 @@ function Confetti() {
       dx: (Math.random() - 0.5) * 2,
       dy: 1.5 + Math.random() * 3,
       dr: (Math.random() - 0.5) * 10,
+      shape: Math.random() > 0.5 ? "circle" : "rect" as "circle" | "rect",
     }));
     setParticles(newParticles);
   }, []);
@@ -32,7 +33,7 @@ function Confetti() {
       {particles.map((p) => (
         <div
           key={p.id}
-          className="absolute w-3 h-3 rounded-sm"
+          className={`absolute ${p.shape === "circle" ? "w-3 h-3 rounded-full" : "w-3 h-4 rounded-sm"}`}
           style={{
             left: `${p.x}%`,
             backgroundColor: p.color,
@@ -161,6 +162,8 @@ export default function TriviaPage() {
   const [gameOver, setGameOver] = useState(false);
   // Show confetti
   const [showConfetti, setShowConfetti] = useState(false);
+  // Visual feedback flash: "correct" | "incorrect" | null
+  const [answerFlash, setAnswerFlash] = useState<"correct" | "incorrect" | null>(null);
 
   const totalQuestions = categories.length * pointValues.length; // 25
   const maxScore = categories.reduce((sum, cat) => sum + cat.questions.reduce((s, _, i) => s + pointValues[i], 0), 0); // 15000
@@ -181,6 +184,8 @@ export default function TriviaPage() {
     const points = pointValues[qIdx];
 
     setSubmitted(true);
+    setAnswerFlash(isCorrect ? "correct" : "incorrect");
+    setTimeout(() => setAnswerFlash(null), 600);
     if (isCorrect) {
       setScore((s) => s + points);
       setCorrect((c) => c + 1);
@@ -229,6 +234,23 @@ export default function TriviaPage() {
       />
 
       {showConfetti && <Confetti />}
+
+      {/* Visual feedback flash overlay */}
+      {answerFlash && (
+        <div
+          className="fixed inset-0 z-[650] pointer-events-none"
+          style={{
+            animation: "answerFlash 0.6s ease-out forwards",
+            backgroundColor: answerFlash === "correct" ? "rgba(45, 107, 63, 0.15)" : "rgba(148, 48, 48, 0.15)",
+          }}
+        />
+      )}
+      <style jsx>{`
+        @keyframes answerFlash {
+          0% { opacity: 1; }
+          100% { opacity: 0; }
+        }
+      `}</style>
 
       <div className="py-1.5 lg:py-2">
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
@@ -280,6 +302,9 @@ export default function TriviaPage() {
                   <p className="text-[10px] text-alta-gray">Accuracy</p>
                 </div>
               </div>
+
+              {/* Share Your Score */}
+              <ShareScore score={score} />
 
               <div className="flex flex-wrap gap-3 justify-center">
                 <button onClick={resetGame} className="px-6 py-3 bg-alta-teal text-white font-semibold rounded-lg hover:bg-alta-teal-dark transition-colors">
@@ -340,9 +365,9 @@ export default function TriviaPage() {
 
           {/* ══ QUESTION MODAL ══ */}
           {activeCell && (
-            <div className="fixed inset-0 z-[700] flex items-center justify-center p-4" onClick={() => { if (submitted) closeQuestion(); }}>
+            <div className="fixed inset-0 z-[700] flex items-end sm:items-center justify-center sm:p-4" onClick={() => { if (submitted) closeQuestion(); }}>
               <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
-              <div className="relative bg-white rounded-2xl shadow-2xl max-w-xl w-full max-h-[90vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
+              <div className="relative bg-white rounded-t-2xl sm:rounded-2xl shadow-2xl max-w-xl w-full max-h-[90vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
                 {/* Header */}
                 <div className={`bg-gradient-to-r ${categories[activeCell.catIdx].gradient} px-6 py-4 rounded-t-2xl`}>
                   <div className="flex items-center justify-between">
@@ -489,5 +514,38 @@ export default function TriviaPage() {
         </div>
       </div>
     </>
+  );
+}
+
+/* ─── Share Your Score ─── */
+function ShareScore({ score }: { score: number }) {
+  const [copied, setCopied] = useState(false);
+  const shareText = `I scored $${score.toLocaleString()} on the HC101 Trivia Challenge! Test your homebuying knowledge at homeclosing101.vercel.app/trivia`;
+
+  const handleCopy = () => {
+    navigator.clipboard.writeText(shareText).then(() => {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    });
+  };
+
+  return (
+    <div className="max-w-md mx-auto mb-6 p-4 bg-[#e6f1f5] rounded-xl border border-[#b4d8e8]">
+      <h3 className="text-sm font-bold text-alta-navy mb-2 flex items-center gap-2">
+        <svg className="w-4 h-4 text-[#0a7ea8]" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M7.217 10.907a2.25 2.25 0 100 2.186m0-2.186c.18.324.283.696.283 1.093s-.103.77-.283 1.093m0-2.186l9.566-5.314m-9.566 7.5l9.566 5.314m0 0a2.25 2.25 0 103.935 2.186 2.25 2.25 0 00-3.935-2.186zm0-12.814a2.25 2.25 0 103.933-2.185 2.25 2.25 0 00-3.933 2.185z" /></svg>
+        Share Your Score
+      </h3>
+      <p className="text-xs text-alta-gray bg-white rounded-lg p-3 mb-3 leading-relaxed border border-gray-100">{shareText}</p>
+      <button
+        onClick={handleCopy}
+        className={`w-full py-2 rounded-lg text-xs font-semibold transition-all ${
+          copied
+            ? "bg-[#2d6b3f] text-white"
+            : "bg-[#0a7ea8] text-white hover:bg-[#086a8a]"
+        }`}
+      >
+        {copied ? "Copied to Clipboard!" : "Copy to Clipboard"}
+      </button>
+    </div>
   );
 }

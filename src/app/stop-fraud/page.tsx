@@ -113,6 +113,40 @@ export default function StopFraudPage() {
           </div>
         </div>
 
+        {/* EMERGENCY: What to do RIGHT NOW if you're a victim */}
+        <div className="mb-6 rounded-2xl overflow-hidden shadow-lg">
+          <div className="bg-gradient-to-r from-[#7a1a1a] via-[#943030] to-[#7a1a1a] px-5 py-3">
+            <h2 className="text-white font-bold text-lg tracking-tight flex items-center gap-2">
+              <svg className="w-5 h-5 animate-pulse" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M8.485 2.495c.673-1.167 2.357-1.167 3.03 0l6.28 10.875c.673 1.168-.168 2.625-1.516 2.625H3.72c-1.347 0-2.189-1.457-1.515-2.625L8.485 2.495zM10 5a.75.75 0 01.75.75v3.5a.75.75 0 01-1.5 0v-3.5A.75.75 0 0110 5zm0 9a1 1 0 100-2 1 1 0 000 2z" clipRule="evenodd" /></svg>
+              What To Do RIGHT NOW If You&apos;re a Victim
+            </h2>
+          </div>
+          <div className="bg-gradient-to-b from-red-50 to-white p-5 border-2 border-t-0 border-[#943030]/30 rounded-b-2xl">
+            <p className="text-xs text-alta-gray mb-4 font-medium">Every minute matters. Do these three things immediately — in this order:</p>
+            <div className="grid sm:grid-cols-3 gap-3">
+              <div className="relative p-4 bg-white rounded-xl border-2 border-red-200 shadow-sm">
+                <span className="absolute -top-3 -left-2 w-7 h-7 rounded-full bg-[#943030] text-white flex items-center justify-center text-sm font-black shadow-md">1</span>
+                <h3 className="text-sm font-bold text-alta-navy mt-1 mb-1">Call Your Bank</h3>
+                <p className="text-xs text-alta-gray leading-relaxed">Request an immediate wire recall. Ask for the fraud department. Provide the transaction reference number, amount, and receiving bank. Do not hang up until they confirm the recall has been initiated.</p>
+                <p className="text-[10px] text-[#943030] font-bold mt-2 uppercase tracking-wider">Do this within minutes</p>
+              </div>
+              <div className="relative p-4 bg-white rounded-xl border-2 border-red-200 shadow-sm">
+                <span className="absolute -top-3 -left-2 w-7 h-7 rounded-full bg-[#943030] text-white flex items-center justify-center text-sm font-black shadow-md">2</span>
+                <h3 className="text-sm font-bold text-alta-navy mt-1 mb-1">Report to FBI IC3</h3>
+                <p className="text-xs text-alta-gray leading-relaxed">File at <a href="https://www.ic3.gov/" target="_blank" rel="noopener noreferrer" className="text-alta-teal underline font-semibold">ic3.gov</a>. The FBI&apos;s Recovery Asset Team (RAT) has frozen fraudulent transfers for victims who reported quickly. Include all emails, wire confirmations, and account numbers.</p>
+                <p className="text-[10px] text-[#943030] font-bold mt-2 uppercase tracking-wider">Same hour</p>
+              </div>
+              <div className="relative p-4 bg-white rounded-xl border-2 border-red-200 shadow-sm">
+                <span className="absolute -top-3 -left-2 w-7 h-7 rounded-full bg-[#943030] text-white flex items-center justify-center text-sm font-black shadow-md">3</span>
+                <h3 className="text-sm font-bold text-alta-navy mt-1 mb-1">Call Your Title Company</h3>
+                <p className="text-xs text-alta-gray leading-relaxed">Use a phone number you already have on file — NOT one from a suspicious email. Alert them that funds may have been misdirected. They may be able to coordinate with the receiving bank.</p>
+                <p className="text-[10px] text-[#943030] font-bold mt-2 uppercase tracking-wider">Same hour</p>
+              </div>
+            </div>
+            <p className="text-[10px] text-alta-teal font-medium mt-3">Source: FBI IC3 Recovery Asset Team (RAT) protocol, CFPB consumer advisory</p>
+          </div>
+        </div>
+
         {/* Interactive stats — click any tile for deep-dive details */}
         <FraudStats />
 
