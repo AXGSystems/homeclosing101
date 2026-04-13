@@ -25,37 +25,45 @@ const headlines = [
 
 export default function NewsTicker() {
   return (
-    <div className="news-ticker print:hidden bg-alta-navy text-white border-b border-white/10 overflow-hidden">
-      <div className="flex items-center">
-        {/* Label */}
-        <div className="shrink-0 bg-alta-teal px-2 sm:px-4 py-1.5 sm:py-2 font-bold text-[9px] sm:text-[11px] uppercase tracking-wider z-10 flex items-center gap-1.5 sm:gap-2">
-          <span className="relative flex h-1.5 w-1.5 sm:h-2 sm:w-2">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
-            <span className="relative inline-flex rounded-full h-1.5 w-1.5 sm:h-2 sm:w-2 bg-white"></span>
-          </span>
-          <span className="hidden sm:inline">Industry </span>News
-        </div>
+    <>
+      <style dangerouslySetInnerHTML={{ __html: `
+        @keyframes tickerScroll {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-50%); }
+        }
+      `}} />
+      <div className="news-ticker print:hidden bg-alta-navy text-white border-b border-white/10 overflow-hidden">
+        <div className="flex items-center">
+          {/* Label */}
+          <div className="shrink-0 bg-alta-teal px-2 sm:px-4 py-1.5 sm:py-2 font-bold text-[9px] sm:text-[11px] uppercase tracking-wider z-10 flex items-center gap-1.5 sm:gap-2">
+            <span className="relative flex h-1.5 w-1.5 sm:h-2 sm:w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-1.5 w-1.5 sm:h-2 sm:w-2 bg-white"></span>
+            </span>
+            <span className="hidden sm:inline">Industry </span>News
+          </div>
 
-        {/* Scrolling content */}
-        <div className="overflow-hidden flex-1">
-          <div
-            className="flex items-center whitespace-nowrap hover:[animation-play-state:paused]"
-            style={{ animation: "tickerScroll 1s linear infinite" }}
-          >
-            {/* Render headlines twice for seamless loop */}
-            {[...headlines, ...headlines].map((item, i) => (
-              <span
-                key={i}
-                className="inline-flex items-center gap-1.5 px-4 py-2 text-[11px] shrink-0"
-              >
-                <span className="text-gray-300">{item.text}</span>
-                <span className="text-[9px] text-alta-teal font-semibold uppercase tracking-wider">{item.source}</span>
-                <span className="text-gray-600 mx-1">|</span>
-              </span>
-            ))}
+          {/* Scrolling content */}
+          <div className="overflow-hidden flex-1">
+            <div
+              className="flex items-center whitespace-nowrap hover:[animation-play-state:paused]"
+              style={{ animation: "tickerScroll 20s linear infinite" }}
+            >
+              {/* Render headlines twice for seamless loop */}
+              {[...headlines, ...headlines].map((item, i) => (
+                <span
+                  key={i}
+                  className="inline-flex items-center gap-1.5 px-4 py-2 text-[11px] shrink-0"
+                >
+                  <span className="text-gray-300">{item.text}</span>
+                  <span className="text-[9px] text-alta-teal font-semibold uppercase tracking-wider">{item.source}</span>
+                  <span className="text-gray-600 mx-1">|</span>
+                </span>
+              ))}
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }

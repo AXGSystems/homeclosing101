@@ -209,11 +209,7 @@ select:focus {
   max-height: 2000px;
 }
 
-/* News ticker marquee */
-@keyframes tickerScroll {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
-}
+/* News ticker keyframes are injected inline by NewsTicker component */
 
 /* ============================================================
    STAT CARDS — the big numbers section
