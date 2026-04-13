@@ -297,7 +297,7 @@ ${terms.map(t => `<div class="term"><h2>${t.term}</h2><p>${t.definition}</p>${t.
                       return (
                         <div
                           key={t.term}
-                          className="relative p-4 bg-white rounded-xl border border-gray-100 shadow-sm hover:shadow-lg hover:-translate-y-0.5 transition-all group cursor-pointer"
+                          className="relative p-4 bg-white rounded-xl border border-gray-100 shadow-sm tile-interactive group cursor-pointer"
                           style={{ borderLeftWidth: '3px', borderLeftColor: color }}
                           onClick={() => setSelectedTerm(t)}
                         >

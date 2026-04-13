@@ -196,7 +196,7 @@ export default function BlogPage() {
 
     <div className="py-1.5 lg:py-2">
       <div className="max-w-5xl mx-auto px-4 sm:px-6">
-        <div className="mb-6 p-4 bg-white rounded-2xl border border-[#c5d8e4] border-l-4 border-l-[#0a7ea8] sm:sticky sm:top-[142px] z-20 shadow-md">
+        <div className="mb-6 p-4 bg-[#e6f1f5] rounded-2xl border border-[#b4d8e8] border-l-4 border-l-[#0a7ea8] sm:sticky sm:top-[142px] z-20 shadow-md">
           <div className="flex items-start gap-4">
             <div className="w-12 h-12 rounded-xl bg-[#0a7ea8]/10 flex items-center justify-center text-[#0a7ea8] shrink-0">
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M12 7.5h1.5m-1.5 3h1.5m-7.5 3h7.5m-7.5 3h7.5m3-9h3.375c.621 0 1.125.504 1.125 1.125V18a2.25 2.25 0 01-2.25 2.25M16.5 7.5V18a2.25 2.25 0 002.25 2.25M16.5 7.5V4.875c0-.621-.504-1.125-1.125-1.125H4.125C3.504 3.75 3 4.254 3 4.875V18a2.25 2.25 0 002.25 2.25h13.5M6 7.5h3v3H6v-3z" /></svg>
@@ -210,7 +210,7 @@ export default function BlogPage() {
 
         {/* Featured article */}
         <div className="mb-8">
-          <button onClick={() => setSelectedArticle(articles[0])} className="w-full text-left group rounded-2xl overflow-hidden shadow-md border border-gray-100 bg-white hover:shadow-lg transition-shadow">
+          <button onClick={() => setSelectedArticle(articles[0])} className="w-full text-left group rounded-2xl overflow-hidden shadow-md border border-gray-100 bg-white tile-interactive">
             <div className="grid md:grid-cols-2">
               <div className="relative h-56 md:h-auto overflow-hidden">
                 <div className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105" style={{ backgroundImage: `url('${articles[0].image}')` }} />
@@ -240,7 +240,7 @@ export default function BlogPage() {
         {/* Article grid */}
         <div className="grid md:grid-cols-2 gap-5 mb-8">
           {articles.slice(1, 5).map((article) => (
-            <button key={article.title} onClick={() => setSelectedArticle(article)} className="text-left group rounded-2xl overflow-hidden shadow-sm border border-gray-100 bg-white hover:shadow-md transition-shadow">
+            <button key={article.title} onClick={() => setSelectedArticle(article)} className="text-left group rounded-2xl overflow-hidden shadow-sm border border-gray-100 bg-white tile-interactive">
               <div className="relative h-40 overflow-hidden">
                 <div className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105" style={{ backgroundImage: `url('${article.image}')` }} />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
@@ -265,7 +265,7 @@ export default function BlogPage() {
         {/* More articles */}
         <div className="grid md:grid-cols-2 gap-5 mb-8">
           {articles.slice(5).map((article) => (
-            <button key={article.title} onClick={() => setSelectedArticle(article)} className="text-left group rounded-2xl overflow-hidden shadow-sm border border-gray-100 bg-white hover:shadow-md transition-shadow">
+            <button key={article.title} onClick={() => setSelectedArticle(article)} className="text-left group rounded-2xl overflow-hidden shadow-sm border border-gray-100 bg-white tile-interactive">
               <div className="relative h-40 overflow-hidden">
                 <div className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105" style={{ backgroundImage: `url('${article.image}')` }} />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />

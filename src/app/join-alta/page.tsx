@@ -1173,7 +1173,7 @@ export default function JoinAltaPage() {
           {/* Stats */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-14">
             {stats.map((s) => (
-              <div key={s.label} className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 text-center hover:shadow-md transition-shadow">
+              <div key={s.label} className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 text-center tile-interactive">
                 <p className="text-3xl font-bold text-alta-teal">{s.value}</p>
                 <p className="text-xs text-alta-gray mt-1 font-medium">{s.label}</p>
               </div>
@@ -1259,7 +1259,7 @@ export default function JoinAltaPage() {
           <p className="text-sm text-alta-gray mb-6 leading-relaxed">ALTA brings the title industry together through flagship conferences, education events, and grassroots advocacy. Click any event to explore.</p>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 mb-10">
             {events.map((e) => (
-              <button key={e.name} onClick={() => setActiveModal(e.modal)} className="text-left rounded-2xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-lg transition-shadow group bg-white cursor-pointer">
+              <button key={e.name} onClick={() => setActiveModal(e.modal)} className="text-left rounded-2xl overflow-hidden border border-gray-100 shadow-sm tile-interactive group bg-white cursor-pointer">
                 <div className="relative h-36 overflow-hidden">
                   <div className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105" style={{ backgroundImage: `url('${e.image}')` }} />
                   <div className={`absolute inset-0 bg-gradient-to-t ${e.color} opacity-70`} />
@@ -1290,7 +1290,7 @@ export default function JoinAltaPage() {
           <p className="text-sm text-alta-gray mb-6 leading-relaxed">Beyond events, ALTA drives impact through grassroots advocacy, charitable giving, professional recognition, and political engagement. Click any to explore.</p>
           <div className="grid md:grid-cols-2 gap-4 mb-10">
             {programs.map((p) => (
-              <button key={p.name} onClick={() => setActiveModal(p.modal)} className="text-left rounded-2xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-md transition-shadow group bg-white cursor-pointer">
+              <button key={p.name} onClick={() => setActiveModal(p.modal)} className="text-left rounded-2xl overflow-hidden border border-gray-100 shadow-sm tile-interactive group bg-white cursor-pointer">
                 <div className={`bg-gradient-to-r ${p.color} px-4 py-3 flex items-center gap-3`}>
                   <div className="w-9 h-9 rounded-lg bg-white/15 flex items-center justify-center shrink-0">
                     <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d={p.icon} /></svg>

@@ -76,7 +76,7 @@ export default function FirstTimeBuyersPage() {
               { label: "Closing Costs", href: "/closing-process/closing-costs", icon: "M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z" },
               { label: "Checklist", href: "/closing-process/closing-checklist", icon: "M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" },
             ].map((t) => (
-              <Link key={t.label} href={t.href} className="p-4 bg-white rounded-xl border border-gray-100 hover:shadow-md hover:border-alta-teal/20 transition-all text-center group">
+              <Link key={t.label} href={t.href} className="p-4 bg-white rounded-xl border border-gray-100 tile-interactive text-center group">
                 <div className="w-10 h-10 rounded-xl bg-alta-light flex items-center justify-center text-alta-teal mx-auto mb-2 group-hover:bg-alta-teal group-hover:text-white transition-colors">
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d={t.icon} /></svg>
                 </div>
@@ -135,7 +135,7 @@ export default function FirstTimeBuyersPage() {
           <h2 className="text-2xl font-bold text-alta-navy mb-4">6 Costly Mistakes First-Time Buyers Make</h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 mb-10">
             {mistakes.map((m, i) => (
-              <div key={i} className="p-5 bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-md hover:border-red-200 transition-all">
+              <div key={i} className="p-5 bg-white rounded-2xl border border-gray-100 shadow-sm tile-interactive">
                 <div className="w-8 h-8 rounded-lg bg-red-100 flex items-center justify-center text-red-600 mb-3">
                   <span className="font-bold text-sm">{i + 1}</span>
                 </div>
@@ -207,7 +207,7 @@ export default function FirstTimeBuyersPage() {
               { insight: "Wish they'd gotten owner's title insurance", detail: "Buyers who skipped owner's title insurance and later faced a title claim had to pay for legal defense out of pocket — often $20,000-$75,000+ even for baseless claims. The one-time premium is a fraction of the risk.", image: "https://images.unsplash.com/photo-1589829085413-56de8ae18c73?w=400&q=80" },
               { insight: "Didn't know about down payment assistance", detail: "Thousands of programs exist at the state, county, and city level to help with down payments and closing costs. Many first-time buyers qualify but never apply because they don't know the programs exist. Check with your state HFA.", image: "https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=400&q=80" },
             ].map((item) => (
-              <div key={item.insight} className="rounded-xl border border-gray-100 overflow-hidden shadow-sm hover:shadow-md transition-all bg-white">
+              <div key={item.insight} className="rounded-xl border border-gray-100 overflow-hidden shadow-sm tile-interactive bg-white">
                 <div className="relative h-32 overflow-hidden">
                   <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url('${item.image}')` }} />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />

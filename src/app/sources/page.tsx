@@ -105,7 +105,7 @@ export default function SourcesPage() {
                 <h2 className="text-xl font-bold text-alta-navy mb-4 pb-2 border-b border-gray-100">{section.category}</h2>
                 <div className="space-y-3">
                   {section.items.map((item) => (
-                    <div key={item.name} className="p-4 bg-white rounded-xl border border-gray-100 shadow-sm hover:shadow-md hover:border-alta-teal/20 transition-all">
+                    <div key={item.name} className="p-4 bg-white rounded-xl border border-gray-100 shadow-sm tile-interactive">
                       <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2">
                         <div className="flex-1">
                           <a href={item.url} target="_blank" rel="noopener noreferrer" className="font-semibold text-alta-navy hover:text-alta-teal transition-colors text-sm inline-flex items-center gap-1">
