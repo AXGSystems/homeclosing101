@@ -224,6 +224,7 @@ export default function MortgageCalculatorPage() {
 
             {/* Results */}
             <div className="space-y-5">
+              <InlineAd />
               <div className="bg-gradient-to-br from-alta-navy to-[#0d3a5c] rounded-2xl p-6 text-white text-center">
                 <p className="text-[10px] text-gray-400 uppercase tracking-wider mb-0.5">{config.name} Loan — Estimated Monthly Payment</p>
                 <p className="text-4xl font-bold">${fmt(calc.totalMonthly)}</p>
