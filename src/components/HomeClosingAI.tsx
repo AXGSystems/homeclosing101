@@ -324,7 +324,11 @@ export default function HomeClosingAI() {
                     dangerouslySetInnerHTML={{
                       __html: msg.content
                         .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                        .replace(/^(\d+)\.\s+/gm, '<br/>$1. ')
+                        .replace(/^- /gm, '<br/>&bull; ')
                         .replace(/\n/g, '<br/>')
+                        .replace(/(<br\/>){3,}/g, '<br/><br/>')
+                        .replace(/^<br\/>/, '')
                     }}
                   />
                 </div>

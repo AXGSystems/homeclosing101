@@ -9,6 +9,7 @@ import ScrollToTop from "@/components/ScrollToTop";
 import RouteScrollToTop from "@/components/RouteScrollToTop";
 import ClosingFolderProvider from "@/components/ClosingFolderProvider";
 import ClosingFolderButton from "@/components/ClosingFolderButton";
+import FeedbackTabs from "@/components/FeedbackTabs";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -112,6 +113,7 @@ export default function RootLayout({
           </div>
           <ScrollToTop />
           <HomeClosingAI />
+          <FeedbackTabs />
           <ClosingFolderButton />
         </ClosingFolderProvider>
       </body>
