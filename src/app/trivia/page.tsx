@@ -3,8 +3,10 @@
 import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 import PageHero from "@/components/PageHero";
+import { useAchievements } from "@/components/AchievementSystem";
 import FirstTimeBuyerCTA from "@/components/FirstTimeBuyerCTA";
 import SaveToFolderBtn from "@/components/SaveToFolderBtn";
+import ShareButtons from "@/components/ShareButtons";
 
 /* ═══════════════════════════════════════════════════════
    CONFETTI SYSTEM
@@ -147,6 +149,7 @@ const pointValues = [200, 400, 600, 800, 1000];
    MAIN COMPONENT
    ═══════════════════════════════════════════════════════ */
 export default function TriviaPage() {
+  const { unlock: unlockAchievement } = useAchievements();
   // Board state: track which cells have been answered
   const [answered, setAnswered] = useState<Set<string>>(new Set());
   // Currently active question
@@ -204,6 +207,13 @@ export default function TriviaPage() {
       setShowConfetti(true);
     }
   };
+
+  // Unlock Quiz Master achievement when game ends with 80%+ accuracy
+  useEffect(() => {
+    if (gameOver && totalQuestions > 0 && (correct / totalQuestions) * 100 >= 80) {
+      unlockAchievement('quiz-master');
+    }
+  }, [gameOver, correct, totalQuestions, unlockAchievement]);
 
   const resetGame = () => {
     setAnswered(new Set());
@@ -314,6 +324,10 @@ export default function TriviaPage() {
                   content={`Score: $${score.toLocaleString()} | Correct: ${correct}/${totalQuestions} | Accuracy: ${Math.round((correct / totalQuestions) * 100)}%`}
                   label="Save Score to Folder"
                 />
+              </div>
+
+              <div className="flex justify-center mb-4">
+                <ShareButtons path="/trivia" title="HomeClosing101 Trivia — Test Your Closing Knowledge" />
               </div>
 
               <div className="flex flex-wrap gap-3 justify-center">

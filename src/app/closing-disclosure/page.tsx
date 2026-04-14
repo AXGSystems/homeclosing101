@@ -5,6 +5,33 @@ import Link from "next/link";
 import PageHero from "@/components/PageHero";
 import { InlineAd } from "@/components/EliteProviders";
 import FirstTimeBuyerCTA from "@/components/FirstTimeBuyerCTA";
+import MiniQuiz from "@/components/MiniQuiz";
+
+const closingDisclosureQuiz = [
+  {
+    q: "How many business days before closing must your lender provide the Closing Disclosure?",
+    choices: ["1 business day", "3 business days", "5 business days", "7 business days"],
+    answer: 1,
+    explanation: "Federal law (TRID rule) requires lenders to deliver the Closing Disclosure at least 3 business days before the closing date so borrowers have time to review all final loan terms and costs."
+  },
+  {
+    q: "What happens if the APR on your Closing Disclosure increases by more than 0.125% from the Loan Estimate?",
+    choices: [
+      "Nothing — small changes are expected",
+      "You receive a new 3-business-day review period",
+      "The lender must cancel the loan",
+      "Closing is delayed by 30 days"
+    ],
+    answer: 1,
+    explanation: "If the APR increases by more than 1/8 of a percent for a fixed-rate loan (or 1/4 percent for an adjustable-rate loan), a corrected Closing Disclosure must be provided and a new 3-business-day waiting period begins."
+  },
+  {
+    q: "Which document should you compare side-by-side with your Closing Disclosure to spot unexpected changes?",
+    choices: ["Your credit report", "The appraisal", "The Loan Estimate", "The title commitment"],
+    answer: 2,
+    explanation: "The Closing Disclosure mirrors the format of the Loan Estimate so you can compare them page by page. Look for any changes in loan terms, interest rate, monthly payment, and closing costs."
+  }
+];
 
 const pages = [
   {
@@ -516,6 +543,8 @@ export default function ClosingDisclosurePage() {
               </Link>
             </div>
           </div>
+
+          <MiniQuiz title="Test Your Knowledge: Closing Disclosure" questions={closingDisclosureQuiz} />
 
           <FirstTimeBuyerCTA />
         </div>

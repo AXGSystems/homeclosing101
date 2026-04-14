@@ -6,6 +6,43 @@ import PageHero from "@/components/PageHero";
 import { InlineAd } from "@/components/EliteProviders";
 import TrustedALTAMembers from "@/components/TrustedALTAMembers";
 import FirstTimeBuyerCTA from "@/components/FirstTimeBuyerCTA";
+import MiniQuiz from "@/components/MiniQuiz";
+
+const escrowQuiz = [
+  {
+    q: "What is the primary purpose of an escrow account during a real estate transaction?",
+    choices: [
+      "To help the buyer get a lower interest rate",
+      "To hold funds and documents from a neutral third party until all conditions are met",
+      "To guarantee the home passes inspection",
+      "To speed up the closing timeline"
+    ],
+    answer: 1,
+    explanation: "An escrow account is managed by a neutral third party (the escrow agent) who holds funds, documents, and instructions until all conditions of the purchase agreement are satisfied — protecting both the buyer and seller."
+  },
+  {
+    q: "After closing, your mortgage escrow account typically pays for which of the following?",
+    choices: [
+      "Your monthly principal and interest",
+      "HOA dues and utilities",
+      "Property taxes and homeowners insurance",
+      "Home repairs and maintenance"
+    ],
+    answer: 2,
+    explanation: "After closing, lenders commonly require an escrow account to collect and pay property taxes and homeowners insurance premiums on your behalf, ensuring these critical bills are never missed."
+  },
+  {
+    q: "What is 'earnest money' in the context of escrow?",
+    choices: [
+      "The lender's origination fee",
+      "A good-faith deposit from the buyer showing serious intent to purchase",
+      "The seller's share of closing costs",
+      "A government tax on real estate transactions"
+    ],
+    answer: 1,
+    explanation: "Earnest money is a deposit (typically 1-3% of the purchase price) placed into escrow when the purchase agreement is signed. It demonstrates the buyer's good faith and is applied toward the down payment or closing costs at closing."
+  }
+];
 
 const phases = [
   {
@@ -432,6 +469,8 @@ export default function EscrowGuidePage() {
               </Link>
             </div>
           </div>
+
+          <MiniQuiz title="Test Your Knowledge: Escrow" questions={escrowQuiz} />
 
           <FirstTimeBuyerCTA />
         </div>

@@ -1,8 +1,9 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import Link from "next/link";
 import PageHero from "@/components/PageHero";
+import { useAchievements } from "@/components/AchievementSystem";
 import { InlineAd } from "@/components/EliteProviders";
 import { propertyTaxRates, loanTypes } from "@/data/propertyTaxRates";
 import { countyTaxRates } from "@/data/countyTaxRates";
@@ -12,6 +13,8 @@ const stateOptions = Object.entries(propertyTaxRates)
   .map(([code, data]) => ({ code, name: data.name, rate: data.rate }));
 
 export default function MortgageCalculatorPage() {
+  const { unlock } = useAchievements();
+  useEffect(() => { unlock("calculator-pro"); }, [unlock]);
   const [homePrice, setHomePrice] = useState(350000);
   const [downPaymentPct, setDownPaymentPct] = useState(20);
   const [interestRate, setInterestRate] = useState(6.5);

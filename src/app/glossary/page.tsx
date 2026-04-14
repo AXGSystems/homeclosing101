@@ -20,9 +20,39 @@ const letterColors: Record<string, string> = {
 
 const totalAllTerms = Object.values(glossaryData).reduce((acc, arr) => acc + arr.length, 0);
 
+/* ─── Category filter definitions (keyword-based matching) ─── */
+const categoryDefs: { label: string; keywords: string[] }[] = [
+  { label: "Title & Ownership", keywords: ["title", "deed", "lien", "chain of title", "cloud on title", "abstract", "conveyance", "ownership", "vesting", "quitclaim", "grant", "warranty deed", "trustee"] },
+  { label: "Closing & Settlement", keywords: ["closing", "settlement", "escrow", "closing disclosure", "closing costs", "closing agent", "closing protection", "settlement statement", "hud-1", "disbursement", "proration", "clear to close"] },
+  { label: "Mortgage & Lending", keywords: ["mortgage", "lender", "loan", "dti", "apr", "pmi", "amortiz", "interest rate", "underwriting", "refinanc", "pre-approv", "pre-qualif", "debt-to-income", "down payment", "discount point", "origination", "buydown", "rate lock"] },
+  { label: "Insurance", keywords: ["insurance", "premium", "coverage", "policy", "endorsement", "binder", "indemnity", "underwriter", "claim"] },
+  { label: "Legal & Regulatory", keywords: ["respa", "trid", "cfpb", "regulation", "compliance", "statute", "ordinance", "zoning", "arbitration", "adjudication", "affidavit", "notary", "power of attorney", "fiduciary"] },
+  { label: "Property & Valuation", keywords: ["appraisal", "survey", "assessment", "valuation", "market value", "appraised value", "assessed value", "inspection", "boundary", "encroachment", "easement", "acre", "parcel", "plat", "flood zone", "cap rate"] },
+];
+
+function termMatchesCategory(t: GlossaryTerm, cat: typeof categoryDefs[number]): boolean {
+  const text = (t.term + " " + t.definition).toLowerCase();
+  return cat.keywords.some((kw) => text.includes(kw));
+}
+
+/* ─── Term of the Day (date-seeded) ─── */
+function getTermOfTheDay(): GlossaryTerm {
+  const allTerms = Object.values(glossaryData).flat();
+  const today = new Date();
+  const seed = today.getFullYear() * 10000 + (today.getMonth() + 1) * 100 + today.getDate();
+  return allTerms[seed % allTerms.length];
+}
+
+/* ─── Per-letter counts ─── */
+const letterCounts: Record<string, number> = {};
+for (const l of allLetters) {
+  letterCounts[l] = glossaryData[l]?.length || 0;
+}
+
 export default function GlossaryPage() {
   const [search, setSearch] = useState("");
   const [activeLetter, setActiveLetter] = useState<string | null>(null);
+  const [activeCategory, setActiveCategory] = useState<string | null>(null);
   const [clipped, setClipped] = useState<Record<string, GlossaryTerm>>({});
   const [selectedTerm, setSelectedTerm] = useState<GlossaryTerm | null>(null);
   const [showClipList, setShowClipList] = useState(false);
@@ -30,19 +60,20 @@ export default function GlossaryPage() {
   const [folderSaved, setFolderSaved] = useState<string | null>(null);
 
   const filteredData = useMemo(() => {
-    if (!search && !activeLetter) return glossaryData;
+    if (!search && !activeLetter && !activeCategory) return glossaryData;
+    const catDef = activeCategory ? categoryDefs.find((c) => c.label === activeCategory) : null;
     const result: typeof glossaryData = {};
     for (const [letter, terms] of Object.entries(glossaryData)) {
       if (activeLetter && letter !== activeLetter) continue;
-      const filtered = terms.filter(
-        (t) =>
-          t.term.toLowerCase().includes(search.toLowerCase()) ||
-          t.definition.toLowerCase().includes(search.toLowerCase())
-      );
+      const filtered = terms.filter((t) => {
+        const matchesSearch = !search || t.term.toLowerCase().includes(search.toLowerCase()) || t.definition.toLowerCase().includes(search.toLowerCase());
+        const matchesCat = !catDef || termMatchesCategory(t, catDef);
+        return matchesSearch && matchesCat;
+      });
       if (filtered.length > 0) result[letter] = filtered;
     }
     return result;
-  }, [search, activeLetter]);
+  }, [search, activeLetter, activeCategory]);
 
   const totalTerms = Object.values(filteredData).reduce((acc, arr) => acc + arr.length, 0);
   const clippedCount = Object.keys(clipped).length;
@@ -267,7 +298,7 @@ ${terms.map(t => `<div class="term"><h2>${t.term}</h2><p>${t.definition}</p>${t.
                   key={l}
                   onClick={() => { setActiveLetter(l === activeLetter ? null : l); setSearch(""); }}
                   disabled={!hasTerms}
-                  className={`w-7 h-7 text-[11px] font-semibold rounded transition-colors ${
+                  className={`relative w-7 h-7 text-[11px] font-semibold rounded transition-colors ${
                     l === activeLetter
                       ? "text-white shadow-sm"
                       : hasTerms
@@ -279,15 +310,43 @@ ${terms.map(t => `<div class="term"><h2>${t.term}</h2><p>${t.definition}</p>${t.
                   onMouseLeave={(e) => { if (hasTerms && l !== activeLetter) { e.currentTarget.style.backgroundColor = ''; e.currentTarget.style.color = ''; } }}
                 >
                   {l}
+                  {hasTerms && (
+                    <span className="absolute -top-1.5 -right-1.5 min-w-[14px] h-[14px] px-0.5 bg-alta-navy text-white text-[8px] font-bold rounded-full flex items-center justify-center leading-none">{count}</span>
+                  )}
                 </button>
               );
             })}
           </div>
 
+          {/* Category filter chips */}
+          <div className="flex flex-wrap gap-1.5 mb-2">
+            {categoryDefs.map((cat) => (
+              <button
+                key={cat.label}
+                onClick={() => { setActiveCategory(activeCategory === cat.label ? null : cat.label); setActiveLetter(null); setSearch(""); }}
+                className={`px-2.5 py-1 text-[11px] font-semibold rounded-full border transition-colors ${
+                  activeCategory === cat.label
+                    ? "bg-alta-navy text-white border-alta-navy"
+                    : "bg-white text-alta-gray border-gray-200 hover:border-alta-teal hover:text-alta-teal"
+                }`}
+              >
+                {cat.label}
+              </button>
+            ))}
+            {activeCategory && (
+              <button
+                onClick={() => setActiveCategory(null)}
+                className="px-2.5 py-1 text-[11px] font-semibold rounded-full border border-red-200 text-red-500 bg-red-50 hover:bg-red-100 transition-colors"
+              >
+                Clear Filter
+              </button>
+            )}
+          </div>
+
           {/* Count + sponsor ad strip */}
           <div className="flex items-center justify-between">
             <p className="text-[11px] text-alta-gray">
-              {search ? `Showing ${totalTerms} of ${totalAllTerms} terms for "${search}"` : activeLetter ? `Showing ${totalTerms} of ${totalAllTerms} terms starting with ${activeLetter}` : `Showing all ${totalTerms} terms`}
+              {search ? `Showing ${totalTerms} of ${totalAllTerms} terms for "${search}"` : activeCategory ? `Showing ${totalTerms} terms in "${activeCategory}"` : activeLetter ? `Showing ${totalTerms} of ${totalAllTerms} terms starting with ${activeLetter}` : `Showing all ${totalTerms} terms`}
             </p>
           </div>
 
@@ -295,8 +354,11 @@ ${terms.map(t => `<div class="term"><h2>${t.term}</h2><p>${t.definition}</p>${t.
           <StickyGlossaryAd />
         </div>
 
+        {/* Term of the Day */}
+        {!search && !activeLetter && !activeCategory && <TermOfTheDay onSelect={setSelectedTerm} />}
+
         {/* Most Searched Terms */}
-        {!search && !activeLetter && (
+        {!search && !activeLetter && !activeCategory && (
           <div className="mt-4 mb-6">
             <p className="text-xs font-semibold text-alta-navy mb-2">Most Searched Terms</p>
             <div className="flex flex-wrap gap-2">
@@ -480,6 +542,39 @@ function StickyGlossaryAd() {
           </div>
         </div>
       </a>
+    </div>
+  );
+}
+
+/* ─── Term of the Day Component ─── */
+function TermOfTheDay({ onSelect }: { onSelect: (t: GlossaryTerm) => void }) {
+  const term = getTermOfTheDay();
+  const color = letterColors[term.term.charAt(0)] || '#0a8ebc';
+  return (
+    <div className="mt-4 mb-2">
+      <button
+        onClick={() => onSelect(term)}
+        className="w-full text-left p-4 rounded-xl border-2 border-dashed transition-all hover:shadow-md group"
+        style={{ borderColor: `${color}50`, background: `linear-gradient(135deg, ${color}08, ${color}04)` }}
+      >
+        <div className="flex items-start gap-4">
+          <div className="w-12 h-12 rounded-2xl flex items-center justify-center text-white font-bold text-lg shrink-0 group-hover:scale-110 transition-transform" style={{ backgroundColor: color }}>
+            {term.term.charAt(0)}
+          </div>
+          <div className="flex-1 min-w-0">
+            <div className="flex items-center gap-2 mb-1">
+              <span className="text-[10px] font-bold uppercase tracking-widest" style={{ color }}>Term of the Day</span>
+              <span className="text-[10px] text-alta-gray">{new Date().toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })}</span>
+            </div>
+            <h3 className="font-bold text-alta-navy text-base group-hover:text-alta-teal transition-colors">{term.term}</h3>
+            <p className="text-xs text-alta-gray mt-1 leading-relaxed line-clamp-2">{term.definition}</p>
+            <span className="inline-flex items-center gap-0.5 mt-2 text-[10px] font-semibold opacity-0 group-hover:opacity-100 transition-opacity" style={{ color }}>
+              View full definition
+              <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
+            </span>
+          </div>
+        </div>
+      </button>
     </div>
   );
 }

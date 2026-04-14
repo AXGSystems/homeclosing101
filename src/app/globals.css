@@ -11,6 +11,23 @@
   --alta-gray: #6b7a8d;
   --background: #ffffff;
   --foreground: #1a2744;
+  --bg-primary: #ffffff;
+  --bg-secondary: #f8fafc;
+  --text-primary: #1a1a1a;
+  --text-secondary: #6b7a8d;
+  --border-color: #e5e7eb;
+}
+
+html.dark {
+  --bg-primary: #0f172a;
+  --bg-secondary: #1e293b;
+  --text-primary: #f1f5f9;
+  --text-secondary: #94a3b8;
+  --border-color: #334155;
+  --background: #0f172a;
+  --foreground: #f1f5f9;
+  --alta-light: #1e293b;
+  --alta-navy: #f1f5f9;
 }
 
 @theme inline {
@@ -40,7 +57,7 @@ html {
 
 /* Accessible focus-visible outlines */
 *:focus-visible {
-  outline: 2px solid #0a7ea8;
+  outline: 2px solid #088da5;
   outline-offset: 2px;
   border-radius: 4px;
 }
@@ -56,6 +73,24 @@ html {
   background: var(--alta-teal);
   border-radius: 4px;
 }
+
+/* ============================================================
+   DARK MODE — key element overrides
+   ============================================================ */
+html.dark .bg-white { background-color: var(--bg-primary); }
+html.dark .bg-gray-50,
+html.dark .bg-gray-100,
+html.dark .bg-slate-50 { background-color: var(--bg-secondary); }
+html.dark .border-gray-100,
+html.dark .border-gray-200,
+html.dark .border-gray-300 { border-color: var(--border-color); }
+html.dark .text-gray-500,
+html.dark .text-gray-600 { color: var(--text-secondary); }
+html.dark .text-gray-700,
+html.dark .text-gray-800,
+html.dark .text-gray-900 { color: var(--text-primary); }
+html.dark .shadow-sm { box-shadow: 0 1px 2px rgba(0,0,0,0.3); }
+html.dark .shadow-lg { box-shadow: 0 10px 25px rgba(0,0,0,0.4); }
 
 /* Checklist animations */
 .check-item {
@@ -452,5 +487,15 @@ select:focus {
   /* Page title — print a clean title from the content */
   h1, h2 {
     break-after: avoid;
+  }
+}
+
+/* ============================================================
+   REDUCED MOTION — respect user preference
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
   }
 }

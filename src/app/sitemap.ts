@@ -37,6 +37,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly" as const,
     },
 
+    {
+      path: "/closing-day-prep",
+      priority: 0.8,
+      changeFrequency: "monthly" as const,
+    },
+
     // Documents & tools
     {
       path: "/closing-disclosure",
@@ -65,6 +71,21 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     {
       path: "/affordability",
+      priority: 0.7,
+      changeFrequency: "monthly" as const,
+    },
+    {
+      path: "/rent-vs-buy",
+      priority: 0.7,
+      changeFrequency: "monthly" as const,
+    },
+    {
+      path: "/dti-calculator",
+      priority: 0.7,
+      changeFrequency: "monthly" as const,
+    },
+    {
+      path: "/compare-loans",
       priority: 0.7,
       changeFrequency: "monthly" as const,
     },
@@ -138,8 +159,30 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     { path: "/trivia", priority: 0.6, changeFrequency: "monthly" as const },
     {
+      path: "/achievements",
+      priority: 0.5,
+      changeFrequency: "monthly" as const,
+    },
+    {
       path: "/my-folder",
       priority: 0.5,
+      changeFrequency: "monthly" as const,
+    },
+    {
+      path: "/my-journey",
+      priority: 0.6,
+      changeFrequency: "monthly" as const,
+    },
+
+    // Gamification & progress
+    {
+      path: "/achievements",
+      priority: 0.5,
+      changeFrequency: "monthly" as const,
+    },
+    {
+      path: "/closing-day-prep",
+      priority: 0.6,
       changeFrequency: "monthly" as const,
     },
 

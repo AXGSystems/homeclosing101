@@ -313,6 +313,7 @@ const reductionStrategies = [
   {
     title: "Shop for title insurance",
     tip: "Under RESPA, you can choose your own title company. Get quotes from 2-3 providers. Ask about simultaneous issue discounts.",
+    savings: "Save $500-$1,500",
     detail: {
       strategy: "Title insurance is one of the largest closing costs and one of the most shoppable. Under the Real Estate Settlement Procedures Act (RESPA), you have the legal right to choose your own title insurance provider — your lender or real estate agent cannot require you to use a specific company.",
       steps: [
@@ -328,6 +329,7 @@ const reductionStrategies = [
   {
     title: "Negotiate seller concessions",
     tip: "Ask the seller to pay a portion of closing costs (common in buyer's markets). This is capped at 3-9% depending on loan type.",
+    savings: "Save $5,000-$10,000+",
     detail: {
       strategy: "Seller concessions (also called seller credits or seller-paid closing costs) are an agreement where the seller pays a portion of your closing costs. This is very common in buyer's markets and perfectly legal — it just means the seller nets less from the sale. The amount is limited by your loan type.",
       steps: [
@@ -343,6 +345,7 @@ const reductionStrategies = [
   {
     title: "Compare Loan Estimates",
     tip: "CFPB requires lenders to provide a Loan Estimate within 3 business days. Compare at least 3 to find the best deal.",
+    savings: "Save $1,000-$3,000+",
     detail: {
       strategy: "The Loan Estimate is a standardized 3-page form that every lender must provide within 3 business days of receiving your application. Because the format is identical across all lenders, it makes comparison straightforward. Shopping multiple lenders is one of the most effective ways to reduce closing costs.",
       steps: [
@@ -358,6 +361,7 @@ const reductionStrategies = [
   {
     title: "Ask about lender credits",
     tip: "Some lenders offer credits toward closing costs in exchange for a slightly higher interest rate. Do the math on total cost over time.",
+    savings: "Save $1,000-$5,000+",
     detail: {
       strategy: "A lender credit is the opposite of discount points — instead of paying upfront to lower your rate, the lender gives you money toward closing costs in exchange for accepting a slightly higher interest rate. This can be a smart strategy if you plan to sell or refinance within a few years.",
       steps: [
@@ -373,6 +377,7 @@ const reductionStrategies = [
   {
     title: "Close at end of month",
     tip: "Closing later in the month reduces prepaid interest charges since you pay interest from closing date through month-end.",
+    savings: "Save $500-$1,500",
     detail: {
       strategy: "Prepaid interest is calculated from your closing date through the last day of the month. Your first mortgage payment isn't due until the first of the month after next. By closing at the end of the month, you minimize the number of days of prepaid interest charged at closing.",
       steps: [
@@ -388,6 +393,7 @@ const reductionStrategies = [
   {
     title: "Check for first-time buyer programs",
     tip: "Many states and counties offer down payment assistance and closing cost grants. Check with your state housing finance agency.",
+    savings: "Save $5,000-$15,000+",
     detail: {
       strategy: "Every state has a Housing Finance Agency (HFA) that offers programs for first-time homebuyers, and many cities and counties have their own programs too. These can include down payment assistance, closing cost grants, below-market interest rates, and tax credits. Many programs define 'first-time buyer' as anyone who hasn't owned a home in the past 3 years.",
       steps: [
@@ -403,6 +409,7 @@ const reductionStrategies = [
   {
     title: "Review the Closing Disclosure carefully",
     tip: "Compare every line item to your Loan Estimate. Question any fees that increased or appeared unexpectedly.",
+    savings: "Save $200-$2,000+",
     detail: {
       strategy: "Your Closing Disclosure must be delivered at least 3 business days before closing. This is your last chance to catch errors and challenge unexpected fee increases. Under TRID rules, some fees cannot increase at all, some can increase up to 10% in aggregate, and others have no limit — but all must be disclosed and explained.",
       steps: [
@@ -418,9 +425,36 @@ const reductionStrategies = [
   },
 ];
 
+const NATIONAL_AVG_PCT = 3.4;
+
+const stateClosingCosts: Record<string, { avgPct: number; transferTax: number; notes: string }> = {
+  TX: { avgPct: 3.1, transferTax: 0, notes: "No state income tax. Title insurance rates set by state." },
+  CA: { avgPct: 3.5, transferTax: 0.11, notes: "High property values increase absolute costs." },
+  FL: { avgPct: 3.8, transferTax: 0.7, notes: "Documentary stamp tax adds significant cost." },
+  NY: { avgPct: 5.0, transferTax: 0.4, notes: "Attorney state. Mansion tax on $1M+ properties." },
+  PA: { avgPct: 3.9, transferTax: 1.0, notes: "High transfer tax split between buyer and seller." },
+  IL: { avgPct: 3.6, transferTax: 0.1, notes: "Chicago adds city transfer tax on top of state/county." },
+  OH: { avgPct: 3.2, transferTax: 0.1, notes: "Moderate costs. County conveyance fees apply." },
+  GA: { avgPct: 3.3, transferTax: 0.1, notes: "Attorney state. Intangible mortgage tax applies." },
+  NC: { avgPct: 3.1, transferTax: 0.2, notes: "Attorney state. Revenue stamps required on deeds." },
+  MI: { avgPct: 3.4, transferTax: 0.75, notes: "State and county transfer taxes both apply." },
+  NJ: { avgPct: 3.7, transferTax: 0.4, notes: "Realty transfer fee varies by sale price tier." },
+  VA: { avgPct: 3.2, transferTax: 0.25, notes: "Grantor tax paid by seller; recordation tax by buyer." },
+  WA: { avgPct: 3.3, transferTax: 1.28, notes: "Real estate excise tax (REET) is one of the highest in the U.S." },
+  AZ: { avgPct: 2.8, transferTax: 0, notes: "No transfer tax. Lower overall costs than most states." },
+  CO: { avgPct: 2.9, transferTax: 0.01, notes: "Minimal transfer tax. Costs vary by county." },
+};
+
+const stateNames: Record<string, string> = {
+  TX: "Texas", CA: "California", FL: "Florida", NY: "New York", PA: "Pennsylvania",
+  IL: "Illinois", OH: "Ohio", GA: "Georgia", NC: "North Carolina", MI: "Michigan",
+  NJ: "New Jersey", VA: "Virginia", WA: "Washington", AZ: "Arizona", CO: "Colorado",
+};
+
 export default function ClosingCostsPage() {
   const [homePrice, setHomePrice] = useState(350000);
   const [downPayment, setDownPayment] = useState(20);
+  const [selectedState, setSelectedState] = useState("");
   const [activeDetail, setActiveDetail] = useState<{title: string; gradient: string; content: React.ReactNode} | null>(null);
 
   const loanAmount = homePrice * (1 - downPayment / 100);
@@ -560,7 +594,7 @@ export default function ClosingCostsPage() {
         {/* Calculator */}
         <div className="bg-alta-light rounded-2xl p-6 lg:p-8 mb-12 border border-gray-100">
           <h2 className="text-xl font-bold text-alta-navy mb-6">Closing Cost Calculator</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
             <div>
               <label className="block text-sm font-medium text-alta-navy mb-2">Home Purchase Price</label>
               <div className="relative">
@@ -586,6 +620,19 @@ export default function ClosingCostsPage() {
                 />
                 <span className="absolute right-3 top-1/2 -translate-y-1/2 text-alta-gray">%</span>
               </div>
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-alta-navy mb-2">State</label>
+              <select
+                value={selectedState}
+                onChange={(e) => setSelectedState(e.target.value)}
+                className="w-full px-4 py-3 border border-gray-200 rounded-lg text-alta-navy bg-white"
+              >
+                <option value="">National Average</option>
+                {Object.keys(stateClosingCosts).sort((a, b) => stateNames[a].localeCompare(stateNames[b])).map((code) => (
+                  <option key={code} value={code}>{stateNames[code]}</option>
+                ))}
+              </select>
             </div>
           </div>
 
@@ -645,6 +692,45 @@ export default function ClosingCostsPage() {
             * This calculator provides estimates only. Actual costs vary by state, county, lender, and transaction details. Consult your settlement agent for an accurate Closing Disclosure.
           </p>
         </div>
+
+        {/* Personalized State Closing Cost Card */}
+        {selectedState && stateClosingCosts[selectedState] && (() => {
+          const sd = stateClosingCosts[selectedState];
+          const stateLow = homePrice * (sd.avgPct - 0.5) / 100;
+          const stateHigh = homePrice * (sd.avgPct + 0.5) / 100;
+          const transferTaxAmt = homePrice * sd.transferTax / 100;
+          const natAvgTotal = homePrice * NATIONAL_AVG_PCT / 100;
+          const stateAvgTotal = homePrice * sd.avgPct / 100;
+          const diff = stateAvgTotal - natAvgTotal;
+          return (
+            <div className="bg-gradient-to-br from-[#e6f1f5] to-white rounded-2xl p-6 lg:p-8 mb-12 border-2 border-alta-teal shadow-sm">
+              <h2 className="text-xl font-bold text-alta-navy mb-1">Your Estimated Closing Costs in {stateNames[selectedState]}</h2>
+              <p className="text-sm text-alta-gray mb-5">Based on a ${homePrice.toLocaleString()} home with {downPayment}% down</p>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-5">
+                <div className="bg-white rounded-xl p-4 text-center border border-gray-100">
+                  <p className="text-xs text-alta-gray uppercase tracking-wider mb-1">Estimated Range</p>
+                  <p className="text-lg font-bold text-alta-navy">${Math.round(stateLow).toLocaleString()} &ndash; ${Math.round(stateHigh).toLocaleString()}</p>
+                  <p className="text-xs text-alta-gray mt-0.5">{(sd.avgPct - 0.5).toFixed(1)}% &ndash; {(sd.avgPct + 0.5).toFixed(1)}% of price</p>
+                </div>
+                <div className="bg-white rounded-xl p-4 text-center border border-gray-100">
+                  <p className="text-xs text-alta-gray uppercase tracking-wider mb-1">Transfer Tax</p>
+                  <p className="text-lg font-bold text-alta-navy">{sd.transferTax === 0 ? "None" : `$${Math.round(transferTaxAmt).toLocaleString()}`}</p>
+                  <p className="text-xs text-alta-gray mt-0.5">{sd.transferTax === 0 ? "No state transfer tax" : `${sd.transferTax}% of sale price`}</p>
+                </div>
+                <div className="bg-white rounded-xl p-4 text-center border border-gray-100">
+                  <p className="text-xs text-alta-gray uppercase tracking-wider mb-1">vs. National Avg</p>
+                  <p className={`text-lg font-bold ${diff > 0 ? "text-[#943030]" : diff < 0 ? "text-[#2d6b3f]" : "text-alta-navy"}`}>
+                    {diff === 0 ? "Same" : `${diff > 0 ? "+" : ""}$${Math.round(Math.abs(diff)).toLocaleString()}`}
+                  </p>
+                  <p className="text-xs text-alta-gray mt-0.5">{sd.avgPct}% vs. {NATIONAL_AVG_PCT}% national</p>
+                </div>
+              </div>
+              <div className="p-3 bg-[#faf4e4] rounded-xl border border-[#e8d9a8]">
+                <p className="text-sm text-alta-gray leading-relaxed"><span className="font-semibold text-alta-navy">{stateNames[selectedState]} note:</span> {sd.notes}</p>
+              </div>
+            </div>
+          );
+        })()}
 
         <InlineAd />
 
@@ -727,7 +813,8 @@ export default function ClosingCostsPage() {
                 {item.title}
                 <svg className="w-3.5 h-3.5 text-[#2d6b3f] opacity-0 group-hover:opacity-100 transition-opacity shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" /></svg>
               </h3>
-              <p className="text-xs text-alta-gray leading-relaxed">{item.tip}</p>
+              <p className="text-xs text-alta-gray leading-relaxed mb-2">{item.tip}</p>
+              <span className="inline-block text-xs font-bold text-[#2d6b3f] bg-[#d4edda] px-2 py-0.5 rounded-full">{item.savings}</span>
             </button>
           ))}
         </div>

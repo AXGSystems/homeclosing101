@@ -1,9 +1,11 @@
 import Link from "next/link";
 import PageHero from "@/components/PageHero";
+import AchievementTrigger from "@/components/AchievementTrigger";
 import { InlineAd } from "@/components/EliteProviders";
 import TrustedALTAMembers from "@/components/TrustedALTAMembers";
 import LoanComparisonChart from "@/components/LoanComparisonChart";
 import ExpandableTimeline from "@/components/ExpandableTimeline";
+import ShareButtons from "@/components/ShareButtons";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -31,6 +33,7 @@ const mistakes = [
 export default function FirstTimeBuyersPage() {
   return (
     <>
+      <AchievementTrigger id="first-steps" />
       <PageHero
         title="First-Time Homebuyer Guide"
         subtitle="Everything you need to know about buying your first home — from building credit to getting the keys. A complete timeline and resource guide."
@@ -223,6 +226,10 @@ export default function FirstTimeBuyersPage() {
               </div>
             ))}
           </div>
+
+          <div className="h-1 bg-gradient-to-r from-transparent via-alta-teal/20 to-transparent my-10" />
+
+          <ShareButtons path="/first-time-buyers" title="First-Time Homebuyer Guide — HomeClosing101" />
 
           <div className="h-1 bg-gradient-to-r from-transparent via-alta-teal/20 to-transparent my-10" />
 

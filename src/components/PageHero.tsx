@@ -34,7 +34,7 @@ export default function PageHero({ title, subtitle, image, breadcrumb }: PageHer
         <div className="absolute bottom-0 left-1/4 w-60 h-60 bg-alta-teal/10 rounded-full translate-y-1/3 blur-2xl" />
         <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6">
           {breadcrumb && breadcrumb.length > 0 && (
-            <nav className="mb-5">
+            <nav className="mb-5" role="navigation" aria-label="Breadcrumb">
               <ol className="flex items-center gap-1.5 text-xs text-gray-400">
                 <li><Link href="/" className="hover:text-white transition-colors">Home</Link></li>
                 {breadcrumb.map((crumb, i) => (
@@ -67,7 +67,7 @@ export default function PageHero({ title, subtitle, image, breadcrumb }: PageHer
           <div className="max-w-5xl mx-auto px-3 sm:px-6 py-1.5 sm:py-2.5 flex items-center justify-between">
             <div className="flex items-center gap-3 min-w-0">
               {breadcrumb && breadcrumb.length > 0 && (
-                <nav className="hidden sm:flex items-center gap-1 text-[10px] text-gray-400 shrink-0">
+                <nav className="hidden sm:flex items-center gap-1 text-[10px] text-gray-400 shrink-0" role="navigation" aria-label="Breadcrumb">
                   {breadcrumb.slice(0, -1).map((crumb) => (
                     <span key={crumb.href} className="flex items-center gap-1">
                       <Link href={crumb.href} className="hover:text-white">{crumb.label}</Link>

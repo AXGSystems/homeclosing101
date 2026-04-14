@@ -2,6 +2,8 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import SiteSearch from "./SiteSearch";
+import ThemeToggle from "./ThemeToggle";
 
 const navItems = [
   {
@@ -18,6 +20,7 @@ const navItems = [
       { label: "Your Loan Estimate", href: "/loan-estimate" },
       { label: "Your Closing Disclosure", href: "/closing-disclosure" },
       { label: "Document Checklist", href: "/document-checklist" },
+      { label: "Closing Day Prep", href: "/closing-day-prep" },
     ],
   },
   {
@@ -26,6 +29,9 @@ const navItems = [
     children: [
       { label: "Mortgage Calculator", href: "/mortgage-calculator" },
       { label: "Affordability Calculator", href: "/affordability" },
+      { label: "DTI Calculator", href: "/dti-calculator" },
+      { label: "Rent vs Buy Calculator", href: "/rent-vs-buy" },
+      { label: "Compare Loans", href: "/compare-loans" },
       { label: "Closing Cost Calculator", href: "/closing-process/closing-costs" },
       { label: "First-Time Buyer Guide", href: "/first-time-buyers" },
     ],
@@ -51,9 +57,11 @@ const navItems = [
       { label: "Blog & News", href: "/blog" },
       { label: "Document Library", href: "/document-library" },
       { label: "HC101 Trivia Challenge", href: "/trivia" },
+      { label: "Achievements", href: "/achievements" },
       { label: "Other Resources", href: "/resources" },
       { label: "Source Index", href: "/sources" },
       { label: "My Closing Folder", href: "/my-folder" },
+      { label: "My Homebuying Journey", href: "/my-journey" },
       { label: "In the Title Industry?", href: "/join-alta" },
     ],
   },
@@ -64,7 +72,7 @@ export default function Header() {
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
 
   return (
-    <header className="bg-white shadow-sm z-50 border-b-2 border-transparent" style={{ borderImage: 'linear-gradient(to right, #0a7ea8, #2d6b3f, #5b3a8c, #d4a843) 1' }}>
+    <header className="bg-[var(--bg-primary)] shadow-sm z-50 border-b-2 border-transparent" style={{ borderImage: 'linear-gradient(to right, #0a7ea8, #2d6b3f, #5b3a8c, #d4a843) 1' }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
@@ -82,7 +90,7 @@ export default function Header() {
           </Link>
 
           {/* Desktop Nav */}
-          <nav className="hidden lg:flex items-center gap-1">
+          <nav className="hidden lg:flex items-center gap-1" role="navigation" aria-label="Main navigation">
             {navItems.map((item) => (
               <div
                 key={item.label}
@@ -102,7 +110,7 @@ export default function Header() {
                   )}
                 </Link>
                 {item.children && openDropdown === item.label && (
-                  <div className="absolute top-full left-0 mt-0 w-56 bg-white rounded-lg shadow-lg border border-gray-100 py-2 z-50">
+                  <div className="absolute top-full left-0 mt-0 w-56 bg-[var(--bg-primary)] rounded-lg shadow-lg border border-[var(--border-color)] py-2 z-50">
                     {item.children.map((child) => (
                       <Link
                         key={child.href}
@@ -118,11 +126,15 @@ export default function Header() {
             ))}
           </nav>
 
-          {/* Mobile toggle */}
-          <button
-            className="lg:hidden p-2 rounded-md text-alta-navy hover:bg-alta-light"
+          {/* Search + Theme + Mobile toggle */}
+          <div className="flex items-center gap-1">
+            <SiteSearch />
+            <ThemeToggle />
+            <button
+              className="lg:hidden p-2 rounded-md text-alta-navy hover:bg-alta-light"
             onClick={() => setMobileOpen(!mobileOpen)}
             aria-label="Toggle menu"
+            aria-expanded={mobileOpen}
           >
             {mobileOpen ? (
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -134,11 +146,12 @@ export default function Header() {
               </svg>
             )}
           </button>
+          </div>
         </div>
       </div>
 
       {/* Mobile Nav */}
-      <div className={`lg:hidden border-t border-gray-100 bg-gradient-to-b from-white to-[#f4f7fa] overflow-y-auto shadow-inner transition-all duration-300 ease-in-out ${mobileOpen ? 'max-h-[70vh] opacity-100' : 'max-h-0 opacity-0 overflow-hidden border-t-0'}`}>
+      <nav className={`lg:hidden border-t border-[var(--border-color)] bg-[var(--bg-primary)] overflow-y-auto shadow-inner transition-all duration-300 ease-in-out ${mobileOpen ? 'max-h-[70vh] opacity-100' : 'max-h-0 opacity-0 overflow-hidden border-t-0'}`} role="navigation" aria-label="Mobile navigation">
         <div className="px-4 py-3 space-y-0.5">
           {navItems.map((item) => (
             <div key={item.label}>
@@ -162,7 +175,7 @@ export default function Header() {
             </div>
           ))}
         </div>
-      </div>
+      </nav>
     </header>
   );
 }

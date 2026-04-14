@@ -5,6 +5,38 @@ import Link from "next/link";
 import PageHero from "@/components/PageHero";
 import { InlineAd } from "@/components/EliteProviders";
 import FirstTimeBuyerCTA from "@/components/FirstTimeBuyerCTA";
+import MiniQuiz from "@/components/MiniQuiz";
+
+const insuranceQuiz = [
+  {
+    q: "What does 'dwelling coverage' (Coverage A) on a homeowners insurance policy protect?",
+    choices: [
+      "Your personal belongings inside the home",
+      "The physical structure of your home",
+      "Injuries to visitors on your property",
+      "Temporary living expenses if displaced"
+    ],
+    answer: 1,
+    explanation: "Dwelling coverage (Coverage A) pays to repair or rebuild the physical structure of your home — walls, roof, floors, and built-in fixtures — if damaged by a covered peril such as fire, windstorm, or hail."
+  },
+  {
+    q: "When purchasing a home, when must you have homeowners insurance in place?",
+    choices: [
+      "Within 30 days after closing",
+      "Before the home inspection",
+      "Before closing day",
+      "Only if the lender requests it"
+    ],
+    answer: 2,
+    explanation: "Lenders require proof of homeowners insurance before closing because the policy must be active on the day ownership transfers. Without it, the lender will not fund the mortgage."
+  },
+  {
+    q: "Which common natural disaster is typically NOT covered by a standard homeowners insurance policy?",
+    choices: ["Fire", "Windstorm", "Flooding", "Hail"],
+    answer: 2,
+    explanation: "Standard homeowners policies (HO-3) exclude flood damage. Homeowners in flood-prone areas need a separate flood insurance policy, often through the National Flood Insurance Program (NFIP)."
+  }
+];
 
 const coverageTypes = [
   {
@@ -499,6 +531,8 @@ export default function HomeownersInsurancePage() {
               </Link>
             </div>
           </div>
+
+          <MiniQuiz title="Test Your Knowledge: Homeowners Insurance" questions={insuranceQuiz} />
 
           <FirstTimeBuyerCTA />
         </div>

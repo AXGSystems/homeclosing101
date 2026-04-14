@@ -123,6 +123,7 @@ export default function SponsorSidebar() {
           <button
             key={i}
             onClick={() => { setFading(true); setTimeout(() => { setCurrent(i); setFading(false); }, 200); }}
+            aria-label={`Show sponsor ${i + 1} of ${sponsors.length}`}
             className={`w-1.5 h-1.5 rounded-full transition-colors ${i === current ? "bg-alta-teal" : "bg-gray-200"}`}
           />
         ))}

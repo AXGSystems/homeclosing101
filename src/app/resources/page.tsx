@@ -198,6 +198,8 @@ export default function ResourcesPage() {
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
             {[
               { name: "Mortgage Payment Calculator", desc: "Compare Conventional, FHA, VA & USDA with county-level property tax rates and detailed payment breakdowns.", href: "/mortgage-calculator", badge: "Calculator" },
+              { name: "Rent vs Buy Calculator", desc: "Compare the true cost of renting versus buying over time — includes equity, appreciation, taxes, and break-even analysis.", href: "/rent-vs-buy", badge: "Calculator" },
+              { name: "DTI Calculator", desc: "Calculate your front-end and back-end debt-to-income ratios with visual gauges, lender interpretation, and max mortgage affordability.", href: "/dti-calculator", badge: "Calculator" },
               { name: "Closing Cost Estimator", desc: "Interactive calculator that estimates your total closing costs with itemized fees based on home price and location.", href: "/closing-process/closing-costs", badge: "Calculator" },
               { name: "Interactive Closing Checklist", desc: "33-item checklist with progress tracking across 5 phases. Check off items and print a blank copy for closing day.", href: "/closing-process/closing-checklist", badge: "Checklist" },
               { name: "Document Checklist", desc: "Everything to bring on closing day organized by category — ID, insurance, funds, and supporting documents.", href: "/document-checklist", badge: "Checklist" },

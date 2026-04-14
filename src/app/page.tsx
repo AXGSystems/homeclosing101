@@ -3,6 +3,7 @@ import EliteProviders, { InlineAd } from "@/components/EliteProviders";
 import MarketStats from "@/components/MarketStats";
 import AnimatedCounter from "@/components/AnimatedCounter";
 import HomepageTestimonials from "@/components/HomepageTestimonials";
+import QuickEstimate from "@/components/QuickEstimate";
 
 const features = [
   {
@@ -169,6 +170,28 @@ export default function HomePage() {
                   Cost Calculator
                 </Link>
               </div>
+
+              {/* Popular Right Now */}
+              <div className="mt-6">
+                <p className="text-[10px] uppercase tracking-widest text-gray-400 mb-2 font-medium">Popular right now</p>
+                <div className="flex items-center gap-3 overflow-x-auto pb-2 px-1 -mx-1">
+                  {[
+                    { label: "Wire Fraud Guide", href: "/stop-fraud", hot: true },
+                    { label: "Mortgage Calculator", href: "/mortgage-calculator" },
+                    { label: "First-Time Buyers", href: "/first-time-buyers" },
+                    { label: "HC101 Trivia", href: "/trivia" },
+                    { label: "Closing Checklist", href: "/closing-process/closing-checklist" },
+                  ].map((item: { label: string; href: string; hot?: boolean }) => (
+                    <Link key={item.href} href={item.href} className="shrink-0 px-3 py-1.5 bg-white/10 backdrop-blur-sm rounded-full text-xs text-white font-medium hover:bg-white/20 transition-colors border border-white/10">
+                      {item.hot && <span className="text-[#943030] mr-1">●</span>}
+                      {item.label}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+
+              {/* Quick Estimate — desktop only */}
+              <QuickEstimate />
             </div>
 
             {/* Right — key stats */}
@@ -591,18 +614,22 @@ export default function HomePage() {
               <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
             </Link>
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
             {[
               { title: "Mortgage Calculator", href: "/mortgage-calculator", icon: "M2.25 18.75a60.07 60.07 0 0115.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 013 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 00-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 01-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 003 15h-.75M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" },
               { title: "Affordability", href: "/affordability", icon: "M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" },
               { title: "Closing Checklist", href: "/closing-process/closing-checklist", icon: "M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" },
               { title: "Find a Company", href: "/find-company", icon: "M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" },
-            ].map((t) => (
+              { title: "HC101 Trivia", href: "/trivia", icon: "M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.455 2.456L21.75 6l-1.036.259a3.375 3.375 0 00-2.455 2.456z", isNew: true },
+              { title: "My Journey", href: "/my-journey", icon: "M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z", isNew: true },
+              { title: "Rent vs Buy", href: "/rent-vs-buy", icon: "M7.5 21L3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5", isNew: true },
+            ].map((t: { title: string; href: string; icon: string; isNew?: boolean }) => (
               <Link key={t.title} href={t.href} className="group flex items-center gap-3 p-3 bg-white/5 backdrop-blur-sm rounded-xl border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all">
                 <div className="w-10 h-10 rounded-lg bg-alta-teal/20 flex items-center justify-center shrink-0 group-hover:bg-alta-teal transition-colors">
                   <svg className="w-5 h-5 text-alta-teal group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d={t.icon} /></svg>
                 </div>
                 <span className="text-sm font-medium text-white">{t.title}</span>
+                {t.isNew && <span className="ml-auto px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wide bg-alta-teal text-white rounded-full">New</span>}
               </Link>
             ))}
           </div>

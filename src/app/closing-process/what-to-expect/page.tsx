@@ -3,6 +3,7 @@ import PageHero from "@/components/PageHero";
 import { InlineAd } from "@/components/EliteProviders";
 import FirstTimeBuyerCTA from "@/components/FirstTimeBuyerCTA";
 import ClosingFlowNav from "@/components/ClosingFlowNav";
+import ShareButtons from "@/components/ShareButtons";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -187,6 +188,8 @@ export default function WhatToExpectPage() {
           </div>
 
           <ClosingFlowNav currentStep={1} />
+
+          <ShareButtons path="/closing-process/what-to-expect" title="What to Expect at Closing — HomeClosing101" />
 
           <FirstTimeBuyerCTA />
         </div>

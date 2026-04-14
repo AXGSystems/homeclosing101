@@ -1,6 +1,8 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
+import { usePathname } from 'next/navigation';
+import Link from 'next/link';
 import { X, Send, Sparkles, Download, Loader2 } from 'lucide-react';
 
 const sponsors = [
@@ -117,6 +119,21 @@ function generateResponse(question: string): string {
     return `**ALTA Best Practices**\n\nThe American Land Title Association (ALTA) developed a set of **Best Practices** — a framework of policies and procedures that title and settlement companies follow to protect consumers.\n\n**The 7 Pillars:**\n1. **Licensing** — Maintain proper state licenses\n2. **Escrow Trust Accounting** — Safeguard client funds\n3. **Privacy & Information Security** — Protect personal data\n4. **Settlement Procedures** — Follow proper closing protocols\n5. **Title Policy Production** — Ensure accurate title policies\n6. **Insurance & Fidelity Coverage** — Carry appropriate insurance\n7. **Consumer Complaints** — Have a process to handle issues\n\n**Why it matters to you:**\nCompanies that follow ALTA Best Practices have been assessed for strong consumer protections. When choosing a title company, ask if they are ALTA Best Practices certified.\n\nFind ALTA members at alta.org/find-a-company or visit /find-company.`;
   }
 
+  // Loan types / compare
+  if (q.includes('loan type') || q.includes('compare loan') || q.includes('fha vs') || q.includes('conventional vs') || q.includes('va vs')) {
+    return `**Comparing Common Loan Types**\n\n**Conventional Loan**\n- Down payment: 3%–20%\n- Credit score: 620+ typical\n- PMI required if < 20% down (removable)\n- Best for: Strong credit, decent savings\n\n**FHA Loan**\n- Down payment: 3.5% (580+ score) or 10% (500-579)\n- Credit score: 580+ (some lenders allow 500)\n- MIP required for life of loan (if < 10% down)\n- Best for: Lower credit scores, smaller down payment\n\n**VA Loan**\n- Down payment: 0%\n- Credit score: No VA minimum (lenders often want 620+)\n- No PMI/MIP — but has a funding fee\n- Best for: Veterans, active military, eligible spouses\n\n**USDA Loan**\n- Down payment: 0%\n- Credit score: 640+ typical\n- Must be in eligible rural/suburban area\n- Income limits apply\n- Best for: Moderate-income buyers in qualifying areas\n\n**Tip:** Get pre-approved with 2-3 lenders to compare rates and terms. Even a 0.25% rate difference can save thousands over the life of the loan.\n\nVisit our **First-Time Buyers Guide** at /first-time-buyers for more details!`;
+  }
+
+  // CertifID
+  if (q.includes('certifid')) {
+    return `**CertifID — Wire Fraud Prevention**\n\nCertifID is a leading wire fraud prevention platform used by title companies and real estate professionals to verify identities and secure wire transfers.\n\n**How it works:**\n1. Your title company sends you a secure CertifID request\n2. You verify your identity through the platform\n3. Wire instructions are delivered through an encrypted, verified channel\n4. Both parties are confirmed before funds transfer\n\n**Why it matters:**\n- Wire fraud costs homebuyers **$275.1 million** annually\n- CertifID adds a critical layer of verification\n- Used by thousands of title companies nationwide\n\n**Tip:** Ask your title company if they use CertifID or a similar wire verification platform. It's one of the best safeguards against closing-day fraud.\n\nLearn more about wire fraud protection at /wire-fraud-prevention.`;
+  }
+
+  // Report fraud
+  if (q.includes('report') && (q.includes('fraud') || q.includes('scam'))) {
+    return `**How to Report Wire Fraud**\n\nIf you suspect you've been a victim of wire fraud, act IMMEDIATELY — every minute counts.\n\n**Step 1: Call your bank NOW**\n- Request an emergency recall of the wire transfer\n- Best chance of recovery is within **24 hours**\n\n**Step 2: Contact the FBI**\n- File a complaint at **ic3.gov** (Internet Crime Complaint Center)\n- Call your local FBI field office\n\n**Step 3: Notify your title company and real estate agent**\n- They may be compromised and need to alert other clients\n\n**Step 4: File a police report**\n- Contact your local law enforcement\n\n**Step 5: Report to the FTC**\n- File at **reportfraud.ftc.gov**\n\n**Recovery window:** The sooner you act, the better. After 72 hours, recovery becomes extremely difficult. Some victims have recovered funds weeks later, but speed is critical.\n\nLearn more about prevention at /wire-fraud-prevention.`;
+  }
+
   // Help
   if (q.includes('help') || q.includes('what can you')) {
     return `**HomeClosing101 AI — I can help with:**\n\n- **Closing process:** "How does closing work?"\n- **Title insurance:** "What is title insurance?"\n- **Wire fraud:** "How do I avoid wire fraud?"\n- **Costs:** "How much are closing costs?"\n- **Documents:** "What documents do I need?"\n- **Closing options:** "Can I close remotely?"\n- **Finding companies:** "How do I find a title company?"\n- **Checklist:** "What should I prepare?"\n- **First-time buyers:** "I've never bought a home before"\n- **Down payment help:** "What is down payment assistance?"\n- **DTI ratio:** "What is debt-to-income?"\n- **Escrow:** "How does escrow work?"\n- **Home inspection:** "What should I know about inspections?"\n- **Insurance types:** "Homeowner's vs title insurance"\n- **ALTA Best Practices:** "What are ALTA Best Practices?"\n- **Closing day:** "What happens at the closing table?"\n- **Definitions:** "What is escrow?"\n\nI'm here to help you close with confidence!`;
@@ -126,20 +143,102 @@ function generateResponse(question: string): string {
   return `I'm not sure I understood that, but I can help with a wide range of closing topics!\n\n**Popular questions:**\n- **"How does closing work?"** — Step-by-step process\n- **"What is title insurance?"** — Why you need it\n- **"How much are closing costs?"** — Fee breakdown\n- **"How do I avoid wire fraud?"** — Protection tips\n- **"I'm a first-time buyer"** — Where to start\n- **"What is DTI?"** — Debt-to-income explained\n- **"How does escrow work?"** — The escrow process\n- **"What happens at the closing table?"** — Signing day walkthrough\n- **"What are ALTA Best Practices?"** — Consumer protections\n\nSay **"help"** for my full list of topics.\n\nYou can also browse our **FAQ** at /faq for 250+ answered questions, or search 450+ terms in our **Glossary** at /glossary.`;
 }
 
+// Smart follow-up suggestions keyed by topic detected in the question
+function getFollowUps(question: string): string[] {
+  const q = question.toLowerCase();
+
+  if (q.includes('closing table') || q.includes('closing day') || q.includes('signing day') || q.includes('settlement day'))
+    return ['What documents will I sign?', 'Can I close remotely?', 'How long does closing take?'];
+  if (q.includes('closing') && (q.includes('process') || q.includes('what') || q.includes('how')))
+    return ['What are closing costs?', 'What happens at the closing table?', 'How do I avoid wire fraud?'];
+  if (q.includes('title insurance') || q.includes('title policy') || q.includes('owner\'s policy'))
+    return ['How much does title insurance cost?', 'How do I find a title company?', 'What are ALTA Best Practices?'];
+  if (q.includes('wire fraud') || q.includes('fraud') || q.includes('scam') || q.includes('wire'))
+    return ['What is CertifID?', 'How do I report wire fraud?', 'What happens at the closing table?'];
+  if (q.includes('cost') || q.includes('how much') || q.includes('expensive') || q.includes('fees') || q.includes('price'))
+    return ['What is title insurance?', 'What is DTI ratio?', 'Are there down payment programs?'];
+  if (q.includes('disclosure') || q.includes('document') || q.includes('paperwork'))
+    return ['What happens at closing?', 'What is escrow?', 'Can I close remotely?'];
+  if (q.includes('remote') || q.includes('online') || q.includes('ron') || q.includes('notary'))
+    return ['What documents will I sign?', 'How do I find a title company?', 'What are closing costs?'];
+  if (q.includes('find') && (q.includes('company') || q.includes('title')))
+    return ['What are ALTA Best Practices?', 'What is title insurance?', 'How do I avoid wire fraud?'];
+  if (q.includes('checklist') || q.includes('list') || q.includes('prepare') || q.includes('ready'))
+    return ['What are closing costs?', 'How do I avoid wire fraud?', 'What documents will I sign?'];
+  if (q.includes('first time') || q.includes('first-time') || q.includes('new buyer') || q.includes('never bought'))
+    return ['What are closing costs?', 'What is title insurance?', 'Are there down payment programs?'];
+  if (q.includes('down payment') || q.includes('downpayment') || q.includes('assistance program') || q.includes('dpa'))
+    return ['What is my DTI ratio?', 'First-time buyer tips', 'What are closing costs?'];
+  if (q.includes('dti') || q.includes('debt-to-income') || q.includes('debt to income'))
+    return ['Compare loan types', 'First-time buyer tips', 'What are closing costs?'];
+  if (q.includes('escrow'))
+    return ['What happens at closing?', 'What is title insurance?', 'What are closing costs?'];
+  if (q.includes('inspection') || q.includes('inspector'))
+    return ['What is the closing checklist?', 'What are closing costs?', 'First-time buyer tips'];
+  if (q.includes('alta') || q.includes('best practice') || q.includes('american land title'))
+    return ['How do I find a title company?', 'What is title insurance?', 'How do I avoid wire fraud?'];
+  if (q.includes('loan') || q.includes('mortgage') || q.includes('fha') || q.includes('conventional') || q.includes('va loan') || q.includes('compare'))
+    return ['What is my DTI ratio?', 'What are closing costs?', 'First-time buyer tips'];
+  return ['How does closing work?', 'What is title insurance?', 'How do I avoid wire fraud?'];
+}
+
+// Page-aware suggestion chips
+function getPageSuggestions(pathname: string): string[] {
+  const p = pathname.toLowerCase();
+  if (p.includes('first-time'))
+    return ['First-time buyer tips', 'What are closing costs?', 'What is title insurance?', 'Are there down payment programs?', 'What is my DTI ratio?', 'Compare loan types'];
+  if (p.includes('wire-fraud') || p.includes('protect'))
+    return ['How do I avoid wire fraud?', 'What is CertifID?', 'How do I report wire fraud?', 'What is title insurance?', 'What are ALTA Best Practices?', 'How does closing work?'];
+  if (p.includes('closing-cost'))
+    return ['What are closing costs?', 'What is title insurance?', 'What is my DTI ratio?', 'Are there down payment programs?', 'How does closing work?', 'Compare loan types'];
+  if (p.includes('glossary'))
+    return ['What is escrow?', 'What is title insurance?', 'What are closing costs?', 'How does closing work?', 'What is my DTI ratio?', 'First-time buyer tips'];
+  if (p.includes('closing-process') || p.includes('closing-checklist'))
+    return ['How does closing work?', 'What happens at the closing table?', 'What are closing costs?', 'How do I avoid wire fraud?', 'What documents will I sign?', 'Can I close remotely?'];
+  if (p.includes('escrow'))
+    return ['How does escrow work?', 'What is title insurance?', 'What are closing costs?', 'What happens at closing?', 'How do I avoid wire fraud?', 'First-time buyer tips'];
+  if (p.includes('faq'))
+    return ['How does closing work?', 'What is title insurance?', 'How do I avoid wire fraud?', 'What are closing costs?', 'First-time buyer tips', 'What is my DTI ratio?'];
+  // Default suggestions
+  return ['What is title insurance?', 'How do I avoid wire fraud?', 'What are closing costs?', 'First-time buyer tips', "What's my DTI ratio?", 'Compare loan types'];
+}
+
+// Convert internal paths in response text to clickable links (returns HTML)
+function linkifyPaths(html: string): string {
+  return html.replace(
+    /(?:at |visit |see |browse )?(\/[a-z0-9-]+(?:\/[a-z0-9-]+)*)/gi,
+    (match, path) => {
+      const label = path;
+      return `<a href="${path}" class="text-alta-teal underline underline-offset-2 hover:text-alta-navy transition-colors" data-internal-link="${path}">${label}</a>`;
+    }
+  );
+}
+
+// Typing indicator component
+function TypingDots() {
+  return (
+    <div className="flex justify-start">
+      <div className="bg-gray-100 rounded-2xl rounded-bl-md px-4 py-3 flex items-center gap-1.5">
+        <span className="w-2 h-2 rounded-full bg-gray-400 animate-bounce" style={{ animationDelay: '0ms', animationDuration: '600ms' }} />
+        <span className="w-2 h-2 rounded-full bg-gray-400 animate-bounce" style={{ animationDelay: '150ms', animationDuration: '600ms' }} />
+        <span className="w-2 h-2 rounded-full bg-gray-400 animate-bounce" style={{ animationDelay: '300ms', animationDuration: '600ms' }} />
+      </div>
+    </div>
+  );
+}
+
 export default function HomeClosingAI() {
+  const pathname = usePathname();
   const [open, setOpen] = useState(false);
-  const [messages, setMessages] = useState<Message[]>([
-    {
-      role: 'assistant',
-      content: "Welcome to **HomeClosing101** — your personal closing assistant.\n\nI can answer questions about the closing process, title insurance, costs, wire fraud protection, and more.\n\nAsk me anything — or say **\"help\"** to see what I can do.",
-      timestamp: new Date(),
-    },
-  ]);
+  const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
+  const [typing, setTyping] = useState(false);
+  const [lastUserQuestion, setLastUserQuestion] = useState('');
   const [sponsorIdx, setSponsorIdx] = useState(0);
   const [sponsorFading, setSponsorFading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const chatBodyRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -159,29 +258,31 @@ export default function HomeClosingAI() {
     return () => clearInterval(interval);
   }, []);
 
-  const handleSend = () => {
-    if (!input.trim() || loading) return;
-    const userMsg: Message = { role: 'user', content: input.trim(), timestamp: new Date() };
+  const sendQuestion = (q: string) => {
+    if (!q.trim() || loading || typing) return;
+    const userMsg: Message = { role: 'user', content: q.trim(), timestamp: new Date() };
     setMessages(prev => [...prev, userMsg]);
-    const q = input.trim();
+    setLastUserQuestion(q.trim());
     setInput('');
-    setLoading(true);
+    setTyping(true);
 
+    // Show typing dots for 300ms, then "Thinking..." spinner, then the response
     setTimeout(() => {
-      const response = generateResponse(q);
-      setMessages(prev => [...prev, { role: 'assistant', content: response, timestamp: new Date() }]);
-      setLoading(false);
-    }, 400 + Math.random() * 600);
+      setTyping(false);
+      setLoading(true);
+      setTimeout(() => {
+        const response = generateResponse(q.trim());
+        setMessages(prev => [...prev, { role: 'assistant', content: response, timestamp: new Date() }]);
+        setLoading(false);
+      }, 300 + Math.random() * 400);
+    }, 300);
   };
 
-  const quickActions = [
-    'How does closing work?',
-    'What is title insurance?',
-    'Closing costs breakdown',
-    'Wire fraud tips',
-    'Closing checklist',
-    'Help',
-  ];
+  const handleSend = () => {
+    sendQuestion(input);
+  };
+
+  const quickActions = getPageSuggestions(pathname || '/');
 
   const sponsor = sponsors[sponsorIdx];
 
@@ -297,7 +398,8 @@ export default function HomeClosingAI() {
             </div>
             <div className="flex items-center gap-2">
               <button onClick={() => {
-                const text = messages.map(m => `${m.role === 'user' ? 'You' : 'AI'}: ${m.content}`).join('\n\n');
+                const welcomeText = 'AI: Welcome to HomeClosing101 — your personal closing assistant.\n\n';
+                const text = welcomeText + messages.map(m => `${m.role === 'user' ? 'You' : 'AI'}: ${m.content}`).join('\n\n');
                 const blob = new Blob([text], { type: 'text/plain' });
                 const url = URL.createObjectURL(blob);
                 const a = document.createElement('a');
@@ -312,7 +414,15 @@ export default function HomeClosingAI() {
           </div>
 
           {/* Messages */}
-          <div className="flex-1 overflow-y-auto p-4 space-y-4">
+          <div ref={chatBodyRef} className="flex-1 overflow-y-auto p-4 space-y-4">
+            {/* Welcome message when no messages yet */}
+            {messages.length === 0 && !typing && !loading && (
+              <div className="flex justify-start">
+                <div className="max-w-[85%] rounded-2xl px-4 py-3 text-sm leading-relaxed bg-gray-100 text-gray-800 rounded-bl-md">
+                  <div dangerouslySetInnerHTML={{ __html: "Welcome to <strong>HomeClosing101</strong> — your personal closing assistant.<br/><br/>I can answer questions about the closing process, title insurance, costs, wire fraud protection, and more.<br/><br/>Ask me anything — or tap a suggestion below." }} />
+                </div>
+              </div>
+            )}
             {messages.map((msg, i) => (
               <div key={i} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
                 <div className={`max-w-[85%] rounded-2xl px-4 py-3 text-sm leading-relaxed ${
@@ -321,15 +431,31 @@ export default function HomeClosingAI() {
                     : 'bg-gray-100 text-gray-800 rounded-bl-md'
                 }`}>
                   <div
+                    onClick={(e) => {
+                      const target = e.target as HTMLElement;
+                      if (target.tagName === 'A' && target.dataset.internalLink) {
+                        e.preventDefault();
+                        window.location.href = target.dataset.internalLink;
+                      }
+                    }}
                     dangerouslySetInnerHTML={{
-                      __html: msg.content
-                        .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-                        .replace(/\n/g, '<br/>')
+                      __html: msg.role === 'assistant'
+                        ? linkifyPaths(
+                            msg.content
+                              .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                              .replace(/\n/g, '<br/>')
+                          )
+                        : msg.content
+                            .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                            .replace(/\n/g, '<br/>')
                     }}
                   />
                 </div>
               </div>
             ))}
+            {/* Typing dots indicator */}
+            {typing && <TypingDots />}
+            {/* Thinking spinner */}
             {loading && (
               <div className="flex justify-start">
                 <div className="bg-gray-100 rounded-2xl rounded-bl-md px-4 py-3 flex items-center gap-2">
@@ -338,29 +464,30 @@ export default function HomeClosingAI() {
                 </div>
               </div>
             )}
+            {/* Smart follow-up chips after the last assistant message */}
+            {messages.length >= 2 && !loading && !typing && messages[messages.length - 1].role === 'assistant' && (
+              <div className="flex flex-wrap gap-1.5 pl-1">
+                {getFollowUps(lastUserQuestion).map(fq => (
+                  <button
+                    key={fq}
+                    onClick={() => sendQuestion(fq)}
+                    className="text-[11px] px-2.5 py-1 rounded-full border border-alta-teal/30 text-alta-teal bg-alta-teal/5 hover:border-alta-teal hover:bg-alta-teal/10 transition-all"
+                  >
+                    {fq}
+                  </button>
+                ))}
+              </div>
+            )}
             <div ref={messagesEndRef} />
           </div>
 
-          {/* Quick actions */}
-          {messages.length <= 2 && (
+          {/* Suggested question chips — show when no user messages yet */}
+          {messages.length === 0 && !typing && !loading && (
             <div className="px-4 pb-2 flex flex-wrap gap-1.5">
               {quickActions.map(action => (
                 <button
                   key={action}
-                  onClick={() => {
-                    setInput(action);
-                    setTimeout(() => {
-                      const userMsg: Message = { role: 'user', content: action, timestamp: new Date() };
-                      setMessages(prev => [...prev, userMsg]);
-                      setInput('');
-                      setLoading(true);
-                      setTimeout(() => {
-                        const response = generateResponse(action);
-                        setMessages(prev => [...prev, { role: 'assistant', content: response, timestamp: new Date() }]);
-                        setLoading(false);
-                      }, 400 + Math.random() * 600);
-                    }, 50);
-                  }}
+                  onClick={() => sendQuestion(action)}
                   className="text-[11px] px-2.5 py-1 rounded-full border border-gray-200 text-gray-500 hover:border-alta-teal hover:text-alta-teal hover:bg-alta-teal/5 transition-all"
                 >
                   {action}
@@ -381,7 +508,7 @@ export default function HomeClosingAI() {
             />
             <button
               onClick={handleSend}
-              disabled={!input.trim() || loading}
+              disabled={!input.trim() || loading || typing}
               aria-label="Send message"
               className="p-2.5 rounded-xl bg-alta-navy text-white hover:bg-alta-teal disabled:opacity-40 transition-colors"
             >
