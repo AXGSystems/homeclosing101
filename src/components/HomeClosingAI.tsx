@@ -241,7 +241,7 @@ export default function HomeClosingAI() {
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [messages]);
+  }, [messages, typing, loading]);
 
   // Rotate sponsors
   useEffect(() => {
