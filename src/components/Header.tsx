@@ -53,6 +53,7 @@ const navItems = [
       { label: "HC101 Trivia Challenge", href: "/trivia" },
       { label: "Other Resources", href: "/resources" },
       { label: "Source Index", href: "/sources" },
+      { label: "Questions & Support", href: "/support" },
       { label: "My Closing Folder", href: "/my-folder" },
       { label: "In the Title Industry?", href: "/join-alta" },
     ],
