@@ -83,7 +83,11 @@ function getCompleted(): string[] {
 }
 
 function saveCompleted(ids: string[]) {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(ids));
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(ids));
+  } catch {
+    // ignore
+  }
 }
 
 /* ─── Compact strip for closing-process pages ─── */

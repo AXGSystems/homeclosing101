@@ -42,6 +42,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
       changeFrequency: "monthly" as const,
     },
+    {
+      path: "/after-closing",
+      priority: 0.8,
+      changeFrequency: "monthly" as const,
+    },
+    {
+      path: "/negotiation-guide",
+      priority: 0.8,
+      changeFrequency: "monthly" as const,
+    },
 
     // Documents & tools
     {
@@ -51,6 +61,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     {
       path: "/loan-estimate",
+      priority: 0.8,
+      changeFrequency: "monthly" as const,
+    },
+    {
+      path: "/le-vs-cd",
       priority: 0.8,
       changeFrequency: "monthly" as const,
     },
@@ -90,6 +105,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly" as const,
     },
 
+    {
+      path: "/true-cost",
+      priority: 0.7,
+      changeFrequency: "monthly" as const,
+    },
+
     // Protection & insurance
     {
       path: "/protect-your-rights",
@@ -118,6 +139,21 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     {
       path: "/escrow-guide",
+      priority: 0.7,
+      changeFrequency: "monthly" as const,
+    },
+    {
+      path: "/appraisal-guide",
+      priority: 0.7,
+      changeFrequency: "monthly" as const,
+    },
+    {
+      path: "/hoa-guide",
+      priority: 0.7,
+      changeFrequency: "monthly" as const,
+    },
+    {
+      path: "/tax-benefits",
       priority: 0.7,
       changeFrequency: "monthly" as const,
     },
@@ -174,15 +210,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly" as const,
     },
 
-    // Gamification & progress
+    // Emergency contacts
     {
-      path: "/achievements",
-      priority: 0.5,
-      changeFrequency: "monthly" as const,
-    },
-    {
-      path: "/closing-day-prep",
-      priority: 0.6,
+      path: "/emergency-contacts",
+      priority: 0.7,
       changeFrequency: "monthly" as const,
     },
 

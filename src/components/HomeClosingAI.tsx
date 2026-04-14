@@ -113,6 +113,46 @@ function generateResponse(question: string): string {
     return `**Homeowner's Insurance vs. Title Insurance**\n\nThese are two completely different types of protection:\n\n**Homeowner's Insurance:**\n- Protects against **future** damage (fire, storms, theft, liability)\n- **Paid annually** (or monthly through escrow)\n- **Required** by your lender\n- Covers the physical structure and your belongings\n\n**Title Insurance:**\n- Protects against **past** issues with ownership (liens, forgery, errors)\n- **One-time payment** at closing\n- **Owner's policy** is optional but strongly recommended\n- **Lender's policy** is required by your lender\n- Covers you for as long as you own the home\n\n**Bottom line:** You need BOTH. Homeowner's insurance protects the house itself. Title insurance protects your legal right to own it.\n\nLearn more at /homeowners-insurance and /protect-your-rights.`;
   }
 
+  // After closing / what to do after closing
+  if (q.includes('after closing') || q.includes('after i close') || q.includes('new homeowner') || q.includes('what now')) {
+    return `**What to Do After Closing**\n\nCongratulations — you're a homeowner! Here's your post-closing checklist:\n\n**Immediately:**\n- **Change the locks** — You don't know who has copies of the old keys\n- **Set up utilities** — Electric, gas, water, internet, trash\n- **File your homestead exemption** — Can significantly lower your property taxes\n- **Save your closing documents** — Store your deed, title policy, and Closing Disclosure in a safe place\n\n**Within 30 days:**\n- **Update your address** — USPS, DMV, bank accounts, subscriptions\n- **Review your first mortgage statement** — Confirm the terms match your Closing Disclosure\n- **Build an emergency fund** — Aim for 1-3% of the home's value annually for maintenance\n\n**Ongoing:**\n- **Keep your title insurance policy** — It protects you for as long as you own the home\n- **Don't fall for deed scams** — Ignore mail that asks you to pay for a copy of your deed\n- **Track home improvements** — Receipts can reduce capital gains taxes when you sell\n\nVisit our full **After Closing Guide** at /after-closing for more details.`;
+  }
+
+  // Appraisal (enhanced — low appraisal / appraisal gap)
+  if (q.includes('appraisal came in low') || q.includes('low appraisal') || q.includes('appraisal gap')) {
+    return `**What to Do When the Appraisal Comes in Low**\n\nA low appraisal means the appraiser valued the home below your agreed purchase price. This is more common than you think — and you have options.\n\n**Your 4 options:**\n\n1. **Renegotiate the price** — Ask the seller to lower the price to the appraised value. This is the most common resolution.\n\n2. **Cover the gap with cash** — Pay the difference between the appraised value and the purchase price out of pocket. Your lender will only lend based on the appraised value.\n\n3. **Request a Reconsideration of Value (ROV)** — Provide your lender with comparable sales the appraiser may have missed. If justified, the value may be revised upward.\n\n4. **Walk away** — If you have an appraisal contingency in your contract, you can cancel the deal and get your earnest money back.\n\n**Example:** Home price $400,000, appraised at $380,000. The $20,000 gap is yours to solve — the lender won't cover it.\n\n**Tip:** An appraisal contingency is your safety net. Never waive it unless you can afford to cover a potential gap.\n\nLearn more in our **Appraisal Guide** at /appraisal-guide.`;
+  }
+
+  // HOA
+  if (q.includes('hoa') || q.includes('homeowners association') || q.includes('condo fees')) {
+    return `**HOA — What Homebuyers Need to Know**\n\nA Homeowners Association (HOA) manages shared spaces and enforces community rules. Monthly fees typically range from **$200-$400**, but luxury or urban condos can exceed **$1,000/month**.\n\n**What HOA fees usually cover:**\n- Common area maintenance (pool, gym, landscaping)\n- Exterior building maintenance (condos)\n- Trash and water (sometimes)\n- Insurance for shared structures\n- Reserve fund for major repairs\n\n**Red flags to watch for:**\n- **Low reserve fund** — Could mean a special assessment is coming\n- **Frequent special assessments** — Sign of poor financial planning\n- **Pending litigation** — Could affect your ability to get a mortgage\n- **Excessive restrictions** — Read the CC&Rs before you buy\n\n**Questions to ask before buying:**\n- What are the current monthly dues and when did they last increase?\n- What is the reserve fund balance?\n- Are there any pending special assessments or lawsuits?\n- What do the CC&Rs restrict (rentals, pets, renovations)?\n\n**Important:** Your lender factors HOA fees into your DTI ratio, so higher fees reduce your buying power.\n\nLearn more in our **HOA Guide** at /hoa-guide.`;
+  }
+
+  // Negotiation / what can I negotiate
+  if (q.includes('negotiate') || q.includes('negotiable') || q.includes('seller concession') || q.includes('credits')) {
+    return `**What You Can (and Can't) Negotiate at Closing**\n\nMany closing costs are negotiable — but not all of them. Here's what to know.\n\n**Negotiable costs:**\n- **Seller concessions** — Ask the seller to cover part of your closing costs (up to 3-6% depending on loan type)\n- **Title insurance premiums** — Shop around; prices vary between companies\n- **Settlement/closing fees** — Some companies will match competitors\n- **Home warranty** — Ask the seller to include one\n- **Repairs or credits** — Based on inspection findings\n- **Real estate agent commissions** — Can sometimes be negotiated\n\n**Non-negotiable costs:**\n- **Government recording fees** — Set by the county\n- **Transfer taxes** — Set by state/local law\n- **Prepaid property taxes** — Based on tax rate\n- **Prepaid homeowner's insurance** — Based on your policy\n\n**Seller concession limits by loan type:**\n- **Conventional:** 3% (less than 10% down), 6% (10-25% down), 9% (25%+ down)\n- **FHA:** Up to 6%\n- **VA:** Up to 4%\n\n**Tip:** In a buyer's market, sellers are more willing to negotiate. In a hot market, asking for too many concessions can cost you the deal.\n\nSee our **Negotiation Guide** at /negotiation-guide for strategies.`;
+  }
+
+  // Tax benefits
+  if (q.includes('tax') && !q.includes('transfer tax') || q.includes('deduction') || q.includes('mortgage interest deduction') || q.includes('homestead')) {
+    return `**Tax Benefits of Homeownership**\n\nOwning a home comes with several valuable tax deductions. Here are the major ones:\n\n**Key deductions:**\n- **Mortgage interest** — Deductible on loans up to $750,000 (married filing jointly). This is often the largest homeowner tax break.\n- **Property taxes** — Deductible up to $10,000 combined with state/local income taxes (SALT cap)\n- **Mortgage points** — Points paid at closing to lower your rate are deductible in the year of purchase\n- **Home office** — If you're self-employed and use a dedicated space exclusively for business\n\n**Other tax benefits:**\n- **Homestead exemption** — Many states reduce your property tax assessment for primary residences. File with your county after closing!\n- **Capital gains exclusion** — When you sell, up to $250,000 in profit ($500,000 married) is tax-free if you've lived there 2+ of the last 5 years\n- **Energy credits** — Federal tax credits for solar panels, heat pumps, and energy-efficient upgrades\n\n**Important:** You must **itemize deductions** to claim mortgage interest and property taxes. If your total itemized deductions don't exceed the standard deduction ($29,200 married / $14,600 single for 2024), you may not benefit.\n\n**Tip:** Consult a tax professional for advice specific to your situation.\n\nLearn more at /tax-benefits.`;
+  }
+
+  // Hidden costs / true cost
+  if (q.includes('hidden cost') || q.includes('true cost') || q.includes('surprise') || q.includes('unexpected')) {
+    return `**The Hidden Costs of Homeownership**\n\nThe purchase price is just the beginning. The average homeowner spends approximately **$21,000 per year** beyond their mortgage payment.\n\n**Costs buyers often miss:**\n- **Property taxes** — $2,500-$8,000+/year depending on location\n- **Homeowner's insurance** — $1,500-$3,000+/year (more in disaster-prone areas)\n- **Maintenance & repairs** — Budget 1-3% of home value annually ($3,500-$10,500 on a $350K home)\n- **Utilities** — Often higher than renting: $200-$400+/month\n- **HOA fees** — $200-$400+/month if applicable\n- **PMI** — $100-$300+/month if your down payment is under 20%\n- **Lawn care & landscaping** — $100-$300/month\n- **Pest control** — $400-$600/year\n- **Appliance replacement** — Major appliances last 10-15 years\n\n**The big surprises:**\n- **Special assessments** — HOA can levy unexpected charges for major repairs\n- **Foundation or roof issues** — Can cost $5,000-$15,000+\n- **Sewer line replacement** — $3,000-$25,000\n- **Tree removal** — $500-$2,000 per tree\n\n**Tip:** Before buying, add up ALL expected monthly costs — not just the mortgage. Use the 28/36 rule: spend no more than 28% of gross income on housing costs.\n\nSee the full breakdown at /true-cost.`;
+  }
+
+  // Deal falling through / cancellation
+  if (q.includes('cancel') || q.includes('back out') || q.includes('walk away') || q.includes('cold feet') || q.includes('contingency')) {
+    return `**Can I Back Out of Buying a Home?**\n\nThe short answer: **it depends on your contingencies and timing.**\n\n**When you CAN walk away (and keep your earnest money):**\n- **Inspection contingency** — Home has major issues you can't resolve with the seller\n- **Appraisal contingency** — Home appraises below the purchase price\n- **Financing contingency** — Your mortgage falls through despite good-faith effort\n- **Title contingency** — Title search reveals unresolvable issues\n- **Sale contingency** — Your current home doesn't sell\n\n**When you CAN'T (or it will cost you):**\n- **After contingency deadlines pass** — You've waived your protections\n- **After waiving contingencies** — Common in competitive markets; risky move\n- **Cold feet alone** — Not a legal reason to cancel\n- **At the closing table** — Technically possible but you'll likely lose your earnest money\n\n**Earnest money at risk:**\n- Typically **1-3% of purchase price** ($3,500-$10,500 on a $350K home)\n- If you cancel outside a contingency, the seller usually keeps it\n- The seller could also sue for additional damages (rare but possible)\n\n**Tip:** Never waive contingencies unless you fully understand the financial risk. They are your contractual safety net.\n\nLearn more about contingencies in our **FAQ** at /faq.`;
+  }
+
+  // Rate lock
+  if (q.includes('rate lock') || q.includes('lock in') || q.includes('lock my rate')) {
+    return `**Mortgage Rate Locks Explained**\n\nA rate lock is a lender's guarantee that your interest rate won't change for a set period while your loan is processed.\n\n**How it works:**\n- You "lock" your rate with your lender after pre-approval or when you have an accepted offer\n- The lender guarantees that rate for a set period, regardless of market changes\n- If rates go up, you're protected. If rates drop significantly, you may be stuck (unless you have a float-down option)\n\n**Typical lock periods:**\n- **30 days** — Most common, usually the cheapest\n- **45 days** — Standard for most purchases\n- **60 days** — Needed for longer closings; slightly higher cost\n- **90+ days** — Available but usually costs more (higher rate or fees)\n\n**When to lock:**\n- **After your offer is accepted** — You have a target closing date\n- **When you're comfortable with the rate** — Don't try to time the market perfectly\n- **Allow a buffer** — If closing is expected in 35 days, lock for 45\n\n**What happens if your lock expires:**\n- You'll need to re-lock at **current market rates** (which could be higher)\n- Some lenders charge a fee to extend the lock\n- Extensions are typically 7-15 days and cost 0.125%-0.25% of the loan\n\n**Tip:** Ask your lender about a **float-down option** — it lets you take advantage of lower rates if they drop after you lock, usually for a small fee.\n\nLearn more about mortgage rates in our **First-Time Buyers Guide** at /first-time-buyers.`;
+  }
+
   // ALTA Best Practices
   if (q.includes('alta') || q.includes('best practice') || q.includes('american land title')) {
     return `**ALTA Best Practices**\n\nThe American Land Title Association (ALTA) developed a set of **Best Practices** — a framework of policies and procedures that title and settlement companies follow to protect consumers.\n\n**The 7 Pillars:**\n1. **Licensing** — Maintain proper state licenses\n2. **Escrow Trust Accounting** — Safeguard client funds\n3. **Privacy & Information Security** — Protect personal data\n4. **Settlement Procedures** — Follow proper closing protocols\n5. **Title Policy Production** — Ensure accurate title policies\n6. **Insurance & Fidelity Coverage** — Carry appropriate insurance\n7. **Consumer Complaints** — Have a process to handle issues\n\n**Why it matters to you:**\nCompanies that follow ALTA Best Practices have been assessed for strong consumer protections. When choosing a title company, ask if they are ALTA Best Practices certified.\n\nFind ALTA members at alta.org/find-a-company or visit /find-company.`;
@@ -135,11 +175,11 @@ function generateResponse(question: string): string {
 
   // Help
   if (q.includes('help') || q.includes('what can you')) {
-    return `**HomeClosing101 AI — I can help with:**\n\n- **Closing process:** "How does closing work?"\n- **Title insurance:** "What is title insurance?"\n- **Wire fraud:** "How do I avoid wire fraud?"\n- **Costs:** "How much are closing costs?"\n- **Documents:** "What documents do I need?"\n- **Closing options:** "Can I close remotely?"\n- **Finding companies:** "How do I find a title company?"\n- **Checklist:** "What should I prepare?"\n- **First-time buyers:** "I've never bought a home before"\n- **Down payment help:** "What is down payment assistance?"\n- **DTI ratio:** "What is debt-to-income?"\n- **Escrow:** "How does escrow work?"\n- **Home inspection:** "What should I know about inspections?"\n- **Insurance types:** "Homeowner's vs title insurance"\n- **ALTA Best Practices:** "What are ALTA Best Practices?"\n- **Closing day:** "What happens at the closing table?"\n- **Definitions:** "What is escrow?"\n\nI'm here to help you close with confidence!`;
+    return `**HomeClosing101 AI — I can help with:**\n\n- **Closing process:** "How does closing work?"\n- **Title insurance:** "What is title insurance?"\n- **Wire fraud:** "How do I avoid wire fraud?"\n- **Costs:** "How much are closing costs?"\n- **Documents:** "What documents do I need?"\n- **Closing options:** "Can I close remotely?"\n- **Finding companies:** "How do I find a title company?"\n- **Checklist:** "What should I prepare?"\n- **First-time buyers:** "I've never bought a home before"\n- **Down payment help:** "What is down payment assistance?"\n- **DTI ratio:** "What is debt-to-income?"\n- **Escrow:** "How does escrow work?"\n- **Home inspection:** "What should I know about inspections?"\n- **Insurance types:** "Homeowner's vs title insurance"\n- **ALTA Best Practices:** "What are ALTA Best Practices?"\n- **Closing day:** "What happens at the closing table?"\n- **After closing:** "What do I do after closing?"\n- **Low appraisal:** "My appraisal came in low"\n- **HOA fees:** "What should I know about HOA?"\n- **Negotiation:** "What can I negotiate?"\n- **Tax benefits:** "What are the tax benefits?"\n- **Hidden costs:** "What are the hidden costs?"\n- **Backing out:** "Can I back out of buying?"\n- **Rate lock:** "Should I lock my rate?"\n- **Definitions:** "What is escrow?"\n\nI'm here to help you close with confidence!`;
   }
 
   // Default
-  return `I'm not sure I understood that, but I can help with a wide range of closing topics!\n\n**Popular questions:**\n- **"How does closing work?"** — Step-by-step process\n- **"What is title insurance?"** — Why you need it\n- **"How much are closing costs?"** — Fee breakdown\n- **"How do I avoid wire fraud?"** — Protection tips\n- **"I'm a first-time buyer"** — Where to start\n- **"What is DTI?"** — Debt-to-income explained\n- **"How does escrow work?"** — The escrow process\n- **"What happens at the closing table?"** — Signing day walkthrough\n- **"What are ALTA Best Practices?"** — Consumer protections\n\nSay **"help"** for my full list of topics.\n\nYou can also browse our **FAQ** at /faq for 250+ answered questions, or search 450+ terms in our **Glossary** at /glossary.`;
+  return `I'm not sure I understood that, but I can help with a wide range of closing topics!\n\n**Popular questions:**\n- **"How does closing work?"** — Step-by-step process\n- **"What is title insurance?"** — Why you need it\n- **"How much are closing costs?"** — Fee breakdown\n- **"How do I avoid wire fraud?"** — Protection tips\n- **"I'm a first-time buyer"** — Where to start\n- **"My appraisal came in low"** — Your 4 options\n- **"What can I negotiate?"** — Save on closing costs\n- **"What do I do after closing?"** — New homeowner checklist\n- **"What are the hidden costs?"** — The $21K/year reality\n- **"Can I back out?"** — Contingencies explained\n\nSay **"help"** for my full list of topics.\n\nYou can also browse our **FAQ** at /faq for 250+ answered questions, or search 450+ terms in our **Glossary** at /glossary.`;
 }
 
 // Smart follow-up suggestions keyed by topic detected in the question
@@ -178,6 +218,22 @@ function getFollowUps(question: string): string[] {
     return ['How do I find a title company?', 'What is title insurance?', 'How do I avoid wire fraud?'];
   if (q.includes('loan') || q.includes('mortgage') || q.includes('fha') || q.includes('conventional') || q.includes('va loan') || q.includes('compare'))
     return ['What is my DTI ratio?', 'What are closing costs?', 'First-time buyer tips'];
+  if (q.includes('after closing') || q.includes('after i close') || q.includes('new homeowner') || q.includes('what now'))
+    return ['What are the hidden costs?', 'What are the tax benefits?', 'What is title insurance?'];
+  if (q.includes('appraisal came in low') || q.includes('low appraisal') || q.includes('appraisal gap'))
+    return ['Can I back out of buying?', 'What can I negotiate?', 'What are closing costs?'];
+  if (q.includes('hoa') || q.includes('homeowners association') || q.includes('condo fees'))
+    return ['What are the hidden costs?', 'What is my DTI ratio?', 'What can I negotiate?'];
+  if (q.includes('negotiate') || q.includes('negotiable') || q.includes('seller concession') || q.includes('credits'))
+    return ['What are closing costs?', 'What can I negotiate?', 'First-time buyer tips'];
+  if (q.includes('tax') || q.includes('deduction') || q.includes('mortgage interest deduction') || q.includes('homestead'))
+    return ['What do I do after closing?', 'What are the hidden costs?', 'What are closing costs?'];
+  if (q.includes('hidden cost') || q.includes('true cost') || q.includes('surprise') || q.includes('unexpected'))
+    return ['What about HOA fees?', 'What are the tax benefits?', 'What can I negotiate?'];
+  if (q.includes('cancel') || q.includes('back out') || q.includes('walk away') || q.includes('cold feet') || q.includes('contingency'))
+    return ['My appraisal came in low', 'What can I negotiate?', 'How does escrow work?'];
+  if (q.includes('rate lock') || q.includes('lock in') || q.includes('lock my rate'))
+    return ['Compare loan types', 'What are closing costs?', 'First-time buyer tips'];
   return ['How does closing work?', 'What is title insurance?', 'How do I avoid wire fraud?'];
 }
 
@@ -200,6 +256,16 @@ function getPageSuggestions(pathname: string): string[] {
     return ['How does closing work?', 'What is title insurance?', 'How do I avoid wire fraud?', 'What are closing costs?', 'First-time buyer tips', 'What is my DTI ratio?'];
   // Default suggestions
   return ['What is title insurance?', 'How do I avoid wire fraud?', 'What are closing costs?', 'First-time buyer tips', "What's my DTI ratio?", 'Compare loan types'];
+}
+
+// Escape HTML special characters to prevent XSS
+function escapeHtml(text: string): string {
+  return text
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
 }
 
 // Convert internal paths in response text to clickable links (returns HTML)
@@ -444,7 +510,7 @@ export default function HomeClosingAI() {
                               .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
                               .replace(/\n/g, '<br/>')
                           )
-                        : msg.content
+                        : escapeHtml(msg.content)
                             .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
                             .replace(/\n/g, '<br/>')
                     }}

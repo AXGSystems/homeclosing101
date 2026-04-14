@@ -9,12 +9,16 @@ export default function ThemeToggle() {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    const stored = localStorage.getItem(STORAGE_KEY);
-    const prefersDark =
-      stored === "dark" ||
-      (!stored && window.matchMedia("(prefers-color-scheme: dark)").matches);
-    setDark(prefersDark);
-    document.documentElement.classList.toggle("dark", prefersDark);
+    try {
+      const stored = localStorage.getItem(STORAGE_KEY);
+      const prefersDark =
+        stored === "dark" ||
+        (!stored && window.matchMedia("(prefers-color-scheme: dark)").matches);
+      setDark(prefersDark);
+      document.documentElement.classList.toggle("dark", prefersDark);
+    } catch {
+      // localStorage unavailable — use default
+    }
     setMounted(true);
   }, []);
 
@@ -22,7 +26,11 @@ export default function ThemeToggle() {
     const next = !dark;
     setDark(next);
     document.documentElement.classList.toggle("dark", next);
-    localStorage.setItem(STORAGE_KEY, next ? "dark" : "light");
+    try {
+      localStorage.setItem(STORAGE_KEY, next ? "dark" : "light");
+    } catch {
+      // ignore
+    }
   };
 
   // Avoid hydration mismatch — render nothing until mounted

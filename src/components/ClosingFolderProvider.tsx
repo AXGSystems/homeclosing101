@@ -17,7 +17,7 @@ interface ClosingFolderContextValue {
   clearAll: () => void;
 }
 
-const STORAGE_KEY = 'closingFolder';
+const STORAGE_KEY = 'hc101-closingFolder';
 
 export const ClosingFolderContext = createContext<ClosingFolderContextValue | null>(null);
 

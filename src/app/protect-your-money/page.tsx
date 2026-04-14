@@ -94,7 +94,7 @@ export default function ProtectYourMoneyPage() {
                   </div>
                 </div>
               </div>
-              <p className="text-[10px] text-alta-teal font-medium mt-4 text-center">Source: FBI IC3 2024 Internet Crime Report, CertifID 2026 State of Wire Fraud Report</p>
+              <p className="text-[10px] text-alta-teal font-medium mt-4 text-center">Source: FBI IC3 2025 Internet Crime Report, CertifID 2026 State of Wire Fraud Report</p>
             </div>
           </div>
 
@@ -224,7 +224,7 @@ export default function ProtectYourMoneyPage() {
             </div>
           </div>
 
-          <p className="text-[10px] text-alta-teal font-medium mb-8">Source: FBI IC3 2024 Report, CertifID 2026 State of Wire Fraud Report, ALTA Best Practices Pillar 3, NAR Consumer Guide on Wire Fraud</p>
+          <p className="text-[10px] text-alta-teal font-medium mb-8">Source: FBI IC3 2025 Report, CertifID 2026 State of Wire Fraud Report, ALTA Best Practices Pillar 3, NAR Consumer Guide on Wire Fraud</p>
 
           <InlineAd />
 

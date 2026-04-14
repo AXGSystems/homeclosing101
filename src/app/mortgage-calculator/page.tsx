@@ -5,6 +5,7 @@ import Link from "next/link";
 import PageHero from "@/components/PageHero";
 import { useAchievements } from "@/components/AchievementSystem";
 import { InlineAd } from "@/components/EliteProviders";
+import FirstTimeBuyerCTA from "@/components/FirstTimeBuyerCTA";
 import { propertyTaxRates, loanTypes } from "@/data/propertyTaxRates";
 import { countyTaxRates } from "@/data/countyTaxRates";
 
@@ -455,6 +456,8 @@ export default function MortgageCalculatorPage() {
           </div>
 
           <p className="text-[10px] text-alta-gray mt-6 text-center">* This calculator provides estimates only. Actual payments vary by lender, credit score, location, and loan terms. Property tax rates are state averages — your actual tax depends on county and local assessments. Consult a mortgage professional for exact figures. Sources: Tax Foundation, Census Bureau, FHA.com, VA.gov, USDA.gov, Fannie Mae.</p>
+
+          <FirstTimeBuyerCTA />
         </div>
       </div>
     </>

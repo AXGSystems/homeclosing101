@@ -186,7 +186,7 @@ function FraudFlowCard({ item, index, isVisible }: { item: typeof fraudFlow[0]; 
             </div>
             <div className="p-6">
               <p className="text-sm text-alta-gray leading-relaxed">{item.detail}</p>
-              <p className="text-[10px] text-alta-teal mt-4 font-medium">Source: FBI IC3 2024 Report, CertifID</p>
+              <p className="text-[10px] text-alta-teal mt-4 font-medium">Source: FBI IC3 2025 Report, CertifID</p>
             </div>
           </div>
         </div>

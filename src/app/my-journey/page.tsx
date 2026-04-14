@@ -20,10 +20,9 @@ export default function MyJourneyPage() {
       <section className="py-12 bg-alta-light">
         <div className="max-w-3xl mx-auto px-4 sm:px-6">
           <JourneyTracker />
+          <FirstTimeBuyerCTA />
         </div>
       </section>
-
-      <FirstTimeBuyerCTA />
     </>
   );
 }

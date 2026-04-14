@@ -45,6 +45,11 @@ const pages: PageEntry[] = [
   { path: "/trivia", title: "HC101 Trivia Challenge", description: "Test your real estate closing knowledge" },
   { path: "/my-folder", title: "My Closing Folder", description: "Your saved documents and bookmarked items" },
   { path: "/join-alta", title: "In the Title Industry?", description: "Learn about ALTA membership and industry resources" },
+  { path: "/dti-calculator", title: "DTI Calculator", description: "Calculate your debt-to-income ratio and see how lenders evaluate your finances" },
+  { path: "/rent-vs-buy", title: "Rent vs. Buy Calculator", description: "Compare the true cost of renting versus buying over time" },
+  { path: "/my-journey", title: "My Homebuying Journey", description: "Track your progress through the 8 key steps of buying a home" },
+  { path: "/achievements", title: "Your Achievements", description: "Track your HomeClosing101 learning milestones" },
+  { path: "/closing-day-prep", title: "Closing Day Prep", description: "Everything to bring and do before, during, and after closing day" },
 ];
 
 /* ── Flatten glossary for search ── */

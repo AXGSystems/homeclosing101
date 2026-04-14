@@ -198,7 +198,7 @@ const timeline: TimelinePhase[] = [
         label: "Verify wire transfer instructions BY PHONE (never email)",
         detail: "This single step prevents more wire fraud than any other measure. Real estate wire fraud cost Americans $275.1 million in 2025 (FBI IC3). Criminals hack into real estate email accounts or create look-alike domains, then send fake 'updated' wiring instructions near closing. The money is gone within hours. ALWAYS verify wiring instructions by calling your title company or closing attorney using a phone number you already have — from their website (type the URL yourself), your original closing documents, or their business card. NEVER use a phone number provided in an email. NEVER trust 'updated' or 'changed' wire instructions received via email, text, or voicemail. When you call, ask to speak to someone who can confirm: the bank name, routing number, account number, and account holder name. If anything doesn't match, STOP and investigate. After wiring, call your title company immediately to confirm receipt — recovery rates drop from 20% within the first hour to under 5% after 48 hours.",
         action: "Save your title company's verified phone number in your contacts TODAY. Call to verify before you wire, then call again to confirm receipt.",
-        source: "FBI IC3 2024 Report, ALTA, CertifID",
+        source: "FBI IC3 2025 Report, ALTA, CertifID",
       },
       {
         label: "Schedule and complete final walk-through",

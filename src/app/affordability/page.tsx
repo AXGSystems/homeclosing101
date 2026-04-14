@@ -5,6 +5,7 @@ import Link from "next/link";
 import PageHero from "@/components/PageHero";
 import { InlineAd } from "@/components/EliteProviders";
 import DTIGauge from "@/components/DTIGauge";
+import FirstTimeBuyerCTA from "@/components/FirstTimeBuyerCTA";
 
 const hiddenCosts = [
   {
@@ -351,6 +352,8 @@ export default function AffordabilityPage() {
           </div>
 
           <p className="text-[10px] text-alta-gray mt-6 text-center">* This is an estimate for educational purposes. Your actual buying power depends on credit score, specific loan program, and lender requirements. Get pre-approved by a lender for an accurate number.</p>
+
+          <FirstTimeBuyerCTA />
         </div>
       </div>
 

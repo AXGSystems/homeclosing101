@@ -1,5 +1,6 @@
 import PageHero from "@/components/PageHero";
 import { InlineAd } from "@/components/EliteProviders";
+import FirstTimeBuyerCTA from "@/components/FirstTimeBuyerCTA";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -33,7 +34,7 @@ const sources = [
   {
     category: "Industry Research & Reports",
     items: [
-      { name: "CertifID — 2026 State of Wire Fraud Report", url: "https://www.certifid.com/state-of-wire-fraud", used: "1,760% increase in BEC attacks, 1 in 4 buyers received suspicious messages, 60% of title professionals report increasing fraud, 56% consumer trust impact, buyer cash-to-close fraud (30% of cases)" },
+      { name: "CertifID — 2026 State of Wire Fraud Report", url: "https://www.certifid.com/state-of-wire-fraud", used: "1,760% increase in BEC attacks, 22% of homebuyers received fraudulent communications, 60% of title professionals report increasing fraud, 85% of consumers would pay extra for protection, buyer cash-to-close fraud (30% of cases)" },
       { name: "Entrust — 2026 Identity Fraud Report", url: "https://www.entrust.com/", used: "40% year-over-year increase in deepfake scams, AI-related fraud complaints ($893.3M in losses)" },
       { name: "HousingWire", url: "https://www.housingwire.com/", used: "Title industry technology trends, company financial performance data" },
       { name: "National Mortgage Professional (NMP)", url: "https://nationalmortgageprofessional.com/", used: "Wire fraud protection as revenue stream analysis" },
@@ -128,6 +129,8 @@ export default function SourcesPage() {
             <h3 className="font-bold text-alta-navy mb-2">Report an Error</h3>
             <p className="text-sm text-alta-gray">If you find any information on HomeClosing101 that is inaccurate, outdated, or improperly sourced, please contact ALTA at <strong>202.296.3671</strong> or visit <a href="https://www.alta.org" target="_blank" rel="noopener noreferrer" className="text-alta-teal font-medium hover:underline">alta.org</a>. We take accuracy seriously and will correct any verified errors promptly.</p>
           </div>
+
+          <FirstTimeBuyerCTA />
         </div>
       </div>
     </>

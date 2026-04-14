@@ -89,7 +89,7 @@ const stats = [
   { value: "1,760%", label: "Increase in BEC attacks since AI tools became available", source: "CertifID 2026" },
   { value: "~20%", label: "Recovery rate if reported within 1 hour", source: "FBI" },
   { value: "<5%", label: "Recovery rate after 48 hours", source: "FBI" },
-  { value: "1 in 4", label: "Buyers received suspicious messages during transactions", source: "CertifID" },
+  { value: "22%", label: "Of homebuyers receive fraudulent communications", source: "CertifID 2026" },
   { value: "40%", label: "Year-over-year increase in deepfake scams", source: "Entrust 2026" },
 ];
 

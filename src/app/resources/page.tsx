@@ -5,6 +5,7 @@ import Link from "next/link";
 import PageHero from "@/components/PageHero";
 import { InlineAd } from "@/components/EliteProviders";
 import AltaMembershipCTA from "@/components/AltaMembershipCTA";
+import FirstTimeBuyerCTA from "@/components/FirstTimeBuyerCTA";
 
 const buyingResources = [
   { name: "Consumer Financial Protection Bureau (CFPB)", desc: "Homeownership guides, settlement cost booklet, and complaint filing", url: "https://www.consumerfinance.gov/owning-a-home/", logo: "https://www.google.com/s2/favicons?domain=consumerfinance.gov&sz=64", brandColor: "#20aa3f", bgTint: "bg-[#e9f5ed]", borderColor: "border-[#bddcc7]", accentBorder: "border-l-[#20aa3f]",
@@ -212,6 +213,14 @@ export default function ResourcesPage() {
               { name: "Wire Fraud Prevention Guide", desc: "How the scam works, 5 safeguards, and what to do if you're a victim — with FBI IC3 recovery data.", href: "/protect-your-money", badge: "Guide" },
               { name: "Source Index", desc: "Complete list of every data source cited across the site — CFPB, FBI, NAR, ALTA, IRS, and more.", href: "/sources", badge: "Reference" },
               { name: "HC101 Trivia Challenge", desc: "Jeopardy-style homebuying trivia — 25 questions across 5 categories. Test your knowledge and earn your title!", href: "/trivia", badge: "Game" },
+              { name: "Affordability Calculator", desc: "See what home price fits your budget based on income, debts, down payment, and local tax rates.", href: "/affordability", badge: "Calculator" },
+              { name: "Compare Loans Side-by-Side", desc: "Enter up to 4 loan offers and compare monthly payments, total interest, APR, and break-even points.", href: "/compare-loans", badge: "Calculator" },
+              { name: "True Cost of Homeownership", desc: "Your mortgage is just the start. Calculate property taxes, insurance, maintenance, HOA, and utilities to find your real monthly cost.", href: "/true-cost", badge: "Calculator" },
+              { name: "Closing Day Prep Guide", desc: "Everything you need to know before, during, and after your closing appointment — a step-by-step walkthrough.", href: "/closing-day-prep", badge: "Guide" },
+              { name: "After Closing Guide", desc: "Complete new homeowner checklist — first 24 hours, first week, first month, seasonal maintenance, and hidden costs of ownership.", href: "/after-closing", badge: "Guide" },
+              { name: "My Closing Folder", desc: "Save glossary terms, checklist items, and notes in one place. Exportable and printable.", href: "/my-folder", badge: "Tool" },
+              { name: "My Homebuying Journey", desc: "Track your progress through every phase of homebuying — from pre-approval to closing day and beyond.", href: "/my-journey", badge: "Tracker" },
+              { name: "Achievements", desc: "Earn badges as you explore HC101 — complete quizzes, use calculators, and master the closing process.", href: "/achievements", badge: "Gamification" },
             ].map((t) => (
               <Link key={t.name} href={t.href} className="flex items-start gap-3 p-4 bg-white rounded-xl border border-gray-200 border-l-4 border-l-[#0a7ea8] shadow-sm tile-interactive group">
                 <div className="w-9 h-9 rounded-lg bg-alta-teal/10 flex items-center justify-center text-alta-teal shrink-0 group-hover:bg-alta-teal group-hover:text-white transition-colors">
@@ -253,6 +262,10 @@ export default function ResourcesPage() {
 
       {/* ALTA Membership CTA */}
       <AltaMembershipCTA />
+
+      <div className="max-w-5xl mx-auto px-4 sm:px-6">
+        <FirstTimeBuyerCTA />
+      </div>
     </div>
 
     {/* Modal */}

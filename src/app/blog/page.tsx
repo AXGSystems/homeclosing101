@@ -24,13 +24,13 @@ const articles: Article[] = [
   {
     title: "FBI Reports $275 Million in Real Estate Wire Fraud Losses",
     excerpt: "The FBI's Internet Crime Complaint Center reports a 59% year-over-year increase in real estate wire fraud, with losses totaling $275.1 million in 2025.",
-    content: "The FBI's Internet Crime Complaint Center (IC3) 2024 Internet Crime Report reveals that real estate wire fraud continues to escalate dramatically. Criminals are using increasingly sophisticated tactics — including AI-generated deepfake voice calls, business email compromise (BEC), and hacked real estate agent accounts — to intercept closing funds.\n\nThe average individual loss is approximately $150,000, often representing the buyer's entire down payment and closing costs. Recovery rates remain dire: approximately 20% if reported within 1 hour, 10% within 24 hours, and less than 5% after 48 hours.\n\nThe FBI recommends that homebuyers ALWAYS verify wiring instructions by phone using a known number, never trust 'updated' wire instructions received via email, and confirm receipt with their settlement agent immediately after wiring. The IC3's Recovery Asset Team (RAT) has successfully frozen funds in many cases when notified quickly.",
+    content: "The FBI's Internet Crime Complaint Center (IC3) 2025 Internet Crime Report reveals that real estate wire fraud continues to escalate dramatically. Criminals are using increasingly sophisticated tactics — including AI-generated deepfake voice calls, business email compromise (BEC), and hacked real estate agent accounts — to intercept closing funds.\n\nThe average individual loss is approximately $150,000, often representing the buyer's entire down payment and closing costs. Recovery rates remain dire: approximately 20% if reported within 1 hour, 10% within 24 hours, and less than 5% after 48 hours.\n\nThe FBI recommends that homebuyers ALWAYS verify wiring instructions by phone using a known number, never trust 'updated' wire instructions received via email, and confirm receipt with their settlement agent immediately after wiring. The IC3's Recovery Asset Team (RAT) has successfully frozen funds in many cases when notified quickly.",
     date: "March 2026",
     category: "Wire Fraud",
     readTime: "4 min",
     image: "https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=600&q=80",
-    source: "FBI IC3 2024 Internet Crime Report",
-    sourceUrl: "https://www.ic3.gov/Media/PDF/AnnualReport/2024_IC3Report.pdf",
+    source: "FBI IC3 2025 Internet Crime Report",
+    sourceUrl: "https://www.ic3.gov/Media/PDF/AnnualReport/2025_IC3Report.pdf",
   },
   {
     title: "CFPB: Understanding Your Closing Disclosure",
@@ -96,7 +96,7 @@ const articles: Article[] = [
     readTime: "6 min",
     image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&q=80",
     source: "ASHI, InterNACHI",
-    sourceUrl: "https://www.homeinspector.org/For-Homebuyers",
+    sourceUrl: "https://www.homeinspector.org/resources/for-consumers",
   },
   {
     title: "FHA vs VA vs Conventional: Choosing the Right Mortgage",
