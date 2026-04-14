@@ -7,19 +7,35 @@ type TabType = "bug" | "suggestion" | null;
 export default function FeedbackTabs() {
   const [activeTab, setActiveTab] = useState<TabType>(null);
   const [submitted, setSubmitted] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [error, setError] = useState("");
   const [form, setForm] = useState({ name: "", email: "", message: "" });
 
-  const handleSubmit = (type: TabType) => {
-    if (!form.message.trim()) return;
-    const subject = type === "bug" ? "Bug Report — HomeClosing101" : "Suggestion — HomeClosing101";
-    const body = `${type === "bug" ? "Bug Report" : "Suggestion"}\n\nFrom: ${form.name || "Anonymous"}\nEmail: ${form.email || "Not provided"}\n\n${form.message}`;
-    window.location.href = `mailto:feedback@homeclosing101.org?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    setSubmitted(true);
-    setTimeout(() => {
-      setSubmitted(false);
-      setActiveTab(null);
-      setForm({ name: "", email: "", message: "" });
-    }, 3000);
+  const handleSubmit = async (type: TabType) => {
+    if (!form.message.trim() || sending) return;
+    setSending(true);
+    setError("");
+
+    try {
+      const res = await fetch("/api/feedback", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ type, ...form }),
+      });
+
+      if (!res.ok) throw new Error("Failed to send");
+
+      setSubmitted(true);
+      setTimeout(() => {
+        setSubmitted(false);
+        setActiveTab(null);
+        setForm({ name: "", email: "", message: "" });
+      }, 3000);
+    } catch {
+      setError("Failed to send. Please try again.");
+    } finally {
+      setSending(false);
+    }
   };
 
   return (
@@ -146,19 +162,22 @@ export default function FeedbackTabs() {
                     className="w-full px-3 py-2 rounded-lg border border-gray-200 text-sm resize-none focus:outline-none focus:border-alta-teal focus:ring-1 focus:ring-alta-teal/20"
                   />
                 </div>
+                {error && (
+                  <p className="text-xs text-alta-red text-center bg-red-50 rounded-lg py-2">{error}</p>
+                )}
                 <button
                   onClick={() => handleSubmit(activeTab)}
-                  disabled={!form.message.trim()}
+                  disabled={!form.message.trim() || sending}
                   className={`w-full py-2.5 rounded-xl text-white font-bold text-sm transition-all disabled:opacity-40 ${
                     activeTab === "bug"
                       ? "bg-alta-red hover:bg-red-700"
                       : "bg-alta-teal hover:bg-alta-teal-dark"
                   }`}
                 >
-                  {activeTab === "bug" ? "Submit Bug Report" : "Submit Suggestion"}
+                  {sending ? "Sending..." : activeTab === "bug" ? "Submit Bug Report" : "Submit Suggestion"}
                 </button>
                 <p className="text-[10px] text-alta-gray text-center">
-                  This will open your email client to send the report.
+                  Sent to qa-alerts@alta.org
                 </p>
               </div>
             )}
