@@ -2,8 +2,7 @@ import Link from "next/link";
 import PageHero from "@/components/PageHero";
 import { InlineAd } from "@/components/EliteProviders";
 import TrustedALTAMembers from "@/components/TrustedALTAMembers";
-import ExpandableInspectionTiles from "@/components/ExpandableInspectionTiles";
-import ExpandableInspectionAreas from "@/components/ExpandableInspectionAreas";
+import { DeferredInspectionAreas, DeferredInspectionTiles } from "@/components/LazyInspection";
 import FirstTimeBuyerCTA from "@/components/FirstTimeBuyerCTA";
 import type { Metadata } from "next";
 
@@ -96,7 +95,7 @@ export default function HomeInspectionPage() {
           {/* What inspectors look at — expandable deep-dive tiles */}
           <h2 className="text-2xl font-bold text-alta-navy mb-2">What a Home Inspector Examines</h2>
           <p className="text-sm text-alta-gray mb-6 leading-relaxed">Click any area below for the full breakdown — what inspectors look for, red flags that could cost thousands, and what questions to ask. A general inspection covers all six of these areas in a 2-4 hour visit.</p>
-          <ExpandableInspectionAreas />
+          <DeferredInspectionAreas />
 
           <InlineAd />
 
@@ -135,7 +134,7 @@ export default function HomeInspectionPage() {
           {/* Specialty inspections */}
           <h2 className="text-2xl font-bold text-alta-navy mb-4">Specialty Inspections: When You Need More</h2>
           <p className="text-sm text-alta-gray mb-4 leading-relaxed">A general home inspection doesn&apos;t cover everything. Click any inspection below for full details on when it&apos;s needed, what it reveals, and what problems cost to fix.</p>
-          <ExpandableInspectionTiles />
+          <DeferredInspectionTiles />
 
           {/* How to choose an inspector */}
           <h2 className="text-2xl font-bold text-alta-navy mb-4">Choosing an Independent Home Inspector</h2>

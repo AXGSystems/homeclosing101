@@ -3,8 +3,7 @@ import PageHero from "@/components/PageHero";
 import AchievementTrigger from "@/components/AchievementTrigger";
 import { InlineAd } from "@/components/EliteProviders";
 import TrustedALTAMembers from "@/components/TrustedALTAMembers";
-import LoanComparisonChart from "@/components/LoanComparisonChart";
-import ExpandableTimeline from "@/components/ExpandableTimeline";
+import { DeferredTimeline, DeferredLoanChart } from "@/components/LazyFirstTimeBuyer";
 import ShareButtons from "@/components/ShareButtons";
 import type { Metadata } from "next";
 
@@ -94,7 +93,7 @@ export default function FirstTimeBuyersPage() {
           <h2 className="text-2xl font-bold text-alta-navy mb-2">Your Homebuying Timeline</h2>
           <p className="text-sm text-alta-gray mb-6 leading-relaxed">Click any item to expand the full breakdown — what it means, why it matters, and exactly what to do.</p>
           <div className="mb-12">
-            <ExpandableTimeline />
+            <DeferredTimeline />
           </div>
 
           <InlineAd />
@@ -107,7 +106,7 @@ export default function FirstTimeBuyersPage() {
 
           {/* Loan Types */}
           {/* Interactive loan comparison chart */}
-          <LoanComparisonChart />
+          <DeferredLoanChart />
 
           <h2 className="text-2xl font-bold text-alta-navy mb-4">Understanding Loan Types</h2>
           <p className="text-alta-gray mb-6">The type of mortgage you choose affects your down payment, monthly payment, and total cost. Here&apos;s how they compare:</p>

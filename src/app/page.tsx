@@ -580,7 +580,7 @@ export default function HomePage() {
                 {/* Large logo at top */}
                 <div className="flex items-center justify-center pt-8 pb-6 px-5">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={r.logo} alt={r.name} className="max-h-16 max-w-[90%] object-contain" />
+                  <img src={r.logo} alt={r.name} className="max-h-16 max-w-[90%] object-contain" loading="lazy" />
                 </div>
                 {/* Thin accent line */}
                 <div className="mx-5 h-0.5 rounded-full opacity-25" style={{ backgroundColor: r.halo }} />

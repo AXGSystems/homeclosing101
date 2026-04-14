@@ -43,10 +43,37 @@ function getTermOfTheDay(): GlossaryTerm {
   return allTerms[seed % allTerms.length];
 }
 
-/* ─── Per-letter counts ─── */
-const letterCounts: Record<string, number> = {};
-for (const l of allLetters) {
-  letterCounts[l] = glossaryData[l]?.length || 0;
+/* ─── Term of the Day component ─── */
+function TermOfTheDay({ onSelect }: { onSelect: (t: GlossaryTerm) => void }) {
+  const term = getTermOfTheDay();
+  const color = letterColors[term.term.charAt(0)] || '#0a8ebc';
+  return (
+    <div className="mt-4 mb-2">
+      <button
+        onClick={() => onSelect(term)}
+        className="w-full text-left p-4 rounded-xl border-2 border-dashed transition-all hover:shadow-md group"
+        style={{ borderColor: `${color}50`, background: `linear-gradient(135deg, ${color}08, ${color}04)` }}
+      >
+        <div className="flex items-start gap-4">
+          <div className="w-12 h-12 rounded-2xl flex items-center justify-center text-white font-bold text-lg shrink-0 group-hover:scale-110 transition-transform" style={{ backgroundColor: color }}>
+            {term.term.charAt(0)}
+          </div>
+          <div className="flex-1 min-w-0">
+            <div className="flex items-center gap-2 mb-1">
+              <span className="text-[10px] font-bold uppercase tracking-widest" style={{ color }}>Term of the Day</span>
+              <span className="text-[10px] text-alta-gray">{new Date().toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })}</span>
+            </div>
+            <h3 className="font-bold text-alta-navy text-base group-hover:text-alta-teal transition-colors">{term.term}</h3>
+            <p className="text-xs text-alta-gray mt-1 leading-relaxed line-clamp-2">{term.definition}</p>
+            <span className="inline-flex items-center gap-0.5 mt-2 text-[10px] font-semibold opacity-0 group-hover:opacity-100 transition-opacity" style={{ color }}>
+              View full definition
+              <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
+            </span>
+          </div>
+        </div>
+      </button>
+    </div>
+  );
 }
 
 export default function GlossaryPage() {
@@ -255,7 +282,7 @@ ${terms.map(t => `<div class="term"><h2>${t.term}</h2><p>${t.definition}</p>${t.
                 type="text"
                 placeholder="Search terms or definitions..."
                 value={search}
-                onChange={(e) => { setSearch(e.target.value); setActiveLetter(null); }}
+                onChange={(e) => { setSearch(e.target.value); setActiveLetter(null); setActiveCategory(null); }}
                 className="w-full pl-9 pr-9 py-2.5 border border-gray-200 rounded-lg text-sm text-alta-navy"
               />
               {search && (
@@ -283,9 +310,9 @@ ${terms.map(t => `<div class="term"><h2>${t.term}</h2><p>${t.definition}</p>${t.
           {/* Letter nav */}
           <div className="flex flex-wrap gap-1 mb-2">
             <button
-              onClick={() => { setActiveLetter(null); setSearch(""); }}
+              onClick={() => { setActiveLetter(null); setSearch(""); setActiveCategory(null); }}
               className={`px-2 h-7 text-[11px] font-semibold rounded transition-colors ${
-                !activeLetter ? "bg-alta-teal text-white shadow-sm" : "bg-alta-light text-alta-gray hover:text-alta-teal"
+                !activeLetter && !activeCategory ? "bg-alta-teal text-white shadow-sm" : "bg-alta-light text-alta-gray hover:text-alta-teal"
               }`}
             >
               All ({totalAllTerms})
@@ -296,7 +323,7 @@ ${terms.map(t => `<div class="term"><h2>${t.term}</h2><p>${t.definition}</p>${t.
               return (
                 <button
                   key={l}
-                  onClick={() => { setActiveLetter(l === activeLetter ? null : l); setSearch(""); }}
+                  onClick={() => { setActiveLetter(l === activeLetter ? null : l); setSearch(""); setActiveCategory(null); }}
                   disabled={!hasTerms}
                   className={`relative w-7 h-7 text-[11px] font-semibold rounded transition-colors ${
                     l === activeLetter
@@ -462,10 +489,10 @@ ${terms.map(t => `<div class="term"><h2>${t.term}</h2><p>${t.definition}</p>${t.
             </div>
             <p className="text-alta-navy font-semibold text-lg mb-1">No terms found</p>
             <p className="text-sm text-alta-gray max-w-xs mx-auto">
-              We couldn&apos;t find any terms matching &quot;{search || activeLetter}&quot;. Try a different keyword or browse by letter.
+              We couldn&apos;t find any terms matching &quot;{search || activeCategory || activeLetter}&quot;. Try a different keyword or browse by letter.
             </p>
             <button
-              onClick={() => { setSearch(""); setActiveLetter(null); }}
+              onClick={() => { setSearch(""); setActiveLetter(null); setActiveCategory(null); }}
               className="mt-4 px-5 py-2 bg-alta-teal text-white text-sm font-semibold rounded-lg hover:bg-alta-teal-dark transition-colors"
             >
               Clear &amp; Show All Terms
@@ -546,35 +573,3 @@ function StickyGlossaryAd() {
   );
 }
 
-/* ─── Term of the Day Component ─── */
-function TermOfTheDay({ onSelect }: { onSelect: (t: GlossaryTerm) => void }) {
-  const term = getTermOfTheDay();
-  const color = letterColors[term.term.charAt(0)] || '#0a8ebc';
-  return (
-    <div className="mt-4 mb-2">
-      <button
-        onClick={() => onSelect(term)}
-        className="w-full text-left p-4 rounded-xl border-2 border-dashed transition-all hover:shadow-md group"
-        style={{ borderColor: `${color}50`, background: `linear-gradient(135deg, ${color}08, ${color}04)` }}
-      >
-        <div className="flex items-start gap-4">
-          <div className="w-12 h-12 rounded-2xl flex items-center justify-center text-white font-bold text-lg shrink-0 group-hover:scale-110 transition-transform" style={{ backgroundColor: color }}>
-            {term.term.charAt(0)}
-          </div>
-          <div className="flex-1 min-w-0">
-            <div className="flex items-center gap-2 mb-1">
-              <span className="text-[10px] font-bold uppercase tracking-widest" style={{ color }}>Term of the Day</span>
-              <span className="text-[10px] text-alta-gray">{new Date().toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })}</span>
-            </div>
-            <h3 className="font-bold text-alta-navy text-base group-hover:text-alta-teal transition-colors">{term.term}</h3>
-            <p className="text-xs text-alta-gray mt-1 leading-relaxed line-clamp-2">{term.definition}</p>
-            <span className="inline-flex items-center gap-0.5 mt-2 text-[10px] font-semibold opacity-0 group-hover:opacity-100 transition-opacity" style={{ color }}>
-              View full definition
-              <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
-            </span>
-          </div>
-        </div>
-      </button>
-    </div>
-  );
-}

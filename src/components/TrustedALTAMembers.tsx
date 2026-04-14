@@ -51,7 +51,7 @@ export default function TrustedALTAMembers() {
             title={s.name}
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={s.logo} alt={s.name} className="h-6 w-auto object-contain max-w-[100px]" onError={(e) => { e.currentTarget.style.display = 'none'; }} />
+            <img src={s.logo} alt={s.name} className="h-6 w-auto object-contain max-w-[100px]" loading="lazy" onError={(e) => { e.currentTarget.style.display = 'none'; }} />
           </a>
         ))}
       </div>

@@ -2,7 +2,6 @@
 
 import { useState, useRef, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
-import Link from 'next/link';
 import { X, Send, Sparkles, Download, Loader2 } from 'lucide-react';
 
 const sponsors = [
