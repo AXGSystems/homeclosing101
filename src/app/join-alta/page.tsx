@@ -317,7 +317,7 @@ const benefits = [
 const aboutCards = [
   {
     title: "Founded in 1907",
-    desc: "ALTA has represented the title insurance and settlement services industry for over 116 years. From handwritten abstracts to digital closings, ALTA has been the voice of the industry through every era.",
+    desc: "ALTA has represented the title insurance and settlement services industry for over 119 years. From handwritten abstracts to digital closings, ALTA has been the voice of the industry through every era.",
     color: "from-[#1a5276] to-[#154463]",
     icon: "M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z",
     modal: {
@@ -1168,7 +1168,7 @@ export default function JoinAltaPage() {
     <>
       <PageHero
         title="In the Title Industry? Join ALTA."
-        subtitle="6,000+ member companies. 50 states. 117 years of advocacy. The voice of the title insurance and settlement services industry."
+        subtitle="6,000+ member companies. 50 states. 119 years of advocacy. The voice of the title insurance and settlement services industry."
         image="https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=1920&q=80"
         breadcrumb={[{ label: "Resources", href: "/resources" }, { label: "Join ALTA", href: "/join-alta" }]}
       />
@@ -1371,7 +1371,7 @@ export default function JoinAltaPage() {
           <h2 className="text-2xl font-bold text-alta-navy mb-4">Why Members Stay Year After Year</h2>
           <div className="grid sm:grid-cols-2 gap-4 mb-10">
             {[
-              { stat: "116+", label: "Years of continuous advocacy for the title industry since 1907", color: "text-[#1a5276]", bg: "bg-[#e8f0f5]", border: "border-[#c5d8e4]" },
+              { stat: "119", label: "Years of continuous advocacy for the title industry since 1907", color: "text-[#1a5276]", bg: "bg-[#e8f0f5]", border: "border-[#c5d8e4]" },
               { stat: "6,000+", label: "Member companies across all 50 states and D.C.", color: "text-[#2d6b3f]", bg: "bg-[#e9f5ed]", border: "border-[#bddcc7]" },
               { stat: "7", label: "Pillars in the Best Practices framework — the industry gold standard", color: "text-[#5b3a8c]", bg: "bg-[#f0ecf6]", border: "border-[#d4c8e4]" },
               { stat: "$2.77B", label: "In BEC losses ALTA helps members defend against through education and tools", color: "text-[#943030]", bg: "bg-[#f5e8e8]", border: "border-[#e4c5c5]" },

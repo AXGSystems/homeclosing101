@@ -240,7 +240,7 @@ export default function HomePage() {
                 <p className="text-3xl font-bold text-white mb-1">$275.1M</p>
                 <p className="text-sm text-gray-300 mb-2">Lost to real estate wire fraud in 2025</p>
                 <p className="text-xs text-gray-400 leading-relaxed">Criminals use AI, deepfakes, and hacked emails to intercept closing funds. The average victim loses their entire down payment — approximately $150,000. Recovery rates drop below 5% after 48 hours.</p>
-                <p className="text-[10px] text-red-400 mt-3 font-medium">Source: FBI IC3 2024 Report</p>
+                <p className="text-[10px] text-red-400 mt-3 font-medium">Source: FBI IC3 2025 Report</p>
               </div>
             </div>
             <div className="relative rounded-2xl overflow-hidden shadow-md group">
