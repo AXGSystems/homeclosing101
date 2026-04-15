@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useState, useEffect, useRef } from "react";
+import HeroSearch from "@/components/HeroSearch";
 
 
 interface PageHeroProps {
@@ -53,8 +54,12 @@ export default function PageHero({ title, subtitle, image, breadcrumb }: PageHer
           )}
           <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold text-white mb-2 leading-tight">{title}</h1>
           <p className="text-xs sm:text-sm text-gray-300 max-w-2xl leading-relaxed">{subtitle}</p>
+          {/* Search bar */}
+          <div className="mt-4 max-w-sm">
+            <HeroSearch />
+          </div>
           {/* Subtle bottom border accent */}
-          <div className="mt-6 w-20 h-1 bg-gradient-to-r from-alta-teal to-transparent rounded-full" />
+          <div className="mt-4 w-20 h-1 bg-gradient-to-r from-alta-teal to-transparent rounded-full" />
         </div>
       </section>
 

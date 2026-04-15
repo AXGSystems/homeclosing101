@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import HeroSearch from "./HeroSearch";
+import SiteSearch from "./SiteSearch";
 
 const navItems = [
   {
@@ -138,9 +138,7 @@ export default function Header() {
 
           {/* Search + Mobile toggle */}
           <div className="flex items-center gap-1">
-            <div className="hidden lg:block">
-              <HeroSearch variant="header" />
-            </div>
+            <SiteSearch />
             <button
               className="lg:hidden p-2 rounded-md text-alta-navy hover:bg-alta-light"
             onClick={() => setMobileOpen(!mobileOpen)}
