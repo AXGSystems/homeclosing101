@@ -49,10 +49,11 @@ function slugify(term: string): string {
   return term.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
 }
 
-export default function HeroSearch() {
+export default function HeroSearch({ variant = "default" }: { variant?: "default" | "header" }) {
   const [query, setQuery] = useState("");
   const [focused, setFocused] = useState(false);
   const wrapperRef = useRef<HTMLDivElement>(null);
+  const isHeader = variant === "header";
 
   useEffect(() => {
     const handler = (e: MouseEvent) => {
@@ -108,21 +109,25 @@ export default function HeroSearch() {
   };
 
   return (
-    <div ref={wrapperRef} className="relative w-full max-w-xs">
+    <div ref={wrapperRef} className={`relative ${isHeader ? "w-48 xl:w-56" : "w-full max-w-xs"}`}>
       <div className="relative">
-        <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-white/50" />
+        <Search className={`absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 ${isHeader ? "text-alta-gray" : "text-white/50"}`} />
         <input
           type="text"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           onFocus={() => setFocused(true)}
           placeholder="Search HC101..."
-          className="w-full pl-9 pr-3 py-2 bg-white/10 border border-white/20 rounded-lg text-sm text-white placeholder:text-white/40 focus:outline-none focus:bg-white/15 focus:border-white/40 transition-all"
+          className={`w-full pl-9 pr-3 py-1.5 rounded-lg text-sm transition-all focus:outline-none ${
+            isHeader
+              ? "bg-alta-light border border-gray-200 text-alta-navy placeholder:text-alta-gray/50 focus:border-alta-teal focus:ring-1 focus:ring-alta-teal/20"
+              : "bg-white/10 border border-white/20 text-white placeholder:text-white/40 focus:bg-white/15 focus:border-white/40"
+          }`}
         />
       </div>
 
       {showResults && (
-        <div className="absolute top-full left-0 right-0 mt-2 bg-white rounded-xl shadow-2xl border border-gray-200 max-h-[320px] overflow-y-auto z-50">
+        <div className="absolute top-full left-0 right-0 sm:w-[360px] sm:right-0 sm:left-auto mt-2 bg-white/80 backdrop-blur-xl rounded-xl shadow-2xl border border-white/40 max-h-[380px] overflow-y-auto z-[100]">
           {results.length === 0 ? (
             <div className="px-4 py-6 text-center text-sm text-alta-gray">No results found</div>
           ) : (
@@ -133,7 +138,7 @@ export default function HeroSearch() {
                   key={`${r.type}-${i}`}
                   href={r.href}
                   onClick={() => { setQuery(""); setFocused(false); }}
-                  className="flex items-start gap-3 px-4 py-3 hover:bg-alta-light transition-colors border-b border-gray-50 last:border-0"
+                  className="flex items-start gap-3 px-4 py-3 hover:bg-white/60 transition-colors border-b border-gray-100/50 last:border-0"
                 >
                   <span className={`text-[9px] font-bold px-1.5 py-0.5 rounded-full shrink-0 mt-0.5 ${label.cls}`}>{label.text}</span>
                   <div className="min-w-0">
