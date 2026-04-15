@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useState, useEffect, useRef } from "react";
+import SiteSearch from "@/components/SiteSearch";
 
 interface PageHeroProps {
   title: string;
@@ -33,6 +34,12 @@ export default function PageHero({ title, subtitle, image, breadcrumb }: PageHer
         <div className="absolute top-0 right-0 w-80 h-80 bg-white/5 rounded-full -translate-y-1/3 translate-x-1/4 blur-3xl" />
         <div className="absolute bottom-0 left-1/4 w-60 h-60 bg-alta-teal/10 rounded-full translate-y-1/3 blur-2xl" />
         <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6">
+          {/* Search icon — top right of hero */}
+          <div className="absolute top-0 right-4 sm:right-6">
+            <div className="[&_button]:text-white/60 [&_button]:hover:text-white [&_button]:hover:bg-white/10">
+              <SiteSearch />
+            </div>
+          </div>
           {breadcrumb && breadcrumb.length > 0 && (
             <nav className="mb-5" role="navigation" aria-label="Breadcrumb">
               <ol className="flex items-center gap-1.5 text-xs text-gray-400">
