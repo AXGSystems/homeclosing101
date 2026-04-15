@@ -383,25 +383,65 @@ export default function HomePage() {
       <div className="max-w-5xl mx-auto px-4 sm:px-6 py-4"><InlineAd /></div>
 
       {/* The Road to Homeownership */}
-      <section className="py-14 lg:py-20 bg-alta-light">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 text-center">
-          <h2 className="text-3xl font-bold text-alta-navy mb-5">The Road to Homeownership</h2>
-          <p className="text-lg text-alta-gray leading-relaxed mb-4">
-            Buying a home is the biggest financial decision most people will ever make. From getting your finances ready and getting pre-approved, to finding the right property, making an offer, signing the purchase agreement, securing funding and insurance, and finally closing the transaction — there are eight critical milestones between you and your keys.
-          </p>
-          <p className="text-base text-alta-gray leading-relaxed mb-8">
-            Each step has its own requirements, timelines, and potential pitfalls. Understanding what to expect at every stage helps you avoid costly mistakes, protect your investment, and close with confidence.
-          </p>
-          <Link href="/closing-process/what-to-expect" className="inline-flex items-center px-6 py-3 bg-alta-teal text-white font-semibold rounded-lg hover:bg-[#077a9e] transition-colors shadow-md">
-            Detailed Walkthrough of Each Step
-            <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-            </svg>
-          </Link>
+      <section className="relative py-14 lg:py-20 overflow-hidden">
+        <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1515162816999-a0c47dc192f7?w=1920&q=80')" }} />
+        <div className="absolute inset-0 bg-gradient-to-b from-white/95 to-white/90" />
+        <div className="relative max-w-4xl mx-auto px-4 sm:px-6">
+          <div className="text-center mb-10">
+            <div className="inline-flex items-center gap-2 bg-alta-navy/10 px-4 py-1.5 rounded-full mb-4">
+              <svg className="w-4 h-4 text-alta-navy" fill="currentColor" viewBox="0 0 24 24"><path d="M11.47 3.84a.75.75 0 011.06 0l8.69 8.69a.75.75 0 11-1.06 1.06l-.97-.97V19.5a.75.75 0 01-.75.75h-4.5a.75.75 0 01-.75-.75v-3.75h-3v3.75a.75.75 0 01-.75.75h-4.5a.75.75 0 01-.75-.75v-6.88l-.97.97a.75.75 0 01-1.06-1.06l8.69-8.69z" /></svg>
+              <span className="text-xs font-bold text-alta-navy uppercase tracking-wider">8 Key Milestones</span>
+            </div>
+            <h2 className="text-3xl font-bold text-alta-navy mb-4">The Road to Homeownership</h2>
+            <p className="text-lg text-alta-gray leading-relaxed max-w-2xl mx-auto">
+              Buying a home is the biggest financial decision most people will ever make. From getting your finances ready to getting the keys — there are eight critical milestones on the journey.
+            </p>
+          </div>
+
+          {/* 3 Data cards */}
+          <div className="grid sm:grid-cols-3 gap-4 mb-10">
+            <div className="bg-white rounded-xl p-5 shadow-sm border border-gray-100 text-center">
+              <svg className="w-8 h-8 mx-auto mb-3 text-alta-teal" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5" /></svg>
+              <p className="text-2xl font-bold text-alta-navy">30–45 days</p>
+              <p className="text-sm text-alta-gray mt-1">Average time from contract to closing</p>
+              <p className="text-xs text-alta-teal mt-2 font-medium">Source: NAR 2025</p>
+            </div>
+            <div className="bg-white rounded-xl p-5 shadow-sm border border-gray-100 text-center">
+              <svg className="w-8 h-8 mx-auto mb-3 text-alta-teal" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 002.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 00-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25zM6.75 12h.008v.008H6.75V12zm0 3h.008v.008H6.75V15zm0 3h.008v.008H6.75V18z" /></svg>
+              <p className="text-2xl font-bold text-alta-navy">50–100+</p>
+              <p className="text-sm text-alta-gray mt-1">Pages of documents signed at closing</p>
+              <p className="text-xs text-alta-teal mt-2 font-medium">Source: CFPB</p>
+            </div>
+            <div className="bg-white rounded-xl p-5 shadow-sm border border-gray-100 text-center">
+              <svg className="w-8 h-8 mx-auto mb-3 text-alta-teal" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M2.25 18.75a60.07 60.07 0 0115.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 013 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 00-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 01-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 003 15h-.75M15 10.5a3 3 0 11-6 0 3 3 0 016 0zm3 0h.008v.008H18V10.5zm-12 0h.008v.008H6V10.5z" /></svg>
+              <p className="text-2xl font-bold text-alta-navy">6–10%</p>
+              <p className="text-sm text-alta-gray mt-1">Total cash needed (down payment + closing costs)</p>
+              <p className="text-xs text-alta-teal mt-2 font-medium">Source: Bankrate 2025</p>
+            </div>
+          </div>
+
+          {/* Blurb */}
+          <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 sm:p-8 border border-gray-100 shadow-sm mb-8">
+            <p className="text-base text-alta-gray leading-relaxed mb-4">
+              Each step has its own requirements, timelines, and potential pitfalls. Understanding what to expect — from checking your credit score and comparing lenders, to ordering a title search, reviewing your Closing Disclosure, and sitting down at the closing table — helps you avoid costly mistakes and close with confidence.
+            </p>
+            <p className="text-base text-alta-gray leading-relaxed">
+              Our detailed walkthrough covers all eight milestones with expert tips, common errors to avoid, and links to every tool and calculator you need along the way.
+            </p>
+          </div>
+
+          <div className="text-center">
+            <Link href="/closing-process/what-to-expect" className="inline-flex items-center px-6 py-3 bg-alta-teal text-white font-semibold rounded-lg hover:bg-[#077a9e] transition-colors shadow-md">
+              Detailed Walkthrough of Each Step
+              <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+            </Link>
+          </div>
         </div>
       </section>
       {/* Gradient divider */}
-      <div className="h-0.5 bg-alta-teal/20" />
+      <div className="h-0.5 bg-gradient-to-r from-alta-navy to-alta-teal" />
 
       {/* Where to start — large photo-backed cards */}
       <section className="py-10 bg-alta-light">
