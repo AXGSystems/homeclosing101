@@ -207,12 +207,16 @@ export default function HomePage() {
               <QuickEstimate />
             </div>
 
-            {/* Right — key stats (4x2 grid with glow effect) */}
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-              {stats.map((stat) => (
+            {/* Right — key stats (4x2 grid with glow + float) */}
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-5">
+              {stats.map((stat, i) => (
                 <Link key={stat.value} href={stat.href} className="group relative">
-                  <div className={`stat-card relative overflow-hidden backdrop-blur-lg rounded-2xl p-5 lg:p-6 border border-white/25 transition-all duration-300 hover:scale-[1.06] hover:border-white/50`}
-                    style={{ boxShadow: '0 0 20px rgba(10, 142, 188, 0.15), 0 8px 32px rgba(0,0,0,0.2)' }}
+                  <div className={`stat-card relative overflow-hidden backdrop-blur-lg rounded-2xl p-6 lg:p-8 border border-white/25 transition-all duration-300 hover:scale-[1.06] hover:border-white/50`}
+                    style={{
+                      boxShadow: '0 0 20px rgba(10, 142, 188, 0.15), 0 8px 32px rgba(0,0,0,0.2)',
+                      animation: `statFloat 3s ease-in-out infinite`,
+                      animationDelay: `${i * 0.4}s`,
+                    }}
                     onMouseEnter={(e) => {
                       const accent = stat.accent.includes('5ec4e6') ? '#5ec4e6' : stat.accent.includes('6fcf97') ? '#6fcf97' : stat.accent.includes('b794f4') ? '#b794f4' : stat.accent.includes('f0d06e') ? '#f0d06e' : '#f87171';
                       (e.currentTarget as HTMLElement).style.boxShadow = `0 0 30px ${accent}40, 0 0 60px ${accent}20, 0 12px 40px rgba(0,0,0,0.3)`;
@@ -224,11 +228,11 @@ export default function HomePage() {
                     <div className={`absolute inset-0 bg-gradient-to-br ${stat.color}`} />
                     <div className="absolute inset-0 bg-white/[0.06] backdrop-blur-sm" />
                     <div className="relative text-center">
-                      <div className={`${stat.accent} mb-2 flex justify-center opacity-80 group-hover:opacity-100 transition-opacity`}>{stat.icon}</div>
-                      <p className={`text-3xl lg:text-4xl font-bold mb-1.5 ${stat.accent} drop-shadow-[0_0_12px_currentColor]`}>
+                      <div className={`${stat.accent} mb-3 flex justify-center opacity-80 group-hover:opacity-100 transition-opacity`}>{stat.icon}</div>
+                      <p className={`text-4xl lg:text-5xl font-bold mb-2 ${stat.accent} drop-shadow-[0_0_12px_currentColor]`}>
                         <AnimatedCounter end={stat.end} suffix={stat.suffix} duration={1800} />
                       </p>
-                      <p className="text-xs text-gray-200 leading-snug font-semibold tracking-wide">{stat.label}</p>
+                      <p className="text-sm text-gray-200 leading-snug font-semibold tracking-wide">{stat.label}</p>
                     </div>
                   </div>
                   {/* Hover preview modal */}
