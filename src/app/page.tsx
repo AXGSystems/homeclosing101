@@ -382,9 +382,12 @@ export default function HomePage() {
       {/* Ad between features and roadmap */}
       <div className="max-w-5xl mx-auto px-4 sm:px-6 py-4"><InlineAd /></div>
 
-      {/* The Road to Homeownership — street with houses */}
-      <section className="py-12 lg:py-16 bg-gradient-to-b from-[#e8f4ec] to-[#dceef5] overflow-hidden">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6">
+      {/* The Road to Homeownership */}
+      <section className="relative py-12 lg:py-16 overflow-hidden">
+        {/* Real road background */}
+        <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1515162816999-a0c47dc192f7?w=1920&q=80')" }} />
+        <div className="absolute inset-0 bg-white/92" />
+        <div className="relative max-w-5xl mx-auto px-4 sm:px-6">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-alta-navy mb-3">The Road to Homeownership</h2>
             <p className="text-alta-gray max-w-lg mx-auto">Eight key milestones from getting your finances ready to getting the keys.</p>
@@ -419,21 +422,12 @@ export default function HomePage() {
               <svg className="w-8 h-8 text-alta-teal" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2.5}><path strokeLinecap="round" strokeLinejoin="round" d="M19.5 13.5L12 21m0 0l-7.5-7.5M12 21V3" /></svg>
             </div>
 
-            {/* The road */}
-            <div className="relative h-10 my-1">
-              <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 h-10 bg-[#4a4a4a] rounded-full" />
-              <div className="absolute inset-x-6 top-1/2 -translate-y-1/2 flex items-center justify-between">
-                {Array.from({ length: 28 }).map((_, i) => (
-                  <div key={i} className="w-5 h-1 bg-[#f0c030] rounded-full" />
-                ))}
+            {/* Divider with path feel */}
+            <div className="relative my-4">
+              <div className="h-px bg-gradient-to-r from-transparent via-alta-teal/30 to-transparent" />
+              <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-white px-4">
+                <svg className="w-5 h-5 text-alta-teal/40" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" /></svg>
               </div>
-              <div className="absolute inset-x-1 top-1/2 -translate-y-[calc(50%+16px)] h-0.5 bg-white/60 rounded-full" />
-              <div className="absolute inset-x-1 top-1/2 translate-y-[calc(-50%+16px)] h-0.5 bg-white/60 rounded-full" />
-            </div>
-
-            {/* Curved arrow: road → row 2 */}
-            <div className="flex justify-start pl-8 my-1">
-              <svg className="w-8 h-8 text-alta-teal" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2.5}><path strokeLinecap="round" strokeLinejoin="round" d="M19.5 13.5L12 21m0 0l-7.5-7.5M12 21V3" /></svg>
             </div>
 
             {/* Row 2: steps 5→6→7→8 (left to right) */}
