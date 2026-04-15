@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { useState } from "react";
 import SiteSearch from "./SiteSearch";
-import ThemeToggle from "./ThemeToggle";
 
 const navItems = [
   {
@@ -137,10 +136,9 @@ export default function Header() {
             ))}
           </nav>
 
-          {/* Search + Theme + Mobile toggle */}
+          {/* Search + Mobile toggle */}
           <div className="flex items-center gap-1">
             <SiteSearch />
-            <ThemeToggle />
             <button
               className="lg:hidden p-2 rounded-md text-alta-navy hover:bg-alta-light"
             onClick={() => setMobileOpen(!mobileOpen)}
