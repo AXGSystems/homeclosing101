@@ -355,16 +355,16 @@ export default function HomeClosingAI() {
 
   return (
     <div id="home-closing-ai" className="print:hidden">
-      {/* Minimized: tiny tab on right edge */}
+      {/* Minimized: visible tab on right edge */}
       {!open && minimized && (
         <button
           onClick={() => setMinimized(false)}
-          className="fixed bottom-32 sm:bottom-1/3 right-0 z-[600] bg-gradient-to-b from-alta-navy to-alta-teal text-white rounded-l-xl px-1.5 py-3 shadow-lg hover:brightness-110 transition-all"
+          className="fixed bottom-28 sm:bottom-1/3 right-0 z-[600] bg-gradient-to-b from-alta-navy to-alta-teal text-white rounded-l-2xl px-3 py-6 shadow-xl hover:brightness-110 hover:px-4 transition-all"
           style={{ writingMode: 'vertical-rl', textOrientation: 'mixed' }}
         >
-          <span className="text-[9px] font-bold tracking-wider flex items-center gap-1">
-            <Sparkles className="w-2.5 h-2.5 rotate-90" />
-            AI
+          <span className="text-xs font-bold tracking-widest flex items-center gap-2">
+            <Sparkles className="w-4 h-4 rotate-90" />
+            Ask HC101
           </span>
         </button>
       )}
