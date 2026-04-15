@@ -93,7 +93,7 @@ export default function Header() {
               >
                 <Link
                   href={item.href}
-                  className="relative px-3 py-2 text-sm font-medium text-alta-navy hover:text-alta-teal rounded-md transition-colors group/nav after:absolute after:bottom-0 after:left-3 after:right-3 after:h-0.5 after:bg-alta-teal after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:origin-left"
+                  className="relative px-2 xl:px-3 py-2 text-[13px] xl:text-sm font-medium text-alta-navy hover:text-alta-teal rounded-md transition-colors whitespace-nowrap group/nav after:absolute after:bottom-0 after:left-2 after:right-2 after:h-0.5 after:bg-alta-teal after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:origin-left"
                 >
                   {item.label}
                   {item.children && (
