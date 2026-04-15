@@ -269,9 +269,10 @@ function escapeHtml(text: string): string {
 }
 
 // Convert internal paths in response text to clickable links (returns HTML)
+// Negative lookbehind (?<!<) prevents matching /strong, /a, etc. inside closing HTML tags
 function linkifyPaths(html: string): string {
   return html.replace(
-    /(?:at |visit |see |browse )?(\/[a-z0-9-]+(?:\/[a-z0-9-]+)*)/gi,
+    /(?:at |visit |see |browse )?(?<!<)(\/[a-z0-9-]+(?:\/[a-z0-9-]+)*)/gi,
     (match, path) => {
       const label = path;
       return `<a href="${path}" class="text-alta-teal underline underline-offset-2 hover:text-alta-navy transition-colors" data-internal-link="${path}">${label}</a>`;
