@@ -2,8 +2,6 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import HeroSearch from "./HeroSearch";
-
 const navItems = [
   {
     label: "The Closing Process",
@@ -155,19 +153,11 @@ export default function Header() {
           </button>
         </div>
 
-        {/* Search bar — second row, below nav */}
-        <div className="hidden lg:flex justify-end pb-2">
-          <HeroSearch variant="header" />
-        </div>
       </div>
 
       {/* Mobile Nav */}
       <nav className={`lg:hidden border-t border-[var(--border-color)] bg-[var(--bg-primary)] overflow-y-auto shadow-inner transition-all duration-300 ease-in-out ${mobileOpen ? 'max-h-[70vh] opacity-100' : 'max-h-0 opacity-0 overflow-hidden border-t-0'}`} role="navigation" aria-label="Mobile navigation">
         <div className="px-4 py-3 space-y-0.5">
-          {/* Mobile search */}
-          <div className="pb-3 mb-2 border-b border-[var(--border-color)]">
-            <HeroSearch variant="header" />
-          </div>
           {navItems.map((item) => (
             <div key={item.label}>
               <Link

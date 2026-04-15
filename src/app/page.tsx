@@ -5,6 +5,7 @@ import AnimatedCounter from "@/components/AnimatedCounter";
 import HomepageTestimonials from "@/components/HomepageTestimonials";
 import QuickEstimate from "@/components/QuickEstimate";
 import StatCard from "@/components/StatCard";
+import HeroSearch from "@/components/HeroSearch";
 
 const features = [
   {
@@ -202,6 +203,11 @@ export default function HomePage() {
                     </Link>
                   ))}
                 </div>
+              </div>
+
+              {/* Search */}
+              <div className="mt-5">
+                <HeroSearch />
               </div>
 
               {/* Quick Estimate — desktop only */}
