@@ -81,22 +81,18 @@ const features = [
 ];
 
 const stats = [
-  { value: "30+", end: 30, suffix: "+", label: "In-depth guides", color: "from-[#0a7ea8]/30 to-[#0a7ea8]/10", accent: "text-[#5ec4e6]", href: "/closing-process", preview: "Step-by-step guides covering every phase from pre-approval to getting the keys.",
-    icon: <svg viewBox="0 0 24 24" className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" /></svg> },
-  { value: "250+", end: 250, suffix: "+", label: "FAQ answers", color: "from-[#2d6b3f]/30 to-[#2d6b3f]/10", accent: "text-[#6fcf97]", href: "/faq", preview: "Verified answers sourced from CFPB, FBI, ALTA, NAR, and more.",
-    icon: <svg viewBox="0 0 24 24" className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9 5.25h.008v.008H12v-.008z" /></svg> },
-  { value: "450+", end: 450, suffix: "+", label: "Glossary terms", color: "from-[#5b3a8c]/30 to-[#5b3a8c]/10", accent: "text-[#b794f4]", href: "/glossary", preview: "Searchable real estate terms with examples you can save and print.",
-    icon: <svg viewBox="0 0 24 24" className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M4.26 10.147a60.438 60.438 0 00-.491 6.347A48.62 48.62 0 0112 20.904a48.62 48.62 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.636 50.636 0 00-2.658-.813A59.906 59.906 0 0112 3.493a59.903 59.903 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.717 50.717 0 0112 13.489a50.702 50.702 0 017.74-3.342" /></svg> },
-  { value: "8", end: 8, suffix: "", label: "Calculators & tools", color: "from-[#8b6914]/30 to-[#8b6914]/10", accent: "text-[#f0d06e]", href: "/mortgage-calculator", preview: "Mortgage, affordability, DTI, rent-vs-buy, closing costs, and more.",
-    icon: <svg viewBox="0 0 24 24" className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M15.75 15.75V18m-7.5-6.75h.008v.008H8.25v-.008zm0 2.25h.008v.008H8.25v-.008zm0 2.25h.008v.008H8.25v-.008zm0 2.25h.008v.008H8.25v-.008zm2.498-6.75h.007v.008h-.007v-.008zm0 2.25h.007v.008h-.007v-.008zm0 2.25h.007v.008h-.007v-.008zm0 2.25h.007v.008h-.007v-.008zm2.504-6.75h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008v-.008zM8.25 6h7.5v2.25h-7.5V6zM12 2.25c-1.892 0-3.758.11-5.593.322C5.307 2.7 4.5 3.65 4.5 4.757V19.5a2.25 2.25 0 002.25 2.25h10.5a2.25 2.25 0 002.25-2.25V4.757c0-1.108-.806-2.057-1.907-2.185A48.507 48.507 0 0012 2.25z" /></svg> },
-  { value: "6K+", end: 6, suffix: "K+", label: "ALTA members", color: "from-[#943030]/30 to-[#943030]/10", accent: "text-[#f87171]", href: "/find-company", preview: "Title companies and agents protecting homebuyers in all 50 states.",
-    icon: <svg viewBox="0 0 24 24" className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z" /></svg> },
-  { value: "50", end: 50, suffix: "", label: "State coverage", color: "from-[#0a7ea8]/30 to-[#0a7ea8]/10", accent: "text-[#5ec4e6]", href: "/find-company", preview: "Title insurance and settlement services available in every state.",
-    icon: <svg viewBox="0 0 24 24" className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M9 6.75V15m6-6v8.25m.503 3.498l4.875-2.437c.381-.19.622-.58.622-1.006V4.82c0-.836-.88-1.38-1.628-1.006l-3.869 1.934c-.317.159-.69.159-1.006 0L9.503 3.252a1.125 1.125 0 00-1.006 0L3.622 5.689C3.24 5.88 3 6.27 3 6.695V19.18c0 .836.88 1.38 1.628 1.006l3.869-1.934c.317-.159.69-.159 1.006 0l4.994 2.497c.317.158.69.158 1.006 0z" /></svg> },
-  { value: "8", end: 8, suffix: "", label: "Closing milestones", color: "from-[#2d6b3f]/30 to-[#2d6b3f]/10", accent: "text-[#6fcf97]", href: "/closing-process/what-to-expect", preview: "The complete 8-step journey from finances to keys in your hand.",
-    icon: <svg viewBox="0 0 24 24" className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M3 3v1.5M3 21v-6m0 0l2.77-.693a9 9 0 016.208.682l.108.054a9 9 0 006.086.71l3.114-.732a48.524 48.524 0 01-.005-10.499l-3.11.732a9 9 0 01-6.085-.711l-.108-.054a9 9 0 00-6.208-.682L3 4.5M3 15V4.5" /></svg> },
-  { value: "24/7", end: 24, suffix: "/7", label: "AI assistant", color: "from-[#5b3a8c]/30 to-[#5b3a8c]/10", accent: "text-[#b794f4]", href: "/faq", preview: "Ask HomeClosing101 AI any question about closing — instant answers.",
-    icon: <svg viewBox="0 0 24 24" className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z" /></svg> },
+  { value: "30+", end: 30, suffix: "+", label: "In-Depth Guides", color: "from-[#0a7ea8]/30 to-[#0a7ea8]/10", accent: "text-[#5ec4e6]", href: "/closing-process", preview: "Step-by-step guides covering every phase from pre-approval to getting the keys.",
+    icon: <svg viewBox="0 0 24 24" className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" /></svg> },
+  { value: "250+", end: 250, suffix: "+", label: "FAQ Answers", color: "from-[#2d6b3f]/30 to-[#2d6b3f]/10", accent: "text-[#6fcf97]", href: "/faq", preview: "Verified answers sourced from CFPB, FBI, ALTA, NAR, and more.",
+    icon: <svg viewBox="0 0 24 24" className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9 5.25h.008v.008H12v-.008z" /></svg> },
+  { value: "450+", end: 450, suffix: "+", label: "Glossary Terms", color: "from-[#5b3a8c]/30 to-[#5b3a8c]/10", accent: "text-[#b794f4]", href: "/glossary", preview: "Searchable real estate terms with examples you can save and print.",
+    icon: <svg viewBox="0 0 24 24" className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M4.26 10.147a60.438 60.438 0 00-.491 6.347A48.62 48.62 0 0112 20.904a48.62 48.62 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.636 50.636 0 00-2.658-.813A59.906 59.906 0 0112 3.493a59.903 59.903 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.717 50.717 0 0112 13.489a50.702 50.702 0 017.74-3.342" /></svg> },
+  { value: "8", end: 8, suffix: "", label: "Calculators & Tools", color: "from-[#8b6914]/30 to-[#8b6914]/10", accent: "text-[#f0d06e]", href: "/mortgage-calculator", preview: "Mortgage, affordability, DTI, rent-vs-buy, closing costs, and more.",
+    icon: <svg viewBox="0 0 24 24" className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M15.75 15.75V18m-7.5-6.75h.008v.008H8.25v-.008zm0 2.25h.008v.008H8.25v-.008zm0 2.25h.008v.008H8.25v-.008zm0 2.25h.008v.008H8.25v-.008zm2.498-6.75h.007v.008h-.007v-.008zm0 2.25h.007v.008h-.007v-.008zm0 2.25h.007v.008h-.007v-.008zm0 2.25h.007v.008h-.007v-.008zM8.25 6h7.5v2.25h-7.5V6zM12 2.25c-1.892 0-3.758.11-5.593.322C5.307 2.7 4.5 3.65 4.5 4.757V19.5a2.25 2.25 0 002.25 2.25h10.5a2.25 2.25 0 002.25-2.25V4.757c0-1.108-.806-2.057-1.907-2.185A48.507 48.507 0 0012 2.25z" /></svg> },
+  { value: "$275M", end: 275, suffix: "M", label: "Wire Fraud Losses", color: "from-[#943030]/30 to-[#943030]/10", accent: "text-[#f87171]", href: "/protect-your-money", preview: "Lost to real estate wire fraud in 2025. Learn how to protect yourself.",
+    icon: <svg viewBox="0 0 24 24" className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" /></svg> },
+  { value: "1 in 3", end: 3, suffix: "", label: "Title Issues Found", color: "from-[#0a7ea8]/30 to-[#0a7ea8]/10", accent: "text-[#5ec4e6]", href: "/protect-your-rights", preview: "Title searches find problems in 1 out of 3 transactions before closing.",
+    icon: <svg viewBox="0 0 24 24" className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" /></svg> },
 ];
 
 const steps = [
@@ -207,26 +203,26 @@ export default function HomePage() {
               <QuickEstimate />
             </div>
 
-            {/* Right — key stats (4x2 grid with hover previews) */}
-            <div className="grid grid-cols-4 gap-2">
+            {/* Right — key stats (3x2 grid with hover previews) */}
+            <div className="grid grid-cols-3 gap-3">
               {stats.map((stat) => (
                 <Link key={stat.value} href={stat.href} className="group relative">
-                  <div className={`stat-card relative overflow-hidden backdrop-blur-md rounded-lg p-3 border border-white/20 hover:border-white/40 transition-all shadow-lg shadow-black/10`}>
+                  <div className={`stat-card relative overflow-hidden backdrop-blur-md rounded-xl p-4 border border-white/20 hover:border-white/40 transition-all hover:scale-[1.04] shadow-lg shadow-black/10`}>
                     <div className={`absolute inset-0 bg-gradient-to-br ${stat.color}`} />
                     <div className="absolute inset-0 bg-white/[0.08] backdrop-blur-sm" />
                     <div className="relative text-center">
-                      <div className={`${stat.accent} mb-1 flex justify-center`}>{stat.icon}</div>
-                      <p className={`text-xl font-bold ${stat.accent}`}>
+                      <div className={`${stat.accent} mb-1.5 flex justify-center`}>{stat.icon}</div>
+                      <p className={`text-2xl lg:text-3xl font-bold mb-1 ${stat.accent}`}>
                         <AnimatedCounter end={stat.end} suffix={stat.suffix} duration={1800} />
                       </p>
-                      <p className="text-[10px] text-gray-300 leading-snug">{stat.label}</p>
+                      <p className="text-[11px] text-gray-300 leading-snug font-medium">{stat.label}</p>
                     </div>
                   </div>
                   {/* Hover preview modal */}
-                  <div className="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-48 bg-white/95 backdrop-blur-xl rounded-xl shadow-2xl border border-gray-200 p-3 opacity-0 pointer-events-none group-hover:opacity-100 transition-opacity duration-200 z-50 hidden sm:block">
+                  <div className="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-52 bg-white/95 backdrop-blur-xl rounded-xl shadow-2xl border border-gray-200 p-3 opacity-0 pointer-events-none group-hover:opacity-100 transition-opacity duration-200 z-50 hidden sm:block">
                     <p className="text-xs font-bold text-alta-navy mb-1">{stat.label}</p>
                     <p className="text-[11px] text-alta-gray leading-relaxed">{stat.preview}</p>
-                    <p className="text-[10px] text-alta-teal font-medium mt-2 flex items-center gap-0.5">View <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg></p>
+                    <p className="text-[10px] text-alta-teal font-medium mt-2 flex items-center gap-0.5">Explore <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg></p>
                     <div className="absolute left-1/2 -translate-x-1/2 top-full -translate-y-1 rotate-45 w-2 h-2 bg-white border-r border-b border-gray-200"></div>
                   </div>
                 </Link>
@@ -712,13 +708,13 @@ export default function HomePage() {
                 Use our interactive tools to track your progress, estimate your costs, and make sure nothing falls through the cracks.
               </p>
               <div className="flex flex-col sm:flex-row gap-3">
-                <Link href="/closing-process/closing-checklist" className="px-7 py-3.5 bg-white text-alta-navy font-semibold rounded-lg hover:bg-gray-100 transition-colors text-center">
+                <Link href="/closing-process/closing-checklist" className="px-7 py-3.5 border-2 border-white/40 text-white font-semibold rounded-lg hover:bg-[#c0392b] hover:border-[#c0392b] transition-all text-center">
                   Interactive Checklist
                 </Link>
-                <Link href="/closing-process/closing-costs" className="px-7 py-3.5 border-2 border-white/40 text-white font-semibold rounded-lg hover:bg-white/10 transition-colors text-center">
+                <Link href="/closing-process/closing-costs" className="px-7 py-3.5 border-2 border-white/40 text-white font-semibold rounded-lg hover:bg-[#c0392b] hover:border-[#c0392b] transition-all text-center">
                   Cost Calculator
                 </Link>
-                <Link href="/find-company" className="px-7 py-3.5 border-2 border-white/40 text-white font-semibold rounded-lg hover:bg-white/10 transition-colors text-center">
+                <Link href="/find-company" className="px-7 py-3.5 border-2 border-white/40 text-white font-semibold rounded-lg hover:bg-[#c0392b] hover:border-[#c0392b] transition-all text-center">
                   Find a Company
                 </Link>
               </div>
