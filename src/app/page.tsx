@@ -222,7 +222,7 @@ export default function HomePage() {
       <section className="py-12 lg:py-16 bg-white">
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
           <div className="text-center mb-10">
-            <h2 className="text-3xl font-bold text-alta-navy mb-3">Why Every Homebuyer Needs This</h2>
+            <h2 className="text-3xl font-bold text-alta-navy mb-3">The Importance of Homebuyer Education</h2>
             <p className="text-alta-gray max-w-2xl mx-auto leading-relaxed">The closing process is the most consequential financial event most people will ever experience — yet it&apos;s the one they prepare for the least. Here&apos;s what the data says.</p>
           </div>
 
@@ -337,7 +337,7 @@ export default function HomePage() {
       <section className="py-14 lg:py-18 bg-alta-light">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-alta-navy mb-3">Everything You Need to Know</h2>
+            <h2 className="text-3xl font-bold text-alta-navy mb-3">Your Journey Consolidated</h2>
             <p className="text-alta-gray max-w-xl mx-auto">From understanding costs to protecting your investment — 25+ pages of deep, verified guides.</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -381,53 +381,53 @@ export default function HomePage() {
       {/* Ad between features and roadmap */}
       <div className="max-w-5xl mx-auto px-4 sm:px-6 py-4"><InlineAd /></div>
 
-      {/* The Road to Homeownership — alternating timeline */}
-      <section className="py-12 lg:py-16">
+      {/* The Road to Homeownership — street with houses */}
+      <section className="py-12 lg:py-16 bg-gradient-to-b from-[#e8f4ec] to-[#dceef5] overflow-hidden">
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-alta-navy mb-3">The Road to Homeownership</h2>
             <p className="text-alta-gray max-w-lg mx-auto">Seven key milestones from getting your finances ready to getting the keys.</p>
           </div>
-          {/* Timeline */}
+
+          {/* Road */}
           <div className="relative">
-            {/* Center line */}
-            <div className="absolute left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-alta-teal via-alta-teal/60 to-[#d4a843] hidden md:block" style={{ transform: 'translateX(-50%)' }} />
-            <div className="space-y-6 md:space-y-0">
+            {/* The road surface */}
+            <div className="absolute left-0 right-0 top-1/2 -translate-y-1/2 h-16 sm:h-20 bg-[#4a4a4a] rounded-full hidden md:block" />
+            {/* Yellow center dashes */}
+            <div className="absolute left-4 right-4 top-1/2 -translate-y-1/2 h-1 hidden md:flex items-center justify-between">
+              {Array.from({ length: 20 }).map((_, i) => (
+                <div key={i} className="w-8 h-1 bg-[#f0c030] rounded-full" />
+              ))}
+            </div>
+            {/* White edge lines */}
+            <div className="absolute left-2 right-2 top-1/2 -translate-y-[calc(50%+28px)] h-0.5 bg-white/80 rounded-full hidden md:block" />
+            <div className="absolute left-2 right-2 top-1/2 translate-y-[calc(-50%+28px)] h-0.5 bg-white/80 rounded-full hidden md:block" />
+
+            {/* Houses along the road */}
+            <div className="relative z-10 grid grid-cols-1 md:grid-cols-7 gap-4 md:gap-2">
               {steps.map((step: { num: string; title: string; desc: string; keys?: boolean; bg: string; borderColor: string }, i: number) => (
-                <div key={step.num} className={`relative md:flex md:items-center md:gap-8 ${i % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'} md:mb-8`}>
-                  {/* Content card — desktop only */}
-                  <div className={`flex-1 hidden md:block ${i % 2 === 0 ? 'md:text-right' : 'md:text-left'}`}>
-                    <div className={`inline-block ${step.bg} rounded-xl p-4 shadow-sm hover:shadow-md transition-shadow ${i % 2 === 0 ? 'border-r-4' : 'border-l-4'} ${step.borderColor} max-w-sm ${i % 2 === 0 ? 'ml-auto' : ''}`}>
-                      <h3 className={`font-semibold text-base ${step.keys ? 'text-[#d4a843]' : 'text-alta-navy'}`}>{step.title}</h3>
-                      <p className="text-sm text-alta-gray mt-1 leading-relaxed">{step.desc}</p>
-                    </div>
-                  </div>
-                  {/* Center node */}
-                  <div className="hidden md:flex items-center justify-center shrink-0 z-10">
-                    <div className={`w-12 h-12 rounded-full flex items-center justify-center font-bold text-sm shadow-lg ring-4 ring-white ${step.keys ? 'bg-gradient-to-br from-[#d4a843] to-[#b8922e] text-white' : 'bg-gradient-to-br from-alta-teal to-[#077a9e] text-white'}`}>
-                      {step.keys ? (
-                        <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M15.75 5.25a3 3 0 013 3m3 0a6 6 0 01-7.029 5.912c-.563-.097-1.159.026-1.563.43L10.5 17.25H8.25v2.25H6v2.25H2.25v-2.818c0-.597.237-1.17.659-1.591l6.499-6.499c.404-.404.527-1 .43-1.563A6 6 0 1121.75 8.25z" /></svg>
-                      ) : step.num}
-                    </div>
-                  </div>
-                  {/* Spacer for opposite side — desktop only */}
-                  <div className="flex-1 hidden md:block" />
-                  {/* Mobile-only: inline step number */}
-                  <div className={`md:hidden flex gap-3 items-start mb-4`}>
-                    <div className={`w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm shrink-0 ${step.keys ? 'bg-[#d4a843] text-white' : 'bg-alta-teal text-white'}`}>
-                      {step.keys ? (
-                        <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M15.75 5.25a3 3 0 013 3m3 0a6 6 0 01-7.029 5.912c-.563-.097-1.159.026-1.563.43L10.5 17.25H8.25v2.25H6v2.25H2.25v-2.818c0-.597.237-1.17.659-1.591l6.499-6.499c.404-.404.527-1 .43-1.563A6 6 0 1121.75 8.25z" /></svg>
-                      ) : step.num}
-                    </div>
-                    <div className={`${step.bg} rounded-xl p-3 flex-1 border-l-4 ${step.borderColor}`}>
-                      <h3 className={`font-semibold ${step.keys ? 'text-[#d4a843]' : 'text-alta-navy'}`}>{step.title}</h3>
-                      <p className="text-sm text-alta-gray mt-0.5">{step.desc}</p>
+                <div key={step.num} className={`flex flex-col items-center ${i % 2 === 0 ? 'md:-translate-y-16' : 'md:translate-y-16'}`}>
+                  {/* House shape */}
+                  <div className={`relative w-full max-w-[140px] group`}>
+                    {/* Roof */}
+                    <div className={`relative mx-auto w-0 h-0 border-l-[60px] border-r-[60px] border-b-[30px] ${step.keys ? 'border-b-[#d4a843]' : 'border-b-[#1a5276]'} border-l-transparent border-r-transparent`} />
+                    {/* House body */}
+                    <div className={`${step.bg} border-2 ${step.borderColor} rounded-b-lg p-3 text-center shadow-md group-hover:shadow-lg group-hover:-translate-y-1 transition-all`}>
+                      {/* Step number */}
+                      <div className={`w-8 h-8 rounded-full flex items-center justify-center mx-auto mb-2 text-white text-xs font-bold ${step.keys ? 'bg-[#d4a843]' : 'bg-alta-teal'}`}>
+                        {step.keys ? (
+                          <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M15.75 5.25a3 3 0 013 3m3 0a6 6 0 01-7.029 5.912c-.563-.097-1.159.026-1.563.43L10.5 17.25H8.25v2.25H6v2.25H2.25v-2.818c0-.597.237-1.17.659-1.591l6.499-6.499c.404-.404.527-1 .43-1.563A6 6 0 1121.75 8.25z" /></svg>
+                        ) : step.num}
+                      </div>
+                      <h3 className={`font-bold text-xs leading-tight ${step.keys ? 'text-[#d4a843]' : 'text-alta-navy'}`}>{step.title}</h3>
+                      <p className="text-[10px] text-alta-gray mt-1 leading-snug hidden sm:block">{step.desc}</p>
                     </div>
                   </div>
                 </div>
               ))}
             </div>
           </div>
+
           <div className="text-center mt-12">
             <Link href="/closing-process/what-to-expect" className="inline-flex items-center px-6 py-3 bg-alta-teal text-white font-semibold rounded-lg hover:bg-[#077a9e] transition-colors shadow-md">
               Detailed Walkthrough of Each Step
