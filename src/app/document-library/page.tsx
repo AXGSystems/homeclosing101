@@ -5,6 +5,7 @@ import Link from "next/link";
 import PageHero from "@/components/PageHero";
 import { InlineAd } from "@/components/EliteProviders";
 import FirstTimeBuyerCTA from "@/components/FirstTimeBuyerCTA";
+import ResourcesContent from "@/components/ResourcesContent";
 
 const documentSections = [
   {
@@ -119,17 +120,41 @@ const sectionGradients: Record<string, string> = {
 };
 
 export default function DocumentLibraryPage() {
+  const [activeTab, setActiveTab] = useState<"documents" | "resources">("documents");
   const [activeModal, setActiveModal] = useState<{title: string; gradient: string; content: React.ReactNode} | null>(null);
 
   return (
     <>
       <PageHero
-        title="Document Library"
-        subtitle="Download official forms, sample documents, checklists, and guides from CFPB, ALTA, Fannie Mae, Freddie Mac, and other trusted sources."
+        title="Document & Resource Library"
+        subtitle="Official forms, sample documents, checklists, guides, and trusted external resources — all in one place."
         image="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=1920&q=80"
-        breadcrumb={[{ label: "Resources", href: "/resources" }, { label: "Document Library", href: "/document-library" }]}
+        breadcrumb={[{ label: "Resources", href: "/document-library" }, { label: "Document & Resource Library", href: "/document-library" }]}
       />
 
+      <div className="py-1.5 lg:py-2">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6">
+          {/* Tab bar */}
+          <div className="flex gap-1 mb-6 bg-alta-light rounded-xl p-1">
+            <button
+              onClick={() => setActiveTab("documents")}
+              className={`flex-1 px-4 py-2.5 rounded-lg text-sm font-semibold transition-all ${activeTab === "documents" ? "bg-white text-alta-navy shadow-sm" : "text-alta-gray hover:text-alta-navy"}`}
+            >
+              Document Library
+            </button>
+            <button
+              onClick={() => setActiveTab("resources")}
+              className={`flex-1 px-4 py-2.5 rounded-lg text-sm font-semibold transition-all ${activeTab === "resources" ? "bg-white text-alta-navy shadow-sm" : "text-alta-gray hover:text-alta-navy"}`}
+            >
+              External Resources
+            </button>
+          </div>
+
+          {activeTab === "resources" && <ResourcesContent />}
+        </div>
+      </div>
+
+      {activeTab === "documents" && <>
       <div className="py-1.5 lg:py-2">
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
           <div className="mb-6 p-4 bg-[#e6f1f5] rounded-2xl border border-[#b4d8e8] border-l-4 border-l-[#0a7ea8] sm:sticky sm:top-[142px] z-20 shadow-md">
@@ -277,6 +302,7 @@ export default function DocumentLibraryPage() {
           <FirstTimeBuyerCTA />
         </div>
       </div>
+      </>}
 
       {/* Modal */}
       {activeModal && (

@@ -352,10 +352,10 @@ export default function QuestionsToAskPage() {
   return (
     <>
     <PageHero
-      title="Questions to Ask Your Title Professional"
+      title="Ask Your Title Pro"
       subtitle="40+ printable questions across 5 categories. Print this list and bring it with you."
       image="https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?w=1920&q=80"
-      breadcrumb={[{ label: "Resources", href: "/resources" }, { label: "Questions to Ask", href: "/questions-to-ask" }]}
+      breadcrumb={[{ label: "Resources", href: "/document-library" }, { label: "Ask Your Title Pro", href: "/questions-to-ask" }]}
     />
     <div className="py-1.5 lg:py-2">
       <div className="max-w-4xl mx-auto px-4 sm:px-6">
