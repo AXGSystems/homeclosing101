@@ -109,7 +109,7 @@ export default function HeroSearch({ variant = "default" }: { variant?: "default
   };
 
   return (
-    <div ref={wrapperRef} className={`relative ${isHeader ? "w-52 xl:w-60" : "w-full max-w-sm"}`}>
+    <div ref={wrapperRef} className={`relative ${isHeader ? "w-full sm:w-72 xl:w-80" : "w-full max-w-sm"}`}>
       <div className="relative">
         <Search className={`absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 ${isHeader ? "text-alta-gray/60" : "text-white/50"}`} />
         <input
