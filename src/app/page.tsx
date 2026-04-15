@@ -628,35 +628,47 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Interactive Tools — dark horizontal strip */}
-      <section className="py-8 bg-gradient-to-r from-[#0f1b33] to-[#1a2744]">
+      {/* Interactive Tools */}
+      <section className="py-12 lg:py-16 bg-[#f0f1f3]">
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
-          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
-            <div>
-              <h2 className="text-xl font-bold text-white">Interactive Tools</h2>
-              <p className="text-xs text-gray-400">Run the numbers. Track your progress. Find your team.</p>
-            </div>
-            <Link href="/resources" className="text-xs text-alta-teal font-medium flex items-center gap-1 hover:text-white transition-colors shrink-0">
-              View all tools
-              <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
-            </Link>
+          <div className="text-center mb-10">
+            <h2 className="text-3xl font-bold text-alta-navy mb-3">Interactive Tools</h2>
+            <p className="text-alta-gray max-w-xl mx-auto">Run the numbers, track your progress, and find your team. Hover over any tool to learn more.</p>
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {[
-              { title: "Mortgage Calculator", href: "/mortgage-calculator", icon: "M2.25 18.75a60.07 60.07 0 0115.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 013 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 00-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 01-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 003 15h-.75M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" },
-              { title: "Affordability", href: "/affordability", icon: "M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" },
-              { title: "Closing Checklist", href: "/closing-process/closing-checklist", icon: "M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" },
-              { title: "Find a Company", href: "/find-company", icon: "M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" },
-              { title: "HC101 Trivia", href: "/trivia", icon: "M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.455 2.456L21.75 6l-1.036.259a3.375 3.375 0 00-2.455 2.456z", isNew: true },
-              { title: "My Journey", href: "/my-journey", icon: "M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z", isNew: true },
-              { title: "Rent vs Buy", href: "/rent-vs-buy", icon: "M7.5 21L3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5", isNew: true },
-            ].map((t: { title: string; href: string; icon: string; isNew?: boolean }) => (
-              <Link key={t.title} href={t.href} className="group flex items-center gap-3 p-3 bg-white/5 backdrop-blur-sm rounded-xl border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all">
-                <div className="w-10 h-10 rounded-lg bg-alta-teal/20 flex items-center justify-center shrink-0 group-hover:bg-alta-teal transition-colors">
-                  <svg className="w-5 h-5 text-alta-teal group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d={t.icon} /></svg>
+              { title: "Mortgage Calculator", desc: "Estimate your monthly payment with principal, interest, taxes, insurance, and PMI. Adjust loan amount, rate, and term instantly.", href: "/mortgage-calculator", color: "#0a7ea8", icon: "M2.25 18.75a60.07 60.07 0 0115.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 013 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 00-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 01-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 003 15h-.75M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" },
+              { title: "Affordability Calculator", desc: "Find out how much home you can afford based on your income, debts, down payment, and local tax rates.", href: "/affordability", color: "#2d6b3f", icon: "M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" },
+              { title: "Closing Checklist", desc: "28-item interactive checklist across 5 phases — from pre-approval to closing day. Track your progress as you go.", href: "/closing-process/closing-checklist", color: "#1a5276", icon: "M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" },
+              { title: "Find a Company", desc: "Search for ALTA member title companies and settlement agents near you. Verify Best Practices certification.", href: "/find-company", color: "#5b3a8c", icon: "M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" },
+              { title: "Rent vs Buy", desc: "Compare the true 10-year cost of renting versus buying — including equity, tax benefits, and appreciation.", href: "/rent-vs-buy", color: "#8b6914", icon: "M7.5 21L3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5" },
+              { title: "Trivia & Achievements", desc: "Test your homebuying knowledge Jeopardy-style. Earn badges as you explore guides, calculators, and quizzes.", href: "/trivia", color: "#943030", icon: "M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.455 2.456L21.75 6l-1.036.259a3.375 3.375 0 00-2.455 2.456z" },
+            ].map((t) => (
+              <Link key={t.title} href={t.href} className="group relative overflow-hidden rounded-2xl shadow-md hover:shadow-xl transition-all">
+                {/* Glassmorphic card */}
+                <div className="relative bg-white/60 backdrop-blur-md border border-white/80 p-6 h-full" style={{ borderTopColor: t.color, borderTopWidth: '3px' }}>
+                  {/* Default state */}
+                  <div className="flex items-start gap-4 group-hover:opacity-0 group-hover:-translate-y-2 transition-all duration-300">
+                    <div className="w-12 h-12 rounded-xl flex items-center justify-center shrink-0" style={{ backgroundColor: `${t.color}15` }}>
+                      <svg className="w-6 h-6" style={{ color: t.color }} fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d={t.icon} /></svg>
+                    </div>
+                    <div>
+                      <h3 className="font-bold text-alta-navy text-base">{t.title}</h3>
+                      <p className="text-xs text-alta-teal font-medium mt-1">Hover to learn more</p>
+                    </div>
+                  </div>
+                  {/* Hover state — pop out info */}
+                  <div className="absolute inset-0 p-6 flex flex-col justify-center opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300" style={{ backgroundColor: `${t.color}08` }}>
+                    <div className="w-10 h-10 rounded-lg flex items-center justify-center mb-3" style={{ backgroundColor: `${t.color}20` }}>
+                      <svg className="w-5 h-5" style={{ color: t.color }} fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d={t.icon} /></svg>
+                    </div>
+                    <h3 className="font-bold text-alta-navy text-sm mb-2">{t.title}</h3>
+                    <p className="text-sm text-alta-gray leading-relaxed">{t.desc}</p>
+                    <span className="inline-flex items-center text-xs font-semibold mt-3 gap-1" style={{ color: t.color }}>
+                      Open tool <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
+                    </span>
+                  </div>
                 </div>
-                <span className="text-sm font-medium text-white">{t.title}</span>
-                {t.isNew && <span className="ml-auto px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wide bg-alta-teal text-white rounded-full">New</span>}
               </Link>
             ))}
           </div>
