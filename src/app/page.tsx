@@ -391,42 +391,71 @@ export default function HomePage() {
           </div>
 
           {/* Road */}
-          <div className="relative">
-            {/* The road surface */}
-            <div className="absolute left-0 right-0 top-1/2 -translate-y-1/2 h-16 sm:h-20 bg-[#4a4a4a] rounded-full hidden md:block" />
-            {/* Yellow center dashes */}
-            <div className="absolute left-4 right-4 top-1/2 -translate-y-1/2 h-1 hidden md:flex items-center justify-between">
-              {Array.from({ length: 20 }).map((_, i) => (
-                <div key={i} className="w-8 h-1 bg-[#f0c030] rounded-full" />
-              ))}
-            </div>
-            {/* White edge lines */}
-            <div className="absolute left-2 right-2 top-1/2 -translate-y-[calc(50%+28px)] h-0.5 bg-white/80 rounded-full hidden md:block" />
-            <div className="absolute left-2 right-2 top-1/2 translate-y-[calc(-50%+28px)] h-0.5 bg-white/80 rounded-full hidden md:block" />
-
-            {/* Houses along the road */}
-            <div className="relative z-10 grid grid-cols-1 md:grid-cols-8 gap-4 md:gap-2">
-              {steps.map((step: { num: string; title: string; desc: string; keys?: boolean; bg: string; borderColor: string }, i: number) => (
-                <div key={step.num} className={`flex flex-col items-center ${i % 2 === 0 ? 'md:-translate-y-16' : 'md:translate-y-16'}`}>
-                  {/* House shape */}
-                  <div className={`relative w-full max-w-[140px] group`}>
-                    {/* Roof */}
-                    <div className={`relative mx-auto w-0 h-0 border-l-[60px] border-r-[60px] border-b-[30px] ${step.keys ? 'border-b-[#d4a843]' : 'border-b-[#1a5276]'} border-l-transparent border-r-transparent`} />
-                    {/* House body */}
-                    <div className={`${step.bg} border-2 ${step.borderColor} rounded-b-lg p-3 text-center shadow-md group-hover:shadow-lg group-hover:-translate-y-1 transition-all`}>
-                      {/* Step number */}
-                      <div className={`w-8 h-8 rounded-full flex items-center justify-center mx-auto mb-2 text-white text-xs font-bold ${step.keys ? 'bg-[#d4a843]' : 'bg-alta-teal'}`}>
-                        {step.keys ? (
-                          <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M15.75 5.25a3 3 0 013 3m3 0a6 6 0 01-7.029 5.912c-.563-.097-1.159.026-1.563.43L10.5 17.25H8.25v2.25H6v2.25H2.25v-2.818c0-.597.237-1.17.659-1.591l6.499-6.499c.404-.404.527-1 .43-1.563A6 6 0 1121.75 8.25z" /></svg>
-                        ) : step.num}
-                      </div>
-                      <h3 className={`font-bold text-xs leading-tight ${step.keys ? 'text-[#d4a843]' : 'text-alta-navy'}`}>{step.title}</h3>
-                      <p className="text-[10px] text-alta-gray mt-1 leading-snug hidden sm:block">{step.desc}</p>
+          <div className="relative hidden md:block">
+            {/* Top row — odd steps (1,3,5,7) */}
+            <div className="grid grid-cols-4 gap-4 mb-4">
+              {steps.filter((_, i) => i % 2 === 0).map((step: { num: string; title: string; desc: string; keys?: boolean; bg: string; borderColor: string }) => (
+                <div key={step.num} className="group">
+                  <div className={`${step.bg} border-2 ${step.borderColor} rounded-xl p-4 text-center shadow-md group-hover:shadow-lg group-hover:-translate-y-1 transition-all`}>
+                    <svg viewBox="0 0 24 24" className={`w-8 h-8 mx-auto mb-2 ${step.keys ? 'text-[#d4a843]' : 'text-alta-teal'}`} fill="currentColor"><path d="M11.47 3.84a.75.75 0 011.06 0l8.69 8.69a.75.75 0 11-1.06 1.06l-.97-.97V19.5a.75.75 0 01-.75.75h-4.5a.75.75 0 01-.75-.75v-3.75h-3v3.75a.75.75 0 01-.75.75h-4.5a.75.75 0 01-.75-.75v-6.88l-.97.97a.75.75 0 01-1.06-1.06l8.69-8.69z" /></svg>
+                    <div className={`w-7 h-7 rounded-full flex items-center justify-center mx-auto mb-2 text-white text-xs font-bold ${step.keys ? 'bg-[#d4a843]' : 'bg-alta-teal'}`}>
+                      {step.keys ? (
+                        <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M15.75 5.25a3 3 0 013 3m3 0a6 6 0 01-7.029 5.912c-.563-.097-1.159.026-1.563.43L10.5 17.25H8.25v2.25H6v2.25H2.25v-2.818c0-.597.237-1.17.659-1.591l6.499-6.499c.404-.404.527-1 .43-1.563A6 6 0 1121.75 8.25z" /></svg>
+                      ) : step.num}
                     </div>
+                    <h3 className={`font-bold text-sm leading-tight ${step.keys ? 'text-[#d4a843]' : 'text-alta-navy'}`}>{step.title}</h3>
+                    <p className="text-xs text-alta-gray mt-1 leading-snug">{step.desc}</p>
                   </div>
                 </div>
               ))}
             </div>
+
+            {/* The road */}
+            <div className="relative h-14 my-2">
+              <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 h-14 bg-[#4a4a4a] rounded-full" />
+              <div className="absolute inset-x-4 top-1/2 -translate-y-1/2 flex items-center justify-between">
+                {Array.from({ length: 24 }).map((_, i) => (
+                  <div key={i} className="w-6 h-1.5 bg-[#f0c030] rounded-full" />
+                ))}
+              </div>
+              <div className="absolute inset-x-1 top-1/2 -translate-y-[calc(50%+22px)] h-0.5 bg-white/70 rounded-full" />
+              <div className="absolute inset-x-1 top-1/2 translate-y-[calc(-50%+22px)] h-0.5 bg-white/70 rounded-full" />
+            </div>
+
+            {/* Bottom row — even steps (2,4,6,8) */}
+            <div className="grid grid-cols-4 gap-4 mt-4">
+              {steps.filter((_, i) => i % 2 === 1).map((step: { num: string; title: string; desc: string; keys?: boolean; bg: string; borderColor: string }) => (
+                <div key={step.num} className="group">
+                  <div className={`${step.bg} border-2 ${step.borderColor} rounded-xl p-4 text-center shadow-md group-hover:shadow-lg group-hover:-translate-y-1 transition-all`}>
+                    <svg viewBox="0 0 24 24" className={`w-8 h-8 mx-auto mb-2 ${step.keys ? 'text-[#d4a843]' : 'text-alta-teal'}`} fill="currentColor"><path d="M11.47 3.84a.75.75 0 011.06 0l8.69 8.69a.75.75 0 11-1.06 1.06l-.97-.97V19.5a.75.75 0 01-.75.75h-4.5a.75.75 0 01-.75-.75v-3.75h-3v3.75a.75.75 0 01-.75.75h-4.5a.75.75 0 01-.75-.75v-6.88l-.97.97a.75.75 0 01-1.06-1.06l8.69-8.69z" /></svg>
+                    <div className={`w-7 h-7 rounded-full flex items-center justify-center mx-auto mb-2 text-white text-xs font-bold ${step.keys ? 'bg-[#d4a843]' : 'bg-alta-teal'}`}>
+                      {step.keys ? (
+                        <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M15.75 5.25a3 3 0 013 3m3 0a6 6 0 01-7.029 5.912c-.563-.097-1.159.026-1.563.43L10.5 17.25H8.25v2.25H6v2.25H2.25v-2.818c0-.597.237-1.17.659-1.591l6.499-6.499c.404-.404.527-1 .43-1.563A6 6 0 1121.75 8.25z" /></svg>
+                      ) : step.num}
+                    </div>
+                    <h3 className={`font-bold text-sm leading-tight ${step.keys ? 'text-[#d4a843]' : 'text-alta-navy'}`}>{step.title}</h3>
+                    <p className="text-xs text-alta-gray mt-1 leading-snug">{step.desc}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Mobile: simple vertical list */}
+          <div className="md:hidden space-y-3">
+            {steps.map((step: { num: string; title: string; desc: string; keys?: boolean; bg: string; borderColor: string }) => (
+              <div key={step.num} className="flex gap-3 items-start">
+                <div className={`w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm shrink-0 text-white ${step.keys ? 'bg-[#d4a843]' : 'bg-alta-teal'}`}>
+                  {step.keys ? (
+                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M15.75 5.25a3 3 0 013 3m3 0a6 6 0 01-7.029 5.912c-.563-.097-1.159.026-1.563.43L10.5 17.25H8.25v2.25H6v2.25H2.25v-2.818c0-.597.237-1.17.659-1.591l6.499-6.499c.404-.404.527-1 .43-1.563A6 6 0 1121.75 8.25z" /></svg>
+                  ) : step.num}
+                </div>
+                <div className={`${step.bg} rounded-xl p-3 flex-1 border-l-4 ${step.borderColor}`}>
+                  <h3 className={`font-semibold ${step.keys ? 'text-[#d4a843]' : 'text-alta-navy'}`}>{step.title}</h3>
+                  <p className="text-sm text-alta-gray mt-0.5">{step.desc}</p>
+                </div>
+              </div>
+            ))}
           </div>
 
           <div className="text-center mt-12">
