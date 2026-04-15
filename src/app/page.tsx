@@ -284,55 +284,76 @@ export default function HomePage() {
       </section>
 
       {/* How HomeClosing101 Helps */}
-      <section className="py-14 lg:py-18 bg-gradient-to-b from-[#f0f4f8] to-white">
+      <section className="py-14 lg:py-20 bg-[#f0f1f3]">
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
-          <div className="text-center mb-10">
-            <h2 className="text-3xl font-bold text-alta-navy mb-3">How HomeClosing101 Helps</h2>
-            <p className="text-alta-gray max-w-xl mx-auto">Three pillars that guide every homebuyer from first search to final signature.</p>
+          <div className="text-center mb-6">
+            <div className="inline-flex items-center gap-2 bg-alta-teal/10 px-4 py-1.5 rounded-full mb-4">
+              <svg className="w-4 h-4 text-alta-teal" fill="currentColor" viewBox="0 0 24 24"><path d="M4.26 10.147a60.438 60.438 0 00-.491 6.347A48.62 48.62 0 0112 20.904a48.62 48.62 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.636 50.636 0 00-2.658-.813A59.906 59.906 0 0112 3.493a59.903 59.903 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.717 50.717 0 0112 13.489a50.702 50.702 0 017.74-3.342" /></svg>
+              <span className="text-xs font-bold text-alta-teal uppercase tracking-wider">An ALTA Initiative</span>
+            </div>
+            <h2 className="text-3xl font-bold text-alta-navy mb-4">How HomeClosing101 Helps</h2>
+            <p className="text-base text-alta-gray max-w-2xl mx-auto leading-relaxed">
+              The American Land Title Association — representing 6,000+ title insurance companies and agents across all 50 states — created HomeClosing101 because too many buyers arrive at the closing table unprepared. Our mission is to bridge the knowledge gap between industry professionals and the consumers they serve.
+            </p>
           </div>
+
+          {/* Why ALTA does this */}
+          <div className="bg-white/60 backdrop-blur-sm rounded-2xl p-6 border border-white/80 shadow-sm mb-10 max-w-3xl mx-auto">
+            <p className="text-sm text-alta-gray leading-relaxed text-center">
+              When buyers understand their Closing Disclosure, know how to verify wire instructions, and appreciate the value of title insurance, the entire transaction runs smoother — fewer delays, fewer disputes, and fewer victims of fraud. Educated consumers make better decisions, ask better questions, and close with confidence. That&apos;s good for buyers and good for the industry.
+            </p>
+          </div>
+
+          {/* Three pillars — glassmorphic colored tiles */}
           <div className="grid md:grid-cols-3 gap-6">
             {/* Learn */}
-            <Link href="/closing-process" className="group relative bg-white rounded-2xl p-7 shadow-sm border border-gray-100 hover:shadow-lg hover:-translate-y-1 transition-all text-center">
-              <div className="w-16 h-16 rounded-2xl bg-[#0a7ea8]/10 flex items-center justify-center mx-auto mb-5 group-hover:bg-[#0a7ea8]/20 transition-colors">
-                <svg className="w-8 h-8 text-[#0a7ea8]" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M4.26 10.147a60.438 60.438 0 00-.491 6.347A48.62 48.62 0 0112 20.904a48.62 48.62 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.636 50.636 0 00-2.658-.813A59.906 59.906 0 0112 3.493a59.903 59.903 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.717 50.717 0 0112 13.489a50.702 50.702 0 017.74-3.342M6.75 15a.75.75 0 100-1.5.75.75 0 000 1.5zm0 0v-3.675A55.378 55.378 0 0112 8.443m-7.007 11.55A5.981 5.981 0 006.75 15.75v-1.5" /></svg>
+            <Link href="/closing-process" className="group relative overflow-hidden rounded-2xl p-7 shadow-md hover:shadow-xl hover:-translate-y-1 transition-all text-center bg-white/50 backdrop-blur-md border border-[#0a7ea8]/20">
+              <div className="absolute inset-0 bg-gradient-to-br from-[#0a7ea8]/5 to-[#0a7ea8]/15 group-hover:from-[#0a7ea8]/10 group-hover:to-[#0a7ea8]/25 transition-all" />
+              <div className="relative">
+                <div className="w-16 h-16 rounded-2xl bg-[#0a7ea8]/15 flex items-center justify-center mx-auto mb-5 group-hover:bg-[#0a7ea8]/25 transition-colors">
+                  <svg className="w-8 h-8 text-[#0a7ea8]" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M4.26 10.147a60.438 60.438 0 00-.491 6.347A48.62 48.62 0 0112 20.904a48.62 48.62 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.636 50.636 0 00-2.658-.813A59.906 59.906 0 0112 3.493a59.903 59.903 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.717 50.717 0 0112 13.489a50.702 50.702 0 017.74-3.342M6.75 15a.75.75 0 100-1.5.75.75 0 000 1.5zm0 0v-3.675A55.378 55.378 0 0112 8.443m-7.007 11.55A5.981 5.981 0 006.75 15.75v-1.5" /></svg>
+                </div>
+                <h3 className="text-xl font-bold text-alta-navy mb-2">Learn</h3>
+                <p className="text-sm text-alta-gray leading-relaxed mb-1">30+ in-depth guides covering every step of the closing process, title insurance, and homebuyer rights — all written in plain language with verified sources.</p>
+                <span className="inline-flex items-center text-sm font-medium text-[#0a7ea8] mt-3 group-hover:gap-2 transition-all">
+                  Explore guides <svg className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
+                </span>
               </div>
-              <h3 className="text-xl font-bold text-alta-navy mb-2">Learn</h3>
-              <p className="text-sm text-alta-gray leading-relaxed">30+ in-depth guides covering every step of the closing process, title insurance, and homebuyer rights.</p>
-              <span className="inline-flex items-center text-sm font-medium text-[#0a7ea8] mt-4 group-hover:gap-2 transition-all">
-                Explore guides
-                <svg className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
-              </span>
             </Link>
             {/* Calculate */}
-            <Link href="/closing-process/closing-costs" className="group relative bg-white rounded-2xl p-7 shadow-sm border border-gray-100 hover:shadow-lg hover:-translate-y-1 transition-all text-center">
-              <div className="w-16 h-16 rounded-2xl bg-[#8b6914]/10 flex items-center justify-center mx-auto mb-5 group-hover:bg-[#8b6914]/20 transition-colors">
-                <svg className="w-8 h-8 text-[#8b6914]" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M15.75 15.75V18m-7.5-6.75h.008v.008H8.25v-.008zm0 2.25h.008v.008H8.25V13.5zm0 2.25h.008v.008H8.25v-.008zm0 2.25h.008v.008H8.25V18zm2.498-6.75h.007v.008h-.007v-.008zm0 2.25h.007v.008h-.007V13.5zm0 2.25h.007v.008h-.007v-.008zm0 2.25h.007v.008h-.007V18zm2.504-6.75h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V13.5zm0 2.25h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V18zm2.498-6.75h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V13.5zM8.25 6h7.5v2.25h-7.5V6zM12 2.25c-1.892 0-3.758.11-5.593.322C5.307 2.7 4.5 3.65 4.5 4.757V19.5a2.25 2.25 0 002.25 2.25h10.5a2.25 2.25 0 002.25-2.25V4.757c0-1.108-.806-2.057-1.907-2.185A48.507 48.507 0 0012 2.25z" /></svg>
+            <Link href="/closing-process/closing-costs" className="group relative overflow-hidden rounded-2xl p-7 shadow-md hover:shadow-xl hover:-translate-y-1 transition-all text-center bg-white/50 backdrop-blur-md border border-[#8b6914]/20">
+              <div className="absolute inset-0 bg-gradient-to-br from-[#8b6914]/5 to-[#8b6914]/15 group-hover:from-[#8b6914]/10 group-hover:to-[#8b6914]/25 transition-all" />
+              <div className="relative">
+                <div className="w-16 h-16 rounded-2xl bg-[#8b6914]/15 flex items-center justify-center mx-auto mb-5 group-hover:bg-[#8b6914]/25 transition-colors">
+                  <svg className="w-8 h-8 text-[#8b6914]" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M15.75 15.75V18m-7.5-6.75h.008v.008H8.25v-.008zm0 2.25h.008v.008H8.25V13.5zm0 2.25h.008v.008H8.25v-.008zm0 2.25h.008v.008H8.25V18zm2.498-6.75h.007v.008h-.007v-.008zm0 2.25h.007v.008h-.007V13.5zm0 2.25h.007v.008h-.007v-.008zm0 2.25h.007v.008h-.007V18zm2.504-6.75h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V13.5zm0 2.25h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V18zm2.498-6.75h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V13.5zM8.25 6h7.5v2.25h-7.5V6zM12 2.25c-1.892 0-3.758.11-5.593.322C5.307 2.7 4.5 3.65 4.5 4.757V19.5a2.25 2.25 0 002.25 2.25h10.5a2.25 2.25 0 002.25-2.25V4.757c0-1.108-.806-2.057-1.907-2.185A48.507 48.507 0 0012 2.25z" /></svg>
+                </div>
+                <h3 className="text-xl font-bold text-alta-navy mb-2">Calculate</h3>
+                <p className="text-sm text-alta-gray leading-relaxed mb-1">Interactive mortgage, affordability, DTI, and closing cost calculators so you know exactly what to budget before you start shopping.</p>
+                <span className="inline-flex items-center text-sm font-medium text-[#8b6914] mt-3 group-hover:gap-2 transition-all">
+                  Run the numbers <svg className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
+                </span>
               </div>
-              <h3 className="text-xl font-bold text-alta-navy mb-2">Calculate</h3>
-              <p className="text-sm text-alta-gray leading-relaxed">Interactive mortgage, affordability, and closing cost calculators so you know exactly what to budget.</p>
-              <span className="inline-flex items-center text-sm font-medium text-[#8b6914] mt-4 group-hover:gap-2 transition-all">
-                Run the numbers
-                <svg className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
-              </span>
             </Link>
             {/* Protect */}
-            <Link href="/protect-your-money" className="group relative bg-white rounded-2xl p-7 shadow-sm border border-gray-100 hover:shadow-lg hover:-translate-y-1 transition-all text-center">
-              <div className="w-16 h-16 rounded-2xl bg-[#943030]/10 flex items-center justify-center mx-auto mb-5 group-hover:bg-[#943030]/20 transition-colors">
-                <svg className="w-8 h-8 text-[#943030]" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" /></svg>
+            <Link href="/protect-your-money" className="group relative overflow-hidden rounded-2xl p-7 shadow-md hover:shadow-xl hover:-translate-y-1 transition-all text-center bg-white/50 backdrop-blur-md border border-[#943030]/20">
+              <div className="absolute inset-0 bg-gradient-to-br from-[#943030]/5 to-[#943030]/15 group-hover:from-[#943030]/10 group-hover:to-[#943030]/25 transition-all" />
+              <div className="relative">
+                <div className="w-16 h-16 rounded-2xl bg-[#943030]/15 flex items-center justify-center mx-auto mb-5 group-hover:bg-[#943030]/25 transition-colors">
+                  <svg className="w-8 h-8 text-[#943030]" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" /></svg>
+                </div>
+                <h3 className="text-xl font-bold text-alta-navy mb-2">Protect</h3>
+                <p className="text-sm text-alta-gray leading-relaxed mb-1">Wire fraud prevention, title insurance deep dives, and safeguards to defend your investment — because $275M was lost to real estate fraud in 2025 alone.</p>
+                <span className="inline-flex items-center text-sm font-medium text-[#943030] mt-3 group-hover:gap-2 transition-all">
+                  Stay protected <svg className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
+                </span>
               </div>
-              <h3 className="text-xl font-bold text-alta-navy mb-2">Protect</h3>
-              <p className="text-sm text-alta-gray leading-relaxed">Wire fraud prevention, title insurance guides, and safeguards to defend your investment and your money.</p>
-              <span className="inline-flex items-center text-sm font-medium text-[#943030] mt-4 group-hover:gap-2 transition-all">
-                Stay protected
-                <svg className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
-              </span>
             </Link>
           </div>
         </div>
       </section>
 
       {/* Gradient divider */}
-      <div className="h-1 bg-gradient-to-r from-[#0a7ea8] via-[#5b3a8c] to-[#d4a843]" />
+      <div className="h-0.5 bg-gradient-to-r from-alta-navy to-alta-teal" />
 
       {/* Feature Cards */}
       <section className="py-14 lg:py-18 bg-alta-light">
@@ -384,8 +405,8 @@ export default function HomePage() {
 
       {/* The Road to Homeownership */}
       <section className="relative py-14 lg:py-20 overflow-hidden">
-        <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1515162816999-a0c47dc192f7?w=1920&q=80')" }} />
-        <div className="absolute inset-0 bg-gradient-to-b from-white/95 to-white/90" />
+        <div className="absolute inset-0 bg-cover bg-center opacity-[0.04]" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1515162816999-a0c47dc192f7?w=1920&q=80')" }} />
+        <div className="absolute inset-0 bg-[#e8e9eb]" />
         <div className="relative max-w-4xl mx-auto px-4 sm:px-6">
           <div className="text-center mb-10">
             <div className="inline-flex items-center gap-2 bg-alta-navy/10 px-4 py-1.5 rounded-full mb-4">
@@ -512,7 +533,7 @@ export default function HomePage() {
       </section>
 
       {/* Gradient divider */}
-      <div className="h-1 bg-gradient-to-r from-[#2d6b3f] via-[#0a7ea8] to-[#943030]" />
+      <div className="h-0.5 bg-gradient-to-r from-alta-navy to-alta-teal" />
 
       {/* Wire Fraud Warning — expanded */}
       <section className="py-14 bg-red-50 border-y border-red-100">
@@ -564,7 +585,7 @@ export default function HomePage() {
       <HomepageTestimonials />
 
       {/* Gradient divider */}
-      <div className="h-1 bg-gradient-to-r from-[#943030] via-[#d4a843] to-[#1a5276]" />
+      <div className="h-0.5 bg-gradient-to-r from-alta-navy to-alta-teal" />
 
       {/* External Resources */}
       <section className="py-16 lg:py-20 bg-white">
