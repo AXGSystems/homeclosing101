@@ -6,6 +6,7 @@ import PageHero from "@/components/PageHero";
 import { InlineAd } from "@/components/EliteProviders";
 import FirstTimeBuyerCTA from "@/components/FirstTimeBuyerCTA";
 import SaveToFolderBtn from "@/components/SaveToFolderBtn";
+import ClosingDisclosureContent from "@/components/ClosingDisclosureContent";
 
 const docSections = [
   {
@@ -112,6 +113,7 @@ const colorMap: Record<string, { border: string; badge: string; icon: string; gr
 };
 
 export default function DocumentChecklistPage() {
+  const [activeTab, setActiveTab] = useState<"checklist" | "disclosure">("checklist");
   const [activeModal, setActiveModal] = useState<{title: string; gradient: string; content: React.ReactNode} | null>(null);
   const [checkedDocs, setCheckedDocs] = useState<Set<string>>(new Set());
 
@@ -132,12 +134,35 @@ export default function DocumentChecklistPage() {
   return (
     <>
       <PageHero
-        title="Closing Day Document Checklist"
-        subtitle="Everything you need to bring to your closing appointment — organized by category and marked by importance."
+        title="Closing Documents"
+        subtitle="Your document checklist and closing disclosure guide — everything you need before signing."
         image="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=1920&q=80"
-        breadcrumb={[{ label: "The Closing Process", href: "/closing-process" }, { label: "Document Checklist", href: "/document-checklist" }]}
+        breadcrumb={[{ label: "The Closing Process", href: "/closing-process" }, { label: "Closing Documents", href: "/document-checklist" }]}
       />
 
+      <div className="py-1.5 lg:py-2">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6">
+          {/* Tab bar */}
+          <div className="flex gap-1 mb-6 bg-alta-light rounded-xl p-1">
+            <button
+              onClick={() => setActiveTab("checklist")}
+              className={`flex-1 px-4 py-2.5 rounded-lg text-sm font-semibold transition-all ${activeTab === "checklist" ? "bg-white text-alta-navy shadow-sm" : "text-alta-gray hover:text-alta-navy"}`}
+            >
+              Document Checklist
+            </button>
+            <button
+              onClick={() => setActiveTab("disclosure")}
+              className={`flex-1 px-4 py-2.5 rounded-lg text-sm font-semibold transition-all ${activeTab === "disclosure" ? "bg-white text-alta-navy shadow-sm" : "text-alta-gray hover:text-alta-navy"}`}
+            >
+              Closing Disclosure
+            </button>
+          </div>
+
+          {activeTab === "disclosure" && <ClosingDisclosureContent />}
+        </div>
+      </div>
+
+      {activeTab === "checklist" && <>
       <div className="py-1.5 lg:py-2">
         <div className="max-w-4xl mx-auto px-4 sm:px-6">
           <div className="mb-6 p-4 bg-[#e6f1f5] rounded-2xl border border-[#b4d8e8] border-l-4 border-l-[#0a7ea8] sm:sticky sm:top-[142px] z-20 shadow-md">
@@ -291,16 +316,17 @@ export default function DocumentChecklistPage() {
                 <h3 className="text-sm font-bold text-alta-navy group-hover:text-alta-teal transition-colors">Closing Checklist</h3>
                 <p className="text-[10px] text-alta-gray mt-1">Track every step from offer to keys with our interactive checklist</p>
               </Link>
-              <Link href="/closing-disclosure" className="p-4 bg-[#f0ecf6] rounded-xl border border-[#d4c8e4] border-l-4 border-l-[#5b3a8c] tile-interactive group">
+              <button onClick={() => { setActiveTab("disclosure"); window.scrollTo({ top: 0, behavior: "instant" }); }} className="p-4 bg-[#f0ecf6] rounded-xl border border-[#d4c8e4] border-l-4 border-l-[#5b3a8c] tile-interactive group text-left">
                 <h3 className="text-sm font-bold text-alta-navy group-hover:text-alta-teal transition-colors">Closing Disclosure Guide</h3>
                 <p className="text-[10px] text-alta-gray mt-1">Review your final loan terms and costs before signing at closing</p>
-              </Link>
+              </button>
             </div>
           </div>
 
           <FirstTimeBuyerCTA />
         </div>
       </div>
+      </>}
 
       {/* Modal */}
       {activeModal && (
