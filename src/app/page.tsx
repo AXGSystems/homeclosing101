@@ -293,7 +293,7 @@ export default function HomePage() {
             </div>
             <h2 className="text-3xl font-bold text-alta-navy mb-4">How HomeClosing101 Helps</h2>
             <p className="text-base text-alta-gray max-w-2xl mx-auto leading-relaxed">
-              The American Land Title Association — representing 6,000+ title insurance companies and agents across all 50 states — created HomeClosing101 because homebuyers deserve access to the same critical information that industry professionals rely on every day. Too often, buyers reach the closing table without the resources they need to make fully informed decisions. Our mission is to close that gap.
+              The American Land Title Association — representing 6,000+ title insurance companies and agents across all 50 states — created HomeClosing101 because homebuyers deserve access to the same critical information that industry professionals rely on every day. Too often, buyers reach the closing table without the resources they need to make fully informed decisions. Our mission is to help close that gap.
             </p>
           </div>
 
