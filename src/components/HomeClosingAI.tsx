@@ -353,13 +353,11 @@ export default function HomeClosingAI() {
 
   return (
     <div id="home-closing-ai" className="print:hidden">
-      {/* Collapsed: tab on mobile, full widget on desktop */}
+      {/* Collapsed: mini sticky tab on right edge */}
       {!open && (
-        <>
-        {/* Mobile: slim side tab */}
         <button
           onClick={() => setOpen(true)}
-          className="sm:hidden fixed bottom-28 right-0 z-[600] bg-gradient-to-b from-alta-navy to-alta-teal text-white rounded-l-xl px-2 py-4 shadow-lg"
+          className="fixed bottom-32 sm:bottom-1/3 right-0 z-[600] bg-gradient-to-b from-alta-navy to-alta-teal text-white rounded-l-xl px-2 py-4 shadow-lg hover:brightness-110 transition-all"
           style={{ writingMode: 'vertical-rl', textOrientation: 'mixed' }}
         >
           <span className="text-[10px] font-bold tracking-wider flex items-center gap-1">
@@ -367,54 +365,6 @@ export default function HomeClosingAI() {
             Ask HC101
           </span>
         </button>
-
-        {/* Desktop: full sponsor + AI button */}
-        <div className="hidden sm:block fixed top-1/2 -translate-y-1/2 right-6 z-[600] w-[250px] group/widget">
-          {/* Sponsor top half */}
-          <div className="relative">
-            <a
-              href={sponsor.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={(e) => e.stopPropagation()}
-              className={`peer flex items-center gap-2.5 bg-white rounded-t-2xl px-4 py-3 shadow-lg border border-gray-100 border-b-0 hover:bg-gray-50 transition-all w-full ${sponsorFading ? 'opacity-0' : 'opacity-100'}`}
-              style={{ transition: 'opacity 350ms ease' }}
-            >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={sponsor.logo} alt={sponsor.name} className="h-7 w-auto object-contain max-w-[90px] shrink-0" onError={(e) => { e.currentTarget.style.display = 'none'; }} />
-              <div className="border-l border-gray-100 pl-2.5 min-w-0">
-                <p className="text-[8px] text-alta-gray uppercase tracking-wider font-semibold leading-none">Sponsor</p>
-                <p className="text-[11px] text-alta-navy font-semibold leading-tight mt-0.5 truncate">{sponsor.name}</p>
-              </div>
-            </a>
-            {/* Hover popup — hidden on mobile (no hover support) */}
-            <div className="absolute bottom-full right-0 mb-2 w-[280px] bg-white rounded-xl shadow-2xl border border-gray-100 p-4 opacity-0 pointer-events-none peer-hover:opacity-100 peer-hover:pointer-events-auto transition-opacity duration-200 z-[610] hidden sm:block sm:opacity-0 sm:peer-hover:opacity-100">
-              <div className="flex items-center gap-3 mb-3">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={sponsor.logo} alt={sponsor.name} className="h-10 w-auto object-contain max-w-[100px]" onError={(e) => { e.currentTarget.style.display = 'none'; }} />
-                <div>
-                  <p className="text-sm font-bold text-alta-navy">{sponsor.name}</p>
-                  <p className="text-[10px] text-alta-teal font-medium">ALTA Member</p>
-                </div>
-              </div>
-              <p className="text-xs text-alta-gray leading-relaxed mb-3">{sponsor.blurb}</p>
-              <p className="text-[11px] text-alta-teal font-medium flex items-center gap-1">
-                {sponsor.url.replace('https://', '').replace('http://', '').replace(/\/$/, '')}
-                <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
-              </p>
-              <div className="absolute bottom-0 right-8 translate-y-1/2 rotate-45 w-3 h-3 bg-white border-r border-b border-gray-100"></div>
-            </div>
-          </div>
-          {/* AI button bottom half */}
-          <button
-            onClick={() => setOpen(true)}
-            className="bg-gradient-to-r from-alta-navy to-alta-teal text-white rounded-b-2xl px-5 py-2.5 shadow-2xl hover:brightness-110 transition-all duration-300 flex items-center gap-2.5 group w-full justify-center"
-          >
-            <Sparkles className="w-4 h-4 text-white/80 group-hover:rotate-12 transition-transform" />
-            <span className="font-bold text-sm">Ask HomeClosing101</span>
-          </button>
-        </div>
-        </>
       )}
 
       {/* Chat panel — with sponsor inside header */}
@@ -508,7 +458,11 @@ export default function HomeClosingAI() {
                         ? linkifyPaths(
                             msg.content
                               .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                              .replace(/^(\d+)\.\s+/gm, '<br/>$1. ')
+                              .replace(/^- /gm, '<br/>&bull; ')
                               .replace(/\n/g, '<br/>')
+                              .replace(/(<br\/>){3,}/g, '<br/><br/>')
+                              .replace(/^<br\/>/, '')
                           )
                         : escapeHtml(msg.content)
                             .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')

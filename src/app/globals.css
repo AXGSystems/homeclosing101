@@ -244,7 +244,7 @@ select:focus {
   max-height: 2000px;
 }
 
-/* News ticker styles moved to inline JSX in NewsTicker component */
+/* News ticker keyframes are injected inline by NewsTicker component */
 
 /* ============================================================
    STAT CARDS — the big numbers section

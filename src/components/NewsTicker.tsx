@@ -1,7 +1,5 @@
 "use client";
 
-import { useRef, useEffect, useState } from "react";
-
 const headlines = [
   { text: "4.2 million homes sold in the U.S. in 2025 — median price $400K", source: "NAR" },
   { text: "Wire fraud losses hit $275.1M in 2025 — always verify wiring by phone", source: "FBI IC3" },
@@ -26,72 +24,46 @@ const headlines = [
 ];
 
 export default function NewsTicker() {
-  const scrollRef = useRef<HTMLDivElement>(null);
-  const [animDuration, setAnimDuration] = useState(0);
-
-  useEffect(() => {
-    const measure = () => {
-      if (scrollRef.current) {
-        const scrollWidth = scrollRef.current.scrollWidth / 2;
-        const isMobile = window.innerWidth < 768;
-        // Mobile needs to be MUCH faster — the narrow viewport makes slow text feel frozen
-        const pixelsPerSecond = isMobile ? 300 : 120;
-        if (scrollWidth > 0) {
-          setAnimDuration(scrollWidth / pixelsPerSecond);
-        } else {
-          requestAnimationFrame(measure);
-        }
-      }
-    };
-    const timer = setTimeout(measure, 100);
-    // Re-measure on resize (rotation, etc.)
-    const onResize = () => { clearTimeout(timer); setTimeout(measure, 100); };
-    window.addEventListener("resize", onResize);
-    return () => { clearTimeout(timer); window.removeEventListener("resize", onResize); };
-  }, []);
-
   return (
-    <div className="news-ticker print:hidden bg-alta-navy text-white border-b border-white/10 overflow-hidden">
-      <div className="flex items-center">
-        {/* Label */}
-        <div className="shrink-0 bg-alta-teal px-2 sm:px-4 py-1.5 sm:py-2 font-bold text-[9px] sm:text-[11px] uppercase tracking-wider z-10 flex items-center gap-1.5 sm:gap-2">
-          <span className="relative flex h-1.5 w-1.5 sm:h-2 sm:w-2">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
-            <span className="relative inline-flex rounded-full h-1.5 w-1.5 sm:h-2 sm:w-2 bg-white"></span>
-          </span>
-          <span className="hidden sm:inline">Industry </span>News
-        </div>
-
-        {/* Scrolling content */}
-        <div className="overflow-hidden flex-1">
-          <div
-            ref={scrollRef}
-            className="flex items-center whitespace-nowrap hover:[animation-play-state:paused]"
-            style={{
-              animation: `tickerScroll ${animDuration > 0 ? animDuration : 120}s linear infinite`,
-            }}
-          >
-            {/* Render headlines twice for seamless loop */}
-            {[...headlines, ...headlines].map((item, i) => (
-              <span
-                key={i}
-                className="inline-flex items-center gap-1.5 px-4 py-2 text-[11px] shrink-0"
-              >
-                <span className="text-gray-300">{item.text}</span>
-                <span className="text-[9px] text-alta-teal font-semibold uppercase tracking-wider">{item.source}</span>
-                <span className="text-gray-600 mx-1">|</span>
-              </span>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      <style jsx>{`
+    <>
+      <style dangerouslySetInnerHTML={{ __html: `
         @keyframes tickerScroll {
           0% { transform: translateX(0); }
           100% { transform: translateX(-50%); }
         }
-      `}</style>
-    </div>
+      `}} />
+      <div className="news-ticker print:hidden bg-alta-navy text-white border-b border-white/10 overflow-hidden">
+        <div className="flex items-center">
+          {/* Label */}
+          <div className="shrink-0 bg-alta-teal px-2 sm:px-4 py-1.5 sm:py-2 font-bold text-[9px] sm:text-[11px] uppercase tracking-wider z-10 flex items-center gap-1.5 sm:gap-2">
+            <span className="relative flex h-1.5 w-1.5 sm:h-2 sm:w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-1.5 w-1.5 sm:h-2 sm:w-2 bg-white"></span>
+            </span>
+            <span className="hidden sm:inline">Industry </span>News
+          </div>
+
+          {/* Scrolling content */}
+          <div className="overflow-hidden flex-1">
+            <div
+              className="flex items-center whitespace-nowrap hover:[animation-play-state:paused]"
+              style={{ animation: "tickerScroll 5s linear infinite", width: "max-content" }}
+            >
+              {/* Render headlines twice for seamless loop */}
+              {[...headlines, ...headlines].map((item, i) => (
+                <span
+                  key={i}
+                  className="inline-flex items-center gap-1.5 px-4 py-2 text-[11px] shrink-0"
+                >
+                  <span className="text-gray-300">{item.text}</span>
+                  <span className="text-[9px] text-alta-teal font-semibold uppercase tracking-wider">{item.source}</span>
+                  <span className="text-gray-600 mx-1">|</span>
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
   );
 }

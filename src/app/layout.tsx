@@ -4,9 +4,11 @@ import Header from "@/components/Header";
 import AltaDisclaimer from "@/components/AltaDisclaimer";
 import Footer from "@/components/Footer";
 import NewsTicker from "@/components/NewsTicker";
+import RouteScrollToTop from "@/components/RouteScrollToTop";
 import ClosingFolderProvider from "@/components/ClosingFolderProvider";
 import AchievementProvider from "@/components/AchievementSystem";
 import LayoutOverlays from "@/components/LayoutOverlays";
+import FeedbackTabs from "@/components/FeedbackTabs";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -88,6 +90,7 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col bg-[var(--bg-primary)] text-[var(--text-primary)]">
         <AchievementProvider>
         <ClosingFolderProvider>
+          <RouteScrollToTop />
           <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-[9999] focus:bg-alta-navy focus:text-white focus:px-4 focus:py-2 focus:rounded-lg focus:text-sm focus:font-semibold">
             Skip to main content
           </a>
@@ -111,6 +114,7 @@ export default function RootLayout({
             <Footer />
           </div>
           <LayoutOverlays />
+          <FeedbackTabs />
         </ClosingFolderProvider>
         </AchievementProvider>
       </body>
