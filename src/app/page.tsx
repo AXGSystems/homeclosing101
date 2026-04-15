@@ -611,33 +611,34 @@ export default function HomePage() {
             <h2 className="text-3xl font-bold text-alta-navy mb-3">Trusted Resources</h2>
             <p className="text-alta-gray max-w-xl mx-auto">Verified links to government agencies and industry organizations that support homebuyers.</p>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
             {resources.map((r) => (
               <a
                 key={r.name}
                 href={r.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="resource-card group rounded-2xl bg-white border-2 border-gray-100 shadow-sm overflow-hidden transition-all duration-300 hover:-translate-y-1"
-                style={{ ['--halo-color' as string]: r.halo }}
+                className="group block [perspective:800px] h-52"
               >
-                {/* Large logo at top */}
-                <div className="flex items-center justify-center pt-8 pb-6 px-5">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={r.logo} alt={r.name} className="max-h-16 max-w-[90%] object-contain" loading="lazy" />
-                </div>
-                {/* Thin accent line */}
-                <div className="mx-5 h-0.5 rounded-full opacity-25" style={{ backgroundColor: r.halo }} />
-                {/* Content */}
-                <div className="px-5 pt-3 pb-5">
-                  <h3 className="text-[13px] font-bold text-alta-navy mb-1.5 leading-tight transition-colors" style={{ transitionDuration: '200ms' }}>{r.name}</h3>
-                  <p className="text-[11px] text-alta-gray leading-relaxed mb-3">{r.desc}</p>
-                  <span className="inline-flex items-center gap-1 text-xs font-semibold" style={{ color: r.halo }}>
-                    Visit site
-                    <svg className="w-3 h-3 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                    </svg>
-                  </span>
+                <div className="relative w-full h-full transition-transform duration-500 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]">
+                  {/* Front — logo */}
+                  <div className="absolute inset-0 [backface-visibility:hidden] bg-white rounded-2xl border-2 border-gray-100 shadow-sm flex flex-col items-center justify-center p-5">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img src={r.logo} alt={r.name} className="max-h-14 max-w-[80%] object-contain mb-3" loading="lazy" />
+                    <p className="text-xs font-bold text-alta-navy text-center leading-tight">{r.name}</p>
+                  </div>
+                  {/* Back — description */}
+                  <div
+                    className="absolute inset-0 [backface-visibility:hidden] [transform:rotateY(180deg)] rounded-2xl border-2 shadow-md flex flex-col items-center justify-center p-5 text-center"
+                    style={{ backgroundColor: `${r.halo}10`, borderColor: `${r.halo}40` }}
+                  >
+                    <p className="text-sm font-bold text-alta-navy mb-2 leading-tight">{r.name}</p>
+                    <p className="text-xs text-alta-gray leading-relaxed mb-3">{r.desc}</p>
+                    <span className="inline-flex items-center gap-1 text-xs font-bold" style={{ color: r.halo }}>
+                      Visit site
+                      <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
+                    </span>
+                  </div>
                 </div>
               </a>
             ))}
