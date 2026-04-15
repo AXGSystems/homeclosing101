@@ -93,12 +93,13 @@ const stats = [
 
 const steps = [
   { num: "1", title: "Get Your Finances Ready", desc: "Check your credit, pay down debts, save for your down payment and closing costs.", bg: "bg-[#e8f0f5]", borderColor: "border-[#1a5276]" },
-  { num: "2", title: "Get Pre-Approved", desc: "Compare lenders and lock in your financing options.", bg: "bg-[#e9f5ed]", borderColor: "border-[#2d6b3f]" },
-  { num: "3", title: "Find Your Home", desc: "Work with a real estate agent to find the right property.", bg: "bg-[#f0ecf6]", borderColor: "border-[#5b3a8c]" },
+  { num: "2", title: "Get Pre-Approved", desc: "Compare lenders, learn your loan options, and lock in financing.", bg: "bg-[#e9f5ed]", borderColor: "border-[#2d6b3f]" },
+  { num: "3", title: "Find a Property", desc: "Work with a real estate agent to find the right home.", bg: "bg-[#f0ecf6]", borderColor: "border-[#5b3a8c]" },
   { num: "4", title: "Make an Offer", desc: "Submit your purchase proposal and negotiate terms.", bg: "bg-[#faf4e4]", borderColor: "border-[#8b6914]" },
-  { num: "5", title: "Order Title Search", desc: "A professional reviews public records for any claims on the property.", bg: "bg-[#e6f1f5]", borderColor: "border-[#0a7ea8]" },
-  { num: "6", title: "Get Insurance", desc: "Secure homeowner's insurance and owner's title insurance.", bg: "bg-[#e9f5ed]", borderColor: "border-[#2d6b3f]" },
-  { num: "7", title: "Close & Get Your Keys", desc: "Sign documents, transfer funds, and officially become a homeowner.", keys: true, bg: "bg-[#faf4e4]", borderColor: "border-[#d4a843]" },
+  { num: "5", title: "Sign the Purchase Agreement", desc: "Formalize the deal with a binding contract.", bg: "bg-[#e8f0f5]", borderColor: "border-[#1a5276]" },
+  { num: "6", title: "Get Funding", desc: "Finalize your mortgage through underwriting and appraisal.", bg: "bg-[#e9f5ed]", borderColor: "border-[#2d6b3f]" },
+  { num: "7", title: "Get Insurance", desc: "Secure homeowner's insurance and owner's title insurance.", bg: "bg-[#e6f1f5]", borderColor: "border-[#0a7ea8]" },
+  { num: "8", title: "Close & Get Your Keys", desc: "Sign documents, transfer funds, and officially become a homeowner.", keys: true, bg: "bg-[#faf4e4]", borderColor: "border-[#d4a843]" },
 ];
 
 const resourceColors = ["#1a5276", "#2d6b3f", "#5b3a8c", "#8b6914", "#943030", "#0a7ea8"];
@@ -386,7 +387,7 @@ export default function HomePage() {
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-alta-navy mb-3">The Road to Homeownership</h2>
-            <p className="text-alta-gray max-w-lg mx-auto">Seven key milestones from getting your finances ready to getting the keys.</p>
+            <p className="text-alta-gray max-w-lg mx-auto">Eight key milestones from getting your finances ready to getting the keys.</p>
           </div>
 
           {/* Road */}
@@ -404,7 +405,7 @@ export default function HomePage() {
             <div className="absolute left-2 right-2 top-1/2 translate-y-[calc(-50%+28px)] h-0.5 bg-white/80 rounded-full hidden md:block" />
 
             {/* Houses along the road */}
-            <div className="relative z-10 grid grid-cols-1 md:grid-cols-7 gap-4 md:gap-2">
+            <div className="relative z-10 grid grid-cols-1 md:grid-cols-8 gap-4 md:gap-2">
               {steps.map((step: { num: string; title: string; desc: string; keys?: boolean; bg: string; borderColor: string }, i: number) => (
                 <div key={step.num} className={`flex flex-col items-center ${i % 2 === 0 ? 'md:-translate-y-16' : 'md:translate-y-16'}`}>
                   {/* House shape */}
