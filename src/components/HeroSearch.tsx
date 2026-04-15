@@ -109,25 +109,25 @@ export default function HeroSearch({ variant = "default" }: { variant?: "default
   };
 
   return (
-    <div ref={wrapperRef} className={`relative ${isHeader ? "w-48 xl:w-56" : "w-full max-w-xs"}`}>
+    <div ref={wrapperRef} className={`relative ${isHeader ? "w-52 xl:w-60" : "w-full max-w-sm"}`}>
       <div className="relative">
-        <Search className={`absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 ${isHeader ? "text-alta-gray" : "text-white/50"}`} />
+        <Search className={`absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 ${isHeader ? "text-alta-gray/60" : "text-white/50"}`} />
         <input
           type="text"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           onFocus={() => setFocused(true)}
           placeholder="Search HC101..."
-          className={`w-full pl-9 pr-3 py-1.5 rounded-lg text-sm transition-all focus:outline-none ${
+          className={`w-full pl-10 pr-4 py-2 rounded-full text-sm transition-all focus:outline-none ${
             isHeader
-              ? "bg-alta-light border border-gray-200 text-alta-navy placeholder:text-alta-gray/50 focus:border-alta-teal focus:ring-1 focus:ring-alta-teal/20"
-              : "bg-white/10 border border-white/20 text-white placeholder:text-white/40 focus:bg-white/15 focus:border-white/40"
+              ? "bg-gray-100 border border-gray-200 text-alta-navy placeholder:text-alta-gray/50 focus:border-alta-teal focus:ring-2 focus:ring-alta-teal/20 focus:bg-white"
+              : "bg-white/10 backdrop-blur-md border border-white/25 text-white placeholder:text-white/40 focus:bg-white/15 focus:border-white/50 shadow-lg shadow-black/10"
           }`}
         />
       </div>
 
       {showResults && (
-        <div className="absolute top-full left-0 right-0 sm:w-[360px] sm:right-0 sm:left-auto mt-2 bg-white/80 backdrop-blur-xl rounded-xl shadow-2xl border border-white/40 max-h-[380px] overflow-y-auto z-[100]">
+        <div className="absolute top-full left-0 right-0 sm:w-[380px] sm:left-0 mt-2 bg-white/85 backdrop-blur-2xl rounded-2xl shadow-[0_8px_40px_rgba(0,0,0,0.15)] border border-white/50 max-h-[400px] overflow-y-auto z-[100]">
           {results.length === 0 ? (
             <div className="px-4 py-6 text-center text-sm text-alta-gray">No results found</div>
           ) : (
