@@ -383,119 +383,25 @@ export default function HomePage() {
       <div className="max-w-5xl mx-auto px-4 sm:px-6 py-4"><InlineAd /></div>
 
       {/* The Road to Homeownership */}
-      <section className="relative py-12 lg:py-16 overflow-hidden">
-        {/* Real road background */}
-        <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1515162816999-a0c47dc192f7?w=1920&q=80')" }} />
-        <div className="absolute inset-0 bg-white/92" />
-        <div className="relative max-w-5xl mx-auto px-4 sm:px-6">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-alta-navy mb-3">The Road to Homeownership</h2>
-            <p className="text-alta-gray max-w-lg mx-auto">Eight key milestones from getting your finances ready to getting the keys.</p>
-          </div>
-
-          {/* Road */}
-          {/* Desktop: sequential snake layout with arrows */}
-          <div className="hidden md:block">
-            {/* Row 1: steps 1→2→3→4 (left to right) */}
-            <div className="flex items-center gap-2 mb-2">
-              {steps.slice(0, 4).map((step, i) => (
-                <div key={step.num} className="flex items-center flex-1">
-                  <div className="group w-full">
-                    <div className={`${step.bg} border-2 ${step.borderColor} rounded-xl overflow-hidden shadow-md group-hover:shadow-lg group-hover:-translate-y-1 transition-all`}>
-                      <div className="h-24 bg-cover bg-center" style={{ backgroundImage: `url('${step.image}')` }} />
-                      <div className="p-3 text-center">
-                        <div className={`w-7 h-7 rounded-full flex items-center justify-center mx-auto mb-1.5 text-white text-xs font-bold ${step.keys ? 'bg-[#d4a843]' : 'bg-alta-teal'}`}>{step.num}</div>
-                        <h3 className="font-bold text-xs text-alta-navy leading-tight">{step.title}</h3>
-                        <p className="text-[10px] text-alta-gray mt-1 leading-snug">{step.desc}</p>
-                      </div>
-                    </div>
-                  </div>
-                  {i < 3 && (
-                    <svg className="w-6 h-6 text-alta-teal shrink-0 mx-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2.5}><path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" /></svg>
-                  )}
-                </div>
-              ))}
-            </div>
-
-            {/* Curved arrow: row 1 → row 2 */}
-            <div className="flex justify-end pr-8 my-1">
-              <svg className="w-8 h-8 text-alta-teal" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2.5}><path strokeLinecap="round" strokeLinejoin="round" d="M19.5 13.5L12 21m0 0l-7.5-7.5M12 21V3" /></svg>
-            </div>
-
-            {/* Divider with path feel */}
-            <div className="relative my-4">
-              <div className="h-px bg-gradient-to-r from-transparent via-alta-teal/30 to-transparent" />
-              <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-white px-4">
-                <svg className="w-5 h-5 text-alta-teal/40" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" /></svg>
-              </div>
-            </div>
-
-            {/* Row 2: steps 5→6→7→8 (left to right) */}
-            <div className="flex items-center gap-2 mt-2">
-              {steps.slice(4, 8).map((step, i) => (
-                <div key={step.num} className="flex items-center flex-1">
-                  <div className="group w-full">
-                    <div className={`${step.bg} border-2 ${step.borderColor} rounded-xl overflow-hidden shadow-md group-hover:shadow-lg group-hover:-translate-y-1 transition-all`}>
-                      <div className="h-24 bg-cover bg-center" style={{ backgroundImage: `url('${step.image}')` }} />
-                      <div className="p-3 text-center">
-                        <div className={`w-7 h-7 rounded-full flex items-center justify-center mx-auto mb-1.5 text-white text-xs font-bold ${step.keys ? 'bg-[#d4a843]' : 'bg-alta-teal'}`}>
-                          {step.keys ? (
-                            <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M15.75 5.25a3 3 0 013 3m3 0a6 6 0 01-7.029 5.912c-.563-.097-1.159.026-1.563.43L10.5 17.25H8.25v2.25H6v2.25H2.25v-2.818c0-.597.237-1.17.659-1.591l6.499-6.499c.404-.404.527-1 .43-1.563A6 6 0 1121.75 8.25z" /></svg>
-                          ) : step.num}
-                        </div>
-                        <h3 className={`font-bold text-xs leading-tight ${step.keys ? 'text-[#d4a843]' : 'text-alta-navy'}`}>{step.title}</h3>
-                        <p className="text-[10px] text-alta-gray mt-1 leading-snug">{step.desc}</p>
-                      </div>
-                    </div>
-                  </div>
-                  {i < 3 && (
-                    <svg className="w-6 h-6 text-alta-teal shrink-0 mx-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2.5}><path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" /></svg>
-                  )}
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Mobile: sequential vertical list with arrows */}
-          <div className="md:hidden space-y-2">
-            {steps.map((step, i) => (
-              <div key={step.num}>
-                <div className="flex gap-3 items-start">
-                  <div className={`w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm shrink-0 text-white ${step.keys ? 'bg-[#d4a843]' : 'bg-alta-teal'}`}>
-                    {step.keys ? (
-                      <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M15.75 5.25a3 3 0 013 3m3 0a6 6 0 01-7.029 5.912c-.563-.097-1.159.026-1.563.43L10.5 17.25H8.25v2.25H6v2.25H2.25v-2.818c0-.597.237-1.17.659-1.591l6.499-6.499c.404-.404.527-1 .43-1.563A6 6 0 1121.75 8.25z" /></svg>
-                    ) : step.num}
-                  </div>
-                  <div className={`${step.bg} rounded-xl overflow-hidden flex-1 border-l-4 ${step.borderColor}`}>
-                    <div className="h-20 bg-cover bg-center" style={{ backgroundImage: `url('${step.image}')` }} />
-                    <div className="p-3">
-                      <h3 className={`font-semibold ${step.keys ? 'text-[#d4a843]' : 'text-alta-navy'}`}>{step.title}</h3>
-                      <p className="text-sm text-alta-gray mt-0.5">{step.desc}</p>
-                    </div>
-                  </div>
-                </div>
-                {i < steps.length - 1 && (
-                  <div className="flex justify-center py-1">
-                    <svg className="w-5 h-5 text-alta-teal" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2.5}><path strokeLinecap="round" strokeLinejoin="round" d="M19.5 13.5L12 21m0 0l-7.5-7.5M12 21V3" /></svg>
-                  </div>
-                )}
-              </div>
-            ))}
-          </div>
-
-          <div className="text-center mt-12">
-            <Link href="/closing-process/what-to-expect" className="inline-flex items-center px-6 py-3 bg-alta-teal text-white font-semibold rounded-lg hover:bg-[#077a9e] transition-colors shadow-md">
-              Detailed Walkthrough of Each Step
-              <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-              </svg>
-            </Link>
-          </div>
+      <section className="py-14 lg:py-20 bg-alta-light">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 text-center">
+          <h2 className="text-3xl font-bold text-alta-navy mb-5">The Road to Homeownership</h2>
+          <p className="text-lg text-alta-gray leading-relaxed mb-4">
+            Buying a home is the biggest financial decision most people will ever make. From getting your finances ready and getting pre-approved, to finding the right property, making an offer, signing the purchase agreement, securing funding and insurance, and finally closing the transaction — there are eight critical milestones between you and your keys.
+          </p>
+          <p className="text-base text-alta-gray leading-relaxed mb-8">
+            Each step has its own requirements, timelines, and potential pitfalls. Understanding what to expect at every stage helps you avoid costly mistakes, protect your investment, and close with confidence.
+          </p>
+          <Link href="/closing-process/what-to-expect" className="inline-flex items-center px-6 py-3 bg-alta-teal text-white font-semibold rounded-lg hover:bg-[#077a9e] transition-colors shadow-md">
+            Detailed Walkthrough of Each Step
+            <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            </svg>
+          </Link>
         </div>
       </section>
-
       {/* Gradient divider */}
-      <div className="h-1 bg-gradient-to-r from-[#1a5276] via-[#0a7ea8] to-[#2d6b3f]" />
+      <div className="h-0.5 bg-alta-teal/20" />
 
       {/* Where to start — large photo-backed cards */}
       <section className="py-10 bg-alta-light">
