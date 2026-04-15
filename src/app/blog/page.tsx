@@ -377,7 +377,7 @@ export default function BlogPage() {
               </div>
               <div>
                 <h3 className="text-xs font-semibold text-alta-navy group-hover:text-alta-teal transition-colors">250+ FAQ</h3>
-                <p className="text-[10px] text-alta-gray">Verified answers</p>
+                <p className="text-xs text-alta-gray">Verified answers</p>
               </div>
             </Link>
             <Link href="/glossary" className="group flex items-center gap-3 p-3 bg-[#e8f0f5] rounded-xl border border-[#c5d8e4] border-l-4 border-l-[#1a5276] tile-interactive">
@@ -386,7 +386,7 @@ export default function BlogPage() {
               </div>
               <div>
                 <h3 className="text-xs font-semibold text-alta-navy group-hover:text-alta-teal transition-colors">450+ Glossary</h3>
-                <p className="text-[10px] text-alta-gray">Real estate terms</p>
+                <p className="text-xs text-alta-gray">Real estate terms</p>
               </div>
             </Link>
             <Link href="/stop-fraud" className="group flex items-center gap-3 p-3 bg-[#f5e8e8] rounded-xl border border-[#e4c5c5] border-l-4 border-l-[#943030] tile-interactive">
@@ -395,7 +395,7 @@ export default function BlogPage() {
               </div>
               <div>
                 <h3 className="text-xs font-semibold text-alta-navy group-hover:text-alta-teal transition-colors">Stop Fraud 101</h3>
-                <p className="text-[10px] text-alta-gray">Prevention guide</p>
+                <p className="text-xs text-alta-gray">Prevention guide</p>
               </div>
             </Link>
           </div>

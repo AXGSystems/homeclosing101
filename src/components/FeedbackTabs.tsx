@@ -45,10 +45,10 @@ export default function FeedbackTabs() {
         {/* Report A Bug tab */}
         <button
           onClick={() => { setActiveTab(activeTab === "bug" ? null : "bug"); setSubmitted(false); }}
-          className={`flex items-center gap-1.5 px-2 py-3 sm:px-3 sm:py-4 rounded-r-xl shadow-lg text-[10px] sm:text-xs font-bold uppercase tracking-wider transition-all duration-200 ${
+          className={`flex items-center gap-1.5 px-2 py-3 sm:px-3 sm:py-4 rounded-r-xl text-[10px] sm:text-xs font-bold uppercase tracking-wider transition-all duration-200 backdrop-blur-md border border-l-0 ${
             activeTab === "bug"
-              ? "bg-alta-red text-white translate-x-0"
-              : "bg-white text-alta-red border border-l-0 border-gray-200 hover:bg-red-50 -translate-x-0.5 hover:translate-x-0"
+              ? "bg-alta-red/90 text-white border-alta-red/30 shadow-lg shadow-red-500/20"
+              : "bg-white/40 text-alta-red border-white/30 hover:bg-white/60 -translate-x-0.5 hover:translate-x-0 shadow-lg shadow-black/5"
           }`}
           style={{ writingMode: "vertical-rl", textOrientation: "mixed" }}
         >
@@ -61,10 +61,10 @@ export default function FeedbackTabs() {
         {/* Suggestion Box tab */}
         <button
           onClick={() => { setActiveTab(activeTab === "suggestion" ? null : "suggestion"); setSubmitted(false); }}
-          className={`flex items-center gap-1.5 px-2 py-3 sm:px-3 sm:py-4 rounded-r-xl shadow-lg text-[10px] sm:text-xs font-bold uppercase tracking-wider transition-all duration-200 ${
+          className={`flex items-center gap-1.5 px-2 py-3 sm:px-3 sm:py-4 rounded-r-xl text-[10px] sm:text-xs font-bold uppercase tracking-wider transition-all duration-200 backdrop-blur-md border border-l-0 ${
             activeTab === "suggestion"
-              ? "bg-alta-teal text-white translate-x-0"
-              : "bg-white text-alta-teal border border-l-0 border-gray-200 hover:bg-teal-50 -translate-x-0.5 hover:translate-x-0"
+              ? "bg-alta-teal/90 text-white border-alta-teal/30 shadow-lg shadow-teal-500/20"
+              : "bg-white/40 text-alta-teal border-white/30 hover:bg-white/60 -translate-x-0.5 hover:translate-x-0 shadow-lg shadow-black/5"
           }`}
           style={{ writingMode: "vertical-rl", textOrientation: "mixed" }}
         >

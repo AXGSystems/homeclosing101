@@ -403,7 +403,7 @@ export default function HomeownersInsurancePage() {
                   <svg className="w-3.5 h-3.5 text-[#1a5276]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" /></svg>
                 </div>
                 <h3 className="text-sm font-bold text-[#943030] mb-1">{g.gap}</h3>
-                <p className="text-xs text-alta-gray leading-relaxed mb-1">{g.solution}</p>
+                <p className="text-sm text-alta-gray leading-relaxed mb-1">{g.solution}</p>
                 <p className="text-[9px] text-alta-teal font-medium">Source: {g.source}</p>
               </div>
             ))}
@@ -425,7 +425,7 @@ export default function HomeownersInsurancePage() {
                 <span className="w-7 h-7 rounded-full bg-alta-navy text-white flex items-center justify-center text-xs font-bold shrink-0">{s.step}</span>
                 <div>
                   <h3 className="text-sm font-bold text-alta-navy">{s.title}</h3>
-                  <p className="text-xs text-alta-gray leading-relaxed mt-0.5">{s.desc}</p>
+                  <p className="text-sm text-alta-gray leading-relaxed mt-0.5">{s.desc}</p>
                 </div>
               </div>
             ))}
@@ -450,13 +450,13 @@ export default function HomeownersInsurancePage() {
                 <p className="text-[9px] text-alta-gray mt-0.5">Hurricane/wildfire zones</p>
               </div>
             </div>
-            <p className="text-xs text-alta-gray leading-relaxed">Factors affecting your premium: location (weather risk, crime rate), home age and construction type, coverage amount, deductible, claims history, credit score (in most states), and proximity to fire stations/hydrants. Rates vary dramatically by state — Florida and Louisiana are among the most expensive due to hurricane risk.</p>
+            <p className="text-sm text-alta-gray leading-relaxed">Factors affecting your premium: location (weather risk, crime rate), home age and construction type, coverage amount, deductible, claims history, credit score (in most states), and proximity to fire stations/hydrants. Rates vary dramatically by state — Florida and Louisiana are among the most expensive due to hurricane risk.</p>
           </div>
 
           {/* The Declarations Page */}
           <h2 className="text-xl font-bold text-alta-navy mb-4">Understanding Your Declarations Page</h2>
           <div className="p-5 bg-[#faf4e4] rounded-2xl border border-[#e8d9a8] shadow-sm mb-10">
-            <p className="text-xs text-alta-gray leading-relaxed mb-4">The declarations page (or &quot;dec page&quot;) is the summary page of your insurance policy. Your lender will require a copy before closing. It is typically 1-2 pages and contains all the key details of your coverage:</p>
+            <p className="text-sm text-alta-gray leading-relaxed mb-4">The declarations page (or &quot;dec page&quot;) is the summary page of your insurance policy. Your lender will require a copy before closing. It is typically 1-2 pages and contains all the key details of your coverage:</p>
             <div className="grid sm:grid-cols-2 gap-3">
               {[
                 { field: "Named Insured", detail: "Your full legal name (and co-borrower if applicable). Must match the name on your mortgage documents exactly." },
@@ -493,7 +493,7 @@ export default function HomeownersInsurancePage() {
                 <span className="w-7 h-7 rounded-full bg-alta-navy text-white flex items-center justify-center text-xs font-bold shrink-0">{s.step}</span>
                 <div>
                   <h3 className="text-sm font-bold text-alta-navy">{s.title}</h3>
-                  <p className="text-xs text-alta-gray leading-relaxed mt-0.5">{s.desc}</p>
+                  <p className="text-sm text-alta-gray leading-relaxed mt-0.5">{s.desc}</p>
                 </div>
               </div>
             ))}
@@ -519,15 +519,15 @@ export default function HomeownersInsurancePage() {
             <div className="grid sm:grid-cols-3 gap-3">
               <Link href="/protect-your-rights" className="p-4 bg-[#e9f5ed] rounded-xl border border-[#bddcc7] border-l-4 border-l-[#2d6b3f] tile-interactive group">
                 <h3 className="text-sm font-bold text-alta-navy group-hover:text-alta-teal transition-colors">Title Insurance Guide</h3>
-                <p className="text-[10px] text-alta-gray mt-1">How owner's title insurance protects your property rights</p>
+                <p className="text-xs text-alta-gray mt-1">How owner's title insurance protects your property rights</p>
               </Link>
               <Link href="/closing-process/closing-costs" className="p-4 bg-[#f0ecf6] rounded-xl border border-[#d4c8e4] border-l-4 border-l-[#5b3a8c] tile-interactive group">
                 <h3 className="text-sm font-bold text-alta-navy group-hover:text-alta-teal transition-colors">Closing Costs Calculator</h3>
-                <p className="text-[10px] text-alta-gray mt-1">Estimate your total closing costs including insurance premiums</p>
+                <p className="text-xs text-alta-gray mt-1">Estimate your total closing costs including insurance premiums</p>
               </Link>
               <Link href="/closing-process/closing-checklist" className="p-4 bg-[#faf4e4] rounded-xl border border-[#e8d9a8] border-l-4 border-l-[#8b6914] tile-interactive group">
                 <h3 className="text-sm font-bold text-alta-navy group-hover:text-alta-teal transition-colors">Closing Checklist</h3>
-                <p className="text-[10px] text-alta-gray mt-1">Track every step from offer to keys with our interactive checklist</p>
+                <p className="text-xs text-alta-gray mt-1">Track every step from offer to keys with our interactive checklist</p>
               </Link>
             </div>
           </div>

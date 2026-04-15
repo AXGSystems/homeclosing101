@@ -207,7 +207,7 @@ function ExpandableTile({
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
             </svg>
           </div>
-          <p className="text-xs text-alta-gray leading-relaxed mt-1">{summary}</p>
+          <p className="text-sm text-alta-gray leading-relaxed mt-1">{summary}</p>
         </div>
       </div>
       <div

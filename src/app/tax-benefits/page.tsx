@@ -265,7 +265,7 @@ function ItemizeCheck() {
         </div>
       )}
 
-      <p className="text-[10px] text-alta-gray mt-3">
+      <p className="text-xs text-alta-gray mt-3">
         This is a simplified estimate. Other itemized deductions include charitable contributions, medical expenses exceeding 7.5% of AGI, and casualty/theft losses from federally declared disasters. A CPA can provide a complete analysis.
       </p>
     </div>
@@ -327,7 +327,7 @@ function TaxBenefitSection({ section }: { section: TaxSection }) {
           )}
 
           {section.source && (
-            <p className="ml-[52px] mt-2 text-[10px] text-alta-gray italic">
+            <p className="ml-[52px] mt-2 text-xs text-alta-gray italic">
               Source: {section.source}
             </p>
           )}
@@ -443,15 +443,15 @@ export default function TaxBenefitsPage() {
           <div className="grid sm:grid-cols-3 gap-3">
             <Link href="/closing-process/closing-costs" className="p-4 bg-[#eaf2f8] rounded-xl border border-[#bcd4e6] border-l-4 border-l-[#1a5276] tile-interactive group">
               <h3 className="text-sm font-bold text-alta-navy group-hover:text-alta-teal transition-colors">Closing Costs Explained</h3>
-              <p className="text-[10px] text-alta-gray mt-1">Understand every line item on your settlement statement</p>
+              <p className="text-xs text-alta-gray mt-1">Understand every line item on your settlement statement</p>
             </Link>
             <Link href="/escrow-guide" className="p-4 bg-[#e9f5ed] rounded-xl border border-[#bddcc7] border-l-4 border-l-[#2d6b3f] tile-interactive group">
               <h3 className="text-sm font-bold text-alta-navy group-hover:text-alta-teal transition-colors">Understanding Escrow</h3>
-              <p className="text-[10px] text-alta-gray mt-1">How escrow accounts work for taxes and insurance after closing</p>
+              <p className="text-xs text-alta-gray mt-1">How escrow accounts work for taxes and insurance after closing</p>
             </Link>
             <Link href="/homeowners-insurance" className="p-4 bg-[#f0ecf6] rounded-xl border border-[#d4c8e4] border-l-4 border-l-[#5b3a8c] tile-interactive group">
               <h3 className="text-sm font-bold text-alta-navy group-hover:text-alta-teal transition-colors">Homeowner&apos;s Insurance</h3>
-              <p className="text-[10px] text-alta-gray mt-1">What your policy covers and how to save on premiums</p>
+              <p className="text-xs text-alta-gray mt-1">What your policy covers and how to save on premiums</p>
             </Link>
           </div>
         </div>

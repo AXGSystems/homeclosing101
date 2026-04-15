@@ -206,7 +206,7 @@ export default function SupportPage() {
                   {sending ? "Sending..." : "Submit Question"}
                 </button>
 
-                <p className="text-[10px] text-alta-gray text-center">
+                <p className="text-xs text-alta-gray text-center">
                   Your question will be sent to the HomeClosing101 support team at ALTA.
                 </p>
               </form>

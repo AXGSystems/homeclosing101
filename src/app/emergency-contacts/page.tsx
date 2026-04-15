@@ -110,7 +110,7 @@ export default function EmergencyContactsPage() {
                       <p className="text-xs text-[#943030] font-bold mt-1">
                         Call the number on the back of your debit card
                       </p>
-                      <p className="text-[10px] text-alta-gray mt-1">
+                      <p className="text-xs text-alta-gray mt-1">
                         Request an immediate wire recall. Do not hang up until
                         they confirm.
                       </p>
@@ -143,7 +143,7 @@ export default function EmergencyContactsPage() {
                       <p className="text-xs text-[#943030] font-bold mt-1">
                         1-800-CALL-FBI (1-800-225-5324)
                       </p>
-                      <p className="text-[10px] text-alta-gray mt-1">
+                      <p className="text-xs text-alta-gray mt-1">
                         File online at{" "}
                         <a
                           href="https://www.ic3.gov/"
@@ -183,7 +183,7 @@ export default function EmergencyContactsPage() {
                       <p className="text-xs text-[#943030] font-bold mt-1">
                         Call the number from your closing documents
                       </p>
-                      <p className="text-[10px] text-alta-gray mt-1">
+                      <p className="text-xs text-alta-gray mt-1">
                         Never use a phone number from a suspicious email.
                       </p>
                     </div>
@@ -215,7 +215,7 @@ export default function EmergencyContactsPage() {
                       <p className="text-xs text-[#943030] font-bold mt-1">
                         1-855-411-2372
                       </p>
-                      <p className="text-[10px] text-alta-gray mt-1">
+                      <p className="text-xs text-alta-gray mt-1">
                         Consumer Financial Protection Bureau complaint hotline
                       </p>
                     </div>
@@ -537,7 +537,7 @@ export default function EmergencyContactsPage() {
                         util.action
                       )}
                     </p>
-                    <p className="text-[10px] text-alta-gray mt-1">
+                    <p className="text-xs text-alta-gray mt-1">
                       {util.tip}
                     </p>
                   </div>
@@ -750,7 +750,7 @@ export default function EmergencyContactsPage() {
                   label="Save to Folder"
                   savedLabel="Saved to Folder!"
                 />
-                <span className="text-[10px] text-alta-gray">
+                <span className="text-xs text-alta-gray">
                   Saves to your{" "}
                   <Link
                     href="/my-folder"
@@ -801,7 +801,7 @@ export default function EmergencyContactsPage() {
               <h3 className="text-sm font-bold text-alta-navy group-hover:text-alta-teal transition-colors">
                 Stop Fraud 101
               </h3>
-              <p className="text-[10px] text-alta-gray mt-1">
+              <p className="text-xs text-alta-gray mt-1">
                 10 FBI-sourced steps to prevent wire fraud during your closing
               </p>
             </Link>
@@ -812,7 +812,7 @@ export default function EmergencyContactsPage() {
               <h3 className="text-sm font-bold text-alta-navy group-hover:text-alta-teal transition-colors">
                 Closing Day Prep
               </h3>
-              <p className="text-[10px] text-alta-gray mt-1">
+              <p className="text-xs text-alta-gray mt-1">
                 Everything you need to do before and on closing day
               </p>
             </Link>
@@ -823,7 +823,7 @@ export default function EmergencyContactsPage() {
               <h3 className="text-sm font-bold text-alta-navy group-hover:text-alta-teal transition-colors">
                 After Closing
               </h3>
-              <p className="text-[10px] text-alta-gray mt-1">
+              <p className="text-xs text-alta-gray mt-1">
                 Post-closing steps including utility setup, tax filing, and
                 homestead exemption
               </p>

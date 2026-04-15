@@ -96,7 +96,7 @@ export default function AchievementsPage() {
               </p>
 
               {a.unlocked && a.unlockedAt && (
-                <p className="text-[10px] text-alta-gray/60 mt-2">
+                <p className="text-xs text-alta-gray/60 mt-2">
                   {new Date(a.unlockedAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
                 </p>
               )}

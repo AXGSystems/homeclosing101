@@ -63,7 +63,7 @@ function DetailModal({ data, onClose }: { data: ModalData; onClose: () => void }
               {data.stats.map((s) => (
                 <div key={s.label} className="p-3 bg-alta-light rounded-xl text-center">
                   <p className="text-lg font-bold text-alta-teal">{s.value}</p>
-                  <p className="text-[10px] text-alta-gray leading-tight">{s.label}</p>
+                  <p className="text-xs text-alta-gray leading-tight">{s.label}</p>
                 </div>
               ))}
             </div>

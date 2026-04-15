@@ -288,7 +288,7 @@ export default function EscrowGuidePage() {
                       <div className="flex items-start justify-between gap-3">
                         <div className="flex-1">
                           <h4 className="font-bold text-alta-navy text-sm mb-1">{item.title}</h4>
-                          <p className="text-xs text-alta-gray leading-relaxed">{item.desc}</p>
+                          <p className="text-sm text-alta-gray leading-relaxed">{item.desc}</p>
                           {item.title === "Annual Escrow Analysis" && <p className="text-[10px] text-alta-teal mt-1 font-medium">Source: CFPB</p>}
                         </div>
                         <div className="flex flex-col items-center gap-1 shrink-0 mt-1 opacity-60 group-hover:opacity-100 transition-opacity">
@@ -316,29 +316,29 @@ export default function EscrowGuidePage() {
               <div className="flex justify-between p-2 bg-[#f5e8e8] rounded-lg"><span className="text-alta-navy font-medium">PMI (under 20% down)</span><span className="font-bold text-[#943030]">$184</span></div>
               <div className="flex justify-between p-2 bg-alta-navy text-white rounded-lg"><span className="font-semibold">Total Monthly Payment (PITI)</span><span className="font-bold">$2,788</span></div>
             </div>
-            <p className="text-[10px] text-alta-gray mt-3">Of your $2,788 monthly payment, only $1,991 goes to your actual loan. The remaining $797 is held in escrow for taxes, insurance, and PMI. This is why your mortgage payment is significantly more than just principal and interest.</p>
+            <p className="text-xs text-alta-gray mt-3">Of your $2,788 monthly payment, only $1,991 goes to your actual loan. The remaining $797 is held in escrow for taxes, insurance, and PMI. This is why your mortgage payment is significantly more than just principal and interest.</p>
           </div>
 
           {/* Escrow waivers */}
           <h2 className="text-xl font-bold text-alta-navy mb-4">Escrow Waivers: Paying Taxes & Insurance Yourself</h2>
           <div className="p-5 bg-[#f0ecf6] rounded-2xl border border-[#d4c8e4] border-l-4 border-l-[#5b3a8c] shadow-sm mb-10 tile-interactive">
-            <p className="text-xs text-alta-gray leading-relaxed mb-4">Some borrowers prefer to pay property taxes and insurance directly rather than through an escrow account. This is called an escrow waiver (or escrow exemption). Here is what you need to know:</p>
+            <p className="text-sm text-alta-gray leading-relaxed mb-4">Some borrowers prefer to pay property taxes and insurance directly rather than through an escrow account. This is called an escrow waiver (or escrow exemption). Here is what you need to know:</p>
             <div className="space-y-3">
               <div className="p-3 bg-[#e8f0f5] rounded-lg border border-[#c5d8e4]">
                 <h4 className="text-sm font-bold text-alta-navy mb-1">Eligibility Requirements</h4>
-                <p className="text-xs text-alta-gray leading-relaxed">Most lenders require at least 20% equity (80% LTV or less) to waive escrow. FHA, VA, and USDA loans generally do not allow escrow waivers. Conventional loans are the most flexible, but each lender sets its own policy. Some lenders also require a strong credit score (720+) and a clean payment history.</p>
+                <p className="text-sm text-alta-gray leading-relaxed">Most lenders require at least 20% equity (80% LTV or less) to waive escrow. FHA, VA, and USDA loans generally do not allow escrow waivers. Conventional loans are the most flexible, but each lender sets its own policy. Some lenders also require a strong credit score (720+) and a clean payment history.</p>
               </div>
               <div className="p-3 bg-[#faf4e4] rounded-lg border border-[#e8d9a8]">
                 <h4 className="text-sm font-bold text-alta-navy mb-1">The Escrow Waiver Fee</h4>
-                <p className="text-xs text-alta-gray leading-relaxed">Lenders typically charge a fee for waiving escrow -- usually 0.25% of the loan amount (e.g., $625 on a $250,000 loan). This fee may be paid upfront or added to your interest rate. The fee compensates the lender for the increased risk that you could miss a tax or insurance payment, which would put their collateral at risk.</p>
+                <p className="text-sm text-alta-gray leading-relaxed">Lenders typically charge a fee for waiving escrow -- usually 0.25% of the loan amount (e.g., $625 on a $250,000 loan). This fee may be paid upfront or added to your interest rate. The fee compensates the lender for the increased risk that you could miss a tax or insurance payment, which would put their collateral at risk.</p>
               </div>
               <div className="p-3 bg-[#f5e8e8] rounded-lg border border-[#e4c5c5]">
                 <h4 className="text-sm font-bold text-alta-navy mb-1">Risks of Waiving Escrow</h4>
-                <p className="text-xs text-alta-gray leading-relaxed">If you miss a property tax payment, your county can place a tax lien on your home -- which takes priority over your mortgage. If your insurance lapses, your lender will buy force-placed insurance on your behalf (at a much higher cost) and add it to your loan balance. You are responsible for budgeting and paying large lump-sum bills (property taxes are typically due 1-2 times per year; insurance annually).</p>
+                <p className="text-sm text-alta-gray leading-relaxed">If you miss a property tax payment, your county can place a tax lien on your home -- which takes priority over your mortgage. If your insurance lapses, your lender will buy force-placed insurance on your behalf (at a much higher cost) and add it to your loan balance. You are responsible for budgeting and paying large lump-sum bills (property taxes are typically due 1-2 times per year; insurance annually).</p>
               </div>
               <div className="p-3 bg-[#e9f5ed] rounded-lg border border-[#bddcc7]">
                 <h4 className="text-sm font-bold text-alta-navy mb-1">When It Makes Sense</h4>
-                <p className="text-xs text-alta-gray leading-relaxed">An escrow waiver can make sense if you are disciplined about saving, want to earn interest on your own funds, or live in a state where escrow accounts do not earn interest. However, most financial advisors recommend keeping escrow for the convenience and protection it provides -- especially for first-time buyers.</p>
+                <p className="text-sm text-alta-gray leading-relaxed">An escrow waiver can make sense if you are disciplined about saving, want to earn interest on your own funds, or live in a state where escrow accounts do not earn interest. However, most financial advisors recommend keeping escrow for the convenience and protection it provides -- especially for first-time buyers.</p>
               </div>
             </div>
             <p className="text-[10px] text-alta-teal font-medium mt-3">Source: CFPB -- Escrow accounts are regulated under the Real Estate Settlement Procedures Act (RESPA), 12 CFR Part 1024</p>
@@ -350,7 +350,7 @@ export default function EscrowGuidePage() {
           <h2 className="text-xl font-bold text-alta-navy mb-4">Federal Escrow Protections (RESPA)</h2>
           <p className="text-sm text-alta-gray mb-3">Click any rule for the full legal basis, real examples, and what to do if it's violated.</p>
           <div className="p-5 bg-gradient-to-br from-amber-50 to-white rounded-2xl border border-amber-200 mb-10">
-            <p className="text-xs text-alta-gray leading-relaxed mb-3">The Real Estate Settlement Procedures Act (RESPA) sets federal rules that protect you from excessive escrow collections:</p>
+            <p className="text-sm text-alta-gray leading-relaxed mb-3">The Real Estate Settlement Procedures Act (RESPA) sets federal rules that protect you from excessive escrow collections:</p>
             <div className="space-y-2">
               {respaRules.map((r) => (
                 <div
@@ -427,7 +427,7 @@ export default function EscrowGuidePage() {
                 <div className="flex items-start justify-between gap-2">
                   <div className="flex-1">
                     <h3 className="text-sm font-bold text-alta-navy mb-1">{faq.q}</h3>
-                    <p className="text-xs text-alta-gray leading-relaxed">{faq.a}</p>
+                    <p className="text-sm text-alta-gray leading-relaxed">{faq.a}</p>
                   </div>
                   <div className="flex flex-col items-center gap-1 shrink-0 mt-1 opacity-60 group-hover:opacity-100 transition-opacity">
                     <svg className="w-4 h-4 text-alta-teal" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" /></svg>
@@ -457,15 +457,15 @@ export default function EscrowGuidePage() {
             <div className="grid sm:grid-cols-3 gap-3">
               <Link href="/closing-disclosure" className="p-4 bg-[#f0ecf6] rounded-xl border border-[#d4c8e4] border-l-4 border-l-[#5b3a8c] tile-interactive group">
                 <h3 className="text-sm font-bold text-alta-navy group-hover:text-alta-teal transition-colors">Closing Disclosure Guide</h3>
-                <p className="text-[10px] text-alta-gray mt-1">Review your final loan terms and costs before signing at closing</p>
+                <p className="text-xs text-alta-gray mt-1">Review your final loan terms and costs before signing at closing</p>
               </Link>
               <Link href="/closing-process/closing-costs" className="p-4 bg-[#faf4e4] rounded-xl border border-[#e8d9a8] border-l-4 border-l-[#8b6914] tile-interactive group">
                 <h3 className="text-sm font-bold text-alta-navy group-hover:text-alta-teal transition-colors">Closing Costs Calculator</h3>
-                <p className="text-[10px] text-alta-gray mt-1">Estimate your total closing costs and understand each line item</p>
+                <p className="text-xs text-alta-gray mt-1">Estimate your total closing costs and understand each line item</p>
               </Link>
               <Link href="/closing-process/closing-checklist" className="p-4 bg-[#e6f1f5] rounded-xl border border-[#b4d8e8] border-l-4 border-l-[#0a7ea8] tile-interactive group">
                 <h3 className="text-sm font-bold text-alta-navy group-hover:text-alta-teal transition-colors">Closing Checklist</h3>
-                <p className="text-[10px] text-alta-gray mt-1">Track every step from offer to keys with our interactive checklist</p>
+                <p className="text-xs text-alta-gray mt-1">Track every step from offer to keys with our interactive checklist</p>
               </Link>
             </div>
           </div>

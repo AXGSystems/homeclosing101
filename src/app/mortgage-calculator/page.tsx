@@ -122,7 +122,7 @@ export default function MortgageCalculatorPage() {
                 }`}
               >
                 <p className={`text-sm font-bold ${loanType === key ? "text-alta-teal" : "text-alta-navy"}`}>{lt.name}</p>
-                <p className="text-[10px] text-alta-gray mt-0.5">Min {lt.minDown}% down{lt.minCredit > 0 ? ` | ${lt.minCredit}+ credit` : ""}</p>
+                <p className="text-xs text-alta-gray mt-0.5">Min {lt.minDown}% down{lt.minCredit > 0 ? ` | ${lt.minCredit}+ credit` : ""}</p>
               </button>
             ))}
           </div>
@@ -198,7 +198,7 @@ export default function MortgageCalculatorPage() {
                         <option key={c.county} value={c.county}>{c.county} County — {c.rate}%</option>
                       ))}
                     </select>
-                    <div className="mt-1.5 text-[10px] text-alta-gray">
+                    <div className="mt-1.5 text-xs text-alta-gray">
                       <p>
                         {usingCountyRate ? (
                           <span className="text-green-600 font-medium">Using {selectedCounty} County rate: {taxRate}%</span>
@@ -342,18 +342,18 @@ export default function MortgageCalculatorPage() {
               <div className="grid grid-cols-3 gap-3 mb-3">
                 <div className="text-center">
                   <p className="text-lg font-bold text-alta-teal">{taxRate}%</p>
-                  <p className="text-[10px] text-alta-gray">{usingCountyRate ? "County Rate" : "State Avg Rate"}</p>
+                  <p className="text-xs text-alta-gray">{usingCountyRate ? "County Rate" : "State Avg Rate"}</p>
                 </div>
                 <div className="text-center">
                   <p className="text-lg font-bold text-alta-navy">${fmt(propertyTax)}</p>
-                  <p className="text-[10px] text-alta-gray">Annual Tax</p>
+                  <p className="text-xs text-alta-gray">Annual Tax</p>
                 </div>
                 <div className="text-center">
                   <p className="text-lg font-bold text-alta-navy">${fmt(propertyTax / 12)}</p>
-                  <p className="text-[10px] text-alta-gray">Monthly (in escrow)</p>
+                  <p className="text-xs text-alta-gray">Monthly (in escrow)</p>
                 </div>
               </div>
-              <div className="text-[10px] text-alta-gray space-y-1">
+              <div className="text-xs text-alta-gray space-y-1">
                 {usingCountyRate ? (
                   <p className="text-green-600"><strong>Using {selectedCounty} County rate:</strong> {taxRate}% — more accurate than the state average of {propertyTaxRates[selectedState]?.rate}%. Note: your actual tax may still vary based on city, school district, and special assessment districts within the county.</p>
                 ) : (
@@ -405,7 +405,7 @@ export default function MortgageCalculatorPage() {
                 </tbody>
               </table>
             </div>
-            <p className="text-[10px] text-alta-gray mt-2">* FHA MIP is permanent for most loans (LTV &gt; 90% at origination). USDA guarantee fees are for the life of the loan. Sources: FHA.com, VA.gov, USDA Rural Development, Fannie Mae</p>
+            <p className="text-xs text-alta-gray mt-2">* FHA MIP is permanent for most loans (LTV &gt; 90% at origination). USDA guarantee fees are for the life of the loan. Sources: FHA.com, VA.gov, USDA Rural Development, Fannie Mae</p>
           </div>
 
           {/* Quick Scenarios */}
@@ -419,7 +419,7 @@ export default function MortgageCalculatorPage() {
               >
                 <p className="text-sm font-bold text-alta-navy">First-Time Buyer</p>
                 <p className="text-xs text-alta-teal font-semibold mt-1">$300K | 3.5% Down | FHA</p>
-                <p className="text-[10px] text-alta-gray mt-1.5 leading-relaxed">Low down payment option for buyers with limited savings. FHA loans accept credit scores as low as 580.</p>
+                <p className="text-xs text-alta-gray mt-1.5 leading-relaxed">Low down payment option for buyers with limited savings. FHA loans accept credit scores as low as 580.</p>
               </button>
               <button
                 onClick={() => { setHomePrice(500000); setDownPaymentPct(20); setLoanType("conventional"); setInterestRate(6.5); setLoanTermYears(30); }}
@@ -427,7 +427,7 @@ export default function MortgageCalculatorPage() {
               >
                 <p className="text-sm font-bold text-alta-navy">Move-Up Buyer</p>
                 <p className="text-xs text-alta-teal font-semibold mt-1">$500K | 20% Down | Conv</p>
-                <p className="text-[10px] text-alta-gray mt-1.5 leading-relaxed">Using equity from a previous home to avoid PMI. Conventional loan with the best rates available.</p>
+                <p className="text-xs text-alta-gray mt-1.5 leading-relaxed">Using equity from a previous home to avoid PMI. Conventional loan with the best rates available.</p>
               </button>
               <button
                 onClick={() => { setHomePrice(400000); setDownPaymentPct(0); setLoanType("va"); setInterestRate(6.0); setLoanTermYears(30); }}
@@ -435,7 +435,7 @@ export default function MortgageCalculatorPage() {
               >
                 <p className="text-sm font-bold text-alta-navy">VA Veteran</p>
                 <p className="text-xs text-alta-teal font-semibold mt-1">$400K | 0% Down | VA</p>
-                <p className="text-[10px] text-alta-gray mt-1.5 leading-relaxed">Zero down payment, no monthly PMI. Available to eligible veterans, active duty, and surviving spouses.</p>
+                <p className="text-xs text-alta-gray mt-1.5 leading-relaxed">Zero down payment, no monthly PMI. Available to eligible veterans, active duty, and surviving spouses.</p>
               </button>
             </div>
           </div>
@@ -443,19 +443,19 @@ export default function MortgageCalculatorPage() {
           <div className="mt-8 grid sm:grid-cols-3 gap-3">
             <Link href="/affordability" className="group p-4 bg-[#e8f0f5] rounded-xl border border-[#c5d8e4] border-l-4 border-l-[#1a5276] tile-interactive text-center">
               <h3 className="text-sm font-semibold text-alta-navy group-hover:text-alta-teal transition-colors">Affordability Calculator</h3>
-              <p className="text-[10px] text-alta-gray mt-1">How much home can you afford?</p>
+              <p className="text-xs text-alta-gray mt-1">How much home can you afford?</p>
             </Link>
             <Link href="/closing-process/closing-costs" className="group p-4 bg-[#faf4e4] rounded-xl border border-[#e8d9a8] border-l-4 border-l-[#8b6914] tile-interactive text-center">
               <h3 className="text-sm font-semibold text-alta-navy group-hover:text-alta-teal transition-colors">Closing Costs Calculator</h3>
-              <p className="text-[10px] text-alta-gray mt-1">Estimate all your closing fees</p>
+              <p className="text-xs text-alta-gray mt-1">Estimate all your closing fees</p>
             </Link>
             <Link href="/first-time-buyers" className="group p-4 bg-[#e9f5ed] rounded-xl border border-[#bddcc7] border-l-4 border-l-[#2d6b3f] tile-interactive text-center">
               <h3 className="text-sm font-semibold text-alta-navy group-hover:text-alta-teal transition-colors">First-Time Buyer Guide</h3>
-              <p className="text-[10px] text-alta-gray mt-1">Complete homebuying roadmap</p>
+              <p className="text-xs text-alta-gray mt-1">Complete homebuying roadmap</p>
             </Link>
           </div>
 
-          <p className="text-[10px] text-alta-gray mt-6 text-center">* This calculator provides estimates only. Actual payments vary by lender, credit score, location, and loan terms. Property tax rates are state averages — your actual tax depends on county and local assessments. Consult a mortgage professional for exact figures. Sources: Tax Foundation, Census Bureau, FHA.com, VA.gov, USDA.gov, Fannie Mae.</p>
+          <p className="text-xs text-alta-gray mt-6 text-center">* This calculator provides estimates only. Actual payments vary by lender, credit score, location, and loan terms. Property tax rates are state averages — your actual tax depends on county and local assessments. Consult a mortgage professional for exact figures. Sources: Tax Foundation, Census Bureau, FHA.com, VA.gov, USDA.gov, Fannie Mae.</p>
 
           <FirstTimeBuyerCTA />
         </div>

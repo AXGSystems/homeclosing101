@@ -67,7 +67,7 @@ export default function ProtectYourRightsPage() {
                 </div>
                 <div>
                   <p className="text-sm font-bold text-alta-navy">Right to Choose Your Title Company</p>
-                  <p className="text-xs text-alta-gray leading-relaxed mt-0.5">Under the Real Estate Settlement Procedures Act (RESPA), Section 9, no seller can require a buyer to use a specific title company as a condition of sale. You can shop for the provider that best fits your needs.</p>
+                  <p className="text-sm text-alta-gray leading-relaxed mt-0.5">Under the Real Estate Settlement Procedures Act (RESPA), Section 9, no seller can require a buyer to use a specific title company as a condition of sale. You can shop for the provider that best fits your needs.</p>
                   <p className="text-[10px] text-alta-teal font-medium mt-1">12 U.S.C. 2608 (RESPA Section 9)</p>
                 </div>
               </div>
@@ -77,7 +77,7 @@ export default function ProtectYourRightsPage() {
                 </div>
                 <div>
                   <p className="text-sm font-bold text-alta-navy">Right to 3-Business-Day CD Review</p>
-                  <p className="text-xs text-alta-gray leading-relaxed mt-0.5">The TILA-RESPA Integrated Disclosure (TRID) rule requires your lender to provide the Closing Disclosure at least 3 business days before closing. Use this time to compare it to your Loan Estimate.</p>
+                  <p className="text-sm text-alta-gray leading-relaxed mt-0.5">The TILA-RESPA Integrated Disclosure (TRID) rule requires your lender to provide the Closing Disclosure at least 3 business days before closing. Use this time to compare it to your Loan Estimate.</p>
                   <p className="text-[10px] text-alta-teal font-medium mt-1">12 CFR 1026.19(f) (TRID Rule / Reg Z)</p>
                 </div>
               </div>
@@ -87,7 +87,7 @@ export default function ProtectYourRightsPage() {
                 </div>
                 <div>
                   <p className="text-sm font-bold text-alta-navy">Right to Shop for Settlement Services</p>
-                  <p className="text-xs text-alta-gray leading-relaxed mt-0.5">Your Loan Estimate includes a &quot;Services You Can Shop For&quot; section. You have the right to select your own providers for those services, including title insurance, pest inspections, and surveys.</p>
+                  <p className="text-sm text-alta-gray leading-relaxed mt-0.5">Your Loan Estimate includes a &quot;Services You Can Shop For&quot; section. You have the right to select your own providers for those services, including title insurance, pest inspections, and surveys.</p>
                   <p className="text-[10px] text-alta-teal font-medium mt-1">12 CFR 1026.19(e)(1)(vi) (TRID Rule)</p>
                 </div>
               </div>
@@ -97,7 +97,7 @@ export default function ProtectYourRightsPage() {
                 </div>
                 <div>
                   <p className="text-sm font-bold text-alta-navy">Right to File Complaints</p>
-                  <p className="text-xs text-alta-gray leading-relaxed mt-0.5">If you believe a settlement service provider violated RESPA, you can file a complaint with the Consumer Financial Protection Bureau (CFPB) at <a href="https://www.consumerfinance.gov/complaint/" target="_blank" rel="noopener noreferrer" className="text-alta-teal underline font-semibold">consumerfinance.gov/complaint</a> or your state&apos;s department of insurance.</p>
+                  <p className="text-sm text-alta-gray leading-relaxed mt-0.5">If you believe a settlement service provider violated RESPA, you can file a complaint with the Consumer Financial Protection Bureau (CFPB) at <a href="https://www.consumerfinance.gov/complaint/" target="_blank" rel="noopener noreferrer" className="text-alta-teal underline font-semibold">consumerfinance.gov/complaint</a> or your state&apos;s department of insurance.</p>
                   <p className="text-[10px] text-alta-teal font-medium mt-1">12 U.S.C. 2607 (RESPA Section 8)</p>
                 </div>
               </div>
@@ -181,7 +181,7 @@ export default function ProtectYourRightsPage() {
                 <span className="w-8 h-8 rounded-full bg-alta-teal text-white flex items-center justify-center text-xs font-bold shrink-0">{s.step}</span>
                 <div>
                   <h3 className="font-bold text-alta-navy text-sm">{s.title}</h3>
-                  <p className="text-xs text-alta-gray leading-relaxed mt-1">{s.desc}</p>
+                  <p className="text-sm text-alta-gray leading-relaxed mt-1">{s.desc}</p>
                 </div>
               </div>
             ))}
@@ -273,15 +273,15 @@ export default function ProtectYourRightsPage() {
             <div className="grid sm:grid-cols-3 gap-3">
               <Link href="/protect-your-money" className="p-4 bg-[#faf4e4] rounded-xl border border-[#e8d9a8] border-l-4 border-l-[#8b6914] tile-interactive group">
                 <h3 className="text-sm font-bold text-alta-navy group-hover:text-alta-teal transition-colors">Protect Your Money</h3>
-                <p className="text-[10px] text-alta-gray mt-1">Recognize and prevent wire fraud targeting homebuyers at closing</p>
+                <p className="text-xs text-alta-gray mt-1">Recognize and prevent wire fraud targeting homebuyers at closing</p>
               </Link>
               <Link href="/homeowners-insurance" className="p-4 bg-[#e6f1f5] rounded-xl border border-[#b4d8e8] border-l-4 border-l-[#0a7ea8] tile-interactive group">
                 <h3 className="text-sm font-bold text-alta-navy group-hover:text-alta-teal transition-colors">Homeowner's Insurance</h3>
-                <p className="text-[10px] text-alta-gray mt-1">Coverage types, costs, and what to look for in a policy</p>
+                <p className="text-xs text-alta-gray mt-1">Coverage types, costs, and what to look for in a policy</p>
               </Link>
               <Link href="/glossary" className="p-4 bg-[#f0ecf6] rounded-xl border border-[#d4c8e4] border-l-4 border-l-[#5b3a8c] tile-interactive group">
                 <h3 className="text-sm font-bold text-alta-navy group-hover:text-alta-teal transition-colors">Glossary</h3>
-                <p className="text-[10px] text-alta-gray mt-1">Look up any real estate or title insurance term you encounter</p>
+                <p className="text-xs text-alta-gray mt-1">Look up any real estate or title insurance term you encounter</p>
               </Link>
             </div>
           </div>

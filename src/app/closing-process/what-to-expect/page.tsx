@@ -90,12 +90,12 @@ export default function WhatToExpectPage() {
   return (
     <>
       <PageHero
-        title="What to Expect"
+        title="Beginning Your Journey"
         subtitle="Closing is the final phase of your home purchase — where you legally commit to your mortgage loan and become the official property owner. Here's what the journey looks like."
         image="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1920&q=80"
         breadcrumb={[
           { label: "The Closing Process", href: "/closing-process" },
-          { label: "What to Expect", href: "/closing-process/what-to-expect" },
+          { label: "Beginning Your Journey", href: "/closing-process/what-to-expect" },
         ]}
       />
 

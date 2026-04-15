@@ -87,7 +87,7 @@ export default function HomeInspectionPage() {
             ].map((s) => (
               <div key={s.val} className={`p-4 ${s.bg} rounded-xl border ${s.border} shadow-sm tile-interactive text-center`}>
                 <p className={`text-2xl font-bold ${s.text}`}>{s.val}</p>
-                <p className="text-[10px] text-alta-gray mt-1">{s.label}</p>
+                <p className="text-xs text-alta-gray mt-1">{s.label}</p>
               </div>
             ))}
           </div>
@@ -121,7 +121,7 @@ export default function HomeInspectionPage() {
                   </div>
                   <div>
                     <p className="text-[10px] font-semibold text-alta-teal uppercase tracking-wider mb-1">What to Focus On</p>
-                    <p className="text-xs text-alta-gray leading-relaxed">{ht.focus}</p>
+                    <p className="text-sm text-alta-gray leading-relaxed">{ht.focus}</p>
                   </div>
                   <div className="p-3 bg-amber-50 rounded-xl border border-amber-100">
                     <p className="text-xs text-amber-800"><strong>Typical cost:</strong> {ht.cost}</p>
@@ -192,7 +192,7 @@ export default function HomeInspectionPage() {
             ].map((opt) => (
               <div key={opt.option} className={`p-4 rounded-xl border ${opt.color} tile-interactive`}>
                 <h3 className="text-sm font-bold text-alta-navy mb-1">{opt.option}</h3>
-                <p className="text-xs text-alta-gray leading-relaxed">{opt.desc}</p>
+                <p className="text-sm text-alta-gray leading-relaxed">{opt.desc}</p>
               </div>
             ))}
           </div>
@@ -204,7 +204,7 @@ export default function HomeInspectionPage() {
             <p className="text-sm text-alta-gray leading-relaxed">In competitive markets, some buyers waive the inspection contingency to make their offer more attractive. This is extremely risky. Without an inspection contingency, you cannot walk away or renegotiate if the inspection reveals major problems — you&apos;re legally obligated to buy the home regardless. If you feel pressured to waive, consider a &quot;pass/fail&quot; inspection contingency instead, where you can only cancel for major structural or safety issues, not cosmetic concerns.</p>
           </div>
 
-          <p className="text-[10px] text-alta-gray mb-6">Sources: American Society of Home Inspectors (ASHI), International Association of Certified Home Inspectors (InterNACHI), EPA (radon, mold, well water), National Pest Management Association (NPMA), Chimney Safety Institute of America (CSIA)</p>
+          <p className="text-xs text-alta-gray mb-6">Sources: American Society of Home Inspectors (ASHI), International Association of Certified Home Inspectors (InterNACHI), EPA (radon, mold, well water), National Pest Management Association (NPMA), Chimney Safety Institute of America (CSIA)</p>
 
           <div className="flex flex-col sm:flex-row gap-3">
             <Link href="/closing-process/closing-checklist" className="px-5 py-2.5 bg-alta-teal text-white font-semibold rounded-lg hover:bg-alta-teal-dark transition-colors text-center text-sm">
@@ -223,15 +223,15 @@ export default function HomeInspectionPage() {
             <div className="grid sm:grid-cols-3 gap-3">
               <Link href="/closing-process/closing-checklist" className="p-4 bg-[#e8f0f5] rounded-xl border border-[#c5d8e4] border-l-4 border-l-[#1a5276] tile-interactive group">
                 <h3 className="text-sm font-bold text-alta-navy group-hover:text-alta-teal transition-colors">Closing Checklist</h3>
-                <p className="text-[10px] text-alta-gray mt-1">Track every step from offer to keys with our interactive checklist</p>
+                <p className="text-xs text-alta-gray mt-1">Track every step from offer to keys with our interactive checklist</p>
               </Link>
               <Link href="/questions-to-ask" className="p-4 bg-[#e9f5ed] rounded-xl border border-[#bddcc7] border-l-4 border-l-[#2d6b3f] tile-interactive group">
                 <h3 className="text-sm font-bold text-alta-navy group-hover:text-alta-teal transition-colors">Questions to Ask</h3>
-                <p className="text-[10px] text-alta-gray mt-1">Essential questions for your agent, lender, and title company</p>
+                <p className="text-xs text-alta-gray mt-1">Essential questions for your agent, lender, and title company</p>
               </Link>
               <Link href="/first-time-buyers" className="p-4 bg-[#faf4e4] rounded-xl border border-[#e8d9a8] border-l-4 border-l-[#8b6914] tile-interactive group">
                 <h3 className="text-sm font-bold text-alta-navy group-hover:text-alta-teal transition-colors">First-Time Buyers Guide</h3>
-                <p className="text-[10px] text-alta-gray mt-1">Step-by-step guidance for navigating your first home purchase</p>
+                <p className="text-xs text-alta-gray mt-1">Step-by-step guidance for navigating your first home purchase</p>
               </Link>
             </div>
           </div>

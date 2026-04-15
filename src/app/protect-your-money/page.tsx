@@ -54,7 +54,7 @@ export default function ProtectYourMoneyPage() {
                   </div>
                   <div>
                     <p className="text-xs font-bold text-alta-navy">Fake Email Sent</p>
-                    <p className="text-[10px] text-alta-gray leading-tight mt-0.5">Criminal sends spoofed wiring instructions</p>
+                    <p className="text-xs text-alta-gray leading-tight mt-0.5">Criminal sends spoofed wiring instructions</p>
                   </div>
                 </div>
                 <div className="flex sm:flex-col items-center sm:items-center gap-3 sm:gap-2 text-center">
@@ -63,7 +63,7 @@ export default function ProtectYourMoneyPage() {
                   </div>
                   <div>
                     <p className="text-xs font-bold text-alta-navy">Funds Wired</p>
-                    <p className="text-[10px] text-alta-gray leading-tight mt-0.5">Buyer wires money to fraudulent account</p>
+                    <p className="text-xs text-alta-gray leading-tight mt-0.5">Buyer wires money to fraudulent account</p>
                   </div>
                 </div>
                 <div className="flex sm:flex-col items-center sm:items-center gap-3 sm:gap-2 text-center">
@@ -72,7 +72,7 @@ export default function ProtectYourMoneyPage() {
                   </div>
                   <div>
                     <p className="text-xs font-bold text-alta-navy">Money Moved Overseas</p>
-                    <p className="text-[10px] text-alta-gray leading-tight mt-0.5">Funds layered through multiple accounts internationally</p>
+                    <p className="text-xs text-alta-gray leading-tight mt-0.5">Funds layered through multiple accounts internationally</p>
                   </div>
                 </div>
                 <div className="flex sm:flex-col items-center sm:items-center gap-3 sm:gap-2 text-center">
@@ -81,7 +81,7 @@ export default function ProtectYourMoneyPage() {
                   </div>
                   <div>
                     <p className="text-xs font-bold text-alta-navy">Recovery Drops to ~10%</p>
-                    <p className="text-[10px] text-alta-gray leading-tight mt-0.5">Most funds are already beyond reach</p>
+                    <p className="text-xs text-alta-gray leading-tight mt-0.5">Most funds are already beyond reach</p>
                   </div>
                 </div>
                 <div className="flex sm:flex-col items-center sm:items-center gap-3 sm:gap-2 text-center">
@@ -90,7 +90,7 @@ export default function ProtectYourMoneyPage() {
                   </div>
                   <div>
                     <p className="text-xs font-bold text-alta-navy">Less Than 5% Recovery</p>
-                    <p className="text-[10px] text-alta-gray leading-tight mt-0.5">Funds are effectively gone</p>
+                    <p className="text-xs text-alta-gray leading-tight mt-0.5">Funds are effectively gone</p>
                   </div>
                 </div>
               </div>
@@ -169,7 +169,7 @@ export default function ProtectYourMoneyPage() {
             ].map((item) => (
               <div key={item.title} className="group p-4 bg-[#e8f0f5] rounded-xl border border-[#c5d8e4] border-l-4 border-l-[#1a5276] shadow-sm tile-interactive">
                 <h3 className="text-sm font-bold text-alta-navy mb-1 group-hover:text-alta-teal transition-colors">{item.title}</h3>
-                <p className="text-xs text-alta-gray leading-relaxed">{item.desc}</p>
+                <p className="text-sm text-alta-gray leading-relaxed">{item.desc}</p>
               </div>
             ))}
           </div>
@@ -248,15 +248,15 @@ export default function ProtectYourMoneyPage() {
             <div className="grid sm:grid-cols-3 gap-3">
               <Link href="/stop-fraud" className="p-4 bg-[#e8f0f5] rounded-xl border border-[#c5d8e4] border-l-4 border-l-[#1a5276] tile-interactive group">
                 <h3 className="text-sm font-bold text-alta-navy group-hover:text-alta-teal transition-colors">Stop Fraud 101</h3>
-                <p className="text-[10px] text-alta-gray mt-1">10 FBI-sourced prevention steps to protect your closing funds</p>
+                <p className="text-xs text-alta-gray mt-1">10 FBI-sourced prevention steps to protect your closing funds</p>
               </Link>
               <Link href="/protect-your-rights" className="p-4 bg-[#e9f5ed] rounded-xl border border-[#bddcc7] border-l-4 border-l-[#2d6b3f] tile-interactive group">
                 <h3 className="text-sm font-bold text-alta-navy group-hover:text-alta-teal transition-colors">Protect Your Property Rights</h3>
-                <p className="text-[10px] text-alta-gray mt-1">How owner's title insurance shields you from hidden title defects</p>
+                <p className="text-xs text-alta-gray mt-1">How owner's title insurance shields you from hidden title defects</p>
               </Link>
               <Link href="/find-company" className="p-4 bg-[#f0ecf6] rounded-xl border border-[#d4c8e4] border-l-4 border-l-[#5b3a8c] tile-interactive group">
                 <h3 className="text-sm font-bold text-alta-navy group-hover:text-alta-teal transition-colors">Find a Title Company</h3>
-                <p className="text-[10px] text-alta-gray mt-1">Search for ALTA member title and settlement companies near you</p>
+                <p className="text-xs text-alta-gray mt-1">Search for ALTA member title and settlement companies near you</p>
               </Link>
             </div>
           </div>

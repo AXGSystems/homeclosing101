@@ -302,15 +302,15 @@ export default function TriviaPage() {
               <div className="grid grid-cols-3 gap-4 max-w-md mx-auto mb-6">
                 <div className="p-4 bg-white rounded-xl border border-gray-100 shadow-sm">
                   <p className="text-2xl font-bold text-[#d4a843]">${score.toLocaleString()}</p>
-                  <p className="text-[10px] text-alta-gray">Final Score</p>
+                  <p className="text-xs text-alta-gray">Final Score</p>
                 </div>
                 <div className="p-4 bg-white rounded-xl border border-gray-100 shadow-sm">
                   <p className="text-2xl font-bold text-[#2d6b3f]">{correct}/{totalQuestions}</p>
-                  <p className="text-[10px] text-alta-gray">Correct</p>
+                  <p className="text-xs text-alta-gray">Correct</p>
                 </div>
                 <div className="p-4 bg-white rounded-xl border border-gray-100 shadow-sm">
                   <p className="text-2xl font-bold text-[#0a7ea8]">{Math.round((correct / totalQuestions) * 100)}%</p>
-                  <p className="text-[10px] text-alta-gray">Accuracy</p>
+                  <p className="text-xs text-alta-gray">Accuracy</p>
                 </div>
               </div>
 

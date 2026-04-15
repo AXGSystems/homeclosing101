@@ -273,15 +273,15 @@ export default function StopFraudPage() {
           <div className="grid sm:grid-cols-3 gap-3">
             <Link href="/protect-your-money" className="p-4 bg-[#faf4e4] rounded-xl border border-[#e8d9a8] border-l-4 border-l-[#8b6914] tile-interactive group">
               <h3 className="text-sm font-bold text-alta-navy group-hover:text-alta-teal transition-colors">Protect Your Money</h3>
-              <p className="text-[10px] text-alta-gray mt-1">Wire fraud overview, recovery steps, and what your title company should do</p>
+              <p className="text-xs text-alta-gray mt-1">Wire fraud overview, recovery steps, and what your title company should do</p>
             </Link>
             <Link href="/protect-your-rights" className="p-4 bg-[#e9f5ed] rounded-xl border border-[#bddcc7] border-l-4 border-l-[#2d6b3f] tile-interactive group">
               <h3 className="text-sm font-bold text-alta-navy group-hover:text-alta-teal transition-colors">Protect Your Property Rights</h3>
-              <p className="text-[10px] text-alta-gray mt-1">How owner's title insurance shields you from hidden title defects</p>
+              <p className="text-xs text-alta-gray mt-1">How owner's title insurance shields you from hidden title defects</p>
             </Link>
             <Link href="/find-company" className="p-4 bg-[#e6f1f5] rounded-xl border border-[#b4d8e8] border-l-4 border-l-[#0a7ea8] tile-interactive group">
               <h3 className="text-sm font-bold text-alta-navy group-hover:text-alta-teal transition-colors">Find a Title Company</h3>
-              <p className="text-[10px] text-alta-gray mt-1">Search for ALTA member title and settlement companies near you</p>
+              <p className="text-xs text-alta-gray mt-1">Search for ALTA member title and settlement companies near you</p>
             </Link>
           </div>
         </div>

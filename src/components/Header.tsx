@@ -10,7 +10,7 @@ const navItems = [
     label: "The Closing Process",
     href: "/closing-process",
     children: [
-      { label: "Appraisal Guide", href: "/appraisal-guide" },
+      { label: "Understanding Your Home Appraisal", href: "/appraisal-guide" },
       { label: "Closing Checklist", href: "/closing-process/closing-checklist" },
       { label: "Closing Costs Explained", href: "/closing-process/closing-costs" },
       { label: "Closing Day Prep", href: "/closing-day-prep" },
@@ -21,7 +21,7 @@ const navItems = [
       { label: "LE vs CD Comparison", href: "/le-vs-cd" },
       { label: "Negotiation Guide", href: "/negotiation-guide" },
       { label: "Understanding Escrow", href: "/escrow-guide" },
-      { label: "What to Expect", href: "/closing-process/what-to-expect" },
+      { label: "Beginning Your Journey", href: "/closing-process/what-to-expect" },
       { label: "Your Loan Estimate", href: "/loan-estimate" },
     ],
   },

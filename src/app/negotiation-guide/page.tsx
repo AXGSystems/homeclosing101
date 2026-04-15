@@ -512,15 +512,15 @@ export default function NegotiationGuidePage() {
           <div className="grid sm:grid-cols-3 gap-3">
             <Link href="/closing-process/closing-costs" className="p-4 bg-[#faf4e4] rounded-xl border border-[#e8d9a8] border-l-4 border-l-[#8b6914] tile-interactive group">
               <h3 className="text-sm font-bold text-alta-navy group-hover:text-alta-teal transition-colors">Closing Costs Explained</h3>
-              <p className="text-[10px] text-alta-gray mt-1">Understand every fee on your Closing Disclosure and who pays what</p>
+              <p className="text-xs text-alta-gray mt-1">Understand every fee on your Closing Disclosure and who pays what</p>
             </Link>
             <Link href="/loan-estimate" className="p-4 bg-[#e6f1f5] rounded-xl border border-[#b4d8e8] border-l-4 border-l-[#0a7ea8] tile-interactive group">
               <h3 className="text-sm font-bold text-alta-navy group-hover:text-alta-teal transition-colors">Your Loan Estimate</h3>
-              <p className="text-[10px] text-alta-gray mt-1">Learn to read your Loan Estimate and compare offers from multiple lenders</p>
+              <p className="text-xs text-alta-gray mt-1">Learn to read your Loan Estimate and compare offers from multiple lenders</p>
             </Link>
             <Link href="/home-inspection" className="p-4 bg-[#f0ecf6] rounded-xl border border-[#d4c8e4] border-l-4 border-l-[#5b3a8c] tile-interactive group">
               <h3 className="text-sm font-bold text-alta-navy group-hover:text-alta-teal transition-colors">Home Inspection Guide</h3>
-              <p className="text-[10px] text-alta-gray mt-1">Know what inspectors look for and how to use findings in negotiations</p>
+              <p className="text-xs text-alta-gray mt-1">Know what inspectors look for and how to use findings in negotiations</p>
             </Link>
           </div>
         </div>

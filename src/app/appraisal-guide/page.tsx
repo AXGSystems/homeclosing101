@@ -190,7 +190,7 @@ export default function AppraisalGuidePage() {
             ].map((s) => (
               <div key={s.label} className={`p-4 ${s.bg} rounded-xl border ${s.border} shadow-sm tile-interactive text-center`}>
                 <p className={`text-2xl font-bold ${s.text}`}>{s.val}</p>
-                <p className="text-[10px] text-alta-gray mt-1">{s.label}</p>
+                <p className="text-xs text-alta-gray mt-1">{s.label}</p>
               </div>
             ))}
           </div>
@@ -247,7 +247,7 @@ export default function AppraisalGuidePage() {
                     </div>
                     <div className="min-w-0">
                       <h3 className="text-sm font-bold text-alta-navy mb-1">{area.title}</h3>
-                      <p className="text-xs text-alta-gray leading-relaxed">{area.summary}</p>
+                      <p className="text-sm text-alta-gray leading-relaxed">{area.summary}</p>
                     </div>
                   </div>
                   <div className="absolute top-2 right-2 w-5 h-5 rounded-full bg-alta-teal/10 flex items-center justify-center opacity-60 group-hover:opacity-100 transition-opacity">
@@ -256,8 +256,8 @@ export default function AppraisalGuidePage() {
                 </div>
                 {expandedTile === i && (
                   <div className="mt-1 p-4 bg-alta-light rounded-xl border border-gray-100 animate-in fade-in duration-200">
-                    <p className="text-xs text-alta-gray leading-relaxed mb-2">{area.detail}</p>
-                    <p className="text-[10px] text-alta-gray/70 italic">Source: {area.source}</p>
+                    <p className="text-sm text-alta-gray leading-relaxed mb-2">{area.detail}</p>
+                    <p className="text-xs text-alta-gray/70 italic">Source: {area.source}</p>
                   </div>
                 )}
               </div>
@@ -290,7 +290,7 @@ export default function AppraisalGuidePage() {
                     </div>
                     <div className="flex-1 min-w-0">
                       <h3 className="text-sm font-bold text-alta-navy">{opt.option}</h3>
-                      <p className="text-xs text-alta-gray leading-relaxed mt-0.5">{opt.desc}</p>
+                      <p className="text-sm text-alta-gray leading-relaxed mt-0.5">{opt.desc}</p>
                     </div>
                     <svg className={`w-4 h-4 text-alta-gray shrink-0 mt-1 transition-transform ${expandedOption === i ? "rotate-180" : ""}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
                   </div>
@@ -322,7 +322,7 @@ export default function AppraisalGuidePage() {
                       </div>
                       <div className="p-3 bg-white/60 rounded-xl">
                         <p className="text-[10px] font-semibold text-alta-teal uppercase tracking-wider mb-1">When to use this option</p>
-                        <p className="text-xs text-alta-gray leading-relaxed">{opt.when}</p>
+                        <p className="text-sm text-alta-gray leading-relaxed">{opt.when}</p>
                       </div>
                     </div>
                   )}
@@ -373,13 +373,13 @@ export default function AppraisalGuidePage() {
             <div className="grid sm:grid-cols-2 gap-3 mt-3">
               <div className="p-3 bg-white/70 rounded-xl">
                 <p className="text-[10px] font-semibold text-purple-700 uppercase tracking-wider mb-1">How it works</p>
-                <p className="text-xs text-alta-gray leading-relaxed">
+                <p className="text-sm text-alta-gray leading-relaxed">
                   You write into your offer: &quot;Buyer will cover an appraisal gap of up to $20,000.&quot; If the appraisal comes in $15,000 low, you bring that $15,000 in additional cash to closing. If the gap exceeds your coverage amount, you can renegotiate or exercise your appraisal contingency.
                 </p>
               </div>
               <div className="p-3 bg-white/70 rounded-xl">
                 <p className="text-[10px] font-semibold text-purple-700 uppercase tracking-wider mb-1">Important considerations</p>
-                <p className="text-xs text-alta-gray leading-relaxed">
+                <p className="text-sm text-alta-gray leading-relaxed">
                   Appraisal gap coverage funds come from your cash reserves and are separate from your down payment. Your lender will verify you have sufficient funds for both. Do not commit to more gap coverage than you can afford — factor it into your total cash-to-close calculation before making an offer.
                 </p>
               </div>
@@ -395,8 +395,8 @@ export default function AppraisalGuidePage() {
             {smoothTips.map((tip) => (
               <div key={tip.title} className="p-4 bg-white rounded-xl border border-gray-100 shadow-sm tile-interactive">
                 <h3 className="text-sm font-bold text-alta-navy mb-1">{tip.title}</h3>
-                <p className="text-xs text-alta-gray leading-relaxed mb-2">{tip.desc}</p>
-                <p className="text-[10px] text-alta-gray/70 italic">Source: {tip.source}</p>
+                <p className="text-sm text-alta-gray leading-relaxed mb-2">{tip.desc}</p>
+                <p className="text-xs text-alta-gray/70 italic">Source: {tip.source}</p>
               </div>
             ))}
           </div>
@@ -404,7 +404,7 @@ export default function AppraisalGuidePage() {
           <InlineAd />
 
           {/* ── Sources ── */}
-          <p className="text-[10px] text-alta-gray mb-6">
+          <p className="text-xs text-alta-gray mb-6">
             Sources: Consumer Financial Protection Bureau (CFPB), Fannie Mae Selling Guide (B4-1 Appraisal Requirements), Appraisal Institute — The Appraisal of Real Estate (15th ed.), HUD Handbook 4000.1 (FHA appraisal requirements), VA Pamphlet 26-7 (VA appraisal requirements). Appraisal cost and timeline figures reflect 2024-2025 national averages.
           </p>
 
@@ -427,15 +427,15 @@ export default function AppraisalGuidePage() {
             <div className="grid sm:grid-cols-3 gap-3">
               <Link href="/home-inspection" className="p-4 bg-[#e8f0f5] rounded-xl border border-[#c5d8e4] border-l-4 border-l-[#1a5276] tile-interactive group">
                 <h3 className="text-sm font-bold text-alta-navy group-hover:text-alta-teal transition-colors">Home Inspection Guide</h3>
-                <p className="text-[10px] text-alta-gray mt-1">Complete guide to what inspectors look for and how to use the results</p>
+                <p className="text-xs text-alta-gray mt-1">Complete guide to what inspectors look for and how to use the results</p>
               </Link>
               <Link href="/closing-process/closing-costs" className="p-4 bg-[#e9f5ed] rounded-xl border border-[#bddcc7] border-l-4 border-l-[#2d6b3f] tile-interactive group">
                 <h3 className="text-sm font-bold text-alta-navy group-hover:text-alta-teal transition-colors">Closing Costs Explained</h3>
-                <p className="text-[10px] text-alta-gray mt-1">Understand every fee on your Closing Disclosure including the appraisal fee</p>
+                <p className="text-xs text-alta-gray mt-1">Understand every fee on your Closing Disclosure including the appraisal fee</p>
               </Link>
               <Link href="/first-time-buyers" className="p-4 bg-[#faf4e4] rounded-xl border border-[#e8d9a8] border-l-4 border-l-[#8b6914] tile-interactive group">
                 <h3 className="text-sm font-bold text-alta-navy group-hover:text-alta-teal transition-colors">First-Time Buyers Guide</h3>
-                <p className="text-[10px] text-alta-gray mt-1">Step-by-step guidance for navigating your first home purchase</p>
+                <p className="text-xs text-alta-gray mt-1">Step-by-step guidance for navigating your first home purchase</p>
               </Link>
             </div>
           </div>

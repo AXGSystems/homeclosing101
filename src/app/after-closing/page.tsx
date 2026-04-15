@@ -223,7 +223,7 @@ export default function AfterClosingPage() {
                       <span className="hidden print:inline text-sm">&#9744;</span>
                       <h3 className="font-semibold text-alta-navy text-sm">{item.title}</h3>
                     </div>
-                    <p className="text-xs text-alta-gray mt-1 leading-relaxed">{item.desc}</p>
+                    <p className="text-sm text-alta-gray mt-1 leading-relaxed">{item.desc}</p>
                   </div>
                 </div>
               ))}
@@ -258,7 +258,7 @@ export default function AfterClosingPage() {
                       <span className="hidden print:inline text-sm">&#9744;</span>
                       <h3 className="font-semibold text-alta-navy text-sm">{item.title}</h3>
                     </div>
-                    <p className="text-xs text-alta-gray mt-1 leading-relaxed">{item.desc}</p>
+                    <p className="text-sm text-alta-gray mt-1 leading-relaxed">{item.desc}</p>
                   </div>
                 </div>
               ))}
@@ -295,7 +295,7 @@ export default function AfterClosingPage() {
                       <span className="hidden print:inline text-sm">&#9744;</span>
                       <h3 className="font-semibold text-alta-navy text-sm">{item.title}</h3>
                     </div>
-                    <p className="text-xs text-alta-gray mt-1 leading-relaxed">{item.desc}</p>
+                    <p className="text-sm text-alta-gray mt-1 leading-relaxed">{item.desc}</p>
                   </div>
                 </div>
               ))}
@@ -327,7 +327,7 @@ export default function AfterClosingPage() {
                   </h3>
                   <ul className="space-y-1.5">
                     {s.tasks.map((task) => (
-                      <li key={task} className="flex items-start gap-2 text-xs text-alta-gray">
+                      <li key={task} className="flex items-start gap-2 text-sm text-alta-gray">
                         <span className="hidden print:inline">&#9744;</span>
                         <svg className="w-3.5 h-3.5 text-alta-teal shrink-0 mt-0.5 print:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
                           <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
@@ -364,7 +364,7 @@ export default function AfterClosingPage() {
                   className="p-3 print:p-2 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-slate-800 print:border-gray-300 print:rounded-none"
                 >
                   <h3 className="font-semibold text-alta-navy text-sm">{doc.name}</h3>
-                  <p className="text-xs text-alta-gray mt-1 leading-relaxed">{doc.why}</p>
+                  <p className="text-sm text-alta-gray mt-1 leading-relaxed">{doc.why}</p>
                 </div>
               ))}
             </div>
@@ -398,7 +398,7 @@ export default function AfterClosingPage() {
                       </div>
                     ))}
                   </div>
-                  <p className="text-[10px] text-alta-gray mt-3">Source: Bankrate &mdash; &ldquo;Hidden costs of homeownership&rdquo; (2024 analysis). Actual costs vary significantly by location, home age, and property value.</p>
+                  <p className="text-xs text-alta-gray mt-3">Source: Bankrate &mdash; &ldquo;Hidden costs of homeownership&rdquo; (2024 analysis). Actual costs vary significantly by location, home age, and property value.</p>
                 </div>
               </div>
             </div>
@@ -419,7 +419,7 @@ export default function AfterClosingPage() {
                   className="p-4 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-slate-800 hover:border-alta-teal transition-colors group"
                 >
                   <h3 className="font-semibold text-alta-navy text-sm group-hover:text-alta-teal transition-colors">{link.title}</h3>
-                  <p className="text-xs text-alta-gray mt-1">{link.desc}</p>
+                  <p className="text-sm text-alta-gray mt-1">{link.desc}</p>
                 </Link>
               ))}
             </div>

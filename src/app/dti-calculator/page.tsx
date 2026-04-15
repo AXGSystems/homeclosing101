@@ -220,17 +220,17 @@ export default function DTICalculatorPage() {
                     <div className="p-3 bg-[#e8f5e9] rounded-lg text-center border border-[#c8e6c9]">
                       <p className="text-[10px] text-[#2d6b3f] font-medium mb-1">Ideal Zone</p>
                       <p className="text-lg font-bold text-[#2d6b3f]">&lt;36%</p>
-                      <p className="text-[10px] text-alta-gray">Best rates & terms</p>
+                      <p className="text-xs text-alta-gray">Best rates & terms</p>
                     </div>
                     <div className="p-3 bg-[#faf4e4] rounded-lg text-center border border-[#e8d9a8]">
                       <p className="text-[10px] text-[#8b6914] font-medium mb-1">Caution Zone</p>
                       <p className="text-lg font-bold text-[#8b6914]">36-43%</p>
-                      <p className="text-[10px] text-alta-gray">Higher rates likely</p>
+                      <p className="text-xs text-alta-gray">Higher rates likely</p>
                     </div>
                     <div className="p-3 bg-[#fbe8e8] rounded-lg text-center border border-[#f5c6c6]">
                       <p className="text-[10px] text-[#943030] font-medium mb-1">Danger Zone</p>
                       <p className="text-lg font-bold text-[#943030]">&gt;43%</p>
-                      <p className="text-[10px] text-alta-gray">Most lenders decline</p>
+                      <p className="text-xs text-alta-gray">Most lenders decline</p>
                     </div>
                   </div>
                   <div className="p-3 bg-[#f4f7fa] rounded-lg">
@@ -253,17 +253,17 @@ export default function DTICalculatorPage() {
                   <div className="p-4 bg-[#e8f5e9] rounded-xl border border-[#c8e6c9] text-center">
                     <p className="text-[10px] font-medium text-[#2d6b3f] mb-1">Conservative (28% front-end)</p>
                     <p className="text-xl font-bold text-[#2d6b3f]">${fmt(calc.maxMortgageAt28)}</p>
-                    <p className="text-[10px] text-alta-gray mt-1">per month</p>
+                    <p className="text-xs text-alta-gray mt-1">per month</p>
                   </div>
                   <div className="p-4 bg-[#e6f1f5] rounded-xl border border-[#b4d8e8] text-center">
                     <p className="text-[10px] font-medium text-[#0a7ea8] mb-1">Standard (36% back-end)</p>
                     <p className="text-xl font-bold text-[#0a7ea8]">${fmt(calc.maxMortgageAt36)}</p>
-                    <p className="text-[10px] text-alta-gray mt-1">per month</p>
+                    <p className="text-xs text-alta-gray mt-1">per month</p>
                   </div>
                   <div className="p-4 bg-[#faf4e4] rounded-xl border border-[#e8d9a8] text-center">
                     <p className="text-[10px] font-medium text-[#8b6914] mb-1">Maximum QM (43% back-end)</p>
                     <p className="text-xl font-bold text-[#8b6914]">${fmt(calc.maxMortgageAt43)}</p>
-                    <p className="text-[10px] text-alta-gray mt-1">per month</p>
+                    <p className="text-xs text-alta-gray mt-1">per month</p>
                   </div>
                 </div>
                 <div className="mt-3 p-3 bg-[#f0ecf6] rounded-lg border border-[#d4c8e4]">
@@ -293,7 +293,7 @@ export default function DTICalculatorPage() {
                       </div>
                       <div>
                         <h4 className="text-xs font-bold text-alta-navy">{tip.title}</h4>
-                        <p className="text-[10px] text-alta-gray mt-0.5 leading-relaxed">{tip.desc}</p>
+                        <p className="text-xs text-alta-gray mt-0.5 leading-relaxed">{tip.desc}</p>
                       </div>
                     </div>
                   ))}
@@ -351,15 +351,15 @@ export default function DTICalculatorPage() {
                 <div className="grid sm:grid-cols-3 gap-3">
                   <Link href="/affordability" className="p-4 bg-[#e6f1f5] rounded-xl border border-[#b4d8e8] border-l-4 border-l-[#0a7ea8] tile-interactive group">
                     <h3 className="text-sm font-bold text-alta-navy group-hover:text-alta-teal transition-colors">Affordability Calculator</h3>
-                    <p className="text-[10px] text-alta-gray mt-1">See the true cost of homeownership beyond the mortgage payment</p>
+                    <p className="text-xs text-alta-gray mt-1">See the true cost of homeownership beyond the mortgage payment</p>
                   </Link>
                   <Link href="/mortgage-calculator" className="p-4 bg-[#faf4e4] rounded-xl border border-[#e8d9a8] border-l-4 border-l-[#8b6914] tile-interactive group">
                     <h3 className="text-sm font-bold text-alta-navy group-hover:text-alta-teal transition-colors">Mortgage Calculator</h3>
-                    <p className="text-[10px] text-alta-gray mt-1">Calculate your monthly payment with taxes, insurance, and PMI</p>
+                    <p className="text-xs text-alta-gray mt-1">Calculate your monthly payment with taxes, insurance, and PMI</p>
                   </Link>
                   <Link href="/first-time-buyers" className="p-4 bg-[#f0ecf6] rounded-xl border border-[#d4c8e4] border-l-4 border-l-[#5b3a8c] tile-interactive group">
                     <h3 className="text-sm font-bold text-alta-navy group-hover:text-alta-teal transition-colors">First-Time Buyer Guide</h3>
-                    <p className="text-[10px] text-alta-gray mt-1">Complete 27-step timeline from pre-approval to closing day</p>
+                    <p className="text-xs text-alta-gray mt-1">Complete 27-step timeline from pre-approval to closing day</p>
                   </Link>
                 </div>
               </div>

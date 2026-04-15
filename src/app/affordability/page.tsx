@@ -260,7 +260,7 @@ export default function AffordabilityPage() {
                     <span className="text-alta-navy"><strong>Emergency fund:</strong> 3-6 months of expenses saved</span>
                   </div>
                 </div>
-                <p className="text-[10px] text-alta-gray mt-2">A good rule of thumb: if your total housing costs (mortgage + all the above) exceed 35-40% of your take-home pay, you may be stretching too thin.</p>
+                <p className="text-xs text-alta-gray mt-2">A good rule of thumb: if your total housing costs (mortgage + all the above) exceed 35-40% of your take-home pay, you may be stretching too thin.</p>
               </div>
             </div>
           </div>
@@ -314,7 +314,7 @@ export default function AffordabilityPage() {
                 </div>
                 <h3 className="text-sm font-bold text-alta-navy">{c.cost}</h3>
                 <p className="text-xs font-semibold text-alta-teal mt-0.5">{c.amount}</p>
-                <p className="text-[10px] text-alta-gray mt-1 leading-relaxed">{c.detail}</p>
+                <p className="text-xs text-alta-gray mt-1 leading-relaxed">{c.detail}</p>
                 {c.source && <p className="text-[9px] text-alta-teal mt-1 font-medium">Source: {c.source}</p>}
               </div>
             ))}
@@ -333,25 +333,25 @@ export default function AffordabilityPage() {
               <div className="flex justify-between p-2 bg-white rounded-lg"><span className="text-alta-gray">Utilities (avg)</span><span className="font-medium text-alta-gray">$300</span></div>
               <div className="flex justify-between p-2 bg-alta-teal/10 rounded-lg border border-alta-teal/20"><span className="font-semibold text-alta-navy">True Monthly Cost</span><span className="font-bold text-alta-teal">$3,355</span></div>
             </div>
-            <p className="text-[10px] text-alta-gray mt-3">The mortgage payment alone is $1,991 — but the true cost of owning the home is $3,355/month when you include everything. Budget for the REAL number, not just the mortgage.</p>
+            <p className="text-xs text-alta-gray mt-3">The mortgage payment alone is $1,991 — but the true cost of owning the home is $3,355/month when you include everything. Budget for the REAL number, not just the mortgage.</p>
           </div>
 
           <div className="grid sm:grid-cols-3 gap-3">
             <Link href="/mortgage-calculator" className="group p-4 bg-[#e8f0f5] rounded-xl border border-[#c5d8e4] border-l-4 border-l-[#1a5276] tile-interactive text-center">
               <h3 className="text-sm font-semibold text-alta-navy group-hover:text-alta-teal transition-colors">Mortgage Calculator</h3>
-              <p className="text-[10px] text-alta-gray mt-1">Exact monthly payments with taxes and PMI</p>
+              <p className="text-xs text-alta-gray mt-1">Exact monthly payments with taxes and PMI</p>
             </Link>
             <Link href="/closing-process/closing-costs" className="group p-4 bg-[#faf4e4] rounded-xl border border-[#e8d9a8] border-l-4 border-l-[#8b6914] tile-interactive text-center">
               <h3 className="text-sm font-semibold text-alta-navy group-hover:text-alta-teal transition-colors">Closing Costs</h3>
-              <p className="text-[10px] text-alta-gray mt-1">Estimate 2-5% in upfront closing fees</p>
+              <p className="text-xs text-alta-gray mt-1">Estimate 2-5% in upfront closing fees</p>
             </Link>
             <Link href="/first-time-buyers" className="group p-4 bg-[#e9f5ed] rounded-xl border border-[#bddcc7] border-l-4 border-l-[#2d6b3f] tile-interactive text-center">
               <h3 className="text-sm font-semibold text-alta-navy group-hover:text-alta-teal transition-colors">First-Time Guide</h3>
-              <p className="text-[10px] text-alta-gray mt-1">Complete roadmap to homeownership</p>
+              <p className="text-xs text-alta-gray mt-1">Complete roadmap to homeownership</p>
             </Link>
           </div>
 
-          <p className="text-[10px] text-alta-gray mt-6 text-center">* This is an estimate for educational purposes. Your actual buying power depends on credit score, specific loan program, and lender requirements. Get pre-approved by a lender for an accurate number.</p>
+          <p className="text-xs text-alta-gray mt-6 text-center">* This is an estimate for educational purposes. Your actual buying power depends on credit score, specific loan program, and lender requirements. Get pre-approved by a lender for an accurate number.</p>
 
           <FirstTimeBuyerCTA />
         </div>

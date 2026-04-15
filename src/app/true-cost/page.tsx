@@ -302,7 +302,7 @@ export default function TrueCostPage() {
                       onChange={(e) => setHomePrice(Number(e.target.value))}
                       className="w-full accent-[#0a8ebc]"
                     />
-                    <div className="flex justify-between text-[10px] text-alta-gray mt-0.5">
+                    <div className="flex justify-between text-xs text-alta-gray mt-0.5">
                       <span>$100K</span>
                       <span>$1.5M</span>
                     </div>
@@ -322,7 +322,7 @@ export default function TrueCostPage() {
                         onChange={(e) => setDownPaymentPct(Number(e.target.value))}
                         className="w-full accent-[#0a8ebc]"
                       />
-                      <div className="flex justify-between text-[10px] text-alta-gray mt-0.5">
+                      <div className="flex justify-between text-xs text-alta-gray mt-0.5">
                         <span>0%</span>
                         <span>30%</span>
                       </div>
@@ -341,7 +341,7 @@ export default function TrueCostPage() {
                         onChange={(e) => setMortgageRate(Number(e.target.value))}
                         className="w-full accent-[#0a8ebc]"
                       />
-                      <div className="flex justify-between text-[10px] text-alta-gray mt-0.5">
+                      <div className="flex justify-between text-xs text-alta-gray mt-0.5">
                         <span>3%</span>
                         <span>10%</span>
                       </div>
@@ -371,7 +371,7 @@ export default function TrueCostPage() {
                       onChange={(e) => setPropertyTaxRate(Number(e.target.value))}
                       className="w-full accent-[#0a8ebc]"
                     />
-                    <div className="flex justify-between text-[10px] text-alta-gray mt-0.5">
+                    <div className="flex justify-between text-xs text-alta-gray mt-0.5">
                       <span>0.3% (Hawaii)</span>
                       <span>3% (New Jersey)</span>
                     </div>
@@ -390,7 +390,7 @@ export default function TrueCostPage() {
                       onChange={(e) => setInsuranceCost(Number(e.target.value))}
                       className="w-full accent-[#0a8ebc]"
                     />
-                    <div className="flex justify-between text-[10px] text-alta-gray mt-0.5">
+                    <div className="flex justify-between text-xs text-alta-gray mt-0.5">
                       <span>$600</span>
                       <span>$8,000</span>
                     </div>
@@ -419,7 +419,7 @@ export default function TrueCostPage() {
                       onChange={(e) => setHoaFee(Number(e.target.value))}
                       className="w-full accent-[#0a8ebc]"
                     />
-                    <div className="flex justify-between text-[10px] text-alta-gray mt-0.5">
+                    <div className="flex justify-between text-xs text-alta-gray mt-0.5">
                       <span>$0</span>
                       <span>$800/mo</span>
                     </div>
@@ -441,7 +441,7 @@ export default function TrueCostPage() {
                       onChange={(e) => setMaintenancePct(Number(e.target.value))}
                       className="w-full accent-[#0a8ebc]"
                     />
-                    <div className="flex justify-between text-[10px] text-alta-gray mt-0.5">
+                    <div className="flex justify-between text-xs text-alta-gray mt-0.5">
                       <span>0.5% (newer home)</span>
                       <span>3% (older home)</span>
                     </div>
@@ -460,7 +460,7 @@ export default function TrueCostPage() {
                       onChange={(e) => setUtilitiesMonthly(Number(e.target.value))}
                       className="w-full accent-[#0a8ebc]"
                     />
-                    <div className="flex justify-between text-[10px] text-alta-gray mt-0.5">
+                    <div className="flex justify-between text-xs text-alta-gray mt-0.5">
                       <span>$100/mo</span>
                       <span>$600/mo</span>
                     </div>

@@ -182,7 +182,7 @@ export default function RentVsBuyPage() {
                       onChange={(e) => setMonthlyRent(Number(e.target.value))}
                       className="w-full accent-[#0a8ebc]"
                     />
-                    <div className="flex justify-between text-[10px] text-alta-gray mt-0.5">
+                    <div className="flex justify-between text-xs text-alta-gray mt-0.5">
                       <span>$500</span>
                       <span>$5,000</span>
                     </div>
@@ -201,7 +201,7 @@ export default function RentVsBuyPage() {
                       onChange={(e) => setAnnualRentIncrease(Number(e.target.value))}
                       className="w-full accent-[#0a8ebc]"
                     />
-                    <div className="flex justify-between text-[10px] text-alta-gray mt-0.5">
+                    <div className="flex justify-between text-xs text-alta-gray mt-0.5">
                       <span>1%</span>
                       <span>5%</span>
                     </div>
@@ -226,7 +226,7 @@ export default function RentVsBuyPage() {
                       onChange={(e) => setHomePrice(Number(e.target.value))}
                       className="w-full accent-[#0a8ebc]"
                     />
-                    <div className="flex justify-between text-[10px] text-alta-gray mt-0.5">
+                    <div className="flex justify-between text-xs text-alta-gray mt-0.5">
                       <span>$100K</span>
                       <span>$1M</span>
                     </div>
@@ -247,7 +247,7 @@ export default function RentVsBuyPage() {
                       onChange={(e) => setDownPaymentPct(Number(e.target.value))}
                       className="w-full accent-[#0a8ebc]"
                     />
-                    <div className="flex justify-between text-[10px] text-alta-gray mt-0.5">
+                    <div className="flex justify-between text-xs text-alta-gray mt-0.5">
                       <span>0%</span>
                       <span>30%</span>
                     </div>
@@ -272,7 +272,7 @@ export default function RentVsBuyPage() {
                         onChange={(e) => setMortgageRate(Number(e.target.value))}
                         className="w-full accent-[#0a8ebc]"
                       />
-                      <div className="flex justify-between text-[10px] text-alta-gray mt-0.5">
+                      <div className="flex justify-between text-xs text-alta-gray mt-0.5">
                         <span>3%</span>
                         <span>10%</span>
                       </div>
@@ -291,7 +291,7 @@ export default function RentVsBuyPage() {
                         onChange={(e) => setHomeAppreciation(Number(e.target.value))}
                         className="w-full accent-[#0a8ebc]"
                       />
-                      <div className="flex justify-between text-[10px] text-alta-gray mt-0.5">
+                      <div className="flex justify-between text-xs text-alta-gray mt-0.5">
                         <span>1%</span>
                         <span>8%</span>
                       </div>
@@ -316,7 +316,7 @@ export default function RentVsBuyPage() {
                     onChange={(e) => setYearsToCompare(Number(e.target.value))}
                     className="w-full accent-[#0a8ebc]"
                   />
-                  <div className="flex justify-between text-[10px] text-alta-gray mt-0.5">
+                  <div className="flex justify-between text-xs text-alta-gray mt-0.5">
                     <span>1 year</span>
                     <span>30 years</span>
                   </div>
@@ -401,7 +401,7 @@ export default function RentVsBuyPage() {
                         style={{ width: `${maxBar > 0 ? (results.totalRent / maxBar) * 100 : 0}%` }}
                       />
                     </div>
-                    <p className="text-[10px] text-alta-gray mt-0.5">
+                    <p className="text-xs text-alta-gray mt-0.5">
                       {yearsToCompare} years of rent with {annualRentIncrease}% annual increases
                     </p>
                   </div>
@@ -430,7 +430,7 @@ export default function RentVsBuyPage() {
                         }}
                       />
                     </div>
-                    <p className="text-[10px] text-alta-gray mt-0.5">
+                    <p className="text-xs text-alta-gray mt-0.5">
                       Total paid minus equity built ({fmtDollar(results.finalEquity)} in equity)
                     </p>
                   </div>

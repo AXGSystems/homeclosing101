@@ -61,7 +61,7 @@ function TermOfTheDay({ onSelect }: { onSelect: (t: GlossaryTerm) => void }) {
           <div className="flex-1 min-w-0">
             <div className="flex items-center gap-2 mb-1">
               <span className="text-[10px] font-bold uppercase tracking-widest" style={{ color }}>Term of the Day</span>
-              <span className="text-[10px] text-alta-gray">{new Date().toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })}</span>
+              <span className="text-xs text-alta-gray">{new Date().toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })}</span>
             </div>
             <h3 className="font-bold text-alta-navy text-base group-hover:text-alta-teal transition-colors">{term.term}</h3>
             <p className="text-xs text-alta-gray mt-1 leading-relaxed line-clamp-2">{term.definition}</p>
