@@ -47,16 +47,16 @@ export default function NewsTicker() {
           <div className="overflow-hidden flex-1">
             <div
               className="flex items-center whitespace-nowrap hover:[animation-play-state:paused]"
-              style={{ animation: "tickerScroll 150s linear infinite", width: "max-content" }}
+              style={{ animation: "tickerScroll 188s linear infinite", width: "max-content" }}
             >
               {/* Render headlines twice for seamless loop */}
               {[...headlines, ...headlines].map((item, i) => (
                 <span
                   key={i}
-                  className="inline-flex items-center gap-1.5 px-4 py-2 text-[11px] shrink-0"
+                  className="inline-flex items-center gap-1.5 px-4 py-2 text-[13px] shrink-0"
                 >
                   <span className="text-gray-300">{item.text}</span>
-                  <span className="text-[9px] text-alta-teal font-semibold uppercase tracking-wider">{item.source}</span>
+                  <span className="text-[10px] text-alta-teal font-semibold uppercase tracking-wider">{item.source}</span>
                   <span className="text-gray-600 mx-1">|</span>
                 </span>
               ))}
