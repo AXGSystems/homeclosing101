@@ -63,12 +63,11 @@ const navItems = [
     label: "Resources",
     href: "/faq",
     children: [
-      { label: "Achievements", href: "/achievements" },
       { label: "Ask Your Title Pro", href: "/questions-to-ask" },
       { label: "Document & Resource Library", href: "/document-library" },
       { label: "Emergency Contacts", href: "/emergency-contacts" },
       { label: "FAQ", href: "/faq" },
-      { label: "HC101 Trivia Challenge", href: "/trivia" },
+      { label: "Trivia & Achievements", href: "/trivia" },
       { label: "In the Title Industry?", href: "/join-alta" },
       { label: "My Closing Folder", href: "/my-folder" },
       { label: "My Homebuying Journey", href: "/my-journey" },
