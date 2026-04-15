@@ -54,14 +54,14 @@ const typeConfig: Record<FeedbackType, {
     accentColor: "#c0392b",
     accentGradient: "linear-gradient(135deg, #c0392b 0%, #96281b 100%)",
     icon: "🐛",
-    recipients: [SHARED_MAILBOX],
+    recipients: ["vscott@alta.org"],
   },
   suggestion: {
     label: "Suggestion",
     accentColor: "#0a8ebc",
     accentGradient: "linear-gradient(135deg, #0a8ebc 0%, #077a9e 100%)",
     icon: "💡",
-    recipients: [SHARED_MAILBOX],
+    recipients: ["vscott@alta.org"],
   },
   support: {
     label: "Question / Support",
