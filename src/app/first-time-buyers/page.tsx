@@ -99,7 +99,7 @@ export default function FirstTimeBuyersPage() {
           <InlineAd />
 
           <div className="p-4 bg-[#faf4e4] rounded-xl border border-[#e8d9a8] border-l-4 border-l-[#8b6914] my-6">
-            <p className="text-xs text-alta-gray"><strong className="text-[#8b6914]">Did you know?</strong> According to NAR, 32% of homebuyers in 2024 were first-time buyers — the lowest share since NAR began tracking in 1981. Rising prices and mortgage rates have made it harder, but down payment assistance programs helped more than 300,000 buyers close in 2024 alone (NCSHA).</p>
+            <p className="text-xs text-alta-gray"><strong className="text-[#8b6914]">Did you know?</strong> According to NAR, 24% of homebuyers in 2024 were first-time buyers — the lowest share since NAR began tracking in 1981. Rising prices and mortgage rates have made it harder, but down payment assistance programs continue to help hundreds of thousands of buyers close each year (NCSHA).</p>
           </div>
 
           <div className="h-1 bg-gradient-to-r from-transparent via-alta-teal/20 to-transparent my-10" />
@@ -154,7 +154,7 @@ export default function FirstTimeBuyersPage() {
           <TrustedALTAMembers />
 
           <div className="p-4 bg-[#faf4e4] rounded-xl border border-[#e8d9a8] border-l-4 border-l-[#8b6914] my-6">
-            <p className="text-xs text-alta-gray"><strong className="text-[#8b6914]">Did you know?</strong> The CFPB found that buyers who compared Loan Estimates from 3 or more lenders saved an average of $1,500 over the life of their loan compared to those who went with the first lender they contacted.</p>
+            <p className="text-xs text-alta-gray"><strong className="text-[#8b6914]">Did you know?</strong> The CFPB found that buyers who compared Loan Estimates from 3 or more lenders saved an average of $300 per year — roughly $3,500 over the first five years — compared to those who went with the first lender they contacted.</p>
           </div>
 
           {/* Down payment assistance */}
@@ -207,7 +207,7 @@ export default function FirstTimeBuyersPage() {
           <div className="grid sm:grid-cols-2 gap-3 mb-10">
             {[
               { insight: "Closing costs were more than expected", detail: "Many buyers budget only for the down payment and are surprised by 2-5% in closing costs on top of it. On a $350K home, that's $7,000-$17,500 in additional cash needed at closing.", image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=400&q=80" },
-              { insight: "Should have shopped more lenders", detail: "Buyers who compared 3+ Loan Estimates saved an average of $1,500 over the life of their loan compared to those who went with the first lender they talked to. The CFPB recommends comparing at least 3.", image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=400&q=80" },
+              { insight: "Should have shopped more lenders", detail: "Buyers who compared 3+ Loan Estimates saved an average of $300/year — about $3,500 over the first five years — compared to those who went with the first lender they talked to. The CFPB recommends comparing at least 3.", image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=400&q=80" },
               { insight: "Didn't understand the inspection report", detail: "Inspection reports can be 40+ pages of technical findings. Attending the inspection in person and asking the inspector to explain priorities vs cosmetic issues is the single best way to understand what matters.", image: "https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=400&q=80" },
               { insight: "Underestimated ongoing homeowner costs", detail: "Beyond the mortgage: property taxes, insurance, HOA fees, maintenance (budget 1-2% of home value per year), utilities, and unexpected repairs. Budget for these BEFORE you buy, not after.", image: "https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=400&q=80" },
               { insight: "Wish they'd gotten owner's title insurance", detail: "Buyers who skipped owner's title insurance and later faced a title claim had to pay for legal defense out of pocket — often $20,000-$75,000+ even for baseless claims. The one-time premium is a fraction of the risk.", image: "https://images.unsplash.com/photo-1589829085413-56de8ae18c73?w=400&q=80" },

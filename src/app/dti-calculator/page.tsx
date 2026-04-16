@@ -104,7 +104,7 @@ export default function DTICalculatorPage() {
         subtitle="Your DTI ratio is one of the most important numbers in your mortgage application. Find out where you stand and what lenders will see."
         image="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=1920&q=80"
         breadcrumb={[
-          { label: "Tools", href: "/mortgage-calculator" },
+          { label: "Tools", href: "/resources" },
           { label: "DTI Calculator", href: "/dti-calculator" },
         ]}
       />

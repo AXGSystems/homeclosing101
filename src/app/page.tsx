@@ -70,7 +70,7 @@ const features = [
   },
   {
     title: "Real Estate Glossary",
-    description: "80+ searchable terms — from abstract to warranty deed. Instant A-Z lookup.",
+    description: "450+ searchable terms — from abstract to zoning. Instant A-Z lookup.",
     href: "/glossary",
     accent: "purple",
     image: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=400&q=80",
@@ -101,7 +101,7 @@ const stats = [
     icon: <svg viewBox="0 0 24 24" className="w-9 h-9" fill="none" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M3 3v1.5M3 21v-6m0 0l2.77-.693a9 9 0 016.208.682l.108.054a9 9 0 006.086.71l3.114-.732a48.524 48.524 0 01-.005-10.499l-3.11.732a9 9 0 01-6.085-.711l-.108-.054a9 9 0 00-6.208-.682L3 4.5M3 15V4.5" /></svg> },
   { value: "40+", end: 40, suffix: "+", label: "Questions to Ask", ...palette[5], href: "/questions-to-ask", preview: "Printable questions for your title company, lender, and agent.",
     icon: <svg viewBox="0 0 24 24" className="w-9 h-9" fill="none" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 01-2.555-.337A5.972 5.972 0 015.41 20.97a5.969 5.969 0 01-.474-.065 4.48 4.48 0 00.978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25z" /></svg> },
-  { value: "28", end: 28, suffix: "", label: "Closing Checklist", ...palette[6], href: "/closing-process/closing-checklist", preview: "Interactive 28-item checklist across 5 phases — track your progress online.",
+  { value: "33", end: 33, suffix: "", label: "Closing Checklist", ...palette[6], href: "/closing-process/closing-checklist", preview: "Interactive 33-item checklist across 5 phases — track your progress online.",
     icon: <svg viewBox="0 0 24 24" className="w-9 h-9" fill="none" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg> },
   { value: "A.i.", end: 0, suffix: "", staticValue: "A.i.", label: "ALTA Intelligence Assistant", ...palette[7], href: "/faq", preview: "Ask HomeClosing101 any question related to the closing process — get quality and informed responses.",
     icon: <svg viewBox="0 0 24 24" className="w-9 h-9" fill="none" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z" /></svg> },
@@ -377,7 +377,7 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-alta-navy mb-3">Your Journey Consolidated</h2>
-            <p className="text-alta-gray max-w-xl mx-auto">From understanding costs to protecting your investment — 25+ pages of deep, verified guides.</p>
+            <p className="text-alta-gray max-w-xl mx-auto">From understanding costs to protecting your investment — 40+ pages of deep, verified guides.</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {features.map((f) => (
@@ -490,7 +490,7 @@ export default function HomePage() {
           </div>
           <div className="grid sm:grid-cols-2 gap-4">
             {[
-              { label: "First-Time Buyer", desc: "Complete 27-step timeline from building credit to getting the keys — with expandable deep dives on every step.", href: "/first-time-buyers", image: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=600&q=80", color: "from-[#0a7ea8] to-[#077a9e]" },
+              { label: "First-Time Buyer", desc: "Complete 28-step timeline from building credit to getting the keys — with expandable deep dives on every step.", href: "/first-time-buyers", image: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=600&q=80", color: "from-[#0a7ea8] to-[#077a9e]" },
               { label: "Ready to Close", desc: "Interactive checklist, document guide, wire fraud prevention, and everything you need for closing day.", href: "/closing-process/closing-checklist", image: "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=600&q=80", color: "from-[#1a2744] to-[#0f1b33]" },
               { label: "Shopping for a Lender", desc: "Compare 4 loan types side-by-side, estimate closing costs, and learn how to read your Loan Estimate like a pro.", href: "/mortgage-calculator", image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=600&q=80", color: "from-[#2d6b3f] to-[#1e5530]" },
               { label: "Worried About Fraud", desc: "How wire fraud works, the 5 safeguards, and exactly what to do if you suspect you're being targeted.", href: "/protect-your-money", image: "https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=600&q=80", color: "from-[#943030] to-[#7a2020]" },
@@ -720,7 +720,7 @@ export default function HomePage() {
               <Link href="/glossary" className="bg-white/10 backdrop-blur-sm rounded-xl p-5 border border-white/10 hover:bg-[#0a8ebc]/30 hover:border-[#0a8ebc]/40 transition-colors text-center">
                 <svg className="w-8 h-8 text-white mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" /></svg>
                 <p className="text-white font-semibold text-sm">Glossary</p>
-                <p className="text-gray-400 text-xs mt-0.5">80+ terms</p>
+                <p className="text-gray-400 text-xs mt-0.5">450+ terms</p>
               </Link>
               <Link href="/questions-to-ask" className="bg-white/10 backdrop-blur-sm rounded-xl p-5 border border-white/10 hover:bg-[#0a8ebc]/30 hover:border-[#0a8ebc]/40 transition-colors text-center">
                 <svg className="w-8 h-8 text-white mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 01-2.555-.337A5.972 5.972 0 015.41 20.97a5.969 5.969 0 01-.474-.065 4.48 4.48 0 00.978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25z" /></svg>

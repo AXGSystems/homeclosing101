@@ -149,7 +149,7 @@ const benefits = [
       subtitle: "601 Pennsylvania Avenue NW — steps from the U.S. Capitol",
       gradient: "from-[#1a5276] to-[#154463]",
       stats: [
-        { value: "116+", label: "Years of Advocacy" },
+        { value: "119+", label: "Years of Advocacy" },
         { value: "535", label: "Members of Congress Engaged" },
         { value: "50", label: "State Legislatures Monitored" },
       ],
@@ -321,7 +321,7 @@ const aboutCards = [
     color: "from-[#1a5276] to-[#154463]",
     icon: "M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z",
     modal: {
-      title: "116+ Years of Industry Leadership",
+      title: "119+ Years of Industry Leadership",
       subtitle: "Founded 1907 — the oldest title industry trade association",
       gradient: "from-[#1a5276] to-[#154463]",
       paragraphs: [
@@ -412,7 +412,7 @@ const aboutCards = [
 const stats = [
   { value: "6,000+", label: "Member Companies" },
   { value: "50", label: "States Represented" },
-  { value: "116+", label: "Years of Advocacy" },
+  { value: "119+", label: "Years of Advocacy" },
   { value: "#1", label: "Title Industry Association" },
 ];
 

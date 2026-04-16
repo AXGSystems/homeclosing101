@@ -382,7 +382,7 @@ export default function AfterClosingPage() {
                 <div className="w-full">
                   <h2 className="font-bold text-amber-800 dark:text-amber-400 text-base mb-1">The Hidden Costs of Homeownership</h2>
                   <p className="text-sm text-alta-gray leading-relaxed mb-4">
-                    The average U.S. homeowner spends approximately <strong className="text-alta-navy">$18,118 per year</strong> on hidden costs beyond their mortgage payment, according to Bankrate&apos;s 2024 analysis. These costs include property taxes, insurance, maintenance, utilities, and HOA fees. Knowing what to expect prevents financial shock.
+                    The average U.S. homeowner spends approximately <strong className="text-alta-navy">$18,118 per year</strong> on hidden costs beyond their mortgage payment, according to Bankrate&apos;s 2025 analysis. These costs include property taxes, insurance, maintenance, utilities, and HOA fees. Knowing what to expect prevents financial shock.
                   </p>
                   <div className="grid sm:grid-cols-2 gap-2">
                     {hiddenCosts.map((cost) => (
@@ -398,7 +398,7 @@ export default function AfterClosingPage() {
                       </div>
                     ))}
                   </div>
-                  <p className="text-xs text-alta-gray mt-3">Source: Bankrate &mdash; &ldquo;Hidden costs of homeownership&rdquo; (2024 analysis). Actual costs vary significantly by location, home age, and property value.</p>
+                  <p className="text-xs text-alta-gray mt-3">Source: Bankrate &mdash; &ldquo;Hidden costs of homeownership&rdquo; (2025 analysis). Actual costs vary significantly by location, home age, and property value.</p>
                 </div>
               </div>
             </div>

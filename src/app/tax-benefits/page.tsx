@@ -51,7 +51,7 @@ const sections: TaxSection[] = [
       "You can find the amount on Form 1098 (Box 10) or on your county property tax bill.",
       "If you paid property taxes at closing (see your Closing Disclosure, page 2), those amounts count toward your deduction in that tax year.",
     ],
-    tip: "The $10,000 SALT cap ($5,000 if married filing separately) was established by the Tax Cuts and Jobs Act of 2017 and is currently set to expire after 2025 — watch for legislative updates.",
+    tip: "The $10,000 SALT cap ($5,000 if married filing separately) was established by the Tax Cuts and Jobs Act of 2017. The cap was scheduled to expire after 2025 — check with a tax professional for the latest status on any legislative changes.",
     source: "IRS Topic No. 503 — Deductible Taxes; 26 U.S.C. \u00A7164",
   },
   {

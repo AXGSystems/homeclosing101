@@ -47,7 +47,7 @@ export default function MyFolderPage() {
       <PageHero
         title="My Closing Folder"
         subtitle="Your personalized collection of glossary terms, checklist items, questions, and notes saved from across HomeClosing101."
-        image="/images/hero-resources.jpg"
+        image="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=1920&q=80"
         breadcrumb={[
           { label: "Resources", href: "/resources" },
           { label: "My Closing Folder", href: "/my-folder" },

@@ -542,8 +542,6 @@ export default function ClosingOptionsPage() {
 
           <InlineAd />
 
-          <InlineAd />
-
           {/* What documents you'll sign */}
           <h2 className="text-xl font-bold text-alta-navy mb-4">Documents You&apos;ll Sign at Closing</h2>
           <p className="text-sm text-alta-gray mb-4 leading-relaxed">Regardless of which closing method you choose, you&apos;ll sign essentially the same set of documents. The method only changes HOW and WHERE you sign them — not what you sign. Tap any document to learn what it is, what to look for, and what questions to ask.</p>

@@ -107,7 +107,7 @@ export default function RootLayout({
           <main id="main-content" className="flex-1 pb-16 sm:pb-14">{children}</main>
           {/* Print-only footer */}
           <div className="print-footer hidden">
-            HomeClosing101.org — An educational initiative of the American Land Title Association (ALTA) — homeclosing101.org
+            HomeClosing101 — An educational initiative of the American Land Title Association (ALTA) — homeclosing101.vercel.app
           </div>
           <div className="fixed bottom-0 left-0 right-0 z-50">
             <AltaDisclaimer />

@@ -479,8 +479,6 @@ export default function ClosingChecklistPage() {
           </div>
         )}
 
-        <InlineAd />
-
         <div className="mt-6 p-4 bg-alta-light rounded-lg text-sm text-alta-gray">
           <strong className="text-alta-navy">Tip:</strong> Use the Print button above to take a blank copy with you. Your checked items won&apos;t persist between browser sessions, so consider bookmarking this page for easy access.
         </div>
