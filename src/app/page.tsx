@@ -153,87 +153,85 @@ export default function HomePage() {
         <div className="absolute bottom-0 left-1/4 w-80 h-80 bg-white/5 rounded-full translate-y-1/3 blur-3xl" />
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
-          <div className="grid lg:grid-cols-2 gap-8 lg:gap-14 items-center">
-            {/* Left — copy */}
-            <div>
-              <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full mb-6 border border-white/20">
-                <span className="text-xs font-medium text-gray-200 uppercase tracking-wider">An ALTA Educational Initiative</span>
-              </div>
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 leading-[1.08]">
-                The Homebuyer&apos;s Guide to <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-blue-200">Closing with Confidence</span>
-              </h1>
-              <p className="text-base sm:text-lg text-gray-300 max-w-lg mb-4 leading-relaxed">
-                Every year, millions of Americans buy a home — and most walk into the closing process with no idea what they&apos;re signing, what they&apos;re paying for, or how to protect themselves.
-              </p>
-              <p className="text-sm text-gray-400 max-w-lg mb-8 leading-relaxed">
-                HomeClosing101 changes that. Built by the <strong className="text-white">American Land Title Association</strong>, this is your free, comprehensive, no-nonsense guide to understanding closing costs, protecting your property rights, avoiding wire fraud, and making informed decisions at every step — backed by verified data from the CFPB, FBI, NAR, and ALTA.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-3">
-                <Link
-                  href="/first-time-buyers"
-                  className="inline-flex items-center justify-center px-7 py-3.5 bg-white text-alta-navy font-semibold rounded-lg hover:bg-gray-100 transition-colors shadow-lg shadow-black/10"
-                >
-                  Start Here
-                  <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                  </svg>
-                </Link>
-                <Link
-                  href="/closing-process/closing-checklist"
-                  className="inline-flex items-center justify-center px-7 py-3.5 border-2 border-white/40 text-white font-semibold rounded-lg hover:bg-white/10 hover:border-white/60 transition-all"
-                >
-                  Closing Checklist
-                </Link>
-                <Link
-                  href="/closing-process/closing-costs"
-                  className="inline-flex items-center justify-center px-7 py-3.5 border-2 border-white/40 text-white font-semibold rounded-lg hover:bg-white/10 hover:border-white/60 transition-all"
-                >
-                  Cost Calculator
-                </Link>
-              </div>
-
-              {/* Popular Right Now */}
-              <div className="mt-6">
-                <p className="text-[10px] uppercase tracking-widest text-gray-400 mb-2 font-medium">Popular right now</p>
-                <div className="flex items-center gap-3 overflow-x-auto pb-2 px-1 -mx-1">
-                  {[
-                    { label: "Wire Fraud Guide", href: "/stop-fraud", hot: true },
-                    { label: "Mortgage Calculator", href: "/mortgage-calculator" },
-                    { label: "First-Time Buyers", href: "/first-time-buyers" },
-                    { label: "HC101 Trivia", href: "/trivia" },
-                    { label: "Closing Checklist", href: "/closing-process/closing-checklist" },
-                  ].map((item: { label: string; href: string; hot?: boolean }) => (
-                    <Link key={item.href} href={item.href} className="shrink-0 px-3 py-1.5 bg-white/10 backdrop-blur-sm rounded-full text-xs text-white font-medium hover:bg-white/20 transition-colors border border-white/10">
-                      {item.hot && <span className="text-[#943030] mr-1">●</span>}
-                      {item.label}
-                    </Link>
-                  ))}
-                </div>
-              </div>
-
-              {/* Search */}
-              <div className="mt-5">
-                <HeroSearch />
-              </div>
-
-              {/* Quick Estimate — desktop only */}
-              <QuickEstimate />
+          {/* Hero copy */}
+          <div className="max-w-3xl mx-auto text-center mb-10">
+            <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full mb-6 border border-white/20">
+              <span className="text-xs font-medium text-gray-200 uppercase tracking-wider">An ALTA Educational Initiative</span>
+            </div>
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 leading-[1.08]">
+              The Homebuyer&apos;s Guide to <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-blue-200">Closing with Confidence</span>
+            </h1>
+            <p className="text-base sm:text-lg text-gray-300 mb-4 leading-relaxed">
+              Every year, millions of Americans buy a home — and most walk into the closing process with no idea what they&apos;re signing, what they&apos;re paying for, or how to protect themselves.
+            </p>
+            <p className="text-sm text-gray-400 mb-8 leading-relaxed">
+              HomeClosing101 changes that. Built by the <strong className="text-white">American Land Title Association</strong>, this is your free, comprehensive, no-nonsense guide to understanding closing costs, protecting your property rights, avoiding wire fraud, and making informed decisions at every step — backed by verified data from the CFPB, FBI, NAR, and ALTA.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-3 justify-center">
+              <Link
+                href="/first-time-buyers"
+                className="inline-flex items-center justify-center px-7 py-3.5 bg-white text-alta-navy font-semibold rounded-lg hover:bg-gray-100 transition-colors shadow-lg shadow-black/10"
+              >
+                Start Here
+                <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+              </Link>
+              <Link
+                href="/closing-process/closing-checklist"
+                className="inline-flex items-center justify-center px-7 py-3.5 border-2 border-white/40 text-white font-semibold rounded-lg hover:bg-white/10 hover:border-white/60 transition-all"
+              >
+                Closing Checklist
+              </Link>
+              <Link
+                href="/closing-process/closing-costs"
+                className="inline-flex items-center justify-center px-7 py-3.5 border-2 border-white/40 text-white font-semibold rounded-lg hover:bg-white/10 hover:border-white/60 transition-all"
+              >
+                Cost Calculator
+              </Link>
             </div>
 
-            {/* Right — key stats (4x2 grid, square tiles with built-in info) */}
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-              {stats.map((stat, i) => (
-                <Link key={stat.value} href={stat.href} className="group">
-                  <StatCard accent={stat.accent} color={stat.color} icon={stat.icon} index={i}>
-                    <p className={`text-3xl lg:text-4xl font-bold mb-1 ${stat.accent} drop-shadow-[0_0_12px_currentColor]`}>
-                      {"staticValue" in stat && stat.staticValue ? stat.staticValue : <AnimatedCounter end={stat.end} suffix={stat.suffix} duration={1800} />}
-                    </p>
-                    <p className="text-sm text-white font-semibold leading-snug mb-2">{stat.label}</p>
-                    <p className="text-[11px] text-gray-300/80 leading-relaxed">{stat.preview}</p>
-                  </StatCard>
-                </Link>
-              ))}
+            {/* Popular Right Now */}
+            <div className="mt-6">
+              <p className="text-[10px] uppercase tracking-widest text-gray-400 mb-2 font-medium">Popular right now</p>
+              <div className="flex items-center gap-3 justify-center flex-wrap">
+                {[
+                  { label: "Wire Fraud Guide", href: "/stop-fraud", hot: true },
+                  { label: "Mortgage Calculator", href: "/mortgage-calculator" },
+                  { label: "First-Time Buyers", href: "/first-time-buyers" },
+                  { label: "HC101 Trivia", href: "/trivia" },
+                  { label: "Closing Checklist", href: "/closing-process/closing-checklist" },
+                ].map((item: { label: string; href: string; hot?: boolean }) => (
+                  <Link key={item.href} href={item.href} className="shrink-0 px-3 py-1.5 bg-white/10 backdrop-blur-sm rounded-full text-xs text-white font-medium hover:bg-white/20 transition-colors border border-white/10">
+                    {item.hot && <span className="text-[#943030] mr-1">●</span>}
+                    {item.label}
+                  </Link>
+                ))}
+              </div>
             </div>
+
+            {/* Search */}
+            <div className="mt-5 flex justify-center">
+              <HeroSearch />
+            </div>
+
+            {/* Quick Estimate — desktop only */}
+            <QuickEstimate />
+          </div>
+
+          {/* Stat tiles — full-width 4-column grid */}
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-5">
+            {stats.map((stat, i) => (
+              <Link key={stat.value} href={stat.href} className="group">
+                <StatCard accent={stat.accent} color={stat.color} icon={stat.icon} index={i}>
+                  <p className={`text-3xl lg:text-4xl font-bold mb-1 ${stat.accent} drop-shadow-[0_0_12px_currentColor]`}>
+                    {"staticValue" in stat && stat.staticValue ? stat.staticValue : <AnimatedCounter end={stat.end} suffix={stat.suffix} duration={1800} />}
+                  </p>
+                  <p className="text-sm text-white font-semibold leading-snug mb-2">{stat.label}</p>
+                  <p className="text-[11px] text-gray-300/80 leading-relaxed">{stat.preview}</p>
+                </StatCard>
+              </Link>
+            ))}
           </div>
         </div>
       </section>
@@ -531,7 +529,7 @@ export default function HomePage() {
             {[
               { title: "What It Covers", desc: "Forgery, undisclosed heirs, recording errors, liens, encroachments, and other defects that could threaten your ownership.", color: "#2d6b3f", bg: "bg-[#e9f5ed]", icon: "M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" },
               { title: "One-Time Premium", desc: "Unlike other insurance, you pay once at closing. No monthly premiums, no annual renewals. Protection lasts as long as you or your heirs own the property.", color: "#0a7ea8", bg: "bg-[#e6f1f5]", icon: "M2.25 18.75a60.07 60.07 0 0115.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 013 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 00-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 01-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 003 15h-.75M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" },
-              { title: "Owner's vs. Lender's", desc: "Your lender requires a policy to protect their loan — but only an owner's policy protects you. It is optional, but strongly recommended by ALTA and the CFPB.", color: "#5b3a8c", bg: "bg-[#f0ecf6]", icon: "M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" },
+              { title: "Owner's vs. Lender's", desc: "Your lender requires a policy to protect their loan — but only an owner's policy protects you. It is a critical tool in protecting one of your most valuable assets and is strongly endorsed by ALTA and leading organizations in the title industry.", color: "#5b3a8c", bg: "bg-[#f0ecf6]", icon: "M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" },
             ].map((item) => (
               <div key={item.title} className={`${item.bg} rounded-2xl p-6 border border-transparent hover:border-[${item.color}]/20 transition-all hover:shadow-md`}>
                 <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-4" style={{ backgroundColor: `${item.color}15` }}>
