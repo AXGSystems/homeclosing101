@@ -664,7 +664,7 @@ export default function HomePage() {
             ].map((t) => (
               <Link key={t.title} href={t.href} className="group relative overflow-hidden rounded-2xl shadow-md hover:shadow-xl transition-all">
                 {/* Glassmorphic card */}
-                <div className="relative bg-white/60 backdrop-blur-md border border-white/80 p-6 h-full" style={{ borderTopColor: t.color, borderTopWidth: '3px' }}>
+                <div className="relative bg-white/60 backdrop-blur-md border border-white/80 p-6 h-full min-h-[200px]" style={{ borderTopColor: t.color, borderTopWidth: '3px' }}>
                   {/* Default state */}
                   <div className="flex items-start gap-4 group-hover:opacity-0 group-hover:-translate-y-2 transition-all duration-300">
                     <div className="w-12 h-12 rounded-xl flex items-center justify-center shrink-0" style={{ backgroundColor: `${t.color}15` }}>
