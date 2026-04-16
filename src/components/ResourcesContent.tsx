@@ -203,7 +203,7 @@ export default function ResourcesContent() {
               { name: "Questions to Ask", desc: "40+ printable questions organized by who you're asking — your lender, agent, title company, and inspector.", href: "/questions-to-ask", badge: "Printable" },
               { name: "Real Estate Glossary", desc: "450+ searchable terms with real-world closing examples. Save terms to build a custom printable list.", href: "/glossary", badge: "Reference" },
               { name: "250+ FAQ Knowledge Base", desc: "Every answer verified and sourced from CFPB, FBI, NAR, ALTA, IRS, FHA, VA, and other authorities.", href: "/faq", badge: "Reference" },
-              { name: "First-Time Buyer Timeline", desc: "5-phase, 27-item expandable timeline — each step with detailed breakdown, action items, and source citations.", href: "/first-time-buyers", badge: "Guide" },
+              { name: "First-Time Buyer Timeline", desc: "5-phase, 28-item expandable timeline — each step with detailed breakdown, action items, and source citations.", href: "/first-time-buyers", badge: "Guide" },
               { name: "Document Library", desc: "Links to official CFPB forms, sample documents, homebuyer education courses, and state-specific resources.", href: "/document-library", badge: "Library" },
               { name: "State Insurance Directory", desc: "Contact information for all 50 state insurance departments + DC — verified addresses, phone numbers, and websites.", href: "/homeowners-insurance", badge: "Directory" },
               { name: "Wire Fraud Prevention Guide", desc: "How the scam works, 5 safeguards, and what to do if you're a victim — with FBI IC3 recovery data.", href: "/protect-your-money", badge: "Guide" },

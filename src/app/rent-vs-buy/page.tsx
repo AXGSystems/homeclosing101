@@ -523,7 +523,7 @@ export default function RentVsBuyPage() {
               </div>
               <div className="flex items-start gap-2">
                 <span className="w-1 h-1 bg-alta-teal rounded-full mt-1.5 shrink-0" />
-                <span>Selling costs (5-6% agent commissions) not included</span>
+                <span>Selling costs (agent commissions, typically 4-5%) not included</span>
               </div>
             </div>
           </div>
