@@ -17,13 +17,9 @@ export default function StatCard({
 }) {
   const accentHex = accent.includes("5ec4e6")
     ? "#5ec4e6"
-    : accent.includes("6fcf97")
-      ? "#6fcf97"
-      : accent.includes("b794f4")
-        ? "#b794f4"
-        : accent.includes("f0d06e")
-          ? "#f0d06e"
-          : "#f87171";
+    : accent.includes("c8d6e5")
+      ? "#c8d6e5"
+      : "#f87171";
 
   return (
     <div
