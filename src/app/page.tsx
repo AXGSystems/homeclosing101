@@ -108,14 +108,14 @@ const stats = [
 ];
 
 const steps = [
-  { num: "1", title: "Get Your Finances Ready", desc: "Check your credit, pay down debts, save for your down payment and closing costs.", bg: "bg-[#e8f0f5]", borderColor: "border-[#1a5276]", image: "https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=300&h=200&fit=crop&q=80" },
-  { num: "2", title: "Get Pre-Approved", desc: "Compare lenders, learn your loan options, and lock in financing.", bg: "bg-[#e9f5ed]", borderColor: "border-[#2d6b3f]", image: "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=300&h=200&fit=crop&q=80" },
-  { num: "3", title: "Find a Property", desc: "Work with a real estate agent to find the right home.", bg: "bg-[#f0ecf6]", borderColor: "border-[#5b3a8c]", image: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=300&h=200&fit=crop&q=80" },
-  { num: "4", title: "Make an Offer", desc: "Submit your purchase proposal and negotiate terms.", bg: "bg-[#faf4e4]", borderColor: "border-[#8b6914]", image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=300&h=200&fit=crop&q=80" },
-  { num: "5", title: "Sign the Purchase Agreement", desc: "Formalize the deal with a binding contract.", bg: "bg-[#e8f0f5]", borderColor: "border-[#1a5276]", image: "https://images.unsplash.com/photo-1583608205776-bfd35f0d9f83?w=300&h=200&fit=crop&q=80" },
-  { num: "6", title: "Get Funding", desc: "Finalize your mortgage through underwriting and appraisal.", bg: "bg-[#e9f5ed]", borderColor: "border-[#2d6b3f]", image: "https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=300&h=200&fit=crop&q=80" },
-  { num: "7", title: "Get Insurance", desc: "Secure homeowner's insurance and owner's title insurance.", bg: "bg-[#e6f1f5]", borderColor: "border-[#0a7ea8]", image: "https://images.unsplash.com/photo-1605276374104-dee2a0ed3cd6?w=300&h=200&fit=crop&q=80" },
-  { num: "8", title: "Close & Get Your Keys", desc: "Sign documents, transfer funds, and officially become a homeowner.", keys: true, bg: "bg-[#faf4e4]", borderColor: "border-[#d4a843]", image: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=300&h=200&fit=crop&q=80" },
+  { num: "1", title: "Get Your Finances Ready", desc: "Check your credit, pay down debts, save for your down payment and closing costs.", gradient: "from-[#0a7ea8] to-[#065a7a]", image: "https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=300&h=200&fit=crop&q=80" },
+  { num: "2", title: "Get Pre-Approved", desc: "Compare lenders, learn your loan options, and lock in financing.", gradient: "from-[#94a3b8] to-[#64748b]", image: "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=300&h=200&fit=crop&q=80" },
+  { num: "3", title: "Find a Property", desc: "Work with a real estate agent to find the right home.", gradient: "from-[#943030] to-[#6b2020]", image: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=300&h=200&fit=crop&q=80" },
+  { num: "4", title: "Make an Offer", desc: "Submit your purchase proposal and negotiate terms.", gradient: "from-[#0a7ea8] to-[#065a7a]", image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=300&h=200&fit=crop&q=80" },
+  { num: "5", title: "Sign the Purchase Agreement", desc: "Formalize the deal with a binding contract.", gradient: "from-[#94a3b8] to-[#64748b]", image: "https://images.unsplash.com/photo-1583608205776-bfd35f0d9f83?w=300&h=200&fit=crop&q=80" },
+  { num: "6", title: "Get Funding", desc: "Finalize your mortgage through underwriting and appraisal.", gradient: "from-[#943030] to-[#6b2020]", image: "https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=300&h=200&fit=crop&q=80" },
+  { num: "7", title: "Get Insurance", desc: "Secure homeowner's insurance and owner's title insurance.", gradient: "from-[#0a7ea8] to-[#065a7a]", image: "https://images.unsplash.com/photo-1605276374104-dee2a0ed3cd6?w=300&h=200&fit=crop&q=80" },
+  { num: "8", title: "Close & Get Your Keys", desc: "Sign documents, transfer funds, and officially become a homeowner.", keys: true, gradient: "from-[#94a3b8] to-[#64748b]", image: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=300&h=200&fit=crop&q=80" },
 ];
 
 const resourceColors = ["#1a5276", "#2d6b3f", "#5b3a8c", "#8b6914", "#943030", "#0a7ea8"];
@@ -458,14 +458,51 @@ export default function HomePage() {
             </div>
           </div>
 
-          {/* Blurb */}
-          <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 sm:p-8 border border-gray-100 shadow-sm mb-8">
-            <p className="text-base text-alta-gray leading-relaxed mb-4">
-              Each step has its own requirements, timelines, and potential pitfalls. Understanding what to expect — from checking your credit score and comparing lenders, to ordering a title search, reviewing your Closing Disclosure, and sitting down at the closing table — helps you avoid costly mistakes and close with confidence.
-            </p>
-            <p className="text-base text-alta-gray leading-relaxed">
-              Our detailed walkthrough covers all eight milestones with expert tips, common errors to avoid, and links to every tool and calculator you need along the way.
-            </p>
+          {/* Step tiles */}
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-10">
+            {steps.map((step) => (
+              <Link
+                key={step.num}
+                href="/closing-process/what-to-expect"
+                className="group relative rounded-2xl overflow-hidden shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
+              >
+                {/* Background image */}
+                <div
+                  className="absolute inset-0 bg-cover bg-center"
+                  style={{ backgroundImage: `url('${step.image}')` }}
+                />
+                {/* Color overlay */}
+                <div className={`absolute inset-0 bg-gradient-to-t ${step.gradient} opacity-85 group-hover:opacity-90 transition-opacity`} />
+
+                {/* Content */}
+                <div className="relative p-4 sm:p-5 flex flex-col min-h-[180px] sm:min-h-[200px] justify-between">
+                  {/* Step number badge */}
+                  <div className="flex items-start justify-between">
+                    <span className="inline-flex items-center justify-center w-9 h-9 rounded-full bg-white/20 backdrop-blur-sm text-white font-bold text-lg border border-white/30">
+                      {step.num}
+                    </span>
+                    {step.keys && (
+                      <svg className="w-6 h-6 text-yellow-300" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12.65 10C11.83 7.67 9.61 6 7 6c-3.31 0-6 2.69-6 6s2.69 6 6 6c2.61 0 4.83-1.67 5.65-4H17v4h4v-4h2v-4H12.65zM7 14c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z" />
+                      </svg>
+                    )}
+                  </div>
+
+                  {/* Title + Description */}
+                  <div className="mt-auto">
+                    <h3 className="text-white font-bold text-sm sm:text-base leading-tight mb-1.5">
+                      {step.title}
+                    </h3>
+                    <p className="text-white/75 text-[11px] sm:text-xs leading-relaxed">
+                      {step.desc}
+                    </p>
+                  </div>
+                </div>
+
+                {/* Bottom accent bar */}
+                <div className="absolute bottom-0 left-0 right-0 h-1 bg-white/30 group-hover:bg-white/60 transition-colors" />
+              </Link>
+            ))}
           </div>
 
           <div className="text-center">
