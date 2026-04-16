@@ -399,8 +399,14 @@ export default function MortgageCalculatorPage() {
                 <thead className="bg-alta-navy text-white">
                   <tr>
                     <th className="px-3 py-2.5 text-left font-semibold">Feature</th>
-                    {Object.values(loanTypes).map((lt) => (
-                      <th key={lt.name} className={`px-3 py-2.5 text-left font-semibold ${lt.name === config.name ? "bg-alta-teal" : ""}`}>{lt.name}</th>
+                    {Object.entries(loanTypes).map(([key, lt]) => (
+                      <th
+                        key={lt.name}
+                        onClick={() => setLoanType(key as keyof typeof loanTypes)}
+                        className={`px-3 py-2.5 text-left font-semibold cursor-pointer hover:bg-alta-teal/80 transition-colors ${lt.name === config.name ? "bg-alta-teal" : ""}`}
+                      >
+                        {lt.name}
+                      </th>
                     ))}
                   </tr>
                 </thead>
