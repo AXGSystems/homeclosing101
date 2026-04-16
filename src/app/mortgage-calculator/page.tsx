@@ -31,6 +31,7 @@ export default function MortgageCalculatorPage() {
   const [loanTermYears, setLoanTermYears] = useState(30);
   const [loanType, setLoanType] = useState<keyof typeof loanTypes>("conventional");
   const [selectedState, setSelectedState] = useState("TX");
+  const [comparisonDetail, setComparisonDetail] = useState<string | null>(null);
   const [selectedCounty, setSelectedCounty] = useState("");
   const [homeInsurance, setHomeInsurance] = useState(1500);
   const [hoa, setHoa] = useState(0);
@@ -402,8 +403,11 @@ export default function MortgageCalculatorPage() {
                     {Object.entries(loanTypes).map(([key, lt]) => (
                       <th
                         key={lt.name}
-                        onClick={() => setLoanType(key as keyof typeof loanTypes)}
-                        className={`px-3 py-2.5 text-left font-semibold cursor-pointer hover:bg-alta-teal/80 transition-colors ${lt.name === config.name ? "bg-alta-teal" : ""}`}
+                        onClick={() => {
+                          setLoanType(key as keyof typeof loanTypes);
+                          if (lt.minDown > downPaymentPct) setDownPaymentPct(lt.minDown);
+                        }}
+                        className={`px-3 py-2.5 text-left font-semibold cursor-pointer transition-colors ${loanType === key ? "bg-alta-teal" : "hover:bg-alta-teal/60"}`}
                       >
                         {lt.name}
                       </th>
@@ -411,16 +415,62 @@ export default function MortgageCalculatorPage() {
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-50">
-                  <tr className="hover:bg-alta-light/50"><td className="px-3 py-2 font-medium text-alta-navy">Min Down Payment</td>{Object.values(loanTypes).map((lt) => <td key={lt.name} className="px-3 py-2">{lt.minDown}%</td>)}</tr>
-                  <tr className="hover:bg-alta-light/50"><td className="px-3 py-2 font-medium text-alta-navy">Min Credit Score</td>{Object.values(loanTypes).map((lt) => <td key={lt.name} className="px-3 py-2">{lt.minCredit || "None (620+ typical)"}</td>)}</tr>
-                  <tr className="hover:bg-alta-light/50"><td className="px-3 py-2 font-medium text-alta-navy">Upfront Fee</td>{Object.values(loanTypes).map((lt) => <td key={lt.name} className="px-3 py-2">{lt.upfrontMIP > 0 ? `${lt.upfrontMIP}%` : "None"}</td>)}</tr>
-                  <tr className="hover:bg-alta-light/50"><td className="px-3 py-2 font-medium text-alta-navy">Monthly MI Rate</td>{Object.values(loanTypes).map((lt) => <td key={lt.name} className="px-3 py-2">{lt.annualMIP > 0 ? `${lt.annualMIP}%/yr` : "None"}</td>)}</tr>
-                  <tr className="hover:bg-alta-light/50"><td className="px-3 py-2 font-medium text-alta-navy">MI Removable?</td>{Object.values(loanTypes).map((lt) => <td key={lt.name} className="px-3 py-2">{lt.mipRemovable ? "Yes" : "No*"}</td>)}</tr>
-                  <tr className="hover:bg-alta-light/50"><td className="px-3 py-2 font-medium text-alta-navy">Max DTI</td>{Object.values(loanTypes).map((lt) => <td key={lt.name} className="px-3 py-2">{lt.maxDTI}%</td>)}</tr>
+                  {[
+                    { label: "Min Down Payment", getValue: (lt: typeof config) => `${lt.minDown}%`, detail: "The minimum percentage of the home price you must pay upfront. A higher down payment reduces your loan amount and may eliminate the need for mortgage insurance. For example, on a $400,000 home, 3% down = $12,000, while 20% down = $80,000." },
+                    { label: "Min Credit Score", getValue: (lt: typeof config) => lt.minCredit ? String(lt.minCredit) : "None (620+ typical)", detail: "The minimum credit score required by the loan program. Your actual rate depends heavily on your score — a 740+ score typically gets the best rates, while lower scores mean higher rates and fees. Check your score for free at annualcreditreport.com before applying." },
+                    { label: "Upfront Fee", getValue: (lt: typeof config) => lt.upfrontMIP > 0 ? `${lt.upfrontMIP}%` : "None", detail: "A one-time fee charged at closing, calculated as a percentage of your loan amount. FHA charges 1.75% UFMIP (added to loan balance). VA charges a funding fee of 2.15% (first use) or 3.3% (subsequent use) — waived for disabled veterans. USDA charges a 1% guarantee fee. Conventional loans have no upfront fee." },
+                    { label: "Monthly MI Rate", getValue: (lt: typeof config) => lt.annualMIP > 0 ? `${lt.annualMIP}%/yr` : "None", detail: "The annual mortgage insurance rate divided into monthly payments added to your mortgage. Conventional PMI (~0.5%/yr) is based on credit score and LTV — it varies from 0.3% to 1.5%. FHA MIP is 0.55%/yr for most borrowers. USDA charges 0.35%/yr. VA loans have NO monthly mortgage insurance at all." },
+                    { label: "MI Removable?", getValue: (lt: typeof config) => lt.mipRemovable ? "Yes" : "No*", detail: (Object.values(loanTypes) as typeof config[]).map(lt => `${lt.name}: ${lt.mipRemovalNote}`).join("\n\n") },
+                    { label: "Max DTI", getValue: (lt: typeof config) => `${lt.maxDTI}%`, detail: "Debt-to-Income ratio limit — the maximum percentage of your gross monthly income that can go toward all debt payments (including your new mortgage). Lower DTI = easier approval and better rates. Some lenders allow exceptions with compensating factors like large cash reserves or excellent credit." },
+                    { label: "Loan Limit (2025)", getValue: (lt: typeof config) => lt.loanLimit2026 > 0 ? `$${fmt(lt.loanLimit2026)}` : "No limit", detail: "The maximum loan amount allowed by each program. Conventional conforming limit is $806,500 (higher in high-cost areas). FHA floor limit is $524,225. VA has no loan limit for qualified veterans since 2020. USDA has no loan limit but has household income caps (typically 115% of area median income)." },
+                  ].map((row) => (
+                    <tr
+                      key={row.label}
+                      onClick={() => setComparisonDetail(comparisonDetail === row.label ? null : row.label)}
+                      className="cursor-pointer transition-colors hover:bg-[#0a8ebc]/10 active:bg-[#0a8ebc]/15"
+                    >
+                      <td className="px-3 py-2.5 font-medium text-alta-navy">
+                        {row.label}
+                        <svg className="inline-block w-3 h-3 ml-1 text-alta-gray" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                      </td>
+                      {Object.values(loanTypes).map((lt) => (
+                        <td key={lt.name} className={`px-3 py-2.5 ${loanType === Object.keys(loanTypes).find(k => loanTypes[k].name === lt.name) ? "bg-alta-teal/5 font-semibold" : ""}`}>{row.getValue(lt)}</td>
+                      ))}
+                    </tr>
+                  ))}
                 </tbody>
               </table>
             </div>
-            <p className="text-xs text-alta-gray mt-2">* FHA MIP is permanent for most loans (LTV &gt; 90% at origination). USDA guarantee fees are for the life of the loan. Sources: FHA.com, VA.gov, USDA Rural Development, Fannie Mae</p>
+            <p className="text-[10px] text-alta-gray mt-2">Click any row for detailed explanation &bull; Click a column header to select that loan type</p>
+            <p className="text-xs text-alta-gray mt-1">* FHA MIP is permanent for most loans (LTV &gt; 90% at origination). USDA guarantee fees are for the life of the loan. Sources: FHA.com, VA.gov, USDA Rural Development, Fannie Mae</p>
+
+            {/* Detail modal */}
+            {comparisonDetail && (
+              <div className="mt-3 p-5 bg-white rounded-2xl border-2 border-alta-teal/30 shadow-lg relative">
+                <button
+                  onClick={() => setComparisonDetail(null)}
+                  className="absolute top-3 right-3 p-1.5 rounded-lg text-alta-gray hover:bg-gray-100 hover:text-alta-navy transition-colors"
+                  aria-label="Close"
+                >
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
+                </button>
+                <h3 className="text-sm font-bold text-alta-navy mb-2 flex items-center gap-2">
+                  <svg className="w-4 h-4 text-alta-teal" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                  {comparisonDetail}
+                </h3>
+                <p className="text-sm text-alta-gray leading-relaxed whitespace-pre-line">
+                  {[
+                    { label: "Min Down Payment", getValue: (_lt: typeof config) => "", detail: "The minimum percentage of the home price you must pay upfront. A higher down payment reduces your loan amount and may eliminate the need for mortgage insurance. For example, on a $400,000 home, 3% down = $12,000, while 20% down = $80,000." },
+                    { label: "Min Credit Score", getValue: (_lt: typeof config) => "", detail: "The minimum credit score required by the loan program. Your actual rate depends heavily on your score — a 740+ score typically gets the best rates, while lower scores mean higher rates and fees. Check your score for free at annualcreditreport.com before applying." },
+                    { label: "Upfront Fee", getValue: (_lt: typeof config) => "", detail: "A one-time fee charged at closing, calculated as a percentage of your loan amount. FHA charges 1.75% UFMIP (added to loan balance). VA charges a funding fee of 2.15% (first use) or 3.3% (subsequent use) — waived for disabled veterans. USDA charges a 1% guarantee fee. Conventional loans have no upfront fee." },
+                    { label: "Monthly MI Rate", getValue: (_lt: typeof config) => "", detail: "The annual mortgage insurance rate divided into monthly payments added to your mortgage. Conventional PMI (~0.5%/yr) is based on credit score and LTV — it varies from 0.3% to 1.5%. FHA MIP is 0.55%/yr for most borrowers. USDA charges 0.35%/yr. VA loans have NO monthly mortgage insurance at all." },
+                    { label: "MI Removable?", getValue: (_lt: typeof config) => "", detail: (Object.values(loanTypes) as typeof config[]).map(lt => `${lt.name}: ${lt.mipRemovalNote}`).join("\n\n") },
+                    { label: "Max DTI", getValue: (_lt: typeof config) => "", detail: "Debt-to-Income ratio limit — the maximum percentage of your gross monthly income that can go toward all debt payments (including your new mortgage). Lower DTI = easier approval and better rates. Some lenders allow exceptions with compensating factors like large cash reserves or excellent credit." },
+                    { label: "Loan Limit (2025)", getValue: (_lt: typeof config) => "", detail: "The maximum loan amount allowed by each program. Conventional conforming limit is $806,500 (higher in high-cost areas). FHA floor limit is $524,225. VA has no loan limit for qualified veterans since 2020. USDA has no loan limit but has household income caps (typically 115% of area median income)." },
+                  ].find(r => r.label === comparisonDetail)?.detail}
+                </p>
+              </div>
+            )}
           </div>
 
           {/* Quick Scenarios */}
