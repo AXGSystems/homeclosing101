@@ -662,30 +662,18 @@ export default function HomePage() {
               { title: "Rent vs Buy", desc: "Compare the true 10-year cost of renting versus buying — including equity, tax benefits, and appreciation.", href: "/rent-vs-buy", color: "#8b6914", icon: "M7.5 21L3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5" },
               { title: "Trivia & Achievements", desc: "Test your homebuying knowledge Jeopardy-style. Earn badges as you explore guides, calculators, and quizzes.", href: "/trivia", color: "#943030", icon: "M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.455 2.456L21.75 6l-1.036.259a3.375 3.375 0 00-2.455 2.456z" },
             ].map((t) => (
-              <Link key={t.title} href={t.href} className="group relative overflow-hidden rounded-2xl shadow-md hover:shadow-xl transition-all">
-                {/* Glassmorphic card */}
-                <div className="relative bg-white/60 backdrop-blur-md border border-white/80 p-6 h-full min-h-[200px]" style={{ borderTopColor: t.color, borderTopWidth: '3px' }}>
-                  {/* Default state */}
-                  <div className="flex items-start gap-4 group-hover:opacity-0 group-hover:-translate-y-2 transition-all duration-300">
+              <Link key={t.title} href={t.href} className="group rounded-2xl shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-200">
+                <div className="bg-white/60 backdrop-blur-md border border-white/80 p-6 h-full rounded-2xl" style={{ borderTopColor: t.color, borderTopWidth: '3px' }}>
+                  <div className="flex items-start gap-4 mb-3">
                     <div className="w-12 h-12 rounded-xl flex items-center justify-center shrink-0" style={{ backgroundColor: `${t.color}15` }}>
                       <svg className="w-6 h-6" style={{ color: t.color }} fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d={t.icon} /></svg>
                     </div>
-                    <div>
-                      <h3 className="font-bold text-alta-navy text-base">{t.title}</h3>
-                      <p className="text-xs text-alta-teal font-medium mt-1">Hover to learn more</p>
-                    </div>
+                    <h3 className="font-bold text-alta-navy text-base mt-2">{t.title}</h3>
                   </div>
-                  {/* Hover state — pop out info */}
-                  <div className="absolute inset-0 p-6 flex flex-col justify-center opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300" style={{ backgroundColor: `${t.color}08` }}>
-                    <div className="w-10 h-10 rounded-lg flex items-center justify-center mb-3" style={{ backgroundColor: `${t.color}20` }}>
-                      <svg className="w-5 h-5" style={{ color: t.color }} fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d={t.icon} /></svg>
-                    </div>
-                    <h3 className="font-bold text-alta-navy text-sm mb-2">{t.title}</h3>
-                    <p className="text-sm text-alta-gray leading-relaxed">{t.desc}</p>
-                    <span className="inline-flex items-center text-xs font-semibold mt-3 gap-1" style={{ color: t.color }}>
-                      Open tool <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
-                    </span>
-                  </div>
+                  <p className="text-sm text-alta-gray leading-relaxed mb-3">{t.desc}</p>
+                  <span className="inline-flex items-center text-xs font-semibold gap-1 group-hover:gap-2 transition-all" style={{ color: t.color }}>
+                    Open tool <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
+                  </span>
                 </div>
               </Link>
             ))}
