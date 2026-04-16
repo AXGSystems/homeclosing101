@@ -16,7 +16,7 @@ export default function StatCard({
 }) {
   return (
     <div
-      className="stat-card relative overflow-hidden backdrop-blur-lg rounded-2xl border border-white/25 transition-all duration-200 hover:scale-[1.03] hover:border-white/50 aspect-square flex items-center justify-center"
+      className="stat-card relative overflow-hidden backdrop-blur-lg rounded-2xl border border-white/25 transition-all duration-200 hover:scale-[1.03] hover:border-white/50"
       style={{
         boxShadow:
           "0 0 20px rgba(10, 142, 188, 0.15), 0 8px 32px rgba(0,0,0,0.2)",

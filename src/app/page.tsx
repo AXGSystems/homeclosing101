@@ -210,13 +210,13 @@ export default function HomePage() {
               </div>
             </div>
 
-            {/* Search */}
-            <div className="mt-5 flex justify-center">
-              <HeroSearch />
-            </div>
-
             {/* Quick Estimate — desktop only */}
             <QuickEstimate />
+          </div>
+
+          {/* Search — centered above tiles */}
+          <div className="flex justify-center mb-6">
+            <HeroSearch />
           </div>
 
           {/* Stat tiles — full-width 4-column grid */}
