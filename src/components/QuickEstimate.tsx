@@ -22,7 +22,7 @@ export default function QuickEstimate() {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="hidden lg:flex items-center gap-2 mt-6 max-w-sm">
+    <form onSubmit={handleSubmit} className="hidden lg:flex items-center gap-2 mt-6 max-w-sm mx-auto">
       <div className="relative flex-1">
         <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm font-medium">$</span>
         <input

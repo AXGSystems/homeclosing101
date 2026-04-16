@@ -17,6 +17,15 @@ export default function MortgageCalculatorPage() {
   const { unlock } = useAchievements();
   useEffect(() => { unlock("calculator-pro"); }, [unlock]);
   const [homePrice, setHomePrice] = useState(350000);
+
+  // Read price from URL query param (e.g. ?price=500000 from QuickEstimate)
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const urlPrice = Number(params.get("price"));
+    if (urlPrice >= 50000 && urlPrice <= 2000000) {
+      setHomePrice(urlPrice);
+    }
+  }, []);
   const [downPaymentPct, setDownPaymentPct] = useState(20);
   const [interestRate, setInterestRate] = useState(6.5);
   const [loanTermYears, setLoanTermYears] = useState(30);
