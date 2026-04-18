@@ -43,6 +43,7 @@ const navItems = [
       { label: "HOA Guide", href: "/hoa-guide" },
       { label: "Homeowner's Insurance", href: "/homeowners-insurance" },
       { label: "Title Insurance & Property Rights", href: "/protect-your-rights" },
+      { label: "Your Property Rights", href: "/property-rights" },
     ],
   },
   {
@@ -50,8 +51,10 @@ const navItems = [
     href: "/protect-your-money",
     children: [
       { label: "After Closing Guide", href: "/after-closing" },
+      { label: "Deed Theft & Title Fraud", href: "/deed-theft" },
       { label: "Stop Fraud 101", href: "/stop-fraud" },
       { label: "Wire Fraud Overview", href: "/protect-your-money" },
+      { label: "Identity Protection", href: "/identity-protection" },
     ],
   },
   { label: "Find a Company", href: "/find-company" },

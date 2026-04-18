@@ -118,6 +118,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly" as const,
     },
     {
+      path: "/property-rights",
+      priority: 0.7,
+      changeFrequency: "monthly" as const,
+    },
+    {
       path: "/protect-your-money",
       priority: 0.8,
       changeFrequency: "monthly" as const,
@@ -125,6 +130,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
     {
       path: "/stop-fraud",
       priority: 0.8,
+      changeFrequency: "monthly" as const,
+    },
+    {
+      path: "/identity-protection",
+      priority: 0.7,
+      changeFrequency: "monthly" as const,
+    },
+    {
+      path: "/deed-theft",
+      priority: 0.7,
       changeFrequency: "monthly" as const,
     },
     {
