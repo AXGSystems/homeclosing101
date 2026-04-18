@@ -7,6 +7,7 @@ import { InlineAd } from "@/components/EliteProviders";
 import TrustedALTAMembers from "@/components/TrustedALTAMembers";
 import FirstTimeBuyerCTA from "@/components/FirstTimeBuyerCTA";
 import MiniQuiz from "@/components/MiniQuiz";
+import SponsorTip from "@/components/SponsorTip";
 
 const escrowQuiz = [
   {
@@ -393,6 +394,8 @@ export default function EscrowGuidePage() {
             </div>
             <p className="text-[10px] text-alta-teal font-medium mt-3">Source: 12 U.S.C. Section 2609; 12 CFR Part 1024 (Regulation X); CFPB Escrow Account Rules</p>
           </div>
+
+          <SponsorTip context="closing" />
 
           {/* Common escrow questions */}
           <h2 className="text-xl font-bold text-alta-navy mb-4">Common Escrow Questions</h2>

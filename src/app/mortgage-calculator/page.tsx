@@ -301,8 +301,6 @@ export default function MortgageCalculatorPage() {
             </div>
           </div>
 
-          <InlineAd />
-
           <ContextualSponsor context="mortgage" />
 
           <div className="p-4 bg-[#faf4e4] rounded-xl border border-[#e8d9a8] border-l-4 border-l-[#8b6914] my-6">

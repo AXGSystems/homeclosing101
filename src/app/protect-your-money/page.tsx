@@ -116,8 +116,6 @@ export default function ProtectYourMoneyPage() {
           {/* Interactive fraud flow + safeguards with expandable modals */}
           <ExpandableSafeguards />
 
-          <InlineAd />
-
           <ContextualSponsor context="fraud" />
 
           {/* Legitimate vs fraudulent communications */}

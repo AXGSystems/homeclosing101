@@ -6,6 +6,7 @@ import PrintButton from "@/components/PrintButton";
 import SaveToFolderBtn from "@/components/SaveToFolderBtn";
 import { InlineAd } from "@/components/EliteProviders";
 import FirstTimeBuyerCTA from "@/components/FirstTimeBuyerCTA";
+import SponsorTip from "@/components/SponsorTip";
 
 /* ─── Data ─── */
 
@@ -424,6 +425,8 @@ export default function AfterClosingPage() {
               ))}
             </div>
           </section>
+
+          <SponsorTip context="closing" />
 
           <div className="no-print">
             <FirstTimeBuyerCTA />

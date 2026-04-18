@@ -5,6 +5,7 @@ import Link from "next/link";
 import PageHero from "@/components/PageHero";
 import { InlineAd } from "@/components/EliteProviders";
 import FirstTimeBuyerCTA from "@/components/FirstTimeBuyerCTA";
+import SponsorTip from "@/components/SponsorTip";
 
 /* ───────── Appraiser evaluation areas (expandable tiles) ───────── */
 const evaluationAreas = [
@@ -439,6 +440,8 @@ export default function AppraisalGuidePage() {
               </Link>
             </div>
           </div>
+
+          <SponsorTip context="mortgage" />
 
           <FirstTimeBuyerCTA />
         </div>

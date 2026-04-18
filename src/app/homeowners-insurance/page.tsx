@@ -364,8 +364,6 @@ export default function HomeownersInsurancePage() {
             ))}
           </div>
 
-          <InlineAd />
-
           <div className="h-1 bg-gradient-to-r from-transparent via-alta-teal/20 to-transparent my-10" />
 
           {/* What it does NOT cover */}

@@ -4,6 +4,7 @@ import { InlineAd } from "@/components/EliteProviders";
 import TrustedALTAMembers from "@/components/TrustedALTAMembers";
 import { DeferredInspectionAreas, DeferredInspectionTiles } from "@/components/LazyInspection";
 import FirstTimeBuyerCTA from "@/components/FirstTimeBuyerCTA";
+import SponsorTip from "@/components/SponsorTip";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -235,6 +236,8 @@ export default function HomeInspectionPage() {
               </Link>
             </div>
           </div>
+
+          <SponsorTip context="insurance" />
 
           <FirstTimeBuyerCTA />
         </div>

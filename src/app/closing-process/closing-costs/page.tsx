@@ -733,8 +733,6 @@ export default function ClosingCostsPage() {
           );
         })()}
 
-        <InlineAd />
-
         <ContextualSponsor context="closing" />
 
         {/* Fee Categories */}
