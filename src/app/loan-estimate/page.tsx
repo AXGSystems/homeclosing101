@@ -5,6 +5,7 @@ import Link from "next/link";
 import PageHero from "@/components/PageHero";
 import { InlineAd } from "@/components/EliteProviders";
 import FirstTimeBuyerCTA from "@/components/FirstTimeBuyerCTA";
+import SponsorBadge from "@/components/SponsorBadge";
 
 const pages = [
   {
@@ -334,7 +335,10 @@ export default function LoanEstimatePage() {
           </div>
 
           {/* Page-by-page breakdown */}
-          <h2 className="text-xl font-bold text-alta-navy mb-6">Page-by-Page Breakdown</h2>
+          <div className="flex items-center gap-3 flex-wrap mb-6">
+            <h2 className="text-xl font-bold text-alta-navy">Page-by-Page Breakdown</h2>
+            <SponsorBadge />
+          </div>
           <p className="text-sm text-alta-gray mb-4">Click any section to explore detailed guidance, common errors, and what to do if something looks wrong.</p>
           <div className="space-y-8 mb-10">
             {pages.map((pg) => (

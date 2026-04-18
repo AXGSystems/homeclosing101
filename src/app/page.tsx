@@ -3,7 +3,6 @@ import EliteProviders, { InlineAd } from "@/components/EliteProviders";
 import MarketStats from "@/components/MarketStats";
 import AnimatedCounter from "@/components/AnimatedCounter";
 import HomepageTestimonials from "@/components/HomepageTestimonials";
-import QuickEstimate from "@/components/QuickEstimate";
 import StatCard from "@/components/StatCard";
 import HeroSearch from "@/components/HeroSearch";
 import SponsorShowcase from "@/components/SponsorShowcase";
@@ -154,11 +153,18 @@ export default function HomePage() {
         <div className="absolute bottom-0 left-1/4 w-80 h-80 bg-white/5 rounded-full translate-y-1/3 blur-3xl" />
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
-          {/* Hero copy */}
-          <div className="max-w-3xl mx-auto text-center mb-10">
-            <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full mb-6 border border-white/20">
+          {/* ALTA pill + search inline */}
+          <div className="flex items-center justify-between mb-6">
+            <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full border border-white/20">
               <span className="text-xs font-medium text-gray-200 uppercase tracking-wider">An ALTA Educational Initiative</span>
             </div>
+            <div className="hidden sm:block">
+              <HeroSearch />
+            </div>
+          </div>
+
+          {/* Hero copy */}
+          <div className="max-w-3xl mx-auto text-center mb-10">
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 leading-[1.08]">
               The Homebuyer&apos;s Guide to <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-blue-200">Closing with Confidence</span>
             </h1>
@@ -192,44 +198,31 @@ export default function HomePage() {
               </Link>
             </div>
 
-            {/* Popular Right Now */}
-            <div className="mt-6">
-              <p className="text-[10px] uppercase tracking-widest text-gray-400 mb-2 font-medium">Popular right now</p>
-              <div className="flex items-center gap-3 justify-center flex-wrap">
-                {[
-                  { label: "Wire Fraud Guide", href: "/stop-fraud", hot: true },
-                  { label: "Mortgage Calculator", href: "/mortgage-calculator" },
-                  { label: "First-Time Buyers", href: "/first-time-buyers" },
-                  { label: "HC101 Trivia", href: "/trivia" },
-                  { label: "Closing Checklist", href: "/closing-process/closing-checklist" },
-                ].map((item: { label: string; href: string; hot?: boolean }) => (
-                  <Link key={item.href} href={item.href} className="shrink-0 px-3 py-1.5 bg-white/10 backdrop-blur-sm rounded-full text-xs text-white font-medium hover:bg-white/20 transition-colors border border-white/10">
-                    {item.hot && <span className="text-[#943030] mr-1">●</span>}
-                    {item.label}
-                  </Link>
-                ))}
-              </div>
-            </div>
-
-            {/* Quick Estimate — desktop only */}
-            <QuickEstimate />
           </div>
 
-          {/* Search — centered above tiles */}
-          <div className="flex justify-center mb-6">
-            <HeroSearch />
-          </div>
-
-          {/* Stat tiles — full-width 4-column grid */}
+          {/* Stat tiles — full-width 4-column grid with 3D flip */}
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-5">
             {stats.map((stat, i) => (
               <Link key={stat.value} href={stat.href} className="group">
-                <StatCard accent={stat.accent} color={stat.color} icon={stat.icon} index={i}>
+                <StatCard
+                  accent={stat.accent}
+                  color={stat.color}
+                  icon={stat.icon}
+                  index={i}
+                  backContent={
+                    <>
+                      <p className="text-sm text-gray-200 leading-relaxed mb-3">{stat.preview}</p>
+                      <span className="inline-flex items-center text-xs font-semibold text-white/90 group-hover:text-white">
+                        Explore
+                        <svg className="w-3 h-3 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
+                      </span>
+                    </>
+                  }
+                >
                   <p className={`text-3xl lg:text-4xl font-bold mb-1 ${stat.accent} drop-shadow-[0_0_12px_currentColor]`}>
                     {"staticValue" in stat && stat.staticValue ? stat.staticValue : <AnimatedCounter end={stat.end} suffix={stat.suffix} duration={1800} />}
                   </p>
-                  <p className="text-sm text-white font-semibold leading-snug mb-2">{stat.label}</p>
-                  <p className="text-[11px] text-gray-300/80 leading-relaxed">{stat.preview}</p>
+                  <p className="text-sm text-white font-semibold leading-snug">{stat.label}</p>
                 </StatCard>
               </Link>
             ))}

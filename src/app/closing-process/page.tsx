@@ -2,6 +2,7 @@ import Link from "next/link";
 import PageHero from "@/components/PageHero";
 import { InlineAd } from "@/components/EliteProviders";
 import FirstTimeBuyerCTA from "@/components/FirstTimeBuyerCTA";
+import SponsorBadge from "@/components/SponsorBadge";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -56,7 +57,10 @@ export default function ClosingProcessPage() {
           <div className="mb-10">
             <div className="grid md:grid-cols-[1fr_280px] gap-6 items-center mb-8">
               <div>
-                <h2 className="text-2xl font-bold text-alta-navy mb-3">What Is a Real Estate Closing?</h2>
+                <div className="flex items-center gap-3 flex-wrap mb-3">
+                  <h2 className="text-2xl font-bold text-alta-navy">What Is a Real Estate Closing?</h2>
+                  <SponsorBadge />
+                </div>
                 <p className="text-sm text-alta-gray leading-relaxed mb-3">Closing — also called settlement — is the moment everything comes together. It&apos;s the final step in buying a home, where ownership legally transfers from the seller to you. You&apos;ll sign the mortgage documents, pay your closing costs and down payment, and receive the keys to your new home.</p>
                 <p className="text-sm text-alta-gray leading-relaxed mb-3">The process typically takes <strong className="text-alta-navy">30-45 days</strong> from accepted offer to closing day, and involves coordination between your lender, real estate agents, title company, insurance providers, and local government. Along the way, you&apos;ll encounter inspections, appraisals, title searches, insurance decisions, and a stack of documents to review and sign.</p>
                 <p className="text-sm text-alta-gray leading-relaxed">It can feel overwhelming — but it doesn&apos;t have to be. The guides below break every phase into clear, actionable steps so you know exactly what&apos;s happening, why it matters, and what to do next. Whether you&apos;re a first-time buyer or a seasoned homeowner, understanding the closing process is the best way to protect yourself and close with confidence.</p>

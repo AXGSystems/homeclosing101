@@ -7,6 +7,7 @@ import { InlineAd } from "@/components/EliteProviders";
 import FirstTimeBuyerCTA from "@/components/FirstTimeBuyerCTA";
 import SaveToFolderBtn from "@/components/SaveToFolderBtn";
 import ClosingDisclosureContent from "@/components/ClosingDisclosureContent";
+import SponsorBadge from "@/components/SponsorBadge";
 
 const docSections = [
   {
@@ -262,7 +263,10 @@ export default function DocumentChecklistPage() {
           <InlineAd />
 
           {/* Pre-closing timeline */}
-          <h2 className="text-xl font-bold text-alta-navy mb-4 mt-6">Pre-Closing Document Timeline</h2>
+          <div className="flex items-center gap-3 flex-wrap mb-4 mt-6">
+            <h2 className="text-xl font-bold text-alta-navy">Pre-Closing Document Timeline</h2>
+            <SponsorBadge />
+          </div>
           <p className="text-sm text-alta-gray mb-4 leading-relaxed">Documents don&apos;t all arrive at once. Here&apos;s when to expect each one so you&apos;re not scrambling at the last minute:</p>
           <div className="space-y-3 mb-8">
             {[
