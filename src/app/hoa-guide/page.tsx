@@ -1,10 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import Link from "next/link";
 import PageHero from "@/components/PageHero";
 import { InlineAd } from "@/components/EliteProviders";
 import FirstTimeBuyerCTA from "@/components/FirstTimeBuyerCTA";
+import PrintButton from "@/components/PrintButton";
+import SaveToFolderBtn from "@/components/SaveToFolderBtn";
 
 /* ------------------------------------------------------------------ */
 /*  Data                                                               */
@@ -99,6 +101,18 @@ const redFlags = [
       "Every HOA has CC&Rs (covenants, conditions, and restrictions), but some go too far. Review the rules carefully before buying. Common restrictions cover exterior paint colors, landscaping choices, pet breed/size limits, parking (including in your own driveway), renting out your home, holiday decorations, and satellite dish placement. If you can't live with the rules, don't buy in that community — changing CC&Rs typically requires a supermajority vote of all homeowners.",
     severity: "medium",
   },
+  {
+    flag: "Rapid Fee Increases (Over 10% Annually)",
+    detail:
+      "While moderate increases of 3-5% annually are normal and healthy, increases exceeding 10% per year signal that the HOA was previously undercharging and is now playing catch-up — or that costs are spiraling. Request the fee history for the past 5-10 years. Large, sudden jumps often precede special assessments or indicate that insurance premiums or vendor costs are out of control.",
+    severity: "medium",
+  },
+  {
+    flag: "Board Dominated by Developer",
+    detail:
+      "In new communities, the developer typically controls the HOA board until a certain percentage of units are sold (often 75%). During this period, the developer may keep dues artificially low to attract buyers, defer maintenance, and understate future costs. Once homeowners take over, they inherit deferred maintenance and an underfunded reserve. Ask when the developer plans to transition control and whether an independent reserve study has been conducted.",
+    severity: "high",
+  },
 ];
 
 const questionsToAsk = [
@@ -134,6 +148,14 @@ const questionsToAsk = [
     question: "What insurance does the HOA carry?",
     why: "Understanding the master policy helps you determine what your individual policy (HO-6) needs to cover. Ask for a copy of the declarations page showing coverage limits and deductibles.",
   },
+  {
+    question: "Are there any rental restrictions?",
+    why: "Some HOAs limit the percentage of units that can be rented, require minimum lease terms (e.g., no short-term rentals), or ban rentals entirely. This matters whether you plan to rent the property or want to ensure neighborhood stability.",
+  },
+  {
+    question: "What is the process for exterior modifications?",
+    why: "If you plan to add a fence, patio, solar panels, or paint your front door, you need to know the architectural review process. Some HOAs take weeks or months to approve changes, and unapproved modifications can result in forced removal at your expense.",
+  },
 ];
 
 const memberRights = [
@@ -166,6 +188,156 @@ const memberRights = [
     right: "Run for the Board",
     detail:
       "Any homeowner in good standing can typically run for a seat on the HOA board of directors. Serving on the board gives you direct influence over budgets, rules, and community direction. If you're unhappy with how things are run, running for the board is the most effective way to make change.",
+  },
+  {
+    right: "Challenge Fines and Assessments",
+    detail:
+      "You have the right to dispute fines and assessments through the HOA's internal grievance process. Most governing documents outline a hearing procedure where you can present your case. If internal remedies fail, many states provide mediation or arbitration programs specifically for HOA disputes.",
+  },
+];
+
+const prosData = [
+  {
+    title: "Maintained Common Areas & Amenities",
+    detail: "Pools, gyms, parks, trails, and clubhouses are professionally maintained. You share the cost with all homeowners, making amenities accessible that would be prohibitively expensive to maintain individually. A community pool that costs $30,000-$50,000/year to operate might cost each homeowner only $15-25/month.",
+  },
+  {
+    title: "Property Value Protection",
+    detail: "Architectural standards prevent eyesores — abandoned cars, unkempt yards, clashing exterior colors — that can drag down neighborhood property values. Studies by the Community Associations Institute suggest homes in HOA communities sell for 4-6% more on average than comparable non-HOA homes, though this varies significantly by market.",
+  },
+  {
+    title: "Dispute Resolution Structure",
+    detail: "When conflicts arise between neighbors — noise complaints, property line issues, parking disputes — the HOA provides a formal process for resolution. Without an HOA, your options are limited to awkward conversations, mediation, or costly lawsuits.",
+  },
+  {
+    title: "Shared Maintenance Costs (Condos/Townhomes)",
+    detail: "In condos and townhomes, the HOA handles major exterior maintenance: roof replacement, siding repairs, painting, parking lot repaving, and elevator maintenance. These costs are spread across all owners, preventing any single owner from facing a $15,000-$30,000 roof bill alone.",
+  },
+  {
+    title: "Community Events & Social Connections",
+    detail: "Many HOAs organize holiday parties, block parties, garage sales, and community events that foster neighborly connections. For new residents and families, this can be a meaningful quality-of-life benefit.",
+  },
+  {
+    title: "Bundled Services",
+    detail: "Snow removal, trash collection, landscaping, and sometimes utilities like water, sewer, cable, or internet are included in your monthly fee. Bundled services often cost less than contracting individually, and you don't have to manage multiple vendors.",
+  },
+];
+
+const consData = [
+  {
+    title: "Monthly Fees That Increase Over Time",
+    detail: "HOA fees typically increase 3-5% annually, and sometimes more. A $300/month fee today could become $445/month in 10 years at a 4% annual increase. Unlike a fixed-rate mortgage, this housing cost is never locked in. Some HOAs have raised fees by 20-50% in a single year when insurance premiums spiked or deferred maintenance caught up.",
+  },
+  {
+    title: "Special Assessments ($5,000 - $60,000+ Per Unit)",
+    detail: "When reserves fail, the board levies special assessments — one-time charges that can range from a few thousand to $60,000 or more per unit. In 2024, Champlain Towers-style building safety laws triggered assessments exceeding $100,000 per unit in some Florida condos. Special assessments can be due immediately or spread over months, but they are mandatory and non-negotiable.",
+  },
+  {
+    title: "Restrictive Rules on Your Own Property",
+    detail: "HOAs can dictate paint colors, landscaping choices, fence styles, parking (including in your own driveway), pet breeds and sizes, holiday decoration timelines, satellite dish placement, and whether you can rent out your home. Some HOAs prohibit political signs, limit the number of vehicles, or ban working on cars in your garage with the door open.",
+  },
+  {
+    title: "Enforcement Inconsistencies",
+    detail: "Selective enforcement — where some homeowners are cited while others are ignored for the same violation — is one of the most common HOA complaints. Board members or their friends may receive favorable treatment while other homeowners face fines. Inconsistent enforcement can be grounds for legal challenge but is costly and time-consuming to fight.",
+  },
+  {
+    title: "Loss of Autonomy Over Your Property",
+    detail: "When you buy into an HOA, you are agreeing to abide by rules set by others — often rules established before you moved in. Changing CC&Rs typically requires a supermajority vote (67-75% of all homeowners), making it extremely difficult to modify rules you disagree with. You own the property but cede significant control over how you use it.",
+  },
+  {
+    title: "Volunteer Boards Making Major Financial Decisions",
+    detail: "HOA boards are staffed by volunteer homeowners who may lack experience in financial management, construction oversight, contract negotiation, or legal compliance. A board that signs a bad vendor contract, fails to maintain reserves, or ignores building maintenance can cost every owner tens of thousands of dollars. Professional management helps but adds another $150-300/unit/year to costs.",
+  },
+  {
+    title: "HOA Liens and Potential Foreclosure",
+    detail: "If you fall behind on HOA dues, the association can place a lien on your property. In many states, HOAs have \"super-lien\" status, meaning their lien takes priority over even the mortgage. In extreme cases, HOAs can and do foreclose on homes for unpaid dues — sometimes for amounts as low as a few thousand dollars. ATTOM Data Solutions reported 284,933 HOA lien filings in 2025.",
+  },
+];
+
+const costComparison = [
+  {
+    type: "Single-Family HOA",
+    range: "$50 - $200/mo",
+    includes: "Basic amenities (pool, park, trails), common area landscaping, entry gate maintenance. Homeowner is responsible for their own exterior, roof, and yard.",
+    color: "from-[#2d6b3f] to-[#235532]",
+  },
+  {
+    type: "Townhome HOA",
+    range: "$150 - $400/mo",
+    includes: "Exterior building maintenance, roof, shared walls, landscaping, insurance for common structures. Usually includes snow removal and trash.",
+    color: "from-[#1a5276] to-[#154463]",
+  },
+  {
+    type: "Condo HOA",
+    range: "$200 - $800/mo",
+    includes: "Full building maintenance (elevator, hallways, lobby, roof, facade), master insurance, water/sewer, sometimes heat. Higher in high-rises with doormen, concierge, or parking garages.",
+    color: "from-[#5b3a8c] to-[#472d6e]",
+  },
+  {
+    type: "Luxury Community",
+    range: "$500 - $1,500+/mo",
+    includes: "Golf courses, marina access, concierge services, valet parking, private beaches, 24/7 security, resort-style pools, tennis/pickleball courts. Some luxury condos in NYC and Miami exceed $5,000/mo.",
+    color: "from-[#8b6914] to-[#6b5010]",
+  },
+];
+
+const disputeSteps = [
+  {
+    step: 1,
+    title: "Review Your CC&Rs",
+    detail: "Start by reading the specific rule you believe was violated or misapplied. Understand the exact language — many disputes arise from ambiguous wording. Check the bylaws for the enforcement procedure, including notice requirements and hearing rights.",
+  },
+  {
+    step: 2,
+    title: "Attend Board Meetings & Speak During Open Comment",
+    detail: "Most states require HOA board meetings to include an open comment period where homeowners can raise concerns. Come prepared with specific facts and a clear ask. Be professional — personal attacks undermine your credibility. Bring supporting documentation (photos, dates, correspondence).",
+  },
+  {
+    step: 3,
+    title: "Request a Formal Hearing",
+    detail: "Most CC&Rs require the board to hold a hearing before imposing fines or penalties. This is your right — exercise it. At the hearing, present your case, cite the specific CC&R provision, and ask for a written decision. If the board denies your hearing request, that itself may be a violation of your governing documents.",
+  },
+  {
+    step: 4,
+    title: "Mediation Through Your State's HOA Program",
+    detail: "Many states offer HOA dispute resolution programs through the attorney general's office, department of real estate, or a dedicated ombudsman. Mediation is typically faster and cheaper than litigation. States like Florida, Nevada, California, and Colorado have formal HOA mediation/arbitration programs.",
+  },
+  {
+    step: 5,
+    title: "Consult a Real Estate Attorney",
+    detail: "If informal resolution fails, consult an attorney who specializes in HOA law (also called community association law). Many offer free initial consultations. Key legal issues include selective enforcement, failure to follow governing documents, breach of fiduciary duty, and violations of state HOA statutes. Costs vary but expect $200-$500/hour.",
+  },
+  {
+    step: 6,
+    title: "File a Complaint with Your State Attorney General",
+    detail: "If you suspect fraud, embezzlement, or corruption by the HOA board, file a formal complaint with your state attorney general's office. This is appropriate when board members are misusing funds, failing to hold required elections, or refusing to provide financial records. Some states also allow complaints to the Department of Business and Professional Regulation or the state real estate commission.",
+  },
+];
+
+const trendData = [
+  {
+    stat: "284,933",
+    label: "HOA Liens Filed in 2025",
+    detail: "HOA lien filings increased 8.6% year-over-year, reflecting rising fees and more aggressive collection practices by management companies.",
+    source: "ATTOM Data Solutions, 2025",
+  },
+  {
+    stat: "50%",
+    label: "Jump in HOA Foreclosures (2022-2025)",
+    detail: "HOA-related foreclosures increased approximately 50% nationally between 2022 and 2025. While still a small fraction of total foreclosures, the trend is accelerating, particularly in states with HOA super-lien statutes.",
+    source: "ATTOM Data Solutions; National Association of Realtors, 2025",
+  },
+  {
+    stat: "30-60%",
+    label: "Insurance Premium Increases (FL, CA, TX)",
+    detail: "Property insurance premiums have surged 30-60% in disaster-prone states, directly driving up HOA fees. In Florida, some condo HOAs saw insurance costs triple between 2022 and 2025, with premium increases passed directly to unit owners through fee hikes.",
+    source: "Insurance Information Institute; Bankrate, 2025",
+  },
+  {
+    stat: "\"Shadow Mortgages\"",
+    label: "Bankrate Warning on Rising HOA Costs",
+    detail: "Bankrate's 2025 housing analysis warned that HOA fees are becoming \"shadow mortgages\" — a second, perpetually increasing payment that buyers underestimate. Unlike a fixed-rate mortgage, HOA fees have no cap and no payoff date.",
+    source: "Bankrate, \"The Hidden Cost of HOA Living,\" 2025",
   },
 ];
 
@@ -207,7 +379,7 @@ function ExpandableTile({
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
             </svg>
           </div>
-          <p className="text-sm text-alta-gray leading-relaxed mt-1">{summary}</p>
+          <p className="text-xs text-alta-gray leading-relaxed mt-1">{summary}</p>
         </div>
       </div>
       <div
@@ -215,6 +387,123 @@ function ExpandableTile({
       >
         <div className="px-4 pb-4 pt-0 ml-[52px] border-t border-[#e2eaf0] mt-0 pt-3">
           <p className="text-xs text-gray-600 leading-relaxed">{detail}</p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function BudgetCalculator() {
+  const [homePrice, setHomePrice] = useState(350000);
+  const [hoaFee, setHoaFee] = useState(250);
+  const annualIncrease = 0.04;
+
+  const calc = useMemo(() => {
+    const rate = 0.07 / 12;
+    const n = 360;
+    const loanAmount = homePrice * 0.8;
+    const monthlyMortgage = loanAmount * (rate * Math.pow(1 + rate, n)) / (Math.pow(1 + rate, n) - 1);
+    const monthlyTax = (homePrice * 0.012) / 12;
+    const monthlyInsurance = 150;
+
+    const totalHousingNoHOA = monthlyMortgage + monthlyTax + monthlyInsurance;
+    const totalHousing = totalHousingNoHOA + hoaFee;
+    const hoaPercent = ((hoaFee / totalHousing) * 100).toFixed(1);
+
+    let fiveYearTotal = 0;
+    let tenYearTotal = 0;
+    for (let year = 0; year < 10; year++) {
+      const yearlyFee = hoaFee * Math.pow(1 + annualIncrease, year) * 12;
+      if (year < 5) fiveYearTotal += yearlyFee;
+      tenYearTotal += yearlyFee;
+    }
+
+    const feeYear10 = hoaFee * Math.pow(1 + annualIncrease, 9);
+
+    return {
+      monthlyMortgage: Math.round(monthlyMortgage),
+      totalHousing: Math.round(totalHousing),
+      hoaPercent,
+      fiveYearTotal: Math.round(fiveYearTotal),
+      tenYearTotal: Math.round(tenYearTotal),
+      feeYear10: Math.round(feeYear10),
+    };
+  }, [homePrice, hoaFee, annualIncrease]);
+
+  return (
+    <div className="rounded-2xl border border-[#c5d8e4] bg-[#fafcfe] overflow-hidden shadow-sm">
+      <div className="bg-gradient-to-r from-[#1a5276] to-[#154463] px-5 py-3">
+        <h3 className="text-white font-bold text-sm">HOA Budget Impact Calculator</h3>
+        <p className="text-white/70 text-xs mt-0.5">See how HOA fees affect your total monthly housing cost</p>
+      </div>
+      <div className="p-5 space-y-5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label className="block text-xs font-semibold text-alta-navy mb-1.5">
+              Home Price: ${homePrice.toLocaleString()}
+            </label>
+            <input
+              type="range"
+              min={150000}
+              max={1000000}
+              step={10000}
+              value={homePrice}
+              onChange={(e) => setHomePrice(Number(e.target.value))}
+              className="w-full accent-alta-teal"
+            />
+            <div className="flex justify-between text-[10px] text-alta-gray mt-0.5">
+              <span>$150k</span>
+              <span>$1M</span>
+            </div>
+          </div>
+          <div>
+            <label className="block text-xs font-semibold text-alta-navy mb-1.5">
+              Monthly HOA Fee: ${hoaFee}/mo
+            </label>
+            <input
+              type="range"
+              min={50}
+              max={1500}
+              step={25}
+              value={hoaFee}
+              onChange={(e) => setHoaFee(Number(e.target.value))}
+              className="w-full accent-alta-teal"
+            />
+            <div className="flex justify-between text-[10px] text-alta-gray mt-0.5">
+              <span>$50</span>
+              <span>$1,500</span>
+            </div>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+          <div className="p-3 bg-[#e8f0f5] rounded-xl text-center">
+            <p className="text-lg font-extrabold text-alta-navy">{calc.hoaPercent}%</p>
+            <p className="text-[10px] text-alta-gray leading-tight mt-1">HOA as % of total monthly housing cost</p>
+          </div>
+          <div className="p-3 bg-[#e8f0f5] rounded-xl text-center">
+            <p className="text-lg font-extrabold text-alta-navy">${calc.fiveYearTotal.toLocaleString()}</p>
+            <p className="text-[10px] text-alta-gray leading-tight mt-1">Total HOA cost over 5 years</p>
+          </div>
+          <div className="p-3 bg-[#e8f0f5] rounded-xl text-center">
+            <p className="text-lg font-extrabold text-alta-navy">${calc.tenYearTotal.toLocaleString()}</p>
+            <p className="text-[10px] text-alta-gray leading-tight mt-1">Total HOA cost over 10 years</p>
+          </div>
+          <div className="p-3 bg-[#e8f0f5] rounded-xl text-center">
+            <p className="text-lg font-extrabold text-alta-navy">${calc.feeYear10}/mo</p>
+            <p className="text-[10px] text-alta-gray leading-tight mt-1">Projected monthly fee in year 10</p>
+          </div>
+        </div>
+
+        <div className="p-3 bg-amber-50 rounded-xl border border-amber-200">
+          <p className="text-xs text-gray-700 leading-relaxed">
+            <span className="font-bold text-[#8b6914]">Your ${hoaFee}/mo HOA fee will cost you ${calc.tenYearTotal.toLocaleString()} over 10 years</span>{" "}
+            (assuming 4% annual increases). By year 10, your monthly fee will be approximately ${calc.feeYear10}/mo — a{" "}
+            {Math.round(((calc.feeYear10 - hoaFee) / hoaFee) * 100)}% increase from today.
+          </p>
+          <p className="text-[10px] text-[#8b6914] font-medium mt-2">
+            Factor HOA fees into your affordability calculation — lenders include them in your debt-to-income (DTI) ratio.
+          </p>
         </div>
       </div>
     </div>
@@ -229,6 +518,11 @@ export default function HOAGuidePage() {
   const [expandedFlag, setExpandedFlag] = useState<number | null>(null);
   const [expandedQuestion, setExpandedQuestion] = useState<number | null>(null);
   const [expandedRight, setExpandedRight] = useState<number | null>(null);
+  const [expandedPro, setExpandedPro] = useState<number | null>(null);
+  const [expandedCon, setExpandedCon] = useState<number | null>(null);
+  const [expandedDispute, setExpandedDispute] = useState<number | null>(null);
+  const [expandedTrend, setExpandedTrend] = useState<number | null>(null);
+  const [expandedCost, setExpandedCost] = useState<number | null>(null);
 
   return (
     <>
@@ -293,6 +587,136 @@ export default function HOAGuidePage() {
                 <p className="text-[10px] text-white/50 mt-2">Source: Bankrate, 2025</p>
               </div>
             </div>
+          </section>
+
+          {/* ---- Objective Pros & Cons ---- */}
+          <section className="mb-8">
+            <h2 className="text-xl font-bold text-alta-navy mb-2">The Honest Pros and Cons of HOA Living</h2>
+            <p className="text-sm text-alta-gray mb-4">
+              HOAs are neither inherently good nor bad — they are a tradeoff. Here is an objective look at both sides to
+              help you decide whether HOA living is right for you.
+            </p>
+
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+              {/* PROS */}
+              <div>
+                <div className="flex items-center gap-2 mb-3">
+                  <div className="w-7 h-7 rounded-full bg-[#2d6b3f]/10 flex items-center justify-center text-[#2d6b3f] shrink-0">
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                    </svg>
+                  </div>
+                  <h3 className="font-bold text-[#2d6b3f] text-sm">Advantages</h3>
+                </div>
+                <div className="space-y-2">
+                  {prosData.map((item, i) => (
+                    <div
+                      key={i}
+                      className="rounded-xl border border-green-200 bg-green-50/50 overflow-hidden cursor-pointer transition-all hover:shadow-sm"
+                      onClick={() => setExpandedPro(expandedPro === i ? null : i)}
+                    >
+                      <div className="p-3 flex items-center justify-between gap-2">
+                        <h4 className="font-semibold text-alta-navy text-xs">{item.title}</h4>
+                        <svg
+                          className={`w-3.5 h-3.5 text-alta-gray shrink-0 transition-transform duration-300 ${expandedPro === i ? "rotate-180" : ""}`}
+                          fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        >
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                        </svg>
+                      </div>
+                      <div className={`overflow-hidden transition-all duration-300 ${expandedPro === i ? "max-h-[300px] opacity-100" : "max-h-0 opacity-0"}`}>
+                        <div className="px-3 pb-3 border-t border-green-200 pt-2">
+                          <p className="text-[11px] text-gray-600 leading-relaxed">{item.detail}</p>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* CONS */}
+              <div>
+                <div className="flex items-center gap-2 mb-3">
+                  <div className="w-7 h-7 rounded-full bg-red-100 flex items-center justify-center text-red-600 shrink-0">
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                  </div>
+                  <h3 className="font-bold text-red-700 text-sm">Disadvantages</h3>
+                </div>
+                <div className="space-y-2">
+                  {consData.map((item, i) => (
+                    <div
+                      key={i}
+                      className="rounded-xl border border-red-200 bg-red-50/50 overflow-hidden cursor-pointer transition-all hover:shadow-sm"
+                      onClick={() => setExpandedCon(expandedCon === i ? null : i)}
+                    >
+                      <div className="p-3 flex items-center justify-between gap-2">
+                        <h4 className="font-semibold text-alta-navy text-xs">{item.title}</h4>
+                        <svg
+                          className={`w-3.5 h-3.5 text-alta-gray shrink-0 transition-transform duration-300 ${expandedCon === i ? "rotate-180" : ""}`}
+                          fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        >
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                        </svg>
+                      </div>
+                      <div className={`overflow-hidden transition-all duration-300 ${expandedCon === i ? "max-h-[300px] opacity-100" : "max-h-0 opacity-0"}`}>
+                        <div className="px-3 pb-3 border-t border-red-200 pt-2">
+                          <p className="text-[11px] text-gray-600 leading-relaxed">{item.detail}</p>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {/* ---- Cost Comparison by Property Type ---- */}
+          <section className="mb-8">
+            <h2 className="text-xl font-bold text-alta-navy mb-2">Real Cost Comparison by Property Type</h2>
+            <p className="text-sm text-alta-gray mb-4">
+              HOA fees vary dramatically based on property type, amenities, and location. Here is what to expect.
+            </p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {costComparison.map((item, i) => (
+                <div
+                  key={item.type}
+                  className="rounded-2xl overflow-hidden shadow-sm border border-[#c5d8e4] cursor-pointer transition-all hover:shadow-md"
+                  onClick={() => setExpandedCost(expandedCost === i ? null : i)}
+                >
+                  <div className={`bg-gradient-to-r ${item.color} px-4 py-3 flex items-center justify-between`}>
+                    <div>
+                      <h3 className="text-white font-bold text-sm">{item.type}</h3>
+                      <p className="text-white/90 font-extrabold text-lg">{item.range}</p>
+                    </div>
+                    <svg
+                      className={`w-4 h-4 text-white/70 shrink-0 transition-transform duration-300 ${expandedCost === i ? "rotate-180" : ""}`}
+                      fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </div>
+                  <div className={`overflow-hidden transition-all duration-300 ${expandedCost === i ? "max-h-[300px] opacity-100" : "max-h-0 opacity-0"}`}>
+                    <div className="p-4">
+                      <p className="text-xs text-gray-600 leading-relaxed">
+                        <span className="font-semibold text-alta-navy">Typically includes: </span>
+                        {item.includes}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+            <p className="text-[10px] text-alta-teal font-medium mt-3">
+              Source: Bankrate, 2025; U.S. Census Bureau American Housing Survey; Community Associations Institute
+            </p>
+          </section>
+
+          {/* ---- Budget Impact Calculator ---- */}
+          <section className="mb-8">
+            <h2 className="text-xl font-bold text-alta-navy mb-3">HOA Budget Impact Calculator</h2>
+            <BudgetCalculator />
           </section>
 
           {/* ---- What Fees Cover ---- */}
@@ -399,7 +823,7 @@ export default function HOAGuidePage() {
               <div className="p-5 space-y-4">
                 <p className="text-sm text-alta-gray leading-relaxed">
                   A <strong className="text-alta-navy">special assessment</strong> is a one-time charge levied by the
-                  HOA board when the reserve fund doesn't have enough money to cover a major expense — such as a roof
+                  HOA board when the reserve fund doesn&apos;t have enough money to cover a major expense — such as a roof
                   replacement, repaving, structural repairs, or a legal settlement. Special assessments can range from a
                   few hundred dollars to <strong className="text-alta-navy">tens of thousands of dollars</strong> per
                   unit.
@@ -460,6 +884,78 @@ export default function HOAGuidePage() {
             </div>
           </section>
 
+          {/* ---- 2025-2026 HOA Trends ---- */}
+          <section className="mb-8">
+            <h2 className="text-xl font-bold text-alta-navy mb-2">2025-2026 HOA Trends: What Buyers Need to Know</h2>
+            <p className="text-sm text-alta-gray mb-4">
+              The HOA landscape is shifting rapidly. These trends are affecting homeowners and buyers right now.
+            </p>
+            <div className="space-y-3">
+              {trendData.map((item, i) => (
+                <div
+                  key={i}
+                  className="rounded-2xl border border-[#c5d8e4] bg-[#fafcfe] overflow-hidden shadow-sm cursor-pointer transition-all hover:shadow-md"
+                  onClick={() => setExpandedTrend(expandedTrend === i ? null : i)}
+                >
+                  <div className="p-4 flex items-start gap-3">
+                    <div className="w-10 h-10 rounded-xl bg-[#5b3a8c]/10 flex items-center justify-center shrink-0">
+                      <svg className="w-5 h-5 text-[#5b3a8c]" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 18L9 11.25l4.306 4.307a11.95 11.95 0 015.814-5.519l2.74-1.22m0 0l-5.94-2.28m5.94 2.28l-2.28 5.941" />
+                      </svg>
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center justify-between gap-2">
+                        <div>
+                          <span className="font-extrabold text-[#5b3a8c] text-sm mr-2">{item.stat}</span>
+                          <span className="font-bold text-alta-navy text-sm">{item.label}</span>
+                        </div>
+                        <svg
+                          className={`w-4 h-4 text-alta-gray shrink-0 transition-transform duration-300 ${expandedTrend === i ? "rotate-180" : ""}`}
+                          fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        >
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+                  <div className={`overflow-hidden transition-all duration-300 ${expandedTrend === i ? "max-h-[400px] opacity-100" : "max-h-0 opacity-0"}`}>
+                    <div className="px-4 pb-4 ml-[52px] border-t border-[#e2eaf0] pt-3">
+                      <p className="text-xs text-gray-600 leading-relaxed">{item.detail}</p>
+                      <p className="text-[10px] text-alta-teal font-medium mt-2">{item.source}</p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+
+              {/* Legislative updates */}
+              <div className="rounded-2xl border border-[#c5d8e4] bg-[#fafcfe] overflow-hidden shadow-sm">
+                <div className="p-4">
+                  <h3 className="font-bold text-alta-navy text-sm mb-2">New State Laws Affecting HOAs</h3>
+                  <div className="space-y-2">
+                    <div className="p-3 bg-[#e8f0f5] rounded-xl">
+                      <p className="text-xs text-alta-gray leading-relaxed">
+                        <strong className="text-alta-navy">California SB 326</strong> — Requires inspection of exterior elevated elements (balconies, walkways, stairways) in condos with three or more units. Initial inspections must be completed by January 1, 2025, with follow-up inspections every 9 years. Non-compliance can result in civil penalties.
+                      </p>
+                    </div>
+                    <div className="p-3 bg-[#e8f0f5] rounded-xl">
+                      <p className="text-xs text-alta-gray leading-relaxed">
+                        <strong className="text-alta-navy">California AB 130 (2025)</strong> — Reforms HOA enforcement practices, including new requirements for notice, hearing procedures, and limits on fine amounts. Aimed at reducing selective enforcement and protecting homeowner rights.
+                      </p>
+                    </div>
+                    <div className="p-3 bg-[#e8f0f5] rounded-xl">
+                      <p className="text-xs text-alta-gray leading-relaxed">
+                        <strong className="text-alta-navy">Florida SB 4-D / SB 154 (2022-2024)</strong> — Post-Surfside reforms requiring structural inspections for condos 3+ stories, 25+ years old (or 20+ years within 3 miles of coast). Reserves for structural components can no longer be waived. These laws triggered massive special assessments across Florida.
+                      </p>
+                    </div>
+                  </div>
+                  <p className="text-[10px] text-alta-teal font-medium mt-3">
+                    Source: California Legislature; Florida Division of Condominiums
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
+
           {/* ---- Questions to Ask ---- */}
           <section className="mb-8">
             <h2 className="text-xl font-bold text-alta-navy mb-2">Questions to Ask Before Buying in an HOA</h2>
@@ -511,8 +1007,88 @@ export default function HOAGuidePage() {
 
           <InlineAd />
 
-          {/* ---- Your Rights ---- */}
+          {/* ---- HOA Insurance Explained ---- */}
           <section className="mb-8 mt-8">
+            <h2 className="text-xl font-bold text-alta-navy mb-3">HOA Insurance Explained</h2>
+            <div className="rounded-2xl border border-[#c5d8e4] bg-[#fafcfe] overflow-hidden shadow-sm">
+              <div className="bg-gradient-to-r from-[#1a5276] to-[#154463] px-5 py-3">
+                <h3 className="text-white font-bold text-sm">Master Policy vs. Your Individual Policy</h3>
+              </div>
+              <div className="p-5 space-y-4">
+                <p className="text-sm text-alta-gray leading-relaxed">
+                  Understanding the gap between the HOA&apos;s master insurance policy and your individual coverage is critical.
+                  If you assume the HOA covers everything, you may be exposed to tens of thousands of dollars in uninsured losses.
+                </p>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div className="p-4 bg-[#e8f0f5] rounded-xl border border-[#c5d8e4]">
+                    <h4 className="font-bold text-sm text-[#1a5276] mb-2">HOA Master Policy Covers</h4>
+                    <ul className="text-xs text-gray-600 leading-relaxed space-y-1.5">
+                      <li className="flex items-start gap-2">
+                        <span className="text-alta-teal mt-0.5 font-bold">+</span>
+                        Common area structures (clubhouse, pool, gym)
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <span className="text-alta-teal mt-0.5 font-bold">+</span>
+                        Exterior building elements (roof, siding, hallways) in condos
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <span className="text-alta-teal mt-0.5 font-bold">+</span>
+                        General liability for injuries in common areas
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <span className="text-alta-teal mt-0.5 font-bold">+</span>
+                        Shared mechanical systems (elevator, HVAC for common areas)
+                      </li>
+                    </ul>
+                  </div>
+                  <div className="p-4 bg-red-50 rounded-xl border border-red-100">
+                    <h4 className="font-bold text-sm text-red-700 mb-2">What It Does NOT Cover</h4>
+                    <ul className="text-xs text-gray-600 leading-relaxed space-y-1.5">
+                      <li className="flex items-start gap-2">
+                        <span className="text-red-500 mt-0.5 font-bold">-</span>
+                        Interior of your unit (walls-in, flooring, cabinets, fixtures)
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <span className="text-red-500 mt-0.5 font-bold">-</span>
+                        Your personal property (furniture, electronics, clothing)
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <span className="text-red-500 mt-0.5 font-bold">-</span>
+                        Your personal liability (someone injured inside your unit)
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <span className="text-red-500 mt-0.5 font-bold">-</span>
+                        Loss of use / temporary housing if your unit is uninhabitable
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <span className="text-red-500 mt-0.5 font-bold">-</span>
+                        Master policy deductible (often $10,000-$50,000, assessed to the unit owner who files the claim)
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div className="p-3 bg-amber-50 rounded-xl border border-amber-200">
+                  <h4 className="font-bold text-xs text-[#8b6914] mb-1">HO-6 Policy for Condo Owners</h4>
+                  <p className="text-xs text-gray-600 leading-relaxed">
+                    If you own a condo, you need an <strong>HO-6 policy</strong> (sometimes called a &quot;walls-in&quot; policy).
+                    This covers your interior finishes, personal property, personal liability, loss assessment coverage
+                    (if the HOA assesses you for a claim against the master policy), and loss of use. Typical cost: $200-$500/year.
+                    Critical: make sure your HO-6 includes <strong>loss assessment coverage</strong> of at least $25,000-$50,000 —
+                    this covers your share if the HOA&apos;s master policy deductible or an underinsured loss is assessed to unit owners.
+                  </p>
+                </div>
+
+                <p className="text-[10px] text-alta-teal font-medium">
+                  Source: Insurance Information Institute; National Association of Insurance Commissioners
+                </p>
+              </div>
+            </div>
+          </section>
+
+          {/* ---- Your Rights ---- */}
+          <section className="mb-8">
             <h2 className="text-xl font-bold text-alta-navy mb-2">Your Rights as an HOA Member</h2>
             <p className="text-sm text-alta-gray mb-4">
               As a dues-paying homeowner, you have legal rights. These vary by state, but the following are broadly
@@ -560,6 +1136,100 @@ export default function HOAGuidePage() {
               ))}
             </div>
           </section>
+
+          {/* ---- Dispute Resolution ---- */}
+          <section className="mb-8">
+            <h2 className="text-xl font-bold text-alta-navy mb-2">HOA Dispute Resolution: Step by Step</h2>
+            <p className="text-sm text-alta-gray mb-4">
+              If you have a dispute with your HOA — a fine you believe is unjust, selective enforcement, or a board
+              decision you oppose — follow these steps in order before escalating.
+            </p>
+            <div className="space-y-2">
+              {disputeSteps.map((item, i) => (
+                <div
+                  key={i}
+                  className="rounded-xl border border-[#c5d8e4] bg-[#fafcfe] overflow-hidden cursor-pointer transition-all hover:shadow-sm"
+                  onClick={() => setExpandedDispute(expandedDispute === i ? null : i)}
+                >
+                  <div className="p-3 flex items-start gap-3">
+                    <div className="w-8 h-8 rounded-full bg-alta-navy flex items-center justify-center text-white shrink-0 text-xs font-bold">
+                      {item.step}
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center justify-between gap-2">
+                        <h3 className="font-bold text-alta-navy text-sm">{item.title}</h3>
+                        <svg
+                          className={`w-4 h-4 text-alta-gray shrink-0 transition-transform duration-300 ${expandedDispute === i ? "rotate-180" : ""}`}
+                          fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        >
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+                  <div className={`overflow-hidden transition-all duration-300 ${expandedDispute === i ? "max-h-[300px] opacity-100" : "max-h-0 opacity-0"}`}>
+                    <div className="px-3 pb-3 ml-11 border-t border-[#e2eaf0] pt-2">
+                      <p className="text-xs text-gray-600 leading-relaxed">{item.detail}</p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          {/* ---- Resources ---- */}
+          <section className="mb-8">
+            <h2 className="text-xl font-bold text-alta-navy mb-3">HOA Resources</h2>
+            <div className="rounded-2xl border border-[#c5d8e4] bg-[#fafcfe] overflow-hidden shadow-sm">
+              <div className="p-5 space-y-4">
+                <p className="text-sm text-alta-gray leading-relaxed">
+                  HOA laws vary significantly by state. The following resources can help you understand your rights and
+                  options in your specific jurisdiction.
+                </p>
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                  <div className="p-4 bg-[#e8f0f5] rounded-xl border border-[#c5d8e4]">
+                    <h4 className="font-bold text-sm text-alta-navy mb-2">Community Associations Institute</h4>
+                    <p className="text-xs text-gray-600 leading-relaxed mb-2">
+                      The largest trade organization for HOAs and community associations. Provides research, best
+                      practices, and legislative tracking.
+                    </p>
+                    <p className="text-xs text-alta-teal font-medium">caionline.org</p>
+                  </div>
+                  <div className="p-4 bg-[#e8f0f5] rounded-xl border border-[#c5d8e4]">
+                    <h4 className="font-bold text-sm text-alta-navy mb-2">State HOA Ombudsman Programs</h4>
+                    <p className="text-xs text-gray-600 leading-relaxed mb-2">
+                      Several states (FL, NV, CO, VA, and others) have ombudsman offices that mediate HOA disputes,
+                      investigate complaints, and provide homeowner education at no cost.
+                    </p>
+                    <p className="text-xs text-alta-teal font-medium">Search: &quot;[your state] HOA ombudsman&quot;</p>
+                  </div>
+                  <div className="p-4 bg-[#e8f0f5] rounded-xl border border-[#c5d8e4]">
+                    <h4 className="font-bold text-sm text-alta-navy mb-2">Your State&apos;s HOA Statutes</h4>
+                    <p className="text-xs text-gray-600 leading-relaxed mb-2">
+                      Every state has laws governing HOAs. Key statutes include the Uniform Common Interest Ownership Act
+                      (adopted with variations in many states), Davis-Stirling Act (CA), and Chapter 720 (FL).
+                    </p>
+                    <p className="text-xs text-alta-teal font-medium">Search: &quot;[your state] HOA statute&quot;</p>
+                  </div>
+                </div>
+                <div className="p-3 bg-amber-50 rounded-xl border border-amber-200">
+                  <p className="text-xs text-gray-700 leading-relaxed">
+                    <span className="font-bold text-[#8b6914]">Before buying in an HOA community:</span> Request the
+                    full HOA disclosure packet (also called a resale certificate or HOA estoppel). This typically includes
+                    the CC&amp;Rs, bylaws, current budget, reserve study, meeting minutes, pending litigation disclosure,
+                    and any planned special assessments. Your real estate agent can help you obtain this from the HOA or
+                    its management company. In most states, the seller pays for this packet.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {/* ---- Print / Save ---- */}
+          <div className="flex flex-wrap items-center gap-3 mb-6">
+            <PrintButton label="Print This Guide" />
+            <SaveToFolderBtn type="checklist" title="HOA Guide: What Every Buyer Needs to Know" content="Comprehensive guide to homeowners associations, including fees, pros and cons, red flags, insurance, dispute resolution, and resources." />
+          </div>
 
           {/* ---- CTA & Related ---- */}
           <FirstTimeBuyerCTA />
