@@ -387,6 +387,9 @@ function ExpandableTile({
       >
         <div className="px-4 pb-4 pt-0 ml-[52px] border-t border-[#e2eaf0] mt-0 pt-3">
           <p className="text-xs text-gray-600 leading-relaxed">{detail}</p>
+          <div className="mt-3">
+            <SaveToFolderBtn type="note" title={title} content={`HOA guide: ${title} — ${typeof detail === "string" ? detail.slice(0, 200) : summary}`} />
+          </div>
         </div>
       </div>
     </div>

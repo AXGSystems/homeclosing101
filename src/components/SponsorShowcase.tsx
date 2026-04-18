@@ -44,7 +44,7 @@ const showcaseSponsors = [
     headline: "Stop Wire Fraud Before It Starts",
     description: "CertifID is the real estate industry's leading wire fraud prevention platform — verifying identities and securing payments to protect homebuyers from the #1 threat in real estate.",
     stats: [
-      { value: "$275M", label: "Fraud Prevented" },
+      { value: "#1", label: "Fraud Prevention" },
       { value: "1M+", label: "Transactions Secured" },
       { value: "5K+", label: "Title Companies" },
     ],

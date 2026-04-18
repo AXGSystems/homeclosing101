@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import PageHero from "@/components/PageHero";
 import { InlineAd } from "@/components/EliteProviders";
+import SaveToFolderBtn from "@/components/SaveToFolderBtn";
 
 /* ═══════════════════════════════════════════════════════
    MODAL DATA TYPE
@@ -94,6 +95,9 @@ function DetailModal({ data, onClose }: { data: ModalData; onClose: () => void }
               ))}
             </div>
           )}
+          <div className="mt-4 pt-3 border-t border-gray-100">
+            <SaveToFolderBtn type="note" title={data.title} content={`ALTA membership: ${data.title}${data.paragraphs[0] ? ` — ${data.paragraphs[0].slice(0, 200)}` : ""}`} />
+          </div>
         </div>
       </div>
     </div>

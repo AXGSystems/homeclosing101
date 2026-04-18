@@ -6,6 +6,7 @@ import PageHero from "@/components/PageHero";
 import { InlineAd } from "@/components/EliteProviders";
 import FirstTimeBuyerCTA from "@/components/FirstTimeBuyerCTA";
 import SponsorBadge from "@/components/SponsorBadge";
+import SaveToFolderBtn from "@/components/SaveToFolderBtn";
 
 const pages = [
   {
@@ -542,7 +543,12 @@ export default function LoanEstimatePage() {
             <div className={`bg-gradient-to-r ${activeModal.gradient} px-6 py-5`}>
               <h2 className="text-xl font-bold text-white pr-10">{activeModal.title}</h2>
             </div>
-            <div className="p-6">{activeModal.content}</div>
+            <div className="p-6">
+              {activeModal.content}
+              <div className="mt-4 pt-3 border-t border-gray-100">
+                <SaveToFolderBtn type="note" title={activeModal.title} content={`Loan Estimate detail: ${activeModal.title}`} />
+              </div>
+            </div>
           </div>
         </div>
       )}

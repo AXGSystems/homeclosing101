@@ -8,6 +8,7 @@ import { InlineAd } from "@/components/EliteProviders";
 import FirstTimeBuyerCTA from "@/components/FirstTimeBuyerCTA";
 import ClosingFlowNav from "@/components/ClosingFlowNav";
 import ContextualSponsor from "@/components/ContextualSponsor";
+import SaveToFolderBtn from "@/components/SaveToFolderBtn";
 
 const costCategories = [
   {
@@ -871,7 +872,12 @@ export default function ClosingCostsPage() {
           <div className={`bg-gradient-to-r ${activeDetail.gradient} px-6 py-5`}>
             <h2 className="text-xl font-bold text-white pr-10">{activeDetail.title}</h2>
           </div>
-          <div className="p-6">{activeDetail.content}</div>
+          <div className="p-6">
+            {activeDetail.content}
+            <div className="mt-4 pt-3 border-t border-gray-100">
+              <SaveToFolderBtn type="note" title={activeDetail.title} content={`Closing cost detail: ${activeDetail.title}`} />
+            </div>
+          </div>
         </div>
       </div>
     )}

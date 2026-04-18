@@ -6,6 +6,7 @@ import { InlineAd } from "@/components/EliteProviders";
 import { stateInsuranceData, callingScript, type StateInsuranceDept } from "@/data/stateInsurance";
 import { stateFlags } from "@/data/stateFlags";
 import FirstTimeBuyerCTA from "@/components/FirstTimeBuyerCTA";
+import SaveToFolderBtn from "@/components/SaveToFolderBtn";
 
 // State colors inspired by state flags/identity
 const stateColors: Record<string, { bg: string; accent: string; text: string }> = {
@@ -543,7 +544,12 @@ export default function FindPolicyPage() {
             <div className={`bg-gradient-to-r ${activeModal.gradient} px-6 py-5`}>
               <h2 className="text-xl font-bold text-white pr-10">{activeModal.title}</h2>
             </div>
-            <div className="p-6">{activeModal.content}</div>
+            <div className="p-6">
+              {activeModal.content}
+              <div className="mt-4 pt-3 border-t border-gray-100">
+                <SaveToFolderBtn type="note" title={activeModal.title} content={`Find your policy: ${activeModal.title}`} />
+              </div>
+            </div>
           </div>
         </div>
       )}

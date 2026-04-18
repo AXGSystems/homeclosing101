@@ -8,6 +8,7 @@ import TrustedALTAMembers from "@/components/TrustedALTAMembers";
 import FirstTimeBuyerCTA from "@/components/FirstTimeBuyerCTA";
 import MiniQuiz from "@/components/MiniQuiz";
 import SponsorTip from "@/components/SponsorTip";
+import SaveToFolderBtn from "@/components/SaveToFolderBtn";
 
 const escrowQuiz = [
   {
@@ -490,7 +491,12 @@ export default function EscrowGuidePage() {
             <div className={`bg-gradient-to-r ${activeModal.gradient} px-6 py-5`}>
               <h2 className="text-xl font-bold text-white pr-10">{activeModal.title}</h2>
             </div>
-            <div className="p-6">{activeModal.content}</div>
+            <div className="p-6">
+              {activeModal.content}
+              <div className="mt-4 pt-3 border-t border-gray-100">
+                <SaveToFolderBtn type="note" title={activeModal.title} content={`Escrow guide detail: ${activeModal.title}`} />
+              </div>
+            </div>
           </div>
         </div>
       )}

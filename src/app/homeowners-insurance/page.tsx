@@ -7,6 +7,7 @@ import { InlineAd } from "@/components/EliteProviders";
 import FirstTimeBuyerCTA from "@/components/FirstTimeBuyerCTA";
 import MiniQuiz from "@/components/MiniQuiz";
 import ContextualSponsor from "@/components/ContextualSponsor";
+import SaveToFolderBtn from "@/components/SaveToFolderBtn";
 
 const insuranceQuiz = [
   {
@@ -550,7 +551,12 @@ export default function HomeownersInsurancePage() {
             <div className={`bg-gradient-to-r ${activeModal.gradient} px-4 sm:px-6 py-4 sm:py-5`}>
               <h2 className="text-lg sm:text-xl font-bold text-white pr-10">{activeModal.title}</h2>
             </div>
-            <div className="p-4 sm:p-6">{activeModal.content}</div>
+            <div className="p-4 sm:p-6">
+              {activeModal.content}
+              <div className="mt-4 pt-3 border-t border-gray-100">
+                <SaveToFolderBtn type="note" title={activeModal.title} content={`Homeowners insurance: ${activeModal.title}`} />
+              </div>
+            </div>
           </div>
         </div>
       )}

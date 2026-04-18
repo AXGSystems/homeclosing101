@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import SaveToFolderBtn from "@/components/SaveToFolderBtn";
 
 const risks = [
   { risk: "Someone else owns an interest in your title", example: "A previous owner's ex-spouse claims they never signed away their ownership interest in a divorce. Your title insurance pays for the legal defense and covers any loss.", detail: "This is one of the most common title claims. Ownership interests can arise from marriages, divorces, business partnerships, inheritance disputes, and improperly executed transfers. Title insurance covers the legal costs to defend your ownership — which can exceed $50,000 even for baseless claims — and pays any covered loss up to your policy amount." },
@@ -61,6 +62,9 @@ export default function ExpandableRiskTiles() {
               <div className="p-4 bg-[#e9f5ed] rounded-xl border border-[#bddcc7]">
                 <p className="text-[10px] font-semibold text-[#2d6b3f] uppercase tracking-wider mb-1">How Title Insurance Protects You</p>
                 <p className="text-sm text-alta-gray leading-relaxed">{risks[expandedIdx].detail}</p>
+              </div>
+              <div className="mt-4 pt-3 border-t border-gray-100">
+                <SaveToFolderBtn type="note" title={risks[expandedIdx].risk} content={`Title insurance risk: ${risks[expandedIdx].risk} — ${risks[expandedIdx].detail.slice(0, 200)}`} />
               </div>
             </div>
           </div>

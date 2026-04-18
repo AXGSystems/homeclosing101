@@ -7,6 +7,7 @@ import PageHero from "@/components/PageHero";
 import SponsorSidebar from "@/components/SponsorSidebar";
 import FirstTimeBuyerCTA from "@/components/FirstTimeBuyerCTA";
 import { InlineAd } from "@/components/EliteProviders";
+import SaveToFolderBtn from "@/components/SaveToFolderBtn";
 
 const states = [
   {code:"AL",name:"Alabama"},{code:"AK",name:"Alaska"},{code:"AZ",name:"Arizona"},{code:"AR",name:"Arkansas"},
@@ -482,7 +483,12 @@ function FindCompanyContent() {
           <div className={`bg-gradient-to-r ${activeModal.gradient} px-6 py-5`}>
             <h2 className="text-xl font-bold text-white pr-10">{activeModal.title}</h2>
           </div>
-          <div className="p-6">{activeModal.content}</div>
+          <div className="p-6">
+            {activeModal.content}
+            <div className="mt-4 pt-3 border-t border-gray-100">
+              <SaveToFolderBtn type="note" title={activeModal.title} content={`Find a title company tip: ${activeModal.title}`} />
+            </div>
+          </div>
         </div>
       </div>
     )}

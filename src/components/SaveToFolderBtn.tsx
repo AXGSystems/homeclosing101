@@ -53,28 +53,24 @@ export default function SaveToFolderBtn({
     <button
       onClick={handleSave}
       disabled={isSaved}
-      className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all duration-200 ${
+      title={showing ? 'Saved to folder' : label}
+      className={`inline-flex items-center gap-1 px-2 py-1 rounded text-[10px] font-medium transition-all duration-200 print:hidden ${
         showing
-          ? 'bg-[#e9f5ed] text-[#2d6b3f] border border-[#bddcc7]'
-          : 'bg-[#e6f1f5] text-[#0a7ea8] border border-[#b4d8e8] hover:bg-[#0a7ea8] hover:text-white hover:border-[#0a7ea8]'
+          ? 'text-[#2d6b3f] opacity-60'
+          : 'text-gray-400 hover:text-[#0a7ea8] opacity-50 hover:opacity-100'
       } ${className}`}
       aria-label={showing ? savedLabel : label}
     >
       {showing ? (
-        <>
-          <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2.5}>
-            <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75" />
-          </svg>
-          {flash ? savedLabel : 'Saved'}
-        </>
+        <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2.5}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75" />
+        </svg>
       ) : (
-        <>
-          <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
-            <path strokeLinecap="round" strokeLinejoin="round" d="M12 10.5v6m3-3H9m4.06-7.19l-2.12-2.12a1.5 1.5 0 00-1.061-.44H4.5A2.25 2.25 0 002.25 6v12a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9a2.25 2.25 0 00-2.25-2.25h-5.379a1.5 1.5 0 01-1.06-.44z" />
-          </svg>
-          {label}
-        </>
+        <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0z" />
+        </svg>
       )}
+      {flash && <span className="text-[#2d6b3f]">Saved</span>}
     </button>
   );
 }
