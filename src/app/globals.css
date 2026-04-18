@@ -277,7 +277,7 @@ select:focus {
 @page {
   margin: 0.75in;
   @bottom-center {
-    content: "HomeClosing101 | homeclosing101.vercel.app";
+    content: "HomeClosing101 — Your Roadmap to a Confident Closing | homeclosing101.org";
     font-size: 8pt;
     color: #999;
   }

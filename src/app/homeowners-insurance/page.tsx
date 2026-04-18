@@ -6,6 +6,7 @@ import PageHero from "@/components/PageHero";
 import { InlineAd } from "@/components/EliteProviders";
 import FirstTimeBuyerCTA from "@/components/FirstTimeBuyerCTA";
 import MiniQuiz from "@/components/MiniQuiz";
+import ContextualSponsor from "@/components/ContextualSponsor";
 
 const insuranceQuiz = [
   {
@@ -318,6 +319,8 @@ export default function HomeownersInsurancePage() {
           </div>
 
           <div className="h-1 bg-gradient-to-r from-transparent via-alta-teal/20 to-transparent my-10" />
+
+          <ContextualSponsor context="insurance" />
 
           {/* What homeowner's insurance covers */}
           <h2 className="text-xl font-bold text-alta-navy mb-4">What Homeowner&apos;s Insurance Covers</h2>

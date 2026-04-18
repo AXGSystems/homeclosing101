@@ -64,7 +64,7 @@ export default function MyFolderPage() {
             <div>
               <span className="font-bold text-[#1a5276] text-lg">HomeClosing</span>
               <span className="font-bold text-[#0a7ea8] text-lg">101</span>
-              <div className="text-[8px] text-gray-500 uppercase tracking-widest -mt-0.5">An Educational Initiative of ALTA</div>
+              <div className="text-[8px] text-gray-500 uppercase tracking-widest -mt-0.5">Your Roadmap to a Confident Closing</div>
             </div>
           </div>
           <div className="text-right">
@@ -74,7 +74,7 @@ export default function MyFolderPage() {
           </div>
         </div>
         <div className="bg-gray-50 rounded-lg p-3 mb-4 border border-gray-200">
-          <p className="text-[9px] text-gray-500 leading-relaxed">This personalized report was generated from HomeClosing101 (homeclosing101.vercel.app), an educational initiative of the American Land Title Association (ALTA). Content is for educational purposes only and does not constitute legal, financial, or insurance advice. Consult qualified professionals for guidance specific to your transaction.</p>
+          <p className="text-[9px] text-gray-500 leading-relaxed">This personalized report was generated from HomeClosing101 (homeclosing101.org), an educational initiative of the American Land Title Association (ALTA). Content is for educational purposes only and does not constitute legal, financial, or insurance advice. Consult qualified professionals for guidance specific to your transaction.</p>
         </div>
       </div>
 
@@ -207,7 +207,7 @@ export default function MyFolderPage() {
                 <div className="w-6 h-6 rounded bg-[#0a7ea8] flex items-center justify-center">
                   <svg viewBox="0 0 24 24" className="w-4 h-4 text-white" fill="currentColor"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" /></svg>
                 </div>
-                <span className="text-[10px] text-gray-500">HomeClosing101 | homeclosing101.vercel.app</span>
+                <span className="text-[10px] text-gray-500">HomeClosing101 | homeclosing101.org</span>
               </div>
               <div className="text-right">
                 <p className="text-[10px] text-gray-500">An educational initiative of the</p>

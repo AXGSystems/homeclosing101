@@ -7,6 +7,7 @@ import ClosingCostChart from "@/components/ClosingCostChart";
 import { InlineAd } from "@/components/EliteProviders";
 import FirstTimeBuyerCTA from "@/components/FirstTimeBuyerCTA";
 import ClosingFlowNav from "@/components/ClosingFlowNav";
+import ContextualSponsor from "@/components/ContextualSponsor";
 
 const costCategories = [
   {
@@ -733,6 +734,8 @@ export default function ClosingCostsPage() {
         })()}
 
         <InlineAd />
+
+        <ContextualSponsor context="closing" />
 
         {/* Fee Categories */}
         {/* Interactive cost breakdown chart */}

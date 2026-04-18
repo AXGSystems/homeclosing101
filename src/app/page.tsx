@@ -6,6 +6,7 @@ import HomepageTestimonials from "@/components/HomepageTestimonials";
 import QuickEstimate from "@/components/QuickEstimate";
 import StatCard from "@/components/StatCard";
 import HeroSearch from "@/components/HeroSearch";
+import SponsorShowcase from "@/components/SponsorShowcase";
 
 const features = [
   {
@@ -548,6 +549,8 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      <SponsorShowcase />
 
       {/* Gradient divider */}
       <div className="h-0.5 bg-gradient-to-r from-alta-navy to-alta-teal" />

@@ -9,6 +9,7 @@ import ClosingFolderProvider from "@/components/ClosingFolderProvider";
 import AchievementProvider from "@/components/AchievementSystem";
 import LayoutOverlays from "@/components/LayoutOverlays";
 import FeedbackTabs from "@/components/FeedbackTabs";
+import StickyBottomAd from "@/components/StickyBottomAd";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -115,6 +116,7 @@ export default function RootLayout({
           </div>
           <LayoutOverlays />
           <FeedbackTabs />
+          <StickyBottomAd />
         </ClosingFolderProvider>
         </AchievementProvider>
       </body>

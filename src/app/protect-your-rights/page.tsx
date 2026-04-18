@@ -3,6 +3,7 @@ import PageHero from "@/components/PageHero";
 import { InlineAd } from "@/components/EliteProviders";
 import ExpandableRiskTiles from "@/components/ExpandableRiskTiles";
 import FirstTimeBuyerCTA from "@/components/FirstTimeBuyerCTA";
+import ContextualSponsor from "@/components/ContextualSponsor";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -143,6 +144,8 @@ export default function ProtectYourRightsPage() {
           </div>
 
           <InlineAd />
+
+          <ContextualSponsor context="title" />
 
           {/* Case studies */}
           <h2 className="text-2xl font-bold text-alta-navy mb-6">Real-Life Cases</h2>

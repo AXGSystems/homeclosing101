@@ -6,6 +6,7 @@ import PageHero from "@/components/PageHero";
 import { useAchievements } from "@/components/AchievementSystem";
 import { InlineAd } from "@/components/EliteProviders";
 import FirstTimeBuyerCTA from "@/components/FirstTimeBuyerCTA";
+import ContextualSponsor from "@/components/ContextualSponsor";
 import { propertyTaxRates, loanTypes } from "@/data/propertyTaxRates";
 import { countyTaxRates } from "@/data/countyTaxRates";
 
@@ -301,6 +302,8 @@ export default function MortgageCalculatorPage() {
           </div>
 
           <InlineAd />
+
+          <ContextualSponsor context="mortgage" />
 
           <div className="p-4 bg-[#faf4e4] rounded-xl border border-[#e8d9a8] border-l-4 border-l-[#8b6914] my-6">
             <p className="text-xs text-alta-gray"><strong className="text-[#8b6914]">Did you know?</strong> According to the CFPB, a 0.5% difference in your mortgage interest rate on a $350,000 loan adds up to more than $37,000 in additional interest over 30 years. Shopping multiple lenders is one of the most impactful financial decisions you can make.</p>

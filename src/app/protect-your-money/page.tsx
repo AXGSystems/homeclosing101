@@ -3,6 +3,7 @@ import PageHero from "@/components/PageHero";
 import { InlineAd } from "@/components/EliteProviders";
 import ExpandableSafeguards from "@/components/ExpandableSafeguards";
 import FirstTimeBuyerCTA from "@/components/FirstTimeBuyerCTA";
+import ContextualSponsor from "@/components/ContextualSponsor";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -116,6 +117,8 @@ export default function ProtectYourMoneyPage() {
           <ExpandableSafeguards />
 
           <InlineAd />
+
+          <ContextualSponsor context="fraud" />
 
           {/* Legitimate vs fraudulent communications */}
           <h2 className="text-2xl font-bold text-alta-navy mb-4">How to Tell Legitimate from Fraudulent Communications</h2>

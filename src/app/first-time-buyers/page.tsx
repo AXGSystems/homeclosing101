@@ -5,6 +5,7 @@ import { InlineAd } from "@/components/EliteProviders";
 import TrustedALTAMembers from "@/components/TrustedALTAMembers";
 import { DeferredTimeline, DeferredLoanChart } from "@/components/LazyFirstTimeBuyer";
 import ShareButtons from "@/components/ShareButtons";
+import SponsorShowcase from "@/components/SponsorShowcase";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -134,6 +135,8 @@ export default function FirstTimeBuyersPage() {
               </tbody>
             </table>
           </div>
+
+          <SponsorShowcase />
 
           <div className="h-1 bg-gradient-to-r from-transparent via-alta-teal/20 to-transparent my-10" />
 
