@@ -15,7 +15,7 @@ const stripSponsors = [
 
 export default function SponsorFooterStrip() {
   return (
-    <div className="print:hidden bg-gray-50 border-t border-gray-100">
+    <div className="print:hidden bg-gray-50 border-t border-gray-100 sticky bottom-0 z-20">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 py-4">
         <p className="text-[10px] text-gray-400 text-center font-medium tracking-wide uppercase mb-3">
           HomeClosing101 is supported by ALTA member companies

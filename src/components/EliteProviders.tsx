@@ -46,7 +46,7 @@ export default function EliteProviders() {
               href={s.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center justify-center h-10 grayscale hover:grayscale-0 opacity-50 hover:opacity-100 transition-all duration-300"
+              className="flex items-center justify-center h-10 opacity-100 hover:scale-105 transition-all duration-300"
               title={s.name}
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}

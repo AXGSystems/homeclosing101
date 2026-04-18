@@ -47,7 +47,7 @@ export default function TrustedALTAMembers() {
             href={s.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center justify-center grayscale hover:grayscale-0 opacity-60 hover:opacity-100 transition-all duration-300"
+            className="flex items-center justify-center opacity-100 transition-all duration-300 hover:scale-105"
             title={s.name}
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}

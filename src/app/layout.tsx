@@ -10,6 +10,7 @@ import AchievementProvider from "@/components/AchievementSystem";
 import LayoutOverlays from "@/components/LayoutOverlays";
 import FeedbackTabs from "@/components/FeedbackTabs";
 import StickyBottomAd from "@/components/StickyBottomAd";
+import SponsorFooterStrip from "@/components/SponsorFooterStrip";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -110,6 +111,7 @@ export default function RootLayout({
           <div className="print-footer hidden">
             HomeClosing101 — An educational initiative of the American Land Title Association (ALTA) — homeclosing101.vercel.app
           </div>
+          <SponsorFooterStrip />
           <AltaDisclaimer />
           <Footer />
           <LayoutOverlays />
