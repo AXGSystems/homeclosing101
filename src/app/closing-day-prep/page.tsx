@@ -175,7 +175,7 @@ export default function ClosingDayPrepPage() {
               {bringItems.map((item) => (
                 <div
                   key={item.title}
-                  className="p-4 print:p-2 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-slate-800 print:border-gray-300 print:rounded-none"
+                  className="p-4 print:p-2 rounded-xl border border-gray-200 bg-white print:border-gray-300 print:rounded-none"
                 >
                   <div className="flex items-start gap-3">
                     <div className="w-9 h-9 rounded-lg bg-alta-teal/10 flex items-center justify-center text-alta-teal shrink-0 print:hidden">
@@ -199,7 +199,7 @@ export default function ClosingDayPrepPage() {
           {/* ─── SECTION 2: Timeline — Day Before Closing ─── */}
           <section className="mb-10 print:mb-6">
             <div className="flex items-center gap-3 mb-5">
-              <div className="w-10 h-10 rounded-xl bg-amber-100 dark:bg-amber-900/30 flex items-center justify-center text-amber-600 shrink-0 print:hidden">
+              <div className="w-10 h-10 rounded-xl bg-amber-100 flex items-center justify-center text-amber-600 shrink-0 print:hidden">
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
@@ -214,9 +214,9 @@ export default function ClosingDayPrepPage() {
               {dayBeforeSteps.map((step, i) => (
                 <div
                   key={step.title}
-                  className="flex gap-4 print:gap-2 p-4 print:p-2 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-slate-800 print:border-gray-300 print:rounded-none"
+                  className="flex gap-4 print:gap-2 p-4 print:p-2 rounded-xl border border-gray-200 bg-white print:border-gray-300 print:rounded-none"
                 >
-                  <div className="w-8 h-8 rounded-full bg-amber-100 dark:bg-amber-900/30 flex items-center justify-center text-amber-700 font-bold text-sm shrink-0 print:bg-transparent print:border print:border-gray-400">
+                  <div className="w-8 h-8 rounded-full bg-amber-100 flex items-center justify-center text-amber-700 font-bold text-sm shrink-0 print:bg-transparent print:border print:border-gray-400">
                     {i + 1}
                   </div>
                   <div className="min-w-0">
@@ -231,7 +231,7 @@ export default function ClosingDayPrepPage() {
           {/* ─── SECTION 3: At the Closing Table ─── */}
           <section className="mb-10 print:mb-6">
             <div className="flex items-center gap-3 mb-5">
-              <div className="w-10 h-10 rounded-xl bg-green-100 dark:bg-green-900/30 flex items-center justify-center text-green-600 shrink-0 print:hidden">
+              <div className="w-10 h-10 rounded-xl bg-green-100 flex items-center justify-center text-green-600 shrink-0 print:hidden">
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z" />
                 </svg>
@@ -244,7 +244,7 @@ export default function ClosingDayPrepPage() {
 
             <div className="grid sm:grid-cols-2 gap-4 print:gap-2">
               {/* Who will be there */}
-              <div className="p-4 print:p-2 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-slate-800 print:border-gray-300 print:rounded-none">
+              <div className="p-4 print:p-2 rounded-xl border border-gray-200 bg-white print:border-gray-300 print:rounded-none">
                 <h3 className="font-semibold text-alta-navy text-sm mb-2">{atTheTableItems[0].title}</h3>
                 <ul className="space-y-1">
                   {atTheTableItems[0].people!.map((p) => (
@@ -259,7 +259,7 @@ export default function ClosingDayPrepPage() {
               </div>
 
               {/* Documents you'll sign */}
-              <div className="p-4 print:p-2 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-slate-800 print:border-gray-300 print:rounded-none">
+              <div className="p-4 print:p-2 rounded-xl border border-gray-200 bg-white print:border-gray-300 print:rounded-none">
                 <h3 className="font-semibold text-alta-navy text-sm mb-2">{atTheTableItems[1].title}</h3>
                 <ul className="space-y-1">
                   {atTheTableItems[1].docs!.map((d) => (
@@ -274,13 +274,13 @@ export default function ClosingDayPrepPage() {
               </div>
 
               {/* How long it takes */}
-              <div className="p-4 print:p-2 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-slate-800 print:border-gray-300 print:rounded-none">
+              <div className="p-4 print:p-2 rounded-xl border border-gray-200 bg-white print:border-gray-300 print:rounded-none">
                 <h3 className="font-semibold text-alta-navy text-sm mb-2">{atTheTableItems[2].title}</h3>
                 <p className="text-xs text-alta-gray leading-relaxed">{atTheTableItems[2].detail}</p>
               </div>
 
               {/* Questions you can still ask */}
-              <div className="p-4 print:p-2 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-slate-800 print:border-gray-300 print:rounded-none">
+              <div className="p-4 print:p-2 rounded-xl border border-gray-200 bg-white print:border-gray-300 print:rounded-none">
                 <h3 className="font-semibold text-alta-navy text-sm mb-2">{atTheTableItems[3].title}</h3>
                 <ul className="space-y-1">
                   {atTheTableItems[3].questions!.map((q) => (
@@ -294,7 +294,7 @@ export default function ClosingDayPrepPage() {
           {/* ─── SECTION 4: After Closing ─── */}
           <section className="mb-10 print:mb-6">
             <div className="flex items-center gap-3 mb-5">
-              <div className="w-10 h-10 rounded-xl bg-purple-100 dark:bg-purple-900/30 flex items-center justify-center text-purple-600 shrink-0 print:hidden">
+              <div className="w-10 h-10 rounded-xl bg-purple-100 flex items-center justify-center text-purple-600 shrink-0 print:hidden">
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M11.35 3.836c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m8.9-4.414c.376.023.75.05 1.124.08 1.131.094 1.976 1.057 1.976 2.192V16.5A2.25 2.25 0 0118 18.75h-2.25m-7.5-10.5H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V18.75m-7.5-10.5h6.375c.621 0 1.125.504 1.125 1.125v9.375m-8.25-3l1.5 1.5 3-3.75" />
                 </svg>
@@ -309,9 +309,9 @@ export default function ClosingDayPrepPage() {
               {afterClosingItems.map((item) => (
                 <div
                   key={item.title}
-                  className="flex gap-4 print:gap-2 p-4 print:p-2 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-slate-800 print:border-gray-300 print:rounded-none"
+                  className="flex gap-4 print:gap-2 p-4 print:p-2 rounded-xl border border-gray-200 bg-white print:border-gray-300 print:rounded-none"
                 >
-                  <div className="w-9 h-9 rounded-lg bg-purple-100 dark:bg-purple-900/30 flex items-center justify-center text-purple-600 shrink-0 print:hidden">
+                  <div className="w-9 h-9 rounded-lg bg-purple-100 flex items-center justify-center text-purple-600 shrink-0 print:hidden">
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
                       <path strokeLinecap="round" strokeLinejoin="round" d={item.icon} />
                     </svg>
@@ -330,7 +330,7 @@ export default function ClosingDayPrepPage() {
 
           {/* ─── SECTION 5: Wire Fraud Reminder ─── */}
           <section className="mb-10 print:mb-6 print:break-inside-avoid">
-            <div className="p-5 print:p-3 bg-[#f5e8e8] dark:bg-red-950/30 rounded-2xl print:rounded-none border border-[#e4c5c5] dark:border-red-800 border-l-4 border-l-[#943030]">
+            <div className="p-5 print:p-3 bg-[#f5e8e8] rounded-2xl print:rounded-none border border-[#e4c5c5] border-l-4 border-l-[#943030]">
               <div className="flex items-start gap-4">
                 <div className="w-12 h-12 rounded-xl bg-[#943030]/10 flex items-center justify-center text-[#943030] shrink-0 print:hidden">
                   <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
@@ -378,7 +378,7 @@ export default function ClosingDayPrepPage() {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="p-4 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-slate-800 hover:border-alta-teal transition-colors group"
+                  className="p-4 rounded-xl border border-gray-200 bg-white hover:border-alta-teal transition-colors group"
                 >
                   <h3 className="font-semibold text-alta-navy text-sm group-hover:text-alta-teal transition-colors">{link.title}</h3>
                   <p className="text-xs text-alta-gray mt-1">{link.desc}</p>

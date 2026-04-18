@@ -86,7 +86,7 @@ const firstMonth = [
 const seasonalChecklist = [
   {
     season: "Spring",
-    color: "bg-green-100 dark:bg-green-900/30 text-green-700",
+    color: "bg-green-100 text-green-700",
     borderColor: "border-green-200 dark:border-green-800",
     tasks: [
       "Clean gutters and downspouts",
@@ -99,7 +99,7 @@ const seasonalChecklist = [
   },
   {
     season: "Summer",
-    color: "bg-amber-100 dark:bg-amber-900/30 text-amber-700",
+    color: "bg-amber-100 text-amber-700",
     borderColor: "border-amber-200 dark:border-amber-800",
     tasks: [
       "Inspect and seal deck or patio",
@@ -125,7 +125,7 @@ const seasonalChecklist = [
   },
   {
     season: "Winter",
-    color: "bg-blue-100 dark:bg-blue-900/30 text-blue-700",
+    color: "bg-blue-100 text-blue-700",
     borderColor: "border-blue-200 dark:border-blue-800",
     tasks: [
       "Prevent frozen pipes: keep cabinet doors open, let faucets drip in extreme cold",
@@ -211,7 +211,7 @@ export default function AfterClosingPage() {
               {first24Hours.map((item) => (
                 <div
                   key={item.title}
-                  className="flex gap-4 print:gap-2 p-4 print:p-2 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-slate-800 print:border-gray-300 print:rounded-none"
+                  className="flex gap-4 print:gap-2 p-4 print:p-2 rounded-xl border border-gray-200 bg-white print:border-gray-300 print:rounded-none"
                 >
                   <div className="w-9 h-9 rounded-lg bg-red-100 dark:bg-red-900/30 flex items-center justify-center text-red-600 shrink-0 print:hidden">
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
@@ -233,7 +233,7 @@ export default function AfterClosingPage() {
           {/* ─── SECTION 2: First Week ─── */}
           <section className="mb-10 print:mb-6">
             <div className="flex items-center gap-3 mb-5">
-              <div className="w-10 h-10 rounded-xl bg-amber-100 dark:bg-amber-900/30 flex items-center justify-center text-amber-600 shrink-0 print:hidden">
+              <div className="w-10 h-10 rounded-xl bg-amber-100 flex items-center justify-center text-amber-600 shrink-0 print:hidden">
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5" />
                 </svg>
@@ -248,9 +248,9 @@ export default function AfterClosingPage() {
               {firstWeek.map((item, i) => (
                 <div
                   key={item.title}
-                  className="flex gap-4 print:gap-2 p-4 print:p-2 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-slate-800 print:border-gray-300 print:rounded-none"
+                  className="flex gap-4 print:gap-2 p-4 print:p-2 rounded-xl border border-gray-200 bg-white print:border-gray-300 print:rounded-none"
                 >
-                  <div className="w-8 h-8 rounded-full bg-amber-100 dark:bg-amber-900/30 flex items-center justify-center text-amber-700 font-bold text-sm shrink-0 print:bg-transparent print:border print:border-gray-400">
+                  <div className="w-8 h-8 rounded-full bg-amber-100 flex items-center justify-center text-amber-700 font-bold text-sm shrink-0 print:bg-transparent print:border print:border-gray-400">
                     {i + 1}
                   </div>
                   <div className="min-w-0">
@@ -285,7 +285,7 @@ export default function AfterClosingPage() {
               {firstMonth.map((item, i) => (
                 <div
                   key={item.title}
-                  className="flex gap-4 print:gap-2 p-4 print:p-2 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-slate-800 print:border-gray-300 print:rounded-none"
+                  className="flex gap-4 print:gap-2 p-4 print:p-2 rounded-xl border border-gray-200 bg-white print:border-gray-300 print:rounded-none"
                 >
                   <div className="w-8 h-8 rounded-full bg-alta-teal/10 flex items-center justify-center text-alta-teal font-bold text-sm shrink-0 print:bg-transparent print:border print:border-gray-400">
                     {i + 1}
@@ -305,7 +305,7 @@ export default function AfterClosingPage() {
           {/* ─── SECTION 4: First Year — Seasonal Maintenance ─── */}
           <section className="mb-10 print:mb-6">
             <div className="flex items-center gap-3 mb-5">
-              <div className="w-10 h-10 rounded-xl bg-purple-100 dark:bg-purple-900/30 flex items-center justify-center text-purple-600 shrink-0 print:hidden">
+              <div className="w-10 h-10 rounded-xl bg-purple-100 flex items-center justify-center text-purple-600 shrink-0 print:hidden">
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M11.42 15.17l-5.1-5.1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
@@ -320,7 +320,7 @@ export default function AfterClosingPage() {
               {seasonalChecklist.map((s) => (
                 <div
                   key={s.season}
-                  className={`p-4 print:p-2 rounded-xl border ${s.borderColor} bg-white dark:bg-slate-800 print:border-gray-300 print:rounded-none`}
+                  className={`p-4 print:p-2 rounded-xl border ${s.borderColor} bg-white print:border-gray-300 print:rounded-none`}
                 >
                   <h3 className={`inline-block px-2.5 py-1 rounded-lg text-sm font-bold mb-3 ${s.color}`}>
                     {s.season}
@@ -361,7 +361,7 @@ export default function AfterClosingPage() {
               {documentsToKeep.map((doc) => (
                 <div
                   key={doc.name}
-                  className="p-3 print:p-2 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-slate-800 print:border-gray-300 print:rounded-none"
+                  className="p-3 print:p-2 rounded-xl border border-gray-200 bg-white print:border-gray-300 print:rounded-none"
                 >
                   <h3 className="font-semibold text-alta-navy text-sm">{doc.name}</h3>
                   <p className="text-sm text-alta-gray mt-1 leading-relaxed">{doc.why}</p>
@@ -416,7 +416,7 @@ export default function AfterClosingPage() {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="p-4 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-slate-800 hover:border-alta-teal transition-colors group"
+                  className="p-4 rounded-xl border border-gray-200 bg-white hover:border-alta-teal transition-colors group"
                 >
                   <h3 className="font-semibold text-alta-navy text-sm group-hover:text-alta-teal transition-colors">{link.title}</h3>
                   <p className="text-sm text-alta-gray mt-1">{link.desc}</p>
