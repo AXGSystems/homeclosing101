@@ -373,15 +373,15 @@ export default function AfterClosingPage() {
 
           {/* ─── SECTION 6: Hidden Costs Callout ─── */}
           <section className="mb-10 print:mb-6 print:break-inside-avoid">
-            <div className="p-5 print:p-3 bg-amber-50 dark:bg-amber-950/20 rounded-2xl print:rounded-none border border-amber-200 dark:border-amber-800 border-l-4 border-l-amber-500">
+            <div className="p-5 print:p-3 bg-white rounded-2xl print:rounded-none border border-gray-200 shadow-sm">
               <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-xl bg-amber-500/10 flex items-center justify-center text-amber-600 shrink-0 print:hidden">
+                <div className="w-12 h-12 rounded-xl bg-[#8b6914]/10 flex items-center justify-center text-[#8b6914] shrink-0 print:hidden">
                   <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
                 </div>
                 <div className="w-full">
-                  <h2 className="font-bold text-amber-800 dark:text-amber-400 text-base mb-1">The Hidden Costs of Homeownership</h2>
+                  <h2 className="font-bold text-alta-navy text-base mb-1">The Hidden Costs of Homeownership</h2>
                   <p className="text-sm text-alta-gray leading-relaxed mb-4">
                     The average U.S. homeowner spends approximately <strong className="text-alta-navy">$18,118 per year</strong> on hidden costs beyond their mortgage payment, according to Bankrate&apos;s 2025 analysis. These costs include property taxes, insurance, maintenance, utilities, and HOA fees. Knowing what to expect prevents financial shock.
                   </p>
