@@ -54,11 +54,28 @@ export default function MyFolderPage() {
         ]}
       />
 
-      {/* Print-only header */}
-      <div className="hidden print:block mb-8 px-6">
-        <h1 className="text-2xl font-bold">My Closing Folder — HomeClosing101</h1>
-        <p className="text-sm text-gray-500">Generated {hydrated ? new Date().toLocaleDateString() : ""}</p>
-        <hr className="my-4" />
+      {/* Print-only branded header */}
+      <div className="hidden print:block mb-6 px-6">
+        <div className="flex items-center justify-between border-b-2 border-[#0a7ea8] pb-4 mb-4">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-lg bg-[#0a7ea8] flex items-center justify-center">
+              <svg viewBox="0 0 24 24" className="w-6 h-6 text-white" fill="currentColor"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" /></svg>
+            </div>
+            <div>
+              <span className="font-bold text-[#1a5276] text-lg">HomeClosing</span>
+              <span className="font-bold text-[#0a7ea8] text-lg">101</span>
+              <div className="text-[8px] text-gray-500 uppercase tracking-widest -mt-0.5">An Educational Initiative of ALTA</div>
+            </div>
+          </div>
+          <div className="text-right">
+            <p className="text-xs text-gray-600 font-medium">My Closing Folder</p>
+            <p className="text-[10px] text-gray-400">{hydrated ? new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) : ""}</p>
+            <p className="text-[10px] text-gray-400">{items.length} item{items.length !== 1 ? 's' : ''} saved</p>
+          </div>
+        </div>
+        <div className="bg-gray-50 rounded-lg p-3 mb-4 border border-gray-200">
+          <p className="text-[9px] text-gray-500 leading-relaxed">This personalized report was generated from HomeClosing101 (homeclosing101.vercel.app), an educational initiative of the American Land Title Association (ALTA). Content is for educational purposes only and does not constitute legal, financial, or insurance advice. Consult qualified professionals for guidance specific to your transaction.</p>
+        </div>
       </div>
 
       <main className="max-w-4xl mx-auto px-4 sm:px-6 py-10 print:py-0 print:px-0">
@@ -70,10 +87,11 @@ export default function MyFolderPage() {
               className="inline-flex items-center gap-2 px-5 py-2.5 bg-alta-teal text-white font-semibold rounded-lg shadow hover:bg-alta-teal/90 transition-colors"
             >
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
               </svg>
-              Print Report
+              Download as PDF
             </button>
+            <p className="text-[10px] text-gray-400 hidden sm:block">Tip: In the print dialog, select &quot;Save as PDF&quot; as the destination</p>
             <button
               onClick={handleClearAll}
               className="inline-flex items-center gap-2 px-5 py-2.5 bg-white text-red-600 font-semibold rounded-lg border border-red-200 hover:bg-red-50 transition-colors"
@@ -178,6 +196,26 @@ export default function MyFolderPage() {
                 </section>
               );
             })}
+          </div>
+        )}
+
+        {/* Print-only branded footer */}
+        {hydrated && !isEmpty && (
+          <div className="hidden print:block mt-12 pt-4 border-t-2 border-[#0a7ea8] px-6">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <div className="w-6 h-6 rounded bg-[#0a7ea8] flex items-center justify-center">
+                  <svg viewBox="0 0 24 24" className="w-4 h-4 text-white" fill="currentColor"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" /></svg>
+                </div>
+                <span className="text-[10px] text-gray-500">HomeClosing101 | homeclosing101.vercel.app</span>
+              </div>
+              <div className="text-right">
+                <p className="text-[10px] text-gray-500">An educational initiative of the</p>
+                <p className="text-[10px] text-[#0a7ea8] font-bold">American Land Title Association (ALTA)</p>
+                <p className="text-[8px] text-gray-400">alta.org | 202.296.3671</p>
+              </div>
+            </div>
+            <p className="text-[7px] text-gray-400 text-center mt-3">© {new Date().getFullYear()} American Land Title Association. HomeClosing101 is an educational initiative of ALTA. All content is for informational purposes only.</p>
           </div>
         )}
       </main>
