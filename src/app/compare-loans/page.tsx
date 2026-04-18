@@ -410,8 +410,6 @@ export default function CompareLoansPage() {
           </ul>
         </div>
 
-        <InlineAd />
-
         <FirstTimeBuyerCTA />
       </main>
     </>

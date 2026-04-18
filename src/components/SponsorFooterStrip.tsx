@@ -27,7 +27,7 @@ export default function SponsorFooterStrip() {
               href={s.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="grayscale hover:grayscale-0 opacity-40 hover:opacity-100 transition-all duration-300"
+              className="opacity-70 hover:opacity-100 transition-all duration-300"
               title={s.name}
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
