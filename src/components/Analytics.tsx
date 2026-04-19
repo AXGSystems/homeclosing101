@@ -19,6 +19,9 @@ export interface AnalyticsEvent {
   page: string;
   data: Record<string, string>;
   timestamp: string;
+  device?: "mobile" | "desktop";
+  referrer?: string;
+  session_id?: string;
 }
 
 interface AnalyticsContextValue {
@@ -26,6 +29,7 @@ interface AnalyticsContextValue {
 }
 
 const STORAGE_KEY = "hc101-analytics";
+const SESSION_KEY = "hc101-session-id";
 
 /* ------------------------------------------------------------------ */
 /*  Context                                                            */
@@ -42,6 +46,32 @@ export function useAnalytics() {
 /* ------------------------------------------------------------------ */
 /*  Helpers                                                            */
 /* ------------------------------------------------------------------ */
+
+function getSessionId(): string {
+  if (typeof sessionStorage === "undefined") return "unknown";
+  try {
+    let sid = sessionStorage.getItem(SESSION_KEY);
+    if (!sid) {
+      sid =
+        Math.random().toString(36).slice(2, 10) +
+        Date.now().toString(36);
+      sessionStorage.setItem(SESSION_KEY, sid);
+    }
+    return sid;
+  } catch {
+    return "unknown";
+  }
+}
+
+function getDevice(): "mobile" | "desktop" {
+  if (typeof window === "undefined") return "desktop";
+  return window.innerWidth < 768 ? "mobile" : "desktop";
+}
+
+function getReferrer(): string {
+  if (typeof document === "undefined") return "";
+  return document.referrer || "";
+}
 
 function getEvents(): AnalyticsEvent[] {
   try {
@@ -74,24 +104,24 @@ export default function AnalyticsProvider({
   const pathname = usePathname();
   const prevPathname = useRef<string | null>(null);
 
-  /* Track page views on route change */
+  /* Track page views on route change — exclude admin pages */
   useEffect(() => {
     if (pathname === prevPathname.current) return;
+    if (pathname.startsWith("/admin")) { prevPathname.current = pathname; return; }
     prevPathname.current = pathname;
-
-    const referrer =
-      typeof document !== "undefined" ? document.referrer : "";
 
     pushEvent({
       type: "page_view",
       page: pathname,
       data: {
-        referrer,
         ...(typeof window !== "undefined"
           ? { userAgent: navigator.userAgent }
           : {}),
       },
       timestamp: new Date().toISOString(),
+      device: getDevice(),
+      referrer: getReferrer(),
+      session_id: getSessionId(),
     });
   }, [pathname]);
 
@@ -105,6 +135,9 @@ export default function AnalyticsProvider({
         page,
         data,
         timestamp: new Date().toISOString(),
+        device: getDevice(),
+        referrer: getReferrer(),
+        session_id: getSessionId(),
       });
     },
     []
