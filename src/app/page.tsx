@@ -4,7 +4,6 @@ import MarketStats from "@/components/MarketStats";
 import AnimatedCounter from "@/components/AnimatedCounter";
 import HomepageTestimonials from "@/components/HomepageTestimonials";
 import StatCard from "@/components/StatCard";
-import HeroSearch from "@/components/HeroSearch";
 import SponsorShowcase from "@/components/SponsorShowcase";
 
 const features = [
@@ -153,13 +152,10 @@ export default function HomePage() {
         <div className="absolute bottom-0 left-1/4 w-80 h-80 bg-white/5 rounded-full translate-y-1/3 blur-3xl" />
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
-          {/* ALTA pill + search inline */}
-          <div className="flex items-center justify-between mb-6">
+          {/* ALTA pill */}
+          <div className="mb-6">
             <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full border border-white/20">
               <span className="text-xs font-medium text-gray-200 uppercase tracking-wider">An ALTA Educational Initiative</span>
-            </div>
-            <div className="hidden sm:block">
-              <HeroSearch />
             </div>
           </div>
 
