@@ -105,10 +105,10 @@ export default function ProtectAgainstDeedFraud() {
   return (
     <>
       <PageHero
-        title="Protect Your Home From Deed Fraud"
-        subtitle="Free tools, county-specific alerts, and a step-by-step protection checklist — most homeowners can set up free monitoring in about 10 minutes."
+        title="Protect Your Home From Title Fraud"
+        subtitle="Title fraud — also known as deed fraud — is preventable. Free tools, county-specific alerts, and a step-by-step protection checklist. Most homeowners can set up free monitoring in about 10 minutes."
         image="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1920&q=80"
-        breadcrumb={[{ label: "Protect Your Money", href: "/protect-your-money" }, { label: "Protect Against Deed Fraud", href: "/protect-against-deed-fraud" }]}
+        breadcrumb={[{ label: "Protect Your Money", href: "/protect-your-money" }, { label: "Protect Against Title Fraud", href: "/protect-against-deed-fraud" }]}
       />
 
       <div className="py-1.5 lg:py-2">
@@ -122,14 +122,14 @@ export default function ProtectAgainstDeedFraud() {
               </div>
               <div>
                 <h2 className="font-bold text-alta-navy mb-1">Consumer Protection Guide</h2>
-                <p className="text-sm text-alta-gray leading-relaxed">Deed fraud is when someone forges your signature on a deed to steal your property. It&apos;s rare but serious. This guide helps you set up free monitoring, check your county&apos;s alert program, and build a personalized protection plan — all at no cost.</p>
+                <p className="text-sm text-alta-gray leading-relaxed">Title fraud — also known as title theft or deed fraud — is when someone forges your signature on a deed to steal your property. It&apos;s rare but serious. This guide helps you set up free monitoring, check your county&apos;s alert program, and build a personalized protection plan — all at no cost.</p>
               </div>
             </div>
           </div>
 
           {/* ═══ SECTION: What is deed fraud? ═══ */}
-          <Section id="what-is-it" expanded={expandedSection} toggle={toggle} title="What is deed fraud?">
-            <p className="text-sm text-alta-gray leading-relaxed mb-3">Deed fraud is a form of real estate identity theft. A criminal uses stolen personal information to forge a deed transferring your property to themselves or a shell company, then records it with the county recorder&apos;s office. Once recorded, the fraudulent deed sits in the public record until it is removed by court order.</p>
+          <Section id="what-is-it" expanded={expandedSection} toggle={toggle} title="What is title fraud?">
+            <p className="text-sm text-alta-gray leading-relaxed mb-3">Title fraud — also called title theft or deed fraud — is a form of real estate identity theft. A criminal uses stolen personal information to forge a deed transferring your property to themselves or a shell company, then records it with the county recorder&apos;s office. Once recorded, the fraudulent deed sits in the public record until it is removed by court order.</p>
             <p className="text-sm text-alta-gray leading-relaxed mb-2 font-semibold text-alta-navy">Common targets include:</p>
             <ul className="space-y-1.5 mb-3">
               {["Vacant land and second homes", "Rental and investment properties", "Homes owned free and clear (no mortgage)", "Properties of elderly or deceased owners", "Homeowners with out-of-state mailing addresses"].map(t => (
@@ -250,7 +250,7 @@ export default function ProtectAgainstDeedFraud() {
           {/* ═══ PROTECTION TOOLKIT ═══ */}
           <div className="mb-10">
             <div className="flex items-center justify-between mb-4">
-              <h2 className="text-xl font-bold text-alta-navy">My Deed Fraud Protection Toolkit</h2>
+              <h2 className="text-xl font-bold text-alta-navy">My Title Fraud Protection Toolkit</h2>
               <div className="flex items-center gap-2">
                 <button onClick={() => setShowExportModal(true)} className="px-3 py-1.5 bg-alta-teal text-white text-xs font-semibold rounded-lg hover:bg-alta-teal/90 transition-colors">Export / Print</button>
                 <button onClick={resetToolkit} className="px-3 py-1.5 text-xs text-gray-400 hover:text-[#943030] transition-colors">Reset</button>

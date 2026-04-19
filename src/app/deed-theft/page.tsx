@@ -171,8 +171,8 @@ export default function DeedTheftPage() {
   return (
     <>
       <PageHero
-        title="Deed Theft & Title Fraud: How to Protect Your Property"
-        subtitle="Deed theft is one of the fastest-growing property crimes in America. Learn how criminals steal property ownership, the warning signs, and how to protect yourself."
+        title="Title Theft & Title Fraud: How to Protect Your Property"
+        subtitle="Title theft — also called deed fraud — is one of the fastest-growing property crimes in America. Learn how criminals steal property ownership, the warning signs, and how to protect yourself."
         image="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=1920&q=80"
         breadcrumb={[
           { label: "Protect Your Money", href: "/protect-your-money" },

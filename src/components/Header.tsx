@@ -51,8 +51,8 @@ const navItems = [
     href: "/protect-your-money",
     children: [
       { label: "After Closing Guide", href: "/after-closing" },
-      { label: "Deed Theft & Title Fraud", href: "/deed-theft" },
-      { label: "Protect Against Deed Fraud", href: "/protect-against-deed-fraud" },
+      { label: "Title Theft & Title Fraud", href: "/deed-theft" },
+      { label: "Protect Against Title Fraud", href: "/protect-against-deed-fraud" },
       { label: "Stop Fraud 101", href: "/stop-fraud" },
       { label: "Wire Fraud Overview", href: "/protect-your-money" },
       { label: "Identity Protection", href: "/identity-protection" },
