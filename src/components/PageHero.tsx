@@ -52,19 +52,20 @@ export default function PageHero({ title, subtitle, image, breadcrumb }: PageHer
             </nav>
           )}
           {breadcrumb && breadcrumb.length > 0 && (
-            <div className="flex items-center gap-2 mt-2">
-              <span className="text-[10px] text-white/40 uppercase tracking-wider">Popular:</span>
-              {[
-                { label: "First-Time Buyers", href: "/first-time-buyers" },
-                { label: "Wire Fraud Guide", href: "/stop-fraud" },
-                { label: "Mortgage Calculator", href: "/mortgage-calculator" },
-              ].map(p => (
-                <Link key={p.href} href={p.href} className="text-[10px] text-white/60 hover:text-white transition-colors">{p.label}</Link>
-              ))}
-            </div>
           )}
           <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold text-white mb-2 leading-tight">{title}</h1>
           <p className="text-xs sm:text-sm text-gray-300 max-w-2xl leading-relaxed">{subtitle}</p>
+          {/* Popular links — below subtitle */}
+          <div className="flex items-center gap-2 mt-3">
+            <span className="text-[10px] text-white/40 uppercase tracking-wider">Popular:</span>
+            {[
+              { label: "First-Time Buyers", href: "/first-time-buyers" },
+              { label: "Wire Fraud Guide", href: "/stop-fraud" },
+              { label: "Mortgage Calculator", href: "/mortgage-calculator" },
+            ].map(p => (
+              <Link key={p.href} href={p.href} className="text-[10px] text-white/60 hover:text-white transition-colors">{p.label}</Link>
+            ))}
+          </div>
           {/* Subtle bottom border accent */}
           <div className="mt-4 w-20 h-1 bg-gradient-to-r from-alta-teal to-transparent rounded-full" />
         </div>
