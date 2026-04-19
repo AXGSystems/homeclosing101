@@ -76,7 +76,7 @@ export default function IdentityProtectionPage() {
         subtitle="During a home purchase, you share your most sensitive personal information with multiple parties. Learn how to protect yourself before, during, and after closing."
         image="https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=1920&q=80"
         breadcrumb={[
-          { label: "Protect Your Money", href: "/protect-your-money" },
+          { label: "Protect Your Property", href: "/protect-your-rights" },
           { label: "Identity Protection", href: "/identity-protection" },
         ]}
       />

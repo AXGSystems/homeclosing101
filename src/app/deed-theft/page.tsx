@@ -175,7 +175,7 @@ export default function DeedTheftPage() {
         subtitle="Title theft — also called deed fraud — is one of the fastest-growing property crimes in America. Learn how criminals steal property ownership, the warning signs, and how to protect yourself."
         image="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=1920&q=80"
         breadcrumb={[
-          { label: "Protect Your Money", href: "/protect-your-money" },
+          { label: "Protect Your Property", href: "/protect-your-rights" },
           { label: "Title Theft & Title Fraud", href: "/deed-theft" },
         ]}
       />

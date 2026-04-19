@@ -230,7 +230,7 @@ export default function PropertyRightsPage() {
         subtitle="Understanding your rights as a property owner is essential to protecting your investment, your family, and your future. This guide covers the fundamental rights that come with homeownership, what can limit them, and how to protect them."
         image="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1920&q=80"
         breadcrumb={[
-          { label: "Protect Your Rights", href: "/protect-your-rights" },
+          { label: "Protect Your Property", href: "/protect-your-rights" },
           { label: "Property Rights", href: "/property-rights" },
         ]}
       />

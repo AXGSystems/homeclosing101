@@ -96,7 +96,7 @@ const stats = [
 export default function StopFraudPage() {
   return (
     <>
-    <PageHero title="Stop Fraud 101" subtitle="10 prevention steps sourced from the FBI, CFPB, NAR, ALTA, and CertifID. Print them out and keep them with your closing documents." image="https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=1920&q=80" breadcrumb={[{label:"Protect Your Money",href:"/protect-your-money"},{label:"Stop Fraud 101",href:"/stop-fraud"}]} />
+    <PageHero title="Stop Fraud 101" subtitle="10 prevention steps sourced from the FBI, CFPB, NAR, ALTA, and CertifID. Print them out and keep them with your closing documents." image="https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=1920&q=80" breadcrumb={[{label:"Protect Your Property",href:"/protect-your-rights"},{label:"Stop Fraud 101",href:"/stop-fraud"}]} />
     <div className="py-1.5 lg:py-2">
       <div className="max-w-5xl mx-auto px-4 sm:px-6">
 

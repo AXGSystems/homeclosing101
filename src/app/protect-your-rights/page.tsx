@@ -33,7 +33,7 @@ export default function ProtectYourRightsPage() {
         title="Protect Your Property Rights"
         subtitle="Owner's title insurance is a one-time purchase at closing that protects your property rights for as long as you or your heirs own the home."
         image="https://images.unsplash.com/photo-1573497620053-ea5300f94f21?w=1920&q=80"
-        breadcrumb={[{ label: "Protect Your Rights", href: "/protect-your-rights" }]}
+        breadcrumb={[{ label: "Protect Your Property", href: "/protect-your-rights" }]}
       />
 
       <div className="py-1.5 lg:py-2">

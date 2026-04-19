@@ -108,7 +108,7 @@ export default function ProtectAgainstDeedFraud() {
         title="Protect Your Home From Title Fraud"
         subtitle="Title fraud — also known as deed fraud — is preventable. Free tools, county-specific alerts, and a step-by-step protection checklist. Most homeowners can set up free monitoring in about 10 minutes."
         image="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1920&q=80"
-        breadcrumb={[{ label: "Protect Your Money", href: "/protect-your-money" }, { label: "Protect Against Title Fraud", href: "/protect-against-deed-fraud" }]}
+        breadcrumb={[{ label: "Protect Your Property", href: "/protect-your-rights" }, { label: "Protect Against Title Fraud", href: "/protect-against-deed-fraud" }]}
       />
 
       <div className="py-1.5 lg:py-2">

@@ -37,25 +37,22 @@ const navItems = [
     ],
   },
   {
-    label: "Protect Your Rights",
+    label: "Protect Your Property",
     href: "/protect-your-rights",
     children: [
-      { label: "HOA Guide", href: "/hoa-guide" },
-      { label: "Homeowner's Insurance", href: "/homeowners-insurance" },
-      { label: "Title Insurance & Property Rights", href: "/protect-your-rights" },
+      // Understand Your Coverage
+      { label: "Title Insurance & Your Rights", href: "/protect-your-rights" },
       { label: "Your Property Rights", href: "/property-rights" },
-    ],
-  },
-  {
-    label: "Protect Your Money",
-    href: "/protect-your-money",
-    children: [
-      { label: "After Closing Guide", href: "/after-closing" },
+      { label: "Homeowner's Insurance", href: "/homeowners-insurance" },
+      { label: "HOA Guide", href: "/hoa-guide" },
+      // Prevent Fraud
+      { label: "Wire Fraud Prevention", href: "/protect-your-money" },
+      { label: "Stop Fraud 101", href: "/stop-fraud" },
       { label: "Title Theft & Title Fraud", href: "/deed-theft" },
       { label: "Protect Against Title Fraud", href: "/protect-against-deed-fraud" },
-      { label: "Stop Fraud 101", href: "/stop-fraud" },
-      { label: "Wire Fraud Overview", href: "/protect-your-money" },
       { label: "Identity Protection", href: "/identity-protection" },
+      // After Closing
+      { label: "After Closing Guide", href: "/after-closing" },
     ],
   },
   { label: "Find a Company", href: "/find-company" },
