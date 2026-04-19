@@ -1,8 +1,11 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import SiteSearch from "@/components/SiteSearch";
+import { Search } from "lucide-react";
+import { glossaryData } from "@/data/glossaryData";
+import { faqs } from "@/data/faqData";
 const navItems = [
   {
     label: "The Closing Process",
@@ -108,8 +111,8 @@ export default function Header() {
             </div>
           </Link>
 
-          {/* Desktop Nav + Search — pushed right */}
-          <nav className="hidden lg:flex items-center gap-1 ml-auto" role="navigation" aria-label="Main navigation">
+          {/* Desktop Nav — close to logo */}
+          <nav className="hidden lg:flex items-center gap-0.5 ml-4" role="navigation" aria-label="Main navigation">
             {navItems.map((item) => (
               <div
                 key={item.label}
@@ -119,7 +122,7 @@ export default function Header() {
               >
                 <Link
                   href={item.href}
-                  className="relative px-2 xl:px-3 py-2 text-[13px] xl:text-sm font-medium text-alta-navy hover:text-alta-teal rounded-md transition-colors whitespace-nowrap group/nav after:absolute after:bottom-0 after:left-2 after:right-2 after:h-0.5 after:bg-alta-teal after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:origin-left"
+                  className="relative px-1.5 xl:px-2 py-2 text-[12px] xl:text-[13px] font-medium text-alta-navy hover:text-alta-teal rounded-md transition-colors whitespace-nowrap group/nav after:absolute after:bottom-0 after:left-1 after:right-1 after:h-0.5 after:bg-alta-teal after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:origin-left"
                 >
                   {item.label}
                   {item.children && (
@@ -149,9 +152,9 @@ export default function Header() {
                 )}
               </div>
             ))}
-            {/* Search — inline with nav */}
-            <div className="ml-2">
-              <SiteSearch />
+            {/* Inline search bar */}
+            <div className="ml-3">
+              <HeaderSearch />
             </div>
           </nav>
 
@@ -216,3 +219,116 @@ export default function Header() {
     </header>
   );
 }
+
+/* ═══ Inline Header Search ═══ */
+const searchPages = [
+  { path: "/first-time-buyers", title: "First-Time Buyer Guide" },
+  { path: "/closing-process", title: "The Closing Process" },
+  { path: "/mortgage-calculator", title: "Mortgage Calculator" },
+  { path: "/protect-your-rights", title: "Title Insurance & Your Rights" },
+  { path: "/stop-fraud", title: "Stop Fraud 101" },
+  { path: "/glossary", title: "Real Estate Glossary" },
+  { path: "/faq", title: "FAQ" },
+  { path: "/find-company", title: "Find a Title Company" },
+  { path: "/affordability", title: "Affordability Calculator" },
+  { path: "/hoa-guide", title: "HOA Guide" },
+  { path: "/deed-theft", title: "Title Theft & Title Fraud" },
+  { path: "/protect-against-deed-fraud", title: "Protect Against Title Fraud" },
+  { path: "/closing-process/closing-costs", title: "Closing Costs Explained" },
+  { path: "/closing-process/closing-checklist", title: "Closing Checklist" },
+  { path: "/home-inspection", title: "Home Inspection Guide" },
+  { path: "/escrow-guide", title: "Understanding Escrow" },
+  { path: "/loan-estimate", title: "Your Loan Estimate" },
+  { path: "/homeowners-insurance", title: "Homeowner's Insurance" },
+  { path: "/rent-vs-buy", title: "Rent vs Buy" },
+  { path: "/dti-calculator", title: "DTI Calculator" },
+  { path: "/trivia", title: "HC101 Trivia" },
+  { path: "/property-rights", title: "Your Property Rights" },
+  { path: "/tax-benefits", title: "Homeowner Tax Benefits" },
+  { path: "/blog", title: "Blog & News" },
+  { path: "/identity-protection", title: "Identity Protection" },
+  { path: "/after-closing", title: "After Closing Guide" },
+  { path: "/true-cost", title: "True Cost of Homeownership" },
+  { path: "/compare-loans", title: "Compare Loans" },
+  { path: "/negotiation-guide", title: "Negotiation Guide" },
+  { path: "/my-folder", title: "My Closing Folder" },
+];
+
+const allTerms = Object.values(glossaryData).flat();
+
+function HeaderSearch() {
+  const [query, setQuery] = useState("");
+  const [focused, setFocused] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handler = (e: MouseEvent) => {
+      if (ref.current && !ref.current.contains(e.target as Node)) setFocused(false);
+    };
+    document.addEventListener("mousedown", handler);
+    return () => document.removeEventListener("mousedown", handler);
+  }, []);
+
+  const q = query.trim().toLowerCase();
+  const showResults = focused && q.length >= 2;
+
+  const pageResults = q.length >= 2 ? searchPages.filter(p => p.title.toLowerCase().includes(q)).slice(0, 5) : [];
+  const glossaryResults = q.length >= 2 ? allTerms.filter(t => t.term.toLowerCase().includes(q)).slice(0, 3) : [];
+  const faqResults = q.length >= 2 ? faqs.filter(f => f.q.toLowerCase().includes(q)).slice(0, 3) : [];
+  const hasResults = pageResults.length + glossaryResults.length + faqResults.length > 0;
+
+  return (
+    <div ref={ref} className="relative">
+      <div className="flex items-center bg-gray-100 rounded-lg px-3 py-1.5 gap-2 w-48 xl:w-56 focus-within:ring-2 focus-within:ring-alta-teal/40 focus-within:bg-white transition-all">
+        <Search className="w-3.5 h-3.5 text-gray-400 shrink-0" />
+        <input
+          type="text"
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          onFocus={() => setFocused(true)}
+          placeholder="Search HC101..."
+          className="bg-transparent outline-none text-xs text-alta-navy placeholder:text-gray-400 w-full"
+        />
+      </div>
+      {showResults && (
+        <div className="absolute top-full right-0 mt-2 w-80 bg-white rounded-xl shadow-2xl border border-gray-200 py-2 z-[999] max-h-[70vh] overflow-y-auto">
+          {!hasResults && (
+            <p className="text-xs text-gray-400 text-center py-4">No results for &ldquo;{query}&rdquo;</p>
+          )}
+          {pageResults.length > 0 && (
+            <>
+              <p className="px-3 pt-2 pb-1 text-[10px] font-bold text-alta-teal uppercase tracking-wider">Pages</p>
+              {pageResults.map(p => (
+                <Link key={p.path} href={p.path} onClick={() => { setQuery(""); setFocused(false); }} className="block px-3 py-2 text-sm text-alta-navy hover:bg-alta-light hover:text-alta-teal transition-colors">
+                  {p.title}
+                </Link>
+              ))}
+            </>
+          )}
+          {glossaryResults.length > 0 && (
+            <>
+              <p className="px-3 pt-3 pb-1 text-[10px] font-bold text-alta-teal uppercase tracking-wider border-t border-gray-100 mt-1">Glossary</p>
+              {glossaryResults.map(t => (
+                <Link key={t.term} href={`/glossary`} onClick={() => { setQuery(""); setFocused(false); }} className="block px-3 py-2 hover:bg-alta-light transition-colors">
+                  <span className="text-sm font-semibold text-alta-navy">{t.term}</span>
+                  <span className="block text-xs text-alta-gray line-clamp-1">{t.definition}</span>
+                </Link>
+              ))}
+            </>
+          )}
+          {faqResults.length > 0 && (
+            <>
+              <p className="px-3 pt-3 pb-1 text-[10px] font-bold text-alta-teal uppercase tracking-wider border-t border-gray-100 mt-1">FAQ</p>
+              {faqResults.map((f, i) => (
+                <Link key={i} href="/faq" onClick={() => { setQuery(""); setFocused(false); }} className="block px-3 py-2 hover:bg-alta-light transition-colors">
+                  <span className="text-sm text-alta-navy line-clamp-1">{f.q}</span>
+                </Link>
+              ))}
+            </>
+          )}
+        </div>
+      )}
+    </div>
+  );
+}
+
