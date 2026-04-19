@@ -143,6 +143,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly" as const,
     },
     {
+      path: "/protect-against-deed-fraud",
+      priority: 0.8,
+      changeFrequency: "monthly" as const,
+    },
+    {
       path: "/homeowners-insurance",
       priority: 0.7,
       changeFrequency: "monthly" as const,

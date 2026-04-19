@@ -245,6 +245,20 @@ export default function ProtectYourMoneyPage() {
           </div>
 
           <div className="mt-8 mb-4">
+            {/* Deed fraud protection callout */}
+            <Link href="/protect-against-deed-fraud" className="block p-5 mb-6 bg-gradient-to-r from-alta-navy to-[#0d3a5c] rounded-2xl text-white hover:shadow-lg transition-shadow group">
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 rounded-xl bg-white/15 flex items-center justify-center shrink-0">
+                  <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" /></svg>
+                </div>
+                <div className="flex-1">
+                  <h3 className="font-bold text-base group-hover:text-alta-teal transition-colors">Set Up Free Deed Fraud Protection</h3>
+                  <p className="text-sm text-gray-300 mt-0.5">Interactive toolkit: find your county&apos;s free alert program, build your protection checklist, and export a personalized report — all in about 10 minutes.</p>
+                </div>
+                <svg className="w-5 h-5 text-white/60 group-hover:translate-x-1 transition-transform shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
+              </div>
+            </Link>
+
             <h2 className="text-lg font-bold text-alta-navy mb-4">Related Topics</h2>
             <div className="grid sm:grid-cols-3 gap-3">
               <Link href="/stop-fraud" className="p-4 bg-[#e8f0f5] rounded-xl border border-[#c5d8e4] border-l-4 border-l-[#1a5276] tile-interactive group">

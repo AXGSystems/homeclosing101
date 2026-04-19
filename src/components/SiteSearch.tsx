@@ -51,6 +51,7 @@ const pages: PageEntry[] = [
   { path: "/achievements", title: "Your Achievements", description: "Track your HomeClosing101 learning milestones" },
   { path: "/closing-day-prep", title: "Closing Day Prep", description: "Everything to bring and do before, during, and after closing day" },
   { path: "/deed-theft", title: "Deed Theft & Title Fraud Prevention", description: "How to protect your property from deed theft and title fraud schemes" },
+  { path: "/protect-against-deed-fraud", title: "Deed Fraud Protection Tool", description: "Interactive toolkit: county lookup, protection checklist, phone scripts, safe-sender email setup — free deed fraud monitoring in 10 minutes" },
   { path: "/property-rights", title: "Your Property Rights as a Homeowner", description: "Understanding your legal property rights and how title insurance protects them" },
   { path: "/identity-protection", title: "Identity Protection During Your Home Purchase", description: "Safeguard your personal information throughout the homebuying process" },
 ];
