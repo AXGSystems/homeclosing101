@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useMemo, useCallback, useRef } from "react";
+import { supabase } from "@/lib/supabase";
 import type { AnalyticsEvent } from "@/components/Analytics";
 
 /* ------------------------------------------------------------------ */
@@ -19,7 +20,6 @@ const MODULES: Record<
   string,
   { label: string; category: string }
 > = {
-  // Global components
   NewsTicker: { label: "News Ticker", category: "Global" },
   HomeClosingAI: { label: "AI Assistant", category: "Global" },
   ScrollToTop: { label: "Back to Top Button", category: "Global" },
@@ -28,7 +28,6 @@ const MODULES: Record<
   FirstTimeBuyerCTA: { label: "First-Time Buyer CTA", category: "Global" },
   ClosingFolderButton: { label: "My Folder Button", category: "Global" },
   StickyBottomAd: { label: "Sticky Bottom Ad", category: "Global" },
-  // Ad formats
   InlineAd: { label: "Inline Sponsor Ad", category: "Ads" },
   ContextualSponsor: { label: "Contextual Sponsor", category: "Ads" },
   SponsorShowcase: { label: "Premium Showcase", category: "Ads" },
@@ -36,14 +35,12 @@ const MODULES: Record<
   SponsorBadge: { label: "Sponsor Badges", category: "Ads" },
   TrustedALTAMembers: { label: "ALTA Members Strip", category: "Ads" },
   EliteProviders: { label: "Footer Sponsors", category: "Ads" },
-  // Features
   JourneyTracker: { label: "Journey Tracker", category: "Features" },
   AchievementSystem: { label: "Achievements", category: "Features" },
   ShareButtons: { label: "Share Buttons", category: "Features" },
   MiniQuiz: { label: "Mini Quizzes", category: "Features" },
   DarkMode: { label: "Dark Mode Toggle", category: "Features" },
   SiteSearch: { label: "Header Search", category: "Features" },
-  // Content sections
   HomepageTestimonials: { label: "Homepage Testimonials", category: "Content" },
   MarketStats: { label: "Market Stats Rotator", category: "Content" },
   FraudStats: { label: "Fraud Statistics", category: "Content" },
@@ -175,6 +172,57 @@ export function isModuleEnabled(moduleKey: string): boolean {
 }
 
 /* ------------------------------------------------------------------ */
+/*  Supabase config helpers                                            */
+/* ------------------------------------------------------------------ */
+
+async function loadConfigFromSupabase(): Promise<AdminConfig | null> {
+  try {
+    const { data, error } = await supabase
+      .from("hc101_site_config")
+      .select("config_key, config_value")
+      .in("config_key", ["modules", "pages", "ads"]);
+    if (error || !data) return null;
+
+    const cfg = defaultConfig();
+    for (const row of data) {
+      if (row.config_key === "modules" && typeof row.config_value === "object") {
+        cfg.modules = row.config_value as Record<string, boolean>;
+      }
+      if (row.config_key === "pages" && typeof row.config_value === "object") {
+        cfg.pageVisibility = row.config_value as Record<string, boolean>;
+      }
+      if (row.config_key === "ads" && typeof row.config_value === "object") {
+        cfg.adToggles = row.config_value as Record<string, boolean>;
+      }
+    }
+    return cfg;
+  } catch {
+    return null;
+  }
+}
+
+async function saveConfigToSupabase(cfg: AdminConfig): Promise<void> {
+  try {
+    await Promise.all([
+      supabase.from("hc101_site_config").upsert(
+        { config_key: "modules", config_value: cfg.modules, updated_at: new Date().toISOString() },
+        { onConflict: "config_key" }
+      ),
+      supabase.from("hc101_site_config").upsert(
+        { config_key: "pages", config_value: cfg.pageVisibility, updated_at: new Date().toISOString() },
+        { onConflict: "config_key" }
+      ),
+      supabase.from("hc101_site_config").upsert(
+        { config_key: "ads", config_value: cfg.adToggles, updated_at: new Date().toISOString() },
+        { onConflict: "config_key" }
+      ),
+    ]);
+  } catch {
+    /* Supabase unavailable — localStorage already saved */
+  }
+}
+
+/* ------------------------------------------------------------------ */
 /*  Utility: date helpers                                              */
 /* ------------------------------------------------------------------ */
 
@@ -263,14 +311,26 @@ function PasswordGate({ onAuth }: { onAuth: () => void }) {
 /*  Reusable UI components                                             */
 /* ------------------------------------------------------------------ */
 
-function Stat({ label, value, sub }: { label: string; value: string | number; sub?: string }) {
+function Stat({ label, value, sub, color, expandContent }: {
+  label: string; value: string | number; sub?: string; color?: string;
+  expandContent?: React.ReactNode;
+}) {
+  const [expanded, setExpanded] = useState(false);
   return (
-    <div className="bg-white rounded-xl border border-gray-100 shadow-sm p-5">
+    <div
+      className={`bg-white rounded-xl border border-gray-100 shadow-sm p-5 transition-all ${expandContent ? "cursor-pointer hover:shadow-md" : ""}`}
+      onClick={() => expandContent && setExpanded(!expanded)}
+    >
       <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-1">
         {label}
       </p>
-      <p className="text-2xl font-bold text-[#1a2744]">{value}</p>
+      <p className={`text-2xl font-bold ${color || "text-[#1a2744]"}`}>{value}</p>
       {sub && <p className="text-[11px] text-gray-400 mt-0.5">{sub}</p>}
+      {expanded && expandContent && (
+        <div className="mt-3 pt-3 border-t border-gray-100 text-xs text-gray-600">
+          {expandContent}
+        </div>
+      )}
     </div>
   );
 }
@@ -295,6 +355,11 @@ function Toggle({ enabled, onChange }: { enabled: boolean; onChange: (v: boolean
   );
 }
 
+const BAR_COLORS = [
+  "bg-[#1a2744]", "bg-[#0a8ebc]", "bg-emerald-500", "bg-amber-500",
+  "bg-purple-500", "bg-red-500", "bg-[#1a2744]", "bg-[#0a8ebc]",
+];
+
 function BarChart({
   data,
   maxVal,
@@ -305,10 +370,16 @@ function BarChart({
   color?: string;
 }) {
   const max = maxVal ?? (data.length ? Math.max(...data.map((d) => d[1]), 1) : 1);
+  const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
   return (
     <div className="space-y-2">
-      {data.map(([label, count]) => (
-        <div key={label} className="flex items-center gap-3">
+      {data.map(([label, count], idx) => (
+        <div
+          key={label}
+          className="flex items-center gap-3 relative"
+          onMouseEnter={() => setHoveredIdx(idx)}
+          onMouseLeave={() => setHoveredIdx(null)}
+        >
           <span className="text-xs text-gray-600 w-44 truncate shrink-0" title={label}>
             {label}
           </span>
@@ -321,6 +392,11 @@ function BarChart({
           <span className="text-xs font-semibold text-[#1a2744] w-12 text-right">
             {count}
           </span>
+          {hoveredIdx === idx && (
+            <div className="absolute left-48 -top-8 bg-[#1a2744] text-white text-[10px] px-2 py-1 rounded shadow-lg whitespace-nowrap z-10">
+              {label}: {count} ({max > 0 ? ((count / max) * 100).toFixed(1) : 0}% of max)
+            </div>
+          )}
         </div>
       ))}
     </div>
@@ -352,6 +428,20 @@ function SectionBadge({ text, color }: { text: string; color?: string }) {
   );
 }
 
+function StatusBadge({ status }: { status: string }) {
+  const colors: Record<string, string> = {
+    new: "bg-blue-50 text-blue-700",
+    reviewed: "bg-amber-50 text-amber-700",
+    resolved: "bg-green-50 text-green-700",
+    dismissed: "bg-gray-100 text-gray-500",
+  };
+  return (
+    <span className={`text-[10px] font-semibold px-2 py-0.5 rounded-full ${colors[status] || colors.new}`}>
+      {status}
+    </span>
+  );
+}
+
 const CATEGORY_COLORS: Record<string, string> = {
   Global: "bg-blue-50 text-blue-600",
   Ads: "bg-amber-50 text-amber-600",
@@ -360,85 +450,249 @@ const CATEGORY_COLORS: Record<string, string> = {
 };
 
 /* ------------------------------------------------------------------ */
+/*  Report types                                                       */
+/* ------------------------------------------------------------------ */
+
+interface ReportDef {
+  key: string;
+  title: string;
+  description: string;
+}
+
+const REPORT_DEFS: ReportDef[] = [
+  { key: "executive", title: "Executive Summary", description: "High-level KPIs, traffic trend, top content" },
+  { key: "ceo", title: "CEO Dashboard", description: "Monthly comparisons, growth metrics, strategic content performance" },
+  { key: "it", title: "IT Team Report", description: "Browser/OS/device breakdown, error rates, performance metrics, session data" },
+  { key: "board", title: "Board Members Overview", description: "Engagement metrics, content reach, ad revenue potential" },
+  { key: "staff", title: "ALTA Staff Report", description: "Most used tools, feature adoption, content performance" },
+  { key: "member", title: "ALTA Member Report", description: "Member-facing content performance, join-alta page metrics" },
+  { key: "elite", title: "Elite Provider Report", description: "Ad impressions/clicks/CTR by sponsor, placement performance" },
+  { key: "adrevenue", title: "Ad Revenue Report", description: "Estimated revenue by format, by page, by time period" },
+  { key: "contentperf", title: "Content Performance Report", description: "Page-by-page engagement, time on page, bounce rates" },
+  { key: "protection", title: "Protection Pages Report", description: "Fraud-related page performance, toolkit completion, county lookups" },
+  { key: "calculator", title: "Calculator Usage Report", description: "Which calculators used most, completion rates" },
+  { key: "search", title: "Search & Discovery Report", description: "What people search for, popular pages, entry points" },
+  { key: "mobile", title: "Mobile Experience Report", description: "Mobile vs desktop metrics, mobile-specific issues" },
+  { key: "feedbackreport", title: "Feedback & Issues Report", description: "Bug reports, suggestions, resolution rates" },
+  { key: "weekly", title: "Weekly Digest", description: "Auto-generated summary of the past 7 days" },
+];
+
+/* ------------------------------------------------------------------ */
+/*  Supabase data types                                                */
+/* ------------------------------------------------------------------ */
+
+interface SBAnalytics {
+  id: number;
+  event_type: string;
+  page: string;
+  data: Record<string, string>;
+  device: string;
+  browser: string;
+  os: string;
+  referrer: string;
+  session_id: string;
+  screen_width: number;
+  screen_height: number;
+  user_agent: string;
+  created_at: string;
+}
+
+interface SBFeedback {
+  id: number;
+  type: string;
+  page: string;
+  message: string;
+  email: string;
+  status: string;
+  admin_notes: string;
+  created_at: string;
+  browser: string;
+  device: string;
+}
+
+interface SBSession {
+  id: number;
+  session_id: string;
+  device: string;
+  browser: string;
+  os: string;
+  entry_page: string;
+  page_count: number;
+  started_at: string;
+  last_active_at: string;
+  referrer: string;
+}
+
+/* ------------------------------------------------------------------ */
 /*  Dashboard                                                          */
 /* ------------------------------------------------------------------ */
 
-type Tab = "overview" | "adPerf" | "content" | "modules" | "pages" | "export";
+type Tab = "overview" | "adPerf" | "content" | "modules" | "pages" | "feedback" | "reports" | "export";
 
 function Dashboard() {
   const [tab, setTab] = useState<Tab>("overview");
-  const [events, setEvents] = useState<AnalyticsEvent[]>([]);
   const [config, setConfig] = useState<AdminConfig>(defaultConfig());
   const [pageSectionFilter, setPageSectionFilter] = useState("All");
   const importRef = useRef<HTMLInputElement>(null);
+  const [supabaseConnected, setSupabaseConnected] = useState(false);
+  const [loading, setLoading] = useState(true);
 
-  /* Load data */
+  // Supabase data
+  const [sbAnalytics, setSbAnalytics] = useState<SBAnalytics[]>([]);
+  const [sbFeedback, setSbFeedback] = useState<SBFeedback[]>([]);
+  const [sbSessions, setSbSessions] = useState<SBSession[]>([]);
+  const [feedbackFilter, setFeedbackFilter] = useState<string>("all");
+  const [activeReport, setActiveReport] = useState<string | null>(null);
+
+  // Fallback localStorage events
+  const [lsEvents, setLsEvents] = useState<AnalyticsEvent[]>([]);
+
+  /* Load data from Supabase first, localStorage fallback */
   useEffect(() => {
-    try {
-      const raw = localStorage.getItem(ANALYTICS_KEY);
-      setEvents(raw ? JSON.parse(raw) : []);
-    } catch { /* empty */ }
-    setConfig(getConfig());
+    async function loadData() {
+      setLoading(true);
+      let connected = false;
+
+      // Try Supabase
+      try {
+        const { data: analyticsData, error: aErr } = await supabase
+          .from("hc101_analytics")
+          .select("*")
+          .order("created_at", { ascending: false })
+          .limit(10000);
+
+        if (!aErr && analyticsData) {
+          setSbAnalytics(analyticsData as SBAnalytics[]);
+          connected = true;
+        }
+      } catch { /* Supabase unavailable */ }
+
+      try {
+        const { data: feedbackData, error: fErr } = await supabase
+          .from("hc101_feedback")
+          .select("*")
+          .order("created_at", { ascending: false })
+          .limit(500);
+
+        if (!fErr && feedbackData) {
+          setSbFeedback(feedbackData as SBFeedback[]);
+        }
+      } catch { /* empty */ }
+
+      try {
+        const { data: sessionData, error: sErr } = await supabase
+          .from("hc101_sessions")
+          .select("*")
+          .order("started_at", { ascending: false })
+          .limit(5000);
+
+        if (!sErr && sessionData) {
+          setSbSessions(sessionData as SBSession[]);
+        }
+      } catch { /* empty */ }
+
+      setSupabaseConnected(connected);
+
+      // Also load localStorage fallback
+      try {
+        const raw = localStorage.getItem(ANALYTICS_KEY);
+        if (raw) setLsEvents(JSON.parse(raw));
+      } catch { /* empty */ }
+
+      // Load config from Supabase, fallback to localStorage
+      const sbConfig = await loadConfigFromSupabase();
+      if (sbConfig) {
+        const localConfig = getConfig();
+        // Merge: Supabase wins but keep localStorage retention setting
+        const merged = { ...localConfig, ...sbConfig, retentionDays: localConfig.retentionDays };
+        setConfig(merged);
+        saveConfig(merged);
+      } else {
+        setConfig(getConfig());
+      }
+
+      setLoading(false);
+    }
+    loadData();
   }, []);
+
+  /* ---------------------------------------------------------------- */
+  /*  Unified events: Supabase data or localStorage fallback           */
+  /* ---------------------------------------------------------------- */
+
+  const events: AnalyticsEvent[] = useMemo(() => {
+    if (sbAnalytics.length > 0) {
+      return sbAnalytics.map((e) => ({
+        type: e.event_type,
+        page: e.page,
+        data: e.data || {},
+        timestamp: e.created_at,
+        device: (e.device as "mobile" | "desktop") || "desktop",
+        browser: e.browser || "",
+        os: e.os || "",
+        referrer: e.referrer || "",
+        session_id: e.session_id || "",
+        screen_width: e.screen_width,
+        screen_height: e.screen_height,
+        user_agent: e.user_agent || "",
+      }));
+    }
+    return lsEvents;
+  }, [sbAnalytics, lsEvents]);
 
   /* ---------------------------------------------------------------- */
   /*  ANALYTICS COMPUTATIONS                                           */
   /* ---------------------------------------------------------------- */
 
   const pageViews = useMemo(() => events.filter((e) => e.type === "page_view"), [events]);
-
   const uniquePages = useMemo(() => new Set(pageViews.map((e) => e.page)).size, [pageViews]);
 
-  /* Sessions */
+  /* Sessions from Supabase or computed from events */
   const sessions = useMemo(() => {
+    if (sbSessions.length > 0) {
+      return sbSessions;
+    }
+    // Fallback: compute from events
     const map: Record<string, AnalyticsEvent[]> = {};
     events.forEach((e) => {
       const sid = e.session_id || "unknown";
       if (!map[sid]) map[sid] = [];
       map[sid].push(e);
     });
-    return map;
-  }, [events]);
+    return Object.entries(map).map(([sid, evts]) => ({
+      id: 0,
+      session_id: sid,
+      device: evts[0]?.device || "desktop",
+      browser: evts[0]?.browser || "",
+      os: evts[0]?.os || "",
+      entry_page: evts.filter((e) => e.type === "page_view").sort((a, b) =>
+        new Date(a.timestamp).getTime() - new Date(b.timestamp).getTime()
+      )[0]?.page || "",
+      page_count: evts.filter((e) => e.type === "page_view").length,
+      started_at: evts[0]?.timestamp || "",
+      last_active_at: evts[evts.length - 1]?.timestamp || "",
+      referrer: evts[0]?.referrer || "",
+    }));
+  }, [sbSessions, events]);
 
-  const sessionCount = useMemo(() => Object.keys(sessions).length, [sessions]);
+  const sessionCount = sessions.length;
 
-  const avgTimeOnSite = useMemo(() => {
-    const durations: number[] = [];
-    Object.values(sessions).forEach((evts) => {
-      if (evts.length < 2) return;
-      const sorted = [...evts].sort((a, b) => new Date(a.timestamp).getTime() - new Date(b.timestamp).getTime());
-      const dur = new Date(sorted[sorted.length - 1].timestamp).getTime() - new Date(sorted[0].timestamp).getTime();
-      if (dur > 0 && dur < 3600000) durations.push(dur);
-    });
-    if (!durations.length) return 0;
-    return durations.reduce((a, b) => a + b, 0) / durations.length;
+  const avgPagesPerSession = useMemo(() => {
+    if (!sessions.length) return 0;
+    const total = sessions.reduce((sum, s) => sum + (s.page_count || 1), 0);
+    return total / sessions.length;
   }, [sessions]);
 
   const bounceRate = useMemo(() => {
-    const total = Object.keys(sessions).length;
-    if (!total) return 0;
-    const bounces = Object.values(sessions).filter((evts) => {
-      const pvs = evts.filter((e) => e.type === "page_view");
-      return pvs.length <= 1;
-    }).length;
-    return bounces / total;
-  }, [sessions]);
-
-  const pagesPerSession = useMemo(() => {
-    const total = Object.keys(sessions).length;
-    if (!total) return 0;
-    const sum = Object.values(sessions).reduce((acc, evts) => {
-      return acc + evts.filter((e) => e.type === "page_view").length;
-    }, 0);
-    return sum / total;
+    if (!sessions.length) return 0;
+    const bounces = sessions.filter((s) => s.page_count <= 1).length;
+    return bounces / sessions.length;
   }, [sessions]);
 
   /* Top pages */
   const topPages = useMemo(() => {
     const counts: Record<string, number> = {};
-    pageViews.forEach((e) => {
-      counts[e.page] = (counts[e.page] || 0) + 1;
-    });
+    pageViews.forEach((e) => { counts[e.page] = (counts[e.page] || 0) + 1; });
     return Object.entries(counts).sort((a, b) => b[1] - a[1]).slice(0, 10);
   }, [pageViews]);
 
@@ -472,58 +726,44 @@ function Dashboard() {
   /* Entry pages */
   const entryPages = useMemo(() => {
     const counts: Record<string, number> = {};
-    Object.values(sessions).forEach((evts) => {
-      const pvs = evts.filter((e) => e.type === "page_view").sort(
-        (a, b) => new Date(a.timestamp).getTime() - new Date(b.timestamp).getTime()
-      );
-      if (pvs.length) counts[pvs[0].page] = (counts[pvs[0].page] || 0) + 1;
-    });
-    return Object.entries(counts).sort((a, b) => b[1] - a[1]).slice(0, 10);
-  }, [sessions]);
-
-  /* Exit pages */
-  const exitPages = useMemo(() => {
-    const counts: Record<string, number> = {};
-    Object.values(sessions).forEach((evts) => {
-      const pvs = evts.filter((e) => e.type === "page_view").sort(
-        (a, b) => new Date(a.timestamp).getTime() - new Date(b.timestamp).getTime()
-      );
-      if (pvs.length) counts[pvs[pvs.length - 1].page] = (counts[pvs[pvs.length - 1].page] || 0) + 1;
-    });
-    return Object.entries(counts).sort((a, b) => b[1] - a[1]).slice(0, 10);
-  }, [sessions]);
-
-  /* User flows (common page sequences) */
-  const userFlows = useMemo(() => {
-    const counts: Record<string, number> = {};
-    Object.values(sessions).forEach((evts) => {
-      const pvs = evts.filter((e) => e.type === "page_view").sort(
-        (a, b) => new Date(a.timestamp).getTime() - new Date(b.timestamp).getTime()
-      );
-      for (let i = 0; i < pvs.length - 1; i++) {
-        const key = `${pvs[i].page} -> ${pvs[i + 1].page}`;
-        counts[key] = (counts[key] || 0) + 1;
-      }
+    sessions.forEach((s) => {
+      if (s.entry_page) counts[s.entry_page] = (counts[s.entry_page] || 0) + 1;
     });
     return Object.entries(counts).sort((a, b) => b[1] - a[1]).slice(0, 10);
   }, [sessions]);
 
   /* Device breakdown */
   const deviceBreakdown = useMemo(() => {
-    let mobile = 0;
-    let desktop = 0;
-    pageViews.forEach((e) => {
-      if (e.device === "mobile") mobile++;
-      else desktop++;
-    });
+    let mobile = 0, desktop = 0;
+    pageViews.forEach((e) => { if (e.device === "mobile") mobile++; else desktop++; });
     return { mobile, desktop, total: mobile + desktop };
+  }, [pageViews]);
+
+  /* Browser breakdown */
+  const browserBreakdown = useMemo(() => {
+    const counts: Record<string, number> = {};
+    pageViews.forEach((e) => {
+      const b = e.browser || "Unknown";
+      counts[b] = (counts[b] || 0) + 1;
+    });
+    return Object.entries(counts).sort((a, b) => b[1] - a[1]);
+  }, [pageViews]);
+
+  /* OS breakdown */
+  const osBreakdown = useMemo(() => {
+    const counts: Record<string, number> = {};
+    pageViews.forEach((e) => {
+      const o = e.os || "Unknown";
+      counts[o] = (counts[o] || 0) + 1;
+    });
+    return Object.entries(counts).sort((a, b) => b[1] - a[1]);
   }, [pageViews]);
 
   /* Referrer tracking */
   const referrerData = useMemo(() => {
     const counts: Record<string, number> = {};
     pageViews.forEach((e) => {
-      const ref = e.referrer || e.data?.referrer || "";
+      const ref = e.referrer || "";
       if (!ref) return;
       try {
         const host = new URL(ref).hostname || ref;
@@ -614,26 +854,23 @@ function Dashboard() {
     return Object.entries(counts).sort((a, b) => b[1] - a[1]);
   }, [events]);
 
-  const triviaScores = useMemo(() => {
-    const scores: number[] = [];
-    events.filter((e) => e.type === "trivia_played").forEach((e) => {
-      const s = parseInt(e.data?.score || "0", 10);
-      if (!isNaN(s)) scores.push(s);
+  const searchQueries = useMemo(() => {
+    const counts: Record<string, number> = {};
+    events.filter((e) => e.type === "search_performed").forEach((e) => {
+      const q = (e.data?.query || "").toLowerCase().trim();
+      if (q) counts[q] = (counts[q] || 0) + 1;
     });
-    return scores;
+    return Object.entries(counts).sort((a, b) => b[1] - a[1]).slice(0, 20);
   }, [events]);
 
-  const triviaDistribution = useMemo(() => {
-    const buckets: Record<string, number> = { "0-20%": 0, "21-40%": 0, "41-60%": 0, "61-80%": 0, "81-100%": 0 };
-    triviaScores.forEach((s) => {
-      if (s <= 20) buckets["0-20%"]++;
-      else if (s <= 40) buckets["21-40%"]++;
-      else if (s <= 60) buckets["41-60%"]++;
-      else if (s <= 80) buckets["61-80%"]++;
-      else buckets["81-100%"]++;
+  const countyLookups = useMemo(() => {
+    const counts: Record<string, number> = {};
+    events.filter((e) => e.type === "county_lookup").forEach((e) => {
+      const loc = e.data?.state ? `${e.data.state} - ${e.data.county || "All"}` : e.data?.query || "Unknown";
+      counts[loc] = (counts[loc] || 0) + 1;
     });
-    return Object.entries(buckets);
-  }, [triviaScores]);
+    return Object.entries(counts).sort((a, b) => b[1] - a[1]).slice(0, 15);
+  }, [events]);
 
   const glossaryViews = useMemo(() => {
     const counts: Record<string, number> = {};
@@ -662,15 +899,6 @@ function Dashboard() {
     return Object.entries(counts).sort((a, b) => b[1] - a[1]).slice(0, 10);
   }, [events]);
 
-  const countyLookups = useMemo(() => {
-    const counts: Record<string, number> = {};
-    events.filter((e) => e.type === "county_lookup").forEach((e) => {
-      const loc = e.data?.state ? `${e.data.state} - ${e.data.county || "All"}` : e.data?.query || "Unknown";
-      counts[loc] = (counts[loc] || 0) + 1;
-    });
-    return Object.entries(counts).sort((a, b) => b[1] - a[1]).slice(0, 15);
-  }, [events]);
-
   const chatbotTopics = useMemo(() => {
     const counts: Record<string, number> = {};
     events.filter((e) => e.type === "chatbot_query").forEach((e) => {
@@ -678,15 +906,6 @@ function Dashboard() {
       counts[topic] = (counts[topic] || 0) + 1;
     });
     return Object.entries(counts).sort((a, b) => b[1] - a[1]).slice(0, 15);
-  }, [events]);
-
-  const searchQueries = useMemo(() => {
-    const counts: Record<string, number> = {};
-    events.filter((e) => e.type === "search_performed").forEach((e) => {
-      const q = (e.data?.query || "").toLowerCase().trim();
-      if (q) counts[q] = (counts[q] || 0) + 1;
-    });
-    return Object.entries(counts).sort((a, b) => b[1] - a[1]).slice(0, 20);
   }, [events]);
 
   const folderSaves = useMemo(() => {
@@ -698,53 +917,69 @@ function Dashboard() {
     return Object.entries(counts).sort((a, b) => b[1] - a[1]);
   }, [events]);
 
+  const triviaScores = useMemo(() => {
+    const scores: number[] = [];
+    events.filter((e) => e.type === "trivia_played").forEach((e) => {
+      const s = parseInt(e.data?.score || "0", 10);
+      if (!isNaN(s)) scores.push(s);
+    });
+    return scores;
+  }, [events]);
+
+  const triviaDistribution = useMemo(() => {
+    const buckets: Record<string, number> = { "0-20%": 0, "21-40%": 0, "41-60%": 0, "61-80%": 0, "81-100%": 0 };
+    triviaScores.forEach((s) => {
+      if (s <= 20) buckets["0-20%"]++;
+      else if (s <= 40) buckets["21-40%"]++;
+      else if (s <= 60) buckets["41-60%"]++;
+      else if (s <= 80) buckets["61-80%"]++;
+      else buckets["81-100%"]++;
+    });
+    return Object.entries(buckets);
+  }, [triviaScores]);
+
   /* ---------------------------------------------------------------- */
   /*  PAGE VIEW COUNTS (for page manager)                              */
   /* ---------------------------------------------------------------- */
 
   const pageViewCounts = useMemo(() => {
     const counts: Record<string, number> = {};
-    pageViews.forEach((e) => {
-      counts[e.page] = (counts[e.page] || 0) + 1;
-    });
+    pageViews.forEach((e) => { counts[e.page] = (counts[e.page] || 0) + 1; });
     return counts;
   }, [pageViews]);
 
   const pageLastViewed = useMemo(() => {
     const last: Record<string, string> = {};
     pageViews.forEach((e) => {
-      if (!last[e.page] || e.timestamp > last[e.page]) {
-        last[e.page] = e.timestamp;
-      }
+      if (!last[e.page] || e.timestamp > last[e.page]) last[e.page] = e.timestamp;
     });
     return last;
   }, [pageViews]);
 
-  const pageAvgTime = useMemo(() => {
-    // Estimate per-page time: time between page_view on page X and next page_view on any page
-    const result: Record<string, number[]> = {};
-    Object.values(sessions).forEach((evts) => {
-      const pvs = evts.filter((e) => e.type === "page_view").sort(
-        (a, b) => new Date(a.timestamp).getTime() - new Date(b.timestamp).getTime()
-      );
-      for (let i = 0; i < pvs.length - 1; i++) {
-        const dur = new Date(pvs[i + 1].timestamp).getTime() - new Date(pvs[i].timestamp).getTime();
-        if (dur > 0 && dur < 600000) {
-          if (!result[pvs[i].page]) result[pvs[i].page] = [];
-          result[pvs[i].page].push(dur);
-        }
-      }
-    });
-    const avgs: Record<string, number> = {};
-    Object.entries(result).forEach(([page, durations]) => {
-      avgs[page] = durations.reduce((a, b) => a + b, 0) / durations.length;
-    });
-    return avgs;
-  }, [sessions]);
+  /* ---------------------------------------------------------------- */
+  /*  FEEDBACK HELPERS                                                 */
+  /* ---------------------------------------------------------------- */
+
+  const filteredFeedback = useMemo(() => {
+    if (feedbackFilter === "all") return sbFeedback;
+    return sbFeedback.filter((f) => f.type === feedbackFilter);
+  }, [sbFeedback, feedbackFilter]);
+
+  const updateFeedbackStatus = useCallback(async (id: number, status: string) => {
+    try {
+      await supabase.from("hc101_feedback").update({ status }).eq("id", id);
+      setSbFeedback((prev) => prev.map((f) => f.id === id ? { ...f, status } : f));
+    } catch { /* Supabase unavailable */ }
+  }, []);
 
   /* ---------------------------------------------------------------- */
   /*  ACTIONS                                                          */
   /* ---------------------------------------------------------------- */
+
+  const persistConfig = useCallback((next: AdminConfig) => {
+    saveConfig(next);
+    saveConfigToSupabase(next);
+  }, []);
 
   const toggleAd = useCallback((key: string) => {
     setConfig((prev) => {
@@ -755,10 +990,10 @@ function Dashboard() {
           [key]: prev.adToggles[key] === undefined ? false : !prev.adToggles[key],
         },
       };
-      saveConfig(next);
+      persistConfig(next);
       return next;
     });
-  }, []);
+  }, [persistConfig]);
 
   const togglePage = useCallback((route: string) => {
     setConfig((prev) => {
@@ -769,10 +1004,10 @@ function Dashboard() {
           [route]: prev.pageVisibility[route] === undefined ? false : !prev.pageVisibility[route],
         },
       };
-      saveConfig(next);
+      persistConfig(next);
       return next;
     });
-  }, []);
+  }, [persistConfig]);
 
   const toggleModule = useCallback((key: string) => {
     setConfig((prev) => {
@@ -783,32 +1018,28 @@ function Dashboard() {
           [key]: prev.modules[key] === undefined ? false : !prev.modules[key],
         },
       };
-      saveConfig(next);
+      persistConfig(next);
       return next;
     });
-  }, []);
+  }, [persistConfig]);
 
   const bulkPages = useCallback((enable: boolean) => {
     setConfig((prev) => {
       const vis: Record<string, boolean> = {};
-      ALL_PAGES.forEach(({ route }) => {
-        vis[route] = enable;
-      });
+      ALL_PAGES.forEach(({ route }) => { vis[route] = enable; });
       const next = { ...prev, pageVisibility: vis };
-      saveConfig(next);
+      persistConfig(next);
       return next;
     });
-  }, []);
+  }, [persistConfig]);
 
   /* CSV export */
   const exportCSV = useCallback(() => {
-    const header = "type,page,timestamp,device,referrer,session_id,data\n";
+    const header = "type,page,timestamp,device,browser,os,referrer,session_id,data\n";
     const rows = events
       .map((e) => {
-        const dataStr = Object.entries(e.data || {})
-          .map(([k, v]) => `${k}=${v}`)
-          .join("; ");
-        return `"${e.type}","${e.page}","${e.timestamp}","${e.device || ""}","${(e.referrer || "").replace(/"/g, '""')}","${e.session_id || ""}","${dataStr.replace(/"/g, '""')}"`;
+        const dataStr = Object.entries(e.data || {}).map(([k, v]) => `${k}=${v}`).join("; ");
+        return `"${e.type}","${e.page}","${e.timestamp}","${e.device || ""}","${e.browser || ""}","${e.os || ""}","${(e.referrer || "").replace(/"/g, '""')}","${e.session_id || ""}","${dataStr.replace(/"/g, '""')}"`;
       })
       .join("\n");
     const blob = new Blob([header + rows], { type: "text/csv;charset=utf-8;" });
@@ -819,6 +1050,18 @@ function Dashboard() {
     a.click();
     URL.revokeObjectURL(url);
   }, [events]);
+
+  const exportReportCSV = useCallback((reportKey: string, data: [string, number][]) => {
+    const header = "label,value\n";
+    const rows = data.map(([label, val]) => `"${label.replace(/"/g, '""')}",${val}`).join("\n");
+    const blob = new Blob([header + rows], { type: "text/csv;charset=utf-8;" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `hc101-report-${reportKey}-${new Date().toISOString().slice(0, 10)}.csv`;
+    a.click();
+    URL.revokeObjectURL(url);
+  }, []);
 
   const exportConfig = useCallback(() => {
     const blob = new Blob([JSON.stringify(config, null, 2)], { type: "application/json" });
@@ -836,29 +1079,26 @@ function Dashboard() {
       try {
         const parsed = JSON.parse(evt.target?.result as string);
         const merged = { ...defaultConfig(), ...parsed };
-        saveConfig(merged);
+        persistConfig(merged);
         setConfig(merged);
       } catch {
         alert("Invalid config file.");
       }
     };
     reader.readAsText(file);
-  }, []);
+  }, [persistConfig]);
 
   const clearAnalytics = useCallback(() => {
     if (confirm("Clear all analytics data? This cannot be undone.")) {
-      try {
-        localStorage.removeItem(ANALYTICS_KEY);
-      } catch { /* empty */ }
-      setEvents([]);
+      try { localStorage.removeItem(ANALYTICS_KEY); } catch { /* empty */ }
+      setSbAnalytics([]);
+      setLsEvents([]);
     }
   }, []);
 
   const clearConfig = useCallback(() => {
     if (confirm("Reset all admin config (toggles, settings)? This cannot be undone.")) {
-      try {
-        localStorage.removeItem(CONFIG_KEY);
-      } catch { /* empty */ }
+      try { localStorage.removeItem(CONFIG_KEY); } catch { /* empty */ }
       setConfig(defaultConfig());
     }
   }, []);
@@ -870,6 +1110,162 @@ function Dashboard() {
       return next;
     });
   }, []);
+
+  /* ---------------------------------------------------------------- */
+  /*  Report data generators                                           */
+  /* ---------------------------------------------------------------- */
+
+  const getReportData = useCallback((key: string): { sections: { title: string; data: [string, number][] }[] } => {
+    const pvCount = pageViews.length;
+    const last7 = pageViews.filter((e) => new Date(e.timestamp).getTime() >= daysAgo(7).getTime());
+    const last30 = pageViews.filter((e) => new Date(e.timestamp).getTime() >= daysAgo(30).getTime());
+    const protectionPages = ["/property-rights", "/protect-against-deed-fraud", "/deed-theft", "/stop-fraud", "/identity-protection", "/protect-your-money", "/protect-your-rights"];
+    const calcPages = ["/mortgage-calculator", "/dti-calculator", "/rent-vs-buy", "/compare-loans", "/true-cost", "/affordability"];
+
+    switch (key) {
+      case "executive":
+        return {
+          sections: [
+            { title: "Key Performance Indicators", data: [["Total Page Views", pvCount], ["Unique Pages Viewed", uniquePages], ["Total Sessions", sessionCount], ["Avg Pages/Session", Math.round(avgPagesPerSession * 10) / 10]] },
+            { title: "Top Content (Top 5)", data: topPages.slice(0, 5) },
+            { title: "Traffic Trend (7 Days)", data: trafficByDay },
+          ],
+        };
+      case "ceo":
+        return {
+          sections: [
+            { title: "Monthly Overview", data: [["Total Views (30d)", last30.length], ["Total Views (7d)", last7.length], ["Sessions", sessionCount], ["Ad Impressions", totalImpressions]] },
+            { title: "Growth Indicators", data: [["Unique Pages", uniquePages], ["Bounce Rate %", Math.round(bounceRate * 100)], ["Mobile %", deviceBreakdown.total ? Math.round((deviceBreakdown.mobile / deviceBreakdown.total) * 100) : 0]] },
+            { title: "Strategic Content", data: topPages.slice(0, 5) },
+          ],
+        };
+      case "it":
+        return {
+          sections: [
+            { title: "Browser Distribution", data: browserBreakdown },
+            { title: "OS Distribution", data: osBreakdown },
+            { title: "Device Split", data: [["Desktop", deviceBreakdown.desktop], ["Mobile", deviceBreakdown.mobile]] },
+            { title: "Sessions Overview", data: [["Total Sessions", sessionCount], ["Avg Pages/Session", Math.round(avgPagesPerSession * 10) / 10], ["Bounce Rate %", Math.round(bounceRate * 100)]] },
+          ],
+        };
+      case "board":
+        return {
+          sections: [
+            { title: "Engagement Metrics", data: [["Total Page Views", pvCount], ["Sessions", sessionCount], ["Pages/Session", Math.round(avgPagesPerSession * 10) / 10]] },
+            { title: "Content Reach (Top 10)", data: topPages },
+            { title: "Ad Revenue Potential", data: [["Total Impressions", totalImpressions], ["Total Clicks", totalAdClicks], ["Est. Revenue Low ($)", Math.round(revenuePotential.low * 100) / 100], ["Est. Revenue High ($)", Math.round(revenuePotential.high * 100) / 100]] },
+          ],
+        };
+      case "staff":
+        return {
+          sections: [
+            { title: "Most Used Tools", data: calculatorUsage.length ? calculatorUsage : [["No data yet", 0]] },
+            { title: "Search Queries", data: searchQueries.length ? searchQueries.slice(0, 10) : [["No data yet", 0]] },
+            { title: "Content Performance", data: topPages.slice(0, 10) },
+          ],
+        };
+      case "member":
+        return {
+          sections: [
+            { title: "Member Content Performance", data: topPages.filter(([p]) => ["/join-alta", "/find-company", "/find-policy", "/resources"].includes(p)).concat(topPages.filter(([p]) => !["/join-alta", "/find-company", "/find-policy", "/resources"].includes(p)).slice(0, 5)) },
+            { title: "Join ALTA Page", data: [["Views", pageViewCounts["/join-alta"] || 0]] },
+          ],
+        };
+      case "elite":
+        return {
+          sections: [
+            { title: "Impressions by Sponsor", data: adImpressionsBySponsor.length ? adImpressionsBySponsor : [["No data yet", 0]] },
+            { title: "Clicks by Sponsor", data: adClicksBySponsor.length ? adClicksBySponsor : [["No data yet", 0]] },
+            { title: "Placement Performance", data: adImpressionsByPage.length ? adImpressionsByPage : [["No data yet", 0]] },
+          ],
+        };
+      case "adrevenue":
+        return {
+          sections: [
+            { title: "Revenue by Format", data: adImpressions.map(([fmt, imps]) => [fmt, Math.round((imps / 1000) * 10 * 100) / 100] as [string, number]) },
+            { title: "Revenue by Page", data: adImpressionsByPage.map(([p, imps]) => [p, Math.round((imps / 1000) * 10 * 100) / 100] as [string, number]) },
+            { title: "Summary", data: [["Total Impressions", totalImpressions], ["Total Clicks", totalAdClicks], ["Est. Revenue (Avg CPM $10)", Math.round((totalImpressions / 1000) * 10 * 100) / 100]] },
+          ],
+        };
+      case "contentperf":
+        return {
+          sections: [
+            { title: "Page Views (Top 10)", data: topPages },
+            { title: "Glossary Views", data: glossaryViews.length ? glossaryViews.slice(0, 10) : [["No data yet", 0]] },
+            { title: "FAQ Views", data: faqViews.length ? faqViews.slice(0, 10) : [["No data yet", 0]] },
+            { title: "Blog Views", data: blogViews.length ? blogViews : [["No data yet", 0]] },
+          ],
+        };
+      case "protection": {
+        const protectionData: [string, number][] = protectionPages.map((p) => [p, pageViewCounts[p] || 0]);
+        return {
+          sections: [
+            { title: "Protection Page Views", data: protectionData },
+            { title: "Toolkit Completions", data: toolkitCompletions.length ? toolkitCompletions : [["No data yet", 0]] },
+            { title: "County Lookups", data: countyLookups.length ? countyLookups.slice(0, 10) : [["No data yet", 0]] },
+          ],
+        };
+      }
+      case "calculator": {
+        const calcData: [string, number][] = calcPages.map((p) => [p, pageViewCounts[p] || 0]);
+        return {
+          sections: [
+            { title: "Calculator Page Views", data: calcData },
+            { title: "Calculator Usage Events", data: calculatorUsage.length ? calculatorUsage : [["No data yet", 0]] },
+          ],
+        };
+      }
+      case "search":
+        return {
+          sections: [
+            { title: "Search Queries", data: searchQueries.length ? searchQueries : [["No data yet", 0]] },
+            { title: "Popular Pages (Entry Points)", data: entryPages.length ? entryPages : [["No data yet", 0]] },
+            { title: "Top Pages Overall", data: topPages.slice(0, 10) },
+          ],
+        };
+      case "mobile": {
+        const mobilePVs = pageViews.filter((e) => e.device === "mobile");
+        const desktopPVs = pageViews.filter((e) => e.device !== "mobile");
+        const mobileTopPages: Record<string, number> = {};
+        mobilePVs.forEach((e) => { mobileTopPages[e.page] = (mobileTopPages[e.page] || 0) + 1; });
+        return {
+          sections: [
+            { title: "Device Comparison", data: [["Mobile Views", mobilePVs.length], ["Desktop Views", desktopPVs.length], ["Mobile %", deviceBreakdown.total ? Math.round((deviceBreakdown.mobile / deviceBreakdown.total) * 100) : 0]] },
+            { title: "Top Mobile Pages", data: Object.entries(mobileTopPages).sort((a, b) => b[1] - a[1]).slice(0, 10) },
+          ],
+        };
+      }
+      case "feedbackreport": {
+        const typeCounts: Record<string, number> = {};
+        const statusCounts: Record<string, number> = {};
+        sbFeedback.forEach((f) => {
+          typeCounts[f.type] = (typeCounts[f.type] || 0) + 1;
+          statusCounts[f.status] = (statusCounts[f.status] || 0) + 1;
+        });
+        return {
+          sections: [
+            { title: "Feedback by Type", data: Object.entries(typeCounts).sort((a, b) => b[1] - a[1]) },
+            { title: "Status Breakdown", data: Object.entries(statusCounts).sort((a, b) => b[1] - a[1]) },
+            { title: "Summary", data: [["Total Feedback", sbFeedback.length]] },
+          ],
+        };
+      }
+      case "weekly":
+        return {
+          sections: [
+            { title: "Weekly Summary (Last 7 Days)", data: [["Page Views", last7.length], ["Sessions (All Time)", sessionCount], ["Ad Impressions (All)", totalImpressions]] },
+            { title: "Daily Breakdown", data: trafficByDay },
+            { title: "Top Pages This Week", data: (() => {
+              const counts: Record<string, number> = {};
+              last7.forEach((e) => { counts[e.page] = (counts[e.page] || 0) + 1; });
+              return Object.entries(counts).sort((a, b) => b[1] - a[1]).slice(0, 10);
+            })() },
+          ],
+        };
+      default:
+        return { sections: [] };
+    }
+  }, [pageViews, uniquePages, sessionCount, avgPagesPerSession, bounceRate, topPages, trafficByDay, deviceBreakdown, browserBreakdown, osBreakdown, totalImpressions, totalAdClicks, revenuePotential, adImpressions, adImpressionsBySponsor, adClicksBySponsor, adImpressionsByPage, calculatorUsage, searchQueries, entryPages, toolkitCompletions, countyLookups, glossaryViews, faqViews, blogViews, sbFeedback, pageViewCounts, chatbotTopics, folderSaves, triviaScores, triviaDistribution, referrerData, blogViews.length, countyLookups.length]);
 
   /* ---------------------------------------------------------------- */
   /*  Sidebar nav                                                      */
@@ -891,11 +1287,13 @@ function Dashboard() {
         { key: "modules", label: "Modules", icon: "M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.066 2.573c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.573 1.066c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.066-2.573c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" },
         { key: "pages", label: "Pages", icon: "M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" },
         { key: "content", label: "Content", icon: "M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" },
+        { key: "feedback", label: "Feedback", icon: "M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" },
       ],
     },
     {
       heading: "Settings",
       items: [
+        { key: "reports", label: "Reports", icon: "M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" },
         { key: "export", label: "Export & Config", icon: "M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" },
       ],
     },
@@ -914,6 +1312,17 @@ function Dashboard() {
   /*  RENDER                                                           */
   /* ================================================================ */
 
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gray-50 print:hidden">
+        <div className="text-center">
+          <div className="w-8 h-8 border-3 border-[#0a8ebc] border-t-transparent rounded-full animate-spin mx-auto mb-3" />
+          <p className="text-sm text-gray-500">Loading analytics...</p>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen flex bg-gray-50 print:hidden">
       {/* ---- Sidebar ---- */}
@@ -921,6 +1330,18 @@ function Dashboard() {
         <div className="p-5 border-b border-white/10">
           <h1 className="text-base font-bold tracking-tight">HC101 Admin</h1>
           <p className="text-[10px] text-gray-400 mt-0.5">Analytics &amp; Controls</p>
+          {supabaseConnected && (
+            <p className="text-[9px] text-emerald-400 mt-1 flex items-center gap-1">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 inline-block" />
+              Supabase connected
+            </p>
+          )}
+          {!supabaseConnected && (
+            <p className="text-[9px] text-amber-400 mt-1 flex items-center gap-1">
+              <span className="w-1.5 h-1.5 rounded-full bg-amber-400 inline-block" />
+              localStorage mode
+            </p>
+          )}
         </div>
         <nav className="flex-1 py-3">
           {navGroups.map((group) => (
@@ -933,12 +1354,12 @@ function Dashboard() {
                   className={`w-full flex items-center gap-3 px-5 py-2.5 text-sm font-medium transition-colors ${
                     tab === item.key
                       ? "bg-white/10 text-white"
-                  : "text-gray-400 hover:text-white hover:bg-white/5"
-              }`}
-            >
-              <svg className="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d={item.icon} />
-              </svg>
+                      : "text-gray-400 hover:text-white hover:bg-white/5"
+                  }`}
+                >
+                  <svg className="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d={item.icon} />
+                  </svg>
                   {item.label}
                 </button>
               ))}
@@ -948,6 +1369,7 @@ function Dashboard() {
         <div className="p-4 border-t border-white/10 space-y-1">
           <p className="text-[10px] text-gray-500">{events.length} events tracked</p>
           <p className="text-[10px] text-gray-500">{sessionCount} sessions</p>
+          <p className="text-[10px] text-gray-500">{sbFeedback.length} feedback items</p>
           <p className="text-[10px] text-gray-500">Retention: {config.retentionDays === 0 ? "All" : `${config.retentionDays}d`}</p>
         </div>
       </aside>
@@ -961,20 +1383,20 @@ function Dashboard() {
           <div className="space-y-8">
             <h2 className="text-xl font-bold text-[#1a2744]">Analytics Overview</h2>
 
-            {/* Row 1 — Core stats */}
+            {/* Row 1 -- Core stats */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               <Stat label="Total Page Views" value={pageViews.length} />
               <Stat label="Unique Pages" value={uniquePages} />
               <Stat label="Sessions" value={sessionCount} />
-              <Stat label="Pages / Session" value={pagesPerSession.toFixed(1)} />
+              <Stat label="Pages / Session" value={avgPagesPerSession.toFixed(1)} />
             </div>
 
-            {/* Row 2 — Session metrics */}
+            {/* Row 2 -- Session metrics */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              <Stat label="Avg. Time on Site" value={avgTimeOnSite > 0 ? fmtDuration(avgTimeOnSite) : "--"} />
               <Stat label="Bounce Rate" value={fmtPct(bounceRate, 1)} sub="Single-page sessions" />
               <Stat label="Mobile Traffic" value={fmtPct(deviceBreakdown.mobile, deviceBreakdown.total || 1)} sub={`${deviceBreakdown.mobile} mobile / ${deviceBreakdown.desktop} desktop`} />
               <Stat label="Ad Impressions" value={totalImpressions} />
+              <Stat label="Feedback Items" value={sbFeedback.length} />
             </div>
 
             {/* Traffic by day */}
@@ -993,18 +1415,20 @@ function Dashboard() {
               ) : (
                 <div className="flex items-end gap-1 h-28">
                   {trafficByHour.hours.map((count, h) => (
-                    <div key={h} className="flex-1 flex flex-col items-center gap-1">
+                    <div key={h} className="flex-1 flex flex-col items-center gap-1 group relative">
                       <div
-                        className="w-full bg-[#0a8ebc] rounded-t transition-all"
+                        className="w-full bg-[#0a8ebc] rounded-t transition-all hover:bg-[#077a9e]"
                         style={{
                           height: `${Math.max((count / trafficByHour.max) * 100, 2)}%`,
                           minHeight: 2,
                         }}
-                        title={`${h}:00 — ${count} views`}
                       />
                       {h % 4 === 0 && (
                         <span className="text-[9px] text-gray-400">{h}h</span>
                       )}
+                      <div className="absolute -top-8 left-1/2 -translate-x-1/2 bg-[#1a2744] text-white text-[9px] px-1.5 py-0.5 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap z-10">
+                        {h}:00 - {count} views
+                      </div>
                     </div>
                   ))}
                 </div>
@@ -1020,47 +1444,15 @@ function Dashboard() {
               )}
             </Card>
 
-            {/* Entry / Exit pages */}
-            <div className="grid md:grid-cols-2 gap-6">
-              <Card title="Top Entry Pages">
-                {entryPages.length === 0 ? (
-                  <EmptyState text="No session data yet." />
-                ) : (
-                  <div className="space-y-2">
-                    {entryPages.map(([page, count]) => (
-                      <div key={page} className="flex justify-between text-sm">
-                        <span className="text-gray-600 truncate mr-3">{page}</span>
-                        <span className="font-semibold text-[#1a2744] shrink-0">{count}</span>
-                      </div>
-                    ))}
-                  </div>
-                )}
-              </Card>
-              <Card title="Top Exit Pages">
-                {exitPages.length === 0 ? (
-                  <EmptyState text="No session data yet." />
-                ) : (
-                  <div className="space-y-2">
-                    {exitPages.map(([page, count]) => (
-                      <div key={page} className="flex justify-between text-sm">
-                        <span className="text-gray-600 truncate mr-3">{page}</span>
-                        <span className="font-semibold text-[#1a2744] shrink-0">{count}</span>
-                      </div>
-                    ))}
-                  </div>
-                )}
-              </Card>
-            </div>
-
-            {/* User flows */}
-            <Card title="Common User Flows (Page A -> Page B)">
-              {userFlows.length === 0 ? (
-                <EmptyState text="No multi-page sessions yet." />
+            {/* Entry pages */}
+            <Card title="Top Entry Pages">
+              {entryPages.length === 0 ? (
+                <EmptyState text="No session data yet." />
               ) : (
                 <div className="space-y-2">
-                  {userFlows.map(([flow, count]) => (
-                    <div key={flow} className="flex justify-between text-sm">
-                      <span className="text-gray-600 truncate mr-3 font-mono text-xs">{flow}</span>
+                  {entryPages.map(([page, count]) => (
+                    <div key={page} className="flex justify-between text-sm">
+                      <span className="text-gray-600 truncate mr-3">{page}</span>
                       <span className="font-semibold text-[#1a2744] shrink-0">{count}</span>
                     </div>
                   ))}
@@ -1068,55 +1460,54 @@ function Dashboard() {
               )}
             </Card>
 
-            {/* Device breakdown + Referrers */}
-            <div className="grid md:grid-cols-2 gap-6">
+            {/* Device + Browser + OS breakdowns */}
+            <div className="grid md:grid-cols-3 gap-6">
               <Card title="Device Breakdown">
                 {deviceBreakdown.total === 0 ? (
                   <EmptyState text="No data yet." />
                 ) : (
                   <div className="space-y-3">
                     <div className="flex items-center gap-3">
-                      <span className="text-sm text-gray-600 w-20">Desktop</span>
+                      <span className="text-sm text-gray-600 w-16">Desktop</span>
                       <div className="flex-1 h-6 bg-gray-100 rounded-full overflow-hidden">
-                        <div
-                          className="h-full bg-[#1a2744] rounded-full"
-                          style={{ width: `${(deviceBreakdown.desktop / deviceBreakdown.total) * 100}%` }}
-                        />
+                        <div className="h-full bg-[#1a2744] rounded-full" style={{ width: `${(deviceBreakdown.desktop / deviceBreakdown.total) * 100}%` }} />
                       </div>
-                      <span className="text-sm font-semibold text-[#1a2744] w-16 text-right">
-                        {deviceBreakdown.desktop} ({fmtPct(deviceBreakdown.desktop, deviceBreakdown.total)})
-                      </span>
+                      <span className="text-xs font-semibold text-[#1a2744] w-14 text-right">{deviceBreakdown.desktop}</span>
                     </div>
                     <div className="flex items-center gap-3">
-                      <span className="text-sm text-gray-600 w-20">Mobile</span>
+                      <span className="text-sm text-gray-600 w-16">Mobile</span>
                       <div className="flex-1 h-6 bg-gray-100 rounded-full overflow-hidden">
-                        <div
-                          className="h-full bg-[#0a8ebc] rounded-full"
-                          style={{ width: `${(deviceBreakdown.mobile / deviceBreakdown.total) * 100}%` }}
-                        />
+                        <div className="h-full bg-[#0a8ebc] rounded-full" style={{ width: `${(deviceBreakdown.mobile / deviceBreakdown.total) * 100}%` }} />
                       </div>
-                      <span className="text-sm font-semibold text-[#1a2744] w-16 text-right">
-                        {deviceBreakdown.mobile} ({fmtPct(deviceBreakdown.mobile, deviceBreakdown.total)})
-                      </span>
+                      <span className="text-xs font-semibold text-[#1a2744] w-14 text-right">{deviceBreakdown.mobile}</span>
                     </div>
                   </div>
                 )}
               </Card>
-              <Card title="Top Referrers">
-                {referrerData.length === 0 ? (
-                  <EmptyState text="No referrer data yet." />
+              <Card title="Browser Breakdown">
+                {browserBreakdown.length === 0 ? (
+                  <EmptyState text="No data yet." />
                 ) : (
-                  <div className="space-y-2">
-                    {referrerData.map(([ref, count]) => (
-                      <div key={ref} className="flex justify-between text-sm">
-                        <span className="text-gray-600 truncate mr-3">{ref}</span>
-                        <span className="font-semibold text-[#1a2744] shrink-0">{count}</span>
-                      </div>
-                    ))}
-                  </div>
+                  <BarChart data={browserBreakdown} color="bg-purple-500" />
+                )}
+              </Card>
+              <Card title="OS Breakdown">
+                {osBreakdown.length === 0 ? (
+                  <EmptyState text="No data yet." />
+                ) : (
+                  <BarChart data={osBreakdown} color="bg-emerald-500" />
                 )}
               </Card>
             </div>
+
+            {/* Referrers */}
+            <Card title="Top Referrers">
+              {referrerData.length === 0 ? (
+                <EmptyState text="No referrer data yet." />
+              ) : (
+                <BarChart data={referrerData} color="bg-amber-500" />
+              )}
+            </Card>
           </div>
         )}
 
@@ -1127,7 +1518,6 @@ function Dashboard() {
           <div className="space-y-8">
             <h2 className="text-xl font-bold text-[#1a2744]">Ad Performance</h2>
 
-            {/* Summary cards */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               <Stat label="Total Impressions" value={totalImpressions} />
               <Stat label="Total Clicks" value={totalAdClicks} />
@@ -1139,7 +1529,6 @@ function Dashboard() {
               />
             </div>
 
-            {/* Impressions per format */}
             <Card title="Impressions per Ad Format">
               {adImpressions.length === 0 ? (
                 <EmptyState text="No impressions yet." />
@@ -1148,7 +1537,6 @@ function Dashboard() {
               )}
             </Card>
 
-            {/* CTR per format */}
             <Card title="Click-Through Rate per Ad Format">
               {adImpressions.length === 0 ? (
                 <EmptyState text="No data yet." />
@@ -1185,7 +1573,6 @@ function Dashboard() {
               )}
             </Card>
 
-            {/* By sponsor */}
             <div className="grid md:grid-cols-2 gap-6">
               <Card title="Impressions per Sponsor">
                 {adImpressionsBySponsor.length === 0 ? (
@@ -1203,13 +1590,35 @@ function Dashboard() {
               </Card>
             </div>
 
-            {/* Top ad placements */}
             <Card title="Top Ad Placements (by Page Impressions)">
               {adImpressionsByPage.length === 0 ? (
                 <EmptyState text="No placement data yet." />
               ) : (
                 <BarChart data={adImpressionsByPage} color="bg-amber-500" />
               )}
+            </Card>
+
+            {/* Ad format toggles */}
+            <Card title="Ad Format Controls">
+              <div className="space-y-3">
+                {AD_FORMATS.map(({ key, label }) => {
+                  const enabled = config.adToggles[key] === undefined ? true : config.adToggles[key];
+                  return (
+                    <div key={key} className="flex items-center justify-between">
+                      <div>
+                        <p className="text-sm font-medium text-[#1a2744]">{label}</p>
+                        <p className="text-xs text-gray-400 font-mono">{key}</p>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <span className={`text-[10px] font-semibold px-2 py-0.5 rounded-full ${enabled ? "bg-green-50 text-green-600" : "bg-gray-100 text-gray-400"}`}>
+                          {enabled ? "Live" : "Paused"}
+                        </span>
+                        <Toggle enabled={enabled} onChange={() => toggleAd(key)} />
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
             </Card>
           </div>
         )}
@@ -1221,7 +1630,6 @@ function Dashboard() {
           <div className="space-y-8">
             <h2 className="text-xl font-bold text-[#1a2744]">Content Performance</h2>
 
-            {/* Calculators */}
             <Card title="Most Used Calculators">
               {calculatorUsage.length === 0 ? (
                 <EmptyState text="No calculator usage tracked yet." />
@@ -1230,7 +1638,6 @@ function Dashboard() {
               )}
             </Card>
 
-            {/* Toolkit completions + Trivia */}
             <div className="grid md:grid-cols-2 gap-6">
               <Card title="Toolkit Completion Rates">
                 {toolkitCompletions.length === 0 ? (
@@ -1251,7 +1658,6 @@ function Dashboard() {
               </Card>
             </div>
 
-            {/* Glossary + FAQ */}
             <div className="grid md:grid-cols-2 gap-6">
               <Card title="Most Viewed Glossary Terms">
                 {glossaryViews.length === 0 ? (
@@ -1283,7 +1689,6 @@ function Dashboard() {
               </Card>
             </div>
 
-            {/* Blog + County */}
             <div className="grid md:grid-cols-2 gap-6">
               <Card title="Most Opened Blog Articles">
                 {blogViews.length === 0 ? (
@@ -1315,7 +1720,6 @@ function Dashboard() {
               </Card>
             </div>
 
-            {/* Chatbot + Search */}
             <div className="grid md:grid-cols-2 gap-6">
               <Card title="AI Chatbot Most Asked Topics">
                 {chatbotTopics.length === 0 ? (
@@ -1347,7 +1751,6 @@ function Dashboard() {
               </Card>
             </div>
 
-            {/* My Folder saves */}
             <Card title="My Folder Saves by Content Type">
               {folderSaves.length === 0 ? (
                 <EmptyState text="No folder save data yet." />
@@ -1422,7 +1825,6 @@ function Dashboard() {
               </p>
             </div>
 
-            {/* Filters & bulk actions */}
             <div className="flex flex-wrap items-center gap-3">
               <span className="text-xs font-semibold text-gray-500 uppercase tracking-wider">Filter:</span>
               {["All", ...PAGE_SECTIONS].map((s) => (
@@ -1455,11 +1857,9 @@ function Dashboard() {
             </div>
 
             <div className="bg-white rounded-xl border border-gray-100 shadow-sm">
-              {/* Table header */}
-              <div className="grid grid-cols-[1fr_80px_80px_90px_80px] gap-2 px-6 py-3 border-b border-gray-100 text-xs font-semibold text-gray-500 uppercase tracking-wider">
+              <div className="grid grid-cols-[1fr_80px_90px_80px] gap-2 px-6 py-3 border-b border-gray-100 text-xs font-semibold text-gray-500 uppercase tracking-wider">
                 <span>Page</span>
                 <span className="text-right">Views</span>
-                <span className="text-right">Avg Time</span>
                 <span className="text-right">Last Viewed</span>
                 <span className="text-right">Status</span>
               </div>
@@ -1468,9 +1868,8 @@ function Dashboard() {
                   const visible = config.pageVisibility[route] === undefined ? true : config.pageVisibility[route];
                   const views = pageViewCounts[route] || 0;
                   const lastView = pageLastViewed[route];
-                  const avgTime = pageAvgTime[route];
                   return (
-                    <div key={route} className="grid grid-cols-[1fr_80px_80px_90px_80px] gap-2 items-center px-6 py-3">
+                    <div key={route} className="grid grid-cols-[1fr_80px_90px_80px] gap-2 items-center px-6 py-3">
                       <div className="min-w-0">
                         <p className="text-sm font-medium text-[#1a2744] truncate">{label}</p>
                         <div className="flex items-center gap-2 mt-0.5">
@@ -1479,9 +1878,6 @@ function Dashboard() {
                         </div>
                       </div>
                       <span className="text-sm font-semibold text-[#1a2744] text-right">{views}</span>
-                      <span className="text-xs text-gray-500 text-right">
-                        {avgTime ? fmtDuration(avgTime) : "--"}
-                      </span>
                       <span className="text-[11px] text-gray-400 text-right">
                         {lastView ? new Date(lastView).toLocaleDateString("en-US", { month: "short", day: "numeric" }) : "--"}
                       </span>
@@ -1504,13 +1900,202 @@ function Dashboard() {
         )}
 
         {/* ============================================================ */}
-        {/*  TAB 6: EXPORT & SETTINGS                                     */}
+        {/*  TAB 6: FEEDBACK                                              */}
+        {/* ============================================================ */}
+        {tab === "feedback" && (
+          <div className="space-y-6">
+            <div>
+              <h2 className="text-xl font-bold text-[#1a2744]">Feedback &amp; Bug Reports</h2>
+              <p className="text-sm text-gray-500 mt-1">
+                View and manage user-submitted feedback from the site.
+              </p>
+            </div>
+
+            {!supabaseConnected ? (
+              <Card title="Supabase Required">
+                <EmptyState text="Connect Supabase to view feedback submissions." />
+              </Card>
+            ) : (
+              <>
+                {/* Filter bar */}
+                <div className="flex flex-wrap items-center gap-2">
+                  <span className="text-xs font-semibold text-gray-500 uppercase tracking-wider">Filter:</span>
+                  {["all", "bug", "suggestion", "feedback", "question"].map((f) => (
+                    <button
+                      key={f}
+                      onClick={() => setFeedbackFilter(f)}
+                      className={`px-3 py-1.5 text-xs font-semibold rounded-lg transition-colors capitalize ${
+                        feedbackFilter === f
+                          ? "bg-[#0a8ebc] text-white"
+                          : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+                      }`}
+                    >
+                      {f} {f !== "all" ? `(${sbFeedback.filter((fb) => fb.type === f).length})` : `(${sbFeedback.length})`}
+                    </button>
+                  ))}
+                </div>
+
+                {/* Feedback list */}
+                {filteredFeedback.length === 0 ? (
+                  <Card title="No Feedback">
+                    <EmptyState text="No feedback items matching this filter." />
+                  </Card>
+                ) : (
+                  <div className="space-y-3">
+                    {filteredFeedback.map((fb) => (
+                      <div key={fb.id} className="bg-white rounded-xl border border-gray-100 shadow-sm p-5">
+                        <div className="flex items-start justify-between mb-3">
+                          <div className="flex items-center gap-2">
+                            <SectionBadge
+                              text={fb.type}
+                              color={
+                                fb.type === "bug" ? "bg-red-50 text-red-600" :
+                                fb.type === "suggestion" ? "bg-blue-50 text-blue-600" :
+                                fb.type === "question" ? "bg-purple-50 text-purple-600" :
+                                "bg-green-50 text-green-600"
+                              }
+                            />
+                            <StatusBadge status={fb.status} />
+                            <span className="text-[10px] text-gray-400">
+                              {new Date(fb.created_at).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric", hour: "2-digit", minute: "2-digit" })}
+                            </span>
+                          </div>
+                          <div className="flex gap-1">
+                            {fb.status !== "reviewed" && (
+                              <button
+                                onClick={() => updateFeedbackStatus(fb.id, "reviewed")}
+                                className="px-2 py-1 text-[10px] font-semibold rounded bg-amber-50 text-amber-700 hover:bg-amber-100 transition-colors"
+                              >
+                                Reviewed
+                              </button>
+                            )}
+                            {fb.status !== "resolved" && (
+                              <button
+                                onClick={() => updateFeedbackStatus(fb.id, "resolved")}
+                                className="px-2 py-1 text-[10px] font-semibold rounded bg-green-50 text-green-700 hover:bg-green-100 transition-colors"
+                              >
+                                Resolved
+                              </button>
+                            )}
+                            {fb.status !== "dismissed" && (
+                              <button
+                                onClick={() => updateFeedbackStatus(fb.id, "dismissed")}
+                                className="px-2 py-1 text-[10px] font-semibold rounded bg-gray-100 text-gray-500 hover:bg-gray-200 transition-colors"
+                              >
+                                Dismiss
+                              </button>
+                            )}
+                          </div>
+                        </div>
+                        <p className="text-sm text-gray-700 mb-2">{fb.message}</p>
+                        <div className="flex flex-wrap gap-3 text-[10px] text-gray-400">
+                          {fb.page && <span>Page: {fb.page}</span>}
+                          {fb.email && <span>Email: {fb.email}</span>}
+                          {fb.browser && <span>Browser: {fb.browser}</span>}
+                          {fb.device && <span>Device: {fb.device}</span>}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </>
+            )}
+          </div>
+        )}
+
+        {/* ============================================================ */}
+        {/*  TAB 7: REPORTS                                                */}
+        {/* ============================================================ */}
+        {tab === "reports" && (
+          <div className="space-y-6">
+            <div>
+              <h2 className="text-xl font-bold text-[#1a2744]">Prebuilt Reports</h2>
+              <p className="text-sm text-gray-500 mt-1">
+                15 report templates for different stakeholders. Click to view, export as CSV.
+              </p>
+            </div>
+
+            {!supabaseConnected && events.length === 0 ? (
+              <Card title="Data Required">
+                <EmptyState text="Connect Supabase to enable reports, or collect some analytics data first." />
+              </Card>
+            ) : (
+              <>
+                {/* Report grid */}
+                <div className="grid md:grid-cols-3 gap-4">
+                  {REPORT_DEFS.map((rpt) => (
+                    <button
+                      key={rpt.key}
+                      onClick={() => setActiveReport(activeReport === rpt.key ? null : rpt.key)}
+                      className={`text-left bg-white rounded-xl border shadow-sm p-5 transition-all hover:shadow-md ${
+                        activeReport === rpt.key ? "border-[#0a8ebc] ring-2 ring-[#0a8ebc]/20" : "border-gray-100"
+                      }`}
+                    >
+                      <h4 className="text-sm font-bold text-[#1a2744] mb-1">{rpt.title}</h4>
+                      <p className="text-[11px] text-gray-400 leading-relaxed">{rpt.description}</p>
+                    </button>
+                  ))}
+                </div>
+
+                {/* Active report detail */}
+                {activeReport && (() => {
+                  const rpt = REPORT_DEFS.find((r) => r.key === activeReport);
+                  const reportData = getReportData(activeReport);
+                  if (!rpt) return null;
+                  return (
+                    <div className="bg-white rounded-xl border border-gray-100 shadow-sm p-6 space-y-6">
+                      <div className="flex items-center justify-between">
+                        <div>
+                          <h3 className="text-lg font-bold text-[#1a2744]">{rpt.title}</h3>
+                          <p className="text-xs text-gray-400 mt-0.5">Generated: {new Date().toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })}</p>
+                        </div>
+                        <div className="flex gap-2">
+                          {reportData.sections.map((section, idx) => (
+                            <button
+                              key={idx}
+                              onClick={() => exportReportCSV(`${activeReport}-${idx}`, section.data)}
+                              className="px-3 py-1.5 text-xs font-semibold rounded-lg bg-[#0a8ebc] text-white hover:bg-[#077a9e] transition-colors"
+                            >
+                              Export CSV
+                            </button>
+                          ))}
+                        </div>
+                      </div>
+
+                      {reportData.sections.map((section, idx) => (
+                        <div key={idx}>
+                          <h4 className="text-sm font-bold text-[#1a2744] mb-3">{section.title}</h4>
+                          {section.data.length === 0 || (section.data.length === 1 && section.data[0][0] === "No data yet") ? (
+                            <EmptyState text="No data available for this section." />
+                          ) : section.data.length <= 4 && section.data.every(([, v]) => typeof v === "number") ? (
+                            <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                              {section.data.map(([label, val]) => (
+                                <div key={label} className="bg-gray-50 rounded-lg p-3">
+                                  <p className="text-[10px] text-gray-400 uppercase tracking-wider">{label}</p>
+                                  <p className="text-lg font-bold text-[#1a2744]">{typeof val === "number" && val % 1 !== 0 ? val.toFixed(1) : val}</p>
+                                </div>
+                              ))}
+                            </div>
+                          ) : (
+                            <BarChart data={section.data} color={BAR_COLORS[idx % BAR_COLORS.length]} />
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                  );
+                })()}
+              </>
+            )}
+          </div>
+        )}
+
+        {/* ============================================================ */}
+        {/*  TAB 8: EXPORT & SETTINGS                                     */}
         {/* ============================================================ */}
         {tab === "export" && (
           <div className="space-y-6">
             <h2 className="text-xl font-bold text-[#1a2744]">Export &amp; Settings</h2>
 
-            {/* Export analytics CSV */}
             <Card title="Export Analytics CSV">
               <p className="text-xs text-gray-400 mb-4">
                 Download all {events.length} tracked events as a CSV file.
@@ -1524,7 +2109,6 @@ function Dashboard() {
               </button>
             </Card>
 
-            {/* Export config JSON */}
             <Card title="Export Admin Config (JSON)">
               <p className="text-xs text-gray-400 mb-4">
                 Download current admin configuration as a JSON backup file.
@@ -1537,7 +2121,6 @@ function Dashboard() {
               </button>
             </Card>
 
-            {/* Import config */}
             <Card title="Import Config from JSON">
               <p className="text-xs text-gray-400 mb-4">
                 Restore a previously exported admin configuration.
@@ -1560,7 +2143,6 @@ function Dashboard() {
               </button>
             </Card>
 
-            {/* Retention period */}
             <Card title="Analytics Retention Period">
               <p className="text-xs text-gray-400 mb-4">
                 Set how long analytics data is retained. Current: {config.retentionDays === 0 ? "All time" : `${config.retentionDays} days`}
@@ -1587,7 +2169,21 @@ function Dashboard() {
               </div>
             </Card>
 
-            {/* Danger zone */}
+            {/* Supabase connection status */}
+            <Card title="Database Connection">
+              <div className="flex items-center gap-3 mb-3">
+                <span className={`w-2.5 h-2.5 rounded-full ${supabaseConnected ? "bg-emerald-500" : "bg-amber-500"}`} />
+                <span className="text-sm font-semibold text-[#1a2744]">
+                  {supabaseConnected ? "Supabase connected" : "Using localStorage (offline mode)"}
+                </span>
+              </div>
+              <p className="text-xs text-gray-400">
+                {supabaseConnected
+                  ? `Reading from Supabase. ${sbAnalytics.length} analytics events, ${sbSessions.length} sessions, ${sbFeedback.length} feedback items in database.`
+                  : "Set NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY environment variables to enable Supabase."}
+              </p>
+            </Card>
+
             <div className="border border-red-200 rounded-xl p-6 space-y-4">
               <h3 className="text-sm font-bold text-red-600">Danger Zone</h3>
               <div className="flex flex-wrap gap-3">
