@@ -24,7 +24,7 @@ const howItHappens = [
   {
     title: "Vacant Property Targeting",
     icon: "M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25",
-    summary: "Out-of-state owners, vacant lots, and inherited properties are prime targets for deed theft schemes.",
+    summary: "Out-of-state owners, vacant lots, and inherited properties are prime targets for title theft schemes.",
     detail: "Criminals specifically target properties where the owner is unlikely to notice suspicious activity: vacant land, rental properties managed by third parties, homes owned by elderly individuals in care facilities, and properties owned by out-of-state or overseas owners. These properties are identified through public records, and criminals exploit the fact that the real owner may not receive or notice county correspondence about title changes. Inherited properties in probate are also frequent targets.",
     source: "ALTA / FBI IC3",
   },
@@ -62,7 +62,7 @@ const warningSigns = [
   },
   {
     sign: "Notice of sale or foreclosure you didn't initiate",
-    detail: "If you receive a foreclosure notice or learn your property has been listed for sale without your knowledge, act immediately — this is a strong indicator of deed theft.",
+    detail: "If you receive a foreclosure notice or learn your property has been listed for sale without your knowledge, act immediately — this is a strong indicator of title theft.",
     icon: "M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z",
   },
   {
@@ -113,7 +113,7 @@ const comparisonData = {
     whatItDoesNot: [
       "Does NOT prevent anyone from filing a fraudulent deed",
       "Does NOT pay for legal defense if your title is challenged",
-      "Does NOT cover financial losses from deed theft",
+      "Does NOT cover financial losses from title theft",
       "Does NOT remove fraudulent documents from your record",
       "Does NOT provide insurance coverage of any kind",
     ],
@@ -176,16 +176,16 @@ export default function DeedTheftPage() {
         image="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=1920&q=80"
         breadcrumb={[
           { label: "Protect Your Money", href: "/protect-your-money" },
-          { label: "Deed Theft & Title Fraud", href: "/deed-theft" },
+          { label: "Title Theft & Title Fraud", href: "/deed-theft" },
         ]}
       />
 
       <div className="py-1.5 lg:py-2">
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
 
-          {/* What is Deed Theft */}
+          {/* What is Title Theft */}
           <section className="mb-8">
-            <h2 className="text-2xl font-bold text-alta-navy mb-4">What Is Deed Theft?</h2>
+            <h2 className="text-2xl font-bold text-alta-navy mb-4">What Is Title Theft?</h2>
             <div className="p-5 bg-[#f5e8e8] rounded-2xl border border-[#e4c5c5] border-l-4 border-l-[#943030]">
               <div className="flex items-start gap-4">
                 <div className="w-12 h-12 rounded-xl bg-[#943030]/10 flex items-center justify-center text-[#943030] shrink-0">
@@ -195,7 +195,7 @@ export default function DeedTheftPage() {
                 </div>
                 <div>
                   <p className="text-sm text-alta-gray leading-relaxed mb-3">
-                    <strong className="text-alta-navy">Deed theft</strong> (also called deed fraud or title fraud) occurs when someone forges a deed to transfer your property ownership without your knowledge or consent. The criminal records the forged deed at the county recorder&apos;s office, making it appear that they — or a shell company they control — are the legal owner of your property.
+                    <strong className="text-alta-navy">Title theft</strong>, also known as title fraud or deed fraud, occurs when someone forges a deed to transfer your property ownership without your knowledge or consent. The criminal records the forged deed at the county recorder&apos;s office, making it appear that they — or a shell company they control — are the legal owner of your property.
                   </p>
                   <p className="text-sm text-alta-gray leading-relaxed mb-3">
                     Once the fraudulent deed is recorded, the criminal can take out mortgages against your property, sell it to an unsuspecting buyer, or simply strip the equity. You may not discover the theft until you receive a foreclosure notice, try to sell or refinance, or notice unfamiliar charges on your property tax records.
@@ -213,7 +213,7 @@ export default function DeedTheftPage() {
             {[
               { value: "$172K", label: "Average fraud loss", source: "FBI IC3" },
               { value: "54%", label: "Of agents saw seller impersonation", source: "CertifID 2023" },
-              { value: "9,600+", label: "Deed fraud complaints in 2023", source: "FBI IC3" },
+              { value: "9,600+", label: "Title fraud complaints in 2023", source: "FBI IC3" },
               { value: "#1", label: "Fastest-growing property crime", source: "ALTA" },
             ].map((stat, i) => (
               <div key={i} className="p-3 bg-white rounded-xl border border-gray-100 shadow-sm text-center">
@@ -226,7 +226,7 @@ export default function DeedTheftPage() {
 
           {/* How It Happens — expandable tiles */}
           <section className="mb-8">
-            <h2 className="text-2xl font-bold text-alta-navy mb-2">How Deed Theft Happens</h2>
+            <h2 className="text-2xl font-bold text-alta-navy mb-2">How Title Theft Happens</h2>
             <p className="text-sm text-alta-gray mb-4">Click any tile to learn the full details of how criminals execute these schemes.</p>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
               {howItHappens.map((item, i) => (
@@ -302,7 +302,7 @@ export default function DeedTheftPage() {
                 Title lock services (typically $15-$30/month) are <strong>monitoring services, not insurance</strong>. They alert you when a document is recorded against your property title — which is useful — but they do <strong>not</strong> prevent fraud, do <strong>not</strong> cover legal defense costs, and do <strong>not</strong> cover financial losses. Many county recorder offices offer similar monitoring alerts for free.
               </p>
               <p className="text-xs text-alta-gray leading-relaxed">
-                Only <strong>owner&apos;s title insurance</strong> provides actual financial protection against deed theft, covering both legal defense and losses. If you already have owner&apos;s title insurance, a title lock subscription may be redundant.
+                Only <strong>owner&apos;s title insurance</strong> provides actual financial protection against title theft, covering both legal defense and losses. If you already have owner&apos;s title insurance, a title lock subscription may be redundant.
               </p>
             </div>
           </section>
@@ -389,7 +389,7 @@ export default function DeedTheftPage() {
               <div className="bg-gradient-to-r from-[#7a1a1a] via-[#943030] to-[#7a1a1a] px-5 py-3">
                 <h2 className="text-white font-bold text-lg tracking-tight flex items-center gap-2">
                   <svg className="w-5 h-5 animate-pulse" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M8.485 2.495c.673-1.167 2.357-1.167 3.03 0l6.28 10.875c.673 1.168-.168 2.625-1.516 2.625H3.72c-1.347 0-2.189-1.457-1.515-2.625L8.485 2.495zM10 5a.75.75 0 01.75.75v3.5a.75.75 0 01-1.5 0v-3.5A.75.75 0 0110 5zm0 9a1 1 0 100-2 1 1 0 000 2z" clipRule="evenodd" /></svg>
-                  What to Do If You&apos;re a Victim of Deed Theft
+                  What to Do If You&apos;re a Victim of Title Theft
                 </h2>
               </div>
               <div className="bg-gradient-to-b from-red-50 to-white p-5 border-2 border-t-0 border-[#943030]/30 rounded-b-2xl">
@@ -418,7 +418,7 @@ export default function DeedTheftPage() {
 
           {/* The Role of Title Insurance */}
           <section className="mb-8">
-            <h2 className="text-2xl font-bold text-alta-navy mb-4">The Role of Title Insurance in Deed Fraud Protection</h2>
+            <h2 className="text-2xl font-bold text-alta-navy mb-4">The Role of Title Insurance in Title Fraud Protection</h2>
             <div className="p-5 bg-[#e9f5ed] rounded-2xl border border-[#bddcc7] border-l-4 border-l-[#2d6b3f]">
               <div className="flex items-start gap-4">
                 <div className="w-12 h-12 rounded-xl bg-[#2d6b3f]/10 flex items-center justify-center text-[#2d6b3f] shrink-0">
@@ -428,7 +428,7 @@ export default function DeedTheftPage() {
                 </div>
                 <div className="space-y-3">
                   <p className="text-sm text-alta-gray leading-relaxed">
-                    <strong className="text-alta-navy">Owner&apos;s title insurance</strong> is the most comprehensive protection available against deed theft and title fraud. When you purchase an owner&apos;s policy at closing, you are protected for as long as you — or your heirs — own the property.
+                    <strong className="text-alta-navy">Owner&apos;s title insurance</strong> is the most comprehensive protection available against title theft and title fraud. When you purchase an owner&apos;s policy at closing, you are protected for as long as you — or your heirs — own the property.
                   </p>
                   <p className="text-sm text-alta-gray leading-relaxed">
                     If someone files a forged deed to steal your property, your title insurance company will:
