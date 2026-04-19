@@ -51,8 +51,6 @@ export default function PageHero({ title, subtitle, image, breadcrumb }: PageHer
               </ol>
             </nav>
           )}
-          {breadcrumb && breadcrumb.length > 0 && (
-          )}
           <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold text-white mb-2 leading-tight">{title}</h1>
           <p className="text-xs sm:text-sm text-gray-300 max-w-2xl leading-relaxed">{subtitle}</p>
           {/* Popular links — below subtitle */}
