@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import SiteSearch from "@/components/SiteSearch";
 const navItems = [
   {
     label: "The Closing Process",
@@ -107,8 +108,8 @@ export default function Header() {
             </div>
           </Link>
 
-          {/* Desktop Nav */}
-          <nav className="hidden lg:flex items-center gap-1" role="navigation" aria-label="Main navigation">
+          {/* Desktop Nav + Search — pushed right */}
+          <nav className="hidden lg:flex items-center gap-1 ml-auto" role="navigation" aria-label="Main navigation">
             {navItems.map((item) => (
               <div
                 key={item.label}
@@ -132,7 +133,7 @@ export default function Header() {
                     {item.children.map((child, ci) => (
                       "divider" in child && child.divider ? (
                         <div key={ci} className={`px-4 pt-3 pb-1 ${ci > 0 ? "border-t border-gray-100 mt-1" : ""}`}>
-                          <span className="text-[9px] font-bold text-alta-teal uppercase tracking-widest">{child.label}</span>
+                          <span className="text-[11px] font-bold text-alta-teal uppercase tracking-wider">{child.label}</span>
                         </div>
                       ) : (
                         <Link
@@ -148,7 +149,16 @@ export default function Header() {
                 )}
               </div>
             ))}
+            {/* Search — inline with nav */}
+            <div className="ml-2">
+              <SiteSearch />
+            </div>
           </nav>
+
+          {/* Mobile: search + toggle */}
+          <div className="lg:hidden flex items-center gap-1">
+            <SiteSearch />
+          </div>
 
           {/* Mobile toggle */}
           <button
@@ -186,7 +196,7 @@ export default function Header() {
               {item.children?.map((child, ci) => (
                 "divider" in child && child.divider ? (
                   <div key={ci} className={`px-6 pt-3 pb-1 ${ci > 0 ? "border-t border-gray-100 mt-1" : ""}`}>
-                    <span className="text-[9px] font-bold text-alta-teal uppercase tracking-widest">{child.label}</span>
+                    <span className="text-[11px] font-bold text-alta-teal uppercase tracking-wider">{child.label}</span>
                   </div>
                 ) : (
                   <Link
