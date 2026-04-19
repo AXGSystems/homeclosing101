@@ -12,6 +12,7 @@ import FeedbackTabs from "@/components/FeedbackTabs";
 import StickyBottomAd from "@/components/StickyBottomAd";
 import SponsorFooterStrip from "@/components/SponsorFooterStrip";
 import AnalyticsProvider from "@/components/Analytics";
+import FeedbackWidget from "@/components/FeedbackWidget";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -118,6 +119,7 @@ export default function RootLayout({
           <Footer />
           <LayoutOverlays />
           <FeedbackTabs />
+          <FeedbackWidget />
           <StickyBottomAd />
         </ClosingFolderProvider>
         </AchievementProvider>
