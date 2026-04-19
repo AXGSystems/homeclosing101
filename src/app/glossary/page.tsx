@@ -337,7 +337,7 @@ ${terms.map(t => `<div class="term"><h2>${t.term}</h2><p>${t.definition}</p>${t.
                   onMouseLeave={(e) => { if (hasTerms && l !== activeLetter) { e.currentTarget.style.backgroundColor = ''; e.currentTarget.style.color = ''; } }}
                 >
                   {l}
-                  {hasTerms && (
+                  {hasTerms && l === activeLetter && (
                     <span className="absolute -top-1.5 -right-1.5 min-w-[14px] h-[14px] px-0.5 bg-alta-navy text-white text-[8px] font-bold rounded-full flex items-center justify-center leading-none">{count}</span>
                   )}
                 </button>
