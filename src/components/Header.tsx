@@ -40,18 +40,18 @@ const navItems = [
     label: "Protect Your Property",
     href: "/protect-your-rights",
     children: [
-      // Understand Your Coverage
-      { label: "Title Insurance & Your Rights", href: "/protect-your-rights" },
+      { label: "UNDERSTAND YOUR COVERAGE", href: "", divider: true },
+      { label: "Title Insurance & Property Rights", href: "/protect-your-rights" },
       { label: "Your Property Rights", href: "/property-rights" },
       { label: "Homeowner's Insurance", href: "/homeowners-insurance" },
       { label: "HOA Guide", href: "/hoa-guide" },
-      // Prevent Fraud
-      { label: "Wire Fraud Prevention", href: "/protect-your-money" },
+      { label: "PREVENT FRAUD", href: "", divider: true },
+      { label: "Wire Fraud Overview", href: "/protect-your-money" },
       { label: "Stop Fraud 101", href: "/stop-fraud" },
       { label: "Title Theft & Title Fraud", href: "/deed-theft" },
       { label: "Protect Against Title Fraud", href: "/protect-against-deed-fraud" },
       { label: "Identity Protection", href: "/identity-protection" },
-      // After Closing
+      { label: "AFTER CLOSING", href: "", divider: true },
       { label: "After Closing Guide", href: "/after-closing" },
     ],
   },
@@ -119,15 +119,21 @@ export default function Header() {
                   )}
                 </Link>
                 {item.children && openDropdown === item.label && (
-                  <div className="absolute top-full left-0 mt-0 w-56 bg-[var(--bg-primary)] rounded-lg shadow-lg border border-[var(--border-color)] py-2 z-50">
-                    {item.children.map((child) => (
-                      <Link
-                        key={child.href}
-                        href={child.href}
-                        className="block px-4 py-2 text-sm text-alta-navy hover:bg-alta-light hover:text-alta-teal transition-colors"
-                      >
-                        {child.label}
-                      </Link>
+                  <div className="absolute top-full left-0 mt-0 w-64 bg-[var(--bg-primary)] rounded-lg shadow-lg border border-[var(--border-color)] py-2 z-50">
+                    {item.children.map((child, ci) => (
+                      "divider" in child && child.divider ? (
+                        <div key={ci} className={`px-4 pt-3 pb-1 ${ci > 0 ? "border-t border-gray-100 mt-1" : ""}`}>
+                          <span className="text-[9px] font-bold text-alta-teal uppercase tracking-widest">{child.label}</span>
+                        </div>
+                      ) : (
+                        <Link
+                          key={child.href}
+                          href={child.href}
+                          className="block px-4 py-1.5 text-sm text-alta-navy hover:bg-alta-light hover:text-alta-teal transition-colors"
+                        >
+                          {child.label}
+                        </Link>
+                      )
                     ))}
                   </div>
                 )}
@@ -168,15 +174,21 @@ export default function Header() {
               >
                 {item.label}
               </Link>
-              {item.children?.map((child) => (
-                <Link
-                  key={child.href}
-                  href={child.href}
-                  className="block px-6 py-2 text-sm text-alta-gray hover:text-alta-teal hover:bg-alta-light/50 rounded-lg"
-                  onClick={() => setMobileOpen(false)}
-                >
-                  {child.label}
-                </Link>
+              {item.children?.map((child, ci) => (
+                "divider" in child && child.divider ? (
+                  <div key={ci} className={`px-6 pt-3 pb-1 ${ci > 0 ? "border-t border-gray-100 mt-1" : ""}`}>
+                    <span className="text-[9px] font-bold text-alta-teal uppercase tracking-widest">{child.label}</span>
+                  </div>
+                ) : (
+                  <Link
+                    key={child.href}
+                    href={child.href}
+                    className="block px-6 py-2 text-sm text-alta-gray hover:text-alta-teal hover:bg-alta-light/50 rounded-lg"
+                    onClick={() => setMobileOpen(false)}
+                  >
+                    {child.label}
+                  </Link>
+                )
               ))}
             </div>
           ))}
