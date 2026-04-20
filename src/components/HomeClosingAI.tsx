@@ -410,7 +410,7 @@ export default function HomeClosingAI() {
               style={{ transition: 'opacity 350ms ease' }}
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={sponsor.logo} alt={sponsor.name} className="h-7 w-auto object-contain max-w-[90px] shrink-0" onError={(e) => { e.currentTarget.style.display = 'none'; }} />
+              <img src={sponsor.logo} alt={sponsor.name} className="h-7 w-auto object-contain max-w-[90px] shrink-0" onError={(e) => { if (!e.currentTarget.src.endsWith('/logos/alta.svg')) e.currentTarget.src = '/logos/alta.svg'; }} />
               <div className="border-l border-gray-100 pl-2.5 min-w-0">
                 <p className="text-[8px] text-alta-gray uppercase tracking-wider font-semibold leading-none">Sponsor</p>
                 <p className="text-[11px] text-alta-navy font-semibold leading-tight mt-0.5 truncate">{sponsor.name}</p>
@@ -420,7 +420,7 @@ export default function HomeClosingAI() {
             <div className="absolute bottom-full right-0 mb-2 w-[300px] bg-white rounded-xl shadow-2xl border border-gray-100 p-4 opacity-0 pointer-events-none peer-hover:opacity-100 peer-hover:pointer-events-auto transition-opacity duration-200 z-[610] hidden sm:block sm:opacity-0 sm:peer-hover:opacity-100">
               <div className="flex items-center gap-3 mb-3">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={sponsor.logo} alt={sponsor.name} className="h-10 w-auto object-contain max-w-[100px]" onError={(e) => { e.currentTarget.style.display = 'none'; }} />
+                <img src={sponsor.logo} alt={sponsor.name} className="h-10 w-auto object-contain max-w-[100px]" onError={(e) => { if (!e.currentTarget.src.endsWith('/logos/alta.svg')) e.currentTarget.src = '/logos/alta.svg'; }} />
                 <div>
                   <p className="text-sm font-bold text-alta-navy">{sponsor.name}</p>
                   <p className="text-[10px] text-alta-teal font-medium">ALTA Member</p>
@@ -463,7 +463,7 @@ export default function HomeClosingAI() {
             <div className="sm:hidden flex items-center gap-2.5 px-3 py-2 bg-gray-50">
               <p className="text-[8px] text-alta-gray font-semibold uppercase tracking-wider shrink-0">Sponsor</p>
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={sponsor.logo} alt={sponsor.name} className="h-5 w-auto object-contain max-w-[70px] shrink-0" onError={(e) => { e.currentTarget.style.display = 'none'; }} />
+              <img src={sponsor.logo} alt={sponsor.name} className="h-5 w-auto object-contain max-w-[70px] shrink-0" onError={(e) => { if (!e.currentTarget.src.endsWith('/logos/alta.svg')) e.currentTarget.src = '/logos/alta.svg'; }} />
               <p className="text-[10px] text-alta-navy font-semibold truncate flex-1">{sponsor.name}</p>
               <svg className="w-3 h-3 text-alta-teal shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
             </div>
@@ -472,7 +472,7 @@ export default function HomeClosingAI() {
               <p className="text-[9px] text-alta-gray font-semibold uppercase tracking-widest text-center mb-3">Sponsored by</p>
               <div className="flex items-center justify-center mb-3">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={sponsor.logo} alt={sponsor.name} className="h-12 w-auto object-contain max-w-[180px]" onError={(e) => { e.currentTarget.style.display = 'none'; }} />
+                <img src={sponsor.logo} alt={sponsor.name} className="h-12 w-auto object-contain max-w-[180px]" onError={(e) => { if (!e.currentTarget.src.endsWith('/logos/alta.svg')) e.currentTarget.src = '/logos/alta.svg'; }} />
               </div>
               <p className="text-[11px] text-alta-gray text-center leading-relaxed mb-2">{sponsor.blurb}</p>
               <p className="text-[10px] text-alta-teal font-medium text-center flex items-center justify-center gap-1">

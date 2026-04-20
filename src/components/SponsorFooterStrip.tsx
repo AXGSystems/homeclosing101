@@ -35,7 +35,7 @@ export default function SponsorFooterStrip() {
                 src={s.logo}
                 alt={s.name}
                 className="h-6 sm:h-7 w-auto object-contain"
-                onError={(e) => { e.currentTarget.style.display = 'none'; }}
+                onError={(e) => { if (!e.currentTarget.src.endsWith('/logos/alta.svg')) e.currentTarget.src = '/logos/alta.svg'; }}
               />
             </a>
           ))}

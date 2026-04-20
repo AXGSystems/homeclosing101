@@ -48,7 +48,7 @@ export default function StickyBottomAd() {
           >
             <div className="w-8 h-8 rounded-lg bg-white border border-gray-100 shadow-sm flex items-center justify-center shrink-0 overflow-hidden">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={sponsor.logo} alt={sponsor.name} className="w-6 h-6 object-contain" onError={(e) => { e.currentTarget.style.display = 'none'; }} />
+              <img src={sponsor.logo} alt={sponsor.name} className="w-6 h-6 object-contain" onError={(e) => { if (!e.currentTarget.src.endsWith('/logos/alta.svg')) e.currentTarget.src = '/logos/alta.svg'; }} />
             </div>
             <div className="min-w-0 hidden sm:block">
               <p className="text-[9px] text-gray-400 uppercase tracking-wider font-medium">ALTA Member Sponsor</p>

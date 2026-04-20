@@ -54,7 +54,7 @@ export default function EliteProviders() {
                 src={s.logo}
                 alt={s.name}
                 className="h-8 md:h-10 w-auto object-contain"
-                onError={(e) => { e.currentTarget.style.display = 'none'; }}
+                onError={(e) => { if (!e.currentTarget.src.endsWith('/logos/alta.svg')) e.currentTarget.src = '/logos/alta.svg'; }}
               />
             </a>
           ))}
@@ -96,7 +96,7 @@ export function InlineAd() {
           {/* Logo */}
           <div className="w-full sm:w-44 flex items-center justify-center shrink-0">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={sponsor.logo} alt={sponsor.name} className="h-14 sm:h-16 w-auto object-contain max-w-[160px]" loading="lazy" onError={(e) => { e.currentTarget.style.display = 'none'; }} />
+            <img src={sponsor.logo} alt={sponsor.name} className="h-14 sm:h-16 w-auto object-contain max-w-[160px]" loading="lazy" onError={(e) => { if (!e.currentTarget.src.endsWith('/logos/alta.svg')) e.currentTarget.src = '/logos/alta.svg'; }} />
           </div>
           {/* Content */}
           <div className="flex-1 text-center sm:text-left">
