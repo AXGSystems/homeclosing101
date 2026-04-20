@@ -179,16 +179,12 @@ export default function OnboardingTour() {
       aria-label="Welcome tour"
       onClick={dismiss}
     >
-      {/* Rich atmospheric backdrop */}
-      <div className="absolute inset-0 bg-gradient-to-br from-[#0a1830]/90 via-[#0d3a5c]/80 to-[#0a8ebc]/50 backdrop-blur-xl" />
-      {/* Floating orbs for depth */}
-      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-alta-teal/20 rounded-full blur-3xl animate-pulse" style={{ animationDuration: "4s" }} />
-      <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-[#d4a843]/10 rounded-full blur-3xl animate-pulse" style={{ animationDuration: "6s", animationDelay: "1s" }} />
-      <div className="absolute top-1/2 right-1/3 w-64 h-64 bg-white/5 rounded-full blur-2xl" />
+      {/* Subtle teal wash — keeps main page visible */}
+      <div className="absolute inset-0 bg-alta-teal/10 backdrop-blur-[2px]" />
 
-      {/* Glass card */}
+      {/* Glass card — teal tint matching site palette */}
       <div
-        className={`relative w-full max-w-xl overflow-hidden rounded-3xl border border-white/20 bg-gradient-to-br from-white/15 via-white/10 to-white/5 backdrop-blur-2xl shadow-[0_0_100px_rgba(10,142,188,0.35)] ring-1 ring-white/10 transition-all duration-500 ${
+        className={`relative w-full max-w-xl overflow-hidden rounded-3xl border border-white/30 bg-gradient-to-br from-[#0a8ebc]/70 via-[#0a8ebc]/55 to-alta-teal/60 backdrop-blur-2xl shadow-[0_0_80px_rgba(10,142,188,0.35)] ring-1 ring-white/20 transition-all duration-500 ${
           mounted ? "translate-y-0 scale-100" : "translate-y-6 scale-95"
         }`}
         onClick={(e) => e.stopPropagation()}
@@ -212,8 +208,8 @@ export default function OnboardingTour() {
         <div key={contentKey.current} className="px-6 pb-2 sm:px-10 animate-[fadeIn_400ms_ease-out]">
           {/* Glowing icon tile */}
           <div className="relative mx-auto w-20 h-20 mb-5">
-            <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-alta-teal/40 to-alta-navy/40 blur-xl" />
-            <div className="relative w-20 h-20 rounded-2xl bg-gradient-to-br from-white/25 to-white/5 border border-white/30 backdrop-blur-xl flex items-center justify-center text-white shadow-[0_8px_32px_rgba(10,142,188,0.4)]">
+            <div className="absolute inset-0 rounded-2xl bg-white/20 blur-xl" />
+            <div className="relative w-20 h-20 rounded-2xl bg-gradient-to-br from-white/30 to-white/10 border border-white/40 backdrop-blur-xl flex items-center justify-center text-white shadow-[0_8px_24px_rgba(255,255,255,0.15)]">
               {slide.icon}
             </div>
           </div>
