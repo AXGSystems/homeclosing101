@@ -44,7 +44,7 @@ export default function CookieConsent() {
         aria-live="polite"
         aria-label="Cookie consent"
       >
-        <div className="mx-auto max-w-5xl rounded-2xl border border-white/30 bg-alta-navy/85 backdrop-blur-xl shadow-2xl ring-1 ring-black/10 text-white">
+        <div className="mx-auto max-w-5xl rounded-2xl border border-white/25 bg-alta-navy/55 backdrop-blur-2xl shadow-2xl ring-1 ring-black/10 text-white">
           <div className="flex flex-col gap-4 p-5 sm:flex-row sm:items-center sm:gap-6 sm:p-6">
             <div className="flex-1 text-sm leading-relaxed">
               <p className="font-semibold text-white mb-1">This site uses cookies</p>
