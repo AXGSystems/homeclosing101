@@ -99,34 +99,24 @@ export default function OnboardingTour() {
   const [current, setCurrent] = useState(0);
   const [dontShow, setDontShow] = useState(false);
 
+  // Temporarily forced on every visit — ignore STORAGE_KEY gate
   useEffect(() => {
     try {
-      if (!localStorage.getItem(STORAGE_KEY)) {
-        setShow(true);
-      }
+      localStorage.removeItem(STORAGE_KEY);
     } catch {
-      // localStorage unavailable — skip tour silently
+      // ignore
     }
+    setShow(true);
   }, []);
 
   const dismiss = useCallback(() => {
     setShow(false);
-    try {
-      if (dontShow) {
-        localStorage.setItem(STORAGE_KEY, "1");
-      }
-    } catch {
-      // ignore
-    }
+    void dontShow;
+    void STORAGE_KEY;
   }, [dontShow]);
 
   const complete = useCallback(() => {
     setShow(false);
-    try {
-      localStorage.setItem(STORAGE_KEY, "1");
-    } catch {
-      // ignore
-    }
   }, []);
 
   if (!show) return null;

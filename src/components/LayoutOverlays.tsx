@@ -5,6 +5,7 @@ import {
   LazyOnboardingTour,
   LazyScrollToTop,
   LazyClosingFolderButton,
+  LazyCookieConsent,
 } from "@/components/lazy";
 
 /**
@@ -19,6 +20,7 @@ export default function LayoutOverlays() {
       <LazyHomeClosingAI />
       <LazyClosingFolderButton />
       <LazyOnboardingTour />
+      <LazyCookieConsent />
     </>
   );
 }

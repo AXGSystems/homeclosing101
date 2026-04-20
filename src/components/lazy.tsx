@@ -51,3 +51,8 @@ export const LazyClosingFolderButton = dynamic(
   () => import("@/components/ClosingFolderButton"),
   { ssr: false }
 );
+
+export const LazyCookieConsent = dynamic(
+  () => import("@/components/CookieConsent"),
+  { ssr: false }
+);
