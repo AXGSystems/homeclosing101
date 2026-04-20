@@ -51,19 +51,41 @@ export default function FeedbackWidget() {
       const device = typeof window !== "undefined" && window.innerWidth < 768 ? "mobile" : "desktop";
       const page = typeof window !== "undefined" ? window.location.pathname : "";
       const browser = parseBrowser(ua);
+      const trimmedMessage = message.trim();
+      const trimmedEmail = email.trim();
 
-      const { error: sbError } = await supabase.from("hc101_feedback").insert({
-        type,
-        page,
-        message: message.trim(),
-        email: email.trim() || null,
-        user_agent: ua,
-        device,
-        browser,
-        status: "new",
-      });
+      const emailBody = `${trimmedMessage}\n\n— Context —\nPage: ${page || "/"}\nDevice: ${device}\nBrowser: ${browser}`;
 
-      if (sbError) throw sbError;
+      const [supabaseResult, emailResult] = await Promise.allSettled([
+        supabase.from("hc101_feedback").insert({
+          type,
+          page,
+          message: trimmedMessage,
+          email: trimmedEmail || null,
+          user_agent: ua,
+          device,
+          browser,
+          status: "new",
+        }),
+        fetch("/api/feedback", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            type,
+            name: "",
+            email: trimmedEmail,
+            message: emailBody,
+            topic: page || undefined,
+          }),
+        }),
+      ]);
+
+      const supabaseOk =
+        supabaseResult.status === "fulfilled" && !supabaseResult.value.error;
+      const emailOk =
+        emailResult.status === "fulfilled" && emailResult.value.ok;
+
+      if (!supabaseOk && !emailOk) throw new Error("Both delivery paths failed");
 
       setSubmitted(true);
       setMessage("");

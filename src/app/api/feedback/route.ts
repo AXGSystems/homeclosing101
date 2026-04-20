@@ -40,7 +40,7 @@ async function getAccessToken(): Promise<string> {
 
 const SHARED_MAILBOX = "qa-alerts@alta.org";
 
-type FeedbackType = "bug" | "suggestion" | "support";
+type FeedbackType = "bug" | "suggestion" | "feedback" | "question" | "support";
 
 const typeConfig: Record<FeedbackType, {
   label: string;
@@ -62,6 +62,20 @@ const typeConfig: Record<FeedbackType, {
     accentGradient: "linear-gradient(135deg, #0a8ebc 0%, #077a9e 100%)",
     icon: "💡",
     recipients: ["vscott@alta.org"],
+  },
+  feedback: {
+    label: "General Feedback",
+    accentColor: "#2d8f5e",
+    accentGradient: "linear-gradient(135deg, #2d8f5e 0%, #1e6b42 100%)",
+    icon: "💬",
+    recipients: ["vscott@alta.org"],
+  },
+  question: {
+    label: "Question / Support",
+    accentColor: "#8b5cf6",
+    accentGradient: "linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%)",
+    icon: "❓",
+    recipients: ["vscott@alta.org", "eblosser@alta.org"],
   },
   support: {
     label: "Question / Support",
