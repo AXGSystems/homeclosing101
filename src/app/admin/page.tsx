@@ -480,24 +480,27 @@ interface ReportDef {
   key: string;
   title: string;
   description: string;
+  audience: string;
+  color: string;
+  accent: string;
 }
 
 const REPORT_DEFS: ReportDef[] = [
-  { key: "executive", title: "Executive Summary", description: "High-level KPIs, traffic trend, top content" },
-  { key: "ceo", title: "CEO Dashboard", description: "Monthly comparisons, growth metrics, strategic content performance" },
-  { key: "it", title: "IT Team Report", description: "Browser/OS/device breakdown, error rates, performance metrics, session data" },
-  { key: "board", title: "Board Members Overview", description: "Engagement metrics, content reach, ad revenue potential" },
-  { key: "staff", title: "ALTA Staff Report", description: "Most used tools, feature adoption, content performance" },
-  { key: "member", title: "ALTA Member Report", description: "Member-facing content performance, join-alta page metrics" },
-  { key: "elite", title: "Elite Provider Report", description: "Ad impressions/clicks/CTR by sponsor, placement performance" },
-  { key: "adrevenue", title: "Ad Revenue Report", description: "Estimated revenue by format, by page, by time period" },
-  { key: "contentperf", title: "Content Performance Report", description: "Page-by-page engagement, time on page, bounce rates" },
-  { key: "protection", title: "Protection Pages Report", description: "Fraud-related page performance, toolkit completion, county lookups" },
-  { key: "calculator", title: "Calculator Usage Report", description: "Which calculators used most, completion rates" },
-  { key: "search", title: "Search & Discovery Report", description: "What people search for, popular pages, entry points" },
-  { key: "mobile", title: "Mobile Experience Report", description: "Mobile vs desktop metrics, mobile-specific issues" },
-  { key: "feedbackreport", title: "Feedback & Issues Report", description: "Bug reports, suggestions, resolution rates" },
-  { key: "weekly", title: "Weekly Digest", description: "Auto-generated summary of the past 7 days" },
+  { key: "executive", title: "Executive Summary", description: "High-level KPIs, traffic trend, top content", audience: "Leadership", color: "bg-[#1a5276]", accent: "border-l-[#1a5276]" },
+  { key: "ceo", title: "CEO Dashboard", description: "Monthly comparisons, growth metrics, strategic content performance", audience: "CEO", color: "bg-[#0a7ea8]", accent: "border-l-[#0a7ea8]" },
+  { key: "it", title: "IT Team Report", description: "Browser/OS/device breakdown, error rates, performance metrics, session data", audience: "IT Team", color: "bg-[#5b3a8c]", accent: "border-l-[#5b3a8c]" },
+  { key: "board", title: "Board Members Overview", description: "Engagement metrics, content reach, ad revenue potential", audience: "Board", color: "bg-[#1a5276]", accent: "border-l-[#1a5276]" },
+  { key: "staff", title: "ALTA Staff Report", description: "Most used tools, feature adoption, content performance", audience: "ALTA Staff", color: "bg-[#2d6b3f]", accent: "border-l-[#2d6b3f]" },
+  { key: "member", title: "ALTA Member Report", description: "Member-facing content performance, join-alta page metrics", audience: "Members", color: "bg-[#0a7ea8]", accent: "border-l-[#0a7ea8]" },
+  { key: "elite", title: "Elite Provider Report", description: "Ad impressions/clicks/CTR by sponsor, placement performance", audience: "Sponsors", color: "bg-[#d4a843]", accent: "border-l-[#d4a843]" },
+  { key: "adrevenue", title: "Ad Revenue Report", description: "Estimated revenue by format, by page, by time period", audience: "Finance", color: "bg-[#8b6914]", accent: "border-l-[#8b6914]" },
+  { key: "contentperf", title: "Content Performance Report", description: "Page-by-page engagement, time on page, bounce rates", audience: "Content Team", color: "bg-[#2d6b3f]", accent: "border-l-[#2d6b3f]" },
+  { key: "protection", title: "Protection Pages Report", description: "Fraud-related page performance, toolkit completion, county lookups", audience: "Advocacy", color: "bg-[#943030]", accent: "border-l-[#943030]" },
+  { key: "calculator", title: "Calculator Usage Report", description: "Which calculators used most, completion rates", audience: "Product", color: "bg-[#5b3a8c]", accent: "border-l-[#5b3a8c]" },
+  { key: "search", title: "Search & Discovery Report", description: "What people search for, popular pages, entry points", audience: "UX Team", color: "bg-[#0a7ea8]", accent: "border-l-[#0a7ea8]" },
+  { key: "mobile", title: "Mobile Experience Report", description: "Mobile vs desktop metrics, mobile-specific issues", audience: "IT Team", color: "bg-[#5b3a8c]", accent: "border-l-[#5b3a8c]" },
+  { key: "feedbackreport", title: "Feedback & Issues Report", description: "Bug reports, suggestions, resolution rates", audience: "Support", color: "bg-[#943030]", accent: "border-l-[#943030]" },
+  { key: "weekly", title: "Weekly Digest", description: "Auto-generated summary of the past 7 days", audience: "All Teams", color: "bg-[#1a5276]", accent: "border-l-[#1a5276]" },
 ];
 
 /* ------------------------------------------------------------------ */
@@ -2055,12 +2058,18 @@ function Dashboard() {
                     <button
                       key={rpt.key}
                       onClick={() => setActiveReport(activeReport === rpt.key ? null : rpt.key)}
-                      className={`text-left bg-white rounded-xl border shadow-sm p-5 transition-all hover:shadow-md ${
-                        activeReport === rpt.key ? "border-[#0a8ebc] ring-2 ring-[#0a8ebc]/20" : "border-gray-100"
+                      className={`text-left bg-white rounded-xl border shadow-sm overflow-hidden transition-all hover:shadow-md border-l-4 ${rpt.accent} ${
+                        activeReport === rpt.key ? "ring-2 ring-[#0a8ebc]/20" : ""
                       }`}
                     >
-                      <h4 className="text-sm font-bold text-[#1a2744] mb-1">{rpt.title}</h4>
-                      <p className="text-[11px] text-gray-400 leading-relaxed">{rpt.description}</p>
+                      <div className="p-4">
+                        <div className="flex items-center justify-between mb-2">
+                          <span className={`text-[9px] font-bold text-white px-2 py-0.5 rounded-full ${rpt.color}`}>{rpt.audience}</span>
+                          {activeReport === rpt.key && <span className="text-[9px] text-[#0a7ea8] font-semibold">VIEWING</span>}
+                        </div>
+                        <h4 className="text-sm font-bold text-[#1a2744] mb-1">{rpt.title}</h4>
+                        <p className="text-[10px] text-gray-400 leading-relaxed">{rpt.description}</p>
+                      </div>
                     </button>
                   ))}
                 </div>
@@ -2071,11 +2080,14 @@ function Dashboard() {
                   const reportData = getReportData(activeReport);
                   if (!rpt) return null;
                   return (
-                    <div className="bg-white rounded-xl border border-gray-100 shadow-sm p-6 space-y-6">
-                      <div className="flex items-center justify-between">
+                    <div className="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden space-y-6">
+                      <div className={`${rpt.color} px-6 py-4 flex items-center justify-between`}>
                         <div>
-                          <h3 className="text-lg font-bold text-[#1a2744]">{rpt.title}</h3>
-                          <p className="text-xs text-gray-400 mt-0.5">Generated: {new Date().toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })}</p>
+                          <div className="flex items-center gap-2 mb-1">
+                            <h3 className="text-lg font-bold text-white">{rpt.title}</h3>
+                            <span className="text-[9px] font-bold text-white/60 bg-white/20 px-2 py-0.5 rounded-full">{rpt.audience}</span>
+                          </div>
+                          <p className="text-xs text-white/70">Generated: {new Date().toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })}</p>
                         </div>
                         <div className="flex gap-2">
                           {reportData.sections.map((section, idx) => (
@@ -2097,15 +2109,15 @@ function Dashboard() {
                             <EmptyState text="No data available for this section." />
                           ) : section.data.length <= 4 && section.data.every(([, v]) => typeof v === "number") ? (
                             <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-                              {section.data.map(([label, val]) => (
-                                <div key={label} className="bg-gray-50 rounded-lg p-3">
+                              {section.data.map(([label, val], si) => (
+                                <div key={label} className="bg-white rounded-lg p-3 border border-gray-100 shadow-sm hover:shadow-md transition-shadow" title={`${label}: ${val}`}>
                                   <p className="text-[10px] text-gray-400 uppercase tracking-wider">{label}</p>
-                                  <p className="text-lg font-bold text-[#1a2744]">{typeof val === "number" && val % 1 !== 0 ? val.toFixed(1) : val}</p>
+                                  <p className="text-lg font-bold" style={{ color: CHART_HEX[si % CHART_HEX.length] }}>{typeof val === "number" && val % 1 !== 0 ? val.toFixed(1) : typeof val === "number" ? val.toLocaleString() : val}</p>
                                 </div>
                               ))}
                             </div>
                           ) : (
-                            <BarChart data={section.data} color={BAR_COLORS[idx % BAR_COLORS.length]} />
+                            <BarChart data={section.data} rainbow />
                           )}
                         </div>
                       ))}
