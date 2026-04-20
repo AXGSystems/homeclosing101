@@ -318,12 +318,16 @@ function Stat({ label, value, sub, color, expandContent }: {
   const [expanded, setExpanded] = useState(false);
   return (
     <div
-      className={`bg-white rounded-xl border border-gray-100 shadow-sm p-5 transition-all ${expandContent ? "cursor-pointer hover:shadow-md" : ""}`}
+      className={`bg-white rounded-xl border border-gray-100 shadow-sm p-5 transition-all hover:shadow-md ${expandContent ? "cursor-pointer" : ""}`}
       onClick={() => expandContent && setExpanded(!expanded)}
+      title={`${label}: ${value}${sub ? ` — ${sub}` : ""}`}
     >
-      <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-1">
-        {label}
-      </p>
+      <div className="flex items-center justify-between mb-1">
+        <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider">
+          {label}
+        </p>
+        {expandContent && <svg className={`w-3 h-3 text-gray-300 transition-transform ${expanded ? "rotate-180" : ""}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>}
+      </div>
       <p className={`text-2xl font-bold ${color || "text-[#1a2744]"}`}>{value}</p>
       {sub && <p className="text-[11px] text-gray-400 mt-0.5">{sub}</p>}
       {expanded && expandContent && (
@@ -360,45 +364,64 @@ const BAR_COLORS = [
   "bg-purple-500", "bg-red-500", "bg-[#1a2744]", "bg-[#0a8ebc]",
 ];
 
+const CHART_COLORS = [
+  "bg-[#0a7ea8]", "bg-[#2d6b3f]", "bg-[#5b3a8c]", "bg-[#8b6914]",
+  "bg-[#943030]", "bg-[#1a5276]", "bg-[#d4a843]", "bg-[#0a7ea8]/80",
+  "bg-[#2d6b3f]/80", "bg-[#5b3a8c]/80",
+];
+const CHART_HEX = [
+  "#0a7ea8", "#2d6b3f", "#5b3a8c", "#8b6914", "#943030",
+  "#1a5276", "#d4a843", "#0a7ea8", "#2d6b3f", "#5b3a8c",
+];
+
 function BarChart({
   data,
   maxVal,
-  color = "bg-[#0a8ebc]",
+  color,
+  rainbow = false,
 }: {
   data: [string, number][];
   maxVal?: number;
   color?: string;
+  rainbow?: boolean;
 }) {
   const max = maxVal ?? (data.length ? Math.max(...data.map((d) => d[1]), 1) : 1);
   const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
+  const total = data.reduce((s, d) => s + d[1], 0);
   return (
     <div className="space-y-2">
-      {data.map(([label, count], idx) => (
-        <div
-          key={label}
-          className="flex items-center gap-3 relative"
-          onMouseEnter={() => setHoveredIdx(idx)}
-          onMouseLeave={() => setHoveredIdx(null)}
-        >
-          <span className="text-xs text-gray-600 w-44 truncate shrink-0" title={label}>
-            {label}
-          </span>
-          <div className="flex-1 h-5 bg-gray-100 rounded-full overflow-hidden">
-            <div
-              className={`h-full ${color} rounded-full transition-all`}
-              style={{ width: `${Math.max((count / max) * 100, 1)}%` }}
-            />
-          </div>
-          <span className="text-xs font-semibold text-[#1a2744] w-12 text-right">
-            {count}
-          </span>
-          {hoveredIdx === idx && (
-            <div className="absolute left-48 -top-8 bg-[#1a2744] text-white text-[10px] px-2 py-1 rounded shadow-lg whitespace-nowrap z-10">
-              {label}: {count} ({max > 0 ? ((count / max) * 100).toFixed(1) : 0}% of max)
+      {data.map(([label, count], idx) => {
+        const barColor = rainbow ? CHART_COLORS[idx % CHART_COLORS.length] : (color || CHART_COLORS[0]);
+        const pct = max > 0 ? ((count / max) * 100).toFixed(1) : "0";
+        const share = total > 0 ? ((count / total) * 100).toFixed(1) : "0";
+        return (
+          <div
+            key={label}
+            className="flex items-center gap-3 relative group cursor-default"
+            onMouseEnter={() => setHoveredIdx(idx)}
+            onMouseLeave={() => setHoveredIdx(null)}
+          >
+            <span className="text-xs text-gray-600 w-44 truncate shrink-0" title={label}>
+              {label}
+            </span>
+            <div className="flex-1 h-6 bg-gray-100 rounded-full overflow-hidden">
+              <div
+                className={`h-full ${barColor} rounded-full transition-all duration-500`}
+                style={{ width: `${Math.max(Number(pct), 1)}%` }}
+              />
             </div>
-          )}
-        </div>
-      ))}
+            <span className="text-xs font-bold text-[#1a2744] w-14 text-right tabular-nums">
+              {count.toLocaleString()}
+            </span>
+            {hoveredIdx === idx && (
+              <div className="absolute left-48 -top-10 bg-[#1a2744] text-white text-[10px] px-3 py-2 rounded-lg shadow-xl whitespace-nowrap z-50 border border-white/10">
+                <div className="font-bold mb-0.5">{label}</div>
+                <div>{count.toLocaleString()} — {share}% of total — {pct}% of max</div>
+              </div>
+            )}
+          </div>
+        );
+      })}
     </div>
   );
 }
@@ -1328,8 +1351,13 @@ function Dashboard() {
       {/* ---- Sidebar ---- */}
       <aside className="w-56 bg-[#1a2744] text-white flex flex-col shrink-0 min-h-screen sticky top-0">
         <div className="p-5 border-b border-white/10">
-          <h1 className="text-base font-bold tracking-tight">HC101 Admin</h1>
-          <p className="text-[10px] text-gray-400 mt-0.5">Analytics &amp; Controls</p>
+          <div className="flex items-center gap-2 mb-1">
+            <div className="w-7 h-7 rounded-lg bg-[#0a7ea8] flex items-center justify-center">
+              <svg viewBox="0 0 24 24" className="w-4 h-4 text-white" fill="currentColor"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" /></svg>
+            </div>
+            <h1 className="text-base font-bold tracking-tight">HC101 Admin</h1>
+          </div>
+          <p className="text-[10px] text-gray-400 mt-0.5">Analytics &amp; Site Controls</p>
           {supabaseConnected && (
             <p className="text-[9px] text-emerald-400 mt-1 flex items-center gap-1">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 inline-block" />
@@ -1353,7 +1381,7 @@ function Dashboard() {
                   onClick={() => setTab(item.key)}
                   className={`w-full flex items-center gap-3 px-5 py-2.5 text-sm font-medium transition-colors ${
                     tab === item.key
-                      ? "bg-white/10 text-white"
+                      ? "bg-white/10 text-white border-l-2 border-l-[#0a7ea8]"
                       : "text-gray-400 hover:text-white hover:bg-white/5"
                   }`}
                 >
@@ -1385,18 +1413,18 @@ function Dashboard() {
 
             {/* Row 1 -- Core stats */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              <Stat label="Total Page Views" value={pageViews.length} />
-              <Stat label="Unique Pages" value={uniquePages} />
-              <Stat label="Sessions" value={sessionCount} />
-              <Stat label="Pages / Session" value={avgPagesPerSession.toFixed(1)} />
+              <Stat label="Total Page Views" value={pageViews.length.toLocaleString()} color="text-[#0a7ea8]" />
+              <Stat label="Unique Pages" value={uniquePages} color="text-[#2d6b3f]" />
+              <Stat label="Sessions" value={sessionCount.toLocaleString()} color="text-[#5b3a8c]" />
+              <Stat label="Pages / Session" value={avgPagesPerSession.toFixed(1)} color="text-[#8b6914]" />
             </div>
 
             {/* Row 2 -- Session metrics */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              <Stat label="Bounce Rate" value={fmtPct(bounceRate, 1)} sub="Single-page sessions" />
-              <Stat label="Mobile Traffic" value={fmtPct(deviceBreakdown.mobile, deviceBreakdown.total || 1)} sub={`${deviceBreakdown.mobile} mobile / ${deviceBreakdown.desktop} desktop`} />
-              <Stat label="Ad Impressions" value={totalImpressions} />
-              <Stat label="Feedback Items" value={sbFeedback.length} />
+              <Stat label="Bounce Rate" value={fmtPct(bounceRate, 1)} sub="Single-page sessions" color="text-[#943030]" />
+              <Stat label="Mobile Traffic" value={fmtPct(deviceBreakdown.mobile, deviceBreakdown.total || 1)} sub={`${deviceBreakdown.mobile} mobile / ${deviceBreakdown.desktop} desktop`} color="text-[#1a5276]" />
+              <Stat label="Ad Impressions" value={totalImpressions.toLocaleString()} color="text-[#d4a843]" />
+              <Stat label="Feedback Items" value={sbFeedback.length} color="text-[#0a7ea8]" />
             </div>
 
             {/* Traffic by day */}
@@ -1488,14 +1516,14 @@ function Dashboard() {
                 {browserBreakdown.length === 0 ? (
                   <EmptyState text="No data yet." />
                 ) : (
-                  <BarChart data={browserBreakdown} color="bg-purple-500" />
+                  <BarChart data={browserBreakdown} rainbow />
                 )}
               </Card>
               <Card title="OS Breakdown">
                 {osBreakdown.length === 0 ? (
                   <EmptyState text="No data yet." />
                 ) : (
-                  <BarChart data={osBreakdown} color="bg-emerald-500" />
+                  <BarChart data={osBreakdown} rainbow />
                 )}
               </Card>
             </div>
@@ -1505,7 +1533,7 @@ function Dashboard() {
               {referrerData.length === 0 ? (
                 <EmptyState text="No referrer data yet." />
               ) : (
-                <BarChart data={referrerData} color="bg-amber-500" />
+                <BarChart data={referrerData} rainbow />
               )}
             </Card>
           </div>
@@ -1578,14 +1606,14 @@ function Dashboard() {
                 {adImpressionsBySponsor.length === 0 ? (
                   <EmptyState text="No sponsor data yet." />
                 ) : (
-                  <BarChart data={adImpressionsBySponsor} color="bg-[#1a2744]" />
+                  <BarChart data={adImpressionsBySponsor} rainbow />
                 )}
               </Card>
               <Card title="Clicks per Sponsor">
                 {adClicksBySponsor.length === 0 ? (
                   <EmptyState text="No click data yet." />
                 ) : (
-                  <BarChart data={adClicksBySponsor} color="bg-green-500" />
+                  <BarChart data={adClicksBySponsor} rainbow />
                 )}
               </Card>
             </div>
@@ -1594,7 +1622,7 @@ function Dashboard() {
               {adImpressionsByPage.length === 0 ? (
                 <EmptyState text="No placement data yet." />
               ) : (
-                <BarChart data={adImpressionsByPage} color="bg-amber-500" />
+                <BarChart data={adImpressionsByPage} rainbow />
               )}
             </Card>
 
