@@ -387,7 +387,7 @@ export default function HomeClosingAI() {
         </button>
 
         {/* Desktop: sponsor + AI button with minimize option */}
-        <div className="hidden sm:block fixed top-1/2 -translate-y-1/2 right-4 z-[600] w-[260px] group/widget">
+        <div className="hidden sm:block fixed top-1/2 -translate-y-1/2 right-4 z-[600] w-[320px] group/widget">
           {/* Minimize button */}
           <button
             onClick={() => setMinimized(true)}
