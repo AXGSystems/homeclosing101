@@ -92,23 +92,23 @@ export function InlineAd() {
         className={`block rounded-2xl border border-gray-100 bg-gradient-to-br from-alta-light to-white shadow-sm hover:shadow-lg hover:border-alta-teal/30 transition-all overflow-hidden ${fading ? "opacity-0" : "opacity-100"}`}
         style={{ transition: "opacity 400ms ease, box-shadow 200ms ease" }}
       >
-        <div className="flex flex-col sm:flex-row items-center gap-5 p-6 sm:p-8">
+        <div className="flex flex-col md:flex-row md:items-center gap-5 p-6 sm:p-8">
           {/* Logo */}
-          <div className="w-full sm:w-44 flex items-center justify-center shrink-0">
+          <div className="w-full md:w-40 flex items-center justify-center shrink-0">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={sponsor.logo} alt={sponsor.name} className="h-14 sm:h-16 w-auto object-contain max-w-[160px]" loading="lazy" onError={(e) => { if (!e.currentTarget.src.endsWith('/logos/alta.svg')) e.currentTarget.src = '/logos/alta.svg'; }} />
+            <img src={sponsor.logo} alt={sponsor.name} className="h-14 sm:h-16 w-auto object-contain max-w-[140px]" loading="lazy" onError={(e) => { if (!e.currentTarget.src.endsWith('/logos/alta.svg')) e.currentTarget.src = '/logos/alta.svg'; }} />
           </div>
           {/* Content */}
-          <div className="flex-1 text-center sm:text-left">
+          <div className="flex-1 min-w-0 text-center md:text-left">
             <p className="text-[9px] font-semibold text-alta-teal uppercase tracking-widest mb-1">ALTA Member Spotlight</p>
             <h3 className="text-lg font-bold text-alta-navy mb-1.5">{sponsor.name}</h3>
             <p className="text-sm text-alta-gray leading-relaxed">{sponsor.blurb}</p>
           </div>
           {/* CTA */}
-          <div className="shrink-0">
-            <span className="inline-flex items-center gap-1.5 px-5 py-2.5 bg-alta-teal text-white rounded-lg font-semibold text-sm hover:bg-alta-teal-dark transition-colors">
+          <div className="shrink-0 w-full md:w-auto flex justify-center md:justify-end">
+            <span className="inline-flex items-center gap-1.5 px-5 py-2.5 bg-alta-teal text-white rounded-lg font-semibold text-sm hover:bg-alta-teal-dark transition-colors whitespace-nowrap">
               Learn More
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
+              <svg className="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
             </span>
           </div>
         </div>
