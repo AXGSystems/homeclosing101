@@ -467,6 +467,60 @@ export default function TrueCostPage() {
                   </div>
                 </div>
               </div>
+
+              {/* Budget Rule Callout — moved into left column to fill space */}
+              <div className="p-5 bg-gradient-to-r from-[#0a7ea8]/10 to-[#2d6b3f]/10 rounded-2xl border-2 border-[#0a7ea8]/30 shadow-md">
+                <div className="flex items-start gap-4">
+                  <div className="w-14 h-14 rounded-2xl bg-[#0a7ea8] flex items-center justify-center text-white shrink-0">
+                    <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-alta-navy text-lg mb-1">The 35% Budget Rule</h3>
+                    <p className="text-sm text-alta-gray leading-relaxed mb-3">
+                      Financial advisors recommend that your <strong className="text-alta-navy">total housing cost</strong> -- not just your mortgage -- should
+                      stay below <strong className="text-alta-navy">35% of your take-home pay</strong>. That includes property taxes, insurance, maintenance, HOA, and utilities.
+                    </p>
+                    <div className="bg-white/60 rounded-xl p-3 border border-gray-200">
+                      <p className="text-xs text-alta-gray mb-1">Based on your calculated total of <strong className="text-alta-navy">{fmtDollar(results.monthlyTotalCost)}/month</strong>, you would need:</p>
+                      <p className="text-lg font-bold text-alta-navy">
+                        {fmtDollar(results.monthlyTotalCost / 0.35)}/month take-home pay
+                      </p>
+                      <p className="text-[11px] text-alta-gray">
+                        That is {fmtDollar((results.monthlyTotalCost / 0.35) * 12)}/year after taxes to comfortably afford this home
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* What counts as hidden costs — short educational block */}
+              <div className="bg-white rounded-2xl border border-gray-100 border-l-4 border-l-[#d4a843] shadow-sm p-5">
+                <h3 className="font-bold text-alta-navy mb-3 text-sm">What Counts as a &ldquo;Hidden&rdquo; Cost?</h3>
+                <ul className="space-y-2.5 text-xs text-alta-gray">
+                  <li className="flex items-start gap-2">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#0a7ea8] mt-1.5 shrink-0" />
+                    <span><strong className="text-alta-navy">Property taxes</strong> vary widely by county — from under 0.5% in low-tax states to over 2.2% in New Jersey or Illinois.</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#2d6b3f] mt-1.5 shrink-0" />
+                    <span><strong className="text-alta-navy">Homeowner&apos;s insurance</strong> averages $1,800/yr but can triple in high-risk areas (hurricane, wildfire, flood).</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#d4a843] mt-1.5 shrink-0" />
+                    <span><strong className="text-alta-navy">Maintenance &amp; repairs</strong> typically run 1%–3% of the home&apos;s value each year — older homes lean higher.</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#8b6914] mt-1.5 shrink-0" />
+                    <span><strong className="text-alta-navy">HOA dues</strong> apply to 44% of U.S. homes; condos and planned communities often exceed $400/mo.</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#5b3a8c] mt-1.5 shrink-0" />
+                    <span><strong className="text-alta-navy">Utilities</strong> (electric, gas, water, trash, internet) average $300–$450/mo depending on home size and climate.</span>
+                  </li>
+                </ul>
+              </div>
             </div>
 
             {/* Results panel */}
@@ -573,33 +627,6 @@ export default function TrueCostPage() {
               </div>
 
               <InlineAd />
-            </div>
-          </div>
-
-          {/* Budget Rule Callout */}
-          <div className="mt-8 p-5 bg-gradient-to-r from-[#0a7ea8]/10 to-[#2d6b3f]/10 rounded-2xl border-2 border-[#0a7ea8]/30 shadow-md">
-            <div className="flex items-start gap-4">
-              <div className="w-14 h-14 rounded-2xl bg-[#0a7ea8] flex items-center justify-center text-white shrink-0">
-                <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-              </div>
-              <div>
-                <h3 className="font-bold text-alta-navy text-lg mb-1">The 35% Budget Rule</h3>
-                <p className="text-sm text-alta-gray leading-relaxed mb-3">
-                  Financial advisors recommend that your <strong className="text-alta-navy">total housing cost</strong> -- not just your mortgage -- should
-                  stay below <strong className="text-alta-navy">35% of your take-home pay</strong>. That includes property taxes, insurance, maintenance, HOA, and utilities.
-                </p>
-                <div className="bg-white/60 rounded-xl p-3 border border-gray-200">
-                  <p className="text-xs text-alta-gray mb-1">Based on your calculated total of <strong className="text-alta-navy">{fmtDollar(results.monthlyTotalCost)}/month</strong>, you would need:</p>
-                  <p className="text-lg font-bold text-alta-navy">
-                    {fmtDollar(results.monthlyTotalCost / 0.35)}/month take-home pay
-                  </p>
-                  <p className="text-[11px] text-alta-gray">
-                    That is {fmtDollar((results.monthlyTotalCost / 0.35) * 12)}/year after taxes to comfortably afford this home
-                  </p>
-                </div>
-              </div>
             </div>
           </div>
 
