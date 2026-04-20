@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 import PageHero from "@/components/PageHero";
 import { InlineAd } from "@/components/EliteProviders";
@@ -18,6 +18,7 @@ interface Article {
   image: string;
   source: string;
   sourceUrl: string;
+  keyTakeaways: string[];
 }
 
 const articles: Article[] = [
@@ -31,6 +32,12 @@ const articles: Article[] = [
     image: "https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=600&q=80",
     source: "FBI IC3 2025 Internet Crime Report",
     sourceUrl: "https://www.ic3.gov/Media/PDF/AnnualReport/2025_IC3Report.pdf",
+    keyTakeaways: [
+      "Wire fraud losses hit $275.1 million in 2025, up 59% year-over-year",
+      "Average individual loss is $150,000 — often the buyer's entire down payment",
+      "Recovery drops to under 5% if not reported within 48 hours",
+      "Always verify wiring instructions by phone using a number you already have on file",
+    ],
   },
   {
     title: "CFPB: Understanding Your Closing Disclosure",
@@ -42,6 +49,12 @@ const articles: Article[] = [
     image: "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=600&q=80",
     source: "CFPB Know Before You Owe",
     sourceUrl: "https://www.consumerfinance.gov/owning-a-home/closing-disclosure/",
+    keyTakeaways: [
+      "Your lender must provide the Closing Disclosure at least 3 business days before closing",
+      "Compare every line item against your original Loan Estimate to catch fee changes",
+      "Some fees have zero tolerance for increases — if they changed, push back",
+      "Pages 2-3 itemize all closing costs and show total cost over 5 years",
+    ],
   },
   {
     title: "ALTA: Title Searches Reveal Issues in 1 of 3 Transactions",
@@ -53,6 +66,12 @@ const articles: Article[] = [
     image: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=600&q=80",
     source: "American Land Title Association",
     sourceUrl: "https://www.alta.org/advocacy/title-insurance-consumer-protections/",
+    keyTakeaways: [
+      "1 in 3 residential transactions has a title issue that must be resolved before closing",
+      "Common problems include unpaid liens, tax delinquencies, and missing signatures on deeds",
+      "Title professionals perform curative work to fix issues before you close",
+      "Owner's title insurance protects against hidden defects that even thorough searches miss",
+    ],
   },
   {
     title: "NAR: Median Home Price Reaches $400,000 — What Buyers Need to Know",
@@ -64,6 +83,12 @@ const articles: Article[] = [
     image: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=600&q=80",
     source: "NAR Research & Statistics",
     sourceUrl: "https://www.nar.realtor/research-and-statistics/housing-statistics",
+    keyTakeaways: [
+      "Median home price reached $400,000 — budget $40K-$52K in cash for down payment plus closing costs",
+      "First-time buyers are just 24% of purchases, the lowest share ever recorded",
+      "Closing costs run 2-5% of purchase price on top of your down payment",
+      "Down payment assistance programs exist in every state but are underutilized",
+    ],
   },
   {
     title: "Remote Online Notarization Now Available in 45 States",
@@ -75,6 +100,12 @@ const articles: Article[] = [
     image: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=600&q=80",
     source: "ALTA, MBA RON Adoption Map",
     sourceUrl: "https://www.mba.org/advocacy-and-policy/residential-policy-issues/remote-online-notarization",
+    keyTakeaways: [
+      "45 states plus DC now allow Remote Online Notarization for real estate closings",
+      "RON sessions include identity verification, live video with a notary, and tamper-evident recordings",
+      "The SECURE Notarization Act aims to enable RON nationwide with federal standards",
+      "Ask your title company if they support RON — availability varies by lender and provider",
+    ],
   },
   {
     title: "CFPB: Your Right to Choose Your Own Title Company",
@@ -86,6 +117,12 @@ const articles: Article[] = [
     image: "https://images.unsplash.com/photo-1573497620053-ea5300f94f21?w=600&q=80",
     source: "CFPB Settlement Cost Booklet",
     sourceUrl: "https://www.consumerfinance.gov/owning-a-home/",
+    keyTakeaways: [
+      "RESPA guarantees your right to choose your own title company — you are never obligated to use a referral",
+      "Get quotes from 2-3 title companies to compare premiums and fees",
+      "Kickbacks for title company referrals are illegal under RESPA",
+      "Ask about the simultaneous issue rate for a discount when buying both owner's and lender's policies",
+    ],
   },
   {
     title: "How the Home Inspection Protects Your $400,000 Investment",
@@ -97,6 +134,12 @@ const articles: Article[] = [
     image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&q=80",
     source: "ASHI, InterNACHI",
     sourceUrl: "https://www.homeinspector.org/resources/for-consumers",
+    keyTakeaways: [
+      "86% of home inspections reveal issues — a $300-$500 inspection can save you tens of thousands",
+      "Attend the inspection in person to learn which issues are critical vs. cosmetic",
+      "Foundation, roof, electrical, and plumbing are the big-ticket items to watch for",
+      "The inspection report (30-60 pages) gives you leverage for repair negotiations",
+    ],
   },
   {
     title: "FHA vs VA vs Conventional: Choosing the Right Mortgage",
@@ -108,6 +151,12 @@ const articles: Article[] = [
     image: "https://images.unsplash.com/photo-1560520653-9e0e4c89eb11?w=600&q=80",
     source: "FHA.com, VA.gov, USDA.gov",
     sourceUrl: "https://www.consumerfinance.gov/owning-a-home/loan-options/",
+    keyTakeaways: [
+      "Conventional PMI can be removed at 20% equity — FHA MIP stays for the life of the loan",
+      "VA loans offer 0% down with no monthly mortgage insurance for eligible veterans",
+      "FHA allows credit scores as low as 580 with 3.5% down and higher DTI ratios",
+      "USDA loans offer 0% down in eligible rural/suburban areas with income limits",
+    ],
   },
   {
     title: "Down Payment Assistance: Programs Most Buyers Don't Know About",
@@ -119,6 +168,12 @@ const articles: Article[] = [
     image: "https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=600&q=80",
     source: "NCSHA, HUD",
     sourceUrl: "https://www.consumerfinance.gov/housing/",
+    keyTakeaways: [
+      "Every state has a Housing Finance Agency offering grants, forgivable loans, and below-market rates",
+      "First-time buyer = anyone who hasn't owned a home in the past 3 years",
+      "FHA allows your entire 3.5% down payment to come from DPA programs or gift funds",
+      "Search '[your state] housing finance agency' or use HUD's counselor locator to find programs",
+    ],
   },
   {
     title: "ALTA Best Practices: How Your Title Company Protects You",
@@ -130,6 +185,12 @@ const articles: Article[] = [
     image: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=600&q=80",
     source: "ALTA Best Practices",
     sourceUrl: "https://www.alta.org/best-practices/",
+    keyTakeaways: [
+      "ALTA Best Practices cover 7 pillars including licensing, escrow accounting, and cybersecurity",
+      "Ask your title company if they follow ALTA Best Practices and have third-party assessment",
+      "Pillar 2 requires separate trust accounts for your closing funds with regular reconciliation",
+      "Over 6,000 ALTA member companies have adopted these consumer protection standards",
+    ],
   },
 ];
 
@@ -158,279 +219,777 @@ const allCategories = [
   "First-Time Buyers",
 ];
 
-export default function BlogPage() {
-  const [selectedArticle, setSelectedArticle] = useState<Article | null>(null);
-  const [activeCategory, setActiveCategory] = useState("All");
+function getRelatedArticles(current: Article, count: number = 3): Article[] {
+  const sameCat = articles.filter(
+    (a) => a.category === current.category && a.title !== current.title
+  );
+  const others = articles.filter(
+    (a) => a.category !== current.category && a.title !== current.title
+  );
+  return [...sameCat, ...others].slice(0, count);
+}
 
-  const filteredArticles = activeCategory === "All"
-    ? articles
-    : articles.filter((a) => a.category === activeCategory);
-
-  const featuredArticle = activeCategory === "All" ? articles[0] : null;
-  const gridArticles = featuredArticle ? filteredArticles.slice(1) : filteredArticles;
-
-  return (
-    <>
-    <PageHero
-      title="Industry News & Advice"
-      subtitle="Real articles sourced from ALTA, CFPB, FBI IC3, NAR, and industry professionals. Click any article to read the full summary."
-      image="https://images.unsplash.com/photo-1504711434969-e33886168d6c?w=1920&q=80"
-      breadcrumb={[{ label: "News & Advice", href: "/blog" }]}
-    />
-
-    {/* Article detail modal */}
-    {selectedArticle && (
-      <div className="fixed inset-0 z-[700] flex items-end sm:items-center justify-center sm:p-4" onClick={() => setSelectedArticle(null)}>
-        <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" />
-        <div className="relative bg-white rounded-t-2xl sm:rounded-2xl shadow-2xl max-w-2xl w-full max-h-[90vh] sm:max-h-[85vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
-          <button onClick={() => setSelectedArticle(null)} className="absolute top-3 right-3 p-2 text-white hover:text-white bg-black/40 hover:bg-black/60 rounded-full z-10 transition-colors">
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12" /></svg>
-          </button>
-          {/* Header */}
-          <div className="relative h-48 overflow-hidden rounded-t-2xl">
-            <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url('${selectedArticle.image}')` }} />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
-            <div className="absolute bottom-4 left-5 right-16">
-              <span className={`text-[10px] font-bold px-2.5 py-1 rounded-full ${catColors[selectedArticle.category] || 'bg-gray-100 text-gray-700'}`}>{selectedArticle.category}</span>
-              <h2 className="text-xl font-bold text-white mt-2 drop-shadow">{selectedArticle.title}</h2>
-              <div className="flex items-center gap-2 mt-1 text-xs text-white/70">
-                <span>{selectedArticle.date}</span>
-                <span className="w-1 h-1 rounded-full bg-white/40" />
-                <span>{selectedArticle.readTime} read</span>
+function ArticleCard({
+  article,
+  onSelect,
+  featured = false,
+}: {
+  article: Article;
+  onSelect: (a: Article) => void;
+  featured?: boolean;
+}) {
+  if (featured) {
+    return (
+      <div className="mb-8">
+        <button
+          onClick={() => onSelect(article)}
+          className="w-full text-left group rounded-2xl overflow-hidden shadow-md border border-gray-100 bg-white tile-interactive"
+        >
+          <div className="grid md:grid-cols-2">
+            <div className="relative h-56 md:h-auto overflow-hidden">
+              <div
+                className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105"
+                style={{ backgroundImage: `url('${article.image}')` }}
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+              <span
+                className={`absolute top-3 left-3 text-[11px] font-bold px-3 py-1 rounded-full ${catColors[article.category]}`}
+              >
+                {article.category}
+              </span>
+              <span className="absolute top-3 right-3 text-[10px] font-bold px-2.5 py-1 rounded-full bg-amber-400 text-amber-950 shadow-sm">
+                Featured
+              </span>
+            </div>
+            <div className="p-6 md:p-8 flex flex-col justify-center">
+              <div className="flex items-center gap-2 mb-3 text-xs text-alta-gray">
+                <span>{article.date}</span>
+                <span className="w-1 h-1 rounded-full bg-gray-300" />
+                <svg
+                  className="w-3.5 h-3.5 text-alta-gray"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1.5}
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"
+                  />
+                </svg>
+                <span>{article.readTime} read</span>
+              </div>
+              <h2 className="text-xl md:text-2xl font-bold text-alta-navy mb-3 group-hover:text-alta-teal transition-colors">
+                {article.title}
+              </h2>
+              <p className="text-sm text-alta-gray leading-relaxed mb-3">
+                {article.excerpt}
+              </p>
+              <div className="flex items-center justify-between">
+                <span className="text-sm font-medium text-alta-teal flex items-center gap-1">
+                  Read full article
+                  <svg
+                    className="w-4 h-4 group-hover:translate-x-1 transition-transform"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M9 5l7 7-7 7"
+                    />
+                  </svg>
+                </span>
+                <p className="text-[9px] text-alta-gray">
+                  Source: {article.source}
+                </p>
               </div>
             </div>
           </div>
-          {/* Body */}
-          <div className="p-6">
-            {selectedArticle.content.split('\n\n').map((para, i) => (
-              <p key={i} className="text-sm text-alta-gray leading-relaxed mb-4">{para}</p>
-            ))}
-            <div className="flex items-center justify-between flex-wrap gap-2 pt-4 border-t border-gray-100">
-              <ShareButtons path="/blog" title={selectedArticle.title + " — HomeClosing101"} />
-              <p className="text-[10px] text-alta-teal font-medium">Source: {selectedArticle.source}</p>
-              <div className="flex items-center gap-2">
+        </button>
+      </div>
+    );
+  }
+
+  return (
+    <button
+      onClick={() => onSelect(article)}
+      className="text-left group rounded-2xl overflow-hidden shadow-sm border border-gray-100 bg-white tile-interactive relative"
+    >
+      <div className="relative h-40 overflow-hidden">
+        <div
+          className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105"
+          style={{ backgroundImage: `url('${article.image}')` }}
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+        <span
+          className={`absolute top-3 left-3 text-[11px] font-bold px-3 py-1 rounded-full ${catColors[article.category] || "bg-gray-100 text-gray-700"}`}
+        >
+          {article.category}
+        </span>
+      </div>
+      <div className="p-5">
+        <div className="flex items-center gap-2 mb-2 text-xs text-alta-gray">
+          <span>{article.date}</span>
+          <span className="w-1 h-1 rounded-full bg-gray-300" />
+          <svg
+            className="w-3.5 h-3.5 text-alta-gray"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            strokeWidth={1.5}
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"
+            />
+          </svg>
+          <span>{article.readTime} read</span>
+        </div>
+        <h3 className="font-bold text-alta-navy mb-2 group-hover:text-alta-teal transition-colors">
+          {article.title}
+        </h3>
+        <p className="text-xs text-alta-gray leading-relaxed mb-2">
+          {article.excerpt}
+        </p>
+        <div className="flex items-center justify-between">
+          <p className="text-[9px] text-alta-teal font-medium">
+            Source: {article.source}
+          </p>
+          <span className="flex items-center gap-1 text-xs font-medium text-alta-teal opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+            Read more
+            <svg
+              className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M9 5l7 7-7 7"
+              />
+            </svg>
+          </span>
+        </div>
+      </div>
+    </button>
+  );
+}
+
+export default function BlogPage() {
+  const [selectedArticle, setSelectedArticle] = useState<Article | null>(null);
+  const [panelVisible, setPanelVisible] = useState(false);
+  const [activeCategory, setActiveCategory] = useState("All");
+  const [linkCopied, setLinkCopied] = useState(false);
+
+  const openPanel = useCallback((article: Article) => {
+    setSelectedArticle(article);
+    requestAnimationFrame(() => setPanelVisible(true));
+  }, []);
+
+  const closePanel = useCallback(() => {
+    setPanelVisible(false);
+    setTimeout(() => setSelectedArticle(null), 300);
+  }, []);
+
+  useEffect(() => {
+    if (selectedArticle) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [selectedArticle]);
+
+  useEffect(() => {
+    const handleEsc = (e: KeyboardEvent) => {
+      if (e.key === "Escape") closePanel();
+    };
+    window.addEventListener("keydown", handleEsc);
+    return () => window.removeEventListener("keydown", handleEsc);
+  }, [closePanel]);
+
+  const filteredArticles =
+    activeCategory === "All"
+      ? articles
+      : articles.filter((a) => a.category === activeCategory);
+
+  const featuredArticle = activeCategory === "All" ? articles[0] : null;
+  const gridArticles = featuredArticle
+    ? filteredArticles.slice(1)
+    : filteredArticles;
+
+  const handleCopyLink = () => {
+    navigator.clipboard.writeText(window.location.href);
+    setLinkCopied(true);
+    setTimeout(() => setLinkCopied(false), 2000);
+  };
+
+  const handleEmailShare = () => {
+    if (!selectedArticle) return;
+    const subject = encodeURIComponent(
+      selectedArticle.title + " — HomeClosing101"
+    );
+    const body = encodeURIComponent(
+      `${selectedArticle.excerpt}\n\nRead more: ${window.location.href}`
+    );
+    window.open(`mailto:?subject=${subject}&body=${body}`);
+  };
+
+  return (
+    <>
+      <PageHero
+        title="Industry News & Advice"
+        subtitle="Real articles sourced from ALTA, CFPB, FBI IC3, NAR, and industry professionals. Click any article to read the full summary."
+        image="https://images.unsplash.com/photo-1504711434969-e33886168d6c?w=1920&q=80"
+        breadcrumb={[{ label: "News & Advice", href: "/blog" }]}
+      />
+
+      {/* Right-side slide-out panel */}
+      {selectedArticle && (
+        <div className="fixed inset-0 z-[700]" aria-modal="true" role="dialog">
+          {/* Backdrop */}
+          <div
+            className={`absolute inset-0 bg-black/50 backdrop-blur-sm transition-opacity duration-300 ${panelVisible ? "opacity-100" : "opacity-0"}`}
+            onClick={closePanel}
+          />
+          {/* Panel */}
+          <div
+            data-panel-scroll
+            className={`absolute top-0 right-0 h-full w-full sm:w-[500px] lg:w-[600px] bg-white shadow-2xl overflow-y-auto transition-transform duration-300 ease-in-out ${panelVisible ? "translate-x-0" : "translate-x-full"}`}
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Close button */}
+            <button
+              onClick={closePanel}
+              className="absolute top-3 right-3 p-2 text-white hover:text-white bg-black/40 hover:bg-black/60 rounded-full z-10 transition-colors"
+              aria-label="Close panel"
+            >
+              <svg
+                className="w-5 h-5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2.5}
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              </svg>
+            </button>
+
+            {/* Hero image */}
+            <div className="relative h-[200px] overflow-hidden">
+              <div
+                className="absolute inset-0 bg-cover bg-center"
+                style={{
+                  backgroundImage: `url('${selectedArticle.image}')`,
+                }}
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
+              <div className="absolute bottom-4 left-5 right-16">
+                <div className="flex items-center gap-2 mb-2">
+                  <span
+                    className={`text-[10px] font-bold px-2.5 py-1 rounded-full ${catColors[selectedArticle.category] || "bg-gray-100 text-gray-700"}`}
+                  >
+                    {selectedArticle.category}
+                  </span>
+                  <span className="text-[10px] text-white/70">
+                    {selectedArticle.date}
+                  </span>
+                  <span className="w-1 h-1 rounded-full bg-white/40" />
+                  <span className="text-[10px] text-white/70">
+                    {selectedArticle.readTime} read
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            {/* Panel body */}
+            <div className="p-6">
+              {/* Title */}
+              <h2 className="text-xl sm:text-2xl font-bold text-alta-navy mb-2 leading-tight">
+                {selectedArticle.title}
+              </h2>
+
+              {/* Source attribution */}
+              <div className="flex items-center gap-2 mb-5 pb-4 border-b border-gray-100">
+                <svg
+                  className="w-3.5 h-3.5 text-alta-teal shrink-0"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1.5}
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M13.19 8.688a4.5 4.5 0 011.242 7.244l-4.5 4.5a4.5 4.5 0 01-6.364-6.364l1.757-1.757m9.86-2.475a4.5 4.5 0 00-1.242-7.244l4.5-4.5a4.5 4.5 0 016.364 6.364l-1.757 1.757"
+                  />
+                </svg>
+                <a
+                  href={selectedArticle.sourceUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-xs text-alta-teal font-medium hover:underline"
+                >
+                  {selectedArticle.source}
+                </a>
+              </div>
+
+              {/* Full article content */}
+              {selectedArticle.content.split("\n\n").map((para, i) => (
+                <p
+                  key={i}
+                  className="text-sm text-alta-gray leading-relaxed mb-4"
+                >
+                  {para}
+                </p>
+              ))}
+
+              {/* Key Takeaways */}
+              <div className="mt-6 p-5 bg-[#e6f1f5] rounded-xl border border-[#b4d8e8]">
+                <h3 className="text-sm font-bold text-alta-navy mb-3 flex items-center gap-2">
+                  <svg
+                    className="w-4 h-4 text-[#0a7ea8]"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    strokeWidth={1.5}
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.455 2.456L21.75 6l-1.036.259a3.375 3.375 0 00-2.455 2.456z"
+                    />
+                  </svg>
+                  Key Takeaways
+                </h3>
+                <ul className="space-y-2">
+                  {selectedArticle.keyTakeaways.map((takeaway, i) => (
+                    <li
+                      key={i}
+                      className="flex items-start gap-2 text-xs text-alta-gray leading-relaxed"
+                    >
+                      <svg
+                        className="w-3.5 h-3.5 text-[#0a7ea8] shrink-0 mt-0.5"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                        strokeWidth={2}
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M4.5 12.75l6 6 9-13.5"
+                        />
+                      </svg>
+                      {takeaway}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* Action buttons */}
+              <div className="mt-6 flex flex-wrap items-center gap-2 pt-4 border-t border-gray-100">
+                <ShareButtons
+                  path="/blog"
+                  title={selectedArticle.title + " — HomeClosing101"}
+                />
+                <button
+                  onClick={handleCopyLink}
+                  className="inline-flex items-center gap-1.5 px-3 py-2 bg-gray-100 text-alta-gray text-xs font-medium rounded-lg hover:bg-gray-200 transition-colors"
+                >
+                  <svg
+                    className="w-3.5 h-3.5"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    strokeWidth={1.5}
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M15.666 3.888A2.25 2.25 0 0013.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 01-.75.75H9.75a.75.75 0 01-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 01-2.25 2.25H6.75A2.25 2.25 0 014.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 011.927-.184"
+                    />
+                  </svg>
+                  {linkCopied ? "Copied!" : "Copy link"}
+                </button>
+                <button
+                  onClick={handleEmailShare}
+                  className="inline-flex items-center gap-1.5 px-3 py-2 bg-gray-100 text-alta-gray text-xs font-medium rounded-lg hover:bg-gray-200 transition-colors"
+                >
+                  <svg
+                    className="w-3.5 h-3.5"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    strokeWidth={1.5}
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"
+                    />
+                  </svg>
+                  Email
+                </button>
                 <SaveToFolderBtn
                   type="note"
                   title={selectedArticle.title}
                   content={selectedArticle.excerpt}
                   label="Save Article"
                 />
-                <a href={selectedArticle.sourceUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 px-4 py-2 bg-alta-teal text-white text-xs font-semibold rounded-lg hover:bg-alta-teal-dark transition-colors">
-                  Read at source
-                  <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
-                </a>
               </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    )}
 
-    <div className="py-1.5 lg:py-2">
-      <div className="max-w-5xl mx-auto px-4 sm:px-6">
-        <div className="mb-6 p-4 bg-[#e6f1f5] rounded-2xl border border-[#b4d8e8] border-l-4 border-l-[#0a7ea8] sm:sticky sm:top-[142px] z-20 shadow-md">
-          <div className="flex items-start gap-4">
-            <div className="w-12 h-12 rounded-xl bg-[#0a7ea8]/10 flex items-center justify-center text-[#0a7ea8] shrink-0">
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M12 7.5h1.5m-1.5 3h1.5m-7.5 3h7.5m-7.5 3h7.5m3-9h3.375c.621 0 1.125.504 1.125 1.125V18a2.25 2.25 0 01-2.25 2.25M16.5 7.5V18a2.25 2.25 0 002.25 2.25M16.5 7.5V4.875c0-.621-.504-1.125-1.125-1.125H4.125C3.504 3.75 3 4.254 3 4.875V18a2.25 2.25 0 002.25 2.25h13.5M6 7.5h3v3H6v-3z" /></svg>
-            </div>
-            <div>
-              <h2 className="font-bold text-alta-navy mb-1">Verified Industry News & Advice</h2>
-              <p className="text-sm text-alta-gray leading-relaxed">Every article is sourced from authoritative organizations — ALTA, CFPB, FBI, NAR, and industry professionals. Click any article to read the full summary, then follow the source link for the original data.</p>
-            </div>
-          </div>
-        </div>
-
-        {/* Category filter tabs */}
-        <div className="mb-5 flex flex-wrap gap-2">
-          {allCategories.map((cat) => (
-            <button
-              key={cat}
-              onClick={() => setActiveCategory(cat)}
-              className={`px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all ${
-                activeCategory === cat
-                  ? cat === "All"
-                    ? "bg-alta-navy text-white shadow-sm"
-                    : (catColors[cat] || "bg-gray-100 text-gray-700") + " ring-2 ring-current/30 shadow-sm"
-                  : "bg-gray-100 text-gray-500 hover:bg-gray-200"
-              }`}
-            >
-              {cat}
-            </button>
-          ))}
-        </div>
-
-        {/* Article count */}
-        {activeCategory !== "All" && (
-          <p className="mb-4 text-sm text-alta-gray">
-            Showing <span className="font-semibold text-alta-navy">{filteredArticles.length}</span> of {articles.length} articles
-          </p>
-        )}
-
-        {/* Empty state */}
-        {filteredArticles.length === 0 && (
-          <div className="py-16 text-center">
-            <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gray-100 flex items-center justify-center">
-              <svg className="w-8 h-8 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m5.231 13.481L15 17.25m-4.5-15H5.625c-.621 0-1.125.504-1.125 1.125v16.5c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9zm3.75 11.625a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z" /></svg>
-            </div>
-            <h3 className="text-lg font-bold text-alta-navy mb-1">No articles in this category yet</h3>
-            <p className="text-sm text-alta-gray mb-4">We are working on adding more content. Try another category or view all articles.</p>
-            <button onClick={() => setActiveCategory("All")} className="px-5 py-2 bg-alta-teal text-white text-sm font-semibold rounded-lg hover:bg-alta-teal-dark transition-colors">
-              View All Articles
-            </button>
-          </div>
-        )}
-
-        {/* Featured article */}
-        {featuredArticle && (
-        <div className="mb-8">
-          <button onClick={() => setSelectedArticle(articles[0])} className="w-full text-left group rounded-2xl overflow-hidden shadow-md border border-gray-100 bg-white tile-interactive">
-            <div className="grid md:grid-cols-2">
-              <div className="relative h-56 md:h-auto overflow-hidden">
-                <div className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105" style={{ backgroundImage: `url('${articles[0].image}')` }} />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
-                <span className={`absolute top-3 left-3 text-[11px] font-bold px-3 py-1 rounded-full ${catColors[articles[0].category]}`}>{articles[0].category}</span>
-                <span className="absolute top-3 right-3 text-[10px] font-bold px-2.5 py-1 rounded-full bg-amber-400 text-amber-950 shadow-sm">Featured</span>
-              </div>
-              <div className="p-6 md:p-8 flex flex-col justify-center">
-                <div className="flex items-center gap-2 mb-3 text-xs text-alta-gray">
-                  <span>{articles[0].date}</span>
-                  <span className="w-1 h-1 rounded-full bg-gray-300" />
-                  <svg className="w-3.5 h-3.5 text-alta-gray" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                  <span>{articles[0].readTime} read</span>
-                </div>
-                <h2 className="text-xl md:text-2xl font-bold text-alta-navy mb-3 group-hover:text-alta-teal transition-colors">{articles[0].title}</h2>
-                <p className="text-sm text-alta-gray leading-relaxed mb-3">{articles[0].excerpt}</p>
-                <div className="flex items-center justify-between">
-                  <span className="text-sm font-medium text-alta-teal flex items-center gap-1">
-                    Read full article
-                    <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
-                  </span>
-                  <p className="text-[9px] text-alta-gray">Source: {articles[0].source}</p>
-                </div>
-              </div>
-            </div>
-          </button>
-        </div>
-        )}
-
-        {/* Article grid */}
-        {gridArticles.length > 0 && (
-        <div className="grid md:grid-cols-2 gap-5 mb-8">
-          {gridArticles.slice(0, 4).map((article) => (
-            <button key={article.title} onClick={() => setSelectedArticle(article)} className="text-left group rounded-2xl overflow-hidden shadow-sm border border-gray-100 bg-white tile-interactive">
-              <div className="relative h-40 overflow-hidden">
-                <div className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105" style={{ backgroundImage: `url('${article.image}')` }} />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
-                <span className={`absolute top-3 left-3 text-[11px] font-bold px-3 py-1 rounded-full ${catColors[article.category] || 'bg-gray-100 text-gray-700'}`}>{article.category}</span>
-              </div>
-              <div className="p-5">
-                <div className="flex items-center gap-2 mb-2 text-xs text-alta-gray">
-                  <span>{article.date}</span>
-                  <span className="w-1 h-1 rounded-full bg-gray-300" />
-                  <svg className="w-3.5 h-3.5 text-alta-gray" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                  <span>{article.readTime} read</span>
-                </div>
-                <h3 className="font-bold text-alta-navy mb-2 group-hover:text-alta-teal transition-colors">{article.title}</h3>
-                <p className="text-xs text-alta-gray leading-relaxed mb-2">{article.excerpt}</p>
-                <p className="text-[9px] text-alta-teal font-medium">Source: {article.source}</p>
-              </div>
-            </button>
-          ))}
-        </div>
-        )}
-
-        {gridArticles.length > 4 && <InlineAd />}
-
-        {/* More articles */}
-        {gridArticles.length > 4 && (
-        <div className="grid md:grid-cols-2 gap-5 mb-8">
-          {gridArticles.slice(4).map((article) => (
-            <button key={article.title} onClick={() => setSelectedArticle(article)} className="text-left group rounded-2xl overflow-hidden shadow-sm border border-gray-100 bg-white tile-interactive">
-              <div className="relative h-40 overflow-hidden">
-                <div className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105" style={{ backgroundImage: `url('${article.image}')` }} />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
-                <span className={`absolute top-3 left-3 text-[11px] font-bold px-3 py-1 rounded-full ${catColors[article.category] || 'bg-gray-100 text-gray-700'}`}>{article.category}</span>
-              </div>
-              <div className="p-5">
-                <div className="flex items-center gap-2 mb-2 text-xs text-alta-gray">
-                  <span>{article.date}</span>
-                  <span className="w-1 h-1 rounded-full bg-gray-300" />
-                  <svg className="w-3.5 h-3.5 text-alta-gray" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                  <span>{article.readTime} read</span>
-                </div>
-                <h3 className="font-bold text-alta-navy mb-2 group-hover:text-alta-teal transition-colors">{article.title}</h3>
-                <p className="text-xs text-alta-gray leading-relaxed mb-2">{article.excerpt}</p>
-                <p className="text-[9px] text-alta-teal font-medium">Source: {article.source}</p>
-              </div>
-            </button>
-          ))}
-        </div>
-        )}
-
-        {/* Quick links */}
-        <div className="p-6 bg-gradient-to-br from-alta-light to-white rounded-2xl border border-gray-100">
-          <h2 className="text-xl font-bold text-alta-navy mb-4">Explore More</h2>
-          <div className="grid sm:grid-cols-3 gap-3">
-            <Link href="/faq" className="group flex items-center gap-3 p-3 bg-[#f0ecf6] rounded-xl border border-[#d4c8e4] border-l-4 border-l-[#5b3a8c] tile-interactive">
-              <div className="w-9 h-9 rounded-lg bg-[#5b3a8c]/10 flex items-center justify-center text-[#5b3a8c] shrink-0">
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9 5.25h.008v.008H12v-.008z" /></svg>
-              </div>
-              <div>
-                <h3 className="text-xs font-semibold text-alta-navy group-hover:text-alta-teal transition-colors">250+ FAQ</h3>
-                <p className="text-xs text-alta-gray">Verified answers</p>
-              </div>
-            </Link>
-            <Link href="/glossary" className="group flex items-center gap-3 p-3 bg-[#e8f0f5] rounded-xl border border-[#c5d8e4] border-l-4 border-l-[#1a5276] tile-interactive">
-              <div className="w-9 h-9 rounded-lg bg-[#1a5276]/10 flex items-center justify-center text-[#1a5276] shrink-0">
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" /></svg>
-              </div>
-              <div>
-                <h3 className="text-xs font-semibold text-alta-navy group-hover:text-alta-teal transition-colors">450+ Glossary</h3>
-                <p className="text-xs text-alta-gray">Real estate terms</p>
-              </div>
-            </Link>
-            <Link href="/stop-fraud" className="group flex items-center gap-3 p-3 bg-[#f5e8e8] rounded-xl border border-[#e4c5c5] border-l-4 border-l-[#943030] tile-interactive">
-              <div className="w-9 h-9 rounded-lg bg-red-100 flex items-center justify-center text-[#943030] shrink-0">
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" /></svg>
-              </div>
-              <div>
-                <h3 className="text-xs font-semibold text-alta-navy group-hover:text-alta-teal transition-colors">Stop Fraud 101</h3>
-                <p className="text-xs text-alta-gray">Prevention guide</p>
-              </div>
-            </Link>
-          </div>
-        </div>
-
-        {/* Subscribe callout */}
-        <div className="mt-6 p-6 bg-gradient-to-br from-[#e6f1f5] to-white rounded-2xl border border-[#b4d8e8] shadow-sm">
-          <div className="flex items-start gap-4">
-            <div className="w-12 h-12 rounded-xl bg-[#0a7ea8]/10 flex items-center justify-center text-[#0a7ea8] shrink-0">
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" /></svg>
-            </div>
-            <div className="flex-1">
-              <h3 className="font-bold text-alta-navy mb-1">Subscribe to Industry Updates</h3>
-              <p className="text-sm text-alta-gray leading-relaxed mb-3">Coming soon — subscribe to get the latest industry news and homebuyer tips delivered to your inbox.</p>
-              <div className="flex gap-2">
-                <input
-                  type="email"
-                  placeholder="you@example.com"
-                  disabled
-                  className="flex-1 px-4 py-2 border border-gray-200 rounded-lg text-sm bg-gray-50 text-gray-400 cursor-not-allowed"
-                />
-                <button
-                  disabled
-                  className="px-5 py-2 bg-gray-300 text-white text-sm font-semibold rounded-lg cursor-not-allowed"
+              {/* Read at source button */}
+              <a
+                href={selectedArticle.sourceUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-4 w-full inline-flex items-center justify-center gap-2 px-4 py-3 bg-alta-teal text-white text-sm font-semibold rounded-lg hover:bg-alta-teal-dark transition-colors"
+              >
+                Read at source
+                <svg
+                  className="w-4 h-4"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
                 >
-                  Coming Soon
-                </button>
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                  />
+                </svg>
+              </a>
+
+              {/* Related Articles */}
+              <div className="mt-8 pt-6 border-t border-gray-100">
+                <h3 className="text-sm font-bold text-alta-navy mb-4">
+                  Related Articles
+                </h3>
+                <div className="space-y-3">
+                  {getRelatedArticles(selectedArticle).map((related) => (
+                    <button
+                      key={related.title}
+                      onClick={() => {
+                        setSelectedArticle(related);
+                        const panelEl = document.querySelector(
+                          "[data-panel-scroll]"
+                        );
+                        if (panelEl) panelEl.scrollTop = 0;
+                      }}
+                      className="w-full text-left group/related flex gap-3 p-3 rounded-xl bg-gray-50 hover:bg-gray-100 transition-colors"
+                    >
+                      <div
+                        className="w-16 h-16 rounded-lg bg-cover bg-center shrink-0"
+                        style={{
+                          backgroundImage: `url('${related.image}')`,
+                        }}
+                      />
+                      <div className="flex-1 min-w-0">
+                        <span
+                          className={`text-[9px] font-bold px-2 py-0.5 rounded-full ${catColors[related.category] || "bg-gray-100 text-gray-700"}`}
+                        >
+                          {related.category}
+                        </span>
+                        <h4 className="text-xs font-semibold text-alta-navy mt-1 line-clamp-2 group-hover/related:text-alta-teal transition-colors">
+                          {related.title}
+                        </h4>
+                        <p className="text-[10px] text-alta-gray mt-0.5">
+                          {related.readTime} read
+                        </p>
+                      </div>
+                    </button>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
         </div>
+      )}
 
-        <FirstTimeBuyerCTA />
+      <div className="py-1.5 lg:py-2">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6">
+          <div className="mb-6 p-4 bg-[#e6f1f5] rounded-2xl border border-[#b4d8e8] border-l-4 border-l-[#0a7ea8] sm:sticky sm:top-[142px] z-20 shadow-md">
+            <div className="flex items-start gap-4">
+              <div className="w-12 h-12 rounded-xl bg-[#0a7ea8]/10 flex items-center justify-center text-[#0a7ea8] shrink-0">
+                <svg
+                  className="w-6 h-6"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1.5}
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M12 7.5h1.5m-1.5 3h1.5m-7.5 3h7.5m-7.5 3h7.5m3-9h3.375c.621 0 1.125.504 1.125 1.125V18a2.25 2.25 0 01-2.25 2.25M16.5 7.5V18a2.25 2.25 0 002.25 2.25M16.5 7.5V4.875c0-.621-.504-1.125-1.125-1.125H4.125C3.504 3.75 3 4.254 3 4.875V18a2.25 2.25 0 002.25 2.25h13.5M6 7.5h3v3H6v-3z"
+                  />
+                </svg>
+              </div>
+              <div>
+                <h2 className="font-bold text-alta-navy mb-1">
+                  Verified Industry News & Advice
+                </h2>
+                <p className="text-sm text-alta-gray leading-relaxed">
+                  Every article is sourced from authoritative organizations —
+                  ALTA, CFPB, FBI, NAR, and industry professionals. Click any
+                  article to read the full summary, then follow the source link
+                  for the original data.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Category filter tabs */}
+          <div className="mb-5 flex flex-wrap gap-2">
+            {allCategories.map((cat) => (
+              <button
+                key={cat}
+                onClick={() => setActiveCategory(cat)}
+                className={`px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all ${
+                  activeCategory === cat
+                    ? cat === "All"
+                      ? "bg-alta-navy text-white shadow-sm"
+                      : (catColors[cat] || "bg-gray-100 text-gray-700") +
+                        " ring-2 ring-current/30 shadow-sm"
+                    : "bg-gray-100 text-gray-500 hover:bg-gray-200"
+                }`}
+              >
+                {cat}
+              </button>
+            ))}
+          </div>
+
+          {/* Article count */}
+          {activeCategory !== "All" && (
+            <p className="mb-4 text-sm text-alta-gray">
+              Showing{" "}
+              <span className="font-semibold text-alta-navy">
+                {filteredArticles.length}
+              </span>{" "}
+              of {articles.length} articles
+            </p>
+          )}
+
+          {/* Empty state */}
+          {filteredArticles.length === 0 && (
+            <div className="py-16 text-center">
+              <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gray-100 flex items-center justify-center">
+                <svg
+                  className="w-8 h-8 text-gray-300"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1.5}
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m5.231 13.481L15 17.25m-4.5-15H5.625c-.621 0-1.125.504-1.125 1.125v16.5c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9zm3.75 11.625a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z"
+                  />
+                </svg>
+              </div>
+              <h3 className="text-lg font-bold text-alta-navy mb-1">
+                No articles in this category yet
+              </h3>
+              <p className="text-sm text-alta-gray mb-4">
+                We are working on adding more content. Try another category or
+                view all articles.
+              </p>
+              <button
+                onClick={() => setActiveCategory("All")}
+                className="px-5 py-2 bg-alta-teal text-white text-sm font-semibold rounded-lg hover:bg-alta-teal-dark transition-colors"
+              >
+                View All Articles
+              </button>
+            </div>
+          )}
+
+          {/* Featured article */}
+          {featuredArticle && (
+            <ArticleCard
+              article={articles[0]}
+              onSelect={openPanel}
+              featured
+            />
+          )}
+
+          {/* Article grid */}
+          {gridArticles.length > 0 && (
+            <div className="grid md:grid-cols-2 gap-5 mb-8">
+              {gridArticles.slice(0, 4).map((article) => (
+                <ArticleCard
+                  key={article.title}
+                  article={article}
+                  onSelect={openPanel}
+                />
+              ))}
+            </div>
+          )}
+
+          {gridArticles.length > 4 && <InlineAd />}
+
+          {/* More articles */}
+          {gridArticles.length > 4 && (
+            <div className="grid md:grid-cols-2 gap-5 mb-8">
+              {gridArticles.slice(4).map((article) => (
+                <ArticleCard
+                  key={article.title}
+                  article={article}
+                  onSelect={openPanel}
+                />
+              ))}
+            </div>
+          )}
+
+          {/* Quick links */}
+          <div className="p-6 bg-gradient-to-br from-alta-light to-white rounded-2xl border border-gray-100">
+            <h2 className="text-xl font-bold text-alta-navy mb-4">
+              Explore More
+            </h2>
+            <div className="grid sm:grid-cols-3 gap-3">
+              <Link
+                href="/faq"
+                className="group flex items-center gap-3 p-3 bg-[#f0ecf6] rounded-xl border border-[#d4c8e4] border-l-4 border-l-[#5b3a8c] tile-interactive"
+              >
+                <div className="w-9 h-9 rounded-lg bg-[#5b3a8c]/10 flex items-center justify-center text-[#5b3a8c] shrink-0">
+                  <svg
+                    className="w-4 h-4"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    strokeWidth={1.5}
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9 5.25h.008v.008H12v-.008z"
+                    />
+                  </svg>
+                </div>
+                <div>
+                  <h3 className="text-xs font-semibold text-alta-navy group-hover:text-alta-teal transition-colors">
+                    250+ FAQ
+                  </h3>
+                  <p className="text-xs text-alta-gray">Verified answers</p>
+                </div>
+              </Link>
+              <Link
+                href="/glossary"
+                className="group flex items-center gap-3 p-3 bg-[#e8f0f5] rounded-xl border border-[#c5d8e4] border-l-4 border-l-[#1a5276] tile-interactive"
+              >
+                <div className="w-9 h-9 rounded-lg bg-[#1a5276]/10 flex items-center justify-center text-[#1a5276] shrink-0">
+                  <svg
+                    className="w-4 h-4"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    strokeWidth={1.5}
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25"
+                    />
+                  </svg>
+                </div>
+                <div>
+                  <h3 className="text-xs font-semibold text-alta-navy group-hover:text-alta-teal transition-colors">
+                    450+ Glossary
+                  </h3>
+                  <p className="text-xs text-alta-gray">Real estate terms</p>
+                </div>
+              </Link>
+              <Link
+                href="/stop-fraud"
+                className="group flex items-center gap-3 p-3 bg-[#f5e8e8] rounded-xl border border-[#e4c5c5] border-l-4 border-l-[#943030] tile-interactive"
+              >
+                <div className="w-9 h-9 rounded-lg bg-red-100 flex items-center justify-center text-[#943030] shrink-0">
+                  <svg
+                    className="w-4 h-4"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    strokeWidth={1.5}
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z"
+                    />
+                  </svg>
+                </div>
+                <div>
+                  <h3 className="text-xs font-semibold text-alta-navy group-hover:text-alta-teal transition-colors">
+                    Stop Fraud 101
+                  </h3>
+                  <p className="text-xs text-alta-gray">Prevention guide</p>
+                </div>
+              </Link>
+            </div>
+          </div>
+
+          {/* Subscribe callout */}
+          <div className="mt-6 p-6 bg-gradient-to-br from-[#e6f1f5] to-white rounded-2xl border border-[#b4d8e8] shadow-sm">
+            <div className="flex items-start gap-4">
+              <div className="w-12 h-12 rounded-xl bg-[#0a7ea8]/10 flex items-center justify-center text-[#0a7ea8] shrink-0">
+                <svg
+                  className="w-6 h-6"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1.5}
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"
+                  />
+                </svg>
+              </div>
+              <div className="flex-1">
+                <h3 className="font-bold text-alta-navy mb-1">
+                  Subscribe to Industry Updates
+                </h3>
+                <p className="text-sm text-alta-gray leading-relaxed mb-3">
+                  Coming soon — subscribe to get the latest industry news and
+                  homebuyer tips delivered to your inbox.
+                </p>
+                <div className="flex gap-2">
+                  <input
+                    type="email"
+                    placeholder="you@example.com"
+                    disabled
+                    className="flex-1 px-4 py-2 border border-gray-200 rounded-lg text-sm bg-gray-50 text-gray-400 cursor-not-allowed"
+                  />
+                  <button
+                    disabled
+                    className="px-5 py-2 bg-gray-300 text-white text-sm font-semibold rounded-lg cursor-not-allowed"
+                  >
+                    Coming Soon
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <FirstTimeBuyerCTA />
+        </div>
       </div>
-    </div>
     </>
   );
 }
