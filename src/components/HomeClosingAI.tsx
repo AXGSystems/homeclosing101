@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
-import { X, Send, Sparkles, Download, Loader2 } from 'lucide-react';
+import { X, Send, Sparkles, Download, Loader2, GripHorizontal, Maximize2, Minimize2, RotateCcw } from 'lucide-react';
 import DateWeatherWidget from '@/components/DateWeatherWidget';
 
 const sponsors = [
@@ -355,6 +355,96 @@ export default function HomeClosingAI() {
 
   const [minimized, setMinimized] = useState(false);
 
+  // Drag / resize / expand state
+  const [position, setPosition] = useState<{ x: number; y: number } | null>(null);
+  const [size, setSize] = useState<{ width: number; height: number } | null>(null);
+  const [isExpanded, setIsExpanded] = useState(false);
+
+  useEffect(() => {
+    try {
+      const p = localStorage.getItem('hc101-ai-position');
+      if (p) setPosition(JSON.parse(p));
+      const s = localStorage.getItem('hc101-ai-size');
+      if (s) setSize(JSON.parse(s));
+    } catch { /* ignore */ }
+  }, []);
+
+  const startDrag = (e: React.PointerEvent, element: HTMLElement | null) => {
+    if (!element || isExpanded) return;
+    const rect = element.getBoundingClientRect();
+    const offsetX = e.clientX - rect.left;
+    const offsetY = e.clientY - rect.top;
+    const width = rect.width;
+    const height = rect.height;
+    let latest = { x: rect.left, y: rect.top };
+    setPosition(latest);
+
+    const handleMove = (ev: PointerEvent) => {
+      const newX = Math.max(0, Math.min(window.innerWidth - width, ev.clientX - offsetX));
+      const newY = Math.max(0, Math.min(window.innerHeight - height, ev.clientY - offsetY));
+      latest = { x: newX, y: newY };
+      setPosition(latest);
+    };
+    const handleUp = () => {
+      document.removeEventListener('pointermove', handleMove);
+      document.removeEventListener('pointerup', handleUp);
+      try { localStorage.setItem('hc101-ai-position', JSON.stringify(latest)); } catch { /* ignore */ }
+    };
+    document.addEventListener('pointermove', handleMove);
+    document.addEventListener('pointerup', handleUp);
+    e.preventDefault();
+    e.stopPropagation();
+  };
+
+  const startResize = (e: React.PointerEvent, element: HTMLElement | null) => {
+    if (!element || isExpanded) return;
+    const rect = element.getBoundingClientRect();
+    if (!position) setPosition({ x: rect.left, y: rect.top });
+    const startX = e.clientX;
+    const startY = e.clientY;
+    const startW = rect.width;
+    const startH = rect.height;
+    let latest = { width: startW, height: startH };
+    setSize(latest);
+
+    const handleMove = (ev: PointerEvent) => {
+      const newW = Math.max(320, Math.min(window.innerWidth - 20, startW + (ev.clientX - startX)));
+      const newH = Math.max(380, Math.min(window.innerHeight - 20, startH + (ev.clientY - startY)));
+      latest = { width: newW, height: newH };
+      setSize(latest);
+    };
+    const handleUp = () => {
+      document.removeEventListener('pointermove', handleMove);
+      document.removeEventListener('pointerup', handleUp);
+      try { localStorage.setItem('hc101-ai-size', JSON.stringify(latest)); } catch { /* ignore */ }
+    };
+    document.addEventListener('pointermove', handleMove);
+    document.addEventListener('pointerup', handleUp);
+    e.preventDefault();
+    e.stopPropagation();
+  };
+
+  const resetLayout = () => {
+    setPosition(null);
+    setSize(null);
+    setIsExpanded(false);
+    try {
+      localStorage.removeItem('hc101-ai-position');
+      localStorage.removeItem('hc101-ai-size');
+    } catch { /* ignore */ }
+  };
+
+  const collapsedStyle: React.CSSProperties = position
+    ? { left: position.x, top: position.y, right: 'auto', transform: 'none' }
+    : {};
+
+  const chatPanelStyle: React.CSSProperties = isExpanded
+    ? { top: '5vh', left: '5vw', right: 'auto', width: '90vw', height: '90vh', maxWidth: 'none', maxHeight: 'none', transform: 'none' }
+    : {
+        ...(position ? { left: position.x, top: position.y, right: 'auto', transform: 'none' } : {}),
+        ...(size ? { width: size.width, height: size.height, maxWidth: 'none', maxHeight: 'none' } : {}),
+      };
+
   return (
     <div id="home-closing-ai" className="print:hidden">
       {/* Minimized: visible tab on right edge */}
@@ -387,18 +477,45 @@ export default function HomeClosingAI() {
         </button>
 
         {/* Desktop: sponsor + AI button with minimize option */}
-        <div className="hidden sm:block fixed top-1/2 -translate-y-1/2 right-4 z-[600] w-[320px] group/widget">
-          {/* Minimize button */}
-          <button
-            onClick={() => setMinimized(true)}
-            className="absolute -top-2 -left-2 w-6 h-6 rounded-full bg-gray-400 hover:bg-gray-600 text-white flex items-center justify-center opacity-0 group-hover/widget:opacity-100 transition-opacity z-10"
-            aria-label="Minimize"
-            title="Minimize"
+        <div
+          className={`hidden sm:block fixed z-[600] w-[290px] group/widget ${position ? '' : 'top-1/2 -translate-y-1/2 right-4'}`}
+          style={collapsedStyle}
+          data-ai-container
+        >
+          {/* Drag handle bar */}
+          <div
+            onPointerDown={(e) => {
+              const container = (e.currentTarget.parentElement) as HTMLElement | null;
+              startDrag(e, container);
+            }}
+            className="flex items-center justify-center h-4 bg-gradient-to-b from-gray-100 to-gray-50 rounded-t-xl border border-gray-100 border-b-0 cursor-move hover:bg-gray-100 transition-colors"
+            title="Drag to move"
           >
-            <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-            </svg>
-          </button>
+            <GripHorizontal className="w-3.5 h-3.5 text-gray-400" />
+          </div>
+          {/* Control buttons (hover to reveal) */}
+          <div className="absolute -top-2 -left-2 flex items-center gap-1 opacity-0 group-hover/widget:opacity-100 transition-opacity z-10">
+            {position && (
+              <button
+                onClick={resetLayout}
+                className="w-6 h-6 rounded-full bg-alta-teal hover:bg-alta-teal-dark text-white flex items-center justify-center shadow"
+                aria-label="Reset position"
+                title="Reset to default position"
+              >
+                <RotateCcw className="w-3 h-3" />
+              </button>
+            )}
+            <button
+              onClick={() => setMinimized(true)}
+              className="w-6 h-6 rounded-full bg-gray-400 hover:bg-gray-600 text-white flex items-center justify-center shadow"
+              aria-label="Minimize"
+              title="Minimize"
+            >
+              <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+          </div>
           {/* Sponsor top half */}
           <div className="relative">
             <a
@@ -406,7 +523,7 @@ export default function HomeClosingAI() {
               target="_blank"
               rel="noopener noreferrer"
               onClick={(e) => e.stopPropagation()}
-              className={`peer flex items-center gap-3 bg-white rounded-t-xl px-4 py-3 shadow-lg border border-gray-100 border-b-0 hover:bg-gray-50 transition-all w-full ${sponsorFading ? 'opacity-0' : 'opacity-100'}`}
+              className={`peer flex items-center gap-3 bg-white px-4 py-3 shadow-lg border border-gray-100 border-t-0 border-b-0 hover:bg-gray-50 transition-all w-full ${sponsorFading ? 'opacity-0' : 'opacity-100'}`}
               style={{ transition: 'opacity 350ms ease' }}
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -450,7 +567,17 @@ export default function HomeClosingAI() {
 
       {/* Chat panel — with sponsor inside header */}
       {open && (
-        <div className="fixed top-1/2 -translate-y-1/2 right-2 sm:right-6 z-[600] w-[calc(100vw-1rem)] sm:w-[420px] max-w-[420px] h-[70vh] sm:h-[580px] max-h-[calc(100vh-6rem)] bg-white rounded-2xl shadow-2xl border border-gray-200 flex flex-col overflow-hidden">
+        <div
+          className={`fixed z-[600] bg-white rounded-2xl shadow-2xl border border-gray-200 flex flex-col overflow-hidden ${
+            isExpanded
+              ? ''
+              : position
+                ? ''
+                : 'top-1/2 -translate-y-1/2 right-2 sm:right-6 w-[calc(100vw-1rem)] sm:w-[420px] max-w-[420px] h-[70vh] sm:h-[580px] max-h-[calc(100vh-6rem)]'
+          }`}
+          style={chatPanelStyle}
+          data-ai-container
+        >
           {/* Sponsor banner — compact on mobile, full showcase on desktop */}
           <a
             href={sponsor.url}
@@ -482,8 +609,16 @@ export default function HomeClosingAI() {
             </div>
           </a>
           {/* Header */}
-          <div className="bg-gradient-to-r from-alta-navy to-[#0d3a5c] text-white px-5 py-3 flex items-center justify-between flex-shrink-0">
-            <div className="flex items-center gap-3">
+          <div
+            onPointerDown={(e) => {
+              if ((e.target as HTMLElement).closest('button')) return;
+              const container = (e.currentTarget.parentElement) as HTMLElement | null;
+              startDrag(e, container);
+            }}
+            className={`bg-gradient-to-r from-alta-navy to-[#0d3a5c] text-white px-5 py-3 flex items-center justify-between flex-shrink-0 ${isExpanded ? '' : 'cursor-move'}`}
+            title={isExpanded ? '' : 'Drag to move'}
+          >
+            <div className="flex items-center gap-3 pointer-events-none">
               <div className="w-8 h-8 rounded-xl bg-alta-teal/30 flex items-center justify-center">
                 <Sparkles className="w-4 h-4 text-white" />
               </div>
@@ -492,7 +627,7 @@ export default function HomeClosingAI() {
                 <div className="text-[10px] text-white/50">Your Closing Assistant</div>
               </div>
             </div>
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-1.5">
               <button onClick={() => {
                 const welcomeText = 'AI: Welcome to HomeClosing101 — your personal closing assistant.\n\n';
                 const text = welcomeText + messages.map(m => `${m.role === 'user' ? 'You' : 'AI'}: ${m.content}`).join('\n\n');
@@ -502,6 +637,24 @@ export default function HomeClosingAI() {
                 a.href = url; a.download = 'HomeClosing101_Conversation.txt'; a.click();
               }} className="p-1.5 rounded-lg bg-white/10 hover:bg-white/20 transition-colors" title="Download conversation" aria-label="Download conversation">
                 <Download className="w-4 h-4" />
+              </button>
+              {(position || size || isExpanded) && (
+                <button
+                  onClick={resetLayout}
+                  className="p-1.5 rounded-lg bg-white/10 hover:bg-white/20 transition-colors"
+                  title="Reset to default position"
+                  aria-label="Reset layout"
+                >
+                  <RotateCcw className="w-4 h-4" />
+                </button>
+              )}
+              <button
+                onClick={() => setIsExpanded(!isExpanded)}
+                className="p-1.5 rounded-lg bg-white/10 hover:bg-white/20 transition-colors"
+                title={isExpanded ? 'Collapse' : 'Expand'}
+                aria-label={isExpanded ? 'Collapse panel' : 'Expand panel'}
+              >
+                {isExpanded ? <Minimize2 className="w-4 h-4" /> : <Maximize2 className="w-4 h-4" />}
               </button>
               <button onClick={() => setOpen(false)} className="p-1.5 rounded-lg bg-white/10 hover:bg-white/20 transition-colors" aria-label="Close chat">
                 <X className="w-4 h-4" />
@@ -615,6 +768,21 @@ export default function HomeClosingAI() {
               <Send className="w-4 h-4" />
             </button>
           </div>
+          {/* Resize handle (bottom-right) */}
+          {!isExpanded && (
+            <div
+              onPointerDown={(e) => {
+                const container = (e.currentTarget.parentElement) as HTMLElement | null;
+                startResize(e, container);
+              }}
+              className="hidden sm:block absolute bottom-0 right-0 w-4 h-4 cursor-nwse-resize z-10 group/resize"
+              title="Drag to resize"
+            >
+              <svg className="w-4 h-4 text-gray-300 group-hover/resize:text-alta-teal transition-colors" viewBox="0 0 16 16" fill="currentColor">
+                <path d="M11 5L5 11M13 9L9 13M13 13L13 13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" fill="none" />
+              </svg>
+            </div>
+          )}
         </div>
       )}
     </div>
