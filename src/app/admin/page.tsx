@@ -801,6 +801,75 @@ function Dashboard() {
     return Object.entries(counts).sort((a, b) => b[1] - a[1]).slice(0, 10);
   }, [pageViews]);
 
+  /* Content Velocity: trending pages (last 7d vs previous 7d) */
+  const contentVelocity = useMemo(() => {
+    const last7Start = daysAgo(7).getTime();
+    const prev7Start = daysAgo(14).getTime();
+    const last7Counts: Record<string, number> = {};
+    const prev7Counts: Record<string, number> = {};
+    pageViews.forEach((e) => {
+      const t = new Date(e.timestamp).getTime();
+      if (t >= last7Start) {
+        last7Counts[e.page] = (last7Counts[e.page] || 0) + 1;
+      } else if (t >= prev7Start && t < last7Start) {
+        prev7Counts[e.page] = (prev7Counts[e.page] || 0) + 1;
+      }
+    });
+    const allPages = new Set([...Object.keys(last7Counts), ...Object.keys(prev7Counts)]);
+    const velocity: { page: string; current: number; previous: number; change: number }[] = [];
+    allPages.forEach((page) => {
+      const current = last7Counts[page] || 0;
+      const previous = prev7Counts[page] || 0;
+      const change = previous > 0 ? Math.round(((current - previous) / previous) * 100) : (current > 0 ? 100 : 0);
+      velocity.push({ page, current, previous, change });
+    });
+    velocity.sort((a, b) => b.change - a.change);
+    return {
+      trending: velocity.filter((v) => v.change > 0).slice(0, 5).map((v) => [v.page + " (+" + v.change + "%)", v.current] as [string, number]),
+      declining: velocity.filter((v) => v.change < 0).sort((a, b) => a.change - b.change).slice(0, 5).map((v) => [v.page + " (" + v.change + "%)", v.current] as [string, number]),
+    };
+  }, [pageViews]);
+
+  /* Average Time on Site */
+  const avgTimeOnSite = useMemo(() => {
+    const durations = sessions
+      .filter((s) => s.started_at && s.last_active_at)
+      .map((s) => new Date(s.last_active_at).getTime() - new Date(s.started_at).getTime())
+      .filter((d) => d > 0 && d < 3600000);
+    if (!durations.length) return "N/A";
+    const avg = durations.reduce((a, b) => a + b, 0) / durations.length;
+    return fmtDuration(avg);
+  }, [sessions]);
+
+  /* Peak Hour */
+  const peakHour = useMemo(() => {
+    if (pageViews.length === 0) return { hour: 0, count: 0 };
+    const hours = new Array(24).fill(0) as number[];
+    pageViews.forEach((e) => { hours[new Date(e.timestamp).getHours()]++; });
+    const maxCount = Math.max(...hours);
+    const maxHour = hours.indexOf(maxCount);
+    return { hour: maxHour, count: maxCount };
+  }, [pageViews]);
+
+  /* Most Active Day of Week */
+  const mostActiveDay = useMemo(() => {
+    if (pageViews.length === 0) return { day: "N/A", count: 0 };
+    const days = new Array(7).fill(0) as number[];
+    pageViews.forEach((e) => { days[new Date(e.timestamp).getDay()]++; });
+    const maxCount = Math.max(...days);
+    const maxDay = days.indexOf(maxCount);
+    const dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+    return { day: dayNames[maxDay], count: maxCount };
+  }, [pageViews]);
+
+  /* Traffic by Day of Week (for chart) */
+  const trafficByDayOfWeek = useMemo(() => {
+    const dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+    const days = new Array(7).fill(0) as number[];
+    pageViews.forEach((e) => { days[new Date(e.timestamp).getDay()]++; });
+    return dayNames.map((name, i) => [name, days[i]] as [string, number]);
+  }, [pageViews]);
+
   /* ---------------------------------------------------------------- */
   /*  AD PERFORMANCE COMPUTATIONS                                      */
   /* ---------------------------------------------------------------- */
@@ -1141,12 +1210,24 @@ function Dashboard() {
   /*  Report data generators                                           */
   /* ---------------------------------------------------------------- */
 
-  const getReportData = useCallback((key: string): { sections: { title: string; data: [string, number][] }[] } => {
+  const getReportData = useCallback((key: string): { sections: { title: string; data: [string, number][] }[]; narrative: string; recommendations: string[] } => {
     const pvCount = pageViews.length;
     const last7 = pageViews.filter((e) => new Date(e.timestamp).getTime() >= daysAgo(7).getTime());
     const last30 = pageViews.filter((e) => new Date(e.timestamp).getTime() >= daysAgo(30).getTime());
+    const prev7 = pageViews.filter((e) => { const t = new Date(e.timestamp).getTime(); return t >= daysAgo(14).getTime() && t < daysAgo(7).getTime(); });
     const protectionPages = ["/property-rights", "/protect-against-deed-fraud", "/deed-theft", "/stop-fraud", "/identity-protection", "/protect-your-money", "/protect-your-rights"];
     const calcPages = ["/mortgage-calculator", "/dti-calculator", "/rent-vs-buy", "/compare-loans", "/true-cost", "/affordability"];
+    const mobilePercent = deviceBreakdown.total ? Math.round((deviceBreakdown.mobile / deviceBreakdown.total) * 100) : 0;
+    const bouncePercent = Math.round(bounceRate * 100);
+    const weekGrowth = prev7.length > 0 ? Math.round(((last7.length - prev7.length) / prev7.length) * 100) : 0;
+    const avgSessionDurMs = (() => {
+      const durations = sessions.filter((s) => s.started_at && s.last_active_at).map((s) => new Date(s.last_active_at).getTime() - new Date(s.started_at).getTime()).filter((d) => d > 0 && d < 3600000);
+      return durations.length ? durations.reduce((a, b) => a + b, 0) / durations.length : 0;
+    })();
+    const avgSessionDurStr = avgSessionDurMs > 0 ? fmtDuration(avgSessionDurMs) : "N/A";
+    const topBrowser = browserBreakdown[0]?.[0] || "Unknown";
+    const topBrowserPct = browserBreakdown[0] && deviceBreakdown.total ? Math.round((browserBreakdown[0][1] / deviceBreakdown.total) * 100) : 0;
+    const overallCTR = totalImpressions > 0 ? ((totalAdClicks / totalImpressions) * 100).toFixed(1) : "0.0";
 
     switch (key) {
       case "executive":
@@ -1156,13 +1237,25 @@ function Dashboard() {
             { title: "Top Content (Top 5)", data: topPages.slice(0, 5) },
             { title: "Traffic Trend (7 Days)", data: trafficByDay },
           ],
+          narrative: `HomeClosing101 received ${pvCount.toLocaleString()} page views across ${uniquePages} pages this period, with an average of ${avgPagesPerSession.toFixed(1)} pages per session. ${bouncePercent > 50 ? 'The bounce rate of ' + bouncePercent + '% suggests users may need more engaging entry points.' : 'The bounce rate of ' + bouncePercent + '% indicates strong content engagement.'} ${deviceBreakdown.mobile > deviceBreakdown.desktop ? 'Mobile traffic exceeds desktop — ensure mobile experience is prioritized.' : 'Desktop traffic leads — but mobile optimization remains important.'} Top performing content: ${topPages[0]?.[0] || 'N/A'}.`,
+          recommendations: [
+            bouncePercent > 50 ? "Consider adding more engaging calls-to-action on high-bounce pages to improve the " + bouncePercent + "% bounce rate." : "Bounce rate is healthy at " + bouncePercent + "% — maintain current engagement strategies.",
+            mobilePercent > 60 ? "Mobile traffic is " + mobilePercent + "% — prioritize mobile-first design improvements." : mobilePercent < 30 ? "Mobile traffic is only " + mobilePercent + "% — consider mobile marketing campaigns to grow this segment." : "Device distribution is balanced (" + mobilePercent + "% mobile) — continue optimizing for both platforms.",
+            topPages.length > 0 ? `Leverage top-performing page "${topPages[0][0]}" (${topPages[0][1].toLocaleString()} views) as a model for underperforming content.` : "Collect more traffic data to identify content optimization opportunities.",
+          ],
         };
       case "ceo":
         return {
           sections: [
             { title: "Monthly Overview", data: [["Total Views (30d)", last30.length], ["Total Views (7d)", last7.length], ["Sessions", sessionCount], ["Ad Impressions", totalImpressions]] },
-            { title: "Growth Indicators", data: [["Unique Pages", uniquePages], ["Bounce Rate %", Math.round(bounceRate * 100)], ["Mobile %", deviceBreakdown.total ? Math.round((deviceBreakdown.mobile / deviceBreakdown.total) * 100) : 0]] },
+            { title: "Growth Indicators", data: [["Unique Pages", uniquePages], ["Bounce Rate %", bouncePercent], ["Mobile %", mobilePercent]] },
             { title: "Strategic Content", data: topPages.slice(0, 5) },
+          ],
+          narrative: `Week-over-week traffic ${weekGrowth >= 0 ? 'grew' : 'declined'} by ${Math.abs(weekGrowth)}% (${last7.length.toLocaleString()} views this week vs ${prev7.length.toLocaleString()} prior week). The strongest content pillar is "${topPages[0]?.[0] || 'N/A'}" with ${topPages[0]?.[1]?.toLocaleString() || '0'} views. ${totalImpressions > 0 ? 'Ad revenue potential is $' + revenuePotential.low.toFixed(2) + '-$' + revenuePotential.high.toFixed(2) + ' based on current ' + totalImpressions.toLocaleString() + ' impressions.' : 'Ad inventory has not yet generated impressions.'} Session engagement averages ${avgPagesPerSession.toFixed(1)} pages per visit.`,
+          recommendations: [
+            weekGrowth < 0 ? "Traffic declined " + Math.abs(weekGrowth) + "% week-over-week — investigate content freshness and promotion strategy." : "Traffic growth of " + weekGrowth + "% is positive — double down on content promotion channels driving the increase.",
+            `Invest in content similar to top performer "${topPages[0]?.[0] || 'homepage'}" to replicate its success across other sections.`,
+            totalImpressions > 100 ? "Current ad inventory supports revenue growth — consider premium placement packages for sponsors." : "Grow page views to increase ad inventory and unlock revenue potential.",
           ],
         };
       case "it":
@@ -1171,7 +1264,13 @@ function Dashboard() {
             { title: "Browser Distribution", data: browserBreakdown },
             { title: "OS Distribution", data: osBreakdown },
             { title: "Device Split", data: [["Desktop", deviceBreakdown.desktop], ["Mobile", deviceBreakdown.mobile]] },
-            { title: "Sessions Overview", data: [["Total Sessions", sessionCount], ["Avg Pages/Session", Math.round(avgPagesPerSession * 10) / 10], ["Bounce Rate %", Math.round(bounceRate * 100)]] },
+            { title: "Sessions Overview", data: [["Total Sessions", sessionCount], ["Avg Pages/Session", Math.round(avgPagesPerSession * 10) / 10], ["Bounce Rate %", bouncePercent]] },
+          ],
+          narrative: `${topBrowserPct}% of sessions are from ${topBrowser}${browserBreakdown[1] ? ', ' + Math.round((browserBreakdown[1][1] / (deviceBreakdown.total || 1)) * 100) + '% from ' + browserBreakdown[1][0] : ''}. Mobile represents ${mobilePercent}% of traffic. ${browserBreakdown.length <= 3 ? 'No critical browser compatibility issues detected — limited browser diversity.' : 'Multiple browser variants detected — ensure cross-browser testing covers top 3.'} Session duration averages ${avgSessionDurStr}.`,
+          recommendations: [
+            browserBreakdown.length > 4 ? "Test critical user flows in the top 3 browsers (" + browserBreakdown.slice(0, 3).map(([b]) => b).join(", ") + ") as they account for the majority of traffic." : "Browser diversity is low — focus testing on " + topBrowser + ".",
+            mobilePercent > 50 ? "Mobile-majority traffic (" + mobilePercent + "%) — prioritize mobile performance monitoring and responsive design audits." : "Desktop-leaning traffic — ensure desktop experience remains fast and polished.",
+            avgSessionDurMs > 0 && avgSessionDurMs < 30000 ? "Average session duration is under 30 seconds — investigate page load performance and initial content visibility." : "Monitor Core Web Vitals regularly to maintain user experience standards.",
           ],
         };
       case "board":
@@ -1181,6 +1280,12 @@ function Dashboard() {
             { title: "Content Reach (Top 10)", data: topPages },
             { title: "Ad Revenue Potential", data: [["Total Impressions", totalImpressions], ["Total Clicks", totalAdClicks], ["Est. Revenue Low ($)", Math.round(revenuePotential.low * 100) / 100], ["Est. Revenue High ($)", Math.round(revenuePotential.high * 100) / 100]] },
           ],
+          narrative: `HC101 reached ${sessionCount.toLocaleString()} unique sessions with ${pvCount.toLocaleString()} page views. Ad revenue potential at current traffic: $${revenuePotential.low.toFixed(2)}-$${revenuePotential.high.toFixed(2)} per period at industry CPM rates ($5-$15). Users engage with an average of ${avgPagesPerSession.toFixed(1)} pages per session, ${bouncePercent < 50 ? 'demonstrating strong content stickiness' : 'with room to improve content stickiness'}.`,
+          recommendations: [
+            totalImpressions > 0 ? "Current traffic supports estimated ad revenue of $" + revenuePotential.low.toFixed(2) + "-$" + revenuePotential.high.toFixed(2) + " — consider formalizing a sponsorship sales strategy." : "Grow traffic to unlock ad revenue potential — target 10,000+ monthly impressions for viable sponsorship packages.",
+            `Content library spans ${uniquePages} active pages — evaluate expanding into adjacent topics to broaden audience reach.`,
+            bouncePercent > 50 ? "Reduce bounce rate from " + bouncePercent + "% to improve engagement metrics for potential sponsors." : "Strong engagement metrics position HC101 well for sponsor conversations.",
+          ],
         };
       case "staff":
         return {
@@ -1189,31 +1294,69 @@ function Dashboard() {
             { title: "Search Queries", data: searchQueries.length ? searchQueries.slice(0, 10) : [["No data yet", 0]] },
             { title: "Content Performance", data: topPages.slice(0, 10) },
           ],
+          narrative: `The site offers ${uniquePages} active pages with ${pvCount.toLocaleString()} total views. ${calculatorUsage.length > 0 ? 'The most popular tool is "' + calculatorUsage[0][0] + '" with ' + calculatorUsage[0][1].toLocaleString() + ' uses.' : 'Calculator usage data has not yet been collected.'} ${searchQueries.length > 0 ? 'Users most frequently search for "' + searchQueries[0][0] + '", indicating strong interest in this topic.' : 'No search queries recorded yet.'} Feature adoption across tools and interactive elements continues to grow.`,
+          recommendations: [
+            calculatorUsage.length > 1 ? "Promote underutilized calculators — the least used tool could benefit from homepage visibility or cross-linking." : "Encourage calculator usage by adding prominent CTAs on relevant content pages.",
+            searchQueries.length > 0 ? `Users are searching for "${searchQueries[0][0]}" most often — ensure this content is easy to find and comprehensive.` : "Enable search tracking to understand user intent and content gaps.",
+            topPages.length >= 5 ? "The bottom half of the top 10 pages receive significantly less traffic — consider refreshing or cross-linking these pages." : "Build out content to provide comprehensive coverage of the closing process.",
+          ],
         };
-      case "member":
+      case "member": {
+        const joinViews = pageViewCounts["/join-alta"] || 0;
+        const findCompanyViews = pageViewCounts["/find-company"] || 0;
+        const findPolicyViews = pageViewCounts["/find-policy"] || 0;
+        const memberTotal = joinViews + findCompanyViews + findPolicyViews;
         return {
           sections: [
             { title: "Member Content Performance", data: topPages.filter(([p]) => ["/join-alta", "/find-company", "/find-policy", "/resources"].includes(p)).concat(topPages.filter(([p]) => !["/join-alta", "/find-company", "/find-policy", "/resources"].includes(p)).slice(0, 5)) },
-            { title: "Join ALTA Page", data: [["Views", pageViewCounts["/join-alta"] || 0]] },
+            { title: "Join ALTA Page", data: [["Views", joinViews]] },
+          ],
+          narrative: `Member-focused pages received ${memberTotal.toLocaleString()} combined views. The "Join ALTA" page has ${joinViews} views, "Find a Company" has ${findCompanyViews} views, and "Find a Policy" has ${findPolicyViews} views. ${joinViews > findCompanyViews ? 'The membership page outperforms directory pages, suggesting strong brand interest.' : 'Directory tools receive more traffic than the membership page — consider adding membership CTAs to directory results.'}`,
+          recommendations: [
+            joinViews < 10 ? "The Join ALTA page has low visibility — add prominent CTAs or banners on high-traffic pages to drive membership interest." : "Join ALTA page traffic is healthy — consider A/B testing the page layout to improve conversion.",
+            findCompanyViews > 0 || findPolicyViews > 0 ? "Directory tools are being used — ensure company/policy data is current and comprehensive." : "Promote the Find a Company and Find a Policy tools more prominently to drive usage.",
+            "Cross-link member benefits content throughout educational pages to reinforce ALTA's value proposition.",
           ],
         };
-      case "elite":
+      }
+      case "elite": {
+        const topSponsor = adImpressionsBySponsor[0];
+        const topSponsorClicks = topSponsor ? (adClicksBySponsor.find(([s]) => s === topSponsor[0])?.[1] || 0) : 0;
+        const topSponsorCTR = topSponsor && topSponsor[1] > 0 ? ((topSponsorClicks / topSponsor[1]) * 100).toFixed(1) : "0.0";
         return {
           sections: [
             { title: "Impressions by Sponsor", data: adImpressionsBySponsor.length ? adImpressionsBySponsor : [["No data yet", 0]] },
             { title: "Clicks by Sponsor", data: adClicksBySponsor.length ? adClicksBySponsor : [["No data yet", 0]] },
             { title: "Placement Performance", data: adImpressionsByPage.length ? adImpressionsByPage : [["No data yet", 0]] },
           ],
+          narrative: `${topSponsor ? 'Sponsor "' + topSponsor[0] + '" received ' + topSponsor[1].toLocaleString() + ' impressions with ' + topSponsorClicks + ' clicks (' + topSponsorCTR + '% CTR).' : 'No sponsor impression data available yet.'} ${adImpressionsByPage.length > 0 ? 'Top performing placement: ' + adImpressionsByPage[0][0] + ' with ' + adImpressionsByPage[0][1].toLocaleString() + ' impressions.' : ''} Overall CTR across all sponsors is ${overallCTR}%. ${adImpressionsBySponsor.length > 1 ? 'There are ' + adImpressionsBySponsor.length + ' active sponsors in the rotation.' : ''}`,
+          recommendations: [
+            parseFloat(overallCTR) < 0.5 ? "Overall CTR of " + overallCTR + "% is below industry average (0.5-1.0%) — consider refreshing ad creative and improving placement visibility." : "CTR of " + overallCTR + "% is competitive — maintain current placement strategy.",
+            adImpressionsByPage.length > 1 ? `Optimize underperforming placements — "${adImpressionsByPage[adImpressionsByPage.length - 1][0]}" has the fewest impressions and may need better page positioning.` : "Expand ad placements to additional high-traffic pages to increase sponsor visibility.",
+            adImpressionsBySponsor.length > 0 ? "Provide sponsors with monthly performance reports to demonstrate ROI and support renewal conversations." : "Begin tracking sponsor impressions to build a data-driven sponsorship program.",
+          ],
         };
-      case "adrevenue":
+      }
+      case "adrevenue": {
+        const estRevAvg = Math.round((totalImpressions / 1000) * 10 * 100) / 100;
+        const topFormat = adImpressions[0];
         return {
           sections: [
             { title: "Revenue by Format", data: adImpressions.map(([fmt, imps]) => [fmt, Math.round((imps / 1000) * 10 * 100) / 100] as [string, number]) },
             { title: "Revenue by Page", data: adImpressionsByPage.map(([p, imps]) => [p, Math.round((imps / 1000) * 10 * 100) / 100] as [string, number]) },
-            { title: "Summary", data: [["Total Impressions", totalImpressions], ["Total Clicks", totalAdClicks], ["Est. Revenue (Avg CPM $10)", Math.round((totalImpressions / 1000) * 10 * 100) / 100]] },
+            { title: "Summary", data: [["Total Impressions", totalImpressions], ["Total Clicks", totalAdClicks], ["Est. Revenue (Avg CPM $10)", estRevAvg]] },
+          ],
+          narrative: `Total ad inventory generated ${totalImpressions.toLocaleString()} impressions and ${totalAdClicks.toLocaleString()} clicks, yielding an estimated $${revenuePotential.low.toFixed(2)}-$${revenuePotential.high.toFixed(2)} in revenue at $5-$15 CPM. ${topFormat ? 'The "' + topFormat[0] + '" format is the highest earner with ' + topFormat[1].toLocaleString() + ' impressions ($' + (Math.round((topFormat[1] / 1000) * 10 * 100) / 100).toFixed(2) + ' est. revenue at $10 CPM).' : 'No format-level data available.'} Click-through rate stands at ${overallCTR}%.`,
+          recommendations: [
+            topFormat && adImpressions.length > 1 ? `The "${topFormat[0]}" format generates the most revenue — consider expanding its placement to additional pages.` : "Diversify ad formats to maximize revenue across different content types.",
+            totalAdClicks > 0 && parseFloat(overallCTR) < 1.0 ? "CTR of " + overallCTR + "% has room for improvement — test different ad creative, sizing, and placement positions." : totalAdClicks === 0 ? "No clicks recorded yet — ensure ad links are properly configured and trackable." : "Healthy CTR — continue current strategy.",
+            adImpressionsByPage.length > 3 ? "Consolidate ad efforts on the top 3-5 pages that drive the most impressions to maximize revenue efficiency." : "Expand ad placements to more pages to grow total impression inventory.",
           ],
         };
-      case "contentperf":
+      }
+      case "contentperf": {
+        const totalGlossary = glossaryViews.reduce((s, [, c]) => s + c, 0);
+        const totalFaq = faqViews.reduce((s, [, c]) => s + c, 0);
         return {
           sections: [
             { title: "Page Views (Top 10)", data: topPages },
@@ -1221,23 +1364,49 @@ function Dashboard() {
             { title: "FAQ Views", data: faqViews.length ? faqViews.slice(0, 10) : [["No data yet", 0]] },
             { title: "Blog Views", data: blogViews.length ? blogViews : [["No data yet", 0]] },
           ],
+          narrative: `The content library spans ${uniquePages} pages with ${pvCount.toLocaleString()} total views. ${topPages[0] ? '"' + topPages[0][0] + '" leads with ' + topPages[0][1].toLocaleString() + ' views.' : ''} The glossary has generated ${totalGlossary.toLocaleString()} term lookups${glossaryViews[0] ? ' (top term: "' + glossaryViews[0][0] + '")' : ''}. FAQ engagement totals ${totalFaq.toLocaleString()} views${faqViews[0] ? ' with "' + faqViews[0][0] + '" as the most viewed question' : ''}.`,
+          recommendations: [
+            topPages.length >= 2 && topPages[0][1] > topPages[1][1] * 3 ? `Traffic is heavily concentrated on "${topPages[0][0]}" — distribute internal links to drive traffic to underperforming pages.` : "Content traffic is well distributed — continue cross-linking strategy.",
+            glossaryViews.length > 0 ? `The glossary term "${glossaryViews[0][0]}" is most popular — consider creating dedicated deep-dive content around this topic.` : "Encourage glossary usage by linking key terms inline throughout educational content.",
+            blogViews.length > 0 ? "Blog content is generating engagement — maintain a consistent publishing schedule to sustain growth." : "Invest in blog content to capture long-tail search traffic and improve SEO.",
+          ],
         };
+      }
       case "protection": {
         const protectionData: [string, number][] = protectionPages.map((p) => [p, pageViewCounts[p] || 0]);
+        const totalProtViews = protectionData.reduce((s, [, c]) => s + c, 0);
+        const topProtPage = protectionData.sort((a, b) => b[1] - a[1])[0];
+        const protectionDataSorted: [string, number][] = protectionPages.map((p) => [p, pageViewCounts[p] || 0]);
         return {
           sections: [
-            { title: "Protection Page Views", data: protectionData },
+            { title: "Protection Page Views", data: protectionDataSorted },
             { title: "Toolkit Completions", data: toolkitCompletions.length ? toolkitCompletions : [["No data yet", 0]] },
             { title: "County Lookups", data: countyLookups.length ? countyLookups.slice(0, 10) : [["No data yet", 0]] },
+          ],
+          narrative: `Protection and fraud-prevention content received ${totalProtViews.toLocaleString()} total views across ${protectionPages.length} pages. ${topProtPage ? '"' + topProtPage[0] + '" leads with ' + topProtPage[1].toLocaleString() + ' views.' : ''} ${toolkitCompletions.length > 0 ? 'The Protection Toolkit has ' + toolkitCompletions.reduce((s, [, c]) => s + c, 0) + ' completions.' : 'No toolkit completions recorded yet.'} ${countyLookups.length > 0 ? 'County lookup tool has been used ' + countyLookups.reduce((s, [, c]) => s + c, 0) + ' times, with ' + countyLookups[0][0] + ' as the most searched area.' : 'County lookup tool has not been used yet.'}`,
+          recommendations: [
+            totalProtViews < pvCount * 0.1 ? "Protection content represents less than 10% of total traffic — consider promoting fraud awareness through homepage banners or email campaigns." : "Protection content has strong engagement — this is a key differentiator for HC101.",
+            toolkitCompletions.length === 0 ? "The Protection Toolkit has no completions — simplify the user flow or add progress indicators to encourage completion." : "Toolkit completions are tracking — add a congratulatory CTA at completion to drive sharing.",
+            countyLookups.length > 0 ? `"${countyLookups[0][0]}" is the most searched area — consider creating localized content for high-interest counties.` : "Promote the County Lookup tool on protection pages to increase utility engagement.",
           ],
         };
       }
       case "calculator": {
         const calcData: [string, number][] = calcPages.map((p) => [p, pageViewCounts[p] || 0]);
+        const totalCalcViews = calcData.reduce((s, [, c]) => s + c, 0);
+        const topCalc = calcData.sort((a, b) => b[1] - a[1])[0];
+        const leastCalc = [...calcData].sort((a, b) => a[1] - b[1])[0];
+        const calcDataSorted: [string, number][] = calcPages.map((p) => [p, pageViewCounts[p] || 0]);
         return {
           sections: [
-            { title: "Calculator Page Views", data: calcData },
+            { title: "Calculator Page Views", data: calcDataSorted },
             { title: "Calculator Usage Events", data: calculatorUsage.length ? calculatorUsage : [["No data yet", 0]] },
+          ],
+          narrative: `Calculator tools received ${totalCalcViews.toLocaleString()} total page views across ${calcPages.length} tools. ${topCalc ? '"' + topCalc[0] + '" is the most visited with ' + topCalc[1].toLocaleString() + ' views.' : ''} ${leastCalc ? '"' + leastCalc[0] + '" has the lowest usage at ' + leastCalc[1].toLocaleString() + ' views.' : ''} ${calculatorUsage.length > 0 ? 'Active calculator submissions total ' + calculatorUsage.reduce((s, [, c]) => s + c, 0).toLocaleString() + ' events.' : 'No calculator submission events recorded yet.'}`,
+          recommendations: [
+            leastCalc && leastCalc[1] < 5 ? `Promote the "${leastCalc[0]}" calculator — it has the lowest usage among tools. Consider homepage placement or contextual cross-links.` : "Calculator usage is balanced across tools — good variety in user engagement.",
+            calculatorUsage.length > 0 ? "Calculator tools drive interactive engagement — consider adding save/share functionality to completed calculations." : "Enable event tracking on calculator submissions to measure actual usage beyond page views.",
+            totalCalcViews > 0 ? "Calculators are a traffic driver — consider building additional tools (e.g., PMI calculator, refinance savings calculator) to expand the toolset." : "Drive traffic to calculator pages through educational content cross-linking.",
           ],
         };
       }
@@ -1248,16 +1417,31 @@ function Dashboard() {
             { title: "Popular Pages (Entry Points)", data: entryPages.length ? entryPages : [["No data yet", 0]] },
             { title: "Top Pages Overall", data: topPages.slice(0, 10) },
           ],
+          narrative: `${searchQueries.length > 0 ? 'Users performed ' + searchQueries.reduce((s, [, c]) => s + c, 0).toLocaleString() + ' searches, with "' + searchQueries[0][0] + '" as the most common query.' : 'No search queries recorded yet.'} ${entryPages.length > 0 ? 'The top entry point is "' + entryPages[0][0] + '" with ' + entryPages[0][1].toLocaleString() + ' sessions starting there.' : 'No entry page data available.'} ${topPages.length > 0 ? 'Overall, "' + topPages[0][0] + '" remains the most visited page.' : ''} Search behavior reveals what users cannot easily find through navigation.`,
+          recommendations: [
+            searchQueries.length > 0 ? `Users frequently search for "${searchQueries[0][0]}" — make this content more prominently accessible from navigation or homepage.` : "Implement and promote site search to understand user intent and content gaps.",
+            entryPages.length > 1 ? `"${entryPages[0][0]}" is the primary entry point — ensure it has clear pathways to deeper content to reduce bounce rate.` : "Diversify entry points through SEO optimization of educational content pages.",
+            searchQueries.length > 5 ? "The variety of search queries suggests users explore diverse topics — consider an AI-powered search to improve discovery." : "Expand content to cover a broader range of closing-related topics.",
+          ],
         };
       case "mobile": {
         const mobilePVs = pageViews.filter((e) => e.device === "mobile");
         const desktopPVs = pageViews.filter((e) => e.device !== "mobile");
         const mobileTopPages: Record<string, number> = {};
         mobilePVs.forEach((e) => { mobileTopPages[e.page] = (mobileTopPages[e.page] || 0) + 1; });
+        const mobileTopPagesSorted = Object.entries(mobileTopPages).sort((a, b) => b[1] - a[1]).slice(0, 10);
+        const mobileSessions = sessions.filter((s) => s.device === "mobile");
+        const mobileAvgPages = mobileSessions.length > 0 ? mobileSessions.reduce((s, se) => s + (se.page_count || 1), 0) / mobileSessions.length : 0;
         return {
           sections: [
-            { title: "Device Comparison", data: [["Mobile Views", mobilePVs.length], ["Desktop Views", desktopPVs.length], ["Mobile %", deviceBreakdown.total ? Math.round((deviceBreakdown.mobile / deviceBreakdown.total) * 100) : 0]] },
-            { title: "Top Mobile Pages", data: Object.entries(mobileTopPages).sort((a, b) => b[1] - a[1]).slice(0, 10) },
+            { title: "Device Comparison", data: [["Mobile Views", mobilePVs.length], ["Desktop Views", desktopPVs.length], ["Mobile %", mobilePercent]] },
+            { title: "Top Mobile Pages", data: mobileTopPagesSorted },
+          ],
+          narrative: `Mobile devices account for ${mobilePercent}% of all traffic (${mobilePVs.length.toLocaleString()} views) compared to ${desktopPVs.length.toLocaleString()} desktop views. ${mobileAvgPages > 0 ? 'Mobile users view an average of ' + mobileAvgPages.toFixed(1) + ' pages per session.' : ''} ${mobileTopPagesSorted[0] ? 'The most visited mobile page is "' + mobileTopPagesSorted[0][0] + '" with ' + mobileTopPagesSorted[0][1].toLocaleString() + ' views.' : ''} ${mobilePercent > 60 ? 'Mobile-dominant traffic pattern confirms the need for mobile-first design.' : mobilePercent > 40 ? 'Near-equal device split requires strong experiences on both platforms.' : 'Desktop-dominant traffic — but mobile growth is an industry trend to watch.'}`,
+          recommendations: [
+            mobilePercent > 60 ? "Mobile-first redesign should be the priority — " + mobilePercent + "% of users are on mobile devices." : mobilePercent > 40 ? "Ensure responsive design works equally well on both platforms — traffic is evenly split." : "Monitor mobile traffic trends — industry benchmarks suggest mobile will grow over time.",
+            mobileAvgPages > 0 && mobileAvgPages < 1.5 ? "Mobile users view fewer pages per session (" + mobileAvgPages.toFixed(1) + ") — simplify mobile navigation and add prominent next-step CTAs." : "Mobile engagement is reasonable — continue testing mobile user flows.",
+            "Test all interactive tools (calculators, forms) on mobile devices to ensure full functionality and usability.",
           ],
         };
       }
@@ -1268,30 +1452,47 @@ function Dashboard() {
           typeCounts[f.type] = (typeCounts[f.type] || 0) + 1;
           statusCounts[f.status] = (statusCounts[f.status] || 0) + 1;
         });
+        const bugCount = typeCounts["bug"] || 0;
+        const suggestionCount = typeCounts["suggestion"] || 0;
+        const resolvedCount = statusCounts["resolved"] || 0;
+        const resolutionRate = sbFeedback.length > 0 ? Math.round((resolvedCount / sbFeedback.length) * 100) : 0;
         return {
           sections: [
             { title: "Feedback by Type", data: Object.entries(typeCounts).sort((a, b) => b[1] - a[1]) },
             { title: "Status Breakdown", data: Object.entries(statusCounts).sort((a, b) => b[1] - a[1]) },
             { title: "Summary", data: [["Total Feedback", sbFeedback.length]] },
           ],
+          narrative: `${sbFeedback.length} feedback items have been submitted: ${bugCount} bug reports, ${suggestionCount} suggestions, and ${sbFeedback.length - bugCount - suggestionCount} other items. Resolution rate is ${resolutionRate}% (${resolvedCount} of ${sbFeedback.length} resolved). ${statusCounts["new"] ? statusCounts["new"] + ' items are still pending review.' : 'All items have been reviewed.'} ${bugCount > suggestionCount ? 'Bug reports outnumber suggestions — prioritize quality assurance efforts.' : 'More suggestions than bugs indicates a stable platform with engaged users.'}`,
+          recommendations: [
+            (statusCounts["new"] || 0) > 5 ? "There are " + statusCounts["new"] + " unreviewed feedback items — schedule a review session to prevent backlog." : "Feedback queue is manageable — maintain current review cadence.",
+            bugCount > 0 ? "Address the " + bugCount + " open bug reports — prioritize by page traffic to maximize impact." : "No bugs reported — the platform is in good shape.",
+            resolutionRate < 50 ? "Resolution rate of " + resolutionRate + "% is low — aim for 80%+ by triaging items weekly." : "Strong resolution rate of " + resolutionRate + "% — keep up the responsive support.",
+          ],
         };
       }
-      case "weekly":
+      case "weekly": {
+        const weeklyTopPages: Record<string, number> = {};
+        last7.forEach((e) => { weeklyTopPages[e.page] = (weeklyTopPages[e.page] || 0) + 1; });
+        const weeklyTopSorted = Object.entries(weeklyTopPages).sort((a, b) => b[1] - a[1]).slice(0, 10);
+        const dailyAvg = last7.length / 7;
         return {
           sections: [
             { title: "Weekly Summary (Last 7 Days)", data: [["Page Views", last7.length], ["Sessions (All Time)", sessionCount], ["Ad Impressions (All)", totalImpressions]] },
             { title: "Daily Breakdown", data: trafficByDay },
-            { title: "Top Pages This Week", data: (() => {
-              const counts: Record<string, number> = {};
-              last7.forEach((e) => { counts[e.page] = (counts[e.page] || 0) + 1; });
-              return Object.entries(counts).sort((a, b) => b[1] - a[1]).slice(0, 10);
-            })() },
+            { title: "Top Pages This Week", data: weeklyTopSorted },
+          ],
+          narrative: `This week saw ${last7.length.toLocaleString()} page views (${dailyAvg.toFixed(0)} daily average), ${weekGrowth >= 0 ? 'up' : 'down'} ${Math.abs(weekGrowth)}% from the previous week (${prev7.length.toLocaleString()} views). ${weeklyTopSorted[0] ? 'Top content this week: "' + weeklyTopSorted[0][0] + '" with ' + weeklyTopSorted[0][1].toLocaleString() + ' views.' : 'No page views recorded this week.'} ${trafficByDay.length > 0 ? 'Peak day was ' + trafficByDay.reduce((max, curr) => curr[1] > max[1] ? curr : max, trafficByDay[0])[0] + '.' : ''}`,
+          recommendations: [
+            weekGrowth < -10 ? "Traffic dropped " + Math.abs(weekGrowth) + "% this week — review content freshness, external links, and any technical issues." : weekGrowth > 10 ? "Strong growth of " + weekGrowth + "% — identify what drove the increase and replicate it." : "Traffic is stable — focus on content quality and user experience improvements.",
+            dailyAvg < 10 ? "Daily average of " + dailyAvg.toFixed(0) + " views is low — consider social media promotion and email outreach to boost traffic." : "Healthy daily traffic — maintain consistent content promotion.",
+            weeklyTopSorted.length > 0 ? `Capitalize on this week's top performer "${weeklyTopSorted[0][0]}" — share it on social channels and add internal links from other pages.` : "Publish new content and promote existing pages to generate weekly traffic.",
           ],
         };
+      }
       default:
-        return { sections: [] };
+        return { sections: [], narrative: "", recommendations: [] };
     }
-  }, [pageViews, uniquePages, sessionCount, avgPagesPerSession, bounceRate, topPages, trafficByDay, deviceBreakdown, browserBreakdown, osBreakdown, totalImpressions, totalAdClicks, revenuePotential, adImpressions, adImpressionsBySponsor, adClicksBySponsor, adImpressionsByPage, calculatorUsage, searchQueries, entryPages, toolkitCompletions, countyLookups, glossaryViews, faqViews, blogViews, sbFeedback, pageViewCounts, chatbotTopics, folderSaves, triviaScores, triviaDistribution, referrerData, blogViews.length, countyLookups.length]);
+  }, [pageViews, uniquePages, sessionCount, avgPagesPerSession, bounceRate, topPages, trafficByDay, deviceBreakdown, browserBreakdown, osBreakdown, totalImpressions, totalAdClicks, revenuePotential, adImpressions, adImpressionsBySponsor, adClicksBySponsor, adImpressionsByPage, calculatorUsage, searchQueries, entryPages, toolkitCompletions, countyLookups, glossaryViews, faqViews, blogViews, sbFeedback, pageViewCounts, chatbotTopics, folderSaves, triviaScores, triviaDistribution, referrerData, blogViews.length, countyLookups.length, sessions]);
 
   /* ---------------------------------------------------------------- */
   /*  Sidebar nav                                                      */
@@ -1623,6 +1824,40 @@ function Dashboard() {
                 <EmptyState text="No referrer data yet." />
               ) : (
                 <BarChart data={referrerData} rainbow />
+              )}
+            </Card>
+
+            {/* Row -- Additional metrics */}
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+              <Stat label="Avg Time on Site" value={avgTimeOnSite} sub="From session start to last activity" color="text-[#2d6b3f]" />
+              <Stat label="Peak Hour" value={`${peakHour.hour}:00`} sub={`${peakHour.count.toLocaleString()} views at peak`} color="text-[#8b6914]" />
+              <Stat label="Most Active Day" value={mostActiveDay.day} sub={`${mostActiveDay.count.toLocaleString()} views`} color="text-[#5b3a8c]" />
+            </div>
+
+            {/* Traffic by Day of Week */}
+            <Card title="Traffic by Day of Week">
+              {pageViews.length === 0 ? (
+                <EmptyState text="No page view data yet." />
+              ) : (
+                <BarChart data={trafficByDayOfWeek} rainbow />
+              )}
+            </Card>
+
+            {/* Content Velocity -- Trending Up */}
+            <Card title="Content Velocity -- Trending Up (7d vs Prior 7d)">
+              {contentVelocity.trending.length === 0 ? (
+                <EmptyState text="No trending pages detected (need 14+ days of data)." />
+              ) : (
+                <BarChart data={contentVelocity.trending} color="bg-emerald-500" />
+              )}
+            </Card>
+
+            {/* Content Velocity -- Declining */}
+            <Card title="Content Velocity -- Declining (7d vs Prior 7d)">
+              {contentVelocity.declining.length === 0 ? (
+                <EmptyState text="No declining pages detected." />
+              ) : (
+                <BarChart data={contentVelocity.declining} color="bg-red-500" />
               )}
             </Card>
           </div>
@@ -2173,6 +2408,33 @@ function Dashboard() {
                           ))}
                         </div>
                       </div>
+
+                      {reportData.narrative && (
+                        <div className="px-6">
+                          <div className="p-5 bg-gradient-to-r from-[#e8f0f5] to-white rounded-xl border border-[#c5d8e4] mb-6">
+                            <h4 className="text-sm font-bold text-[#1a5276] mb-2 flex items-center gap-2">
+                              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" /></svg>
+                              Key Insights
+                            </h4>
+                            <p className="text-sm text-gray-600 leading-relaxed">{reportData.narrative}</p>
+                          </div>
+                        </div>
+                      )}
+
+                      {reportData.recommendations && reportData.recommendations.length > 0 && (
+                        <div className="px-6">
+                          <div className="p-4 bg-[#faf4e4] rounded-xl border border-[#e8d9a8] border-l-4 border-l-[#8b6914] mb-6">
+                            <h4 className="text-sm font-bold text-[#8b6914] mb-2">Recommendations</h4>
+                            <ul className="space-y-1">
+                              {reportData.recommendations.map((rec: string, i: number) => (
+                                <li key={i} className="text-xs text-gray-600 flex items-start gap-2">
+                                  <span className="text-[#8b6914] shrink-0 mt-0.5">&#8226;</span> {rec}
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                        </div>
+                      )}
 
                       {reportData.sections.map((section, idx) => (
                         <div key={idx}>
