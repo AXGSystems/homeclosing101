@@ -1391,7 +1391,12 @@ function Dashboard() {
                   <svg className="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d={item.icon} />
                   </svg>
-                  {item.label}
+                  <span className="flex-1">{item.label}</span>
+                  {item.key === "feedback" && sbFeedback.filter((f) => f.status === "new").length > 0 && (
+                    <span className="ml-auto bg-red-500 text-white text-[9px] font-bold min-w-[18px] h-[18px] flex items-center justify-center rounded-full px-1">
+                      {sbFeedback.filter((f) => f.status === "new").length}
+                    </span>
+                  )}
                 </button>
               ))}
             </div>
@@ -1414,6 +1419,35 @@ function Dashboard() {
           <div className="space-y-8">
             <h2 className="text-xl font-bold text-[#1a2744]">Analytics Overview</h2>
 
+            {/* Real-time indicator */}
+            {(() => {
+              const mostRecent = events.length > 0
+                ? Math.max(...events.map((e) => new Date(e.timestamp).getTime()))
+                : 0;
+              const msSinceLastEvent = mostRecent ? Date.now() - mostRecent : Infinity;
+              const minAgo = Math.floor(msSinceLastEvent / 60000);
+              const isLive = msSinceLastEvent <= 5 * 60 * 1000;
+              const label = mostRecent === 0
+                ? "No events recorded"
+                : minAgo < 1
+                  ? "Last event: just now"
+                  : minAgo < 60
+                    ? `Last event: ${minAgo} minute${minAgo === 1 ? "" : "s"} ago`
+                    : `Last event: ${Math.floor(minAgo / 60)}h ${minAgo % 60}m ago`;
+              return (
+                <div className="bg-white rounded-xl border border-gray-100 shadow-sm px-5 py-3 flex items-center gap-3">
+                  <span className="relative flex h-3 w-3">
+                    {isLive && (
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                    )}
+                    <span className={`relative inline-flex rounded-full h-3 w-3 ${isLive ? "bg-emerald-500" : "bg-gray-300"}`} />
+                  </span>
+                  <span className="text-sm font-medium text-[#1a2744]">{label}</span>
+                  {isLive && <span className="text-[10px] font-semibold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full">LIVE</span>}
+                </div>
+              );
+            })()}
+
             {/* Row 1 -- Core stats */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               <Stat label="Total Page Views" value={pageViews.length.toLocaleString()} color="text-[#0a7ea8]" />
@@ -1429,6 +1463,58 @@ function Dashboard() {
               <Stat label="Ad Impressions" value={totalImpressions.toLocaleString()} color="text-[#d4a843]" />
               <Stat label="Feedback Items" value={sbFeedback.length} color="text-[#0a7ea8]" />
             </div>
+
+            {/* Row 3 -- Session duration + New vs Returning */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              <Stat
+                label="Avg Session Duration"
+                value={(() => {
+                  if (!sessions.length) return "N/A";
+                  const durations = sessions
+                    .filter((s) => s.started_at && s.last_active_at)
+                    .map((s) => new Date(s.last_active_at).getTime() - new Date(s.started_at).getTime())
+                    .filter((d) => d > 0 && d < 3600000);
+                  if (!durations.length) return "N/A";
+                  const avg = durations.reduce((a, b) => a + b, 0) / durations.length;
+                  return fmtDuration(avg);
+                })()}
+                sub={`Based on ${sessions.filter((s) => s.started_at && s.last_active_at).length} sessions`}
+                color="text-[#2d6b3f]"
+              />
+              <Stat
+                label="Engaged Visitors"
+                value={sessions.filter((s) => s.page_count > 1).length.toLocaleString()}
+                sub={`${fmtPct(sessions.filter((s) => s.page_count > 1).length, sessions.length || 1)} of sessions viewed 2+ pages`}
+                color="text-[#0a7ea8]"
+              />
+              <Stat
+                label="Single-Page Visits"
+                value={sessions.filter((s) => s.page_count <= 1).length.toLocaleString()}
+                sub={`${fmtPct(sessions.filter((s) => s.page_count <= 1).length, sessions.length || 1)} bounced after 1 page`}
+                color="text-[#943030]"
+              />
+              <Stat
+                label="Engagement Ratio"
+                value={sessions.length ? `${(sessions.filter((s) => s.page_count > 1).length / sessions.length * 100).toFixed(1)}%` : "N/A"}
+                sub="Engaged vs total sessions"
+                color="text-[#5b3a8c]"
+              />
+            </div>
+
+            {/* New vs Returning visitors comparison */}
+            <Card title="New (Single-Page) vs Engaged (Multi-Page) Visitors">
+              {sessions.length === 0 ? (
+                <EmptyState text="No session data yet." />
+              ) : (
+                <BarChart
+                  data={[
+                    ["Engaged (2+ pages)", sessions.filter((s) => s.page_count > 1).length],
+                    ["Single-page (bounced)", sessions.filter((s) => s.page_count <= 1).length],
+                  ]}
+                  rainbow
+                />
+              )}
+            </Card>
 
             {/* Traffic by day */}
             <Card title="Page Views by Day (Last 7 Days)">
@@ -1752,32 +1838,18 @@ function Dashboard() {
             </div>
 
             <div className="grid md:grid-cols-2 gap-6">
-              <Card title="AI Chatbot Most Asked Topics">
+              <Card title="AI Assistant — Most Asked Topics">
                 {chatbotTopics.length === 0 ? (
                   <EmptyState text="No chatbot data yet." />
                 ) : (
-                  <div className="space-y-2">
-                    {chatbotTopics.map(([topic, count]) => (
-                      <div key={topic} className="flex justify-between text-sm">
-                        <span className="text-gray-600 truncate mr-3">{topic}</span>
-                        <span className="font-semibold text-[#1a2744] shrink-0">{count}</span>
-                      </div>
-                    ))}
-                  </div>
+                  <BarChart data={chatbotTopics} rainbow />
                 )}
               </Card>
               <Card title="Top Search Queries">
                 {searchQueries.length === 0 ? (
                   <EmptyState text="No search data yet." />
                 ) : (
-                  <div className="space-y-2">
-                    {searchQueries.map(([query, count]) => (
-                      <div key={query} className="flex justify-between text-sm">
-                        <span className="text-gray-600 truncate mr-3">&ldquo;{query}&rdquo;</span>
-                        <span className="font-semibold text-[#1a2744] shrink-0">{count}</span>
-                      </div>
-                    ))}
-                  </div>
+                  <BarChart data={searchQueries} rainbow />
                 )}
               </Card>
             </div>
