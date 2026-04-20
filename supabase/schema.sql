@@ -1,9 +1,8 @@
 -- ============================================================
--- HC101 Supabase Schema
--- HomeClosing101 Analytics, Admin Config, and User Data
+-- HC101 Supabase Schema (v2 — conflict-safe policy names)
 -- ============================================================
 
--- 1. Analytics Events (page views, clicks, feature usage)
+-- 1. Analytics Events
 CREATE TABLE IF NOT EXISTS hc101_analytics (
   id BIGSERIAL PRIMARY KEY,
   event_type VARCHAR(50) NOT NULL,
@@ -23,12 +22,7 @@ CREATE TABLE IF NOT EXISTS hc101_analytics (
   created_at TIMESTAMPTZ DEFAULT NOW()
 );
 
-CREATE INDEX idx_hc101_analytics_type ON hc101_analytics(event_type);
-CREATE INDEX idx_hc101_analytics_page ON hc101_analytics(page);
-CREATE INDEX idx_hc101_analytics_created ON hc101_analytics(created_at);
-CREATE INDEX idx_hc101_analytics_session ON hc101_analytics(session_id);
-
--- 2. Site Config (module toggles, page visibility, ad control)
+-- 2. Site Config
 CREATE TABLE IF NOT EXISTS hc101_site_config (
   id SERIAL PRIMARY KEY,
   config_key VARCHAR(100) UNIQUE NOT NULL,
@@ -37,7 +31,6 @@ CREATE TABLE IF NOT EXISTS hc101_site_config (
   updated_at TIMESTAMPTZ DEFAULT NOW()
 );
 
--- Seed default config
 INSERT INTO hc101_site_config (config_key, config_value) VALUES
   ('modules', '{}'),
   ('pages', '{}'),
@@ -45,7 +38,7 @@ INSERT INTO hc101_site_config (config_key, config_value) VALUES
   ('active_profile', '"default"')
 ON CONFLICT (config_key) DO NOTHING;
 
--- 3. Config Profiles (saved configurations)
+-- 3. Config Profiles
 CREATE TABLE IF NOT EXISTS hc101_config_profiles (
   id SERIAL PRIMARY KEY,
   name VARCHAR(100) UNIQUE NOT NULL,
@@ -59,25 +52,22 @@ CREATE TABLE IF NOT EXISTS hc101_config_profiles (
 -- 4. Feedback & Bug Reports
 CREATE TABLE IF NOT EXISTS hc101_feedback (
   id BIGSERIAL PRIMARY KEY,
-  type VARCHAR(20) NOT NULL, -- 'bug', 'suggestion', 'feedback', 'question'
+  type VARCHAR(20) NOT NULL,
   page VARCHAR(255),
   message TEXT NOT NULL,
   email VARCHAR(255),
   user_agent TEXT,
   device VARCHAR(10),
   browser VARCHAR(100),
-  status VARCHAR(20) DEFAULT 'new', -- 'new', 'reviewed', 'resolved', 'dismissed'
+  status VARCHAR(20) DEFAULT 'new',
   admin_notes TEXT,
   created_at TIMESTAMPTZ DEFAULT NOW()
 );
 
-CREATE INDEX idx_hc101_feedback_type ON hc101_feedback(type);
-CREATE INDEX idx_hc101_feedback_status ON hc101_feedback(status);
-
--- 5. Ad Impressions (dedicated high-volume table)
+-- 5. Ad Events
 CREATE TABLE IF NOT EXISTS hc101_ad_events (
   id BIGSERIAL PRIMARY KEY,
-  event_type VARCHAR(20) NOT NULL, -- 'impression', 'click'
+  event_type VARCHAR(20) NOT NULL,
   ad_format VARCHAR(50) NOT NULL,
   sponsor_name VARCHAR(100),
   page VARCHAR(255),
@@ -86,11 +76,7 @@ CREATE TABLE IF NOT EXISTS hc101_ad_events (
   created_at TIMESTAMPTZ DEFAULT NOW()
 );
 
-CREATE INDEX idx_hc101_ad_events_format ON hc101_ad_events(ad_format);
-CREATE INDEX idx_hc101_ad_events_sponsor ON hc101_ad_events(sponsor_name);
-CREATE INDEX idx_hc101_ad_events_created ON hc101_ad_events(created_at);
-
--- 6. Sessions (for session-level analytics)
+-- 6. Sessions
 CREATE TABLE IF NOT EXISTS hc101_sessions (
   id SERIAL PRIMARY KEY,
   session_id VARCHAR(50) UNIQUE NOT NULL,
@@ -109,9 +95,7 @@ CREATE TABLE IF NOT EXISTS hc101_sessions (
   last_active_at TIMESTAMPTZ DEFAULT NOW()
 );
 
-CREATE INDEX idx_hc101_sessions_started ON hc101_sessions(started_at);
-
--- 7. County Fraud Programs (for Phase 2 deed fraud tool)
+-- 7. County Fraud Programs
 CREATE TABLE IF NOT EXISTS hc101_county_programs (
   id SERIAL PRIMARY KEY,
   state_code VARCHAR(2) NOT NULL,
@@ -136,9 +120,7 @@ CREATE TABLE IF NOT EXISTS hc101_county_programs (
   UNIQUE(state_code, county_name)
 );
 
-CREATE INDEX idx_hc101_county_state ON hc101_county_programs(state_code);
-
--- 8. Report access log
+-- 8. Report Access Log
 CREATE TABLE IF NOT EXISTS hc101_report_access (
   id SERIAL PRIMARY KEY,
   report_name VARCHAR(100) NOT NULL,
@@ -147,46 +129,69 @@ CREATE TABLE IF NOT EXISTS hc101_report_access (
 );
 
 -- ============================================================
--- Row Level Security (RLS)
+-- Indexes
 -- ============================================================
+CREATE INDEX IF NOT EXISTS idx_hc101_analytics_type ON hc101_analytics(event_type);
+CREATE INDEX IF NOT EXISTS idx_hc101_analytics_page ON hc101_analytics(page);
+CREATE INDEX IF NOT EXISTS idx_hc101_analytics_created ON hc101_analytics(created_at);
+CREATE INDEX IF NOT EXISTS idx_hc101_analytics_session ON hc101_analytics(session_id);
+CREATE INDEX IF NOT EXISTS idx_hc101_ad_events_format ON hc101_ad_events(ad_format);
+CREATE INDEX IF NOT EXISTS idx_hc101_ad_events_sponsor ON hc101_ad_events(sponsor_name);
+CREATE INDEX IF NOT EXISTS idx_hc101_ad_events_created ON hc101_ad_events(created_at);
+CREATE INDEX IF NOT EXISTS idx_hc101_sessions_started ON hc101_sessions(started_at);
+CREATE INDEX IF NOT EXISTS idx_hc101_feedback_type ON hc101_feedback(type);
+CREATE INDEX IF NOT EXISTS idx_hc101_feedback_status ON hc101_feedback(status);
+CREATE INDEX IF NOT EXISTS idx_hc101_county_state ON hc101_county_programs(state_code);
 
--- Analytics: anyone can insert (anon), only authenticated can read
+-- ============================================================
+-- RLS — all HC101-prefixed policy names to avoid conflicts
+-- ============================================================
 ALTER TABLE hc101_analytics ENABLE ROW LEVEL SECURITY;
-CREATE POLICY "Anyone can insert analytics" ON hc101_analytics FOR INSERT WITH CHECK (true);
-CREATE POLICY "Anyone can read analytics" ON hc101_analytics FOR SELECT USING (true);
+DROP POLICY IF EXISTS "hc101_analytics_insert" ON hc101_analytics;
+DROP POLICY IF EXISTS "hc101_analytics_select" ON hc101_analytics;
+CREATE POLICY "hc101_analytics_insert" ON hc101_analytics FOR INSERT WITH CHECK (true);
+CREATE POLICY "hc101_analytics_select" ON hc101_analytics FOR SELECT USING (true);
 
--- Ad events: same pattern
 ALTER TABLE hc101_ad_events ENABLE ROW LEVEL SECURITY;
-CREATE POLICY "Anyone can insert ad events" ON hc101_ad_events FOR INSERT WITH CHECK (true);
-CREATE POLICY "Anyone can read ad events" ON hc101_ad_events FOR SELECT USING (true);
+DROP POLICY IF EXISTS "hc101_ad_events_insert" ON hc101_ad_events;
+DROP POLICY IF EXISTS "hc101_ad_events_select" ON hc101_ad_events;
+CREATE POLICY "hc101_ad_events_insert" ON hc101_ad_events FOR INSERT WITH CHECK (true);
+CREATE POLICY "hc101_ad_events_select" ON hc101_ad_events FOR SELECT USING (true);
 
--- Sessions: same pattern
 ALTER TABLE hc101_sessions ENABLE ROW LEVEL SECURITY;
-CREATE POLICY "Anyone can insert sessions" ON hc101_sessions FOR INSERT WITH CHECK (true);
-CREATE POLICY "Anyone can read sessions" ON hc101_sessions FOR SELECT USING (true);
-CREATE POLICY "Anyone can update sessions" ON hc101_sessions FOR UPDATE USING (true);
+DROP POLICY IF EXISTS "hc101_sessions_insert" ON hc101_sessions;
+DROP POLICY IF EXISTS "hc101_sessions_select" ON hc101_sessions;
+DROP POLICY IF EXISTS "hc101_sessions_update" ON hc101_sessions;
+CREATE POLICY "hc101_sessions_insert" ON hc101_sessions FOR INSERT WITH CHECK (true);
+CREATE POLICY "hc101_sessions_select" ON hc101_sessions FOR SELECT USING (true);
+CREATE POLICY "hc101_sessions_update" ON hc101_sessions FOR UPDATE USING (true);
 
--- Config: anyone can read, anyone can update (admin password gate is client-side for now)
 ALTER TABLE hc101_site_config ENABLE ROW LEVEL SECURITY;
-CREATE POLICY "Anyone can read config" ON hc101_site_config FOR SELECT USING (true);
-CREATE POLICY "Anyone can update config" ON hc101_site_config FOR UPDATE USING (true);
-CREATE POLICY "Anyone can insert config" ON hc101_site_config FOR INSERT WITH CHECK (true);
+DROP POLICY IF EXISTS "hc101_config_select" ON hc101_site_config;
+DROP POLICY IF EXISTS "hc101_config_update" ON hc101_site_config;
+DROP POLICY IF EXISTS "hc101_config_insert" ON hc101_site_config;
+CREATE POLICY "hc101_config_select" ON hc101_site_config FOR SELECT USING (true);
+CREATE POLICY "hc101_config_update" ON hc101_site_config FOR UPDATE USING (true);
+CREATE POLICY "hc101_config_insert" ON hc101_site_config FOR INSERT WITH CHECK (true);
 
--- Profiles: same
 ALTER TABLE hc101_config_profiles ENABLE ROW LEVEL SECURITY;
-CREATE POLICY "Anyone can manage profiles" ON hc101_config_profiles FOR ALL USING (true);
+DROP POLICY IF EXISTS "hc101_profiles_all" ON hc101_config_profiles;
+CREATE POLICY "hc101_profiles_all" ON hc101_config_profiles FOR ALL USING (true);
 
--- Feedback: anyone can insert, anyone can read (admin reads)
 ALTER TABLE hc101_feedback ENABLE ROW LEVEL SECURITY;
-CREATE POLICY "Anyone can insert feedback" ON hc101_feedback FOR INSERT WITH CHECK (true);
-CREATE POLICY "Anyone can read feedback" ON hc101_feedback FOR SELECT USING (true);
-CREATE POLICY "Anyone can update feedback" ON hc101_feedback FOR UPDATE USING (true);
+DROP POLICY IF EXISTS "hc101_feedback_insert" ON hc101_feedback;
+DROP POLICY IF EXISTS "hc101_feedback_select" ON hc101_feedback;
+DROP POLICY IF EXISTS "hc101_feedback_update" ON hc101_feedback;
+CREATE POLICY "hc101_feedback_insert" ON hc101_feedback FOR INSERT WITH CHECK (true);
+CREATE POLICY "hc101_feedback_select" ON hc101_feedback FOR SELECT USING (true);
+CREATE POLICY "hc101_feedback_update" ON hc101_feedback FOR UPDATE USING (true);
 
--- County programs: anyone can read
 ALTER TABLE hc101_county_programs ENABLE ROW LEVEL SECURITY;
-CREATE POLICY "Anyone can read county programs" ON hc101_county_programs FOR SELECT USING (true);
-CREATE POLICY "Anyone can manage county programs" ON hc101_county_programs FOR ALL USING (true);
+DROP POLICY IF EXISTS "hc101_county_select" ON hc101_county_programs;
+DROP POLICY IF EXISTS "hc101_county_all" ON hc101_county_programs;
+CREATE POLICY "hc101_county_select" ON hc101_county_programs FOR SELECT USING (true);
+CREATE POLICY "hc101_county_all" ON hc101_county_programs FOR ALL USING (true);
 
--- Report access: open
 ALTER TABLE hc101_report_access ENABLE ROW LEVEL SECURITY;
-CREATE POLICY "Anyone can manage report access" ON hc101_report_access FOR ALL USING (true);
+DROP POLICY IF EXISTS "hc101_report_all" ON hc101_report_access;
+CREATE POLICY "hc101_report_all" ON hc101_report_access FOR ALL USING (true);
