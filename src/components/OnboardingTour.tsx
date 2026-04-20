@@ -4,35 +4,19 @@ import { useState, useEffect, useCallback, useRef } from "react";
 
 const STORAGE_KEY = "hc101-toured";
 
-function Typewriter({ text, speed = 18, start = true }: { text: string; speed?: number; start?: boolean }) {
-  const [idx, setIdx] = useState(0);
-  const [done, setDone] = useState(false);
-
-  useEffect(() => {
-    setIdx(0);
-    setDone(false);
-    if (!start || !text) return;
-    let i = 0;
-    const interval = setInterval(() => {
-      i += 1;
-      setIdx(i);
-      if (i >= text.length) {
-        clearInterval(interval);
-        setDone(true);
-      }
-    }, speed);
-    return () => clearInterval(interval);
-  }, [text, speed, start]);
-
-  const skip = () => {
-    setIdx(text.length);
-    setDone(true);
-  };
-
+function WordFade({ text, stagger = 40 }: { text: string; stagger?: number }) {
+  const words = text.split(/(\s+)/);
   return (
-    <span onClick={skip} className="cursor-text select-text">
-      {text.slice(0, idx)}
-      {!done && <span className="inline-block w-[2px] h-[1em] align-middle bg-alta-teal ml-0.5 animate-pulse" />}
+    <span>
+      {words.map((w, i) => (
+        <span
+          key={i}
+          className="inline-block opacity-0 animate-[wordFade_500ms_ease-out_forwards]"
+          style={{ animationDelay: `${i * stagger}ms`, whiteSpace: "pre" }}
+        >
+          {w}
+        </span>
+      ))}
     </span>
   );
 }
@@ -225,9 +209,9 @@ export default function OnboardingTour() {
             {slide.title}
           </h2>
 
-          {/* Typewriter body */}
+          {/* Body — word-by-word fade in */}
           <p className="text-white/85 text-center text-sm sm:text-base leading-relaxed mb-6 min-h-[5.5rem]">
-            <Typewriter key={current} text={slide.body} />
+            <WordFade key={current} text={slide.body} />
           </p>
 
           {/* CTA links on last slide */}
@@ -316,10 +300,14 @@ export default function OnboardingTour() {
         </div>
       </div>
 
-      <style jsx>{`
+      <style jsx global>{`
         @keyframes fadeIn {
           from { opacity: 0; transform: translateY(8px); }
           to   { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes wordFade {
+          from { opacity: 0; transform: translateY(4px); filter: blur(4px); }
+          to   { opacity: 1; transform: translateY(0); filter: blur(0); }
         }
       `}</style>
     </div>
