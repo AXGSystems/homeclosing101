@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 import { X, Send, Sparkles, Download, Loader2 } from 'lucide-react';
+import DateWeatherWidget from '@/components/DateWeatherWidget';
 
 const sponsors = [
   { name: "First American Title", logo: "https://www.alta.org/images/wplogos/0000226.png", url: "https://www.firstam.com/", blurb: "Nation's leading provider of title insurance, settlement services, and risk solutions." },
@@ -433,14 +434,16 @@ export default function HomeClosingAI() {
               <div className="absolute bottom-0 right-8 translate-y-1/2 rotate-45 w-3 h-3 bg-white border-r border-b border-gray-100"></div>
             </div>
           </div>
-          {/* AI button bottom half */}
+          {/* AI button middle */}
           <button
             onClick={() => setOpen(true)}
-            className="bg-gradient-to-r from-alta-navy to-alta-teal text-white rounded-b-xl px-5 py-3 shadow-2xl hover:brightness-110 transition-all duration-300 flex items-center gap-2.5 group w-full justify-center"
+            className="bg-gradient-to-r from-alta-navy to-alta-teal text-white px-5 py-3 shadow-2xl hover:brightness-110 transition-all duration-300 flex items-center gap-2.5 group w-full justify-center"
           >
             <Sparkles className="w-4 h-4 text-white/80 group-hover:rotate-12 transition-transform" />
             <span className="font-bold text-sm">Ask HomeClosing101</span>
           </button>
+          {/* Date & weather bottom tab */}
+          <DateWeatherWidget />
         </div>
         </>
       )}

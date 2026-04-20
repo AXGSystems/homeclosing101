@@ -101,10 +101,10 @@ export default function FeedbackWidget() {
 
   return (
     <>
-      {/* Floating button — bottom-left, above folder button */}
+      {/* Floating button — bottom-right, above scroll-to-top */}
       <button
         onClick={() => setOpen(!open)}
-        className="fixed bottom-[calc(4.5rem+env(safe-area-inset-bottom))] left-4 z-[9998] w-10 h-10 rounded-full bg-[#1a2744] text-white shadow-lg hover:bg-[#0a8ebc] transition-colors flex items-center justify-center print:hidden"
+        className="fixed bottom-[180px] right-4 z-[9998] w-10 h-10 rounded-full bg-[#1a2744] text-white shadow-lg hover:bg-[#0a8ebc] transition-colors flex items-center justify-center print:hidden"
         aria-label="Send feedback"
         title="Send feedback"
       >

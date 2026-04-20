@@ -8,7 +8,6 @@ import RouteScrollToTop from "@/components/RouteScrollToTop";
 import ClosingFolderProvider from "@/components/ClosingFolderProvider";
 import AchievementProvider from "@/components/AchievementSystem";
 import LayoutOverlays from "@/components/LayoutOverlays";
-import FeedbackTabs from "@/components/FeedbackTabs";
 import StickyBottomAd from "@/components/StickyBottomAd";
 import SponsorFooterStrip from "@/components/SponsorFooterStrip";
 import AnalyticsProvider from "@/components/Analytics";
@@ -118,7 +117,6 @@ export default function RootLayout({
           <AltaDisclaimer />
           <Footer />
           <LayoutOverlays />
-          <FeedbackTabs />
           <FeedbackWidget />
           <StickyBottomAd />
         </ClosingFolderProvider>
