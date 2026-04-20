@@ -68,7 +68,7 @@ export default function ContextualSponsor({ context = "closing" }: { context?: s
           {/* Logo */}
           <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-xl bg-white border border-gray-100 shadow-sm flex items-center justify-center shrink-0 overflow-hidden">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={sponsor.logo} alt={sponsor.name} className="w-10 h-10 sm:w-12 sm:h-12 object-contain" onError={(e) => { if (!e.currentTarget.src.endsWith('/logos/alta.svg')) e.currentTarget.src = '/logos/alta.svg'; }} />
+            <img src={sponsor.logo} alt={sponsor.name} className="w-10 h-10 sm:w-12 sm:h-12 object-contain" onError={(e) => { e.currentTarget.style.display = 'none'; }} />
           </div>
           {/* Content */}
           <div className="flex-1 min-w-0">

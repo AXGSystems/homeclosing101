@@ -104,7 +104,7 @@ export default function SponsorSidebar() {
             src={sponsor.logo}
             alt={sponsor.name}
             className="max-h-14 w-auto object-contain"
-            onError={(e) => { if (!e.currentTarget.src.endsWith('/logos/alta.svg')) e.currentTarget.src = '/logos/alta.svg'; }}
+            onError={(e) => { e.currentTarget.style.display = 'none'; }}
           />
         </div>
         <h3 className="text-sm font-semibold text-alta-navy text-center mb-2">{sponsor.name}</h3>

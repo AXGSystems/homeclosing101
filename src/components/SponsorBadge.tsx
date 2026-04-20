@@ -48,7 +48,7 @@ export default function SponsorBadge() {
         src={sponsor.logo}
         alt={sponsor.name}
         className="h-5 w-auto object-contain"
-        onError={(e) => { if (!e.currentTarget.src.endsWith('/logos/alta.svg')) e.currentTarget.src = '/logos/alta.svg'; }}
+        onError={(e) => { e.currentTarget.style.display = 'none'; }}
       />
     </a>
   );

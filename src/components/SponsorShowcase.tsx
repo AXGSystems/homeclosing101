@@ -97,7 +97,7 @@ export default function SponsorShowcase() {
             {/* Logo */}
             <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl bg-white/95 flex items-center justify-center shadow-lg shrink-0 overflow-hidden">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={sponsor.logo} alt={sponsor.name} className="w-16 h-16 sm:w-20 sm:h-20 object-contain" onError={(e) => { if (!e.currentTarget.src.endsWith('/logos/alta.svg')) e.currentTarget.src = '/logos/alta.svg'; }} />
+              <img src={sponsor.logo} alt={sponsor.name} className="w-16 h-16 sm:w-20 sm:h-20 object-contain" onError={(e) => { e.currentTarget.style.display = 'none'; }} />
             </div>
             {/* Content */}
             <div className="flex-1 text-center lg:text-left">
