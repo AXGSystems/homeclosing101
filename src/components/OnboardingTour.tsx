@@ -269,7 +269,7 @@ export default function OnboardingTour() {
               return (
                 <>
                   {parts[0]}
-                  <span style={{ color: "rgba(232, 120, 110, 0.55)" }}>101</span>
+                  <span className="font-extrabold" style={{ color: "#1a2744" }}>101</span>
                   {parts[1]}
                 </>
               );
