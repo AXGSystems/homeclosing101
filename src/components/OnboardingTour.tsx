@@ -1,8 +1,18 @@
 "use client";
 
 import { useState, useEffect, useCallback, useRef } from "react";
+import { trackAdEvent } from "@/components/Analytics";
 
 const STORAGE_KEY = "hc101-toured";
+
+const tourSponsors = [
+  { name: "First American Title", url: "https://www.firstam.com/", logo: "https://www.alta.org/images/wplogos/0000226.png" },
+  { name: "FNF Family of Companies", url: "https://www.fnf.com/", logo: "https://www.alta.org/images/wplogos/0000218.png" },
+  { name: "Stewart Title", url: "https://www.stewart.com/", logo: "https://www.alta.org/images/wplogos/0002809.png" },
+  { name: "Old Republic National Title", url: "https://www.oldrepublictitle.com/", logo: "https://www.alta.org/images/wplogos/0004443.png" },
+  { name: "CertifID", url: "https://certifid.com/", logo: "https://www.alta.org/images/wplogos/1165795.png" },
+  { name: "Qualia", url: "https://www.qualia.com/", logo: "https://www.alta.org/images/wplogos/1141461.png" },
+];
 
 function WordFade({ text, stagger = 40 }: { text: string; stagger?: number }) {
   const words = text.split(/(\s+)/);
@@ -141,6 +151,17 @@ export default function OnboardingTour() {
     setShow(true);
     requestAnimationFrame(() => setMounted(true));
   }, []);
+
+  const [sponsorIdx, setSponsorIdx] = useState(0);
+  useEffect(() => {
+    setSponsorIdx(Math.floor(Math.random() * tourSponsors.length));
+  }, []);
+  const sponsor = tourSponsors[sponsorIdx];
+
+  useEffect(() => {
+    if (!show || !sponsor) return;
+    trackAdEvent("OnboardingTour", sponsor.name, "impression");
+  }, [show, sponsor]);
 
   const dismiss = useCallback(() => {
     setMounted(false);
@@ -304,6 +325,28 @@ export default function OnboardingTour() {
               />
             ))}
           </div>
+
+          {/* Sponsor mini-strip — glass styled to match tour */}
+          <a
+            href={sponsor.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => trackAdEvent("OnboardingTour", sponsor.name, "click")}
+            className="mx-auto mb-3 flex items-center justify-center gap-2.5 px-3 py-1.5 rounded-full border border-white/15 bg-white/5 backdrop-blur-xl hover:bg-white/10 transition-colors w-fit"
+          >
+            <span className="text-[9px] font-semibold text-white/50 uppercase tracking-[0.18em]">Sponsored by</span>
+            <span className="w-px h-3 bg-white/20" />
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={sponsor.logo}
+              alt={sponsor.name}
+              className="h-4 w-auto object-contain opacity-90"
+              style={{ filter: "brightness(0) invert(1)" }}
+              onError={(e) => { e.currentTarget.style.display = "none"; }}
+            />
+            <span className="text-[10px] font-semibold text-white/80">{sponsor.name}</span>
+            <svg className="w-2.5 h-2.5 text-white/50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
+          </a>
         </div>
 
         {/* Footer controls — glass bar */}
