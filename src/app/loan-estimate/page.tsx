@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import PageHero from "@/components/PageHero";
 import { InlineAd } from "@/components/EliteProviders";
+import SponsorTip from "@/components/SponsorTip";
 import FirstTimeBuyerCTA from "@/components/FirstTimeBuyerCTA";
 import SponsorBadge from "@/components/SponsorBadge";
 import SaveToFolderBtn from "@/components/SaveToFolderBtn";
@@ -399,6 +400,8 @@ export default function LoanEstimatePage() {
           </div>
 
           <InlineAd />
+
+          <SponsorTip context="mortgage" />
 
           {/* Red flags */}
           <h2 className="text-xl font-bold text-alta-navy mb-4">Red Flags to Watch For</h2>

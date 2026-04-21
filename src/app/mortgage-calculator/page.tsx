@@ -5,6 +5,7 @@ import Link from "next/link";
 import PageHero from "@/components/PageHero";
 import { useAchievements } from "@/components/AchievementSystem";
 import { InlineAd } from "@/components/EliteProviders";
+import SponsorTip from "@/components/SponsorTip";
 import FirstTimeBuyerCTA from "@/components/FirstTimeBuyerCTA";
 import ContextualSponsor from "@/components/ContextualSponsor";
 import { propertyTaxRates, loanTypes } from "@/data/propertyTaxRates";
@@ -392,6 +393,8 @@ export default function MortgageCalculatorPage() {
           </div>
 
           <InlineAd />
+
+          <SponsorTip context="mortgage" />
 
           {/* Loan type comparison table */}
           <div className="mt-8">

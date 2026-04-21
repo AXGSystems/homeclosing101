@@ -2,6 +2,7 @@ import Link from "next/link";
 import PageHero from "@/components/PageHero";
 import AchievementTrigger from "@/components/AchievementTrigger";
 import { InlineAd } from "@/components/EliteProviders";
+import SponsorTip from "@/components/SponsorTip";
 import TrustedALTAMembers from "@/components/TrustedALTAMembers";
 import { DeferredTimeline, DeferredLoanChart } from "@/components/LazyFirstTimeBuyer";
 import ShareButtons from "@/components/ShareButtons";
@@ -98,6 +99,8 @@ export default function FirstTimeBuyersPage() {
           </div>
 
           <InlineAd />
+
+          <SponsorTip context="closing" />
 
           <div className="p-4 bg-[#faf4e4] rounded-xl border border-[#e8d9a8] border-l-4 border-l-[#8b6914] my-6">
             <p className="text-xs text-alta-gray"><strong className="text-[#8b6914]">Did you know?</strong> According to NAR, 24% of homebuyers in 2024 were first-time buyers — the lowest share since NAR began tracking in 1981. Rising prices and mortgage rates have made it harder, but down payment assistance programs continue to help hundreds of thousands of buyers close each year (NCSHA).</p>

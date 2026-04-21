@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 import { X, Send, Sparkles, Download, Loader2, GripHorizontal, Maximize2, Minimize2, RotateCcw } from 'lucide-react';
 import DateWeatherWidget from '@/components/DateWeatherWidget';
+import { trackAdEvent } from '@/components/Analytics';
 
 const sponsors = [
   { name: "First American Title", logo: "https://www.alta.org/images/wplogos/0000226.png", url: "https://www.firstam.com/", blurb: "Nation's leading provider of title insurance, settlement services, and risk solutions." },
@@ -353,6 +354,10 @@ export default function HomeClosingAI() {
 
   const sponsor = sponsors[sponsorIdx];
 
+  useEffect(() => {
+    trackAdEvent('HomeClosingAI', sponsor.name, 'impression');
+  }, [sponsor]);
+
   const [minimized, setMinimized] = useState(false);
 
   // Drag / resize / expand state
@@ -522,7 +527,7 @@ export default function HomeClosingAI() {
               href={sponsor.url}
               target="_blank"
               rel="noopener noreferrer"
-              onClick={(e) => e.stopPropagation()}
+              onClick={(e) => { e.stopPropagation(); trackAdEvent('HomeClosingAI', sponsor.name, 'click'); }}
               className={`peer flex items-center gap-3 bg-white px-4 py-3 shadow-lg border border-gray-100 border-t-0 border-b-0 hover:bg-gray-50 transition-all w-full ${sponsorFading ? 'opacity-0' : 'opacity-100'}`}
               style={{ transition: 'opacity 350ms ease' }}
             >
@@ -591,6 +596,7 @@ export default function HomeClosingAI() {
             href={sponsor.url}
             target="_blank"
             rel="noopener noreferrer"
+            onClick={() => trackAdEvent('HomeClosingAI', sponsor.name, 'click')}
             className={`flex-shrink-0 block border-b border-gray-100 hover:bg-gray-50 transition-all ${sponsorFading ? 'opacity-0' : 'opacity-100'}`}
             style={{ transition: 'opacity 350ms ease' }}
           >

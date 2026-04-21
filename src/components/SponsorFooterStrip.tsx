@@ -1,5 +1,9 @@
 "use client";
 
+import { useEffect } from "react";
+import { useModuleEnabledHook } from "@/lib/adminConfig";
+import { trackAdEvent } from "@/components/Analytics";
+
 /**
  * SponsorFooterStrip — A slim horizontal strip showing grayscale sponsor logos.
  * Appears just above the site footer. Logos colorize on hover.
@@ -14,6 +18,15 @@ const stripSponsors = [
 ];
 
 export default function SponsorFooterStrip() {
+  const enabled = useModuleEnabledHook("SponsorFooterStrip");
+
+  useEffect(() => {
+    if (!enabled) return;
+    stripSponsors.forEach((s) => trackAdEvent("SponsorFooterStrip", s.name, "impression"));
+  }, [enabled]);
+
+  if (!enabled) return null;
+
   return (
     <div className="print:hidden bg-gray-50 border-t border-gray-100 sticky bottom-0 z-20">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 py-4">
@@ -27,6 +40,7 @@ export default function SponsorFooterStrip() {
               href={s.url}
               target="_blank"
               rel="noopener noreferrer"
+              onClick={() => trackAdEvent("SponsorFooterStrip", s.name, "click")}
               className="opacity-70 hover:opacity-100 transition-all duration-300"
               title={s.name}
             >

@@ -1,6 +1,8 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useAdEnabled } from "@/lib/adminConfig";
+import { trackAdEvent } from "@/components/Analytics";
 
 /**
  * ContextualSponsor — A native-looking sponsor card that blends into educational content.
@@ -36,6 +38,7 @@ const sponsorsByContext: Record<string, { name: string; logo: string; url: strin
 };
 
 export default function ContextualSponsor({ context = "closing" }: { context?: string }) {
+  const enabled = useAdEnabled("ContextualSponsor");
   const [sponsor, setSponsor] = useState<typeof sponsorsByContext.closing[0] | null>(null);
   const [fading, setFading] = useState(false);
 
@@ -53,7 +56,12 @@ export default function ContextualSponsor({ context = "closing" }: { context?: s
     return () => clearInterval(interval);
   }, [context]);
 
-  if (!sponsor) return null;
+  useEffect(() => {
+    if (!enabled || !sponsor) return;
+    trackAdEvent("ContextualSponsor", sponsor.name, "impression");
+  }, [enabled, sponsor]);
+
+  if (!enabled || !sponsor) return null;
 
   return (
     <div className="my-8 print:hidden">
@@ -61,6 +69,7 @@ export default function ContextualSponsor({ context = "closing" }: { context?: s
         href={sponsor.url}
         target="_blank"
         rel="noopener noreferrer"
+        onClick={() => trackAdEvent("ContextualSponsor", sponsor.name, "click")}
         className={`block rounded-2xl border border-gray-100 bg-gradient-to-r from-white via-white to-alta-light/30 hover:shadow-lg hover:border-alta-teal/20 transition-all overflow-hidden ${fading ? 'opacity-0' : 'opacity-100'}`}
         style={{ transition: "opacity 400ms ease, box-shadow 300ms ease" }}
       >

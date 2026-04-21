@@ -1,6 +1,7 @@
 import Link from "next/link";
 import PageHero from "@/components/PageHero";
 import { InlineAd } from "@/components/EliteProviders";
+import SponsorTip from "@/components/SponsorTip";
 import ExpandableRiskTiles from "@/components/ExpandableRiskTiles";
 import FirstTimeBuyerCTA from "@/components/FirstTimeBuyerCTA";
 import type { Metadata } from "next";
@@ -159,6 +160,8 @@ export default function ProtectYourRightsPage() {
           </div>
 
           <InlineAd />
+
+          <SponsorTip context="insurance" />
 
           {/* Covered scenarios — educational, not specific cases */}
           <h2 className="text-2xl font-bold text-alta-navy mb-2">What Title Insurance Covers</h2>

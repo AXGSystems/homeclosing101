@@ -1,6 +1,7 @@
 import Link from "next/link";
 import PageHero from "@/components/PageHero";
 import { InlineAd } from "@/components/EliteProviders";
+import SponsorTip from "@/components/SponsorTip";
 import FirstTimeBuyerCTA from "@/components/FirstTimeBuyerCTA";
 import SponsorBadge from "@/components/SponsorBadge";
 import type { Metadata } from "next";
@@ -135,6 +136,8 @@ export default function ClosingProcessPage() {
           </div>
 
           <InlineAd />
+
+          <SponsorTip context="closing" />
 
           <div className="h-1 bg-gradient-to-r from-transparent via-alta-teal/20 to-transparent my-10" />
 

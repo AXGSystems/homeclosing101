@@ -1,6 +1,8 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useAdEnabled } from "@/lib/adminConfig";
+import { trackAdEvent } from "@/components/Analytics";
 
 const sponsors = [
   { name: "First American Title", logo: "https://www.alta.org/images/wplogos/0000226.png", url: "https://www.firstam.com/" },
@@ -17,6 +19,7 @@ const sponsors = [
 
 // Shows 5 logos, rotates every 6 seconds
 export default function TrustedALTAMembers() {
+  const enabled = useAdEnabled("TrustedALTAMembers");
   const [offset, setOffset] = useState(0);
   const [fading, setFading] = useState(false);
   const count = 5;
@@ -37,6 +40,14 @@ export default function TrustedALTAMembers() {
 
   const visible = Array.from({ length: count }, (_, i) => sponsors[(offset + i) % sponsors.length]);
 
+  useEffect(() => {
+    if (!enabled) return;
+    visible.forEach((s) => trackAdEvent("TrustedALTAMembers", s.name, "impression"));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [enabled, offset]);
+
+  if (!enabled) return null;
+
   return (
     <div className="my-8 py-3 bg-gray-50 rounded-xl border border-gray-100">
       <p className="text-[9px] text-alta-gray text-center uppercase tracking-widest mb-2">Trusted ALTA Member Companies</p>
@@ -47,6 +58,7 @@ export default function TrustedALTAMembers() {
             href={s.url}
             target="_blank"
             rel="noopener noreferrer"
+            onClick={() => trackAdEvent("TrustedALTAMembers", s.name, "click")}
             className="flex items-center justify-center opacity-100 transition-all duration-300 hover:scale-105"
             title={s.name}
           >

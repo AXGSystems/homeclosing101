@@ -3,6 +3,7 @@
 import Link from "next/link";
 import PageHero from "@/components/PageHero";
 import { InlineAd } from "@/components/EliteProviders";
+import SponsorTip from "@/components/SponsorTip";
 import ExpandableTile from "@/components/ExpandableTile";
 import FirstTimeBuyerCTA from "@/components/FirstTimeBuyerCTA";
 import { useState } from "react";
@@ -293,6 +294,8 @@ export default function PropertyRightsPage() {
           </div>
 
           <InlineAd />
+
+          <SponsorTip context="insurance" />
 
           {/* ── SECTION 3: Fair Housing Act ── */}
           <h2 className="text-2xl font-bold text-alta-navy mb-2 mt-10">Fair Housing Act Protections</h2>

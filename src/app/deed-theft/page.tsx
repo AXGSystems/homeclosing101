@@ -3,6 +3,7 @@
 import Link from "next/link";
 import PageHero from "@/components/PageHero";
 import { InlineAd } from "@/components/EliteProviders";
+import SponsorTip from "@/components/SponsorTip";
 import FirstTimeBuyerCTA from "@/components/FirstTimeBuyerCTA";
 import ExpandableTile from "@/components/ExpandableTile";
 
@@ -258,6 +259,8 @@ export default function DeedTheftPage() {
           </section>
 
           <InlineAd />
+
+          <SponsorTip context="fraud" />
 
           {/* Warning Signs */}
           <section className="mb-8">

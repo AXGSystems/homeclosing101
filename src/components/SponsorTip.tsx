@@ -1,6 +1,10 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useAdEnabled } from "@/lib/adminConfig";
+import { trackAdEvent } from "@/components/Analytics";
+
+const AD_KEY = "SponsorTip";
 
 /**
  * SponsorTip — A small "Did you know?" callout with subtle sponsor branding.
@@ -35,6 +39,7 @@ const tipsByContext: Record<string, { sponsor: string; url: string; tip: string 
 };
 
 export default function SponsorTip({ context = "closing" }: { context?: string }) {
+  const enabled = useAdEnabled(AD_KEY);
   const [tip, setTip] = useState<typeof tipsByContext.closing[0] | null>(null);
 
   useEffect(() => {
@@ -42,7 +47,12 @@ export default function SponsorTip({ context = "closing" }: { context?: string }
     setTip(pool[Math.floor(Math.random() * pool.length)]);
   }, [context]);
 
-  if (!tip) return null;
+  useEffect(() => {
+    if (!enabled || !tip) return;
+    trackAdEvent(AD_KEY, tip.sponsor, "impression");
+  }, [enabled, tip]);
+
+  if (!enabled || !tip) return null;
 
   return (
     <div className="my-6 print:hidden">
@@ -57,6 +67,7 @@ export default function SponsorTip({ context = "closing" }: { context?: string }
             href={tip.url}
             target="_blank"
             rel="noopener noreferrer"
+            onClick={() => trackAdEvent(AD_KEY, tip.sponsor, "click")}
             className="inline-flex items-center gap-1 text-[#8b6914] font-semibold hover:underline whitespace-nowrap"
           >
             Learn more

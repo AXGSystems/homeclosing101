@@ -1,6 +1,8 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useAdEnabled } from "@/lib/adminConfig";
+import { trackAdEvent } from "@/components/Analytics";
 
 const sponsors = [
   {
@@ -72,6 +74,7 @@ const sponsors = [
 ];
 
 export default function SponsorSidebar() {
+  const enabled = useAdEnabled("SponsorSidebar");
   const [current, setCurrent] = useState(0);
   const [fading, setFading] = useState(false);
 
@@ -88,6 +91,13 @@ export default function SponsorSidebar() {
 
   const sponsor = sponsors[current];
 
+  useEffect(() => {
+    if (!enabled) return;
+    trackAdEvent("SponsorSidebar", sponsor.name, "impression");
+  }, [enabled, sponsor]);
+
+  if (!enabled) return null;
+
   return (
     <div className="sticky top-28">
       <p className="text-[9px] font-semibold text-alta-gray uppercase tracking-widest mb-3">ALTA Member Spotlight</p>
@@ -95,6 +105,7 @@ export default function SponsorSidebar() {
         href={sponsor.url}
         target="_blank"
         rel="noopener noreferrer"
+        onClick={() => trackAdEvent("SponsorSidebar", sponsor.name, "click")}
         className={`block p-5 bg-white rounded-xl border border-gray-100 shadow-sm hover:shadow-md hover:border-alta-teal/30 transition-all ${fading ? "opacity-0" : "opacity-100"}`}
         style={{ transition: "opacity 400ms ease, box-shadow 200ms ease, border-color 200ms ease" }}
       >

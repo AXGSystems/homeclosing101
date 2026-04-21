@@ -1,6 +1,8 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useAdEnabled } from "@/lib/adminConfig";
+import { trackAdEvent } from "@/components/Analytics";
 
 const sponsors = [
   { name: "First American Title", logo: "https://www.alta.org/images/wplogos/0000226.png", url: "https://www.firstam.com/", blurb: "Nation's leading provider of title insurance, settlement services, and risk solutions for real estate transactions." },
@@ -19,6 +21,7 @@ const sponsors = [
 
 // Show 3 at a time, rotate every 5 seconds
 export default function EliteProviders() {
+  const enabled = useAdEnabled("EliteProviders");
   const [activeSet, setActiveSet] = useState(0);
   const [fading, setFading] = useState(false);
   const setsCount = Math.ceil(sponsors.length / 3);
@@ -36,6 +39,14 @@ export default function EliteProviders() {
 
   const currentSponsors = sponsors.slice(activeSet * 3, activeSet * 3 + 3);
 
+  useEffect(() => {
+    if (!enabled) return;
+    currentSponsors.forEach((s) => trackAdEvent("EliteProviders", s.name, "impression"));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [enabled, activeSet]);
+
+  if (!enabled) return null;
+
   return (
     <section className="print:hidden py-6 bg-alta-light/50 border-t border-gray-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
@@ -46,6 +57,7 @@ export default function EliteProviders() {
               href={s.url}
               target="_blank"
               rel="noopener noreferrer"
+              onClick={() => trackAdEvent("EliteProviders", s.name, "click")}
               className="flex items-center justify-center h-10 opacity-100 hover:scale-105 transition-all duration-300"
               title={s.name}
             >
@@ -66,6 +78,7 @@ export default function EliteProviders() {
 
 // Full-width inline sponsor banner for content pages
 export function InlineAd() {
+  const enabled = useAdEnabled("InlineAd");
   const [sponsor, setSponsor] = useState(sponsors[0]);
   const [fading, setFading] = useState(false);
 
@@ -83,12 +96,20 @@ export function InlineAd() {
     return () => clearInterval(interval);
   }, []);
 
+  useEffect(() => {
+    if (!enabled) return;
+    trackAdEvent("InlineAd", sponsor.name, "impression");
+  }, [enabled, sponsor]);
+
+  if (!enabled) return null;
+
   return (
     <div className="inline-ad print:hidden my-10 @container">
       <a
         href={sponsor.url}
         target="_blank"
         rel="noopener noreferrer"
+        onClick={() => trackAdEvent("InlineAd", sponsor.name, "click")}
         className={`block rounded-2xl border border-gray-100 bg-gradient-to-br from-alta-light to-white shadow-sm hover:shadow-lg hover:border-alta-teal/30 transition-all overflow-hidden ${fading ? "opacity-0" : "opacity-100"}`}
         style={{ transition: "opacity 400ms ease, box-shadow 200ms ease" }}
       >

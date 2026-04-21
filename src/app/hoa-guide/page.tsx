@@ -4,6 +4,7 @@ import { useState, useMemo } from "react";
 import Link from "next/link";
 import PageHero from "@/components/PageHero";
 import { InlineAd } from "@/components/EliteProviders";
+import SponsorTip from "@/components/SponsorTip";
 import FirstTimeBuyerCTA from "@/components/FirstTimeBuyerCTA";
 import PrintButton from "@/components/PrintButton";
 import SaveToFolderBtn from "@/components/SaveToFolderBtn";
@@ -742,6 +743,8 @@ export default function HOAGuidePage() {
           </section>
 
           <InlineAd />
+
+          <SponsorTip context="title" />
 
           {/* ---- Red Flags ---- */}
           <section className="mb-8 mt-8">

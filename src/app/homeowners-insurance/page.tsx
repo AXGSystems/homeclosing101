@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import PageHero from "@/components/PageHero";
 import { InlineAd } from "@/components/EliteProviders";
+import SponsorTip from "@/components/SponsorTip";
 import FirstTimeBuyerCTA from "@/components/FirstTimeBuyerCTA";
 import MiniQuiz from "@/components/MiniQuiz";
 import ContextualSponsor from "@/components/ContextualSponsor";
@@ -503,6 +504,8 @@ export default function HomeownersInsurancePage() {
           <p className="text-xs text-alta-gray mb-8">Source: Insurance Information Institute (III) -- Filing a homeowner's insurance claim. Note: Filing a claim may affect your future premiums. For damage under $2,000-$3,000, consider whether filing is worth a potential rate increase.</p>
 
           <InlineAd />
+
+          <SponsorTip context="insurance" />
 
           <div className="flex flex-col sm:flex-row gap-3">
             <Link href="/protect-your-rights" className="px-5 py-2.5 bg-alta-teal text-white font-semibold rounded-lg hover:bg-alta-teal-dark transition-colors text-center text-sm">
