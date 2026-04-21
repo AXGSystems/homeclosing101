@@ -363,10 +363,14 @@ export default function OnboardingTour() {
             return (
               <h2 className="text-2xl sm:text-3xl font-bold text-center mb-4 tracking-tight text-white">
                 <span
+                  className="inline-block"
                   style={{
-                    color: slideColors[current],
-                    WebkitTextStroke: "1.5px rgba(255,255,255,0.85)",
-                    paintOrder: "stroke fill",
+                    backgroundImage: `linear-gradient(160deg, rgba(255,255,255,0.95) 0%, ${slideColors[current]} 38%, ${slideColors[current]} 62%, rgba(0,0,0,0.35) 100%)`,
+                    WebkitBackgroundClip: "text",
+                    WebkitTextFillColor: "transparent",
+                    backgroundClip: "text",
+                    color: "transparent",
+                    filter: `drop-shadow(0 2px 3px rgba(0,0,0,0.45)) drop-shadow(0 0 10px ${slideColors[current]}55)`,
                   }}
                 >
                   {firstWord}
