@@ -376,10 +376,10 @@ export default function OnboardingTour() {
                 style={{ textShadow: steelShadow }}
               >
                 <span
-                  className="inline-block"
+                  className="inline-block relative px-2 py-0.5 rounded-md"
                   style={{
-                    color: slideColors[current],
-                    filter: `drop-shadow(0 0 12px ${slideColors[current]}40)`,
+                    backgroundColor: `${slideColors[current]}55`,
+                    boxShadow: `0 0 16px ${slideColors[current]}55, inset 0 0 0 1px ${slideColors[current]}66`,
                   }}
                 >
                   {firstWord}
