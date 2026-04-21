@@ -217,14 +217,18 @@ export default function OnboardingTour() {
         {/* Top shimmer bar — visible white-on-glass */}
         <div className="h-[3px] bg-gradient-to-r from-transparent via-white/80 to-transparent" />
 
-        {/* Close X button */}
-        <div className="flex justify-end px-4 pt-3">
+        {/* Welcome banner */}
+        <div className="relative flex items-center justify-center px-12 py-2.5 border-b border-white/10 bg-white/5">
+          <p className="text-[11px] text-center text-white/85 font-semibold tracking-wide">
+            Welcome to <span className="text-white">HomeClosing101</span>
+            <span className="text-white/50"> — an ALTA educational initiative for homebuyers</span>
+          </p>
           <button
             onClick={dismiss}
-            className="p-1.5 text-white/60 hover:text-white hover:bg-white/10 rounded-lg transition-colors"
+            className="absolute right-2 top-1/2 -translate-y-1/2 p-1.5 text-white/60 hover:text-white hover:bg-white/10 rounded-lg transition-colors"
             aria-label="Close tour"
           >
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
             </svg>
           </button>
