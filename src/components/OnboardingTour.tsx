@@ -27,6 +27,19 @@ interface Slide {
   icon: React.ReactNode;
 }
 
+// One brand-appropriate accent per slide — drives the icon halo + tile tint
+const slideColors = [
+  "#0a8ebc", // 1 Welcome — teal
+  "#1a5276", // 2 Closing process — navy
+  "#2d6b3f", // 3 Calculators — green
+  "#943030", // 4 Protect property — red
+  "#5b3a8c", // 5 Glossary — purple
+  "#d4a843", // 6 AI — gold
+  "#077a9e", // 7 Closing folder — deep teal
+  "#b45309", // 8 FAQ — amber
+  "#0a7e6f", // 9 Ready — emerald-teal
+];
+
 const slides: Slide[] = [
   {
     title: "Welcome to HomeClosing101",
@@ -197,11 +210,20 @@ export default function OnboardingTour() {
         </div>
 
         <div key={contentKey.current} className="px-6 pb-2 sm:px-10 animate-[fadeIn_400ms_ease-out]">
-          {/* Glowing icon tile */}
+          {/* Glowing icon tile — per-slide accent color */}
           <div className="relative mx-auto w-20 h-20 mb-5">
-            <div className="absolute -inset-3 rounded-[1.5rem] bg-[#943030]/55 blur-2xl animate-pulse" style={{ animationDuration: "3.5s" }} />
-            <div className="absolute inset-0 rounded-2xl bg-white/25 blur-xl" />
-            <div className="relative w-20 h-20 rounded-2xl bg-gradient-to-br from-white/30 to-white/10 border border-white/40 backdrop-blur-xl flex items-center justify-center text-white shadow-[0_8px_24px_rgba(148,48,48,0.4)]">
+            <div
+              className="absolute -inset-3 rounded-[1.5rem] blur-2xl animate-pulse"
+              style={{ backgroundColor: `${slideColors[current]}88`, animationDuration: "3.5s" }}
+            />
+            <div className="absolute inset-0 rounded-2xl bg-white/20 blur-xl" />
+            <div
+              className="relative w-20 h-20 rounded-2xl border border-white/40 backdrop-blur-xl flex items-center justify-center text-white"
+              style={{
+                background: `linear-gradient(135deg, ${slideColors[current]}66, ${slideColors[current]}22)`,
+                boxShadow: `0 8px 24px ${slideColors[current]}55`,
+              }}
+            >
               {slide.icon}
             </div>
           </div>
