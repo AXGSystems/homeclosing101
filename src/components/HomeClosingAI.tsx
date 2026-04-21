@@ -369,7 +369,7 @@ export default function HomeClosingAI() {
     try {
       // One-time layout reset: clear any saved position/size from prior
       // versions so everyone gets the new landscape default.
-      const LAYOUT_VERSION = '3';
+      const LAYOUT_VERSION = '4';
       if (localStorage.getItem('hc101-ai-layout-v') !== LAYOUT_VERSION) {
         localStorage.removeItem('hc101-ai-position');
         localStorage.removeItem('hc101-ai-size');
@@ -619,7 +619,7 @@ export default function HomeClosingAI() {
               ? ''
               : position
                 ? ''
-                : 'top-1/2 -translate-y-1/2 right-4 sm:right-8 w-[calc(100vw-1rem)] sm:w-[540px] max-w-[540px] h-[calc(100vh-6rem)] sm:h-[460px] max-h-[calc(100vh-6rem)]'
+                : 'top-1/2 -translate-y-1/2 right-4 sm:right-8 w-[calc(100vw-1rem)] sm:w-[540px] max-w-[540px] h-[calc(100vh-6rem)] sm:h-[580px] max-h-[calc(100vh-6rem)]'
           }`}
           style={chatPanelStyle}
           data-ai-container
