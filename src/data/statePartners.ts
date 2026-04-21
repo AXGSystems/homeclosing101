@@ -70,22 +70,46 @@ const cityByState: Record<string, string[]> = {
 };
 
 interface Template {
-  suffix: string;
+  format: string; // use {state} as a placeholder for the state name
   blurb: string;
 }
 
 const demoTemplates: Template[] = [
   {
-    suffix: "Premier Title & Escrow",
-    blurb: "Full-service residential closings with 48-hour title commitments and cyber-verified wire transfers.",
+    format: "{state} Premier Title Company",
+    blurb: "Full-service residential closings with 48-hour title commitments and a dedicated closing coordinator assigned to every file.",
   },
   {
-    suffix: "Heritage Title Services",
-    blurb: "Family-owned ALTA member with four decades of local market expertise and ALTA Best Practices certification.",
+    format: "Heritage Land Title of {state}",
+    blurb: "Family-owned ALTA member with four decades of local market expertise and independent abstract examiners on staff.",
   },
   {
-    suffix: "Closing Partners Group",
-    blurb: "Tech-forward settlement agency offering Remote Online Notarization (RON) and hybrid closings statewide.",
+    format: "{state} Settlement Services",
+    blurb: "Concierge closing experience for residential, commercial, and new-construction transactions across the state.",
+  },
+  {
+    format: "Continental Title Agency — {state}",
+    blurb: "Licensed in 17 states with streamlined escrow, wire verification, and multi-state refinance capability.",
+  },
+  {
+    format: "Metropolitan Abstract & Title of {state}",
+    blurb: "Specialty title research and curative work for complex transactions — probate, foreclosure, and boundary disputes.",
+  },
+  {
+    format: "{state} Guaranty Title Trust",
+    blurb: "Large-account closings, commercial lending, and escrow trust services with SOC 2 Type II cyber controls.",
+  },
+  {
+    format: "Cornerstone Title of {state}",
+    blurb: "Veteran-owned settlement agency specializing in first-time buyer and VA loan transactions statewide.",
+  },
+  {
+    format: "{state} National Title Group",
+    blurb: "Regional underwriter with attorney-led closings and same-week title commitment turnaround.",
+  },
+  {
+    format: "Bluebonnet Title &amp; Abstract",
+    blurb: "Boutique closing firm delivering white-glove service for luxury and relocation transactions.",
   },
 ];
 
@@ -93,18 +117,26 @@ function slug(s: string): string {
   return s.toLowerCase().replace(/[^a-z0-9]+/g, "");
 }
 
+function hash(s: string): number {
+  let h = 0;
+  for (let i = 0; i < s.length; i++) h = (h * 31 + s.charCodeAt(i)) | 0;
+  return Math.abs(h);
+}
+
 export function getStatePartners(stateCode: string, stateName: string): StatePartner[] {
   const cities = cityByState[stateCode] || ["Capital City", "Metro Area", "Downtown"];
-  return demoTemplates.map((t, i) => {
+  const offset = hash(stateCode) % demoTemplates.length;
+  const selected: Template[] = [0, 1, 2].map((i) => demoTemplates[(offset + i) % demoTemplates.length]);
+  return selected.map((t, i) => {
     const city = cities[i] || cities[0];
-    const combined = `${stateName} ${t.suffix}`;
+    const name = t.format.replace("{state}", stateName);
     return {
       id: `${stateCode}-${i}`,
-      name: combined,
+      name,
       city,
       blurb: t.blurb,
       phone: "(555) 000-0000",
-      website: `https://example.com/${slug(combined)}`,
+      website: `https://example.com/${slug(name)}`,
       isDemo: true,
     };
   });
