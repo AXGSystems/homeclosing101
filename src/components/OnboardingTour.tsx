@@ -214,7 +214,7 @@ export default function OnboardingTour() {
         <div className="pointer-events-none absolute -inset-3 rounded-[2rem] bg-[#0d3a5c]/55 blur-2xl" />
 
         {/* Glass card */}
-        <div className="relative w-full overflow-hidden rounded-3xl border border-white/30 bg-gradient-to-br from-[#0d3a5c]/75 via-[#0a8ebc]/55 to-alta-teal/55 backdrop-blur-2xl ring-1 ring-[#0d3a5c]/40 shadow-[0_20px_60px_rgba(10,30,60,0.55)]">
+        <div className="relative w-full overflow-hidden rounded-3xl border border-white/25 bg-gradient-to-br from-[#0d3a5c]/45 via-[#0a8ebc]/30 to-alta-teal/30 backdrop-blur-2xl ring-1 ring-[#0d3a5c]/25 shadow-[0_20px_60px_rgba(10,30,60,0.4)]">
         {/* Top shimmer bar — visible white-on-glass */}
         <div className="h-[3px] bg-gradient-to-r from-transparent via-white/80 to-transparent" />
 
