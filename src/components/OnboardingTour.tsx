@@ -218,8 +218,8 @@ export default function OnboardingTour() {
         {/* Top shimmer bar — visible white-on-glass */}
         <div className="h-[3px] bg-gradient-to-r from-transparent via-white/80 to-transparent" />
 
-        {/* Welcome banner — ALTA navy */}
-        <div className="relative flex items-center justify-center px-12 py-4 border-b border-white/10 bg-[#1a2744]">
+        {/* Welcome banner — glass, matches footer */}
+        <div className="relative flex items-center justify-center px-12 py-4 border-b border-white/10 bg-white/5 backdrop-blur-xl">
           <p className="text-[12px] text-center text-white/90 font-semibold tracking-wide">
             Welcome to <span className="text-white font-bold">HomeClosing101</span>
             <span className="text-white/55"> — an ALTA educational initiative for homebuyers</span>
