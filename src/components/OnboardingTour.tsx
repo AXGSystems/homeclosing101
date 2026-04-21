@@ -339,8 +339,7 @@ export default function OnboardingTour() {
             <img
               src={sponsor.logo}
               alt={sponsor.name}
-              className="h-5 w-auto object-contain opacity-95"
-              style={{ filter: "brightness(0) invert(1)" }}
+              className="h-5 w-auto object-contain"
               onError={(e) => { e.currentTarget.style.display = "none"; }}
             />
             <span className="text-[12px] font-semibold text-white/90">{sponsor.name}</span>
