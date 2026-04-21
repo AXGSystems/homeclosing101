@@ -220,8 +220,8 @@ export default function OnboardingTour() {
 
         {/* Welcome banner — glass, matches footer */}
         <div className="relative flex items-center justify-center px-12 py-4 border-b border-white/10 bg-white/5 backdrop-blur-xl">
-          <p className="text-[12px] text-center text-white/90 font-semibold tracking-wide">
-            Welcome to <span className="text-white font-bold">HomeClosing101</span>
+          <p className="text-sm sm:text-base text-center text-white/90 font-semibold tracking-wide">
+            Welcome to <span className="text-white font-bold">HomeClosing<span className="text-[#1a2744]">101</span></span>
             <span className="text-white/55"> — an ALTA educational initiative for homebuyers</span>
           </p>
           <button
@@ -235,7 +235,7 @@ export default function OnboardingTour() {
           </button>
         </div>
 
-        <div key={contentKey.current} className="px-6 pt-8 pb-2 sm:px-10 sm:pt-10 animate-[fadeIn_400ms_ease-out]">
+        <div key={contentKey.current} className="px-6 pt-5 pb-2 sm:px-10 sm:pt-6 animate-[fadeIn_400ms_ease-out]">
           {/* Glowing icon tile — per-slide accent color */}
           <div className="relative mx-auto w-24 h-24 mb-6">
             <div
