@@ -237,16 +237,16 @@ export default function OnboardingTour() {
 
         <div key={contentKey.current} className="px-6 pt-5 pb-2 sm:px-10 sm:pt-6 animate-[fadeIn_400ms_ease-out]">
           {/* Glowing icon tile — per-slide accent color */}
-          <div className="relative mx-auto w-24 h-24 mb-6">
+          <div className="relative mx-auto w-[77px] h-[77px] mb-5">
             <div
-              className="absolute -inset-3 rounded-[1.75rem] blur-2xl animate-pulse"
+              className="absolute -inset-3 rounded-[1.5rem] blur-2xl animate-pulse"
               style={{ backgroundColor: `${slideColors[current]}99`, animationDuration: "3.5s" }}
             />
             <div
-              className="relative w-24 h-24 rounded-2xl border border-white/40 flex items-center justify-center text-white"
+              className="relative w-[77px] h-[77px] rounded-2xl border border-white/40 flex items-center justify-center text-white"
               style={{
                 background: `linear-gradient(135deg, ${slideColors[current]}, ${slideColors[current]}cc)`,
-                boxShadow: `0 10px 30px ${slideColors[current]}88, inset 0 1px 0 rgba(255,255,255,0.3)`,
+                boxShadow: `0 8px 24px ${slideColors[current]}88, inset 0 1px 0 rgba(255,255,255,0.3)`,
               }}
             >
               {slide.icon}
