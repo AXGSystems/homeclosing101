@@ -234,8 +234,34 @@ export default function OnboardingTour() {
           </p>
 
           {/* Title */}
-          <h2 className="text-2xl sm:text-3xl font-bold text-white text-center mb-4 tracking-tight drop-shadow-[0_2px_12px_rgba(10,142,188,0.4)]">
-            {slide.title}
+          <h2
+            className="text-2xl sm:text-3xl font-bold text-center mb-4 tracking-tight drop-shadow-[0_2px_12px_rgba(10,142,188,0.4)]"
+            style={{
+              backgroundImage: `linear-gradient(135deg, #ffffff 40%, ${slideColors[current]})`,
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+              backgroundClip: "text",
+              color: "transparent",
+            }}
+          >
+            {slide.title.includes("101") ? (
+              <>
+                {slide.title.split("101")[0]}
+                <span
+                  style={{
+                    backgroundImage: "none",
+                    WebkitTextFillColor: "#c0392b",
+                    color: "#c0392b",
+                    textShadow: "0 0 12px rgba(192,57,43,0.5)",
+                  }}
+                >
+                  101
+                </span>
+                {slide.title.split("101")[1]}
+              </>
+            ) : (
+              slide.title
+            )}
           </h2>
 
           {/* Body — word-by-word fade in */}
