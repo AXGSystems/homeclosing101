@@ -166,15 +166,15 @@ export default function OnboardingTour() {
       {/* Subtle teal wash — keeps main page visible */}
       <div className="absolute inset-0 bg-alta-teal/10 backdrop-blur-[2px]" />
 
-      {/* Glass card — teal tint matching site palette */}
+      {/* Glass card — teal + navy gradient matching site palette */}
       <div
-        className={`relative w-full max-w-xl overflow-hidden rounded-3xl border border-white/30 bg-gradient-to-br from-[#0a8ebc]/70 via-[#0a8ebc]/55 to-alta-teal/60 backdrop-blur-2xl shadow-[0_0_80px_rgba(10,142,188,0.35)] ring-1 ring-white/20 transition-all duration-500 ${
+        className={`relative w-full max-w-xl overflow-hidden rounded-3xl border border-white/30 bg-gradient-to-br from-[#0d3a5c]/75 via-[#0a8ebc]/55 to-alta-teal/55 backdrop-blur-2xl shadow-[0_0_80px_rgba(10,60,110,0.45)] ring-1 ring-white/20 transition-all duration-500 ${
           mounted ? "translate-y-0 scale-100" : "translate-y-6 scale-95"
         }`}
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Top shimmer bar */}
-        <div className="h-[2px] bg-gradient-to-r from-transparent via-alta-teal to-transparent" />
+        {/* Top shimmer bar — tricolor with red accent */}
+        <div className="h-[2px] bg-gradient-to-r from-[#943030] via-alta-teal to-[#d4a843]" />
 
         {/* Close X button */}
         <div className="flex justify-end px-4 pt-3">
@@ -199,8 +199,8 @@ export default function OnboardingTour() {
           </div>
 
           {/* Slide counter */}
-          <p className="text-[10px] text-alta-teal font-bold uppercase tracking-[0.25em] text-center mb-3">
-            <span className="text-white/90">{current + 1}</span>
+          <p className="text-[10px] font-bold uppercase tracking-[0.25em] text-center mb-3">
+            <span className="text-[#ff6b6b] drop-shadow-[0_0_8px_rgba(148,48,48,0.6)]">{current + 1}</span>
             <span className="text-white/40"> / {slides.length}</span>
           </p>
 
@@ -244,7 +244,7 @@ export default function OnboardingTour() {
                 aria-label={`Go to slide ${i + 1}`}
                 className={`rounded-full transition-all duration-300 ${
                   i === current
-                    ? "w-8 h-2 bg-gradient-to-r from-alta-teal to-[#0a8ebc] shadow-[0_0_12px_rgba(10,142,188,0.6)]"
+                    ? "w-8 h-2 bg-gradient-to-r from-[#943030] via-alta-teal to-[#0d3a5c] shadow-[0_0_12px_rgba(10,142,188,0.6)]"
                     : "w-2 h-2 bg-white/25 hover:bg-white/50"
                 }`}
               />
