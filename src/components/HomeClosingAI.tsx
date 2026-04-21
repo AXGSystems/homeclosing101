@@ -367,6 +367,15 @@ export default function HomeClosingAI() {
 
   useEffect(() => {
     try {
+      // One-time layout reset: clear any saved position/size from prior
+      // versions so everyone gets the new landscape default.
+      const LAYOUT_VERSION = '3';
+      if (localStorage.getItem('hc101-ai-layout-v') !== LAYOUT_VERSION) {
+        localStorage.removeItem('hc101-ai-position');
+        localStorage.removeItem('hc101-ai-size');
+        localStorage.setItem('hc101-ai-layout-v', LAYOUT_VERSION);
+        return;
+      }
       const p = localStorage.getItem('hc101-ai-position');
       if (p) {
         const pos = JSON.parse(p);
