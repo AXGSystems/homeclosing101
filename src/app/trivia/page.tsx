@@ -7,6 +7,8 @@ import { useAchievements } from "@/components/AchievementSystem";
 import FirstTimeBuyerCTA from "@/components/FirstTimeBuyerCTA";
 import SaveToFolderBtn from "@/components/SaveToFolderBtn";
 import ShareButtons from "@/components/ShareButtons";
+import { InlineAd } from "@/components/EliteProviders";
+import SponsorTip from "@/components/SponsorTip";
 
 /* ═══════════════════════════════════════════════════════
    ACHIEVEMENTS SECTION
@@ -389,6 +391,8 @@ export default function TriviaPage() {
             </button>
           </div>
 
+          <SponsorTip context="closing" />
+
           {/* ══ GAME OVER SCREEN ══ */}
           {gameOver && (
             <div className="mb-10 p-8 bg-gradient-to-br from-alta-light to-white rounded-2xl border border-gray-100 shadow-lg text-center">
@@ -633,6 +637,8 @@ export default function TriviaPage() {
               </div>
             </div>
           )}
+
+          <InlineAd />
 
           <FirstTimeBuyerCTA />
         </div>

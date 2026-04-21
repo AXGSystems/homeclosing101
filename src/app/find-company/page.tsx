@@ -96,7 +96,7 @@ const tips = [
     desc: "A good title company will have wire verification technology and clear fraud prevention processes.",
     gradient: "from-[#943030] to-[#5b3a8c]",
     modalContent: {
-      guidance: "Wire fraud is one of the biggest threats in real estate transactions. Criminals intercept emails between buyers and settlement agents, then send fraudulent wire instructions. According to the FBI's Internet Crime Complaint Center (IC3), real estate wire fraud losses exceeded $446 million in 2023. A reputable title company will have multiple layers of protection and will never send wire instructions by email alone.",
+      guidance: "Wire fraud is one of the biggest threats in real estate transactions. Criminals intercept emails between buyers and settlement agents, then send fraudulent wire instructions. According to the FBI's Internet Crime Complaint Center (IC3), real estate wire fraud losses topped $275.1 million in 2025. A reputable title company will have multiple layers of protection and will never send wire instructions by email alone.",
       questions: [
         "How do you transmit wire instructions to buyers?",
         "Do you use a secure wire verification platform (such as CertifID or similar)?",

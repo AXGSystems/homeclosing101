@@ -6,6 +6,8 @@ import PageHero from "@/components/PageHero";
 import PrintButton from "@/components/PrintButton";
 import SaveToFolderBtn from "@/components/SaveToFolderBtn";
 import FirstTimeBuyerCTA from "@/components/FirstTimeBuyerCTA";
+import { InlineAd } from "@/components/EliteProviders";
+import SponsorTip from "@/components/SponsorTip";
 
 // export const metadata: Metadata = { ... } — cannot use with "use client"
 // Title set via document.title in useEffect or head component; SEO handled by layout template
@@ -355,6 +357,8 @@ export default function EmergencyContactsPage() {
             ))}
           </div>
 
+          <InlineAd />
+
           {/* ============================================= */}
           {/* INDUSTRY ORGANIZATIONS */}
           {/* ============================================= */}
@@ -601,6 +605,8 @@ export default function EmergencyContactsPage() {
               </div>
             ))}
           </div>
+
+          <SponsorTip context="fraud" />
 
           <div className="h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent my-8" />
 
