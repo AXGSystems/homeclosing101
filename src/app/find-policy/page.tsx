@@ -290,7 +290,7 @@ export default function FindPolicyPage() {
                   <div className="flex-1 px-5 py-4 text-white min-w-0">
                     <p className="text-[10px] font-semibold uppercase tracking-widest text-white/60">{sf?.nickname || ''}</p>
                     <h3 className="text-xl sm:text-2xl font-bold truncate">{selectedDept.state}</h3>
-                    <p className="text-xs text-white/70 mt-0.5">{selectedDept.department}</p>
+                    <p className="text-sm sm:text-base font-semibold text-white/95 mt-0.5 truncate">{selectedDept.department}</p>
                   </div>
                   {/* Stats */}
                   <div className="hidden sm:flex flex-col items-center justify-center px-5 border-l border-white/20">
@@ -302,7 +302,10 @@ export default function FindPolicyPage() {
                 <div className="bg-white p-5">
                   <div className="flex items-start gap-3 mb-4">
                     <svg className="w-4 h-4 text-alta-gray shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" /><path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" /></svg>
-                    <p className="text-sm text-alta-gray">{selectedDept.address}</p>
+                    <div>
+                      <p className="text-sm font-bold text-alta-navy leading-tight">{selectedDept.state} {selectedDept.department}</p>
+                      <p className="text-sm text-alta-gray mt-0.5">{selectedDept.address}</p>
+                    </div>
                   </div>
                   {/* State closing details */}
                   {selectedDept.closingType && (
