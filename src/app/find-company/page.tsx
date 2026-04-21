@@ -5,6 +5,7 @@ import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import PageHero from "@/components/PageHero";
 import SponsorSidebar from "@/components/SponsorSidebar";
+import StatePartners from "@/components/StatePartners";
 import FirstTimeBuyerCTA from "@/components/FirstTimeBuyerCTA";
 import { InlineAd } from "@/components/EliteProviders";
 import SaveToFolderBtn from "@/components/SaveToFolderBtn";
@@ -462,9 +463,15 @@ function FindCompanyContent() {
             <FirstTimeBuyerCTA />
           </div>
 
-          {/* Right sidebar — sponsor ads */}
+          {/* Right sidebar — sponsor ads + state partners */}
           <aside className="hidden lg:block">
             <SponsorSidebar />
+            {hasSearched && selectedState && (
+              <StatePartners
+                stateCode={selectedState}
+                stateName={states.find((s) => s.code === selectedState)?.name || selectedState}
+              />
+            )}
           </aside>
         </div>
       </div>
