@@ -556,7 +556,13 @@ export default function HomeClosingAI() {
             onClick={() => setOpen(true)}
             className="bg-gradient-to-r from-alta-navy to-alta-teal text-white px-5 py-3 shadow-2xl hover:brightness-110 transition-all duration-300 flex items-center gap-2.5 group w-full justify-center"
           >
-            <Sparkles className="w-4 h-4 text-white/80 group-hover:rotate-12 transition-transform" />
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/logos/alta.svg"
+              alt="ALTA"
+              className="h-4 w-auto group-hover:scale-105 transition-transform"
+              style={{ filter: "brightness(0) invert(1)" }}
+            />
             <span className="font-bold text-sm">Ask HomeClosing101</span>
           </button>
           {/* Date & weather bottom tab */}
@@ -619,8 +625,9 @@ export default function HomeClosingAI() {
             title={isExpanded ? '' : 'Drag to move'}
           >
             <div className="flex items-center gap-3 pointer-events-none">
-              <div className="w-8 h-8 rounded-xl bg-alta-teal/30 flex items-center justify-center">
-                <Sparkles className="w-4 h-4 text-white" />
+              <div className="w-10 h-10 rounded-xl bg-white flex items-center justify-center shrink-0 shadow-md">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src="/logos/alta.svg" alt="ALTA" className="h-4 w-auto" />
               </div>
               <div>
                 <div className="font-bold text-sm">HomeClosing101</div>
