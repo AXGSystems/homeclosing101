@@ -5,6 +5,13 @@ import AnimatedCounter from "@/components/AnimatedCounter";
 import HomepageTestimonials from "@/components/HomepageTestimonials";
 import StatCard from "@/components/StatCard";
 import SponsorShowcase from "@/components/SponsorShowcase";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "HomeClosing101 — The Complete Home Closing Guide",
+  description:
+    "Your independent, ALTA-backed guide to the home closing process — calculators, checklists, glossary, and expert protection against wire fraud and title theft.",
+};
 
 const features = [
   {
