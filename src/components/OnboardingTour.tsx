@@ -166,19 +166,22 @@ export default function OnboardingTour() {
       {/* Subtle teal wash — keeps main page visible */}
       <div className="absolute inset-0 bg-alta-teal/10 backdrop-blur-[2px]" />
 
-      {/* Glass card — navy->teal glass, red halo, navy accent ring */}
+      {/* Wrapper that positions the auras behind the card */}
       <div
-        className={`relative w-full max-w-xl overflow-hidden rounded-3xl border border-white/30 bg-gradient-to-br from-[#0d3a5c]/75 via-[#0a8ebc]/55 to-alta-teal/55 backdrop-blur-2xl ring-1 ring-[#0d3a5c]/40 transition-all duration-500 ${
+        className={`relative w-full max-w-xl transition-all duration-500 ${
           mounted ? "translate-y-0 scale-100" : "translate-y-6 scale-95"
         }`}
-        style={{
-          boxShadow:
-            "0 0 50px rgba(10,142,188,0.35), 0 0 120px rgba(148,48,48,0.28), 0 20px 60px rgba(10,30,60,0.45)",
-        }}
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Top shimmer bar */}
-        <div className="h-[2px] bg-gradient-to-r from-transparent via-alta-teal to-transparent" />
+        {/* Red aura behind the card */}
+        <div className="pointer-events-none absolute -inset-6 rounded-[2rem] bg-[#943030]/45 blur-3xl animate-pulse" style={{ animationDuration: "4s" }} />
+        {/* Navy underlay */}
+        <div className="pointer-events-none absolute -inset-3 rounded-[2rem] bg-[#0d3a5c]/55 blur-2xl" />
+
+        {/* Glass card */}
+        <div className="relative w-full overflow-hidden rounded-3xl border border-white/30 bg-gradient-to-br from-[#0d3a5c]/75 via-[#0a8ebc]/55 to-alta-teal/55 backdrop-blur-2xl ring-1 ring-[#0d3a5c]/40 shadow-[0_20px_60px_rgba(10,30,60,0.55)]">
+        {/* Top shimmer bar — visible white-on-glass */}
+        <div className="h-[3px] bg-gradient-to-r from-transparent via-white/80 to-transparent" />
 
         {/* Close X button */}
         <div className="flex justify-end px-4 pt-3">
@@ -301,6 +304,7 @@ export default function OnboardingTour() {
               </button>
             )}
           </div>
+        </div>
         </div>
       </div>
 
