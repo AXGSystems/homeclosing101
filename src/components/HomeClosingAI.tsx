@@ -610,7 +610,7 @@ export default function HomeClosingAI() {
               ? ''
               : position
                 ? ''
-                : 'top-1/2 -translate-y-1/2 right-4 sm:right-14 w-[calc(100vw-1rem)] sm:w-[460px] max-w-[460px] h-[70vh] sm:h-[540px] max-h-[calc(100vh-6rem)]'
+                : 'top-1/2 -translate-y-1/2 right-4 sm:right-8 w-[calc(100vw-1rem)] sm:w-[540px] max-w-[540px] h-[calc(100vh-6rem)] sm:h-[460px] max-h-[calc(100vh-6rem)]'
           }`}
           style={chatPanelStyle}
           data-ai-container
