@@ -163,6 +163,33 @@ export default function FirstTimeBuyersPage() {
             <p className="text-xs text-alta-gray"><strong className="text-[#8b6914]">Did you know?</strong> The CFPB found that buyers who compared Loan Estimates from 3 or more lenders saved an average of $300 per year — roughly $3,500 over the first five years — compared to those who went with the first lender they contacted.</p>
           </div>
 
+          {/* MBA Home Loan Learning Center cross-reference */}
+          <div className="my-6 p-5 rounded-2xl border border-[#c5cfe4] bg-gradient-to-br from-[#e8ecf5] to-white shadow-sm">
+            <div className="flex items-start gap-4">
+              <div className="w-12 h-12 rounded-xl bg-[#003366]/10 text-[#003366] flex items-center justify-center shrink-0">
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0012 9.75c-2.551 0-5.056.2-7.5.582V21" />
+                </svg>
+              </div>
+              <div className="flex-1">
+                <p className="text-[10px] font-semibold text-[#003366] uppercase tracking-widest mb-1">Complementary Resource</p>
+                <h3 className="text-base font-bold text-alta-navy mb-1.5">MBA Home Loan Learning Center</h3>
+                <p className="text-sm text-alta-gray leading-relaxed mb-3">
+                  HomeClosing101 covers your closing — but once you&apos;re comparing lenders and loan products, head to the Mortgage Bankers Association&apos;s consumer education site for credit-report guidance, rent-vs-own analysis, and plain-English mortgage explainers. MBA and ALTA partner on industry advocacy (including RON in 45 states).
+                </p>
+                <a
+                  href="https://www.mba.org/home-loan-learning-center"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#003366] hover:text-alta-teal transition-colors"
+                >
+                  Visit MBA Home Loan Learning Center
+                  <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
+                </a>
+              </div>
+            </div>
+          </div>
+
           {/* Down payment assistance */}
           <h2 className="text-2xl font-bold text-alta-navy mb-4">Down Payment Assistance Programs</h2>
           <p className="text-sm text-alta-gray mb-4 leading-relaxed">Many first-time buyers don&apos;t realize that thousands of programs exist to help with down payments and closing costs. These programs are offered by state housing finance agencies, counties, cities, and nonprofits. Eligibility typically depends on income, purchase price, and location.</p>
