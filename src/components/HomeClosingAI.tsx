@@ -309,6 +309,20 @@ export default function HomeClosingAI() {
   const chatBodyRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    const lastMsg = messages[messages.length - 1];
+    // For a new assistant response, scroll to the top of that message so
+    // the user reads it from the beginning instead of landing at the end.
+    if (lastMsg?.role === 'assistant' && !loading && !typing) {
+      const chat = chatBodyRef.current;
+      if (chat) {
+        const nodes = chat.querySelectorAll('[data-message-role="assistant"]');
+        const last = nodes[nodes.length - 1] as HTMLElement | undefined;
+        if (last) {
+          last.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          return;
+        }
+      }
+    }
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages, typing, loading]);
 
@@ -721,7 +735,11 @@ export default function HomeClosingAI() {
               </div>
             )}
             {messages.map((msg, i) => (
-              <div key={i} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
+              <div
+                key={i}
+                data-message-role={msg.role}
+                className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
+              >
                 <div className={`max-w-[85%] rounded-2xl px-4 py-3 text-sm leading-relaxed ${
                   msg.role === 'user'
                     ? 'bg-alta-navy text-white rounded-br-md'
