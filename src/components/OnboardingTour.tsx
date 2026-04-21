@@ -244,24 +244,7 @@ export default function OnboardingTour() {
               color: "transparent",
             }}
           >
-            {slide.title.includes("101") ? (
-              <>
-                {slide.title.split("101")[0]}
-                <span
-                  style={{
-                    backgroundImage: "none",
-                    WebkitTextFillColor: "#c0392b",
-                    color: "#c0392b",
-                    textShadow: "0 0 12px rgba(192,57,43,0.5)",
-                  }}
-                >
-                  101
-                </span>
-                {slide.title.split("101")[1]}
-              </>
-            ) : (
-              slide.title
-            )}
+            {slide.title}
           </h2>
 
           {/* Body — word-by-word fade in */}
