@@ -50,11 +50,12 @@ export default function StatePartners({ stateCode, stateName }: StatePartnersPro
   return (
     <div className="print:hidden">
       <a
-        href={p.website}
-        target="_blank"
-        rel="noopener noreferrer"
-        onClick={() => trackAdEvent(AD_KEY, p.name, "click")}
-        className={`group block p-4 bg-white rounded-xl border border-gray-100 hover:border-alta-teal/30 hover:shadow-md transition-all relative ${fading ? "opacity-0" : "opacity-100"}`}
+        href="#"
+        onClick={(e) => {
+          e.preventDefault();
+          trackAdEvent(AD_KEY, p.name, "click");
+        }}
+        className={`group block p-4 bg-white rounded-xl border border-gray-100 hover:border-alta-teal/30 hover:shadow-md transition-all relative cursor-default ${fading ? "opacity-0" : "opacity-100"}`}
         style={{ transition: "opacity 350ms ease, box-shadow 200ms ease, border-color 200ms ease" }}
       >
         {/* Demo ribbon */}
