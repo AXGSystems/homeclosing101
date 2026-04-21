@@ -124,9 +124,6 @@ export default function WhatToExpectPage() {
                   <div className="relative h-48 md:h-56 rounded-2xl overflow-hidden shadow-md">
                     <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url('${step.image}')` }} />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
-                    <div className="absolute top-3 left-3 w-9 h-9 rounded-full bg-alta-teal text-white flex items-center justify-center font-bold text-sm shadow-lg">
-                      {i + 1}
-                    </div>
                   </div>
                 </div>
                 {/* Content */}
