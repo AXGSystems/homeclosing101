@@ -365,12 +365,18 @@ export default function OnboardingTour() {
                 <span
                   className="inline-block"
                   style={{
-                    backgroundImage: `linear-gradient(160deg, rgba(255,255,255,0.95) 0%, ${slideColors[current]} 38%, ${slideColors[current]} 62%, rgba(0,0,0,0.35) 100%)`,
-                    WebkitBackgroundClip: "text",
-                    WebkitTextFillColor: "transparent",
-                    backgroundClip: "text",
-                    color: "transparent",
-                    filter: `drop-shadow(0 2px 3px rgba(0,0,0,0.45)) drop-shadow(0 0 10px ${slideColors[current]}55)`,
+                    color: slideColors[current],
+                    textShadow: [
+                      // bright top-edge highlight — light source from above
+                      "0 -1px 0 rgba(255,255,255,0.95)",
+                      "-1px -1px 0 rgba(255,255,255,0.55)",
+                      // sharp chiseled shadow below — stamped edge
+                      "0 1px 0 rgba(0,0,0,0.55)",
+                      "1px 2px 0 rgba(0,0,0,0.35)",
+                      // diffuse drop below for "pressed into card" depth
+                      "0 4px 6px rgba(0,0,0,0.45)",
+                    ].join(", "),
+                    filter: `drop-shadow(0 0 12px ${slideColors[current]}40)`,
                   }}
                 >
                   {firstWord}
