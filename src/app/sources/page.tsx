@@ -73,7 +73,6 @@ const sources = [
       { name: "Alliant National Title Insurance Co.", url: "https://alliantnational.com/", used: "2026 fraud and notarization law changes" },
       { name: "Plymouth Title Insurance", url: "https://www.plymouthtitleinsurance.com/", used: "2026 wire fraud protection strategies" },
       { name: "Flagpedia.net", url: "https://flagpedia.net/", used: "U.S. state flag images (public domain)" },
-      { name: "Unsplash", url: "https://unsplash.com/", used: "Photography used in hero banners, feature cards, and section headers (Unsplash License — free for commercial use)" },
     ],
   },
 ];
