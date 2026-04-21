@@ -219,7 +219,7 @@ export default function OnboardingTour() {
         <div className="h-[3px] bg-gradient-to-r from-transparent via-white/80 to-transparent" />
 
         {/* Welcome banner — glass, matches footer */}
-        <div className="relative flex items-center justify-center px-10 py-3 border-b border-white/10 bg-white/5 backdrop-blur-xl">
+        <div className="relative flex items-center justify-center px-6 py-4 sm:px-10 border-b border-white/10 bg-white/5 backdrop-blur-xl">
           <p className="text-[12px] sm:text-[13px] text-center text-white font-semibold tracking-wide whitespace-nowrap">
             Welcome to HomeClosing101 — an ALTA educational initiative for homebuyers
           </p>
