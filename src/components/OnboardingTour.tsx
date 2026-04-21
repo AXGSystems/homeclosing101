@@ -180,6 +180,7 @@ export default function OnboardingTour() {
   const goTo = (i: number) => {
     contentKey.current += 1;
     setCurrent(i);
+    setSponsorIdx((prev) => (prev + 1) % tourSponsors.length);
   };
 
   if (!show) return null;
