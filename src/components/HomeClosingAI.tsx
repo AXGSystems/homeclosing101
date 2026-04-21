@@ -563,6 +563,8 @@ export default function HomeClosingAI() {
               className="h-4 w-auto group-hover:scale-105 transition-transform"
               style={{ filter: "brightness(0) invert(1)" }}
             />
+            <span className="w-px h-4 bg-white/30" />
+            <Sparkles className="w-4 h-4 text-white/80 group-hover:rotate-12 transition-transform" />
             <span className="font-bold text-sm">Ask HomeClosing101</span>
           </button>
           {/* Date & weather bottom tab */}
