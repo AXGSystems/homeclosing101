@@ -235,7 +235,7 @@ export default function OnboardingTour() {
 
           {/* Title */}
           <h2
-            className="text-2xl sm:text-3xl font-bold text-center mb-4 tracking-tight drop-shadow-[0_2px_12px_rgba(10,142,188,0.4)]"
+            className="text-2xl sm:text-3xl font-bold text-center mb-4 tracking-tight"
             style={{
               backgroundImage: `linear-gradient(135deg, #ffffff 40%, ${slideColors[current]})`,
               WebkitBackgroundClip: "text",
@@ -361,8 +361,8 @@ export default function OnboardingTour() {
           to   { opacity: 1; transform: translateY(0); }
         }
         @keyframes wordFade {
-          from { opacity: 0; transform: translateY(4px); filter: blur(4px); }
-          to   { opacity: 1; transform: translateY(0); filter: blur(0); }
+          from { opacity: 0; transform: translateY(4px); }
+          to   { opacity: 1; transform: translateY(0); }
         }
       `}</style>
     </div>
