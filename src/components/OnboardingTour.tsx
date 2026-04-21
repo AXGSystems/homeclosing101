@@ -213,13 +213,29 @@ export default function OnboardingTour() {
         {/* Navy underlay */}
         <div className="pointer-events-none absolute -inset-3 rounded-[2rem] bg-[#0d3a5c]/55 blur-2xl" />
 
+        {/* External close tab */}
+        <div className="absolute -top-3 -right-3 z-20 group/close">
+          <button
+            onClick={dismiss}
+            className="w-9 h-9 rounded-full bg-[#1a2744]/95 border border-white/30 backdrop-blur-xl text-white shadow-xl hover:bg-[#943030] hover:scale-110 transition-all flex items-center justify-center"
+            aria-label="Close tour"
+          >
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+          <span className="absolute right-0 top-full mt-2 px-2.5 py-1 bg-[#1a2744] text-white text-[10px] font-semibold uppercase tracking-[0.15em] rounded-md opacity-0 group-hover/close:opacity-100 pointer-events-none transition-opacity whitespace-nowrap shadow-lg border border-white/10">
+            Click to close
+          </span>
+        </div>
+
         {/* Glass card */}
         <div className="relative w-full overflow-hidden rounded-3xl border border-white/25 bg-gradient-to-br from-[#0d3a5c]/45 via-[#0a8ebc]/30 to-alta-teal/30 backdrop-blur-2xl ring-1 ring-[#0d3a5c]/25 shadow-[0_20px_60px_rgba(10,30,60,0.4)]">
         {/* Top shimmer bar — visible white-on-glass */}
         <div className="h-[3px] bg-gradient-to-r from-transparent via-white/80 to-transparent" />
 
         {/* Welcome banner — glass, matches footer */}
-        <div className="relative flex items-center justify-center px-10 py-4 sm:px-14 border-b border-white/10 bg-white/5 backdrop-blur-xl">
+        <div className="relative flex items-center justify-center px-6 py-4 sm:px-10 border-b border-white/10 bg-white/5 backdrop-blur-xl">
           <p className="text-[12px] sm:text-[13px] text-center text-white font-semibold tracking-wide whitespace-nowrap flex items-center justify-center gap-1.5">
             <span>Welcome to HomeClosing101 — an</span>
             {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -231,15 +247,6 @@ export default function OnboardingTour() {
             />
             <span>educational initiative for homebuyers</span>
           </p>
-          <button
-            onClick={dismiss}
-            className="absolute right-3 sm:right-4 top-1/2 -translate-y-1/2 p-1.5 text-white/70 hover:text-white hover:bg-white/15 rounded-lg transition-colors"
-            aria-label="Close tour"
-          >
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-            </svg>
-          </button>
         </div>
 
         <div key={contentKey.current} className="px-6 pt-5 pb-2 sm:px-10 sm:pt-6 animate-[fadeIn_400ms_ease-out]">
