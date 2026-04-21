@@ -356,41 +356,164 @@ export default function FindPolicyPage() {
                   title: "Verify a Title Company's License",
                   body: "Confirm the company is licensed in your state and has no open disciplinary actions before you hand over wire funds.",
                   color: "#0a7ea8",
+                  gradient: "from-[#0a7ea8] to-[#077a9e]",
+                  guidance: "Every state requires title agents, escrow officers, and title insurance underwriters to hold an active license. Before you share personal information or wire a down payment, confirm the company and the individual handling your closing are both in good standing with your state insurance department — and that no disciplinary actions are open against them.",
+                  checklist: [
+                    "Company legal name (not just a DBA) and business address",
+                    "License number and NAIC code of the underwriter",
+                    "Name of the agent handling your specific file",
+                    "Whether the company is ALTA Best Practices certified",
+                  ],
+                  tips: [
+                    "Use the NAIC's Consumer Information Source at insurance.naic.org to cross-check licenses across states.",
+                    "Disciplinary actions are public record — ask for a certified status letter if anything looks off.",
+                    "If the company cannot provide a license number on request, that alone is a red flag.",
+                  ],
                 },
                 {
                   title: "File a Complaint",
                   body: "If a title or settlement agent misled you, overcharged, or mishandled escrow, your state department investigates formally.",
                   color: "#943030",
+                  gradient: "from-[#943030] to-[#7f1d1d]",
+                  guidance: "State insurance departments have formal authority to investigate title and settlement agents. A written complaint triggers a record the department keeps on file, and the company is required to respond within a statutory window (usually 15–30 days). Even if your specific issue is not resolved your way, the filing contributes to a pattern the department tracks.",
+                  checklist: [
+                    "A clear, chronological timeline of what happened",
+                    "Names of every person involved (agent, lender, seller, attorney)",
+                    "Specific dollar amounts in dispute",
+                    "Copies of emails, the Loan Estimate, the Closing Disclosure, and your HUD-1 if applicable",
+                  ],
+                  tips: [
+                    "File in writing for a formal record — most states offer an online complaint portal.",
+                    "Keep a copy of everything you submit, and note the complaint tracking number.",
+                    "Be factual, not emotional. Investigators respond faster to concise timelines than long narratives.",
+                  ],
                 },
                 {
                   title: "Verify Filed Rates",
                   body: "Some states set title insurance premiums by law. Confirm you were charged the correct rate for your transaction.",
                   color: "#2d6b3f",
+                  gradient: "from-[#2d6b3f] to-[#1e4a2a]",
+                  guidance: "About 20 states operate under filed-rate or promulgated-rate title insurance, where every licensed underwriter must charge the same premium for a given purchase price and policy type. If you were charged more than the filed rate, the state department can confirm the correct amount and, depending on the situation, compel a refund.",
+                  checklist: [
+                    "Your Closing Disclosure (CD) showing every fee line",
+                    "Purchase price of the home and loan amount",
+                    "Owner's policy vs. lender's policy amounts (they are separate)",
+                    "Whether you received a simultaneous-issue discount",
+                  ],
+                  tips: [
+                    "In regulated-rate states, the insurance department publishes the filed rate table online.",
+                    "Simultaneous-issue discounts on an owner's policy purchased with a lender's policy are common — verify you got it.",
+                    "If your state is competitive-rate (filed rates vary by company), rate comparison is on you — shop at least 2–3 quotes.",
+                  ],
                 },
                 {
                   title: "Report Wire or Closing Fraud",
                   body: "State insurance fraud units coordinate with the FBI IC3 and your title insurer's claims team when you are targeted.",
                   color: "#8b6914",
+                  gradient: "from-[#8b6914] to-[#705410]",
+                  guidance: "Real estate wire fraud losses topped $275 million in 2025. Your state insurance department has a dedicated fraud unit that coordinates with the FBI's Internet Crime Complaint Center (IC3), your title insurer's claims team, and — if acted on fast enough — the receiving bank to potentially freeze and recover stolen funds.",
+                  checklist: [
+                    "When the fraudulent wire instructions first arrived",
+                    "Exact email addresses used (including any that looked legitimate but were spoofed)",
+                    "Wire routing and account numbers where the money was sent",
+                    "Any follow-up communication from the criminal",
+                  ],
+                  tips: [
+                    "Report immediately — the first 24–72 hours are critical for fund recovery.",
+                    "Also file with IC3 at ic3.gov and notify your bank's fraud department the same day.",
+                    "Do not delete anything — preserve emails, texts, and voicemails as evidence.",
+                  ],
                 },
                 {
                   title: "Dispute a Claim Denial",
                   body: "If you filed a title insurance claim and the carrier denied or underpaid it, the department can review and mediate.",
                   color: "#5b3a8c",
+                  gradient: "from-[#5b3a8c] to-[#4c2f72]",
+                  guidance: "If your title insurer denied a claim — for an unknown lien, boundary dispute, forged deed, undisclosed heir, etc. — or paid you less than expected, your state department can review the carrier's determination, request the claim file, and mediate between you and the insurer. This is often faster and cheaper than litigation.",
+                  checklist: [
+                    "Claim number and date filed",
+                    "Copy of the written denial or underpayment letter",
+                    "Your policy declarations page and full policy",
+                    "Any correspondence with the insurer's claims team",
+                  ],
+                  tips: [
+                    "Always request an internal appeal with the insurer first — most have a formal appeal process.",
+                    "If the internal appeal fails, the state department is your next step before hiring an attorney.",
+                    "Watch the policy's statute of limitations for disputing a claim — typically 1–3 years.",
+                  ],
                 },
                 {
                   title: "Ask Pre-Closing Questions",
                   body: "Call before you close if something feels off — they can clarify what your state requires and what protections apply.",
                   color: "#0a8ebc",
+                  gradient: "from-[#0a8ebc] to-[#0d3a5c]",
+                  guidance: "You don't have to wait until something goes wrong. State insurance departments answer pre-closing questions — from whether a specific fee is customary to whether a closing structure is even legal in your state. They cannot give you legal advice, but they can tell you what consumer protections apply and what the standard practices look like.",
+                  checklist: [
+                    "Your Loan Estimate and (if you have it) Closing Disclosure",
+                    "The name of the title company and closing agent",
+                    "A specific written question — not just 'does this seem right'",
+                    "Your closing date so they know the timeline",
+                  ],
+                  tips: [
+                    "You have the legal right to delay closing if something is unclear — do not feel rushed.",
+                    "Under RESPA you can choose your own title company. If you are being pressured to a specific one, ask why.",
+                    "Document the call — date, name of the person you spoke with, and a summary of their guidance.",
+                  ],
                 },
               ].map((item) => (
-                <div
+                <button
                   key={item.title}
-                  className="p-3.5 rounded-xl border border-gray-100 bg-gradient-to-br from-white to-gray-50/50 hover:shadow-md hover:border-gray-200 transition-all border-l-4"
+                  onClick={() =>
+                    setActiveModal({
+                      title: item.title,
+                      gradient: item.gradient,
+                      content: (
+                        <div className="space-y-5">
+                          <div>
+                            <h3 className="text-sm font-bold text-alta-navy mb-2">Detailed Guidance</h3>
+                            <p className="text-sm text-alta-gray leading-relaxed">{item.guidance}</p>
+                          </div>
+                          <div>
+                            <h3 className="text-sm font-bold text-[#2d6b3f] mb-2">What to Have Ready</h3>
+                            <ul className="space-y-2">
+                              {item.checklist.map((c, i) => (
+                                <li key={i} className="flex items-start gap-2 text-sm text-alta-gray">
+                                  <svg className="w-4 h-4 text-[#2d6b3f] shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75" />
+                                  </svg>
+                                  {c}
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                          <div className="p-4 bg-[#faf4e4] rounded-xl border border-[#e8d9a8]">
+                            <h3 className="text-sm font-bold text-[#8b6914] mb-2">Tips &amp; Best Practices</h3>
+                            <ul className="space-y-2">
+                              {item.tips.map((t, i) => (
+                                <li key={i} className="flex items-start gap-2 text-sm text-alta-gray">
+                                  <span className="w-1.5 h-1.5 rounded-full bg-[#8b6914] mt-1.5 shrink-0" />
+                                  <span>{t}</span>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                        </div>
+                      ),
+                    })
+                  }
+                  className="text-left p-3.5 rounded-xl border border-gray-100 bg-gradient-to-br from-white to-gray-50/50 hover:shadow-md hover:border-gray-200 transition-all border-l-4 group relative"
                   style={{ borderLeftColor: item.color }}
                 >
-                  <h4 className="text-xs font-bold text-alta-navy mb-1">{item.title}</h4>
-                  <p className="text-[11px] text-alta-gray leading-relaxed">{item.body}</p>
-                </div>
+                  <div className="flex items-start justify-between gap-2">
+                    <div className="flex-1">
+                      <h4 className="text-xs font-bold text-alta-navy mb-1">{item.title}</h4>
+                      <p className="text-[11px] text-alta-gray leading-relaxed">{item.body}</p>
+                    </div>
+                    <svg className="w-4 h-4 text-alta-gray/60 shrink-0 group-hover:text-alta-teal transition-colors mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" />
+                    </svg>
+                  </div>
+                </button>
               ))}
             </div>
             <div className="px-5 pb-5">
