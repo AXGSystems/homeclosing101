@@ -676,17 +676,23 @@ export default function HomeClosingAI() {
               const container = (e.currentTarget.parentElement) as HTMLElement | null;
               startDrag(e, container);
             }}
-            className={`bg-gradient-to-r from-alta-navy to-[#0d3a5c] text-white px-5 py-3 flex items-center justify-between flex-shrink-0 ${isExpanded ? '' : 'cursor-move'}`}
+            className={`bg-gradient-to-r from-alta-teal/80 via-[#0a8ebc]/75 to-[#077a9e]/80 backdrop-blur-xl border-b border-white/20 text-white px-5 py-3 flex items-center justify-between flex-shrink-0 ${isExpanded ? '' : 'cursor-move'}`}
             title={isExpanded ? '' : 'Drag to move'}
           >
-            <div className="flex items-center gap-3 pointer-events-none">
-              <div className="w-10 h-10 rounded-xl bg-white flex items-center justify-center shrink-0 shadow-md">
+            <div className="flex items-center gap-3 pointer-events-none min-w-0">
+              <div className="w-9 h-9 rounded-xl bg-white/15 border border-white/25 backdrop-blur-xl flex items-center justify-center shrink-0">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src="/logos/alta.svg" alt="ALTA" className="h-4 w-auto" />
+                <img
+                  src="/logos/alta.svg"
+                  alt="ALTA"
+                  className="h-3.5 w-auto"
+                  style={{ filter: "brightness(0) invert(1)" }}
+                />
               </div>
-              <div>
-                <div className="font-bold text-sm">HomeClosing101</div>
-                <div className="text-[10px] text-white/50">Your Closing Assistant</div>
+              <div className="flex items-baseline gap-2 min-w-0">
+                <span className="font-bold text-sm whitespace-nowrap">HomeClosing101</span>
+                <span className="text-white/40 text-xs">·</span>
+                <span className="text-xs text-white/85 truncate">Your Closing Assistant</span>
               </div>
             </div>
             <div className="flex items-center gap-1.5">
