@@ -362,7 +362,15 @@ export default function OnboardingTour() {
             };
             return (
               <h2 className="text-2xl sm:text-3xl font-bold text-center mb-4 tracking-tight text-white">
-                <span style={{ color: slideColors[current] }}>{firstWord}</span>
+                <span
+                  style={{
+                    color: slideColors[current],
+                    WebkitTextStroke: "0.75px rgba(255,255,255,0.75)",
+                    paintOrder: "stroke fill",
+                  }}
+                >
+                  {firstWord}
+                </span>
                 {renderRest(rest)}
               </h2>
             );
