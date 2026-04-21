@@ -165,6 +165,8 @@ export default function HomePage() {
           <div className="mb-6">
             <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full border border-white/20">
               <span className="text-xs font-medium text-gray-200 uppercase tracking-wider">An ALTA Educational Initiative</span>
+              <span className="w-px h-3 bg-white/25" />
+              <span className="text-xs font-medium text-gray-300 uppercase tracking-wider">In partnership with the title industry</span>
             </div>
           </div>
 
