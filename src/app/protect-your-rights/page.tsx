@@ -19,11 +19,27 @@ const protections = [
   { text: "Undisclosed easements or rights of way", icon: "M9 6.75V15m6-6v8.25m.503 3.498l4.875-2.437c.381-.19.622-.58.622-1.006V4.82c0-.836-.88-1.38-1.628-1.006l-3.869 1.934c-.317.159-.69.159-1.006 0L9.503 3.252a1.125 1.125 0 00-1.006 0L3.622 5.689C3.24 5.88 3 6.27 3 6.695V19.18c0 .836.88 1.38 1.628 1.006l3.869-1.934c.317-.159.69-.159 1.006 0l4.994 2.497c.317.158.69.158 1.006 0z" },
 ];
 
-const caseStudies = [
-  { location: "Missouri", summary: "A couple was saved from foreclosure when their title insurance covered a missed lien from a previous owner.", image: "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=400&q=80" },
-  { location: "Texas", summary: "A builder sold homes with undisclosed liens. Buyers with owner's title insurance were protected.", image: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=400&q=80" },
-  { location: "Virginia", summary: "Criminals used falsified documents to sell properties they didn't own. Title insurance covered losses.", image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=400&q=80" },
-  { location: "California", summary: "A non-profit lost a lawsuit over property ownership. Title insurance covered legal defense and loss.", image: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=400&q=80" },
+const coveredScenarios = [
+  {
+    category: "Hidden Lien",
+    summary: "An unpaid mortgage, tax debt, or mechanic's lien from a previous owner surfaces after closing. An owner's title policy pays to clear the lien or defends your ownership.",
+    image: "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=400&q=80",
+  },
+  {
+    category: "Deed or Document Fraud",
+    summary: "A forged deed, falsified signature, or impersonated seller is used to transfer property fraudulently. Title insurance funds legal defense and covers losses if title is successfully challenged.",
+    image: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=400&q=80",
+  },
+  {
+    category: "Undisclosed Heir",
+    summary: "A long-lost heir or previously unknown party surfaces with a legitimate claim to the property. Your title policy pays the cost of defending your ownership in court.",
+    image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=400&q=80",
+  },
+  {
+    category: "Boundary or Survey Dispute",
+    summary: "A neighbor asserts rights to part of your property based on a survey error, easement, or encroachment. Title insurance covers legal costs and any resulting settlement.",
+    image: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=400&q=80",
+  },
 ];
 
 export default function ProtectYourRightsPage() {
@@ -144,15 +160,18 @@ export default function ProtectYourRightsPage() {
 
           <InlineAd />
 
-          {/* Case studies */}
-          <h2 className="text-2xl font-bold text-alta-navy mb-6">Real-Life Cases</h2>
+          {/* Covered scenarios — educational, not specific cases */}
+          <h2 className="text-2xl font-bold text-alta-navy mb-2">What Title Insurance Covers</h2>
+          <p className="text-sm text-alta-gray mb-6 leading-relaxed">
+            Four of the most common claim scenarios an owner&apos;s title insurance policy protects against. These are illustrative examples of covered situations, not specific documented claims.
+          </p>
           <div className="grid md:grid-cols-2 gap-5 mb-14">
-            {caseStudies.map((cs) => (
-              <div key={cs.location} className="rounded-2xl overflow-hidden shadow-sm border border-gray-100 bg-white tile-interactive">
+            {coveredScenarios.map((cs) => (
+              <div key={cs.category} className="rounded-2xl overflow-hidden shadow-sm border border-gray-100 bg-white tile-interactive">
                 <div className="relative h-36">
                   <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url('${cs.image}')` }} />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                  <span className="absolute bottom-3 left-4 text-xs font-bold text-white bg-alta-teal px-2.5 py-1 rounded-full">{cs.location}</span>
+                  <span className="absolute bottom-3 left-4 text-xs font-bold text-white bg-alta-teal px-2.5 py-1 rounded-full">{cs.category}</span>
                 </div>
                 <div className="p-4">
                   <p className="text-sm text-alta-gray leading-relaxed">{cs.summary}</p>
