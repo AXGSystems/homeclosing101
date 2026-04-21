@@ -603,11 +603,17 @@ export default function HomeClosingAI() {
               <div className="absolute bottom-0 right-8 translate-y-1/2 rotate-45 w-3 h-3 bg-white border-r border-b border-gray-100"></div>
             </div>
           </div>
-          {/* AI button middle */}
+          {/* AI button middle — click-to-chat CTA */}
           <button
             onClick={() => setOpen(true)}
-            className="bg-gradient-to-r from-alta-navy to-alta-teal text-white px-5 py-3 shadow-2xl hover:brightness-110 transition-all duration-300 flex items-center gap-2.5 group w-full justify-center"
+            className="relative bg-gradient-to-r from-alta-navy to-alta-teal text-white px-5 py-3.5 shadow-2xl hover:brightness-110 transition-all duration-300 flex items-center gap-2.5 group w-full justify-center overflow-hidden"
+            aria-label="Open HomeClosing101 AI chat"
           >
+            {/* Live pulse dot — signals the assistant is ready */}
+            <span className="absolute top-2 right-2 flex h-2.5 w-2.5">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#4ade80] opacity-75" />
+              <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-[#22c55e] shadow-[0_0_8px_rgba(74,222,128,0.9)]" />
+            </span>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src="/logos/alta.svg"
@@ -616,8 +622,11 @@ export default function HomeClosingAI() {
               style={{ filter: "brightness(0) invert(1)" }}
             />
             <span className="w-px h-4 bg-white/30" />
-            <Sparkles className="w-4 h-4 text-white/80 group-hover:rotate-12 transition-transform" />
-            <span className="font-bold text-sm">Ask HomeClosing101</span>
+            <Sparkles className="w-4 h-4 text-white/90 animate-pulse group-hover:rotate-12 transition-transform" />
+            <div className="flex flex-col items-start leading-tight">
+              <span className="font-bold text-sm">Ask HomeClosing101</span>
+              <span className="text-[10px] text-white/70 font-medium tracking-wide">Click to chat →</span>
+            </div>
           </button>
           {/* Date & weather bottom tab */}
           <DateWeatherWidget />
