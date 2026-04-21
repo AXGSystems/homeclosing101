@@ -467,10 +467,12 @@ function FindCompanyContent() {
           <aside className="hidden lg:block">
             <SponsorSidebar />
             {hasSearched && selectedState && (
-              <StatePartners
-                stateCode={selectedState}
-                stateName={states.find((s) => s.code === selectedState)?.name || selectedState}
-              />
+              <div className="mt-6">
+                <StatePartners
+                  stateCode={selectedState}
+                  stateName={states.find((s) => s.code === selectedState)?.name || selectedState}
+                />
+              </div>
             )}
           </aside>
         </div>

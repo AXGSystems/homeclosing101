@@ -48,7 +48,7 @@ export default function StatePartners({ stateCode, stateName }: StatePartnersPro
   const p = partners[current];
 
   return (
-    <div className="mt-6 print:hidden">
+    <div className="print:hidden">
       <a
         href={p.website}
         target="_blank"

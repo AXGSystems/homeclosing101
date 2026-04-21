@@ -337,7 +337,7 @@ export default function FindPolicyPage() {
                     </div>
                   </div>
                   {/* Right column — state partner ads */}
-                  <div className="lg:border-l lg:border-gray-100 lg:pl-5 -mt-1">
+                  <div className="lg:border-l lg:border-gray-100 lg:pl-5">
                     <StatePartners stateCode={selectedDept.abbr} stateName={selectedDept.state} />
                   </div>
                 </div>
