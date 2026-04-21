@@ -214,14 +214,13 @@ export default function OnboardingTour() {
           <div className="relative mx-auto w-20 h-20 mb-5">
             <div
               className="absolute -inset-3 rounded-[1.5rem] blur-2xl animate-pulse"
-              style={{ backgroundColor: `${slideColors[current]}88`, animationDuration: "3.5s" }}
+              style={{ backgroundColor: `${slideColors[current]}99`, animationDuration: "3.5s" }}
             />
-            <div className="absolute inset-0 rounded-2xl bg-white/20 blur-xl" />
             <div
-              className="relative w-20 h-20 rounded-2xl border border-white/40 backdrop-blur-xl flex items-center justify-center text-white"
+              className="relative w-20 h-20 rounded-2xl border border-white/40 flex items-center justify-center text-white"
               style={{
-                background: `linear-gradient(135deg, ${slideColors[current]}66, ${slideColors[current]}22)`,
-                boxShadow: `0 8px 24px ${slideColors[current]}55`,
+                background: `linear-gradient(135deg, ${slideColors[current]}, ${slideColors[current]}cc)`,
+                boxShadow: `0 8px 24px ${slideColors[current]}88, inset 0 1px 0 rgba(255,255,255,0.3)`,
               }}
             >
               {slide.icon}
