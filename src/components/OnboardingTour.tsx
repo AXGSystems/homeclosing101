@@ -219,7 +219,7 @@ export default function OnboardingTour() {
         <div className="h-[3px] bg-gradient-to-r from-transparent via-white/80 to-transparent" />
 
         {/* Welcome banner — glass, matches footer */}
-        <div className="relative flex items-center justify-center px-6 py-4 sm:px-10 border-b border-white/10 bg-white/5 backdrop-blur-xl">
+        <div className="relative flex items-center justify-center px-10 py-4 sm:px-14 border-b border-white/10 bg-white/5 backdrop-blur-xl">
           <p className="text-[12px] sm:text-[13px] text-center text-white font-semibold tracking-wide whitespace-nowrap flex items-center justify-center gap-1.5">
             <span>Welcome to HomeClosing101 — an</span>
             {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -233,7 +233,7 @@ export default function OnboardingTour() {
           </p>
           <button
             onClick={dismiss}
-            className="absolute right-2.5 top-1/2 -translate-y-1/2 p-1.5 text-white/60 hover:text-white hover:bg-white/10 rounded-lg transition-colors"
+            className="absolute right-3 sm:right-4 top-1/2 -translate-y-1/2 p-1.5 text-white/70 hover:text-white hover:bg-white/15 rounded-lg transition-colors"
             aria-label="Close tour"
           >
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
