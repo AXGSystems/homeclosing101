@@ -130,9 +130,6 @@ export default function FindPolicyPage() {
   const [selectedState, setSelectedState] = useState<string | null>(null);
   const [showScript, setShowScript] = useState(false);
   const [activeModal, setActiveModal] = useState<{title: string; gradient: string; content: React.ReactNode} | null>(null);
-  const [compareMode, setCompareMode] = useState(false);
-  const [compareA, setCompareA] = useState<string>("");
-  const [compareB, setCompareB] = useState<string>("");
 
   const filtered = stateInsuranceData.filter((s) =>
     s.state.toLowerCase().includes(search.toLowerCase()) ||
@@ -145,8 +142,6 @@ export default function FindPolicyPage() {
 
   const colors = selectedState ? stateColors[selectedState] : null;
 
-  const compareDeptA = compareA ? stateInsuranceData.find((s) => s.abbr === compareA) : null;
-  const compareDeptB = compareB ? stateInsuranceData.find((s) => s.abbr === compareB) : null;
 
   const closingTypeLabel = (t?: string) => t === "attorney" ? "Attorney State" : t === "title" ? "Title State" : t === "either" ? "Attorney or Title" : "Not available";
   const rateTypeLabel = (t?: string) => t === "regulated" ? "Regulated" : t === "competitive" ? "Competitive" : "Not available";
@@ -344,102 +339,65 @@ export default function FindPolicyPage() {
             })()}
           </div>
 
-          {/* Compare States */}
+          {/* When to Contact Your State Insurance Department */}
           <div className="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden mb-8">
-            <button
-              onClick={() => setCompareMode(!compareMode)}
-              className="w-full flex items-center justify-between p-5 hover:bg-alta-light/50 transition-colors"
-            >
+            <div className="px-5 py-4 border-b border-gray-100 bg-gradient-to-r from-[#5b3a8c]/10 to-transparent">
               <div className="flex items-center gap-3">
-                <svg className="w-5 h-5 text-[#5b3a8c]" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M7.5 21L3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5" /></svg>
-                <span className="font-semibold text-alta-navy">Compare Two States Side-by-Side</span>
+                <svg className="w-5 h-5 text-[#5b3a8c]" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
+                </svg>
+                <span className="font-semibold text-alta-navy">When to Contact Your State Insurance Department</span>
               </div>
-              <svg className={`w-5 h-5 text-alta-gray transition-transform ${compareMode ? "rotate-180" : ""}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-              </svg>
-            </button>
-            {compareMode && (
-              <div className="px-5 pb-5 border-t border-gray-100">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
-                  <div>
-                    <label className="block text-xs font-semibold text-alta-navy mb-1.5">First State</label>
-                    <select
-                      value={compareA}
-                      onChange={(e) => setCompareA(e.target.value)}
-                      className="w-full px-3 py-2.5 border border-gray-200 rounded-lg text-sm bg-white"
-                    >
-                      <option value="">Select a state...</option>
-                      {stateInsuranceData.map((s) => (
-                        <option key={s.abbr} value={s.abbr}>{s.state}</option>
-                      ))}
-                    </select>
-                  </div>
-                  <div>
-                    <label className="block text-xs font-semibold text-alta-navy mb-1.5">Second State</label>
-                    <select
-                      value={compareB}
-                      onChange={(e) => setCompareB(e.target.value)}
-                      className="w-full px-3 py-2.5 border border-gray-200 rounded-lg text-sm bg-white"
-                    >
-                      <option value="">Select a state...</option>
-                      {stateInsuranceData.map((s) => (
-                        <option key={s.abbr} value={s.abbr}>{s.state}</option>
-                      ))}
-                    </select>
-                  </div>
+              <p className="text-xs text-alta-gray mt-2">Most homebuyers never interact with their state&apos;s insurance office, but it exists specifically to protect you. Here are the most common reasons consumers reach out.</p>
+            </div>
+            <div className="p-5 grid grid-cols-1 sm:grid-cols-2 gap-3">
+              {[
+                {
+                  title: "Verify a Title Company's License",
+                  body: "Confirm the company is licensed in your state and has no open disciplinary actions before you hand over wire funds.",
+                  color: "#0a7ea8",
+                },
+                {
+                  title: "File a Complaint",
+                  body: "If a title or settlement agent misled you, overcharged, or mishandled escrow, your state department investigates formally.",
+                  color: "#943030",
+                },
+                {
+                  title: "Verify Filed Rates",
+                  body: "Some states set title insurance premiums by law. Confirm you were charged the correct rate for your transaction.",
+                  color: "#2d6b3f",
+                },
+                {
+                  title: "Report Wire or Closing Fraud",
+                  body: "State insurance fraud units coordinate with the FBI IC3 and your title insurer's claims team when you are targeted.",
+                  color: "#8b6914",
+                },
+                {
+                  title: "Dispute a Claim Denial",
+                  body: "If you filed a title insurance claim and the carrier denied or underpaid it, the department can review and mediate.",
+                  color: "#5b3a8c",
+                },
+                {
+                  title: "Ask Pre-Closing Questions",
+                  body: "Call before you close if something feels off — they can clarify what your state requires and what protections apply.",
+                  color: "#0a8ebc",
+                },
+              ].map((item) => (
+                <div
+                  key={item.title}
+                  className="p-3.5 rounded-xl border border-gray-100 bg-gradient-to-br from-white to-gray-50/50 hover:shadow-md hover:border-gray-200 transition-all border-l-4"
+                  style={{ borderLeftColor: item.color }}
+                >
+                  <h4 className="text-xs font-bold text-alta-navy mb-1">{item.title}</h4>
+                  <p className="text-[11px] text-alta-gray leading-relaxed">{item.body}</p>
                 </div>
-
-                {compareDeptA && compareDeptB && (
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-5">
-                    {[compareDeptA, compareDeptB].map((dept) => {
-                      const sf = stateFlags[dept.abbr];
-                      const primary = sf?.colors[0] || '#002868';
-                      const secondary = sf?.colors[1] || '#ce1126';
-                      return (
-                        <div key={dept.abbr} className="rounded-xl overflow-hidden border border-gray-200 shadow-sm">
-                          <div className="flex items-center gap-3 px-4 py-3 text-white" style={{ background: `linear-gradient(135deg, ${primary}, ${secondary})` }}>
-                            <div className="w-10 h-7 rounded overflow-hidden bg-white/20 shrink-0 flex items-center justify-center">
-                              {/* eslint-disable-next-line @next/next/no-img-element */}
-                              <img src={sf?.flag || ""} alt={`${dept.state} flag`} className="w-full h-full object-cover" onError={(e) => { e.currentTarget.style.display = 'none'; }} />
-                            </div>
-                            <div className="min-w-0">
-                              <h4 className="font-bold text-sm truncate">{dept.state}</h4>
-                              <p className="text-[10px] text-white/70 truncate">{dept.department}</p>
-                            </div>
-                          </div>
-                          <div className="bg-white p-4 space-y-3">
-                            <div className="flex items-start gap-2">
-                              <svg className="w-3.5 h-3.5 text-alta-gray shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" /></svg>
-                              <p className="text-sm font-semibold text-alta-teal">{dept.phone}</p>
-                            </div>
-                            <div className="space-y-2">
-                              <div className="flex items-center justify-between text-xs">
-                                <span className="text-alta-gray">Closing Type</span>
-                                <span className="font-semibold text-alta-navy">{dept.closingType ? closingTypeLabel(dept.closingType) : "---"}</span>
-                              </div>
-                              <div className="flex items-center justify-between text-xs">
-                                <span className="text-alta-gray">RON Available</span>
-                                <span className={`font-semibold ${dept.ronAvailable === true ? "text-green-600" : dept.ronAvailable === false ? "text-red-600" : "text-alta-gray"}`}>{dept.ronAvailable === true ? "Yes" : dept.ronAvailable === false ? "No" : "---"}</span>
-                              </div>
-                              <div className="flex items-center justify-between text-xs">
-                                <span className="text-alta-gray">Rate Type</span>
-                                <span className="font-semibold text-alta-navy">{dept.rateType ? rateTypeLabel(dept.rateType) : "---"}</span>
-                              </div>
-                            </div>
-                            <a href={dept.website} target="_blank" rel="noopener noreferrer" className="block text-center text-xs font-semibold text-alta-teal hover:text-alta-teal-dark mt-2">
-                              Visit Website
-                            </a>
-                          </div>
-                        </div>
-                      );
-                    })}
-                  </div>
-                )}
-                {((compareA && !compareB) || (!compareA && compareB)) && (
-                  <p className="text-xs text-alta-gray mt-4 text-center">Select both states to see a side-by-side comparison.</p>
-                )}
+              ))}
+            </div>
+            <div className="px-5 pb-5">
+              <div className="p-3 bg-[#f0ecf6] rounded-xl border border-[#d4c8e4] text-[11px] text-alta-gray leading-relaxed">
+                <strong className="text-[#5b3a8c]">Before you call:</strong> have your property address, the name of the title/settlement company, your closing date (or HUD-1/Closing Disclosure), and any documents or emails related to your concern. A concise timeline helps the investigator move faster.
               </div>
-            )}
+            </div>
           </div>
 
           <InlineAd />
