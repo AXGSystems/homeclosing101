@@ -218,15 +218,15 @@ export default function OnboardingTour() {
         {/* Top shimmer bar — visible white-on-glass */}
         <div className="h-[3px] bg-gradient-to-r from-transparent via-white/80 to-transparent" />
 
-        {/* Welcome banner */}
-        <div className="relative flex items-center justify-center px-12 py-2.5 border-b border-white/10 bg-white/5">
-          <p className="text-[11px] text-center text-white/85 font-semibold tracking-wide">
-            Welcome to <span className="text-white">HomeClosing101</span>
-            <span className="text-white/50"> — an ALTA educational initiative for homebuyers</span>
+        {/* Welcome banner — ALTA navy */}
+        <div className="relative flex items-center justify-center px-12 py-4 border-b border-white/10 bg-[#1a2744]">
+          <p className="text-[12px] text-center text-white/90 font-semibold tracking-wide">
+            Welcome to <span className="text-white font-bold">HomeClosing101</span>
+            <span className="text-white/55"> — an ALTA educational initiative for homebuyers</span>
           </p>
           <button
             onClick={dismiss}
-            className="absolute right-2 top-1/2 -translate-y-1/2 p-1.5 text-white/60 hover:text-white hover:bg-white/10 rounded-lg transition-colors"
+            className="absolute right-2.5 top-1/2 -translate-y-1/2 p-1.5 text-white/60 hover:text-white hover:bg-white/10 rounded-lg transition-colors"
             aria-label="Close tour"
           >
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -366,6 +366,11 @@ export default function OnboardingTour() {
             />
             <span className="text-xs text-white/70">Don&apos;t show again</span>
           </label>
+
+          {/* Site URL — center */}
+          <span className="hidden sm:block text-[10px] text-white/50 font-semibold tracking-[0.15em] uppercase">
+            HomeClosing101.org
+          </span>
 
           {/* Navigation buttons */}
           <div className="flex items-center gap-2">
