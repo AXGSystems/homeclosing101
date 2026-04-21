@@ -199,8 +199,9 @@ export default function OnboardingTour() {
         <div key={contentKey.current} className="px-6 pb-2 sm:px-10 animate-[fadeIn_400ms_ease-out]">
           {/* Glowing icon tile */}
           <div className="relative mx-auto w-20 h-20 mb-5">
-            <div className="absolute inset-0 rounded-2xl bg-white/20 blur-xl" />
-            <div className="relative w-20 h-20 rounded-2xl bg-gradient-to-br from-white/30 to-white/10 border border-white/40 backdrop-blur-xl flex items-center justify-center text-white shadow-[0_8px_24px_rgba(255,255,255,0.15)]">
+            <div className="absolute -inset-3 rounded-[1.5rem] bg-[#943030]/55 blur-2xl animate-pulse" style={{ animationDuration: "3.5s" }} />
+            <div className="absolute inset-0 rounded-2xl bg-white/25 blur-xl" />
+            <div className="relative w-20 h-20 rounded-2xl bg-gradient-to-br from-white/30 to-white/10 border border-white/40 backdrop-blur-xl flex items-center justify-center text-white shadow-[0_8px_24px_rgba(148,48,48,0.4)]">
               {slide.icon}
             </div>
           </div>
