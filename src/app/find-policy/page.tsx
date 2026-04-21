@@ -297,12 +297,12 @@ export default function FindPolicyPage() {
                 {/* Details */}
                 <div className="bg-white p-5 grid grid-cols-1 lg:grid-cols-[1fr_280px] gap-5">
                   <div>
-                    <div className="flex items-start gap-3 mb-4">
-                      <svg className="w-4 h-4 text-alta-gray shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" /><path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" /></svg>
-                      <div>
-                        <p className="text-sm font-bold text-alta-navy leading-tight">{selectedDept.state} {selectedDept.department}</p>
-                        <p className="text-sm text-alta-gray mt-0.5">{selectedDept.address}</p>
-                      </div>
+                    <div className="flex items-center gap-3 mb-4">
+                      <svg className="w-4 h-4 text-alta-gray shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" /><path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" /></svg>
+                      <p className="text-sm text-alta-navy leading-tight">
+                        <span className="font-bold">{selectedDept.state} {selectedDept.department}</span>
+                        <span className="text-alta-gray"> — {selectedDept.address}</span>
+                      </p>
                     </div>
                     {/* State closing details */}
                     {selectedDept.closingType && (

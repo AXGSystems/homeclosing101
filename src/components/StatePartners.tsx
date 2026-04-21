@@ -49,17 +49,6 @@ export default function StatePartners({ stateCode, stateName }: StatePartnersPro
 
   return (
     <div className="mt-6 print:hidden">
-      <div className="flex items-center justify-between mb-3">
-        <p className="text-[10px] font-semibold text-alta-gray uppercase tracking-widest">
-          {stateName} Partners
-        </p>
-        <span
-          className="text-[8px] font-bold uppercase tracking-widest px-1.5 py-0.5 rounded bg-amber-100 text-amber-700 border border-amber-200"
-          title="Demo placeholder data — real ALTA members will replace this once the directory loads."
-        >
-          Demo
-        </span>
-      </div>
       <a
         href={p.website}
         target="_blank"
