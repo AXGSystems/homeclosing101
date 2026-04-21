@@ -368,9 +368,33 @@ export default function HomeClosingAI() {
   useEffect(() => {
     try {
       const p = localStorage.getItem('hc101-ai-position');
-      if (p) setPosition(JSON.parse(p));
+      if (p) {
+        const pos = JSON.parse(p);
+        if (
+          typeof pos.x === 'number' &&
+          typeof pos.y === 'number' &&
+          pos.x >= 0 && pos.x < window.innerWidth - 100 &&
+          pos.y >= 0 && pos.y < window.innerHeight - 100
+        ) {
+          setPosition(pos);
+        } else {
+          localStorage.removeItem('hc101-ai-position');
+        }
+      }
       const s = localStorage.getItem('hc101-ai-size');
-      if (s) setSize(JSON.parse(s));
+      if (s) {
+        const sz = JSON.parse(s);
+        if (
+          typeof sz.width === 'number' &&
+          typeof sz.height === 'number' &&
+          sz.width >= 320 && sz.width <= window.innerWidth &&
+          sz.height >= 380 && sz.height <= window.innerHeight
+        ) {
+          setSize(sz);
+        } else {
+          localStorage.removeItem('hc101-ai-size');
+        }
+      }
     } catch { /* ignore */ }
   }, []);
 
@@ -586,7 +610,7 @@ export default function HomeClosingAI() {
               ? ''
               : position
                 ? ''
-                : 'top-1/2 -translate-y-1/2 right-2 sm:right-6 w-[calc(100vw-1rem)] sm:w-[420px] max-w-[420px] h-[70vh] sm:h-[580px] max-h-[calc(100vh-6rem)]'
+                : 'top-1/2 -translate-y-1/2 right-4 sm:right-14 w-[calc(100vw-1rem)] sm:w-[460px] max-w-[460px] h-[70vh] sm:h-[540px] max-h-[calc(100vh-6rem)]'
           }`}
           style={chatPanelStyle}
           data-ai-container
