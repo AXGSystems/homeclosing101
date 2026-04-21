@@ -259,35 +259,29 @@ export default function OnboardingTour() {
             <span className="text-white/40"> / {slides.length}</span>
           </p>
 
-          {/* Title */}
-          <h2
-            className="text-2xl sm:text-3xl font-bold text-center mb-4 tracking-tight"
-            style={{
-              backgroundImage: `linear-gradient(135deg, #ffffff 40%, ${slideColors[current]})`,
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-              backgroundClip: "text",
-              color: "transparent",
-            }}
-          >
-            {slide.title.includes("101") ? (
-              <>
-                {slide.title.split("101")[0]}
-                <span
-                  style={{
-                    backgroundImage: "none",
-                    WebkitTextFillColor: "rgba(232, 120, 110, 0.55)",
-                    color: "rgba(232, 120, 110, 0.55)",
-                  }}
-                >
-                  101
-                </span>
-                {slide.title.split("101")[1]}
-              </>
-            ) : (
-              slide.title
-            )}
-          </h2>
+          {/* Title — first word in slide color, rest white, "101" soft red */}
+          {(() => {
+            const firstSpace = slide.title.indexOf(" ");
+            const firstWord = firstSpace === -1 ? slide.title : slide.title.slice(0, firstSpace);
+            const rest = firstSpace === -1 ? "" : slide.title.slice(firstSpace);
+            const renderRest = (text: string) => {
+              if (!text.includes("101")) return text;
+              const parts = text.split("101");
+              return (
+                <>
+                  {parts[0]}
+                  <span style={{ color: "rgba(232, 120, 110, 0.55)" }}>101</span>
+                  {parts[1]}
+                </>
+              );
+            };
+            return (
+              <h2 className="text-2xl sm:text-3xl font-bold text-center mb-4 tracking-tight text-white">
+                <span style={{ color: slideColors[current] }}>{firstWord}</span>
+                {renderRest(rest)}
+              </h2>
+            );
+          })()}
 
           {/* Body — word-by-word fade in */}
           <p className="text-white/85 text-center text-sm sm:text-base leading-relaxed mb-6 min-h-[5.5rem]">
