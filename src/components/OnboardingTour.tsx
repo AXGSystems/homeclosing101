@@ -39,17 +39,22 @@ interface Slide {
 
 // One brand-appropriate accent per slide — drives the icon halo + tile tint
 const slideColors = [
-  "#0a8ebc", // 1 Welcome — teal
-  "#1a5276", // 2 Closing process — navy
-  "#2d6b3f", // 3 Calculators — green
-  "#943030", // 4 Protect property — red
-  "#5b3a8c", // 5 Glossary — purple
-  "#d4a843", // 6 AI — gold
-  "#077a9e", // 7 Closing folder — deep teal
-  "#6b4226", // 8 Document library — warm brown
-  "#0891b2", // 9 Feedback — cyan
-  "#b45309", // 10 FAQ — amber
-  "#0a7e6f", // 11 Ready — emerald-teal
+  "#0a8ebc", // 1  Welcome — teal
+  "#1a5276", // 2  Closing process — navy
+  "#2d6b3f", // 3  Calculators — green
+  "#943030", // 4  Protect property — red
+  "#5b3a8c", // 5  Glossary — purple
+  "#d4a843", // 6  AI — gold
+  "#077a9e", // 7  Closing folder — deep teal
+  "#6b4226", // 8  Document library — warm brown
+  "#0891b2", // 9  Feedback — cyan
+  "#2563eb", // 10 Find a Title Company — bright blue
+  "#7f1d1d", // 11 Wire Fraud Prevention — deep red
+  "#c2410c", // 12 County Deed Fraud Lookup — burnt orange
+  "#475569", // 13 Print & Share — slate
+  "#eab308", // 14 Track Progress — bright gold
+  "#b45309", // 15 FAQ — amber
+  "#0a7e6f", // 16 Ready — emerald-teal
 ];
 
 const slides: Slide[] = [
@@ -131,6 +136,52 @@ const slides: Slide[] = [
     icon: (
       <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
         <path strokeLinecap="round" strokeLinejoin="round" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
+      </svg>
+    ),
+  },
+  {
+    title: "Find a Title Company",
+    body: "Under federal law (RESPA), you have the right to choose your own title company — and comparing two or three can save hundreds in fees. Search the ALTA member directory by state and city, review tips on what to ask, and find a trusted professional near you.",
+    icon: (
+      <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+      </svg>
+    ),
+  },
+  {
+    title: "Wire Fraud Prevention Toolkit",
+    body: "Real estate wire fraud losses topped $275 million in 2025. Our Stop Fraud page walks you through 5 safeguards — phone-verify wire instructions, never trust email changes, confirm receipt — plus a rapid response playbook if you think you're a victim.",
+    icon: (
+      <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M12 15v2.25m-5.25-2.25h10.5a2.25 2.25 0 002.25-2.25V6.75a2.25 2.25 0 00-2.25-2.25H6.75A2.25 2.25 0 004.5 6.75v6a2.25 2.25 0 002.25 2.25zM8.25 9h7.5M8.25 12h3.75" />
+      </svg>
+    ),
+  },
+  {
+    title: "County Deed Fraud Lookup",
+    body: "Deed theft is on the rise — criminals file fake deeds to steal home equity. Our unique county-by-county lookup tells you if your county offers free property alert monitoring, how to enroll, and what to do if you're already a victim. Available in all 50 states.",
+    icon: (
+      <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
+        <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
+      </svg>
+    ),
+  },
+  {
+    title: "Print & Share Everything",
+    body: "Every glossary term, checklist, calculator result, and article is built to print as a branded ALTA PDF — perfect for sharing with your partner, agent, or lender. Social share buttons are on every major guide so you can send trusted info to friends in one tap.",
+    icon: (
+      <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M7.217 10.907a2.25 2.25 0 100 2.186m0-2.186c.18.324.283.696.283 1.093s-.103.77-.283 1.093m0-2.186l9.566-5.314m-9.566 7.5l9.566 5.314m0 0a2.25 2.25 0 103.935 2.186 2.25 2.25 0 00-3.935-2.186zm0-12.814a2.25 2.25 0 103.933-2.185 2.25 2.25 0 00-3.933 2.185z" />
+      </svg>
+    ),
+  },
+  {
+    title: "Track Your Progress",
+    body: "Earn badges as you complete guides, take mini-quizzes, and save items to your Closing Folder. The Journey Tracker remembers where you left off — dip in for five minutes or dig deep, and come back to pick up exactly where you stopped.",
+    icon: (
+      <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M16.5 18.75h-9a9.75 9.75 0 01-1.5-.097v-.017a3.75 3.75 0 01-.75-.173v-2.5a8.25 8.25 0 019.75-8.101m-9.25 1.5h9.25a8.25 8.25 0 01-9.75 8.101M15 12a3 3 0 11-6 0 3 3 0 016 0zm5.25-5.25a1.5 1.5 0 01-1.5 1.5m-12 0a1.5 1.5 0 01-1.5-1.5m0 12a1.5 1.5 0 011.5-1.5m12 0a1.5 1.5 0 011.5 1.5" />
       </svg>
     ),
   },
