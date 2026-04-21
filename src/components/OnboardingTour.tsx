@@ -365,7 +365,7 @@ export default function OnboardingTour() {
                 <span
                   style={{
                     color: slideColors[current],
-                    WebkitTextStroke: "0.75px rgba(255,255,255,0.75)",
+                    WebkitTextStroke: "1.5px rgba(255,255,255,0.85)",
                     paintOrder: "stroke fill",
                   }}
                 >
