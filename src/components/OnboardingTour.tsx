@@ -344,47 +344,27 @@ export default function OnboardingTour() {
             <span className="text-white/40"> / {slides.length}</span>
           </p>
 
-          {/* Title — first word in slide color, rest white, "101" soft red */}
+          {/* Title — whole sentence wrapped in slide-color highlight pill */}
           {(() => {
-            const firstSpace = slide.title.indexOf(" ");
-            const firstWord = firstSpace === -1 ? slide.title : slide.title.slice(0, firstSpace);
-            const rest = firstSpace === -1 ? "" : slide.title.slice(firstSpace);
-            const renderRest = (text: string) => {
-              if (!text.includes("101")) return text;
-              const parts = text.split("101");
-              return (
-                <>
-                  {parts[0]}
-                  <span className="font-extrabold" style={{ color: "#1a2744" }}>101</span>
-                  {parts[1]}
-                </>
-              );
-            };
             const steelShadow = [
-              // bright top-edge highlight — light source from above
               "0 -1px 0 rgba(255,255,255,0.95)",
               "-1px -1px 0 rgba(255,255,255,0.55)",
-              // sharp chiseled shadow below — stamped edge
               "0 1px 0 rgba(0,0,0,0.55)",
               "1px 2px 0 rgba(0,0,0,0.35)",
-              // diffuse drop below for "pressed into card" depth
               "0 4px 6px rgba(0,0,0,0.45)",
             ].join(", ");
             return (
-              <h2
-                className="text-2xl sm:text-3xl font-bold text-center mb-4 tracking-tight text-white"
-                style={{ textShadow: steelShadow }}
-              >
+              <h2 className="text-2xl sm:text-3xl font-bold text-center mb-4 tracking-tight">
                 <span
-                  className="inline-block relative px-2 py-0.5 rounded-md"
+                  className="inline-block px-3 py-1 rounded-lg text-white"
                   style={{
                     backgroundColor: `${slideColors[current]}55`,
-                    boxShadow: `0 0 16px ${slideColors[current]}55, inset 0 0 0 1px ${slideColors[current]}66`,
+                    boxShadow: `0 0 18px ${slideColors[current]}55, inset 0 0 0 1px ${slideColors[current]}66`,
+                    textShadow: steelShadow,
                   }}
                 >
-                  {firstWord}
+                  {slide.title}
                 </span>
-                {renderRest(rest)}
               </h2>
             );
           })()}
