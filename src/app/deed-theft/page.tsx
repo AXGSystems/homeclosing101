@@ -6,6 +6,7 @@ import { InlineAd } from "@/components/EliteProviders";
 import SponsorTip from "@/components/SponsorTip";
 import FirstTimeBuyerCTA from "@/components/FirstTimeBuyerCTA";
 import ExpandableTile from "@/components/ExpandableTile";
+import { SectionGate, AdGate, ModuleGate } from "@/components/Gate";
 
 const howItHappens = [
   {
@@ -171,20 +172,23 @@ const victimSteps = [
 export default function DeedTheftPage() {
   return (
     <>
-      <PageHero
-        title="Title Theft & Title Fraud: How to Protect Your Property"
-        subtitle="Title theft — also called deed fraud — is one of the fastest-growing property crimes in America. Learn how criminals steal property ownership, the warning signs, and how to protect yourself."
-        image="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=1920&q=80"
-        breadcrumb={[
-          { label: "Protect Your Property", href: "/protect-your-rights" },
-          { label: "Title Theft & Title Fraud", href: "/deed-theft" },
-        ]}
-      />
+      <SectionGate page="/deed-theft" id="hero">
+        <PageHero
+          title="Title Theft & Title Fraud: How to Protect Your Property"
+          subtitle="Title theft — also called deed fraud — is one of the fastest-growing property crimes in America. Learn how criminals steal property ownership, the warning signs, and how to protect yourself."
+          image="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=1920&q=80"
+          breadcrumb={[
+            { label: "Protect Your Property", href: "/protect-your-rights" },
+            { label: "Title Theft & Title Fraud", href: "/deed-theft" },
+          ]}
+        />
+      </SectionGate>
 
       <div className="py-1.5 lg:py-2">
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
 
           {/* What is Title Theft */}
+          <SectionGate page="/deed-theft" id="what-is-title-theft">
           <section className="mb-8">
             <h2 className="text-2xl font-bold text-alta-navy mb-4">What Is Title Theft?</h2>
             <div className="p-5 bg-[#f5e8e8] rounded-2xl border border-[#e4c5c5] border-l-4 border-l-[#943030]">
@@ -208,8 +212,10 @@ export default function DeedTheftPage() {
               </div>
             </div>
           </section>
+          </SectionGate>
 
           {/* Stats bar */}
+          <SectionGate page="/deed-theft" id="stats">
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-8">
             {[
               { value: "$172K", label: "Average fraud loss", source: "FBI IC3" },
@@ -224,8 +230,10 @@ export default function DeedTheftPage() {
               </div>
             ))}
           </div>
+          </SectionGate>
 
           {/* How It Happens — expandable tiles */}
+          <SectionGate page="/deed-theft" id="how-it-happens">
           <section className="mb-8">
             <h2 className="text-2xl font-bold text-alta-navy mb-2">How Title Theft Happens</h2>
             <p className="text-sm text-alta-gray mb-4">Click any tile to learn the full details of how criminals execute these schemes.</p>
@@ -257,12 +265,18 @@ export default function DeedTheftPage() {
               ))}
             </div>
           </section>
+          </SectionGate>
 
-          <InlineAd />
+          <AdGate name="InlineAd">
+            <InlineAd />
+          </AdGate>
 
-          <SponsorTip context="fraud" />
+          <AdGate name="SponsorTip">
+            <SponsorTip context="fraud" />
+          </AdGate>
 
           {/* Warning Signs */}
+          <SectionGate page="/deed-theft" id="warning-signs">
           <section className="mb-8">
             <h2 className="text-2xl font-bold text-alta-navy mb-4">Warning Signs Your Property May Be at Risk</h2>
             <div className="space-y-2">
@@ -281,12 +295,15 @@ export default function DeedTheftPage() {
               ))}
             </div>
           </section>
+          </SectionGate>
 
           <div className="h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent my-8" />
 
           {/* How to Protect Yourself */}
+          <SectionGate page="/deed-theft" id="protect-yourself">
           <section className="mb-8">
             <h2 className="text-2xl font-bold text-alta-navy mb-4">How to Protect Yourself</h2>
+            <SectionGate page="/deed-theft" id="protect-yourself" sub="protection-steps">
             <div className="space-y-3">
               {protectionSteps.map((item, i) => (
                 <div key={i} className="relative p-4 bg-white rounded-xl border border-gray-100 shadow-sm">
@@ -297,8 +314,10 @@ export default function DeedTheftPage() {
                 </div>
               ))}
             </div>
+            </SectionGate>
 
             {/* Title Lock honest assessment */}
+            <SectionGate page="/deed-theft" id="protect-yourself" sub="title-lock-note">
             <div className="mt-4 p-4 bg-[#faf4e4] rounded-2xl border border-[#e8d9a8] border-l-4 border-l-[#8b6914]">
               <h3 className="text-sm font-bold text-alta-navy mb-2">A Note About &quot;Title Lock&quot; Services</h3>
               <p className="text-xs text-alta-gray leading-relaxed mb-2">
@@ -308,11 +327,14 @@ export default function DeedTheftPage() {
                 Only <strong>owner&apos;s title insurance</strong> provides actual financial protection against title theft, covering both legal defense and losses. If you already have owner&apos;s title insurance, a title lock subscription may be redundant.
               </p>
             </div>
+            </SectionGate>
           </section>
+          </SectionGate>
 
           <div className="h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent my-8" />
 
           {/* Title Lock vs Title Insurance Comparison */}
+          <SectionGate page="/deed-theft" id="comparison">
           <section className="mb-8">
             <h2 className="text-2xl font-bold text-alta-navy mb-4">Title Lock vs. Title Insurance: Know the Difference</h2>
             <div className="grid md:grid-cols-2 gap-4">
@@ -381,12 +403,16 @@ export default function DeedTheftPage() {
               </div>
             </div>
           </section>
+          </SectionGate>
 
-          <InlineAd />
+          <AdGate name="InlineAd">
+            <InlineAd />
+          </AdGate>
 
           <div className="h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent my-8" />
 
           {/* What to Do If You're a Victim */}
+          <SectionGate page="/deed-theft" id="victim-steps">
           <section className="mb-8">
             <div className="rounded-2xl overflow-hidden shadow-lg">
               <div className="bg-gradient-to-r from-[#7a1a1a] via-[#943030] to-[#7a1a1a] px-5 py-3">
@@ -416,10 +442,12 @@ export default function DeedTheftPage() {
               </div>
             </div>
           </section>
+          </SectionGate>
 
           <div className="h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent my-8" />
 
           {/* The Role of Title Insurance */}
+          <SectionGate page="/deed-theft" id="role-of-title-insurance">
           <section className="mb-8">
             <h2 className="text-2xl font-bold text-alta-navy mb-4">The Role of Title Insurance in Title Fraud Protection</h2>
             <div className="p-5 bg-[#e9f5ed] rounded-2xl border border-[#bddcc7] border-l-4 border-l-[#2d6b3f]">
@@ -457,8 +485,10 @@ export default function DeedTheftPage() {
               </div>
             </div>
           </section>
+          </SectionGate>
 
           {/* Related Topics */}
+          <SectionGate page="/deed-theft" id="related-topics">
           <div className="mb-4">
             <h2 className="text-lg font-bold text-alta-navy mb-4">Related Topics</h2>
             <div className="grid sm:grid-cols-3 gap-3">
@@ -476,8 +506,11 @@ export default function DeedTheftPage() {
               </Link>
             </div>
           </div>
+          </SectionGate>
 
-          <FirstTimeBuyerCTA />
+          <ModuleGate name="FirstTimeBuyerCTA">
+            <FirstTimeBuyerCTA />
+          </ModuleGate>
         </div>
       </div>
     </>

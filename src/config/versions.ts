@@ -99,8 +99,6 @@ export const VERSIONS: Record<VersionId, VersionDef> = {
         "JourneyTracker",
       ]),
       ...adsOff(["StickyBottomAd", "SponsorTip", "SponsorBadge"]),
-      // homepage trims
-      sectionKey("/", "testimonials"),
     ],
   },
 
@@ -148,7 +146,6 @@ export const VERSIONS: Record<VersionId, VersionDef> = {
       ]),
       ...ALL_ADS_OFF,
       // homepage trims — keep the spine, drop the extras
-      sectionKey("/", "testimonials"),
       sectionKey("/", "tools"),
       sectionKey("/", "where-to-start"),
       sectionKey("/", "roadmap"),
@@ -196,7 +193,6 @@ export const VERSIONS: Record<VersionId, VersionDef> = {
       ...ALL_ADS_OFF,
       // homepage trims — de-emphasise tools, keep the educational spine
       sectionKey("/", "tools"),
-      sectionKey("/", "testimonials"),
     ],
   },
 };

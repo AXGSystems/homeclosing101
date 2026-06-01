@@ -8,6 +8,7 @@ import SaveToFolderBtn from "@/components/SaveToFolderBtn";
 import FirstTimeBuyerCTA from "@/components/FirstTimeBuyerCTA";
 import { InlineAd } from "@/components/EliteProviders";
 import SponsorTip from "@/components/SponsorTip";
+import { SectionGate, AdGate, ModuleGate } from "@/components/Gate";
 
 // export const metadata: Metadata = { ... } — cannot use with "use client"
 // Title set via document.title in useEffect or head component; SEO handled by layout template
@@ -41,29 +42,34 @@ export default function EmergencyContactsPage() {
 
   return (
     <>
-      <PageHero
-        title="Emergency Contacts & Key Numbers for Homebuyers"
-        subtitle="Critical phone numbers and resources you need during your real estate transaction. Print this page and keep it with your closing documents."
-        image="https://images.unsplash.com/photo-1423666639041-f56000c27a9a?w=1920&q=80"
-        breadcrumb={[
-          { label: "Resources", href: "/resources" },
-          { label: "Emergency Contacts", href: "/emergency-contacts" },
-        ]}
-      />
+      <SectionGate page="/emergency-contacts" id="hero">
+        <PageHero
+          title="Emergency Contacts & Key Numbers for Homebuyers"
+          subtitle="Critical phone numbers and resources you need during your real estate transaction. Print this page and keep it with your closing documents."
+          image="https://images.unsplash.com/photo-1423666639041-f56000c27a9a?w=1920&q=80"
+          breadcrumb={[
+            { label: "Resources", href: "/resources" },
+            { label: "Emergency Contacts", href: "/emergency-contacts" },
+          ]}
+        />
+      </SectionGate>
       <div className="py-1.5 lg:py-2">
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
           {/* Print + Save buttons — top of page */}
-          <div className="flex flex-wrap items-center gap-3 mb-6">
-            <PrintButton label="Print This Page" />
-            <p className="text-xs text-alta-gray">
-              This page is designed to be printed and kept with your closing
-              documents.
-            </p>
-          </div>
+          <SectionGate page="/emergency-contacts" id="print-toolbar">
+            <div className="flex flex-wrap items-center gap-3 mb-6">
+              <PrintButton label="Print This Page" />
+              <p className="text-xs text-alta-gray">
+                This page is designed to be printed and kept with your closing
+                documents.
+              </p>
+            </div>
+          </SectionGate>
 
           {/* ============================================= */}
           {/* WIRE FRAUD EMERGENCY — RED SECTION */}
           {/* ============================================= */}
+          <SectionGate page="/emergency-contacts" id="wire-fraud-emergency">
           <div className="mb-8 rounded-2xl overflow-hidden shadow-lg">
             <div className="bg-gradient-to-r from-[#7a1a1a] via-[#943030] to-[#7a1a1a] px-5 py-3">
               <h2 className="text-white font-bold text-lg tracking-tight flex items-center gap-2">
@@ -236,10 +242,12 @@ export default function EmergencyContactsPage() {
               </p>
             </div>
           </div>
+          </SectionGate>
 
           {/* ============================================= */}
           {/* GOVERNMENT AGENCIES */}
           {/* ============================================= */}
+          <SectionGate page="/emergency-contacts" id="government-agencies">
           <h2 className="text-2xl font-bold text-alta-navy mb-4 flex items-center gap-2">
             <svg
               className="w-6 h-6 text-alta-teal"
@@ -356,12 +364,16 @@ export default function EmergencyContactsPage() {
               </div>
             ))}
           </div>
+          </SectionGate>
 
-          <InlineAd />
+          <AdGate name="InlineAd">
+            <InlineAd />
+          </AdGate>
 
           {/* ============================================= */}
           {/* INDUSTRY ORGANIZATIONS */}
           {/* ============================================= */}
+          <SectionGate page="/emergency-contacts" id="industry-organizations">
           <h2 className="text-2xl font-bold text-alta-navy mb-4 flex items-center gap-2">
             <svg
               className="w-6 h-6 text-alta-teal"
@@ -444,10 +456,12 @@ export default function EmergencyContactsPage() {
               </div>
             ))}
           </div>
+          </SectionGate>
 
           {/* ============================================= */}
           {/* UTILITY SETUP */}
           {/* ============================================= */}
+          <SectionGate page="/emergency-contacts" id="utility-setup">
           <h2 className="text-2xl font-bold text-alta-navy mb-4 flex items-center gap-2">
             <svg
               className="w-6 h-6 text-alta-teal"
@@ -563,10 +577,12 @@ export default function EmergencyContactsPage() {
               </div>
             ))}
           </div>
+          </SectionGate>
 
           {/* ============================================= */}
           {/* TAX & LEGAL */}
           {/* ============================================= */}
+          <SectionGate page="/emergency-contacts" id="tax-legal">
           <h2 className="text-2xl font-bold text-alta-navy mb-4 flex items-center gap-2">
             <svg
               className="w-6 h-6 text-alta-teal"
@@ -619,14 +635,18 @@ export default function EmergencyContactsPage() {
               </div>
             ))}
           </div>
+          </SectionGate>
 
-          <SponsorTip context="fraud" />
+          <AdGate name="SponsorTip">
+            <SponsorTip context="fraud" />
+          </AdGate>
 
           <div className="h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent my-8" />
 
           {/* ============================================= */}
           {/* MY TRANSACTION CONTACTS — FILLABLE SECTION */}
           {/* ============================================= */}
+          <SectionGate page="/emergency-contacts" id="my-transaction-contacts">
           <div className="mb-8 rounded-2xl overflow-hidden shadow-lg border border-[#b4d8e8]">
             <div className="bg-gradient-to-r from-[#0a7ea8] to-[#0a6e94] px-5 py-3">
               <h2 className="text-white font-bold text-lg tracking-tight flex items-center gap-2">
@@ -783,10 +803,12 @@ export default function EmergencyContactsPage() {
               </div>
             </div>
           </div>
+          </SectionGate>
 
           <div className="h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent my-8" />
 
           {/* Bottom actions */}
+          <SectionGate page="/emergency-contacts" id="bottom-actions">
           <div className="flex flex-col sm:flex-row gap-3 mb-8">
             <PrintButton label="Print This Page" />
             <Link
@@ -808,8 +830,10 @@ export default function EmergencyContactsPage() {
               Document Checklist
             </Link>
           </div>
+          </SectionGate>
 
           {/* Related Topics */}
+          <SectionGate page="/emergency-contacts" id="related-topics">
           <h2 className="text-lg font-bold text-alta-navy mb-4">
             Related Topics
           </h2>
@@ -849,8 +873,11 @@ export default function EmergencyContactsPage() {
               </p>
             </Link>
           </div>
+          </SectionGate>
 
-          <FirstTimeBuyerCTA />
+          <ModuleGate name="FirstTimeBuyerCTA">
+            <FirstTimeBuyerCTA />
+          </ModuleGate>
         </div>
       </div>
     </>

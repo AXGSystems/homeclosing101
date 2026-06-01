@@ -5,6 +5,7 @@ import Link from "next/link";
 import PageHero from "@/components/PageHero";
 import { InlineAd } from "@/components/EliteProviders";
 import FirstTimeBuyerCTA from "@/components/FirstTimeBuyerCTA";
+import { SectionGate, AdGate, ModuleGate } from "@/components/Gate";
 
 const fmt = (n: number) => Math.round(n).toLocaleString();
 const fmtDollar = (n: number) => `$${fmt(Math.abs(n))}`;
@@ -250,19 +251,22 @@ export default function TrueCostPage() {
 
   return (
     <>
-      <PageHero
-        title="The True Cost of Homeownership"
-        subtitle="Your mortgage payment is just the beginning. Bankrate's 2025 study found hidden homeownership costs average $21,000 per year beyond the mortgage. Find out what your real monthly cost will be."
-        image="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1920&q=80"
-        breadcrumb={[
-          { label: "Tools & Calculators", href: "/mortgage-calculator" },
-          { label: "True Cost of Homeownership", href: "/true-cost" },
-        ]}
-      />
+      <SectionGate page="/true-cost" id="hero">
+        <PageHero
+          title="The True Cost of Homeownership"
+          subtitle="Your mortgage payment is just the beginning. Bankrate's 2025 study found hidden homeownership costs average $21,000 per year beyond the mortgage. Find out what your real monthly cost will be."
+          image="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1920&q=80"
+          breadcrumb={[
+            { label: "Tools & Calculators", href: "/mortgage-calculator" },
+            { label: "True Cost of Homeownership", href: "/true-cost" },
+          ]}
+        />
+      </SectionGate>
 
       <div className="py-1.5 lg:py-2">
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
           {/* Stat callout */}
+          <SectionGate page="/true-cost" id="stat-callout">
           <div className="mb-6 p-4 bg-[#fdf6e3] rounded-2xl border border-[#e8d5a0] border-l-4 border-l-[#d4a843] shadow-md">
             <div className="flex items-start gap-4">
               <div className="w-12 h-12 rounded-xl bg-[#d4a843]/10 flex items-center justify-center text-[#d4a843] shrink-0">
@@ -280,9 +284,12 @@ export default function TrueCostPage() {
               </div>
             </div>
           </div>
+          </SectionGate>
 
+          <SectionGate page="/true-cost" id="calculator">
           <div className="grid lg:grid-cols-[1fr_420px] gap-6">
             {/* Inputs */}
+            <SectionGate page="/true-cost" id="calculator" sub="inputs">
             <div className="space-y-5">
               {/* Home & Mortgage */}
               <div className="bg-white rounded-2xl border border-gray-100 border-l-4 border-l-[#0a7ea8] shadow-sm p-5">
@@ -522,8 +529,10 @@ export default function TrueCostPage() {
                 </ul>
               </div>
             </div>
+            </SectionGate>
 
             {/* Results panel */}
+            <SectionGate page="/true-cost" id="calculator" sub="results">
             <div className="space-y-5">
               {/* Mortgage Only vs Real Cost */}
               <div className="rounded-2xl border-2 border-[#d4a843] bg-gradient-to-br from-[#d4a843]/5 to-[#d4a843]/10 p-5 shadow-md">
@@ -626,11 +635,16 @@ export default function TrueCostPage() {
                 </div>
               </div>
 
-              <InlineAd />
+              <AdGate name="InlineAd">
+                <InlineAd />
+              </AdGate>
             </div>
+            </SectionGate>
           </div>
+          </SectionGate>
 
           {/* Hidden Costs Section */}
+          <SectionGate page="/true-cost" id="hidden-costs">
           <div className="mt-10 mb-6">
             <h2 className="text-xl font-bold text-alta-navy mb-1">Hidden Costs Most Buyers Miss</h2>
             <p className="text-sm text-alta-gray mb-6">
@@ -681,8 +695,10 @@ export default function TrueCostPage() {
               ))}
             </div>
           </div>
+          </SectionGate>
 
           {/* Key Assumptions */}
+          <SectionGate page="/true-cost" id="assumptions">
           <div className="mt-8 bg-alta-light rounded-2xl border border-gray-200 p-5">
             <h3 className="font-bold text-alta-navy mb-3 flex items-center gap-2">
               <svg className="w-4 h-4 text-alta-teal" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
@@ -708,10 +724,14 @@ export default function TrueCostPage() {
               ))}
             </div>
           </div>
+          </SectionGate>
 
-          <FirstTimeBuyerCTA />
+          <ModuleGate name="FirstTimeBuyerCTA">
+            <FirstTimeBuyerCTA />
+          </ModuleGate>
 
           {/* Related Topics */}
+          <SectionGate page="/true-cost" id="related-topics">
           <div className="mt-8 mb-8">
             <h3 className="font-bold text-alta-navy mb-4">Related Topics</h3>
             <div className="grid sm:grid-cols-3 gap-3">
@@ -758,6 +778,7 @@ export default function TrueCostPage() {
               ))}
             </div>
           </div>
+          </SectionGate>
         </div>
       </div>
     </>

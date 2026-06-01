@@ -4,6 +4,7 @@ import { InlineAd } from "@/components/EliteProviders";
 import SponsorTip from "@/components/SponsorTip";
 import FirstTimeBuyerCTA from "@/components/FirstTimeBuyerCTA";
 import SponsorBadge from "@/components/SponsorBadge";
+import { SectionGate, AdGate, ModuleGate } from "@/components/Gate";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -45,22 +46,25 @@ const sections = [
 export default function ClosingProcessPage() {
   return (
     <>
-      <PageHero
-        title="The Closing Process"
-        subtitle="Closing — also called settlement — is the final step in a real estate transaction. It's when you legally commit to your mortgage and become the official owner of your new home."
-        image="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1920&q=80"
-        breadcrumb={[{ label: "The Closing Process", href: "/closing-process" }]}
-      />
+      <SectionGate page="/closing-process" id="hero">
+        <PageHero
+          title="The Closing Process"
+          subtitle="Closing — also called settlement — is the final step in a real estate transaction. It's when you legally commit to your mortgage and become the official owner of your new home."
+          image="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1920&q=80"
+          breadcrumb={[{ label: "The Closing Process", href: "/closing-process" }]}
+        />
+      </SectionGate>
 
       <div className="py-1.5 lg:py-2">
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
           {/* Intro section */}
+          <SectionGate page="/closing-process" id="intro">
           <div className="mb-10">
             <div className="grid md:grid-cols-[1fr_280px] gap-6 items-center mb-8">
               <div>
                 <div className="flex items-center gap-3 flex-wrap mb-3">
                   <h2 className="text-2xl font-bold text-alta-navy">What Is a Real Estate Closing?</h2>
-                  <SponsorBadge />
+                  <AdGate name="SponsorBadge"><SponsorBadge /></AdGate>
                 </div>
                 <p className="text-sm text-alta-gray leading-relaxed mb-3">Closing — also called settlement — is the moment everything comes together. It&apos;s the final step in buying a home, where ownership legally transfers from the seller to you. You&apos;ll sign the mortgage documents, pay your closing costs and down payment, and receive the keys to your new home.</p>
                 <p className="text-sm text-alta-gray leading-relaxed mb-3">The process typically takes <strong className="text-alta-navy">30-45 days</strong> from accepted offer to closing day, and involves coordination between your lender, real estate agents, title company, insurance providers, and local government. Along the way, you&apos;ll encounter inspections, appraisals, title searches, insurance decisions, and a stack of documents to review and sign.</p>
@@ -72,7 +76,9 @@ export default function ClosingProcessPage() {
               </div>
             </div>
           </div>
+          </SectionGate>
 
+          <SectionGate page="/closing-process" id="explore-phases">
           <div className="mb-6 p-4 bg-[#e6f1f5] rounded-2xl border border-[#b4d8e8] border-l-4 border-l-[#0a7ea8] sm:sticky sm:top-[142px] z-20 shadow-md">
             <div className="flex items-start gap-4">
               <div className="w-12 h-12 rounded-xl bg-[#0a7ea8]/15 flex items-center justify-center text-[#0a7ea8] shrink-0">
@@ -84,7 +90,10 @@ export default function ClosingProcessPage() {
               </div>
             </div>
           </div>
+          </SectionGate>
+
           {/* Visual flow timeline */}
+          <SectionGate page="/closing-process" id="timeline">
           <div className="relative mb-10">
             {/* Connecting line (desktop only) */}
             <div className="hidden md:block absolute top-[38px] left-[calc(12.5%+20px)] right-[calc(12.5%+20px)] h-1 bg-gradient-to-r from-[#1a5276] via-[#2d6b3f] via-[#5b3a8c] to-[#8b6914] rounded-full opacity-20" />
@@ -105,8 +114,10 @@ export default function ClosingProcessPage() {
               ))}
             </div>
           </div>
+          </SectionGate>
 
           {/* Step cards */}
+          <SectionGate page="/closing-process" id="step-cards">
           <div className="space-y-5">
             {sections.map((s, i) => (
               <Link
@@ -134,11 +145,13 @@ export default function ClosingProcessPage() {
               </Link>
             ))}
           </div>
+          </SectionGate>
 
-          <InlineAd />
+          <AdGate name="InlineAd"><InlineAd /></AdGate>
 
-          <SponsorTip context="closing" />
+          <AdGate name="SponsorTip"><SponsorTip context="closing" /></AdGate>
 
+          <SectionGate page="/closing-process" id="stats">
           <div className="h-1 bg-gradient-to-r from-transparent via-alta-teal/20 to-transparent my-10" />
 
           {/* Key closing stats */}
@@ -155,7 +168,9 @@ export default function ClosingProcessPage() {
               </div>
             ))}
           </div>
+          </SectionGate>
 
+          <SectionGate page="/closing-process" id="resources">
           <div className="h-1 bg-gradient-to-r from-transparent via-alta-teal/20 to-transparent my-10" />
 
           {/* Additional resources */}
@@ -177,8 +192,9 @@ export default function ClosingProcessPage() {
               </Link>
             ))}
           </div>
+          </SectionGate>
 
-          <FirstTimeBuyerCTA />
+          <ModuleGate name="FirstTimeBuyerCTA"><FirstTimeBuyerCTA /></ModuleGate>
         </div>
       </div>
     </>

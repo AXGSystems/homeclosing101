@@ -3,6 +3,7 @@
 import { useState, useMemo } from "react";
 import Link from "next/link";
 import PageHero from "@/components/PageHero";
+import { SectionGate, AdGate, ModuleGate } from "@/components/Gate";
 import { InlineAd } from "@/components/EliteProviders";
 import SponsorTip from "@/components/SponsorTip";
 import FirstTimeBuyerCTA from "@/components/FirstTimeBuyerCTA";
@@ -530,19 +531,22 @@ export default function HOAGuidePage() {
 
   return (
     <>
-      <PageHero
-        title="HOA Guide: What Every Buyer Needs to Know"
-        subtitle="44% of U.S. homes now belong to a homeowners association. Before you buy, understand the fees, rules, and red flags that could affect your budget and lifestyle."
-        image="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1920&q=80"
-        breadcrumb={[
-          { label: "The Closing Process", href: "/closing-process" },
-          { label: "HOA Guide", href: "/hoa-guide" },
-        ]}
-      />
+      <SectionGate page="/hoa-guide" id="hero">
+        <PageHero
+          title="HOA Guide: What Every Buyer Needs to Know"
+          subtitle="44% of U.S. homes now belong to a homeowners association. Before you buy, understand the fees, rules, and red flags that could affect your budget and lifestyle."
+          image="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1920&q=80"
+          breadcrumb={[
+            { label: "The Closing Process", href: "/closing-process" },
+            { label: "HOA Guide", href: "/hoa-guide" },
+          ]}
+        />
+      </SectionGate>
 
       <div className="py-1.5 lg:py-2">
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
           {/* ---- What is an HOA ---- */}
+          <SectionGate page="/hoa-guide" id="what-is-hoa">
           <section className="mb-8">
             <h2 className="text-xl font-bold text-alta-navy mb-3">What is a Homeowners Association?</h2>
             <div className="p-4 bg-[#e8f0f5] rounded-2xl border border-[#c5d8e4] border-l-4 border-l-alta-teal">
@@ -566,8 +570,10 @@ export default function HOAGuidePage() {
               </p>
             </div>
           </section>
+          </SectionGate>
 
           {/* ---- Key Statistics ---- */}
+          <SectionGate page="/hoa-guide" id="stats">
           <section className="mb-8">
             <h2 className="text-xl font-bold text-alta-navy mb-4">HOA by the Numbers</h2>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
@@ -592,8 +598,10 @@ export default function HOAGuidePage() {
               </div>
             </div>
           </section>
+          </SectionGate>
 
           {/* ---- Objective Pros & Cons ---- */}
+          <SectionGate page="/hoa-guide" id="pros-cons">
           <section className="mb-8">
             <h2 className="text-xl font-bold text-alta-navy mb-2">The Honest Pros and Cons of HOA Living</h2>
             <p className="text-sm text-alta-gray mb-4">
@@ -603,6 +611,7 @@ export default function HOAGuidePage() {
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
               {/* PROS */}
+              <SectionGate page="/hoa-guide" id="pros-cons" sub="pros">
               <div>
                 <div className="flex items-center gap-2 mb-3">
                   <div className="w-7 h-7 rounded-full bg-[#2d6b3f]/10 flex items-center justify-center text-[#2d6b3f] shrink-0">
@@ -637,8 +646,10 @@ export default function HOAGuidePage() {
                   ))}
                 </div>
               </div>
+              </SectionGate>
 
               {/* CONS */}
+              <SectionGate page="/hoa-guide" id="pros-cons" sub="cons">
               <div>
                 <div className="flex items-center gap-2 mb-3">
                   <div className="w-7 h-7 rounded-full bg-red-100 flex items-center justify-center text-red-600 shrink-0">
@@ -673,10 +684,13 @@ export default function HOAGuidePage() {
                   ))}
                 </div>
               </div>
+              </SectionGate>
             </div>
           </section>
+          </SectionGate>
 
           {/* ---- Cost Comparison by Property Type ---- */}
+          <SectionGate page="/hoa-guide" id="cost-comparison">
           <section className="mb-8">
             <h2 className="text-xl font-bold text-alta-navy mb-2">Real Cost Comparison by Property Type</h2>
             <p className="text-sm text-alta-gray mb-4">
@@ -716,14 +730,18 @@ export default function HOAGuidePage() {
               Source: Bankrate, 2025; U.S. Census Bureau American Housing Survey; Community Associations Institute
             </p>
           </section>
+          </SectionGate>
 
           {/* ---- Budget Impact Calculator ---- */}
+          <SectionGate page="/hoa-guide" id="budget-calculator">
           <section className="mb-8">
             <h2 className="text-xl font-bold text-alta-navy mb-3">HOA Budget Impact Calculator</h2>
             <BudgetCalculator />
           </section>
+          </SectionGate>
 
           {/* ---- What Fees Cover ---- */}
+          <SectionGate page="/hoa-guide" id="what-fees-cover">
           <section className="mb-8">
             <h2 className="text-xl font-bold text-alta-navy mb-2">What HOA Fees Typically Cover</h2>
             <p className="text-sm text-alta-gray mb-4">
@@ -741,12 +759,18 @@ export default function HOAGuidePage() {
               ))}
             </div>
           </section>
+          </SectionGate>
 
+          <AdGate name="InlineAd">
           <InlineAd />
+          </AdGate>
 
+          <AdGate name="SponsorTip">
           <SponsorTip context="title" />
+          </AdGate>
 
           {/* ---- Red Flags ---- */}
+          <SectionGate page="/hoa-guide" id="red-flags">
           <section className="mb-8 mt-8">
             <h2 className="text-xl font-bold text-alta-navy mb-2">Red Flags to Look for BEFORE Buying</h2>
             <p className="text-sm text-alta-gray mb-4">
@@ -818,8 +842,10 @@ export default function HOAGuidePage() {
               ))}
             </div>
           </section>
+          </SectionGate>
 
           {/* ---- Special Assessments ---- */}
+          <SectionGate page="/hoa-guide" id="special-assessments">
           <section className="mb-8">
             <h2 className="text-xl font-bold text-alta-navy mb-3">Special Assessments Explained</h2>
             <div className="rounded-2xl border border-[#c5d8e4] bg-[#fafcfe] overflow-hidden shadow-sm">
@@ -889,8 +915,10 @@ export default function HOAGuidePage() {
               </div>
             </div>
           </section>
+          </SectionGate>
 
           {/* ---- 2025-2026 HOA Trends ---- */}
+          <SectionGate page="/hoa-guide" id="trends">
           <section className="mb-8">
             <h2 className="text-xl font-bold text-alta-navy mb-2">2025-2026 HOA Trends: What Buyers Need to Know</h2>
             <p className="text-sm text-alta-gray mb-4">
@@ -934,6 +962,7 @@ export default function HOAGuidePage() {
               ))}
 
               {/* Legislative updates */}
+              <SectionGate page="/hoa-guide" id="trends" sub="legislative-updates">
               <div className="rounded-2xl border border-[#c5d8e4] bg-[#fafcfe] overflow-hidden shadow-sm">
                 <div className="p-4">
                   <h3 className="font-bold text-alta-navy text-sm mb-2">New State Laws Affecting HOAs</h3>
@@ -959,10 +988,13 @@ export default function HOAGuidePage() {
                   </p>
                 </div>
               </div>
+              </SectionGate>
             </div>
           </section>
+          </SectionGate>
 
           {/* ---- Questions to Ask ---- */}
+          <SectionGate page="/hoa-guide" id="questions-to-ask">
           <section className="mb-8">
             <h2 className="text-xl font-bold text-alta-navy mb-2">Questions to Ask Before Buying in an HOA</h2>
             <p className="text-sm text-alta-gray mb-4">
@@ -1010,10 +1042,14 @@ export default function HOAGuidePage() {
               ))}
             </div>
           </section>
+          </SectionGate>
 
+          <AdGate name="InlineAd">
           <InlineAd />
+          </AdGate>
 
           {/* ---- HOA Insurance Explained ---- */}
+          <SectionGate page="/hoa-guide" id="hoa-insurance">
           <section className="mb-8 mt-8">
             <h2 className="text-xl font-bold text-alta-navy mb-3">HOA Insurance Explained</h2>
             <div className="rounded-2xl border border-[#c5d8e4] bg-[#fafcfe] overflow-hidden shadow-sm">
@@ -1092,8 +1128,10 @@ export default function HOAGuidePage() {
               </div>
             </div>
           </section>
+          </SectionGate>
 
           {/* ---- Your Rights ---- */}
+          <SectionGate page="/hoa-guide" id="your-rights">
           <section className="mb-8">
             <h2 className="text-xl font-bold text-alta-navy mb-2">Your Rights as an HOA Member</h2>
             <p className="text-sm text-alta-gray mb-4">
@@ -1142,8 +1180,10 @@ export default function HOAGuidePage() {
               ))}
             </div>
           </section>
+          </SectionGate>
 
           {/* ---- Dispute Resolution ---- */}
+          <SectionGate page="/hoa-guide" id="dispute-resolution">
           <section className="mb-8">
             <h2 className="text-xl font-bold text-alta-navy mb-2">HOA Dispute Resolution: Step by Step</h2>
             <p className="text-sm text-alta-gray mb-4">
@@ -1182,8 +1222,10 @@ export default function HOAGuidePage() {
               ))}
             </div>
           </section>
+          </SectionGate>
 
           {/* ---- Resources ---- */}
+          <SectionGate page="/hoa-guide" id="resources">
           <section className="mb-8">
             <h2 className="text-xl font-bold text-alta-navy mb-3">HOA Resources</h2>
             <div className="rounded-2xl border border-[#c5d8e4] bg-[#fafcfe] overflow-hidden shadow-sm">
@@ -1230,16 +1272,22 @@ export default function HOAGuidePage() {
               </div>
             </div>
           </section>
+          </SectionGate>
 
           {/* ---- Print / Save ---- */}
+          <SectionGate page="/hoa-guide" id="print-save">
           <div className="flex flex-wrap items-center gap-3 mb-6">
             <PrintButton label="Print This Guide" />
             <SaveToFolderBtn type="checklist" title="HOA Guide: What Every Buyer Needs to Know" content="Comprehensive guide to homeowners associations, including fees, pros and cons, red flags, insurance, dispute resolution, and resources." />
           </div>
+          </SectionGate>
 
           {/* ---- CTA & Related ---- */}
+          <ModuleGate name="FirstTimeBuyerCTA">
           <FirstTimeBuyerCTA />
+          </ModuleGate>
 
+          <SectionGate page="/hoa-guide" id="related-topics">
           <section className="mt-8 mb-8">
             <h2 className="text-lg font-bold text-alta-navy mb-3">Related Topics</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
@@ -1288,6 +1336,7 @@ export default function HOAGuidePage() {
               ))}
             </div>
           </section>
+          </SectionGate>
         </div>
       </div>
     </>

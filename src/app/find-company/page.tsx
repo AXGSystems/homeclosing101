@@ -9,6 +9,7 @@ import StatePartners from "@/components/StatePartners";
 import FirstTimeBuyerCTA from "@/components/FirstTimeBuyerCTA";
 import { InlineAd } from "@/components/EliteProviders";
 import SaveToFolderBtn from "@/components/SaveToFolderBtn";
+import { SectionGate, AdGate, ModuleGate } from "@/components/Gate";
 
 const states = [
   {code:"AL",name:"Alabama"},{code:"AK",name:"Alaska"},{code:"AZ",name:"Arizona"},{code:"AR",name:"Arkansas"},
@@ -193,17 +194,20 @@ function FindCompanyContent() {
 
   return (
     <>
+    <SectionGate page="/find-company" id="hero">
     <PageHero
       title="Find a Title Company"
       subtitle="Search the ALTA member directory to find title insurance and settlement companies near you. You have the right to choose your own title company."
       image="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1920&q=80"
       breadcrumb={[{ label: "Find a Company", href: "/find-company" }]}
     />
+    </SectionGate>
     <div className="py-1.5 lg:py-2">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <div className="grid lg:grid-cols-[1fr_280px] gap-8">
           {/* Main content */}
           <div>
+            <SectionGate page="/find-company" id="intro">
             <div className="mb-6 p-4 bg-[#e8f0f5] rounded-2xl border border-[#c5d8e4] border-l-4 border-l-[#1a5276] sm:sticky sm:top-[142px] z-20 shadow-md">
               <div className="flex items-start gap-4">
                 <div className="w-12 h-12 rounded-xl bg-[#1a5276]/10 flex items-center justify-center text-[#1a5276] shrink-0">
@@ -215,8 +219,10 @@ function FindCompanyContent() {
                 </div>
               </div>
             </div>
+            </SectionGate>
 
             {/* Search controls */}
+            <SectionGate page="/find-company" id="search">
             <div className="bg-[#e8f0f5] rounded-2xl border border-[#c5d8e4] shadow-sm p-5 mb-6">
               <h2 className="text-lg font-bold text-alta-navy mb-4">Search ALTA Member Directory</h2>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mb-4">
@@ -266,8 +272,10 @@ function FindCompanyContent() {
                 Results show ALTA member companies with offices in your area, plus additional members serving your market. Data sourced from the ALTA membership directory.
               </p>
             </div>
+            </SectionGate>
 
             {/* Results — Feature Pending placeholder (member directory not yet loaded) */}
+            <SectionGate page="/find-company" id="results">
             <div className="bg-white rounded-2xl border border-[#c5d8e4] shadow-sm overflow-hidden mb-6">
               <div className="px-5 py-3 border-b border-[#c5d8e4]">
                 <h3 className="text-sm font-semibold text-alta-navy">
@@ -306,8 +314,10 @@ function FindCompanyContent() {
                 </a>
               </div>
             </div>
+            </SectionGate>
 
             {/* 5 Questions to Ask */}
+            <SectionGate page="/find-company" id="five-questions">
             <div className="bg-white rounded-2xl border border-gray-100 border-l-4 border-l-[#1a5276] shadow-sm p-5 mb-6">
               <h3 className="text-sm font-bold text-alta-navy mb-3">5 Questions to Ask Your Title Company</h3>
               <div className="space-y-2.5">
@@ -333,8 +343,10 @@ function FindCompanyContent() {
                 </div>
               </div>
             </div>
+            </SectionGate>
 
             {/* ALTA Best Practices callout after search results */}
+            <SectionGate page="/find-company" id="best-practices-logos">
             {hasSearched && (
               <div className="mb-8 p-4 bg-[#e9f5ed] rounded-xl border border-[#bddcc7]">
                 <div className="flex items-start gap-3 mb-3">
@@ -359,12 +371,16 @@ function FindCompanyContent() {
                 </div>
               </div>
             )}
+            </SectionGate>
 
+            <SectionGate page="/find-company" id="respa-did-you-know">
             <div className="p-4 bg-[#faf4e4] rounded-xl border border-[#e8d9a8] border-l-4 border-l-[#8b6914] my-6">
               <p className="text-xs text-alta-gray"><strong className="text-[#8b6914]">Did you know?</strong> Under federal law (RESPA Section 9), you have the right to choose your own title insurance company. The seller cannot require you to use a specific provider as a condition of sale. Shopping around can save you hundreds of dollars in settlement fees.</p>
             </div>
+            </SectionGate>
 
             {/* ALTA Membership Callout */}
+            <SectionGate page="/find-company" id="why-alta-membership">
             <div className="p-5 bg-gradient-to-br from-[#e8f0f5] to-white rounded-2xl border border-[#c5d8e4] mb-8">
               <div className="flex items-start gap-3">
                 <div className="w-10 h-10 rounded-xl bg-[#1a5276]/10 flex items-center justify-center text-[#1a5276] shrink-0">
@@ -379,8 +395,10 @@ function FindCompanyContent() {
                 </div>
               </div>
             </div>
+            </SectionGate>
 
             {/* Tips */}
+            <SectionGate page="/find-company" id="tips">
             <h2 className="text-2xl font-bold text-alta-navy mb-2">Tips for Choosing a Title Company</h2>
             <p className="text-sm text-alta-gray mb-4 leading-relaxed"><span className="text-alta-teal font-medium">Click any tip for deeper guidance, questions to ask, and red flags to watch for.</span></p>
             <div className="grid sm:grid-cols-2 gap-3 mb-8">
@@ -444,9 +462,13 @@ function FindCompanyContent() {
                 </div>
               ))}
             </div>
+            </SectionGate>
 
+            <AdGate name="InlineAd">
             <InlineAd />
+            </AdGate>
 
+            <SectionGate page="/find-company" id="right-to-shop">
             <div className="p-5 bg-blue-50 rounded-xl border border-blue-100">
               <h3 className="font-semibold text-alta-navy mb-2">Your Right to Shop</h3>
               <p className="text-sm text-alta-gray">
@@ -459,11 +481,15 @@ function FindCompanyContent() {
                 </svg>
               </Link>
             </div>
+            </SectionGate>
 
+            <ModuleGate name="FirstTimeBuyerCTA">
             <FirstTimeBuyerCTA />
+            </ModuleGate>
           </div>
 
           {/* Right sidebar — sponsor ads + state partners */}
+          <SectionGate page="/find-company" id="sidebar">
           <aside className="hidden lg:block">
             <SponsorSidebar />
             {hasSearched && selectedState && (
@@ -475,6 +501,7 @@ function FindCompanyContent() {
               </div>
             )}
           </aside>
+          </SectionGate>
         </div>
       </div>
     </div>

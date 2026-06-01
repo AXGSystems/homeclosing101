@@ -6,6 +6,7 @@ import { InlineAd } from "@/components/EliteProviders";
 import SponsorTip from "@/components/SponsorTip";
 import ExpandableTile from "@/components/ExpandableTile";
 import FirstTimeBuyerCTA from "@/components/FirstTimeBuyerCTA";
+import { SectionGate, AdGate, ModuleGate } from "@/components/Gate";
 import { useState } from "react";
 
 /* ──────────────────────────────────────────────────────────────────────
@@ -226,19 +227,22 @@ function Accordion({
 export default function PropertyRightsPage() {
   return (
     <>
-      <PageHero
-        title="Your Property Rights: What Every Homeowner Should Know"
-        subtitle="Understanding your rights as a property owner is essential to protecting your investment, your family, and your future. This guide covers the fundamental rights that come with homeownership, what can limit them, and how to protect them."
-        image="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1920&q=80"
-        breadcrumb={[
-          { label: "Protect Your Property", href: "/protect-your-rights" },
-          { label: "Property Rights", href: "/property-rights" },
-        ]}
-      />
+      <SectionGate page="/property-rights" id="hero">
+        <PageHero
+          title="Your Property Rights: What Every Homeowner Should Know"
+          subtitle="Understanding your rights as a property owner is essential to protecting your investment, your family, and your future. This guide covers the fundamental rights that come with homeownership, what can limit them, and how to protect them."
+          image="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1920&q=80"
+          breadcrumb={[
+            { label: "Protect Your Property", href: "/protect-your-rights" },
+            { label: "Property Rights", href: "/property-rights" },
+          ]}
+        />
+      </SectionGate>
 
       <div className="py-1.5 lg:py-2">
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
           {/* ── SECTION 1: Bundle of Rights ── */}
+          <SectionGate page="/property-rights" id="bundle-of-rights">
           <h2 className="text-2xl font-bold text-alta-navy mb-2">The Bundle of Rights</h2>
           <p className="text-sm text-alta-gray mb-6 leading-relaxed">
             Property ownership in the United States is often described as a &quot;bundle of rights&quot; &mdash; five fundamental legal rights that come with holding title to real property. Think of it as five sticks in a bundle: together, they represent full ownership. Each right can be separated, transferred, or limited under certain circumstances.
@@ -270,8 +274,10 @@ export default function PropertyRightsPage() {
               </ExpandableTile>
             ))}
           </div>
+          </SectionGate>
 
           {/* ── SECTION 2: What Can Limit Your Rights ── */}
+          <SectionGate page="/property-rights" id="limitations">
           <h2 className="text-2xl font-bold text-alta-navy mb-2">What Can Limit Your Property Rights</h2>
           <p className="text-sm text-alta-gray mb-6 leading-relaxed">
             Owning property does not mean unlimited freedom. Federal, state, and local laws &mdash; as well as private agreements &mdash; can restrict what you can do with your property. Understanding these limitations before you buy can prevent costly surprises.
@@ -292,17 +298,24 @@ export default function PropertyRightsPage() {
               </div>
             ))}
           </div>
+          </SectionGate>
 
-          <InlineAd />
+          <AdGate name="InlineAd">
+            <InlineAd />
+          </AdGate>
 
-          <SponsorTip context="insurance" />
+          <AdGate name="SponsorTip">
+            <SponsorTip context="insurance" />
+          </AdGate>
 
           {/* ── SECTION 3: Fair Housing Act ── */}
+          <SectionGate page="/property-rights" id="fair-housing">
           <h2 className="text-2xl font-bold text-alta-navy mb-2 mt-10">Fair Housing Act Protections</h2>
           <p className="text-sm text-alta-gray mb-6 leading-relaxed">
             The Fair Housing Act (Title VIII of the Civil Rights Act of 1968, as amended) prohibits discrimination in the sale, rental, and financing of housing based on protected characteristics. The law applies to most housing transactions and is enforced by the U.S. Department of Housing and Urban Development (HUD).
           </p>
 
+          <SectionGate page="/property-rights" id="fair-housing" sub="classes-and-violations">
           <div className="grid md:grid-cols-2 gap-5 mb-6">
             {/* Protected Classes */}
             <div className="p-5 bg-gradient-to-br from-blue-50 to-white rounded-2xl border border-blue-200">
@@ -339,8 +352,10 @@ export default function PropertyRightsPage() {
               </ul>
             </div>
           </div>
+          </SectionGate>
 
           {/* How to file + state protections */}
+          <SectionGate page="/property-rights" id="fair-housing" sub="complaints-and-state">
           <div className="grid md:grid-cols-2 gap-5 mb-14">
             <div className="p-5 bg-gradient-to-br from-green-50 to-white rounded-2xl border border-green-200">
               <h3 className="font-bold text-alta-navy mb-2">How to File a Fair Housing Complaint</h3>
@@ -375,8 +390,11 @@ export default function PropertyRightsPage() {
               </p>
             </div>
           </div>
+          </SectionGate>
+          </SectionGate>
 
           {/* ── SECTION 4: Mineral Rights ── */}
+          <SectionGate page="/property-rights" id="mineral-rights">
           <h2 className="text-2xl font-bold text-alta-navy mb-2">Mineral Rights &amp; Surface Rights</h2>
           <p className="text-sm text-alta-gray mb-6 leading-relaxed">
             When you buy a home, you might assume you own everything above and below the surface. That is not always the case. In the United States, property rights can be &quot;split&quot; &mdash; meaning one person can own the surface (your house, yard, and structures) while someone else owns the subsurface mineral rights (oil, gas, coal, metals, and other resources).
@@ -422,10 +440,14 @@ export default function PropertyRightsPage() {
               </p>
             </Accordion>
           </div>
+          </SectionGate>
 
-          <InlineAd />
+          <AdGate name="InlineAd">
+            <InlineAd />
+          </AdGate>
 
           {/* ── SECTION 5: Transaction Rights ── */}
+          <SectionGate page="/property-rights" id="transaction-rights">
           <h2 className="text-2xl font-bold text-alta-navy mb-2 mt-10">Your Rights During a Real Estate Transaction</h2>
           <p className="text-sm text-alta-gray mb-6 leading-relaxed">
             Federal law provides specific protections for homebuyers during the closing process. The Real Estate Settlement Procedures Act (RESPA) and the TILA-RESPA Integrated Disclosure (TRID) rule ensure transparency, fair dealing, and your right to shop for services.
@@ -447,8 +469,10 @@ export default function PropertyRightsPage() {
               </div>
             ))}
           </div>
+          </SectionGate>
 
           {/* ── SECTION 6: Adverse Possession ── */}
+          <SectionGate page="/property-rights" id="adverse-possession">
           <h2 className="text-2xl font-bold text-alta-navy mb-2">Adverse Possession &amp; Boundary Disputes</h2>
           <p className="text-sm text-alta-gray mb-6 leading-relaxed">
             Adverse possession is a legal doctrine that allows someone to claim ownership of land they have occupied openly, continuously, and without the owner&apos;s permission for a statutory period &mdash; typically between 5 and 20 years, depending on the state. It sounds unlikely, but it happens more often than most homeowners realize, particularly with boundary encroachments.
@@ -481,8 +505,10 @@ export default function PropertyRightsPage() {
               </ul>
             </div>
           </div>
+          </SectionGate>
 
           {/* ── SECTION 7: Protecting Your Rights ── */}
+          <SectionGate page="/property-rights" id="protecting-rights">
           <h2 className="text-2xl font-bold text-alta-navy mb-2">Protecting Your Property Rights</h2>
           <p className="text-sm text-alta-gray mb-6 leading-relaxed">
             The best way to protect your property rights is to be proactive. These six steps can prevent the most common threats to homeownership.
@@ -501,10 +527,14 @@ export default function PropertyRightsPage() {
               </div>
             ))}
           </div>
+          </SectionGate>
 
-          <InlineAd />
+          <AdGate name="InlineAd">
+            <InlineAd />
+          </AdGate>
 
           {/* ── Legal Disclaimer ── */}
+          <SectionGate page="/property-rights" id="legal-disclaimer">
           <div className="mt-10 mb-8 p-4 bg-gray-50 rounded-xl border border-gray-200">
             <div className="flex items-start gap-3">
               <svg className="w-5 h-5 text-alta-gray shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
@@ -518,10 +548,12 @@ export default function PropertyRightsPage() {
               </div>
             </div>
           </div>
+          </SectionGate>
 
           <div className="h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent my-8" />
 
           {/* ── Related Topics ── */}
+          <SectionGate page="/property-rights" id="related-topics">
           <h2 className="text-lg font-bold text-alta-navy mb-4">Related Topics</h2>
           <div className="grid sm:grid-cols-3 gap-3">
             <Link href="/protect-your-rights" className="p-4 bg-[#e9f5ed] rounded-xl border border-[#bddcc7] border-l-4 border-l-[#2d6b3f] tile-interactive group">
@@ -537,8 +569,11 @@ export default function PropertyRightsPage() {
               <p className="text-[10px] text-alta-gray mt-1">Step-by-step guide to what happens on closing day</p>
             </Link>
           </div>
+          </SectionGate>
 
-          <FirstTimeBuyerCTA />
+          <ModuleGate name="FirstTimeBuyerCTA">
+            <FirstTimeBuyerCTA />
+          </ModuleGate>
         </div>
       </div>
     </>

@@ -4,6 +4,7 @@ import { InlineAd } from "@/components/EliteProviders";
 import SponsorTip from "@/components/SponsorTip";
 import ExpandableRiskTiles from "@/components/ExpandableRiskTiles";
 import FirstTimeBuyerCTA from "@/components/FirstTimeBuyerCTA";
+import { SectionGate, AdGate, ModuleGate } from "@/components/Gate";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -46,27 +47,32 @@ const coveredScenarios = [
 export default function ProtectYourRightsPage() {
   return (
     <>
-      <PageHero
-        title="Protect Your Property Rights"
-        subtitle="Owner's title insurance is a one-time purchase at closing that protects your property rights for as long as you or your heirs own the home."
-        image="https://images.unsplash.com/photo-1573497620053-ea5300f94f21?w=1920&q=80"
-        breadcrumb={[{ label: "Protect Your Property", href: "/protect-your-rights" }]}
-      />
+      <SectionGate page="/protect-your-rights" id="hero">
+        <PageHero
+          title="Protect Your Property Rights"
+          subtitle="Owner's title insurance is a one-time purchase at closing that protects your property rights for as long as you or your heirs own the home."
+          image="https://images.unsplash.com/photo-1573497620053-ea5300f94f21?w=1920&q=80"
+          breadcrumb={[{ label: "Protect Your Property", href: "/protect-your-rights" }]}
+        />
+      </SectionGate>
 
       <div className="py-1.5 lg:py-2">
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
-          <div className="mb-6 p-4 bg-[#e9f5ed] rounded-2xl border border-[#bddcc7] border-l-4 border-l-[#2d6b3f] sm:sticky sm:top-[142px] z-20 shadow-md">
-            <div className="flex items-start gap-4">
-              <div className="w-12 h-12 rounded-xl bg-[#2d6b3f]/10 flex items-center justify-center text-[#2d6b3f] shrink-0">
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" /></svg>
-              </div>
-              <div>
-                <h2 className="font-bold text-alta-navy mb-1">Understand Your Most Important Protection</h2>
-                <p className="text-sm text-alta-gray leading-relaxed">Title insurance is the only insurance that protects what already happened — hidden liens, fraud, and errors in public records that could threaten your ownership. Learn the difference between the two types and why the owner&apos;s policy is essential.</p>
+          <SectionGate page="/protect-your-rights" id="intro-banner">
+            <div className="mb-6 p-4 bg-[#e9f5ed] rounded-2xl border border-[#bddcc7] border-l-4 border-l-[#2d6b3f] sm:sticky sm:top-[142px] z-20 shadow-md">
+              <div className="flex items-start gap-4">
+                <div className="w-12 h-12 rounded-xl bg-[#2d6b3f]/10 flex items-center justify-center text-[#2d6b3f] shrink-0">
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" /></svg>
+                </div>
+                <div>
+                  <h2 className="font-bold text-alta-navy mb-1">Understand Your Most Important Protection</h2>
+                  <p className="text-sm text-alta-gray leading-relaxed">Title insurance is the only insurance that protects what already happened — hidden liens, fraud, and errors in public records that could threaten your ownership. Learn the difference between the two types and why the owner&apos;s policy is essential.</p>
+                </div>
               </div>
             </div>
-          </div>
+          </SectionGate>
           {/* Your Rights Checklist */}
+          <SectionGate page="/protect-your-rights" id="rights-checklist">
           <div className="mb-8 p-5 bg-gradient-to-br from-[#e9f5ed] to-white rounded-2xl border-2 border-[#2d6b3f]/20 shadow-sm">
             <div className="flex items-start gap-3 mb-4">
               <div className="w-10 h-10 rounded-lg bg-[#2d6b3f] flex items-center justify-center shrink-0">
@@ -120,8 +126,10 @@ export default function ProtectYourRightsPage() {
               </div>
             </div>
           </div>
+          </SectionGate>
 
           {/* Key distinction */}
+          <SectionGate page="/protect-your-rights" id="policy-distinction">
           <div className="grid md:grid-cols-2 gap-4 mb-14">
             <div className="relative p-6 rounded-2xl overflow-hidden border border-red-200">
               <div className="absolute inset-0 bg-gradient-to-br from-red-50 to-red-100/50" />
@@ -144,8 +152,10 @@ export default function ProtectYourRightsPage() {
               </div>
             </div>
           </div>
+          </SectionGate>
 
           {/* What it protects against */}
+          <SectionGate page="/protect-your-rights" id="protects-against">
           <h2 className="text-2xl font-bold text-alta-navy mb-6">What Does Title Insurance Protect Against?</h2>
           <p className="text-alta-gray mb-6">Title searches reveal problems in more than <strong className="text-alta-navy">one-third</strong> of residential transactions:</p>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 mb-14">
@@ -158,12 +168,18 @@ export default function ProtectYourRightsPage() {
               </div>
             ))}
           </div>
+          </SectionGate>
 
-          <InlineAd />
+          <AdGate name="InlineAd">
+            <InlineAd />
+          </AdGate>
 
-          <SponsorTip context="insurance" />
+          <AdGate name="SponsorTip">
+            <SponsorTip context="insurance" />
+          </AdGate>
 
           {/* Covered scenarios — educational, not specific cases */}
+          <SectionGate page="/protect-your-rights" id="covered-scenarios">
           <h2 className="text-2xl font-bold text-alta-navy mb-2">What Title Insurance Covers</h2>
           <p className="text-sm text-alta-gray mb-6 leading-relaxed">
             Four of the most common claim scenarios an owner&apos;s title insurance policy protects against. These are illustrative examples of covered situations, not specific documented claims.
@@ -182,10 +198,12 @@ export default function ProtectYourRightsPage() {
               </div>
             ))}
           </div>
+          </SectionGate>
 
           <div className="h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent my-8" />
 
           {/* How the title search works */}
+          <SectionGate page="/protect-your-rights" id="title-search-process">
           <h2 className="text-2xl font-bold text-alta-navy mb-4">How the Title Search Process Works</h2>
           <p className="text-sm text-alta-gray mb-4 leading-relaxed">
             Before your title insurance policy can be issued, a title professional conducts a thorough examination of public records related to your property. This process — called a title search or title examination — is one of the most important steps in the closing process. According to ALTA, title searches reveal issues that need resolution in approximately one out of every three residential transactions.
@@ -208,18 +226,22 @@ export default function ProtectYourRightsPage() {
               </div>
             ))}
           </div>
+          </SectionGate>
 
           <div className="h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent my-8" />
 
           {/* The 10 covered risks explained */}
+          <SectionGate page="/protect-your-rights" id="covered-risks">
           <h2 className="text-2xl font-bold text-alta-navy mb-4">What Your Owner&apos;s Policy Actually Covers</h2>
           <p className="text-sm text-alta-gray mb-4 leading-relaxed">
             The current ALTA Owner&apos;s Policy lists specific covered risks. Click any risk below to see how title insurance protects you in detail.
           </p>
           <p className="text-[10px] text-alta-teal font-medium mb-4">Source: ALTA Standard Owner&apos;s Policy</p>
           <ExpandableRiskTiles />
+          </SectionGate>
 
           {/* Dollar comparison */}
+          <SectionGate page="/protect-your-rights" id="the-math">
           <h2 className="text-2xl font-bold text-alta-navy mb-4">The Math: Why Title Insurance is Worth It</h2>
           <div className="p-6 bg-gradient-to-br from-green-50 to-white rounded-2xl border border-green-200 mb-10">
             <div className="grid md:grid-cols-3 gap-4 text-center mb-4">
@@ -240,11 +262,16 @@ export default function ProtectYourRightsPage() {
               For a one-time payment of approximately 0.5% of your home&apos;s value, you get coverage for the entire time you own the property — including full legal defense costs. Without title insurance, a single title dispute could cost you tens of thousands in legal fees, even if you ultimately win. If you lose, you could lose your entire investment.
             </p>
           </div>
+          </SectionGate>
 
-          <InlineAd />
+          <AdGate name="InlineAd">
+            <InlineAd />
+          </AdGate>
 
           {/* Cost and shopping */}
+          <SectionGate page="/protect-your-rights" id="cost-and-claims">
           <div className="grid md:grid-cols-2 gap-5 mb-6 mt-6">
+            <SectionGate page="/protect-your-rights" id="cost-and-claims" sub="cost-and-shop">
             <div className="p-6 bg-gradient-to-br from-blue-50 to-blue-100/30 rounded-2xl border border-blue-100">
               <h3 className="font-bold text-alta-navy mb-2 text-lg">Cost & Your Right to Shop</h3>
               <p className="text-sm text-alta-gray mb-2 leading-relaxed">
@@ -257,6 +284,8 @@ export default function ProtectYourRightsPage() {
                 <strong className="text-alta-navy">Tip:</strong> Ask about the simultaneous issue rate — when you purchase both an owner&apos;s and lender&apos;s policy from the same company at the same time, you typically get a significant discount on the second policy.
               </p>
             </div>
+            </SectionGate>
+            <SectionGate page="/protect-your-rights" id="cost-and-claims" sub="filing-a-claim">
             <div className="p-6 bg-gradient-to-br from-amber-50 to-amber-100/30 rounded-2xl border border-amber-100">
               <h3 className="font-bold text-alta-navy mb-2 text-lg">Filing a Claim</h3>
               <p className="text-sm text-alta-gray mb-2 leading-relaxed">
@@ -273,8 +302,12 @@ export default function ProtectYourRightsPage() {
                 <strong className="text-alta-navy">What to provide:</strong> Your property address, policy number (if available), description of the issue, and any relevant documents. Your insurer will investigate, provide legal defense if needed, and pay covered losses up to your policy amount.
               </p>
             </div>
+            </SectionGate>
           </div>
+          </SectionGate>
 
+          {/* CTA buttons */}
+          <SectionGate page="/protect-your-rights" id="cta-buttons">
           <div className="flex flex-col sm:flex-row gap-3">
             <Link href="/find-company" className="px-5 py-2.5 bg-alta-teal text-white font-semibold rounded-lg hover:bg-alta-teal-dark transition-colors text-center text-sm">
               Find a Title Company
@@ -289,7 +322,9 @@ export default function ProtectYourRightsPage() {
               View Sources
             </Link>
           </div>
+          </SectionGate>
 
+          <SectionGate page="/protect-your-rights" id="related-topics">
           <div className="mt-8 mb-4">
             <h2 className="text-lg font-bold text-alta-navy mb-4">Related Topics</h2>
             <div className="grid sm:grid-cols-3 gap-3">
@@ -307,8 +342,11 @@ export default function ProtectYourRightsPage() {
               </Link>
             </div>
           </div>
+          </SectionGate>
 
-          <FirstTimeBuyerCTA />
+          <ModuleGate name="FirstTimeBuyerCTA">
+            <FirstTimeBuyerCTA />
+          </ModuleGate>
         </div>
       </div>
     </>

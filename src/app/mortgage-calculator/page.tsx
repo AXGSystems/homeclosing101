@@ -8,6 +8,7 @@ import { InlineAd } from "@/components/EliteProviders";
 import SponsorTip from "@/components/SponsorTip";
 import FirstTimeBuyerCTA from "@/components/FirstTimeBuyerCTA";
 import ContextualSponsor from "@/components/ContextualSponsor";
+import { SectionGate, AdGate, ModuleGate } from "@/components/Gate";
 import { propertyTaxRates, loanTypes } from "@/data/propertyTaxRates";
 import { countyTaxRates } from "@/data/countyTaxRates";
 
@@ -97,15 +98,18 @@ export default function MortgageCalculatorPage() {
 
   return (
     <>
-      <PageHero
-        title="Mortgage Payment Calculator"
-        subtitle="Estimate your monthly payment by loan type with real state property tax rates. Compare Conventional, FHA, VA, and USDA side by side."
-        image="https://images.unsplash.com/photo-1560520653-9e0e4c89eb11?w=1920&q=80"
-        breadcrumb={[{ label: "Resources", href: "/resources" }, { label: "Mortgage Calculator", href: "/mortgage-calculator" }]}
-      />
+      <SectionGate page="/mortgage-calculator" id="hero">
+        <PageHero
+          title="Mortgage Payment Calculator"
+          subtitle="Estimate your monthly payment by loan type with real state property tax rates. Compare Conventional, FHA, VA, and USDA side by side."
+          image="https://images.unsplash.com/photo-1560520653-9e0e4c89eb11?w=1920&q=80"
+          breadcrumb={[{ label: "Resources", href: "/resources" }, { label: "Mortgage Calculator", href: "/mortgage-calculator" }]}
+        />
+      </SectionGate>
 
       <div className="py-1.5 lg:py-2">
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
+          <SectionGate page="/mortgage-calculator" id="intro">
           <div className="mb-6 p-4 bg-[#e6f1f5] rounded-2xl border border-[#b4d8e8] border-l-4 border-l-[#0a7ea8] sm:sticky sm:top-[142px] z-20 shadow-md">
             <div className="flex items-start gap-4">
               <div className="w-12 h-12 rounded-xl bg-[#0a7ea8]/10 flex items-center justify-center text-[#0a7ea8] shrink-0">
@@ -117,8 +121,12 @@ export default function MortgageCalculatorPage() {
               </div>
             </div>
           </div>
+          </SectionGate>
 
+          {/* Calculator: selector, inputs, results */}
+          <SectionGate page="/mortgage-calculator" id="calculator">
           {/* Loan type selector */}
+          <SectionGate page="/mortgage-calculator" id="calculator" sub="loan-type-selector">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-2 mb-6">
             {Object.entries(loanTypes).map(([key, lt]) => (
               <button
@@ -138,15 +146,19 @@ export default function MortgageCalculatorPage() {
               </button>
             ))}
           </div>
+          </SectionGate>
 
           {/* Loan type info bar */}
+          <SectionGate page="/mortgage-calculator" id="calculator" sub="loan-type-info">
           <div className="p-4 bg-alta-light rounded-xl border border-gray-100 mb-6">
             <p className="text-xs text-alta-gray leading-relaxed">{config.description}</p>
             {config.upfrontMIP > 0 && (
               <p className="text-xs text-alta-navy mt-2"><strong>Upfront fee:</strong> {config.upfrontMIP}% ({loanType === "va" ? "VA funding fee" : loanType === "fha" ? "FHA UFMIP" : "USDA guarantee fee"}) = <strong>${fmt(calc.upfrontMIPAmount)}</strong> {loanType !== "va" && "(added to loan balance)"}</p>
             )}
           </div>
+          </SectionGate>
 
+          <SectionGate page="/mortgage-calculator" id="calculator" sub="inputs-results">
           <div className="grid lg:grid-cols-[1fr_380px] gap-6">
             {/* Inputs */}
             <div className="space-y-5">
@@ -301,17 +313,23 @@ export default function MortgageCalculatorPage() {
               </div>
             </div>
           </div>
+          </SectionGate>
+          </SectionGate>
 
-          <ContextualSponsor context="mortgage" />
+          <AdGate name="ContextualSponsor"><ContextualSponsor context="mortgage" /></AdGate>
 
+          <SectionGate page="/mortgage-calculator" id="rate-shopping-tip">
           <div className="p-4 bg-[#faf4e4] rounded-xl border border-[#e8d9a8] border-l-4 border-l-[#8b6914] my-6">
             <p className="text-xs text-alta-gray"><strong className="text-[#8b6914]">Did you know?</strong> According to the CFPB, a 0.5% difference in your mortgage interest rate on a $350,000 loan adds up to more than $37,000 in additional interest over 30 years. Shopping multiple lenders is one of the most impactful financial decisions you can make.</p>
           </div>
+          </SectionGate>
 
           {/* Detailed Analysis */}
+          <SectionGate page="/mortgage-calculator" id="detailed-analysis">
           <div className="mt-8 p-6 bg-gradient-to-br from-alta-light to-white rounded-2xl border border-gray-100">
             <h2 className="text-xl font-bold text-alta-navy mb-4">Detailed Analysis: Your {config.name} Loan</h2>
 
+            <SectionGate page="/mortgage-calculator" id="detailed-analysis" sub="cash-and-insurance">
             <div className="grid md:grid-cols-2 gap-5 mb-6">
               {/* Cash needed */}
               <div className="p-4 bg-white rounded-xl border border-gray-100 tile-interactive">
@@ -345,8 +363,10 @@ export default function MortgageCalculatorPage() {
                 )}
               </div>
             </div>
+            </SectionGate>
 
             {/* Property tax context */}
+            <SectionGate page="/mortgage-calculator" id="detailed-analysis" sub="property-tax-context">
             <div className="p-4 bg-white rounded-xl border border-gray-100 tile-interactive mb-6">
               <h3 className="text-sm font-bold text-alta-navy mb-2">
                 Property Tax: {usingCountyRate ? `${selectedCounty} County, ` : ""}{propertyTaxRates[selectedState]?.name}
@@ -374,8 +394,10 @@ export default function MortgageCalculatorPage() {
                 <p>Sources: Tax Foundation, Census Bureau ACS (2024), county tax assessor data via tax-rates.org</p>
               </div>
             </div>
+            </SectionGate>
 
             {/* 5-year and total cost */}
+            <SectionGate page="/mortgage-calculator" id="detailed-analysis" sub="cost-totals">
             <div className="grid grid-cols-3 gap-3">
               <div className="p-4 bg-white rounded-xl border border-gray-100 tile-interactive text-center">
                 <p className="text-xs text-alta-gray mb-1">Total Payments (5 years)</p>
@@ -390,13 +412,16 @@ export default function MortgageCalculatorPage() {
                 <p className="text-lg font-bold text-alta-red">${fmt(calc.totalInterest)}</p>
               </div>
             </div>
+            </SectionGate>
           </div>
+          </SectionGate>
 
-          <InlineAd />
+          <AdGate name="InlineAd"><InlineAd /></AdGate>
 
-          <SponsorTip context="mortgage" />
+          <AdGate name="SponsorTip"><SponsorTip context="mortgage" /></AdGate>
 
           {/* Loan type comparison table */}
+          <SectionGate page="/mortgage-calculator" id="comparison-table">
           <div className="mt-8">
             <h2 className="text-xl font-bold text-alta-navy mb-4">Loan Type Comparison at ${fmt(homePrice)}</h2>
             <div className="overflow-x-auto">
@@ -476,8 +501,10 @@ export default function MortgageCalculatorPage() {
               </div>
             )}
           </div>
+          </SectionGate>
 
           {/* Quick Scenarios */}
+          <SectionGate page="/mortgage-calculator" id="quick-scenarios">
           <div className="mt-8">
             <h2 className="text-xl font-bold text-alta-navy mb-2">Quick Scenarios</h2>
             <p className="text-sm text-alta-gray mb-4">Click a scenario to instantly populate the calculator and see estimated payments.</p>
@@ -508,7 +535,9 @@ export default function MortgageCalculatorPage() {
               </button>
             </div>
           </div>
+          </SectionGate>
 
+          <SectionGate page="/mortgage-calculator" id="related-tools">
           <div className="mt-8 grid sm:grid-cols-3 gap-3">
             <Link href="/affordability" className="group p-4 bg-[#e8f0f5] rounded-xl border border-[#c5d8e4] border-l-4 border-l-[#1a5276] tile-interactive text-center">
               <h3 className="text-sm font-semibold text-alta-navy group-hover:text-alta-teal transition-colors">Affordability Calculator</h3>
@@ -523,10 +552,13 @@ export default function MortgageCalculatorPage() {
               <p className="text-xs text-alta-gray mt-1">Complete homebuying roadmap</p>
             </Link>
           </div>
+          </SectionGate>
 
+          <SectionGate page="/mortgage-calculator" id="disclaimer">
           <p className="text-xs text-alta-gray mt-6 text-center">* This calculator provides estimates only. Actual payments vary by lender, credit score, location, and loan terms. Property tax rates are state averages — your actual tax depends on county and local assessments. Consult a mortgage professional for exact figures. Sources: Tax Foundation, Census Bureau, FHA.com, VA.gov, USDA.gov, Fannie Mae.</p>
+          </SectionGate>
 
-          <FirstTimeBuyerCTA />
+          <ModuleGate name="FirstTimeBuyerCTA"><FirstTimeBuyerCTA /></ModuleGate>
         </div>
       </div>
     </>
