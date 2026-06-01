@@ -5,6 +5,7 @@ import FraudStats from "@/components/FraudStats";
 import ExpandableFraudSteps from "@/components/ExpandableFraudSteps";
 import { InlineAd } from "@/components/EliteProviders";
 import FirstTimeBuyerCTA from "@/components/FirstTimeBuyerCTA";
+import { SectionGate, AdGate, ModuleGate } from "@/components/Gate";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -96,11 +97,14 @@ const stats = [
 export default function StopFraudPage() {
   return (
     <>
+    <SectionGate page="/stop-fraud" id="hero">
     <PageHero title="Stop Fraud 101" subtitle="10 prevention steps sourced from the FBI, CFPB, NAR, ALTA, and CertifID. Print them out and keep them with your closing documents." image="https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=1920&q=80" breadcrumb={[{label:"Protect Your Property",href:"/protect-your-rights"},{label:"Stop Fraud 101",href:"/stop-fraud"}]} />
+    </SectionGate>
     <div className="py-1.5 lg:py-2">
       <div className="max-w-5xl mx-auto px-4 sm:px-6">
 
         {/* Page intro */}
+        <SectionGate page="/stop-fraud" id="intro">
         <div className="mb-6 p-4 bg-[#f5e8e8] rounded-2xl border border-[#e4c5c5] border-l-4 border-l-[#943030] sm:sticky sm:top-[142px] z-20 shadow-md">
           <div className="flex items-start gap-4">
             <div className="w-12 h-12 rounded-xl bg-[#943030]/10 flex items-center justify-center text-[#943030] shrink-0">
@@ -112,8 +116,10 @@ export default function StopFraudPage() {
             </div>
           </div>
         </div>
+        </SectionGate>
 
         {/* EMERGENCY: What to do RIGHT NOW if you're a victim */}
+        <SectionGate page="/stop-fraud" id="emergency">
         <div className="mb-6 rounded-2xl overflow-hidden shadow-lg">
           <div className="bg-gradient-to-r from-[#7a1a1a] via-[#943030] to-[#7a1a1a] px-5 py-3">
             <h2 className="text-white font-bold text-lg tracking-tight flex items-center gap-2">
@@ -146,18 +152,27 @@ export default function StopFraudPage() {
             <p className="text-[10px] text-alta-teal font-medium mt-3">Source: FBI IC3 Recovery Asset Team (RAT) protocol, CFPB consumer advisory</p>
           </div>
         </div>
+        </SectionGate>
 
         {/* Interactive stats — click any tile for deep-dive details */}
+        <ModuleGate name="FraudStats">
         <FraudStats />
+        </ModuleGate>
 
         {/* 10 Prevention Steps */}
+        <SectionGate page="/stop-fraud" id="prevention-steps">
+        <>
         <h2 className="text-2xl font-bold text-alta-navy mb-4">10 Steps to Prevent Wire Fraud</h2>
         <p className="text-sm text-alta-gray mb-4">Click any step for a detailed explanation of why it matters and how to implement it.</p>
         <ExpandableFraudSteps />
+        </>
+        </SectionGate>
 
         <div className="h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent my-8" />
 
         {/* If You're a Victim */}
+        <SectionGate page="/stop-fraud" id="if-victim">
+        <>
         <h2 className="text-2xl font-bold text-alta-navy mb-4">If You Suspect You&apos;re a Victim</h2>
         <p className="text-alta-gray mb-6">Speed is everything. Follow these steps in order — the first hour is your best window for recovery.</p>
         <div className="bg-red-50 rounded-2xl border border-red-200 p-6 mb-12">
@@ -178,10 +193,16 @@ export default function StopFraudPage() {
             ))}
           </div>
         </div>
+        </>
+        </SectionGate>
 
         {/* Reporting Links */}
+        <AdGate name="InlineAd">
         <InlineAd />
+        </AdGate>
 
+        <SectionGate page="/stop-fraud" id="where-to-report">
+        <>
         <h2 className="text-2xl font-bold text-alta-navy mb-4">Where to Report Fraud</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-12">
           {[
@@ -200,10 +221,14 @@ export default function StopFraudPage() {
             </a>
           ))}
         </div>
+        </>
+        </SectionGate>
 
         <div className="h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent my-8" />
 
         {/* Real-world fraud scenarios */}
+        <SectionGate page="/stop-fraud" id="scenarios">
+        <>
         <h2 className="text-2xl font-bold text-alta-navy mb-4">How Fraud Actually Happens: 3 Real Scenarios</h2>
         <div className="space-y-4 mb-10">
           {[
@@ -229,10 +254,14 @@ export default function StopFraudPage() {
             </div>
           ))}
         </div>
+        </>
+        </SectionGate>
 
         <div className="h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent my-8" />
 
         {/* Wire transfer safety checklist */}
+        <SectionGate page="/stop-fraud" id="safety-checklist">
+        <>
         <h2 className="text-2xl font-bold text-alta-navy mb-4">Your Wire Transfer Safety Checklist</h2>
         <p className="text-sm text-alta-gray mb-4">Before you wire ANY money for your closing, verify every item on this list. Print it and check each box:</p>
         <div className="grid sm:grid-cols-2 gap-2 mb-10">
@@ -254,7 +283,10 @@ export default function StopFraudPage() {
             </div>
           ))}
         </div>
+        </>
+        </SectionGate>
 
+        <SectionGate page="/stop-fraud" id="cta-links">
         <div className="flex flex-col sm:flex-row gap-3">
           <Link href="/protect-your-money" className="px-5 py-2.5 bg-[#943030] text-white font-semibold rounded-lg hover:bg-[#7a2020] transition-colors text-center text-sm">
             Wire Fraud Overview
@@ -267,7 +299,9 @@ export default function StopFraudPage() {
           </Link>
           <PrintButton />
         </div>
+        </SectionGate>
 
+        <SectionGate page="/stop-fraud" id="related-topics">
         <div className="mt-8 mb-4">
           <h2 className="text-lg font-bold text-alta-navy mb-4">Related Topics</h2>
           <div className="grid sm:grid-cols-3 gap-3">
@@ -285,8 +319,11 @@ export default function StopFraudPage() {
             </Link>
           </div>
         </div>
+        </SectionGate>
 
+        <ModuleGate name="FirstTimeBuyerCTA">
         <FirstTimeBuyerCTA />
+        </ModuleGate>
       </div>
     </div>
     </>

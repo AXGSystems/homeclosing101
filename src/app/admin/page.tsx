@@ -3,6 +3,7 @@
 import { useState, useEffect, useMemo, useCallback, useRef } from "react";
 import { supabase } from "@/lib/supabase";
 import type { AnalyticsEvent } from "@/components/Analytics";
+import ControlCenter from "./ControlCenter";
 
 /* ------------------------------------------------------------------ */
 /*  Constants                                                          */
@@ -553,10 +554,10 @@ interface SBSession {
 /*  Dashboard                                                          */
 /* ------------------------------------------------------------------ */
 
-type Tab = "overview" | "adPerf" | "content" | "modules" | "pages" | "feedback" | "reports" | "export";
+type Tab = "control" | "overview" | "adPerf" | "content" | "modules" | "pages" | "feedback" | "reports" | "export";
 
 function Dashboard() {
-  const [tab, setTab] = useState<Tab>("overview");
+  const [tab, setTab] = useState<Tab>("control");
   const [config, setConfig] = useState<AdminConfig>(defaultConfig());
   const [pageSectionFilter, setPageSectionFilter] = useState("All");
   const importRef = useRef<HTMLInputElement>(null);
@@ -1502,6 +1503,12 @@ function Dashboard() {
   interface NavGroup { heading: string; items: NavItem[] }
   const navGroups: NavGroup[] = [
     {
+      heading: "Control",
+      items: [
+        { key: "control", label: "Control Center", icon: "M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" },
+      ],
+    },
+    {
       heading: "Analytics",
       items: [
         { key: "overview", label: "Overview", icon: "M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-4 0h4" },
@@ -1511,8 +1518,6 @@ function Dashboard() {
     {
       heading: "Site Visibility",
       items: [
-        { key: "modules", label: "Modules", icon: "M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.066 2.573c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.573 1.066c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.066-2.573c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" },
-        { key: "pages", label: "Pages", icon: "M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" },
         { key: "content", label: "Content", icon: "M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" },
         { key: "feedback", label: "Feedback", icon: "M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" },
       ],
@@ -1613,6 +1618,23 @@ function Dashboard() {
 
       {/* ---- Main content ---- */}
       <main className="flex-1 p-8 overflow-auto max-w-[1200px]">
+        {/* ============================================================ */}
+        {/*  TAB: CONTROL CENTER (versions + master on/off tree)         */}
+        {/* ============================================================ */}
+        {tab === "control" && (
+          <div className="space-y-6">
+            <div>
+              <h2 className="text-xl font-bold text-[#1a2744]">Control Center</h2>
+              <p className="text-sm text-gray-500">
+                Switch the live site between versions, or toggle any page,
+                section, subsection, module or ad on and off. Fundamentals stay
+                on in every version. Changes go live after Save &amp; Publish.
+              </p>
+            </div>
+            <ControlCenter />
+          </div>
+        )}
+
         {/* ============================================================ */}
         {/*  TAB 1: ANALYTICS OVERVIEW                                    */}
         {/* ============================================================ */}

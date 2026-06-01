@@ -5,6 +5,7 @@ import PageHero from "@/components/PageHero";
 import { InlineAd } from "@/components/EliteProviders";
 import FirstTimeBuyerCTA from "@/components/FirstTimeBuyerCTA";
 import { useClosingFolder } from "@/components/ClosingFolderProvider";
+import { SectionGate, AdGate, ModuleGate } from "@/components/Gate";
 
 type QuestionData = {
   q: string;
@@ -351,14 +352,17 @@ export default function QuestionsToAskPage() {
 
   return (
     <>
+    <SectionGate page="/questions-to-ask" id="hero">
     <PageHero
       title="Ask Your Title Pro"
       subtitle="40+ printable questions across 5 categories. Print this list and bring it with you."
       image="https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?w=1920&q=80"
       breadcrumb={[{ label: "Resources", href: "/document-library" }, { label: "Ask Your Title Pro", href: "/questions-to-ask" }]}
     />
+    </SectionGate>
     <div className="py-1.5 lg:py-2">
       <div className="max-w-4xl mx-auto px-4 sm:px-6">
+        <SectionGate page="/questions-to-ask" id="intro">
         <div className="mb-6 p-4 bg-[#e6f1f5] rounded-2xl border border-[#b4d8e8] border-l-4 border-l-[#0a7ea8] sm:sticky sm:top-[142px] z-20 shadow-md">
           <div className="flex items-start gap-4">
             <div className="w-12 h-12 rounded-xl bg-alta-teal/10 flex items-center justify-center text-alta-teal shrink-0">
@@ -379,13 +383,15 @@ export default function QuestionsToAskPage() {
           </svg>
           Print This List
         </button>
+        </SectionGate>
 
+        <SectionGate page="/questions-to-ask" id="question-sections">
         <div className="space-y-8">
           {questionSections.map((section, sIdx) => {
             const c = colorConfig[section.color] || colorConfig.blue;
             return (
               <div key={section.title}>
-              {sIdx === 3 && <InlineAd />}
+              {sIdx === 3 && <AdGate name="InlineAd"><InlineAd /></AdGate>}
               <div className="rounded-2xl border border-gray-200 overflow-hidden shadow-sm tile-interactive">
                 <div className={`${c.headerBg} px-5 py-3`}>
                   <h2 className={`text-base font-bold ${c.headerText}`}>{section.title}</h2>
@@ -421,9 +427,11 @@ export default function QuestionsToAskPage() {
             );
           })}
         </div>
+        </SectionGate>
 
-        <InlineAd />
+        <AdGate name="InlineAd"><InlineAd /></AdGate>
 
+        <SectionGate page="/questions-to-ask" id="conversation-tips">
         <div className="mt-10 p-5 bg-blue-50 rounded-xl border border-blue-100 no-print">
           <h3 className="font-semibold text-alta-navy mb-2">Tips for Your Conversation</h3>
           <ul className="text-sm text-alta-gray space-y-1.5">
@@ -434,8 +442,11 @@ export default function QuestionsToAskPage() {
             <li>- You have the legal right to choose your own title company (RESPA)</li>
           </ul>
         </div>
+        </SectionGate>
 
-        <FirstTimeBuyerCTA />
+        <SectionGate page="/questions-to-ask" id="cta">
+        <ModuleGate name="FirstTimeBuyerCTA"><FirstTimeBuyerCTA /></ModuleGate>
+        </SectionGate>
       </div>
     </div>
 

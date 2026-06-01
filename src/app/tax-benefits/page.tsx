@@ -5,6 +5,7 @@ import Link from "next/link";
 import PageHero from "@/components/PageHero";
 import { InlineAd } from "@/components/EliteProviders";
 import FirstTimeBuyerCTA from "@/components/FirstTimeBuyerCTA";
+import { SectionGate, AdGate, ModuleGate } from "@/components/Gate";
 
 /* ------------------------------------------------------------------ */
 /*  DATA                                                               */
@@ -370,91 +371,113 @@ function TableOfContents() {
 export default function TaxBenefitsPage() {
   return (
     <>
-      <PageHero
-        title="Homeowner Tax Benefits & Deductions"
-        subtitle="A plain-language guide to the federal tax deductions, credits, and exclusions available to homeowners — with IRS sources and a quick itemization calculator."
-        image="/images/hero-closing.jpg"
-        breadcrumb={[
-          { label: "Resources", href: "/resources" },
-          { label: "Homeowner Tax Benefits", href: "/tax-benefits" },
-        ]}
-      />
+      <SectionGate page="/tax-benefits" id="hero">
+        <PageHero
+          title="Homeowner Tax Benefits & Deductions"
+          subtitle="A plain-language guide to the federal tax deductions, credits, and exclusions available to homeowners — with IRS sources and a quick itemization calculator."
+          image="/images/hero-closing.jpg"
+          breadcrumb={[
+            { label: "Resources", href: "/resources" },
+            { label: "Homeowner Tax Benefits", href: "/tax-benefits" },
+          ]}
+        />
+      </SectionGate>
 
       <main className="max-w-4xl mx-auto px-4 sm:px-6 py-8">
         {/* Intro */}
-        <div className="mb-6">
-          <p className="text-sm text-alta-navy leading-relaxed">
-            Owning a home comes with real tax advantages — but only if you know what you qualify for and how to claim them. Below is a breakdown of the most common homeowner tax benefits for the <strong>2025 tax year</strong>, sourced from IRS.gov publications. Use the quick calculator at the bottom to see whether itemizing makes sense for you.
-          </p>
-        </div>
+        <SectionGate page="/tax-benefits" id="intro">
+          <div className="mb-6">
+            <p className="text-sm text-alta-navy leading-relaxed">
+              Owning a home comes with real tax advantages — but only if you know what you qualify for and how to claim them. Below is a breakdown of the most common homeowner tax benefits for the <strong>2025 tax year</strong>, sourced from IRS.gov publications. Use the quick calculator at the bottom to see whether itemizing makes sense for you.
+            </p>
+          </div>
+        </SectionGate>
 
-        <TableOfContents />
+        <SectionGate page="/tax-benefits" id="table-of-contents">
+          <TableOfContents />
+        </SectionGate>
 
         {/* Tax Benefit Sections */}
-        <div className="space-y-4 mb-8">
-          {sections.map((section) => (
-            <TaxBenefitSection key={section.id} section={section} />
-          ))}
-        </div>
+        <SectionGate page="/tax-benefits" id="tax-benefits-list">
+          <div className="space-y-4 mb-8">
+            {sections.map((section) => (
+              <TaxBenefitSection key={section.id} section={section} />
+            ))}
+          </div>
+        </SectionGate>
 
-        <InlineAd />
+        <AdGate name="InlineAd">
+          <InlineAd />
+        </AdGate>
 
         {/* Itemize Quick Check */}
-        <div id="itemize-check" className="my-8">
-          <ItemizeCheck />
-        </div>
+        <SectionGate page="/tax-benefits" id="itemize-check">
+          <div id="itemize-check" className="my-8">
+            <ItemizeCheck />
+          </div>
+        </SectionGate>
 
         {/* Disclaimer */}
-        <div className="bg-[#fff3cd] border border-[#ffc107]/40 rounded-xl p-4 mb-8">
-          <div className="flex items-start gap-3">
-            <svg className="w-5 h-5 text-[#8b6914] shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
-            <div>
-              <p className="text-xs font-bold text-[#8b6914] mb-1">Important Disclaimer</p>
-              <p className="text-xs text-[#6d5410] leading-relaxed">
-                This guide is <strong>educational only and does not constitute tax, legal, or financial advice</strong>. Tax laws change frequently, and individual circumstances vary. Always consult a qualified CPA or tax professional before making decisions based on this information. All figures reflect the 2025 tax year unless otherwise noted.
-              </p>
+        <SectionGate page="/tax-benefits" id="disclaimer">
+          <div className="bg-[#fff3cd] border border-[#ffc107]/40 rounded-xl p-4 mb-8">
+            <div className="flex items-start gap-3">
+              <svg className="w-5 h-5 text-[#8b6914] shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <div>
+                <p className="text-xs font-bold text-[#8b6914] mb-1">Important Disclaimer</p>
+                <p className="text-xs text-[#6d5410] leading-relaxed">
+                  This guide is <strong>educational only and does not constitute tax, legal, or financial advice</strong>. Tax laws change frequently, and individual circumstances vary. Always consult a qualified CPA or tax professional before making decisions based on this information. All figures reflect the 2025 tax year unless otherwise noted.
+                </p>
+              </div>
             </div>
           </div>
-        </div>
+        </SectionGate>
 
-        <InlineAd />
+        <AdGate name="InlineAd">
+          <InlineAd />
+        </AdGate>
 
         {/* Sources */}
-        <div className="bg-[#f8fafc] rounded-xl border border-gray-200 p-4 mb-8">
-          <h2 className="text-xs font-bold text-alta-navy mb-2">IRS Sources & References</h2>
-          <ul className="space-y-1">
-            <li className="text-[11px] text-alta-gray">IRS Publication 936 — Home Mortgage Interest Deduction</li>
-            <li className="text-[11px] text-alta-gray">IRS Topic No. 503 — Deductible Taxes</li>
-            <li className="text-[11px] text-alta-gray">IRS Publication 587 — Business Use of Your Home</li>
-            <li className="text-[11px] text-alta-gray">IRS Publication 523 — Selling Your Home</li>
-            <li className="text-[11px] text-alta-gray">IRS Form 5695 — Residential Energy Credits</li>
-            <li className="text-[11px] text-alta-gray">Inflation Reduction Act of 2022, Sections 13301-13302</li>
-            <li className="text-[11px] text-alta-gray">Tax Cuts and Jobs Act of 2017 (P.L. 115-97) — SALT cap, mortgage interest limit</li>
-          </ul>
-        </div>
+        <SectionGate page="/tax-benefits" id="sources">
+          <div className="bg-[#f8fafc] rounded-xl border border-gray-200 p-4 mb-8">
+            <h2 className="text-xs font-bold text-alta-navy mb-2">IRS Sources & References</h2>
+            <ul className="space-y-1">
+              <li className="text-[11px] text-alta-gray">IRS Publication 936 — Home Mortgage Interest Deduction</li>
+              <li className="text-[11px] text-alta-gray">IRS Topic No. 503 — Deductible Taxes</li>
+              <li className="text-[11px] text-alta-gray">IRS Publication 587 — Business Use of Your Home</li>
+              <li className="text-[11px] text-alta-gray">IRS Publication 523 — Selling Your Home</li>
+              <li className="text-[11px] text-alta-gray">IRS Form 5695 — Residential Energy Credits</li>
+              <li className="text-[11px] text-alta-gray">Inflation Reduction Act of 2022, Sections 13301-13302</li>
+              <li className="text-[11px] text-alta-gray">Tax Cuts and Jobs Act of 2017 (P.L. 115-97) — SALT cap, mortgage interest limit</li>
+            </ul>
+          </div>
+        </SectionGate>
 
-        <FirstTimeBuyerCTA />
+        <ModuleGate name="FirstTimeBuyerCTA">
+          <FirstTimeBuyerCTA />
+        </ModuleGate>
 
         {/* Related Topics */}
-        <div className="mt-8 mb-4">
-          <h2 className="text-lg font-bold text-alta-navy mb-4">Related Topics</h2>
-          <div className="grid sm:grid-cols-3 gap-3">
-            <Link href="/closing-process/closing-costs" className="p-4 bg-[#eaf2f8] rounded-xl border border-[#bcd4e6] border-l-4 border-l-[#1a5276] tile-interactive group">
-              <h3 className="text-sm font-bold text-alta-navy group-hover:text-alta-teal transition-colors">Closing Costs Explained</h3>
-              <p className="text-xs text-alta-gray mt-1">Understand every line item on your settlement statement</p>
-            </Link>
-            <Link href="/escrow-guide" className="p-4 bg-[#e9f5ed] rounded-xl border border-[#bddcc7] border-l-4 border-l-[#2d6b3f] tile-interactive group">
-              <h3 className="text-sm font-bold text-alta-navy group-hover:text-alta-teal transition-colors">Understanding Escrow</h3>
-              <p className="text-xs text-alta-gray mt-1">How escrow accounts work for taxes and insurance after closing</p>
-            </Link>
-            <Link href="/homeowners-insurance" className="p-4 bg-[#f0ecf6] rounded-xl border border-[#d4c8e4] border-l-4 border-l-[#5b3a8c] tile-interactive group">
-              <h3 className="text-sm font-bold text-alta-navy group-hover:text-alta-teal transition-colors">Homeowner&apos;s Insurance</h3>
-              <p className="text-xs text-alta-gray mt-1">What your policy covers and how to save on premiums</p>
-            </Link>
+        <SectionGate page="/tax-benefits" id="related-topics">
+          <div className="mt-8 mb-4">
+            <h2 className="text-lg font-bold text-alta-navy mb-4">Related Topics</h2>
+            <div className="grid sm:grid-cols-3 gap-3">
+              <Link href="/closing-process/closing-costs" className="p-4 bg-[#eaf2f8] rounded-xl border border-[#bcd4e6] border-l-4 border-l-[#1a5276] tile-interactive group">
+                <h3 className="text-sm font-bold text-alta-navy group-hover:text-alta-teal transition-colors">Closing Costs Explained</h3>
+                <p className="text-xs text-alta-gray mt-1">Understand every line item on your settlement statement</p>
+              </Link>
+              <Link href="/escrow-guide" className="p-4 bg-[#e9f5ed] rounded-xl border border-[#bddcc7] border-l-4 border-l-[#2d6b3f] tile-interactive group">
+                <h3 className="text-sm font-bold text-alta-navy group-hover:text-alta-teal transition-colors">Understanding Escrow</h3>
+                <p className="text-xs text-alta-gray mt-1">How escrow accounts work for taxes and insurance after closing</p>
+              </Link>
+              <Link href="/homeowners-insurance" className="p-4 bg-[#f0ecf6] rounded-xl border border-[#d4c8e4] border-l-4 border-l-[#5b3a8c] tile-interactive group">
+                <h3 className="text-sm font-bold text-alta-navy group-hover:text-alta-teal transition-colors">Homeowner&apos;s Insurance</h3>
+                <p className="text-xs text-alta-gray mt-1">What your policy covers and how to save on premiums</p>
+              </Link>
+            </div>
           </div>
-        </div>
+        </SectionGate>
       </main>
     </>
   );

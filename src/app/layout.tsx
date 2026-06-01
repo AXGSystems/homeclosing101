@@ -12,7 +12,18 @@ import StickyBottomAd from "@/components/StickyBottomAd";
 import SponsorFooterStrip from "@/components/SponsorFooterStrip";
 import AnalyticsProvider from "@/components/Analytics";
 import FeedbackWidget from "@/components/FeedbackWidget";
+import { SiteConfigProvider } from "@/components/SiteConfigProvider";
+import RouteGuard from "@/components/RouteGuard";
+import { ModuleGate, AdGate } from "@/components/Gate";
 import "./globals.css";
+
+/**
+ * Pre-hydration gate script: runs before first paint, reads the cached
+ * off-key list (or the previewed version's list when ?v= is present) and
+ * injects a <style> hiding those units. Flash-free + hydration-safe — the
+ * server always renders everything ON and CSS does the hiding.
+ */
+const GATE_BOOT_SCRIPT = `(function(){try{var off=[];var m=/[?&]v=(full|moderate|light|education)/.exec(location.search);if(m){var by=JSON.parse(localStorage.getItem('hc101-cc-offbyver')||'{}');off=by[m[1]]||[];}else{off=JSON.parse(localStorage.getItem('hc101-cc-off')||'[]');}if(off&&off.length){var css=off.map(function(k){return '[data-gate="'+String(k).replace(/["\\\\]/g,'')+'"]{display:none!important}';}).join('');var s=document.createElement('style');s.id='hc-gate-style';s.textContent=css;document.head.appendChild(s);document.documentElement.setAttribute('data-hc-off',off.join(' '));}}catch(e){}})();`;
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -91,6 +102,8 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-[var(--bg-primary)] text-[var(--text-primary)]">
+        <script dangerouslySetInnerHTML={{ __html: GATE_BOOT_SCRIPT }} />
+        <SiteConfigProvider>
         <AnalyticsProvider>
         <AchievementProvider>
         <ClosingFolderProvider>
@@ -100,7 +113,7 @@ export default function RootLayout({
           </a>
           {/* Sticky header block: ticker + nav locked together */}
           <div className="sticky top-0 z-50">
-            <NewsTicker />
+            <ModuleGate name="NewsTicker"><NewsTicker /></ModuleGate>
             <Header />
           </div>
           {/* Print-only header */}
@@ -108,20 +121,23 @@ export default function RootLayout({
             <span>HomeClosing101</span>
             <span style={{ fontSize: '11px', fontWeight: 400, color: '#6b7280' }}>| An ALTA Educational Initiative</span>
           </div>
-          <main id="main-content" className="flex-1 pb-16 sm:pb-14">{children}</main>
+          <main id="main-content" className="flex-1 pb-16 sm:pb-14">
+            <RouteGuard>{children}</RouteGuard>
+          </main>
           {/* Print-only footer */}
           <div className="print-footer hidden">
             HomeClosing101 — An educational initiative of the American Land Title Association (ALTA) — homeclosing101.vercel.app
           </div>
-          <SponsorFooterStrip />
+          <ModuleGate name="SponsorFooterStrip"><SponsorFooterStrip /></ModuleGate>
           <AltaDisclaimer />
           <Footer />
           <LayoutOverlays />
-          <FeedbackWidget />
-          <StickyBottomAd />
+          <ModuleGate name="FeedbackWidget"><FeedbackWidget /></ModuleGate>
+          <AdGate name="StickyBottomAd"><StickyBottomAd /></AdGate>
         </ClosingFolderProvider>
         </AchievementProvider>
         </AnalyticsProvider>
+        </SiteConfigProvider>
       </body>
     </html>
   );

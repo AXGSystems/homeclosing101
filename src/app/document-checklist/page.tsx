@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import PageHero from "@/components/PageHero";
+import { SectionGate, AdGate, ModuleGate } from "@/components/Gate";
 import { InlineAd } from "@/components/EliteProviders";
 import FirstTimeBuyerCTA from "@/components/FirstTimeBuyerCTA";
 import SaveToFolderBtn from "@/components/SaveToFolderBtn";
@@ -134,13 +135,16 @@ export default function DocumentChecklistPage() {
 
   return (
     <>
+      <SectionGate page="/document-checklist" id="hero">
       <PageHero
         title="Closing Documents"
         subtitle="Your document checklist and closing disclosure guide — everything you need before signing."
         image="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=1920&q=80"
         breadcrumb={[{ label: "The Closing Process", href: "/closing-process" }, { label: "Closing Documents", href: "/document-checklist" }]}
       />
+      </SectionGate>
 
+      <SectionGate page="/document-checklist" id="tabs">
       <div className="py-1.5 lg:py-2">
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
           {/* Tab bar */}
@@ -162,10 +166,12 @@ export default function DocumentChecklistPage() {
           {activeTab === "disclosure" && <ClosingDisclosureContent />}
         </div>
       </div>
+      </SectionGate>
 
       {activeTab === "checklist" && <>
       <div className="py-1.5 lg:py-2">
         <div className="max-w-4xl mx-auto px-4 sm:px-6">
+          <SectionGate page="/document-checklist" id="checklist-intro">
           <div className="mb-6 p-4 bg-[#e6f1f5] rounded-2xl border border-[#b4d8e8] border-l-4 border-l-[#0a7ea8] sm:sticky sm:top-[142px] z-20 shadow-md">
             <div className="flex items-start gap-4">
               <div className="w-12 h-12 rounded-xl bg-alta-teal/10 flex items-center justify-center text-alta-teal shrink-0">
@@ -177,7 +183,9 @@ export default function DocumentChecklistPage() {
               </div>
             </div>
           </div>
+          </SectionGate>
 
+          <SectionGate page="/document-checklist" id="checklist-actions">
           <div className="flex flex-wrap items-center gap-3 mb-8">
             <button onClick={() => window.print()} className="no-print inline-flex items-center gap-2 px-5 py-2.5 bg-alta-navy text-white font-semibold rounded-lg hover:bg-alta-teal transition-colors text-sm">
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" /></svg>
@@ -190,7 +198,9 @@ export default function DocumentChecklistPage() {
               label="Save Checklist to Folder"
             />
           </div>
+          </SectionGate>
 
+          <SectionGate page="/document-checklist" id="doc-sections">
           <div className="space-y-8">
             {docSections.map((section) => {
               const c = colorMap[section.color];
@@ -259,13 +269,15 @@ export default function DocumentChecklistPage() {
               );
             })}
           </div>
+          </SectionGate>
 
-          <InlineAd />
+          <AdGate name="InlineAd"><InlineAd /></AdGate>
 
           {/* Pre-closing timeline */}
+          <SectionGate page="/document-checklist" id="timeline">
           <div className="flex items-center gap-3 flex-wrap mb-4 mt-6">
             <h2 className="text-xl font-bold text-alta-navy">Pre-Closing Document Timeline</h2>
-            <SponsorBadge />
+            <AdGate name="SponsorBadge"><SponsorBadge /></AdGate>
           </div>
           <p className="text-sm text-alta-gray mb-4 leading-relaxed">Documents don&apos;t all arrive at once. Here&apos;s when to expect each one so you&apos;re not scrambling at the last minute:</p>
           <div className="space-y-3 mb-8">
@@ -282,8 +294,10 @@ export default function DocumentChecklistPage() {
               </div>
             ))}
           </div>
+          </SectionGate>
 
           {/* Common mistakes */}
+          <SectionGate page="/document-checklist" id="common-mistakes">
           <h2 className="text-xl font-bold text-alta-navy mb-4">5 Common Document Mistakes That Delay Closings</h2>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 mb-8">
             {[
@@ -299,7 +313,9 @@ export default function DocumentChecklistPage() {
               </div>
             ))}
           </div>
+          </SectionGate>
 
+          <SectionGate page="/document-checklist" id="cta-links">
           <div className="mt-8 flex flex-col sm:flex-row gap-3">
             <Link href="/closing-process/closing-checklist" className="px-6 py-3 bg-alta-teal text-white font-semibold rounded-lg hover:bg-alta-teal-dark transition-colors text-center">
               Full Closing Checklist
@@ -308,7 +324,9 @@ export default function DocumentChecklistPage() {
               Questions to Ask
             </Link>
           </div>
+          </SectionGate>
 
+          <SectionGate page="/document-checklist" id="related-topics">
           <div className="mt-8 mb-4">
             <h2 className="text-lg font-bold text-alta-navy mb-4">Related Topics</h2>
             <div className="grid sm:grid-cols-3 gap-3">
@@ -326,8 +344,9 @@ export default function DocumentChecklistPage() {
               </button>
             </div>
           </div>
+          </SectionGate>
 
-          <FirstTimeBuyerCTA />
+          <ModuleGate name="FirstTimeBuyerCTA"><FirstTimeBuyerCTA /></ModuleGate>
         </div>
       </div>
       </>}

@@ -1,6 +1,7 @@
 import PageHero from "@/components/PageHero";
 import { InlineAd } from "@/components/EliteProviders";
 import FirstTimeBuyerCTA from "@/components/FirstTimeBuyerCTA";
+import { SectionGate, AdGate, ModuleGate } from "@/components/Gate";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -79,15 +80,18 @@ const sources = [
 export default function SourcesPage() {
   return (
     <>
-      <PageHero
-        title="Source Index"
-        subtitle="Every fact, statistic, and resource on HomeClosing101 is sourced from verified government agencies, industry authorities, and public data. Nothing on this site is fabricated."
-        image="https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=1920&q=80"
-        breadcrumb={[{ label: "Resources", href: "/resources" }, { label: "Sources", href: "/sources" }]}
-      />
+      <SectionGate page="/sources" id="hero">
+        <PageHero
+          title="Source Index"
+          subtitle="Every fact, statistic, and resource on HomeClosing101 is sourced from verified government agencies, industry authorities, and public data. Nothing on this site is fabricated."
+          image="https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=1920&q=80"
+          breadcrumb={[{ label: "Resources", href: "/resources" }, { label: "Sources", href: "/sources" }]}
+        />
+      </SectionGate>
 
       <div className="py-1.5 lg:py-2">
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
+          <SectionGate page="/sources" id="commitment-banner">
           <div className="mb-6 p-4 bg-[#e6f1f5] rounded-2xl border border-[#b4d8e8] border-l-4 border-l-[#0a7ea8] sm:sticky sm:top-[142px] z-20 shadow-md">
             <div className="flex items-start gap-4">
               <div className="w-12 h-12 rounded-xl bg-alta-teal/10 flex items-center justify-center text-alta-teal shrink-0">
@@ -99,7 +103,9 @@ export default function SourcesPage() {
               </div>
             </div>
           </div>
+          </SectionGate>
 
+          <SectionGate page="/sources" id="source-list">
           <div className="space-y-8">
             {sources.map((section) => (
               <div key={section.category}>
@@ -122,15 +128,22 @@ export default function SourcesPage() {
               </div>
             ))}
           </div>
+          </SectionGate>
 
-          <InlineAd />
+          <AdGate name="InlineAd">
+            <InlineAd />
+          </AdGate>
 
+          <SectionGate page="/sources" id="report-error">
           <div className="mt-10 p-5 bg-gradient-to-br from-blue-50 to-white rounded-2xl border border-blue-100">
             <h3 className="font-bold text-alta-navy mb-2">Report an Error</h3>
             <p className="text-sm text-alta-gray">If you find any information on HomeClosing101 that is inaccurate, outdated, or improperly sourced, please contact ALTA at <strong>202.296.3671</strong> or visit <a href="https://www.alta.org" target="_blank" rel="noopener noreferrer" className="text-alta-teal font-medium hover:underline">alta.org</a>. We take accuracy seriously and will correct any verified errors promptly.</p>
           </div>
+          </SectionGate>
 
-          <FirstTimeBuyerCTA />
+          <ModuleGate name="FirstTimeBuyerCTA">
+            <FirstTimeBuyerCTA />
+          </ModuleGate>
         </div>
       </div>
     </>

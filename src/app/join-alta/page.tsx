@@ -4,6 +4,7 @@ import { useState, useEffect, useRef, useCallback } from "react";
 import PageHero from "@/components/PageHero";
 import { InlineAd } from "@/components/EliteProviders";
 import SaveToFolderBtn from "@/components/SaveToFolderBtn";
+import { SectionGate, AdGate, ModuleGate } from "@/components/Gate";
 
 /* ═══════════════════════════════════════════════════════
    MODAL DATA TYPE
@@ -1170,12 +1171,14 @@ export default function JoinAltaPage() {
 
   return (
     <>
-      <PageHero
-        title="In the Title Industry? Join ALTA."
-        subtitle="6,000+ member companies. 50 states. 119 years of advocacy. The voice of the title insurance and settlement services industry."
-        image="https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=1920&q=80"
-        breadcrumb={[{ label: "Resources", href: "/resources" }, { label: "Join ALTA", href: "/join-alta" }]}
-      />
+      <SectionGate page="/join-alta" id="hero">
+        <PageHero
+          title="In the Title Industry? Join ALTA."
+          subtitle="6,000+ member companies. 50 states. 119 years of advocacy. The voice of the title insurance and settlement services industry."
+          image="https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=1920&q=80"
+          breadcrumb={[{ label: "Resources", href: "/resources" }, { label: "Join ALTA", href: "/join-alta" }]}
+        />
+      </SectionGate>
 
       {/* Global modal */}
       {activeModal && <DetailModal data={activeModal} onClose={() => setActiveModal(null)} />}
@@ -1183,6 +1186,7 @@ export default function JoinAltaPage() {
       <div className="py-1.5 lg:py-2">
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
           {/* ALTA Logo + Intro */}
+          <SectionGate page="/join-alta" id="intro">
           <div className="mb-10 p-6 bg-gradient-to-br from-alta-light to-white rounded-2xl border border-gray-100">
             <div className="flex flex-col sm:flex-row items-center gap-6">
               <div className="shrink-0">
@@ -1195,8 +1199,10 @@ export default function JoinAltaPage() {
               </div>
             </div>
           </div>
+          </SectionGate>
 
           {/* Stats */}
+          <SectionGate page="/join-alta" id="stats">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-14">
             {stats.map((s) => (
               <div key={s.label} className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 text-center tile-interactive">
@@ -1205,8 +1211,10 @@ export default function JoinAltaPage() {
               </div>
             ))}
           </div>
+          </SectionGate>
 
           {/* ── BENEFITS ── */}
+          <SectionGate page="/join-alta" id="benefits">
           <h2 className="text-2xl font-bold text-alta-navy mb-6">Why Join ALTA?</h2>
           <p className="text-sm text-alta-gray mb-4 leading-relaxed">Click any card to explore in depth.</p>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5 mb-14">
@@ -1238,10 +1246,12 @@ export default function JoinAltaPage() {
               </button>
             ))}
           </div>
+          </SectionGate>
 
           <div className="h-1 bg-gradient-to-r from-transparent via-alta-teal/20 to-transparent my-10" />
 
           {/* ── ABOUT ALTA ── */}
+          <SectionGate page="/join-alta" id="about-alta">
           <h2 className="text-2xl font-bold text-alta-navy mb-4">About the American Land Title Association</h2>
           <div className="grid md:grid-cols-2 gap-4 mb-10">
             {aboutCards.map((item) => (
@@ -1265,8 +1275,10 @@ export default function JoinAltaPage() {
               </button>
             ))}
           </div>
+          </SectionGate>
 
           {/* ── MEMBERSHIP TYPES ── */}
+          <SectionGate page="/join-alta" id="membership-types">
           <h2 className="text-2xl font-bold text-alta-navy mb-4">Who Can Join?</h2>
           <p className="text-sm text-alta-gray mb-4 leading-relaxed">ALTA membership is open to companies and individuals across the title insurance and settlement services ecosystem. Agent/Abstractor dues start at $325/year (based on annual revenue). Click any to learn more.</p>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 mb-10">
@@ -1281,10 +1293,12 @@ export default function JoinAltaPage() {
               </button>
             ))}
           </div>
+          </SectionGate>
 
           <div className="h-1 bg-gradient-to-r from-transparent via-alta-teal/20 to-transparent my-10" />
 
           {/* ── EVENTS ── */}
+          <SectionGate page="/join-alta" id="events">
           <h2 className="text-2xl font-bold text-alta-navy mb-2">Events & Conferences</h2>
           <p className="text-sm text-alta-gray mb-6 leading-relaxed">ALTA brings the title industry together through flagship conferences, education events, and grassroots advocacy. Click any event to explore.</p>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 mb-10">
@@ -1314,10 +1328,12 @@ export default function JoinAltaPage() {
               </button>
             ))}
           </div>
+          </SectionGate>
 
           <div className="h-1 bg-gradient-to-r from-transparent via-alta-teal/20 to-transparent my-10" />
 
           {/* ── PROGRAMS ── */}
+          <SectionGate page="/join-alta" id="programs">
           <h2 className="text-2xl font-bold text-alta-navy mb-2">Programs & Initiatives</h2>
           <p className="text-sm text-alta-gray mb-6 leading-relaxed">Beyond events, ALTA drives impact through grassroots advocacy, charitable giving, professional recognition, and political engagement. Click any to explore.</p>
           <div className="grid md:grid-cols-2 gap-4 mb-10">
@@ -1345,12 +1361,14 @@ export default function JoinAltaPage() {
               </button>
             ))}
           </div>
+          </SectionGate>
 
-          <InlineAd />
+          <AdGate name="InlineAd"><InlineAd /></AdGate>
 
           <div className="h-1 bg-gradient-to-r from-transparent via-alta-teal/20 to-transparent my-10" />
 
           {/* ── EDUCATION ── */}
+          <SectionGate page="/join-alta" id="education">
           <h2 className="text-2xl font-bold text-alta-navy mb-2">Education & Publications</h2>
           <p className="text-sm text-alta-gray mb-6 leading-relaxed">ALTA provides industry-leading education, publications, and policy forms that keep your team current and your operations compliant. Click any to explore.</p>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 mb-10">
@@ -1365,13 +1383,17 @@ export default function JoinAltaPage() {
               </button>
             ))}
           </div>
+          </SectionGate>
 
           {/* ── TESTIMONIALS ── */}
-          <MemberTestimonials />
+          <SectionGate page="/join-alta" id="testimonials">
+            <MemberTestimonials />
+          </SectionGate>
 
           <div className="h-1 bg-gradient-to-r from-transparent via-alta-teal/20 to-transparent my-10" />
 
           {/* ── WHY MEMBERS STAY ── */}
+          <SectionGate page="/join-alta" id="why-members-stay">
           <h2 className="text-2xl font-bold text-alta-navy mb-4">Why Members Stay Year After Year</h2>
           <div className="grid sm:grid-cols-2 gap-4 mb-10">
             {[
@@ -1386,8 +1408,10 @@ export default function JoinAltaPage() {
               </div>
             ))}
           </div>
+          </SectionGate>
 
           {/* ── BEST PRACTICES PILLARS ── */}
+          <SectionGate page="/join-alta" id="best-practices-pillars">
           <h2 className="text-2xl font-bold text-alta-navy mb-4">The 7 Pillars of ALTA Best Practices</h2>
           <p className="text-sm text-alta-gray mb-4 leading-relaxed">Companies that adopt ALTA Best Practices demonstrate a commitment to consumer protection, operational excellence, and regulatory compliance. Click any pillar to explore in depth.</p>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 mb-10">
@@ -1405,8 +1429,10 @@ export default function JoinAltaPage() {
               </button>
             ))}
           </div>
+          </SectionGate>
 
           {/* ── CTA ── */}
+          <SectionGate page="/join-alta" id="cta">
           <div className="relative rounded-2xl overflow-hidden">
             <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=1200&q=80')" }} />
             <div className="absolute inset-0 bg-gradient-to-r from-alta-navy/95 to-alta-teal/85" />
@@ -1437,6 +1463,7 @@ export default function JoinAltaPage() {
               <p className="text-[10px] text-gray-400 mt-4">Questions? Contact ALTA at 202.296.3671 or visit alta.org</p>
             </div>
           </div>
+          </SectionGate>
         </div>
       </div>
     </>

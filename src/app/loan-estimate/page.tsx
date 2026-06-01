@@ -7,6 +7,7 @@ import { InlineAd } from "@/components/EliteProviders";
 import FirstTimeBuyerCTA from "@/components/FirstTimeBuyerCTA";
 import SponsorBadge from "@/components/SponsorBadge";
 import SaveToFolderBtn from "@/components/SaveToFolderBtn";
+import { SectionGate, AdGate, ModuleGate } from "@/components/Gate";
 
 const pages = [
   {
@@ -264,15 +265,18 @@ export default function LoanEstimatePage() {
 
   return (
     <>
-      <PageHero
-        title="Understanding Your Loan Estimate"
-        subtitle="The Loan Estimate is a 3-page standardized form your lender must provide within 3 business days of your mortgage application. Here's what every section means."
-        image="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=1920&q=80"
-        breadcrumb={[{ label: "The Closing Process", href: "/closing-process" }, { label: "Loan Estimate", href: "/loan-estimate" }]}
-      />
+      <SectionGate page="/loan-estimate" id="hero">
+        <PageHero
+          title="Understanding Your Loan Estimate"
+          subtitle="The Loan Estimate is a 3-page standardized form your lender must provide within 3 business days of your mortgage application. Here's what every section means."
+          image="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=1920&q=80"
+          breadcrumb={[{ label: "The Closing Process", href: "/closing-process" }, { label: "Loan Estimate", href: "/loan-estimate" }]}
+        />
+      </SectionGate>
 
       <div className="py-1.5 lg:py-2">
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
+          <SectionGate page="/loan-estimate" id="intro">
           <div className="mb-6 p-4 bg-[#e8f0f5] rounded-2xl border border-[#c5d8e4] border-l-4 border-l-[#1a5276] sm:sticky sm:top-[142px] z-20 shadow-md">
             <div className="flex items-start gap-4">
               <div className="w-12 h-12 rounded-xl bg-[#1a5276]/15 flex items-center justify-center text-[#1a5276] shrink-0">
@@ -284,8 +288,10 @@ export default function LoanEstimatePage() {
               </div>
             </div>
           </div>
+          </SectionGate>
 
           {/* TRID/TILA/RESPA explainer */}
+          <SectionGate page="/loan-estimate" id="trid-explainer">
           <div className="p-5 bg-gradient-to-br from-blue-50 to-white rounded-2xl border border-blue-100 mb-8">
             <h3 className="font-bold text-alta-navy mb-3">What Are TRID, TILA, and RESPA?</h3>
             <p className="text-sm text-alta-gray leading-relaxed mb-3">You&apos;ll see these acronyms referenced throughout the closing process. Here&apos;s what they mean in plain English:</p>
@@ -305,8 +311,11 @@ export default function LoanEstimatePage() {
             </div>
             <p className="text-[10px] text-alta-teal mt-3 font-medium">Source: CFPB Know Before You Owe | 12 CFR 1026 (Regulation Z) | 12 CFR 1024 (Regulation X)</p>
           </div>
+          </SectionGate>
 
           {/* When you'll receive it */}
+          <SectionGate page="/loan-estimate" id="timeline">
+          <>
           <h2 className="text-xl font-bold text-alta-navy mb-4">When You&apos;ll Receive It</h2>
           <p className="text-sm text-alta-gray mb-3">Click any timeline item for more detail on your rights and what to expect.</p>
           <div className="grid sm:grid-cols-2 gap-3 mb-10">
@@ -334,11 +343,15 @@ export default function LoanEstimatePage() {
               </div>
             ))}
           </div>
+          </>
+          </SectionGate>
 
           {/* Page-by-page breakdown */}
+          <SectionGate page="/loan-estimate" id="page-breakdown">
+          <>
           <div className="flex items-center gap-3 flex-wrap mb-6">
             <h2 className="text-xl font-bold text-alta-navy">Page-by-Page Breakdown</h2>
-            <SponsorBadge />
+            <AdGate name="SponsorBadge"><SponsorBadge /></AdGate>
           </div>
           <p className="text-sm text-alta-gray mb-4">Click any section to explore detailed guidance, common errors, and what to do if something looks wrong.</p>
           <div className="space-y-8 mb-10">
@@ -397,10 +410,14 @@ export default function LoanEstimatePage() {
               </div>
             ))}
           </div>
+          </>
+          </SectionGate>
 
-          <InlineAd />
+          <AdGate name="InlineAd"><InlineAd /></AdGate>
 
           {/* Red flags */}
+          <SectionGate page="/loan-estimate" id="red-flags">
+          <>
           <h2 className="text-xl font-bold text-alta-navy mb-4">Red Flags to Watch For</h2>
           <p className="text-sm text-alta-gray mb-3">Click any red flag for a detailed breakdown of what it means and how to respond.</p>
           <div className="grid sm:grid-cols-2 gap-3 mb-8">
@@ -444,10 +461,14 @@ export default function LoanEstimatePage() {
               </div>
             ))}
           </div>
+          </>
+          </SectionGate>
 
-          <InlineAd />
+          <AdGate name="InlineAd"><InlineAd /></AdGate>
 
           {/* How to compare */}
+          <SectionGate page="/loan-estimate" id="how-to-compare">
+          <>
           <h2 className="text-xl font-bold text-alta-navy mb-4">How to Compare Loan Estimates Like a Pro</h2>
           <p className="text-sm text-alta-gray mb-4 leading-relaxed">You should get Loan Estimates from at least 3 lenders. Here&apos;s a step-by-step comparison method:</p>
           <div className="grid sm:grid-cols-2 gap-3 mb-8">
@@ -470,6 +491,7 @@ export default function LoanEstimatePage() {
           </div>
 
           {/* APR explained with example */}
+          <SectionGate page="/loan-estimate" id="how-to-compare" sub="apr-example">
           <div className="p-5 bg-gradient-to-br from-alta-light to-white rounded-2xl border border-gray-100 mb-8">
             <h3 className="font-bold text-alta-navy mb-3">Why APR Matters More Than Interest Rate — A Real Example</h3>
             <div className="grid md:grid-cols-2 gap-4 mb-4">
@@ -491,7 +513,11 @@ export default function LoanEstimatePage() {
             <p className="text-xs text-alta-gray leading-relaxed">In this example, Lender B has a HIGHER interest rate but a LOWER APR — and saves you $2,600 over 5 years. This is because Lender A&apos;s higher fees offset their lower rate. The APR captures this. Always compare APRs, not just rates.</p>
             <p className="text-[10px] text-alta-teal mt-2 font-medium">Source: CFPB Know Before You Owe</p>
           </div>
+          </SectionGate>
+          </>
+          </SectionGate>
 
+          <SectionGate page="/loan-estimate" id="cfpb-sample">
           <div className="p-5 bg-gradient-to-br from-blue-50 to-white rounded-2xl border border-blue-100 mb-6">
             <h3 className="font-bold text-alta-navy mb-2">CFPB Sample Loan Estimate</h3>
             <p className="text-sm text-alta-gray mb-3">The Consumer Financial Protection Bureau provides a complete annotated sample Loan Estimate that walks through every field. We recommend reviewing it before you receive yours.</p>
@@ -500,7 +526,9 @@ export default function LoanEstimatePage() {
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
             </a>
           </div>
+          </SectionGate>
 
+          <SectionGate page="/loan-estimate" id="cta">
           <div className="flex flex-col sm:flex-row gap-3">
             <Link href="/closing-disclosure" className="px-5 py-2.5 bg-alta-teal text-white font-semibold rounded-lg hover:bg-alta-teal-dark transition-colors text-center text-sm">
               Understanding Your Closing Disclosure
@@ -509,7 +537,9 @@ export default function LoanEstimatePage() {
               Closing Costs Calculator
             </Link>
           </div>
+          </SectionGate>
 
+          <SectionGate page="/loan-estimate" id="related-topics">
           <div className="mt-8 mb-4">
             <h2 className="text-lg font-bold text-alta-navy mb-4">Related Topics</h2>
             <div className="grid sm:grid-cols-3 gap-3">
@@ -527,8 +557,9 @@ export default function LoanEstimatePage() {
               </Link>
             </div>
           </div>
+          </SectionGate>
 
-          <FirstTimeBuyerCTA />
+          <ModuleGate name="FirstTimeBuyerCTA"><FirstTimeBuyerCTA /></ModuleGate>
         </div>
       </div>
 

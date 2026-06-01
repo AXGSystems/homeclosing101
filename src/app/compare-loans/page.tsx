@@ -4,6 +4,7 @@ import { useState, useMemo } from "react";
 import PageHero from "@/components/PageHero";
 import { InlineAd } from "@/components/EliteProviders";
 import FirstTimeBuyerCTA from "@/components/FirstTimeBuyerCTA";
+import { SectionGate, AdGate, ModuleGate } from "@/components/Gate";
 import PrintButton from "@/components/PrintButton";
 import SaveToFolderBtn from "@/components/SaveToFolderBtn";
 
@@ -206,18 +207,21 @@ export default function CompareLoansPage() {
 
   return (
     <>
-      <PageHero
-        title="Compare Loan Offers"
-        subtitle="Enter details from your Loan Estimates to see which offer truly costs less -- monthly, over 5 years, and over the full life of the loan."
-        image="/images/hero-closing.jpg"
-        breadcrumb={[
-          { label: "Tools & Calculators", href: "/mortgage-calculator" },
-          { label: "Compare Loan Offers", href: "/compare-loans" },
-        ]}
-      />
+      <SectionGate page="/compare-loans" id="hero">
+        <PageHero
+          title="Compare Loan Offers"
+          subtitle="Enter details from your Loan Estimates to see which offer truly costs less -- monthly, over 5 years, and over the full life of the loan."
+          image="/images/hero-closing.jpg"
+          breadcrumb={[
+            { label: "Tools & Calculators", href: "/mortgage-calculator" },
+            { label: "Compare Loan Offers", href: "/compare-loans" },
+          ]}
+        />
+      </SectionGate>
 
       <main className="max-w-6xl mx-auto px-4 sm:px-6 py-8 print:py-2">
         {/* Loan count toggle */}
+        <SectionGate page="/compare-loans" id="calculator" sub="loan-count-toggle">
         <div className="flex items-center gap-3 mb-6 print:hidden">
           <span className="text-sm font-semibold text-alta-navy">Compare:</span>
           {[2, 3].map((n) => (
@@ -234,8 +238,10 @@ export default function CompareLoansPage() {
             </button>
           ))}
         </div>
+        </SectionGate>
 
         {/* Loan input cards */}
+        <SectionGate page="/compare-loans" id="calculator" sub="loan-inputs">
         <div className={`grid gap-4 mb-8 print:hidden ${loanCount === 3 ? "md:grid-cols-3" : "md:grid-cols-2"}`}>
           {activeLoans.map((loan, idx) => (
             <div key={idx} className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5">
@@ -287,10 +293,13 @@ export default function CompareLoansPage() {
             </div>
           ))}
         </div>
+        </SectionGate>
 
         {/* Comparison results */}
+        <SectionGate page="/compare-loans" id="results">
         {validResults.length >= 2 && (
           <>
+            <SectionGate page="/compare-loans" id="results" sub="comparison-table">
             <h2 className="text-lg font-bold text-alta-navy mb-4 flex items-center gap-2">
               <svg className="w-5 h-5 text-alta-teal" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
@@ -348,9 +357,11 @@ export default function CompareLoansPage() {
                 </tbody>
               </table>
             </div>
+            </SectionGate>
 
             {/* Key Differences */}
             {keyDifferences && keyDifferences.length > 0 && (
+              <SectionGate page="/compare-loans" id="results" sub="key-differences">
               <div className="p-5 bg-gradient-to-br from-[#f0f7fa] to-[#e6f1f5] rounded-2xl border border-alta-teal/20 mb-8">
                 <h3 className="text-sm font-bold text-alta-navy mb-3 flex items-center gap-2">
                   <svg className="w-4 h-4 text-alta-teal" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -369,9 +380,11 @@ export default function CompareLoansPage() {
                   ))}
                 </ul>
               </div>
+              </SectionGate>
             )}
 
             {/* Action buttons */}
+            <SectionGate page="/compare-loans" id="results" sub="actions">
             <div className="flex flex-wrap items-center gap-3 mb-8 print:hidden">
               <PrintButton label="Print Comparison" />
               <SaveToFolderBtn
@@ -382,10 +395,13 @@ export default function CompareLoansPage() {
                 label="Save to Folder"
               />
             </div>
+            </SectionGate>
           </>
         )}
+        </SectionGate>
 
         {/* Empty state */}
+        <SectionGate page="/compare-loans" id="empty-state">
         {validResults.length < 2 && (
           <div className="text-center py-12 px-4 bg-gray-50 rounded-2xl border border-dashed border-gray-200 mb-8">
             <svg className="w-12 h-12 text-gray-300 mx-auto mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -395,10 +411,14 @@ export default function CompareLoansPage() {
             <p className="text-xs text-alta-gray">Fill in the interest rate and loan amount for each offer to see your side-by-side comparison.</p>
           </div>
         )}
+        </SectionGate>
 
-        <InlineAd />
+        <AdGate name="InlineAd">
+          <InlineAd />
+        </AdGate>
 
         {/* Pro tips */}
+        <SectionGate page="/compare-loans" id="how-to-use">
         <div className="p-4 bg-[#faf4e4] rounded-xl border border-[#e8d9a8] border-l-4 border-l-[#8b6914] my-6">
           <h3 className="text-sm font-bold text-[#8b6914] mb-2">How to Use This Tool</h3>
           <ul className="text-xs text-[#6b5210] space-y-1.5 leading-relaxed">
@@ -409,8 +429,11 @@ export default function CompareLoansPage() {
             <li>5. The APR includes fees amortized over the loan term, making it the best single-number comparison.</li>
           </ul>
         </div>
+        </SectionGate>
 
-        <FirstTimeBuyerCTA />
+        <ModuleGate name="FirstTimeBuyerCTA">
+          <FirstTimeBuyerCTA />
+        </ModuleGate>
       </main>
     </>
   );

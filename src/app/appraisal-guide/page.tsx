@@ -6,6 +6,7 @@ import PageHero from "@/components/PageHero";
 import { InlineAd } from "@/components/EliteProviders";
 import FirstTimeBuyerCTA from "@/components/FirstTimeBuyerCTA";
 import SponsorTip from "@/components/SponsorTip";
+import { SectionGate, AdGate, ModuleGate } from "@/components/Gate";
 
 /* ───────── Appraiser evaluation areas (expandable tiles) ───────── */
 const evaluationAreas = [
@@ -168,20 +169,23 @@ export default function AppraisalGuidePage() {
 
   return (
     <>
-      <PageHero
-        title="Understanding Your Home Appraisal"
-        subtitle="An appraisal protects you and your lender from overpaying. Here is everything you need to know — what appraisers evaluate, what happens when the value comes in low, and how to prepare."
-        image="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1920&q=80"
-        breadcrumb={[
-          { label: "The Closing Process", href: "/closing-process" },
-          { label: "Appraisal Guide", href: "/appraisal-guide" },
-        ]}
-      />
+      <SectionGate page="/appraisal-guide" id="hero">
+        <PageHero
+          title="Understanding Your Home Appraisal"
+          subtitle="An appraisal protects you and your lender from overpaying. Here is everything you need to know — what appraisers evaluate, what happens when the value comes in low, and how to prepare."
+          image="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1920&q=80"
+          breadcrumb={[
+            { label: "The Closing Process", href: "/closing-process" },
+            { label: "Appraisal Guide", href: "/appraisal-guide" },
+          ]}
+        />
+      </SectionGate>
 
       <div className="py-1.5 lg:py-2">
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
 
           {/* ── Key stats ── */}
+          <SectionGate page="/appraisal-guide" id="key-stats">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-10">
             {[
               { val: "$300-$600", label: "Typical appraisal cost", bg: "bg-blue-50", border: "border-blue-200", text: "text-blue-700" },
@@ -195,8 +199,10 @@ export default function AppraisalGuidePage() {
               </div>
             ))}
           </div>
+          </SectionGate>
 
           {/* ── What is an appraisal ── */}
+          <SectionGate page="/appraisal-guide" id="what-is-appraisal">
           <div className="mb-10 p-4 bg-[#faf4e4] rounded-2xl border border-[#e8d9a8] border-l-4 border-l-[#8b6914] shadow-md">
             <div className="flex items-start gap-4">
               <div className="w-12 h-12 rounded-xl bg-[#8b6914]/10 flex items-center justify-center text-[#8b6914] shrink-0">
@@ -226,8 +232,11 @@ export default function AppraisalGuidePage() {
               </div>
             </div>
           </div>
+          </SectionGate>
 
           {/* ── What appraisers evaluate — expandable tiles ── */}
+          <SectionGate page="/appraisal-guide" id="what-appraisers-evaluate">
+          <>
           <h2 className="text-2xl font-bold text-alta-navy mb-2">What Appraisers Evaluate</h2>
           <p className="text-sm text-alta-gray mb-6 leading-relaxed">
             Click any area below for a detailed breakdown of what the appraiser examines and how it affects your home&apos;s value.
@@ -264,18 +273,26 @@ export default function AppraisalGuidePage() {
               </div>
             ))}
           </div>
+          </>
+          </SectionGate>
 
-          <InlineAd />
+          <AdGate name="InlineAd">
+            <InlineAd />
+          </AdGate>
 
           {/* ── LOW APPRAISAL — critical section ── */}
+          <SectionGate page="/appraisal-guide" id="low-appraisal">
           <div className="mb-10">
+            <SectionGate page="/appraisal-guide" id="low-appraisal" sub="intro">
             <div className="mb-6 p-4 bg-red-50 rounded-2xl border border-red-200 border-l-4 border-l-red-500">
               <h2 className="text-2xl font-bold text-alta-navy mb-2">What Happens When the Appraisal Comes In Low</h2>
               <p className="text-sm text-alta-gray leading-relaxed">
                 A low appraisal means the appraiser&apos;s opinion of value is less than the agreed-upon purchase price. This is one of the most stressful situations in a real estate transaction. The lender will only finance a loan based on the appraised value — not the contract price. If the appraisal is $15,000 below the purchase price, someone has to cover that $15,000 gap. Here are your five options:
               </p>
             </div>
+            </SectionGate>
 
+            <SectionGate page="/appraisal-guide" id="low-appraisal" sub="options">
             <div className="space-y-3">
               {lowAppraisalOptions.map((opt, i) => (
                 <div key={opt.option} className={`rounded-2xl border overflow-hidden ${opt.color}`}>
@@ -330,9 +347,13 @@ export default function AppraisalGuidePage() {
                 </div>
               ))}
             </div>
+            </SectionGate>
           </div>
+          </SectionGate>
 
           {/* ── Appraisal vs Inspection vs CMA ── */}
+          <SectionGate page="/appraisal-guide" id="comparison">
+          <>
           <h2 className="text-2xl font-bold text-alta-navy mb-4">Appraisal vs. Inspection vs. CMA</h2>
           <p className="text-sm text-alta-gray mb-4 leading-relaxed">
             These three evaluations serve different purposes. Understanding the difference prevents confusion about what each professional is responsible for.
@@ -359,8 +380,12 @@ export default function AppraisalGuidePage() {
               </tbody>
             </table>
           </div>
+          </>
+          </SectionGate>
 
           {/* ── Appraisal Gap Coverage ── */}
+          <SectionGate page="/appraisal-guide" id="gap-coverage">
+          <>
           <h2 className="text-2xl font-bold text-alta-navy mb-4">Appraisal Gap Coverage</h2>
           <div className="p-5 bg-gradient-to-br from-purple-50 to-white rounded-2xl border border-purple-100 mb-10">
             <h3 className="font-bold text-alta-navy mb-2">What Is an Appraisal Gap?</h3>
@@ -386,8 +411,12 @@ export default function AppraisalGuidePage() {
               </div>
             </div>
           </div>
+          </>
+          </SectionGate>
 
           {/* ── Tips for a smooth appraisal ── */}
+          <SectionGate page="/appraisal-guide" id="tips">
+          <>
           <h2 className="text-2xl font-bold text-alta-navy mb-4">Tips for a Smooth Appraisal</h2>
           <p className="text-sm text-alta-gray mb-4 leading-relaxed">
             While the buyer has limited control over the appraisal outcome, the seller (and listing agent) can take steps to help ensure the appraiser has the information needed to support the property&apos;s value.
@@ -401,15 +430,22 @@ export default function AppraisalGuidePage() {
               </div>
             ))}
           </div>
+          </>
+          </SectionGate>
 
-          <InlineAd />
+          <AdGate name="InlineAd">
+            <InlineAd />
+          </AdGate>
 
           {/* ── Sources ── */}
+          <SectionGate page="/appraisal-guide" id="sources">
           <p className="text-xs text-alta-gray mb-6">
             Sources: Consumer Financial Protection Bureau (CFPB), Fannie Mae Selling Guide (B4-1 Appraisal Requirements), Appraisal Institute — The Appraisal of Real Estate (15th ed.), HUD Handbook 4000.1 (FHA appraisal requirements), VA Pamphlet 26-7 (VA appraisal requirements). Appraisal cost and timeline figures reflect 2024-2025 national averages.
           </p>
+          </SectionGate>
 
           {/* ── Related links ── */}
+          <SectionGate page="/appraisal-guide" id="related-links">
           <div className="flex flex-col sm:flex-row gap-3">
             <Link href="/home-inspection" className="px-5 py-2.5 bg-alta-teal text-white font-semibold rounded-lg hover:bg-alta-teal-dark transition-colors text-center text-sm">
               Home Inspection Guide
@@ -421,8 +457,10 @@ export default function AppraisalGuidePage() {
               Your Loan Estimate
             </Link>
           </div>
+          </SectionGate>
 
           {/* ── Related Topics ── */}
+          <SectionGate page="/appraisal-guide" id="related-topics">
           <div className="mt-8 mb-4">
             <h2 className="text-lg font-bold text-alta-navy mb-4">Related Topics</h2>
             <div className="grid sm:grid-cols-3 gap-3">
@@ -440,10 +478,15 @@ export default function AppraisalGuidePage() {
               </Link>
             </div>
           </div>
+          </SectionGate>
 
-          <SponsorTip context="mortgage" />
+          <AdGate name="SponsorTip">
+            <SponsorTip context="mortgage" />
+          </AdGate>
 
-          <FirstTimeBuyerCTA />
+          <ModuleGate name="FirstTimeBuyerCTA">
+            <FirstTimeBuyerCTA />
+          </ModuleGate>
         </div>
       </div>
     </>

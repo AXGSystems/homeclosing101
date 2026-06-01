@@ -5,6 +5,7 @@ import AnimatedCounter from "@/components/AnimatedCounter";
 import HomepageTestimonials from "@/components/HomepageTestimonials";
 import StatCard from "@/components/StatCard";
 import SponsorShowcase from "@/components/SponsorShowcase";
+import { SectionGate, AdGate, ModuleGate } from "@/components/Gate";
 
 const features = [
   {
@@ -139,6 +140,7 @@ export default function HomePage() {
   return (
     <>
       {/* Hero */}
+      <SectionGate page="/" id="hero">
       <section className="relative text-white py-8 lg:py-14 overflow-hidden">
         {/* Background image */}
         <div
@@ -197,6 +199,7 @@ export default function HomePage() {
           </div>
 
           {/* Stat tiles — full-width 4-column grid with 3D flip */}
+          <SectionGate page="/" id="hero" sub="stat-tiles">
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-5">
             {stats.map((stat, i) => (
               <Link key={stat.value} href={stat.href} className="group">
@@ -223,10 +226,13 @@ export default function HomePage() {
               </Link>
             ))}
           </div>
+          </SectionGate>
         </div>
       </section>
+      </SectionGate>
 
       {/* Why This Matters — the hook */}
+      <SectionGate page="/" id="why-this-matters">
       <section className="py-12 lg:py-16 bg-white">
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
           <div className="text-center mb-10">
@@ -235,6 +241,7 @@ export default function HomePage() {
           </div>
 
           {/* Compelling data points */}
+          <SectionGate page="/" id="why-this-matters" sub="data-points">
           <div className="grid md:grid-cols-3 gap-5 mb-10">
             <div className="relative rounded-2xl overflow-hidden shadow-md group">
               <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=400&q=80')" }} />
@@ -267,8 +274,10 @@ export default function HomePage() {
               </div>
             </div>
           </div>
+          </SectionGate>
 
           {/* Pull quote */}
+          <SectionGate page="/" id="why-this-matters" sub="pull-quote">
           <div className="p-6 bg-alta-light rounded-2xl border border-gray-100 mb-10">
             <div className="flex items-start gap-4">
               <div className="w-10 h-10 rounded-full bg-alta-teal/10 flex items-center justify-center shrink-0 mt-1">
@@ -280,17 +289,22 @@ export default function HomePage() {
               </div>
             </div>
           </div>
+          </SectionGate>
 
           {/* Animated market stats */}
+          <SectionGate page="/" id="why-this-matters" sub="market-stats">
           <div className="text-center mb-6">
             <h3 className="text-xl font-bold text-alta-navy mb-2">The 2025 Housing Market at a Glance</h3>
             <p className="text-sm text-alta-gray">Real data from NAR, CFPB, Census Bureau, and FBI IC3.</p>
           </div>
-          <MarketStats />
+          <ModuleGate name="MarketStats"><MarketStats /></ModuleGate>
+          </SectionGate>
         </div>
       </section>
+      </SectionGate>
 
       {/* How HomeClosing101 Helps */}
+      <SectionGate page="/" id="how-it-helps">
       <section className="py-14 lg:py-20 bg-[#f0f1f3]">
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
           <div className="text-center mb-6">
@@ -312,6 +326,7 @@ export default function HomePage() {
           </div>
 
           {/* Three pillars — glassmorphic colored tiles */}
+          <SectionGate page="/" id="how-it-helps" sub="pillars">
           <div className="grid md:grid-cols-3 gap-6">
             {/* Learn */}
             <Link href="/closing-process" className="group relative overflow-hidden rounded-2xl p-7 shadow-md hover:shadow-xl hover:-translate-y-1 transition-all text-center bg-white/50 backdrop-blur-md border border-[#0a7ea8]/20">
@@ -356,13 +371,16 @@ export default function HomePage() {
               </div>
             </Link>
           </div>
+          </SectionGate>
         </div>
       </section>
+      </SectionGate>
 
       {/* Gradient divider */}
       <div className="h-0.5 bg-gradient-to-r from-alta-navy to-alta-teal" />
 
       {/* Feature Cards */}
+      <SectionGate page="/" id="feature-cards">
       <section className="py-14 lg:py-18 bg-alta-light">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="text-center mb-12">
@@ -406,11 +424,13 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+      </SectionGate>
 
       {/* Ad between features and roadmap */}
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 py-4"><InlineAd /></div>
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 py-4"><AdGate name="InlineAd"><InlineAd /></AdGate></div>
 
       {/* The Road to Homeownership */}
+      <SectionGate page="/" id="roadmap">
       <section className="relative py-14 lg:py-20 overflow-hidden">
         <div className="absolute inset-0 bg-cover bg-center opacity-[0.04]" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1515162816999-a0c47dc192f7?w=1920&q=80')" }} />
         <div className="absolute inset-0 bg-[#e8e9eb]" />
@@ -427,6 +447,7 @@ export default function HomePage() {
           </div>
 
           {/* 3 Data cards */}
+          <SectionGate page="/" id="roadmap" sub="data-cards">
           <div className="grid sm:grid-cols-3 gap-4 mb-10">
             <div className="bg-gradient-to-br from-[#0a7ea8]/10 to-white rounded-xl p-5 shadow-sm border border-[#0a7ea8]/20 border-l-4 border-l-[#0a7ea8] text-center hover:-translate-y-1 hover:shadow-md transition-all duration-200">
               <svg className="w-8 h-8 mx-auto mb-3 text-[#0a7ea8]" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5" /></svg>
@@ -447,6 +468,7 @@ export default function HomePage() {
               <p className="text-xs text-[#943030] mt-2 font-medium">Source: Bankrate 2025</p>
             </div>
           </div>
+          </SectionGate>
 
           {/* Blurb */}
           <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 sm:p-8 border border-gray-100 shadow-sm mb-8">
@@ -468,10 +490,12 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+      </SectionGate>
       {/* Gradient divider */}
       <div className="h-0.5 bg-gradient-to-r from-alta-navy to-alta-teal" />
 
       {/* Where to start — large photo-backed cards */}
+      <SectionGate page="/" id="where-to-start">
       <section className="py-10 bg-alta-light">
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
           <div className="text-center mb-8">
@@ -501,8 +525,10 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+      </SectionGate>
 
       {/* Why Title Insurance? — ALTA core product callout */}
+      <SectionGate page="/" id="title-insurance">
       <section className="py-14 lg:py-18 bg-white relative overflow-hidden">
         {/* Subtle background pattern */}
         <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, #1a5276 1px, transparent 0)', backgroundSize: '24px 24px' }} />
@@ -515,6 +541,7 @@ export default function HomePage() {
             <h2 className="text-3xl font-bold text-alta-navy mb-3">Why Title Insurance Matters</h2>
             <p className="text-alta-gray max-w-2xl mx-auto leading-relaxed">Your home is likely the biggest purchase you will ever make. Title insurance is a one-time cost that protects your ownership rights for as long as you own the property.</p>
           </div>
+          <SectionGate page="/" id="title-insurance" sub="cards">
           <div className="grid md:grid-cols-3 gap-6 mb-10">
             {[
               { title: "What It Covers", desc: "Forgery, undisclosed heirs, recording errors, liens, encroachments, and other defects that could threaten your ownership.", color: "#2d6b3f", bg: "bg-[#e9f5ed]", icon: "M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" },
@@ -530,6 +557,7 @@ export default function HomePage() {
               </div>
             ))}
           </div>
+          </SectionGate>
           <div className="text-center">
             <Link href="/protect-your-rights" className="inline-flex items-center px-7 py-3.5 bg-[#2d6b3f] text-white font-semibold rounded-lg hover:bg-[#245a34] transition-colors shadow-md">
               Learn About Title Insurance
@@ -538,13 +566,15 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+      </SectionGate>
 
-      <SponsorShowcase />
+      <AdGate name="SponsorShowcase"><SponsorShowcase /></AdGate>
 
       {/* Gradient divider */}
       <div className="h-0.5 bg-gradient-to-r from-alta-navy to-alta-teal" />
 
       {/* Wire Fraud Warning — expanded */}
+      <SectionGate page="/" id="fraud-warning">
       <section className="py-14 bg-red-50 border-y border-red-100">
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
           <div className="grid lg:grid-cols-2 gap-8 items-center">
@@ -570,6 +600,7 @@ export default function HomePage() {
                 </svg>
               </Link>
             </div>
+            <SectionGate page="/" id="fraud-warning" sub="stats">
             <div className="grid grid-cols-2 gap-3">
               {[
                 { num: "$275.1M", text: "Reported losses in 2025" },
@@ -583,20 +614,25 @@ export default function HomePage() {
                 </div>
               ))}
             </div>
+            </SectionGate>
           </div>
         </div>
       </section>
+      </SectionGate>
 
       {/* Ad between fraud warning and resources */}
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 py-4"><InlineAd /></div>
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 py-4"><AdGate name="InlineAd"><InlineAd /></AdGate></div>
 
       {/* Testimonials */}
-      <HomepageTestimonials />
+      <SectionGate page="/" id="testimonials">
+      <ModuleGate name="HomepageTestimonials"><HomepageTestimonials /></ModuleGate>
+      </SectionGate>
 
       {/* Gradient divider */}
       <div className="h-0.5 bg-gradient-to-r from-alta-navy to-alta-teal" />
 
       {/* External Resources */}
+      <SectionGate page="/" id="resources">
       <section className="py-16 lg:py-20 bg-white">
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
           <div className="text-center mb-10">
@@ -637,8 +673,10 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+      </SectionGate>
 
       {/* Interactive Tools */}
+      <SectionGate page="/" id="tools">
       <section className="py-12 lg:py-16 bg-[#f0f1f3]">
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
           <div className="text-center mb-10">
@@ -672,11 +710,13 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+      </SectionGate>
 
       {/* Rotating sponsor logos */}
-      <EliteProviders />
+      <AdGate name="EliteProviders"><EliteProviders /></AdGate>
 
       {/* Full-width CTA */}
+      <SectionGate page="/" id="cta">
       <section className="relative py-10 lg:py-14 overflow-hidden">
         <div
           className="absolute inset-0 bg-cover bg-center"
@@ -728,6 +768,7 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+      </SectionGate>
     </>
   );
 }

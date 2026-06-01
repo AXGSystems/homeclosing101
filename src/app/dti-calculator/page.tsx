@@ -6,6 +6,7 @@ import PageHero from "@/components/PageHero";
 import DTIGauge from "@/components/DTIGauge";
 import { InlineAd } from "@/components/EliteProviders";
 import FirstTimeBuyerCTA from "@/components/FirstTimeBuyerCTA";
+import { SectionGate, AdGate, ModuleGate } from "@/components/Gate";
 
 function InputField({ label, value, onChange, placeholder }: { label: string; value: number; onChange: (v: number) => void; placeholder?: string }) {
   return (
@@ -99,33 +100,39 @@ export default function DTICalculatorPage() {
 
   return (
     <div>
-      <PageHero
-        title="Debt-to-Income (DTI) Calculator"
-        subtitle="Your DTI ratio is one of the most important numbers in your mortgage application. Find out where you stand and what lenders will see."
-        image="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=1920&q=80"
-        breadcrumb={[
-          { label: "Tools", href: "/resources" },
-          { label: "DTI Calculator", href: "/dti-calculator" },
-        ]}
-      />
+      <SectionGate page="/dti-calculator" id="hero">
+        <PageHero
+          title="Debt-to-Income (DTI) Calculator"
+          subtitle="Your DTI ratio is one of the most important numbers in your mortgage application. Find out where you stand and what lenders will see."
+          image="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=1920&q=80"
+          breadcrumb={[
+            { label: "Tools", href: "/resources" },
+            { label: "DTI Calculator", href: "/dti-calculator" },
+          ]}
+        />
+      </SectionGate>
 
       <div className="py-4 lg:py-6">
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
 
           {/* Explainer */}
-          <div className="mb-6 p-4 bg-[#e6f1f5] rounded-2xl border border-[#b4d8e8] border-l-4 border-l-[#0a7ea8]">
-            <h2 className="text-sm font-bold text-alta-navy mb-1">What is DTI?</h2>
-            <p className="text-xs text-alta-gray leading-relaxed">
-              Your <strong>debt-to-income ratio (DTI)</strong> compares your monthly debt payments to your gross monthly income. Lenders use two versions: the <strong>front-end ratio</strong> (housing costs only) and the <strong>back-end ratio</strong> (all monthly debts). Most conventional lenders want a front-end DTI under 28% and a back-end DTI under 36%. The qualified mortgage (QM) hard cap is 43%.
-            </p>
-          </div>
+          <SectionGate page="/dti-calculator" id="explainer">
+            <div className="mb-6 p-4 bg-[#e6f1f5] rounded-2xl border border-[#b4d8e8] border-l-4 border-l-[#0a7ea8]">
+              <h2 className="text-sm font-bold text-alta-navy mb-1">What is DTI?</h2>
+              <p className="text-xs text-alta-gray leading-relaxed">
+                Your <strong>debt-to-income ratio (DTI)</strong> compares your monthly debt payments to your gross monthly income. Lenders use two versions: the <strong>front-end ratio</strong> (housing costs only) and the <strong>back-end ratio</strong> (all monthly debts). Most conventional lenders want a front-end DTI under 28% and a back-end DTI under 36%. The qualified mortgage (QM) hard cap is 43%.
+              </p>
+            </div>
+          </SectionGate>
 
           <div className="grid lg:grid-cols-3 gap-6">
 
             {/* Left column: Inputs */}
+            <SectionGate page="/dti-calculator" id="inputs">
             <div className="lg:col-span-1 space-y-5">
 
               {/* Monthly Income */}
+              <SectionGate page="/dti-calculator" id="inputs" sub="income">
               <div className="bg-white rounded-xl border border-gray-200 p-4 shadow-sm">
                 <div className="flex items-center gap-2 mb-3">
                   <div className="w-7 h-7 rounded-lg bg-[#2d6b3f]/10 flex items-center justify-center">
@@ -144,8 +151,10 @@ export default function DTICalculatorPage() {
                   </div>
                 </div>
               </div>
+              </SectionGate>
 
               {/* Housing Costs */}
+              <SectionGate page="/dti-calculator" id="inputs" sub="housing">
               <div className="bg-white rounded-xl border border-gray-200 p-4 shadow-sm">
                 <div className="flex items-center gap-2 mb-3">
                   <div className="w-7 h-7 rounded-lg bg-[#0a7ea8]/10 flex items-center justify-center">
@@ -164,8 +173,10 @@ export default function DTICalculatorPage() {
                   </div>
                 </div>
               </div>
+              </SectionGate>
 
               {/* Other Debts */}
+              <SectionGate page="/dti-calculator" id="inputs" sub="other-debts">
               <div className="bg-white rounded-xl border border-gray-200 p-4 shadow-sm">
                 <div className="flex items-center gap-2 mb-3">
                   <div className="w-7 h-7 rounded-lg bg-[#943030]/10 flex items-center justify-center">
@@ -186,12 +197,15 @@ export default function DTICalculatorPage() {
                   </div>
                 </div>
               </div>
+              </SectionGate>
             </div>
+            </SectionGate>
 
             {/* Right column: Results */}
             <div className="lg:col-span-2 space-y-5">
 
               {/* Gauges */}
+              <SectionGate page="/dti-calculator" id="gauges">
               <div className="bg-white rounded-xl border border-gray-200 p-5 shadow-sm">
                 <h3 className="text-sm font-bold text-alta-navy mb-4">Your DTI Ratios</h3>
                 <div className="grid sm:grid-cols-2 gap-6">
@@ -211,8 +225,10 @@ export default function DTICalculatorPage() {
                   </div>
                 </div>
               </div>
+              </SectionGate>
 
               {/* What Lenders See */}
+              <SectionGate page="/dti-calculator" id="what-lenders-see">
               <div className="bg-white rounded-xl border border-gray-200 p-5 shadow-sm">
                 <h3 className="text-sm font-bold text-alta-navy mb-3">What Lenders See</h3>
                 <div className="space-y-3">
@@ -244,8 +260,10 @@ export default function DTICalculatorPage() {
                   </div>
                 </div>
               </div>
+              </SectionGate>
 
               {/* Max Mortgage Affordability */}
+              <SectionGate page="/dti-calculator" id="max-mortgage">
               <div className="bg-white rounded-xl border border-gray-200 p-5 shadow-sm">
                 <h3 className="text-sm font-bold text-alta-navy mb-3">Max Mortgage Payment You Can Afford</h3>
                 <p className="text-xs text-alta-gray mb-4">Based on your income and existing debts, here is the maximum mortgage payment (P&I only) at each DTI threshold. Property tax, insurance, and HOA are subtracted.</p>
@@ -272,10 +290,14 @@ export default function DTICalculatorPage() {
                   </p>
                 </div>
               </div>
+              </SectionGate>
 
-              <InlineAd />
+              <AdGate name="InlineAd">
+                <InlineAd />
+              </AdGate>
 
               {/* How to Lower Your DTI */}
+              <SectionGate page="/dti-calculator" id="how-to-lower">
               <div className="bg-white rounded-xl border border-gray-200 p-5 shadow-sm">
                 <h3 className="text-sm font-bold text-alta-navy mb-3">How to Lower Your DTI</h3>
                 <div className="grid sm:grid-cols-2 gap-3">
@@ -299,8 +321,10 @@ export default function DTICalculatorPage() {
                   ))}
                 </div>
               </div>
+              </SectionGate>
 
               {/* DTI by loan type */}
+              <SectionGate page="/dti-calculator" id="dti-by-loan-type">
               <div className="bg-white rounded-xl border border-gray-200 p-5 shadow-sm">
                 <h3 className="text-sm font-bold text-alta-navy mb-3">DTI Limits by Loan Type</h3>
                 <div className="overflow-x-auto">
@@ -342,10 +366,14 @@ export default function DTICalculatorPage() {
                   </table>
                 </div>
               </div>
+              </SectionGate>
 
-              <FirstTimeBuyerCTA />
+              <ModuleGate name="FirstTimeBuyerCTA">
+                <FirstTimeBuyerCTA />
+              </ModuleGate>
 
               {/* Related Topics */}
+              <SectionGate page="/dti-calculator" id="related-topics">
               <div className="mt-6 mb-4">
                 <h2 className="text-lg font-bold text-alta-navy mb-4">Related Topics</h2>
                 <div className="grid sm:grid-cols-3 gap-3">
@@ -363,6 +391,7 @@ export default function DTICalculatorPage() {
                   </Link>
                 </div>
               </div>
+              </SectionGate>
 
             </div>
           </div>

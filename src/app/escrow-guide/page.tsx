@@ -9,6 +9,7 @@ import FirstTimeBuyerCTA from "@/components/FirstTimeBuyerCTA";
 import MiniQuiz from "@/components/MiniQuiz";
 import SponsorTip from "@/components/SponsorTip";
 import SaveToFolderBtn from "@/components/SaveToFolderBtn";
+import { SectionGate, AdGate, ModuleGate } from "@/components/Gate";
 
 const escrowQuiz = [
   {
@@ -218,15 +219,18 @@ export default function EscrowGuidePage() {
 
   return (
     <>
-      <PageHero
-        title="Understanding Escrow"
-        subtitle="Escrow plays two critical roles in your home purchase: holding your earnest money safely during the transaction, and managing your tax and insurance payments after closing."
-        image="https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=1920&q=80"
-        breadcrumb={[{ label: "The Closing Process", href: "/closing-process" }, { label: "Escrow Guide", href: "/escrow-guide" }]}
-      />
+      <SectionGate page="/escrow-guide" id="hero">
+        <PageHero
+          title="Understanding Escrow"
+          subtitle="Escrow plays two critical roles in your home purchase: holding your earnest money safely during the transaction, and managing your tax and insurance payments after closing."
+          image="https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=1920&q=80"
+          breadcrumb={[{ label: "The Closing Process", href: "/closing-process" }, { label: "Escrow Guide", href: "/escrow-guide" }]}
+        />
+      </SectionGate>
 
       <div className="py-1.5 lg:py-2">
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
+          <SectionGate page="/escrow-guide" id="intro">
           <div className="mb-6 p-4 bg-[#e8f0f5] rounded-2xl border border-[#c5d8e4] border-l-4 border-l-[#1a5276] sm:sticky sm:top-[142px] z-20 shadow-md">
             <div className="flex items-start gap-4">
               <div className="w-12 h-12 rounded-xl bg-[#1a5276]/15 flex items-center justify-center text-[#1a5276] shrink-0">
@@ -238,8 +242,10 @@ export default function EscrowGuidePage() {
               </div>
             </div>
           </div>
+          </SectionGate>
 
           {/* Wire Fraud Warning */}
+          <SectionGate page="/escrow-guide" id="fraud-warning">
           <div className="p-4 bg-gradient-to-r from-[#943030] to-[#7a2020] rounded-2xl text-white mb-6">
             <div className="flex items-start gap-3">
               <svg className="w-6 h-6 text-white shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" /></svg>
@@ -250,8 +256,10 @@ export default function EscrowGuidePage() {
               </div>
             </div>
           </div>
+          </SectionGate>
 
           {/* Three phases of escrow */}
+          <SectionGate page="/escrow-guide" id="phases">
           <h2 className="text-xl font-bold text-alta-navy mb-4">The 3 Phases of Escrow</h2>
           <p className="text-sm text-alta-gray mb-4">Click any item for a detailed explanation, common questions, and what to watch for.</p>
           <div className="space-y-6 mb-10">
@@ -304,10 +312,12 @@ export default function EscrowGuidePage() {
               </div>
             ))}
           </div>
+          </SectionGate>
 
-          <InlineAd />
+          <AdGate name="InlineAd"><InlineAd /></AdGate>
 
           {/* Escrow math example */}
+          <SectionGate page="/escrow-guide" id="escrow-math">
           <h2 className="text-xl font-bold text-alta-navy mb-4">Escrow Math: What Your Monthly Payment Includes</h2>
           <div className="p-5 bg-[#faf4e4] rounded-2xl border border-[#e8d9a8] border-l-4 border-l-[#8b6914] shadow-sm mb-10 tile-interactive">
             <p className="text-xs text-alta-gray mb-3">Example for a $350,000 home with 10% down, 6.5% rate, 30-year conventional in a county with 1.5% property tax:</p>
@@ -320,35 +330,47 @@ export default function EscrowGuidePage() {
             </div>
             <p className="text-xs text-alta-gray mt-3">Of your $2,788 monthly payment, only $1,991 goes to your actual loan. The remaining $797 is held in escrow for taxes, insurance, and PMI. This is why your mortgage payment is significantly more than just principal and interest.</p>
           </div>
+          </SectionGate>
 
           {/* Escrow waivers */}
+          <SectionGate page="/escrow-guide" id="escrow-waivers">
           <h2 className="text-xl font-bold text-alta-navy mb-4">Escrow Waivers: Paying Taxes & Insurance Yourself</h2>
           <div className="p-5 bg-[#f0ecf6] rounded-2xl border border-[#d4c8e4] border-l-4 border-l-[#5b3a8c] shadow-sm mb-10 tile-interactive">
             <p className="text-sm text-alta-gray leading-relaxed mb-4">Some borrowers prefer to pay property taxes and insurance directly rather than through an escrow account. This is called an escrow waiver (or escrow exemption). Here is what you need to know:</p>
             <div className="space-y-3">
+              <SectionGate page="/escrow-guide" id="escrow-waivers" sub="eligibility">
               <div className="p-3 bg-[#e8f0f5] rounded-lg border border-[#c5d8e4]">
                 <h4 className="text-sm font-bold text-alta-navy mb-1">Eligibility Requirements</h4>
                 <p className="text-sm text-alta-gray leading-relaxed">Most lenders require at least 20% equity (80% LTV or less) to waive escrow. FHA, VA, and USDA loans generally do not allow escrow waivers. Conventional loans are the most flexible, but each lender sets its own policy. Some lenders also require a strong credit score (720+) and a clean payment history.</p>
               </div>
+              </SectionGate>
+              <SectionGate page="/escrow-guide" id="escrow-waivers" sub="waiver-fee">
               <div className="p-3 bg-[#faf4e4] rounded-lg border border-[#e8d9a8]">
                 <h4 className="text-sm font-bold text-alta-navy mb-1">The Escrow Waiver Fee</h4>
                 <p className="text-sm text-alta-gray leading-relaxed">Lenders typically charge a fee for waiving escrow -- usually 0.25% of the loan amount (e.g., $625 on a $250,000 loan). This fee may be paid upfront or added to your interest rate. The fee compensates the lender for the increased risk that you could miss a tax or insurance payment, which would put their collateral at risk.</p>
               </div>
+              </SectionGate>
+              <SectionGate page="/escrow-guide" id="escrow-waivers" sub="risks">
               <div className="p-3 bg-[#f5e8e8] rounded-lg border border-[#e4c5c5]">
                 <h4 className="text-sm font-bold text-alta-navy mb-1">Risks of Waiving Escrow</h4>
                 <p className="text-sm text-alta-gray leading-relaxed">If you miss a property tax payment, your county can place a tax lien on your home -- which takes priority over your mortgage. If your insurance lapses, your lender will buy force-placed insurance on your behalf (at a much higher cost) and add it to your loan balance. You are responsible for budgeting and paying large lump-sum bills (property taxes are typically due 1-2 times per year; insurance annually).</p>
               </div>
+              </SectionGate>
+              <SectionGate page="/escrow-guide" id="escrow-waivers" sub="when-it-makes-sense">
               <div className="p-3 bg-[#e9f5ed] rounded-lg border border-[#bddcc7]">
                 <h4 className="text-sm font-bold text-alta-navy mb-1">When It Makes Sense</h4>
                 <p className="text-sm text-alta-gray leading-relaxed">An escrow waiver can make sense if you are disciplined about saving, want to earn interest on your own funds, or live in a state where escrow accounts do not earn interest. However, most financial advisors recommend keeping escrow for the convenience and protection it provides -- especially for first-time buyers.</p>
               </div>
+              </SectionGate>
             </div>
             <p className="text-[10px] text-alta-teal font-medium mt-3">Source: CFPB -- Escrow accounts are regulated under the Real Estate Settlement Procedures Act (RESPA), 12 CFR Part 1024</p>
           </div>
+          </SectionGate>
 
-          <InlineAd />
+          <AdGate name="InlineAd"><InlineAd /></AdGate>
 
           {/* RESPA escrow limits */}
+          <SectionGate page="/escrow-guide" id="respa-protections">
           <h2 className="text-xl font-bold text-alta-navy mb-4">Federal Escrow Protections (RESPA)</h2>
           <p className="text-sm text-alta-gray mb-3">Click any rule for the full legal basis, real examples, and what to do if it's violated.</p>
           <div className="p-5 bg-gradient-to-br from-amber-50 to-white rounded-2xl border border-amber-200 mb-10">
@@ -395,10 +417,12 @@ export default function EscrowGuidePage() {
             </div>
             <p className="text-[10px] text-alta-teal font-medium mt-3">Source: 12 U.S.C. Section 2609; 12 CFR Part 1024 (Regulation X); CFPB Escrow Account Rules</p>
           </div>
+          </SectionGate>
 
-          <SponsorTip context="closing" />
+          <AdGate name="SponsorTip"><SponsorTip context="closing" /></AdGate>
 
           {/* Common escrow questions */}
+          <SectionGate page="/escrow-guide" id="faq">
           <h2 className="text-xl font-bold text-alta-navy mb-4">Common Escrow Questions</h2>
           <p className="text-sm text-alta-gray mb-3">Click any question for detailed answers and what to watch for.</p>
           <div className="grid sm:grid-cols-2 gap-3 mb-10">
@@ -441,7 +465,9 @@ export default function EscrowGuidePage() {
               </div>
             ))}
           </div>
+          </SectionGate>
 
+          <SectionGate page="/escrow-guide" id="cta-links">
           <div className="flex flex-col sm:flex-row gap-3">
             <Link href="/closing-process/closing-costs" className="px-5 py-2.5 bg-alta-teal text-white font-semibold rounded-lg hover:bg-alta-teal-dark transition-colors text-center text-sm">
               Closing Costs Calculator
@@ -453,9 +479,11 @@ export default function EscrowGuidePage() {
               Mortgage Calculator
             </Link>
           </div>
+          </SectionGate>
 
-          <TrustedALTAMembers />
+          <AdGate name="TrustedALTAMembers"><TrustedALTAMembers /></AdGate>
 
+          <SectionGate page="/escrow-guide" id="related-topics">
           <div className="mt-8 mb-4">
             <h2 className="text-lg font-bold text-alta-navy mb-4">Related Topics</h2>
             <div className="grid sm:grid-cols-3 gap-3">
@@ -473,10 +501,11 @@ export default function EscrowGuidePage() {
               </Link>
             </div>
           </div>
+          </SectionGate>
 
-          <MiniQuiz title="Test Your Knowledge: Escrow" questions={escrowQuiz} />
+          <ModuleGate name="MiniQuiz"><MiniQuiz title="Test Your Knowledge: Escrow" questions={escrowQuiz} /></ModuleGate>
 
-          <FirstTimeBuyerCTA />
+          <ModuleGate name="FirstTimeBuyerCTA"><FirstTimeBuyerCTA /></ModuleGate>
         </div>
       </div>
 

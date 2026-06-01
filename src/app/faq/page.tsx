@@ -7,6 +7,7 @@ import { InlineAd } from "@/components/EliteProviders";
 import FirstTimeBuyerCTA from "@/components/FirstTimeBuyerCTA";
 import SaveToFolderBtn from "@/components/SaveToFolderBtn";
 import { faqs, faqCategories } from "@/data/faqData";
+import { SectionGate, AdGate, ModuleGate } from "@/components/Gate";
 
 const catColors: Record<string, { bg: string; border: string; text: string; leftBorder: string }> = {
   basics: { bg: "bg-blue-50", border: "border-blue-200", text: "text-blue-700", leftBorder: "border-l-blue-500" },
@@ -36,16 +37,19 @@ export default function FAQPage() {
 
   return (
     <>
+    <SectionGate page="/faq" id="hero">
     <PageHero
       title="Frequently Asked Questions"
       subtitle={`${faqs.length} answers about every aspect of buying a home and closing your transaction.`}
       image="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=1920&q=80"
       breadcrumb={[{ label: "Resources", href: "/resources" }, { label: "FAQ", href: "/faq" }]}
     />
+    </SectionGate>
 
     <div className="py-1.5 lg:py-2">
       <div className="max-w-5xl mx-auto px-4 sm:px-6">
         {/* Page intro */}
+        <SectionGate page="/faq" id="intro">
         <div className="mb-6 p-4 bg-[#f0ecf6] rounded-2xl border border-[#d4c8e4] border-l-4 border-l-[#5b3a8c] sm:sticky sm:top-[142px] z-20 shadow-md">
           <div className="flex items-start gap-4">
             <div className="w-12 h-12 rounded-xl bg-[#5b3a8c]/10 flex items-center justify-center text-[#5b3a8c] shrink-0">
@@ -57,8 +61,10 @@ export default function FAQPage() {
             </div>
           </div>
         </div>
+        </SectionGate>
 
         {/* Search + filters — sticky below the intro */}
+        <SectionGate page="/faq" id="toolbar">
         <div className="sticky top-[200px] sm:top-[255px] z-10 bg-white pb-3 pt-2 -mx-4 px-4 sm:-mx-6 sm:px-6 border-b border-gray-100 shadow-sm">
           <div className="relative mb-3">
             <svg className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-alta-gray" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
@@ -77,6 +83,7 @@ export default function FAQPage() {
           </div>
 
           {/* Category filters */}
+          <SectionGate page="/faq" id="toolbar" sub="category-filters">
           <div className="flex flex-wrap gap-1.5 mb-2">
             {faqCategories.map((cat) => {
               const count = cat.id === "all" ? faqs.length : faqs.filter((f) => f.cat === cat.id).length;
@@ -95,6 +102,7 @@ export default function FAQPage() {
               );
             })}
           </div>
+          </SectionGate>
 
           {/* Results count */}
           <p className="text-[11px] text-alta-gray">
@@ -102,8 +110,10 @@ export default function FAQPage() {
             {searchQuery && <span> matching &quot;{searchQuery}&quot;</span>}
           </p>
         </div>
+        </SectionGate>
 
         {/* FAQ cards */}
+        <SectionGate page="/faq" id="faq-results">
         <div className="grid gap-2.5 md:grid-cols-2 mt-4">
           {filtered.map((faq, i) => {
             const globalIdx = faqs.indexOf(faq);
@@ -128,9 +138,11 @@ export default function FAQPage() {
             <button onClick={() => { setSearchQuery(""); setActiveCat("all"); }} className="text-sm text-alta-teal mt-2 hover:underline">Clear filters</button>
           </div>
         )}
+        </SectionGate>
 
-        <InlineAd />
+        <AdGate name="InlineAd"><InlineAd /></AdGate>
 
+        <SectionGate page="/faq" id="need-more-help">
         <div className="mt-6 p-5 bg-gradient-to-br from-alta-light to-white rounded-2xl border border-gray-100">
           <h3 className="font-bold text-alta-navy mb-3">Need More Help?</h3>
           <div className="flex flex-col sm:flex-row gap-3">
@@ -145,8 +157,10 @@ export default function FAQPage() {
             </Link>
           </div>
         </div>
+        </SectionGate>
 
         {/* Still Have Questions? */}
+        <SectionGate page="/faq" id="still-have-questions">
         <div className="mt-6 p-5 bg-gradient-to-br from-[#f0ecf6] to-white rounded-2xl border border-[#d4c8e4] shadow-sm">
           <div className="flex items-start gap-4">
             <div className="w-12 h-12 rounded-xl bg-[#5b3a8c]/10 flex items-center justify-center text-[#5b3a8c] shrink-0">
@@ -158,8 +172,9 @@ export default function FAQPage() {
             </div>
           </div>
         </div>
+        </SectionGate>
 
-        <FirstTimeBuyerCTA />
+        <ModuleGate name="FirstTimeBuyerCTA"><FirstTimeBuyerCTA /></ModuleGate>
       </div>
     </div>
     </>

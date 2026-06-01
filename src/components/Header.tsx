@@ -1,12 +1,18 @@
 "use client";
 
 import Link from "next/link";
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useMemo } from "react";
 import SiteSearch from "@/components/SiteSearch";
 import { Search } from "lucide-react";
 import { glossaryData } from "@/data/glossaryData";
 import { faqs } from "@/data/faqData";
-const navItems = [
+import { useSiteConfig } from "@/components/SiteConfigProvider";
+import { navKey } from "@/config/siteStructure";
+
+type NavChild = { label: string; href: string; divider?: boolean };
+type NavItem = { label: string; href: string; children?: NavChild[] };
+
+const navItems: NavItem[] = [
   {
     label: "The Closing Process",
     href: "/closing-process",
@@ -89,9 +95,54 @@ const navItems = [
   },
 ];
 
+/** Filter the nav tree by the active version's page enablement. */
+function filterNav(items: NavItem[], on: (href: string) => boolean): NavItem[] {
+  const out: NavItem[] = [];
+  for (const item of items) {
+    if (!item.children) {
+      if (on(item.href)) out.push(item);
+      continue;
+    }
+    // keep dividers + enabled non-divider children
+    const kept = item.children.filter(
+      (c) => c.divider || on(c.href)
+    );
+    // drop dividers that head an empty group
+    const cleaned: NavChild[] = [];
+    for (let i = 0; i < kept.length; i++) {
+      const c = kept[i];
+      if (c.divider) {
+        let hasFollower = false;
+        for (let j = i + 1; j < kept.length; j++) {
+          if (kept[j].divider) break;
+          hasFollower = true;
+          break;
+        }
+        if (hasFollower) cleaned.push(c);
+      } else {
+        cleaned.push(c);
+      }
+    }
+    const visibleChildren = cleaned.filter((c) => !c.divider);
+    const ownOn = on(item.href);
+    if (visibleChildren.length === 0 && !ownOn) continue;
+    out.push({
+      label: item.label,
+      href: ownOn ? item.href : visibleChildren[0]?.href || item.href,
+      children: cleaned,
+    });
+  }
+  return out;
+}
+
 export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
+  const { effective } = useSiteConfig();
+  const visibleNav = useMemo(
+    () => filterNav(navItems, (href) => !!href && effective(navKey(href))),
+    [effective]
+  );
 
   return (
     <header className="bg-[var(--bg-primary)] shadow-sm z-50 border-b-2 border-transparent" style={{ borderImage: 'linear-gradient(to right, #1a2744, #0a8ebc) 1' }}>
@@ -113,7 +164,7 @@ export default function Header() {
 
           {/* Desktop Nav — close to logo */}
           <nav className="hidden lg:flex items-center gap-0.5 ml-4" role="navigation" aria-label="Main navigation">
-            {navItems.map((item) => (
+            {visibleNav.map((item) => (
               <div
                 key={item.label}
                 className="relative"
@@ -187,7 +238,7 @@ export default function Header() {
       {/* Mobile Nav */}
       <nav className={`lg:hidden border-t border-[var(--border-color)] bg-[var(--bg-primary)] overflow-y-auto shadow-inner transition-all duration-300 ease-in-out ${mobileOpen ? 'max-h-[70vh] opacity-100' : 'max-h-0 opacity-0 overflow-hidden border-t-0'}`} role="navigation" aria-label="Mobile navigation">
         <div className="px-4 py-3 space-y-0.5">
-          {navItems.map((item) => (
+          {visibleNav.map((item) => (
             <div key={item.label}>
               <Link
                 href={item.href}

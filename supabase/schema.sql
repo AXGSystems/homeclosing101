@@ -35,7 +35,10 @@ INSERT INTO hc101_site_config (config_key, config_value) VALUES
   ('modules', '{}'),
   ('pages', '{}'),
   ('ads', '{}'),
-  ('active_profile', '"default"')
+  ('active_profile', '"default"'),
+  -- Control Center: active site version + unified per-key overrides
+  ('version', '"full"'),
+  ('toggles', '{}')
 ON CONFLICT (config_key) DO NOTHING;
 
 -- 3. Config Profiles

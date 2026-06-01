@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import PageHero from "@/components/PageHero";
+import { SectionGate, AdGate, ModuleGate } from "@/components/Gate";
 import { InlineAd } from "@/components/EliteProviders";
 import FirstTimeBuyerCTA from "@/components/FirstTimeBuyerCTA";
 import ClosingFlowNav from "@/components/ClosingFlowNav";
@@ -433,18 +434,21 @@ export default function ClosingOptionsPage() {
 
   return (
     <>
-      <PageHero
-        title="Closing Options"
-        subtitle="Today's homebuyers have more choices than ever for how they complete their closing. Find the method that works best for you."
-        image="https://images.unsplash.com/photo-1553028826-f4804a6dba3b?w=1920&q=80"
-        breadcrumb={[
-          { label: "The Closing Process", href: "/closing-process" },
-          { label: "Closing Options", href: "/closing-process/closing-options" },
-        ]}
-      />
+      <SectionGate page="/closing-process/closing-options" id="hero">
+        <PageHero
+          title="Closing Options"
+          subtitle="Today's homebuyers have more choices than ever for how they complete their closing. Find the method that works best for you."
+          image="https://images.unsplash.com/photo-1553028826-f4804a6dba3b?w=1920&q=80"
+          breadcrumb={[
+            { label: "The Closing Process", href: "/closing-process" },
+            { label: "Closing Options", href: "/closing-process/closing-options" },
+          ]}
+        />
+      </SectionGate>
 
       <div className="py-1.5 lg:py-2">
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
+          <SectionGate page="/closing-process/closing-options" id="intro">
           <div className="mb-6 p-4 bg-[#e9f5ed] rounded-2xl border border-[#bddcc7] border-l-4 border-l-[#2d6b3f] sm:sticky sm:top-[142px] z-20 shadow-md">
             <div className="flex items-start gap-4">
               <div className="w-12 h-12 rounded-xl bg-[#2d6b3f]/15 flex items-center justify-center text-[#2d6b3f] shrink-0">
@@ -456,8 +460,10 @@ export default function ClosingOptionsPage() {
               </div>
             </div>
           </div>
+          </SectionGate>
 
           {/* Detailed option breakdowns */}
+          <SectionGate page="/closing-process/closing-options" id="options">
           <div className="space-y-8 mb-10">
             {options.map((opt, i) => (
               <div key={opt.title} className="rounded-2xl border border-[#c5d8e4] overflow-hidden shadow-sm bg-white tile-interactive">
@@ -540,10 +546,14 @@ export default function ClosingOptionsPage() {
               </div>
             ))}
           </div>
+          </SectionGate>
 
-          <InlineAd />
+          <AdGate name="InlineAd">
+            <InlineAd />
+          </AdGate>
 
           {/* What documents you'll sign */}
+          <SectionGate page="/closing-process/closing-options" id="documents">
           <h2 className="text-xl font-bold text-alta-navy mb-4">Documents You&apos;ll Sign at Closing</h2>
           <p className="text-sm text-alta-gray mb-4 leading-relaxed">Regardless of which closing method you choose, you&apos;ll sign essentially the same set of documents. The method only changes HOW and WHERE you sign them — not what you sign. Tap any document to learn what it is, what to look for, and what questions to ask.</p>
           <div className="grid sm:grid-cols-2 gap-3 mb-10">
@@ -561,8 +571,10 @@ export default function ClosingOptionsPage() {
               </button>
             ))}
           </div>
+          </SectionGate>
 
           {/* State availability note */}
+          <SectionGate page="/closing-process/closing-options" id="ron-availability">
           <div className="p-5 bg-gradient-to-br from-amber-50 to-white rounded-2xl border border-amber-200 mb-6">
             <h3 className="font-bold text-alta-navy mb-2">RON State Availability</h3>
             <p className="text-sm text-alta-gray leading-relaxed mb-3">
@@ -576,7 +588,9 @@ export default function ClosingOptionsPage() {
               <strong className="text-alta-navy">Important:</strong> Even if your state allows RON, your lender or settlement provider may not offer it. Some county recorder&apos;s offices do not yet accept electronically notarized documents for recording. Always ask about available closing methods early in the process so you can plan accordingly.
             </p>
           </div>
+          </SectionGate>
 
+          <SectionGate page="/closing-process/closing-options" id="related-links">
           <div className="flex flex-col sm:flex-row gap-3">
             <Link href="/closing-process/closing-checklist" className="px-5 py-2.5 bg-alta-teal text-white font-semibold rounded-lg hover:bg-alta-teal-dark transition-colors text-center text-sm">
               Closing Checklist
@@ -588,10 +602,15 @@ export default function ClosingOptionsPage() {
               Find a Company
             </Link>
           </div>
+          </SectionGate>
 
-          <ClosingFlowNav currentStep={2} />
+          <SectionGate page="/closing-process/closing-options" id="flow-nav">
+            <ClosingFlowNav currentStep={2} />
+          </SectionGate>
 
-          <FirstTimeBuyerCTA />
+          <ModuleGate name="FirstTimeBuyerCTA">
+            <FirstTimeBuyerCTA />
+          </ModuleGate>
         </div>
       </div>
 

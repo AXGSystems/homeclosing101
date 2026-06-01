@@ -5,6 +5,7 @@ import PageHero from "@/components/PageHero";
 import PrintButton from "@/components/PrintButton";
 import FirstTimeBuyerCTA from "@/components/FirstTimeBuyerCTA";
 import SaveToFolderBtn from "@/components/SaveToFolderBtn";
+import { SectionGate, AdGate, ModuleGate } from "@/components/Gate";
 
 const bringItems = [
   {
@@ -132,15 +133,17 @@ const afterClosingItems = [
 export default function ClosingDayPrepPage() {
   return (
     <>
-      <PageHero
-        title="Closing Day Preparation Guide"
-        subtitle="Everything you need to know, bring, and do — the day before, the day of, and immediately after your closing. Print this page and check off each item."
-        image="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1920&q=80"
-        breadcrumb={[
-          { label: "The Closing Process", href: "/closing-process" },
-          { label: "Closing Day Prep", href: "/closing-day-prep" },
-        ]}
-      />
+      <SectionGate page="/closing-day-prep" id="hero">
+        <PageHero
+          title="Closing Day Preparation Guide"
+          subtitle="Everything you need to know, bring, and do — the day before, the day of, and immediately after your closing. Print this page and check off each item."
+          image="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1920&q=80"
+          breadcrumb={[
+            { label: "The Closing Process", href: "/closing-process" },
+            { label: "Closing Day Prep", href: "/closing-day-prep" },
+          ]}
+        />
+      </SectionGate>
 
       <div className="py-1.5 lg:py-2">
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
@@ -158,6 +161,7 @@ export default function ClosingDayPrepPage() {
           </div>
 
           {/* ─── SECTION 1: What to Bring ─── */}
+          <SectionGate page="/closing-day-prep" id="what-to-bring">
           <section className="mb-10 print:mb-6">
             <div className="flex items-center gap-3 mb-5">
               <div className="w-10 h-10 rounded-xl bg-alta-teal/10 flex items-center justify-center text-alta-teal shrink-0 print:hidden">
@@ -171,6 +175,7 @@ export default function ClosingDayPrepPage() {
               </div>
             </div>
 
+            <SectionGate page="/closing-day-prep" id="what-to-bring" sub="items-grid">
             <div className="grid sm:grid-cols-2 gap-4 print:gap-2">
               {bringItems.map((item) => (
                 <div
@@ -194,9 +199,12 @@ export default function ClosingDayPrepPage() {
                 </div>
               ))}
             </div>
+            </SectionGate>
           </section>
+          </SectionGate>
 
           {/* ─── SECTION 2: Timeline — Day Before Closing ─── */}
+          <SectionGate page="/closing-day-prep" id="day-before-timeline">
           <section className="mb-10 print:mb-6">
             <div className="flex items-center gap-3 mb-5">
               <div className="w-10 h-10 rounded-xl bg-amber-100 flex items-center justify-center text-amber-600 shrink-0 print:hidden">
@@ -210,6 +218,7 @@ export default function ClosingDayPrepPage() {
               </div>
             </div>
 
+            <SectionGate page="/closing-day-prep" id="day-before-timeline" sub="steps-list">
             <div className="space-y-4 print:space-y-2">
               {dayBeforeSteps.map((step, i) => (
                 <div
@@ -226,9 +235,12 @@ export default function ClosingDayPrepPage() {
                 </div>
               ))}
             </div>
+            </SectionGate>
           </section>
+          </SectionGate>
 
           {/* ─── SECTION 3: At the Closing Table ─── */}
+          <SectionGate page="/closing-day-prep" id="at-the-table">
           <section className="mb-10 print:mb-6">
             <div className="flex items-center gap-3 mb-5">
               <div className="w-10 h-10 rounded-xl bg-green-100 flex items-center justify-center text-green-600 shrink-0 print:hidden">
@@ -242,6 +254,7 @@ export default function ClosingDayPrepPage() {
               </div>
             </div>
 
+            <SectionGate page="/closing-day-prep" id="at-the-table" sub="details-grid">
             <div className="grid sm:grid-cols-2 gap-4 print:gap-2">
               {/* Who will be there */}
               <div className="p-4 print:p-2 rounded-xl border border-gray-200 bg-white print:border-gray-300 print:rounded-none">
@@ -289,9 +302,12 @@ export default function ClosingDayPrepPage() {
                 </ul>
               </div>
             </div>
+            </SectionGate>
           </section>
+          </SectionGate>
 
           {/* ─── SECTION 4: After Closing ─── */}
+          <SectionGate page="/closing-day-prep" id="after-closing">
           <section className="mb-10 print:mb-6">
             <div className="flex items-center gap-3 mb-5">
               <div className="w-10 h-10 rounded-xl bg-purple-100 flex items-center justify-center text-purple-600 shrink-0 print:hidden">
@@ -305,6 +321,7 @@ export default function ClosingDayPrepPage() {
               </div>
             </div>
 
+            <SectionGate page="/closing-day-prep" id="after-closing" sub="todos-list">
             <div className="space-y-4 print:space-y-2">
               {afterClosingItems.map((item) => (
                 <div
@@ -326,9 +343,12 @@ export default function ClosingDayPrepPage() {
                 </div>
               ))}
             </div>
+            </SectionGate>
           </section>
+          </SectionGate>
 
           {/* ─── SECTION 5: Wire Fraud Reminder ─── */}
+          <SectionGate page="/closing-day-prep" id="fraud-warning">
           <section className="mb-10 print:mb-6 print:break-inside-avoid">
             <div className="p-5 print:p-3 bg-[#f5e8e8] rounded-2xl print:rounded-none border border-[#e4c5c5] border-l-4 border-l-[#943030]">
               <div className="flex items-start gap-4">
@@ -365,8 +385,10 @@ export default function ClosingDayPrepPage() {
               </div>
             </div>
           </section>
+          </SectionGate>
 
           {/* ─── Related Pages ─── */}
+          <SectionGate page="/closing-day-prep" id="related-resources">
           <section className="mb-10 no-print">
             <h2 className="text-lg font-bold text-alta-navy mb-4">Related Resources</h2>
             <div className="grid sm:grid-cols-3 gap-3">
@@ -386,10 +408,13 @@ export default function ClosingDayPrepPage() {
               ))}
             </div>
           </section>
+          </SectionGate>
 
+          <ModuleGate name="FirstTimeBuyerCTA">
           <div className="no-print">
             <FirstTimeBuyerCTA />
           </div>
+          </ModuleGate>
         </div>
       </div>
     </>

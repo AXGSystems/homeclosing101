@@ -6,6 +6,7 @@ import { InlineAd } from "@/components/EliteProviders";
 import { glossaryData, type GlossaryTerm } from "@/data/glossaryData";
 import FirstTimeBuyerCTA from "@/components/FirstTimeBuyerCTA";
 import { useClosingFolder } from "@/components/ClosingFolderProvider";
+import { SectionGate, AdGate, ModuleGate } from "@/components/Gate";
 
 const allLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
 
@@ -138,12 +139,14 @@ ${terms.map(t => `<div class="term"><h2>${t.term}</h2><p>${t.definition}</p>${t.
 
   return (
     <>
+    <SectionGate page="/glossary" id="hero">
     <PageHero
       title="Real Estate Glossary"
       subtitle={`${totalAllTerms} searchable terms — from abstract to zoning. Click any term for details and closing examples.`}
       image="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=1920&q=80"
       breadcrumb={[{ label: "Resources", href: "/resources" }, { label: "Glossary", href: "/glossary" }]}
     />
+    </SectionGate>
 
     {/* Term detail modal */}
     {selectedTerm && (
@@ -260,8 +263,10 @@ ${terms.map(t => `<div class="term"><h2>${t.term}</h2><p>${t.definition}</p>${t.
     <div className="py-1.5 lg:py-2">
       <div className="max-w-4xl mx-auto px-4 sm:px-6">
         {/* Sticky toolbar: intro + search + ad — all lock under the mini hero */}
+        <SectionGate page="/glossary" id="toolbar">
         <div className="sticky top-[128px] sm:top-[138px] z-20 -mx-4 px-4 sm:-mx-6 sm:px-6 bg-white pb-3 pt-3 shadow-md rounded-b-xl">
           {/* Compact intro */}
+          <SectionGate page="/glossary" id="toolbar" sub="intro">
           <div className="flex items-center gap-3 mb-3 px-1">
             <div className="w-9 h-9 rounded-lg bg-alta-teal/10 flex items-center justify-center text-alta-teal shrink-0">
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" /></svg>
@@ -271,8 +276,10 @@ ${terms.map(t => `<div class="term"><h2>${t.term}</h2><p>${t.definition}</p>${t.
               <p className="text-xs text-alta-gray leading-snug">Search, browse by letter, or click any term for details. <strong className="text-alta-navy">Save terms</strong> to build a printable list.</p>
             </div>
           </div>
+          </SectionGate>
 
           {/* Search + My List */}
+          <SectionGate page="/glossary" id="toolbar" sub="search">
           <div className="flex gap-2 mb-2">
             <div className="relative flex-1">
               <svg className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-alta-gray" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -306,8 +313,10 @@ ${terms.map(t => `<div class="term"><h2>${t.term}</h2><p>${t.definition}</p>${t.
               )}
             </button>
           </div>
+          </SectionGate>
 
           {/* Letter nav */}
+          <SectionGate page="/glossary" id="toolbar" sub="letter-nav">
           <div className="flex flex-wrap gap-1 mb-2">
             <button
               onClick={() => { setActiveLetter(null); setSearch(""); setActiveCategory(null); }}
@@ -344,8 +353,10 @@ ${terms.map(t => `<div class="term"><h2>${t.term}</h2><p>${t.definition}</p>${t.
               );
             })}
           </div>
+          </SectionGate>
 
           {/* Category filter chips */}
+          <SectionGate page="/glossary" id="toolbar" sub="category-filter">
           <div className="flex flex-wrap gap-1.5 mb-2">
             {categoryDefs.map((cat) => (
               <button
@@ -369,23 +380,34 @@ ${terms.map(t => `<div class="term"><h2>${t.term}</h2><p>${t.definition}</p>${t.
               </button>
             )}
           </div>
+          </SectionGate>
 
           {/* Count + sponsor ad strip */}
+          <SectionGate page="/glossary" id="toolbar" sub="count">
           <div className="flex items-center justify-between">
             <p className="text-[11px] text-alta-gray">
               {search ? `Showing ${totalTerms} of ${totalAllTerms} terms for "${search}"` : activeCategory ? `Showing ${totalTerms} terms in "${activeCategory}"` : activeLetter ? `Showing ${totalTerms} of ${totalAllTerms} terms starting with ${activeLetter}` : `Showing all ${totalTerms} terms`}
             </p>
           </div>
+          </SectionGate>
 
           {/* Inline sponsor ad inside sticky */}
+          <AdGate name="StickyGlossaryAd">
           <StickyGlossaryAd />
+          </AdGate>
         </div>
+        </SectionGate>
 
         {/* Term of the Day */}
-        {!search && !activeLetter && !activeCategory && <TermOfTheDay onSelect={setSelectedTerm} />}
+        {!search && !activeLetter && !activeCategory && (
+          <SectionGate page="/glossary" id="term-of-the-day">
+            <TermOfTheDay onSelect={setSelectedTerm} />
+          </SectionGate>
+        )}
 
         {/* Most Searched Terms */}
         {!search && !activeLetter && !activeCategory && (
+          <SectionGate page="/glossary" id="most-searched">
           <div className="mt-4 mb-6">
             <p className="text-xs font-semibold text-alta-navy mb-2">Most Searched Terms</p>
             <div className="flex flex-wrap gap-2">
@@ -411,9 +433,11 @@ ${terms.map(t => `<div class="term"><h2>${t.term}</h2><p>${t.definition}</p>${t.
               })}
             </div>
           </div>
+          </SectionGate>
         )}
 
         {/* Terms */}
+        <SectionGate page="/glossary" id="results">
         <div className="space-y-8">
           {Object.entries(filteredData)
             .sort(([a], [b]) => a.localeCompare(b))
@@ -422,7 +446,7 @@ ${terms.map(t => `<div class="term"><h2>${t.term}</h2><p>${t.definition}</p>${t.
               const showAd = !activeLetter && !search && groupIdx > 0 && groupIdx % 4 === 0;
               return (
                 <div key={letter}>
-                {showAd && <div className="py-2"><InlineAd /></div>}
+                {showAd && <AdGate name="InlineAd"><div className="py-2"><InlineAd /></div></AdGate>}
                 <div id={`letter-${letter}`}>
                   <div className="flex items-center gap-3 mb-3">
                     <div className="w-11 h-11 rounded-2xl flex items-center justify-center text-white font-bold text-lg shadow-md" style={{ backgroundColor: color }}>
@@ -477,10 +501,14 @@ ${terms.map(t => `<div class="term"><h2>${t.term}</h2><p>${t.definition}</p>${t.
               );
             })}
         </div>
+        </SectionGate>
 
+        <AdGate name="InlineAd">
         <InlineAd />
+        </AdGate>
 
         {totalTerms === 0 && (
+          <SectionGate page="/glossary" id="empty-state">
           <div className="text-center py-16">
             <div className="w-20 h-20 mx-auto mb-5 rounded-2xl bg-alta-light flex items-center justify-center">
               <svg className="w-10 h-10 text-alta-gray/40" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1}>
@@ -498,9 +526,12 @@ ${terms.map(t => `<div class="term"><h2>${t.term}</h2><p>${t.definition}</p>${t.
               Clear &amp; Show All Terms
             </button>
           </div>
+          </SectionGate>
         )}
 
+        <ModuleGate name="FirstTimeBuyerCTA">
         <FirstTimeBuyerCTA />
+        </ModuleGate>
       </div>
     </div>
     </>

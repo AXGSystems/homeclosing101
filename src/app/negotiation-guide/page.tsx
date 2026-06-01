@@ -5,6 +5,7 @@ import Link from "next/link";
 import PageHero from "@/components/PageHero";
 import { InlineAd } from "@/components/EliteProviders";
 import FirstTimeBuyerCTA from "@/components/FirstTimeBuyerCTA";
+import { SectionGate, AdGate, ModuleGate } from "@/components/Gate";
 
 /* ─── Data ─── */
 
@@ -180,19 +181,22 @@ export default function NegotiationGuidePage() {
 
   return (
     <div className="min-h-screen bg-[var(--bg-secondary)]">
-      <PageHero
-        title="What's Negotiable: Your Buyer's Guide to Saving Money"
-        subtitle="Many homebuyers don't realize how many closing costs and terms are negotiable. This guide breaks down exactly what you can (and can't) negotiate, when to negotiate it, and how to do it effectively."
-        image="/images/hero-closing.jpg"
-        breadcrumb={[
-          { label: "Closing Process", href: "/closing-process" },
-          { label: "Negotiation Guide", href: "/negotiation-guide" },
-        ]}
-      />
+      <SectionGate page="/negotiation-guide" id="hero">
+        <PageHero
+          title="What's Negotiable: Your Buyer's Guide to Saving Money"
+          subtitle="Many homebuyers don't realize how many closing costs and terms are negotiable. This guide breaks down exactly what you can (and can't) negotiate, when to negotiate it, and how to do it effectively."
+          image="/images/hero-closing.jpg"
+          breadcrumb={[
+            { label: "Closing Process", href: "/closing-process" },
+            { label: "Negotiation Guide", href: "/negotiation-guide" },
+          ]}
+        />
+      </SectionGate>
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 py-10">
 
         {/* ── Section 1: Negotiable Closing Costs ── */}
+        <SectionGate page="/negotiation-guide" id="negotiable-costs">
         <section className="mb-12">
           <h2 className="text-2xl font-bold text-alta-navy mb-2">Closing Costs You CAN Negotiate</h2>
           <p className="text-sm text-alta-gray mb-6">
@@ -230,10 +234,12 @@ export default function NegotiationGuidePage() {
             ))}
           </div>
         </section>
+        </SectionGate>
 
-        <InlineAd />
+        <AdGate name="InlineAd"><InlineAd /></AdGate>
 
         {/* ── Section 2: Non-Negotiable Closing Costs ── */}
+        <SectionGate page="/negotiation-guide" id="non-negotiable-costs">
         <section className="mb-12 mt-8">
           <h2 className="text-2xl font-bold text-alta-navy mb-2">Closing Costs You CANNOT Negotiate</h2>
           <p className="text-sm text-alta-gray mb-6">
@@ -265,13 +271,16 @@ export default function NegotiationGuidePage() {
             ))}
           </div>
         </section>
+        </SectionGate>
 
         {/* ── Section 3: Seller Concessions ── */}
+        <SectionGate page="/negotiation-guide" id="seller-concessions">
         <section className="mb-12">
           <h2 className="text-2xl font-bold text-alta-navy mb-2">Seller Concessions</h2>
           <p className="text-sm text-alta-gray mb-4">
             Seller concessions are when the seller agrees to pay a portion of your closing costs. This reduces the amount of cash you need at closing without changing the purchase price. The seller&apos;s contribution is built into the transaction and paid from their proceeds.
           </p>
+          <SectionGate page="/negotiation-guide" id="seller-concessions" sub="concession-limits">
           <div className="bg-white rounded-xl border border-[var(--border-color)] p-5 mb-5">
             <h3 className="font-bold text-alta-navy mb-3">Maximum Seller Concession Limits by Loan Type</h3>
             <div className="overflow-x-auto">
@@ -295,6 +304,8 @@ export default function NegotiationGuidePage() {
               </table>
             </div>
           </div>
+          </SectionGate>
+          <SectionGate page="/negotiation-guide" id="seller-concessions" sub="how-to-ask">
           <div className="bg-blue-50 rounded-xl p-5 border border-blue-200">
             <h3 className="font-bold text-alta-navy mb-2">How to Ask for Seller Concessions</h3>
             <ul className="text-sm text-alta-gray space-y-2">
@@ -319,11 +330,14 @@ export default function NegotiationGuidePage() {
               2026 trend: With elevated mortgage rates, buyers are increasingly requesting seller concessions, particularly for temporary rate buydowns. Sellers in markets with rising inventory are more willing to offer concessions to close deals.
             </p>
           </div>
+          </SectionGate>
         </section>
+        </SectionGate>
 
-        <InlineAd />
+        <AdGate name="InlineAd"><InlineAd /></AdGate>
 
         {/* ── Section 4: Repair Credits vs Repairs ── */}
+        <SectionGate page="/negotiation-guide" id="repair-credits">
         <section className="mb-12 mt-8">
           <h2 className="text-2xl font-bold text-alta-navy mb-2">Repair Credits vs. Repairs</h2>
           <p className="text-sm text-alta-gray mb-5">
@@ -346,6 +360,7 @@ export default function NegotiationGuidePage() {
               </div>
             ))}
           </div>
+          <SectionGate page="/negotiation-guide" id="repair-credits" sub="calculate-credit">
           <div className="bg-amber-50 rounded-xl p-5 border border-amber-200">
             <h3 className="font-bold text-alta-navy mb-2">How to Calculate a Fair Credit Amount</h3>
             <ul className="text-sm text-alta-gray space-y-2">
@@ -369,15 +384,19 @@ export default function NegotiationGuidePage() {
               </li>
             </ul>
           </div>
+          </SectionGate>
         </section>
+        </SectionGate>
 
         {/* ── Section 5: Rate Buydown Options ── */}
+        <SectionGate page="/negotiation-guide" id="rate-buydown">
         <section className="mb-12">
           <h2 className="text-2xl font-bold text-alta-navy mb-2">Rate Buydown Options</h2>
           <p className="text-sm text-alta-gray mb-5">
             Rate buydowns reduce your mortgage interest rate, either permanently or temporarily. Understanding the difference can save you thousands over the life of your loan.
           </p>
           <div className="grid sm:grid-cols-2 gap-4 mb-5">
+            <SectionGate page="/negotiation-guide" id="rate-buydown" sub="permanent-buydown">
             <div className="bg-white rounded-xl border border-[var(--border-color)] p-5">
               <div className="flex items-center gap-2 mb-3">
                 <div className="w-8 h-8 rounded-lg bg-alta-teal/10 flex items-center justify-center">
@@ -397,6 +416,8 @@ export default function NegotiationGuidePage() {
                 <p className="text-xs text-alta-gray"><span className="font-bold text-alta-navy">Example:</span> On a $400,000 loan, 1 point costs $4,000 and reduces your rate from 7.00% to approximately 6.75%. That saves roughly $68/month. Break-even: about 59 months (just under 5 years).</p>
               </div>
             </div>
+            </SectionGate>
+            <SectionGate page="/negotiation-guide" id="rate-buydown" sub="temporary-buydown">
             <div className="bg-white rounded-xl border border-[var(--border-color)] p-5">
               <div className="flex items-center gap-2 mb-3">
                 <div className="w-8 h-8 rounded-lg bg-purple-100 flex items-center justify-center">
@@ -416,7 +437,9 @@ export default function NegotiationGuidePage() {
                 <p className="text-xs text-alta-gray"><span className="font-bold text-alta-navy">Example (2-1):</span> On a 7.00% rate, you pay 5.00% in year 1 and 6.00% in year 2. The seller funds the difference (held in escrow). If rates drop, you refinance before year 3.</p>
               </div>
             </div>
+            </SectionGate>
           </div>
+          <SectionGate page="/negotiation-guide" id="rate-buydown" sub="when-each-makes-sense">
           <div className="bg-purple-50 rounded-xl p-5 border border-purple-200">
             <h3 className="font-bold text-alta-navy mb-2">When Does Each Make Sense?</h3>
             <div className="grid sm:grid-cols-2 gap-4 text-sm text-alta-gray">
@@ -438,11 +461,14 @@ export default function NegotiationGuidePage() {
               </div>
             </div>
           </div>
+          </SectionGate>
         </section>
+        </SectionGate>
 
-        <InlineAd />
+        <AdGate name="InlineAd"><InlineAd /></AdGate>
 
         {/* ── Section 6: Negotiation Timeline ── */}
+        <SectionGate page="/negotiation-guide" id="negotiation-timeline">
         <section className="mb-12 mt-8">
           <h2 className="text-2xl font-bold text-alta-navy mb-2">Negotiation Timeline</h2>
           <p className="text-sm text-alta-gray mb-5">
@@ -471,6 +497,7 @@ export default function NegotiationGuidePage() {
               </div>
             ))}
           </div>
+          <SectionGate page="/negotiation-guide" id="negotiation-timeline" sub="deadline-warning">
           <div className="mt-4 bg-red-50 rounded-xl p-4 border border-red-200">
             <p className="text-sm text-red-800 font-medium flex items-start gap-2">
               <svg className="w-5 h-5 text-red-500 mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -479,9 +506,12 @@ export default function NegotiationGuidePage() {
               <span>Every contingency in your contract has a deadline. Missing an inspection contingency deadline means you lose your right to negotiate repairs. Missing a financing contingency deadline could put your earnest money at risk. Keep a calendar of every deadline and set reminders.</span>
             </p>
           </div>
+          </SectionGate>
         </section>
+        </SectionGate>
 
         {/* ── Section 7: Common Mistakes ── */}
+        <SectionGate page="/negotiation-guide" id="common-mistakes">
         <section className="mb-12">
           <h2 className="text-2xl font-bold text-alta-navy mb-2">Common Negotiation Mistakes</h2>
           <p className="text-sm text-alta-gray mb-5">
@@ -505,8 +535,10 @@ export default function NegotiationGuidePage() {
             ))}
           </div>
         </section>
+        </SectionGate>
 
         {/* ── Related Topics ── */}
+        <SectionGate page="/negotiation-guide" id="related-topics">
         <div className="mt-8 mb-4">
           <h2 className="text-lg font-bold text-alta-navy mb-4">Related Topics</h2>
           <div className="grid sm:grid-cols-3 gap-3">
@@ -524,8 +556,9 @@ export default function NegotiationGuidePage() {
             </Link>
           </div>
         </div>
+        </SectionGate>
 
-        <FirstTimeBuyerCTA />
+        <ModuleGate name="FirstTimeBuyerCTA"><FirstTimeBuyerCTA /></ModuleGate>
       </div>
     </div>
   );

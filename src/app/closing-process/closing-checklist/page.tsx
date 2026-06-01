@@ -7,6 +7,7 @@ import { InlineAd } from "@/components/EliteProviders";
 import FirstTimeBuyerCTA from "@/components/FirstTimeBuyerCTA";
 import ClosingFlowNav from "@/components/ClosingFlowNav";
 import { useClosingFolder } from "@/components/ClosingFolderProvider";
+import { SectionGate, AdGate, ModuleGate } from "@/components/Gate";
 
 const checklistSections = [
   {
@@ -306,15 +307,18 @@ export default function ClosingChecklistPage() {
 
   return (
     <>
+    <SectionGate page="/closing-process/closing-checklist" id="hero">
     <PageHero
       title="Interactive Closing Checklist"
       subtitle="Track your progress and print a copy to bring with you on closing day."
       image="https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=1920&q=80"
       breadcrumb={[{ label: "The Closing Process", href: "/closing-process" }, { label: "Closing Checklist", href: "/closing-process/closing-checklist" }]}
     />
+    </SectionGate>
     <div className="py-1.5 lg:py-2">
       <div className="max-w-4xl mx-auto px-4 sm:px-6">
         {/* Page intro */}
+        <SectionGate page="/closing-process/closing-checklist" id="intro">
         <div className="mb-6 p-4 bg-[#f0ecf6] rounded-2xl border border-[#d4c8e4] border-l-4 border-l-[#5b3a8c] sm:sticky sm:top-[142px] z-20 shadow-md">
           <div className="flex items-start gap-4">
             <div className="w-12 h-12 rounded-xl bg-[#5b3a8c]/15 flex items-center justify-center text-[#5b3a8c] shrink-0">
@@ -326,7 +330,9 @@ export default function ClosingChecklistPage() {
             </div>
           </div>
         </div>
+        </SectionGate>
 
+        <SectionGate page="/closing-process/closing-checklist" id="toolbar">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-4">
           <h2 className="text-2xl font-bold text-alta-navy">Your Checklist</h2>
           <div className="flex gap-2 shrink-0">
@@ -368,14 +374,18 @@ export default function ClosingChecklistPage() {
         <p className="text-lg text-alta-gray mb-8 max-w-2xl">
           Track your progress through the home closing process. Check off items as you complete them. Print a blank copy to take with you.
         </p>
+        </SectionGate>
 
         {/* Session warning */}
+        <SectionGate page="/closing-process/closing-checklist" id="session-warning">
         <div className="mb-4 p-3 bg-amber-50 rounded-xl border border-amber-200 flex items-start gap-2">
           <svg className="w-4 h-4 text-[#8b6914] shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 18v-5.25m0 0a6.01 6.01 0 001.5-.189m-1.5.189a6.01 6.01 0 01-1.5-.189m3.75 7.478a12.06 12.06 0 01-4.5 0m3.75 2.383a14.406 14.406 0 01-3 0M14.25 18v-.192c0-.983.658-1.823 1.508-2.316a7.5 7.5 0 10-7.517 0c.85.493 1.509 1.333 1.509 2.316V18" /></svg>
           <p className="text-xs text-[#8b6914]"><strong>Note:</strong> Your checked items are saved for this browser session only. If you close the tab or clear your browser, your progress will reset. Use the Print button above to save a physical copy.</p>
         </div>
+        </SectionGate>
 
         {/* Progress Bar */}
+        <SectionGate page="/closing-process/closing-checklist" id="progress-bar">
         <div className="sticky top-16 z-40 bg-white/95 backdrop-blur-sm py-4 mb-8 border-b border-gray-100">
           <div className="flex items-center justify-between mb-2">
             <span className="text-sm font-medium text-alta-navy">Your Progress</span>
@@ -388,8 +398,10 @@ export default function ClosingChecklistPage() {
             />
           </div>
         </div>
+        </SectionGate>
 
         {/* Checklist */}
+        <SectionGate page="/closing-process/closing-checklist" id="checklist">
         <div className="space-y-10">
           {checklistSections.map((section, sIdx) => {
             const sectionChecked = section.items.filter((_, iIdx) => checked[`${sIdx}-${iIdx}`]).length;
@@ -468,24 +480,35 @@ export default function ClosingChecklistPage() {
             );
           })}
         </div>
+        </SectionGate>
 
+        <AdGate name="InlineAd">
         <InlineAd />
+        </AdGate>
 
         {/* Completion message */}
+        <SectionGate page="/closing-process/closing-checklist" id="completion">
         {progress === 100 && (
           <div className="mt-10 p-6 bg-green-50 rounded-xl border border-green-200 text-center">
             <h3 className="text-xl font-bold text-alta-green mb-2">Congratulations!</h3>
             <p className="text-alta-gray">You&apos;ve completed every item on the closing checklist. You&apos;re ready to close with confidence!</p>
           </div>
         )}
+        </SectionGate>
 
+        <SectionGate page="/closing-process/closing-checklist" id="print-tip">
         <div className="mt-6 p-4 bg-alta-light rounded-lg text-sm text-alta-gray">
           <strong className="text-alta-navy">Tip:</strong> Use the Print button above to take a blank copy with you. Your checked items won&apos;t persist between browser sessions, so consider bookmarking this page for easy access.
         </div>
+        </SectionGate>
 
+        <SectionGate page="/closing-process/closing-checklist" id="flow-nav">
         <ClosingFlowNav currentStep={3} />
+        </SectionGate>
 
+        <ModuleGate name="FirstTimeBuyerCTA">
         <FirstTimeBuyerCTA />
+        </ModuleGate>
       </div>
     </div>
 

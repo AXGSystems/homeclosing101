@@ -3,6 +3,7 @@
 import { useState, useMemo } from "react";
 import Link from "next/link";
 import PageHero from "@/components/PageHero";
+import { SectionGate, AdGate, ModuleGate } from "@/components/Gate";
 import { InlineAd } from "@/components/EliteProviders";
 import DTIGauge from "@/components/DTIGauge";
 import FirstTimeBuyerCTA from "@/components/FirstTimeBuyerCTA";
@@ -117,15 +118,18 @@ export default function AffordabilityPage() {
 
   return (
     <>
-      <PageHero
-        title="How Much Home Can I Afford?"
-        subtitle="Calculate your maximum home price based on your income, debts, and savings. Understand your debt-to-income ratio and buying power."
-        image="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1920&q=80"
-        breadcrumb={[{ label: "Resources", href: "/resources" }, { label: "Affordability", href: "/affordability" }]}
-      />
+      <SectionGate page="/affordability" id="hero">
+        <PageHero
+          title="How Much Home Can I Afford?"
+          subtitle="Calculate your maximum home price based on your income, debts, and savings. Understand your debt-to-income ratio and buying power."
+          image="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1920&q=80"
+          breadcrumb={[{ label: "Resources", href: "/resources" }, { label: "Affordability", href: "/affordability" }]}
+        />
+      </SectionGate>
 
       <div className="py-1.5 lg:py-2">
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
+          <SectionGate page="/affordability" id="intro-callout">
           <div className="mb-6 p-4 bg-[#e6f1f5] rounded-2xl border border-[#b4d8e8] border-l-4 border-l-[#0a7ea8] sm:sticky sm:top-[142px] z-20 shadow-md">
             <div className="flex items-start gap-4">
               <div className="w-12 h-12 rounded-xl bg-[#0a7ea8]/10 flex items-center justify-center text-[#0a7ea8] shrink-0">
@@ -137,9 +141,12 @@ export default function AffordabilityPage() {
               </div>
             </div>
           </div>
+          </SectionGate>
 
+          <SectionGate page="/affordability" id="calculator">
           <div className="grid lg:grid-cols-2 gap-6">
             {/* Inputs */}
+            <SectionGate page="/affordability" id="calculator" sub="inputs">
             <div className="bg-white rounded-2xl border border-gray-100 border-l-4 border-l-[#0a7ea8] shadow-sm p-6">
               <h3 className="font-bold text-alta-navy mb-5">Your Financial Profile</h3>
               <div className="space-y-5">
@@ -184,8 +191,10 @@ export default function AffordabilityPage() {
                 </div>
               </div>
             </div>
+            </SectionGate>
 
             {/* Results */}
+            <SectionGate page="/affordability" id="calculator" sub="results">
             <div className="space-y-5">
               {/* Main result */}
               <div className="bg-gradient-to-br from-alta-navy to-[#0d3a5c] rounded-2xl p-6 text-white text-center">
@@ -232,9 +241,12 @@ export default function AffordabilityPage() {
                 </div>
               </div>
             </div>
+            </SectionGate>
           </div>
+          </SectionGate>
 
           {/* Budget Reality Check */}
+          <SectionGate page="/affordability" id="budget-reality-check">
           <div className="p-5 bg-[#e9f5ed] rounded-2xl border border-[#bddcc7] border-l-4 border-l-[#2d6b3f] my-6">
             <div className="flex items-start gap-3">
               <div className="w-10 h-10 rounded-xl bg-[#2d6b3f]/10 flex items-center justify-center text-[#2d6b3f] shrink-0">
@@ -265,14 +277,20 @@ export default function AffordabilityPage() {
               </div>
             </div>
           </div>
+          </SectionGate>
 
-          <InlineAd />
+          <AdGate name="InlineAd">
+            <InlineAd />
+          </AdGate>
 
+          <SectionGate page="/affordability" id="fraud-warning">
           <div className="p-4 bg-[#faf4e4] rounded-xl border border-[#e8d9a8] border-l-4 border-l-[#8b6914] my-6">
             <p className="text-xs text-alta-gray"><strong className="text-[#8b6914]">Did you know?</strong> The FBI&apos;s Internet Crime Complaint Center (IC3) reports that Americans lost over $12.5 billion to internet crime in 2023, with real estate and rental fraud among the top categories. Always verify wire instructions by phone before sending closing funds.</p>
           </div>
+          </SectionGate>
 
           {/* Hidden costs of homeownership */}
+          <SectionGate page="/affordability" id="hidden-costs">
           <h2 className="text-xl font-bold text-alta-navy mb-4 mt-6">Hidden Costs Beyond the Mortgage</h2>
           <p className="text-sm text-alta-gray mb-4 leading-relaxed">Your mortgage payment is just the beginning. Real homeownership costs include ongoing expenses many first-time buyers don&apos;t budget for. Factor these into your affordability calculation. <span className="text-alta-teal font-medium">Click any card for detailed guidance.</span></p>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 mb-8">
@@ -320,8 +338,10 @@ export default function AffordabilityPage() {
               </div>
             ))}
           </div>
+          </SectionGate>
 
           {/* The real budget */}
+          <SectionGate page="/affordability" id="real-budget">
           <div className="p-5 bg-gradient-to-br from-alta-light to-white rounded-2xl border border-gray-100 mb-8">
             <h3 className="font-bold text-alta-navy mb-3">What Your Real Monthly Budget Looks Like</h3>
             <p className="text-xs text-alta-gray mb-3 leading-relaxed">Example for a $350,000 home with 10% down, 6.5% rate, 30-year conventional loan in a state with 1% property tax:</p>
@@ -336,7 +356,9 @@ export default function AffordabilityPage() {
             </div>
             <p className="text-xs text-alta-gray mt-3">The mortgage payment alone is $1,991 — but the true cost of owning the home is $3,355/month when you include everything. Budget for the REAL number, not just the mortgage.</p>
           </div>
+          </SectionGate>
 
+          <SectionGate page="/affordability" id="related-links">
           <div className="grid sm:grid-cols-3 gap-3">
             <Link href="/mortgage-calculator" className="group p-4 bg-[#e8f0f5] rounded-xl border border-[#c5d8e4] border-l-4 border-l-[#1a5276] tile-interactive text-center">
               <h3 className="text-sm font-semibold text-alta-navy group-hover:text-alta-teal transition-colors">Mortgage Calculator</h3>
@@ -351,10 +373,15 @@ export default function AffordabilityPage() {
               <p className="text-xs text-alta-gray mt-1">Complete roadmap to homeownership</p>
             </Link>
           </div>
+          </SectionGate>
 
+          <SectionGate page="/affordability" id="disclaimer">
           <p className="text-xs text-alta-gray mt-6 text-center">* This is an estimate for educational purposes. Your actual buying power depends on credit score, specific loan program, and lender requirements. Get pre-approved by a lender for an accurate number.</p>
+          </SectionGate>
 
-          <FirstTimeBuyerCTA />
+          <ModuleGate name="FirstTimeBuyerCTA">
+            <FirstTimeBuyerCTA />
+          </ModuleGate>
         </div>
       </div>
 

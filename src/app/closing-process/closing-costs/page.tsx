@@ -9,6 +9,7 @@ import FirstTimeBuyerCTA from "@/components/FirstTimeBuyerCTA";
 import ClosingFlowNav from "@/components/ClosingFlowNav";
 import ContextualSponsor from "@/components/ContextualSponsor";
 import SaveToFolderBtn from "@/components/SaveToFolderBtn";
+import { SectionGate, AdGate, ModuleGate } from "@/components/Gate";
 
 const costCategories = [
   {
@@ -559,16 +560,19 @@ export default function ClosingCostsPage() {
 
   return (
     <>
+    <SectionGate page="/closing-process/closing-costs" id="hero">
     <PageHero
       title="Closing Costs Explained"
       subtitle="Typically 2%–5% of your home's purchase price. Use our calculator and review every fee category."
       image="https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=1920&q=80"
       breadcrumb={[{ label: "The Closing Process", href: "/closing-process" }, { label: "Closing Costs", href: "/closing-process/closing-costs" }]}
     />
+    </SectionGate>
     <div className="py-1.5 lg:py-2">
       <div className="max-w-4xl mx-auto px-4 sm:px-6">
 
         {/* Page intro */}
+        <SectionGate page="/closing-process/closing-costs" id="intro">
         <div className="mb-6 p-4 bg-[#faf4e4] rounded-2xl border border-[#e8d9a8] border-l-4 border-l-[#8b6914] sm:sticky sm:top-[142px] z-20 shadow-md">
           <div className="flex items-start gap-4">
             <div className="w-12 h-12 rounded-xl bg-[#8b6914]/15 flex items-center justify-center text-[#8b6914] shrink-0">
@@ -580,8 +584,10 @@ export default function ClosingCostsPage() {
             </div>
           </div>
         </div>
+        </SectionGate>
 
         {/* Wire Fraud Warning */}
+        <SectionGate page="/closing-process/closing-costs" id="fraud-warning">
         <div className="p-4 bg-gradient-to-r from-[#943030] to-[#7a2020] rounded-2xl text-white mb-6">
           <div className="flex items-start gap-3">
             <svg className="w-6 h-6 text-white shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" /></svg>
@@ -592,8 +598,10 @@ export default function ClosingCostsPage() {
             </div>
           </div>
         </div>
+        </SectionGate>
 
         {/* Calculator */}
+        <SectionGate page="/closing-process/closing-costs" id="calculator">
         <div className="bg-alta-light rounded-2xl p-6 lg:p-8 mb-12 border border-gray-100">
           <h2 className="text-xl font-bold text-alta-navy mb-6">Closing Cost Calculator</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
@@ -639,6 +647,7 @@ export default function ClosingCostsPage() {
           </div>
 
           {/* Results */}
+          <SectionGate page="/closing-process/closing-costs" id="calculator" sub="results">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
             <div className="bg-[#e8f0f5] rounded-xl p-4 text-center border border-[#c5d8e4] tile-interactive">
               <p className="text-xs text-[#1a5276] uppercase tracking-wider mb-1">Low Estimate (2%)</p>
@@ -653,8 +662,10 @@ export default function ClosingCostsPage() {
               <p className="text-2xl font-bold text-[#943030]">${highEstimate.toLocaleString()}</p>
             </div>
           </div>
+          </SectionGate>
 
           {/* Detailed breakdown */}
+          <SectionGate page="/closing-process/closing-costs" id="calculator" sub="breakdown">
           <details className="group">
             <summary className="cursor-pointer text-sm font-semibold text-alta-teal hover:text-alta-teal-dark flex items-center gap-1">
               View Estimated Breakdown
@@ -689,13 +700,16 @@ export default function ClosingCostsPage() {
               </div>
             </div>
           </details>
+          </SectionGate>
 
           <p className="text-xs text-alta-gray mt-4">
             * This calculator provides estimates only. Actual costs vary by state, county, lender, and transaction details. Consult your settlement agent for an accurate Closing Disclosure.
           </p>
         </div>
+        </SectionGate>
 
         {/* Personalized State Closing Cost Card */}
+        <SectionGate page="/closing-process/closing-costs" id="state-card">
         {selectedState && stateClosingCosts[selectedState] && (() => {
           const sd = stateClosingCosts[selectedState];
           const stateLow = homePrice * (sd.avgPct - 0.5) / 100;
@@ -733,10 +747,14 @@ export default function ClosingCostsPage() {
             </div>
           );
         })()}
+        </SectionGate>
 
+        <AdGate name="ContextualSponsor">
         <ContextualSponsor context="closing" />
+        </AdGate>
 
         {/* Fee Categories */}
+        <SectionGate page="/closing-process/closing-costs" id="fee-categories">
         {/* Interactive cost breakdown chart */}
         <ClosingCostChart />
 
@@ -769,15 +787,20 @@ export default function ClosingCostsPage() {
             </div>
           ))}
         </div>
+        </SectionGate>
 
+        <AdGate name="InlineAd">
         <InlineAd />
+        </AdGate>
 
         {/* Who pays what */}
+        <SectionGate page="/closing-process/closing-costs" id="who-pays-what">
         <h2 className="text-2xl font-bold text-alta-navy mb-4 mt-10">Who Pays What? It Depends on Your State</h2>
         <p className="text-sm text-alta-gray mb-4 leading-relaxed">
           Closing cost responsibilities vary significantly by state and are often negotiable. In some states, the seller traditionally pays for the owner&apos;s title insurance policy. In others, the buyer pays. Your purchase agreement should specify who pays each fee. Here are the general patterns:
         </p>
         <div className="grid sm:grid-cols-2 gap-4 mb-10">
+          <SectionGate page="/closing-process/closing-costs" id="who-pays-what" sub="buyer">
           <div className="p-5 bg-[#e6f1f5] rounded-2xl border border-[#b4d8e8] border-l-4 border-l-[#0a7ea8] shadow-sm tile-interactive">
             <h3 className="font-bold text-alta-navy mb-3">Typically Paid by the Buyer</h3>
             <ul className="space-y-2 text-sm text-alta-gray">
@@ -789,6 +812,8 @@ export default function ClosingCostsPage() {
               <li className="flex items-start gap-2"><svg className="w-4 h-4 text-alta-teal shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>Private mortgage insurance (PMI) if applicable</li>
             </ul>
           </div>
+          </SectionGate>
+          <SectionGate page="/closing-process/closing-costs" id="who-pays-what" sub="seller">
           <div className="p-5 bg-[#e9f5ed] rounded-2xl border border-[#bddcc7] border-l-4 border-l-[#2d6b3f] shadow-sm tile-interactive">
             <h3 className="font-bold text-alta-navy mb-3">Typically Paid by the Seller</h3>
             <ul className="space-y-2 text-sm text-alta-gray">
@@ -799,9 +824,12 @@ export default function ClosingCostsPage() {
               <li className="flex items-start gap-2"><svg className="w-4 h-4 text-alta-teal shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>Prorated property taxes owed</li>
             </ul>
           </div>
+          </SectionGate>
         </div>
+        </SectionGate>
 
         {/* How to reduce costs */}
+        <SectionGate page="/closing-process/closing-costs" id="reduce-costs">
         <h2 className="text-2xl font-bold text-alta-navy mb-4">7 Ways to Reduce Your Closing Costs</h2>
         <p className="text-sm text-alta-gray mb-4">Tap any card to see the full strategy with step-by-step instructions and potential savings.</p>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 mb-10">
@@ -820,8 +848,10 @@ export default function ClosingCostsPage() {
             </button>
           ))}
         </div>
+        </SectionGate>
 
         {/* Key regulations */}
+        <SectionGate page="/closing-process/closing-costs" id="regulations">
         <div className="p-6 bg-gradient-to-br from-blue-50 to-white rounded-2xl border border-blue-100 mb-6">
           <h3 className="font-bold text-alta-navy mb-3">Key Federal Regulations Protecting You</h3>
           <div className="space-y-3 text-sm text-alta-gray">
@@ -842,7 +872,9 @@ export default function ClosingCostsPage() {
             </div>
           </div>
         </div>
+        </SectionGate>
 
+        <SectionGate page="/closing-process/closing-costs" id="cta">
         <div className="flex flex-col sm:flex-row gap-3">
           <Link href="/mortgage-calculator" className="px-5 py-2.5 bg-alta-teal text-white font-semibold rounded-lg hover:bg-alta-teal-dark transition-colors text-center text-sm">
             Mortgage Calculator
@@ -854,10 +886,15 @@ export default function ClosingCostsPage() {
             View All Sources
           </Link>
         </div>
+        </SectionGate>
 
+        <SectionGate page="/closing-process/closing-costs" id="flow-nav">
         <ClosingFlowNav currentStep={4} />
+        </SectionGate>
 
+        <ModuleGate name="FirstTimeBuyerCTA">
         <FirstTimeBuyerCTA />
+        </ModuleGate>
       </div>
     </div>
 

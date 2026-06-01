@@ -7,6 +7,7 @@ import SaveToFolderBtn from "@/components/SaveToFolderBtn";
 import { InlineAd } from "@/components/EliteProviders";
 import FirstTimeBuyerCTA from "@/components/FirstTimeBuyerCTA";
 import SponsorTip from "@/components/SponsorTip";
+import { SectionGate, AdGate, ModuleGate } from "@/components/Gate";
 
 /* ─── Data ─── */
 
@@ -164,28 +165,32 @@ const hiddenCosts = [
 export default function AfterClosingPage() {
   return (
     <>
-      <PageHero
-        title="After Closing: Your New Homeowner Checklist"
-        subtitle="Congratulations — you own a home. Now what? This comprehensive guide covers everything you need to do in the first 24 hours, first week, first month, and first year to protect your investment and avoid costly surprises."
-        image="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1920&q=80"
-        breadcrumb={[
-          { label: "The Closing Process", href: "/closing-process" },
-          { label: "Closing Day Prep", href: "/closing-day-prep" },
-          { label: "After Closing", href: "/after-closing" },
-        ]}
-      />
+      <SectionGate page="/after-closing" id="hero">
+        <PageHero
+          title="After Closing: Your New Homeowner Checklist"
+          subtitle="Congratulations — you own a home. Now what? This comprehensive guide covers everything you need to do in the first 24 hours, first week, first month, and first year to protect your investment and avoid costly surprises."
+          image="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1920&q=80"
+          breadcrumb={[
+            { label: "The Closing Process", href: "/closing-process" },
+            { label: "Closing Day Prep", href: "/closing-day-prep" },
+            { label: "After Closing", href: "/after-closing" },
+          ]}
+        />
+      </SectionGate>
 
       <div className="py-1.5 lg:py-2">
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
           {/* Print + Save bar */}
-          <div className="flex flex-wrap items-center gap-3 mb-6 no-print">
-            <PrintButton label="Print This Checklist" />
-            <SaveToFolderBtn
-              type="checklist"
-              title="After Closing: New Homeowner Checklist"
-              content="Complete post-closing checklist covering first 24 hours, first week, first month, and first year of homeownership."
-            />
-          </div>
+          <SectionGate page="/after-closing" id="toolbar">
+            <div className="flex flex-wrap items-center gap-3 mb-6 no-print">
+              <PrintButton label="Print This Checklist" />
+              <SaveToFolderBtn
+                type="checklist"
+                title="After Closing: New Homeowner Checklist"
+                content="Complete post-closing checklist covering first 24 hours, first week, first month, and first year of homeownership."
+              />
+            </div>
+          </SectionGate>
 
           {/* Print-only header */}
           <div className="hidden print:block mb-6">
@@ -195,6 +200,7 @@ export default function AfterClosingPage() {
           </div>
 
           {/* ─── SECTION 1: First 24 Hours ─── */}
+          <SectionGate page="/after-closing" id="first-24-hours">
           <section className="mb-10 print:mb-6">
             <div className="flex items-center gap-3 mb-5">
               <div className="w-10 h-10 rounded-xl bg-red-100 dark:bg-red-900/30 flex items-center justify-center text-red-600 shrink-0 print:hidden">
@@ -230,8 +236,10 @@ export default function AfterClosingPage() {
               ))}
             </div>
           </section>
+          </SectionGate>
 
           {/* ─── SECTION 2: First Week ─── */}
+          <SectionGate page="/after-closing" id="first-week">
           <section className="mb-10 print:mb-6">
             <div className="flex items-center gap-3 mb-5">
               <div className="w-10 h-10 rounded-xl bg-amber-100 flex items-center justify-center text-amber-600 shrink-0 print:hidden">
@@ -265,10 +273,14 @@ export default function AfterClosingPage() {
               ))}
             </div>
           </section>
+          </SectionGate>
 
-          <InlineAd />
+          <AdGate name="InlineAd">
+            <InlineAd />
+          </AdGate>
 
           {/* ─── SECTION 3: First Month ─── */}
+          <SectionGate page="/after-closing" id="first-month">
           <section className="mb-10 print:mb-6">
             <div className="flex items-center gap-3 mb-5">
               <div className="w-10 h-10 rounded-xl bg-alta-teal/10 flex items-center justify-center text-alta-teal shrink-0 print:hidden">
@@ -302,8 +314,10 @@ export default function AfterClosingPage() {
               ))}
             </div>
           </section>
+          </SectionGate>
 
           {/* ─── SECTION 4: First Year — Seasonal Maintenance ─── */}
+          <SectionGate page="/after-closing" id="seasonal-maintenance">
           <section className="mb-10 print:mb-6">
             <div className="flex items-center gap-3 mb-5">
               <div className="w-10 h-10 rounded-xl bg-purple-100 flex items-center justify-center text-purple-600 shrink-0 print:hidden">
@@ -341,10 +355,14 @@ export default function AfterClosingPage() {
               ))}
             </div>
           </section>
+          </SectionGate>
 
-          <InlineAd />
+          <AdGate name="InlineAd">
+            <InlineAd />
+          </AdGate>
 
           {/* ─── SECTION 5: Documents to Keep Forever ─── */}
+          <SectionGate page="/after-closing" id="documents-to-keep">
           <section className="mb-10 print:mb-6">
             <div className="flex items-center gap-3 mb-5">
               <div className="w-10 h-10 rounded-xl bg-alta-teal/10 flex items-center justify-center text-alta-teal shrink-0 print:hidden">
@@ -370,8 +388,10 @@ export default function AfterClosingPage() {
               ))}
             </div>
           </section>
+          </SectionGate>
 
           {/* ─── SECTION 6: Hidden Costs Callout ─── */}
+          <SectionGate page="/after-closing" id="hidden-costs">
           <section className="mb-10 print:mb-6 print:break-inside-avoid">
             <div className="p-5 print:p-3 bg-white rounded-2xl print:rounded-none border border-gray-200 shadow-sm">
               <div className="flex items-start gap-4">
@@ -404,8 +424,10 @@ export default function AfterClosingPage() {
               </div>
             </div>
           </section>
+          </SectionGate>
 
           {/* ─── Related Topics ─── */}
+          <SectionGate page="/after-closing" id="related-topics">
           <section className="mb-10 no-print">
             <h2 className="text-lg font-bold text-alta-navy mb-4">Related Topics</h2>
             <div className="grid sm:grid-cols-3 gap-3">
@@ -425,12 +447,17 @@ export default function AfterClosingPage() {
               ))}
             </div>
           </section>
+          </SectionGate>
 
-          <SponsorTip context="closing" />
+          <AdGate name="SponsorTip">
+            <SponsorTip context="closing" />
+          </AdGate>
 
-          <div className="no-print">
-            <FirstTimeBuyerCTA />
-          </div>
+          <ModuleGate name="FirstTimeBuyerCTA">
+            <div className="no-print">
+              <FirstTimeBuyerCTA />
+            </div>
+          </ModuleGate>
         </div>
       </div>
     </>

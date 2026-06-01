@@ -3,6 +3,7 @@
 import { useState, useEffect, useMemo, useCallback } from "react";
 import Link from "next/link";
 import PageHero from "@/components/PageHero";
+import { SectionGate, AdGate, ModuleGate } from "@/components/Gate";
 import { InlineAd } from "@/components/EliteProviders";
 import FirstTimeBuyerCTA from "@/components/FirstTimeBuyerCTA";
 import CountyLookup from "@/components/deed-fraud/CountyLookup";
@@ -104,17 +105,20 @@ export default function ProtectAgainstDeedFraud() {
 
   return (
     <>
-      <PageHero
-        title="Protect Your Home From Title Fraud"
-        subtitle="Title fraud — also known as deed fraud — is preventable. Free tools, county-specific alerts, and a step-by-step protection checklist. Most homeowners can set up free monitoring in about 10 minutes."
-        image="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1920&q=80"
-        breadcrumb={[{ label: "Protect Your Property", href: "/protect-your-rights" }, { label: "Protect Against Title Fraud", href: "/protect-against-deed-fraud" }]}
-      />
+      <SectionGate page="/protect-against-deed-fraud" id="hero">
+        <PageHero
+          title="Protect Your Home From Title Fraud"
+          subtitle="Title fraud — also known as deed fraud — is preventable. Free tools, county-specific alerts, and a step-by-step protection checklist. Most homeowners can set up free monitoring in about 10 minutes."
+          image="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1920&q=80"
+          breadcrumb={[{ label: "Protect Your Property", href: "/protect-your-rights" }, { label: "Protect Against Title Fraud", href: "/protect-against-deed-fraud" }]}
+        />
+      </SectionGate>
 
       <div className="py-1.5 lg:py-2">
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
 
           {/* Sticky intro */}
+          <SectionGate page="/protect-against-deed-fraud" id="intro">
           <div className="mb-6 p-4 bg-[#f5e8e8] rounded-2xl border border-[#e4c5c5] border-l-4 border-l-[#943030] sm:sticky sm:top-[142px] z-20 shadow-md">
             <div className="flex items-start gap-4">
               <div className="w-12 h-12 rounded-xl bg-[#943030]/10 flex items-center justify-center text-[#943030] shrink-0">
@@ -126,8 +130,10 @@ export default function ProtectAgainstDeedFraud() {
               </div>
             </div>
           </div>
+          </SectionGate>
 
           {/* ═══ SECTION: What is deed fraud? ═══ */}
+          <SectionGate page="/protect-against-deed-fraud" id="what-is-it">
           <Section id="what-is-it" expanded={expandedSection} toggle={toggle} title="What is title fraud?">
             <p className="text-sm text-alta-gray leading-relaxed mb-3">Title fraud — also called title theft or deed fraud — is a form of real estate identity theft. A criminal uses stolen personal information to forge a deed transferring your property to themselves or a shell company, then records it with the county recorder&apos;s office. Once recorded, the fraudulent deed sits in the public record until it is removed by court order.</p>
             <p className="text-sm text-alta-gray leading-relaxed mb-2 font-semibold text-alta-navy">Common targets include:</p>
@@ -138,8 +144,10 @@ export default function ProtectAgainstDeedFraud() {
             </ul>
             <p className="text-sm text-alta-gray leading-relaxed">A forged deed is legally void, but untangling it typically requires a lawsuit, legal fees, and significant time. Early detection is the most effective defense.</p>
           </Section>
+          </SectionGate>
 
           {/* ═══ SECTION: Why this matters ═══ */}
+          <SectionGate page="/protect-against-deed-fraud" id="why-it-matters">
           <Section id="why-it-matters" expanded={expandedSection} toggle={toggle} title="Why this matters: the cost of not being protected">
             <p className="text-sm text-alta-gray leading-relaxed mb-3">Ten minutes of setup today costs nothing. If your property is ever targeted, the financial and time cost of remediation is substantial — an independent Milliman analysis commissioned by ALTA found that fraud and forgery claims cost title insurers an <strong className="text-alta-navy">average of more than $143,000 per case</strong>, roughly five times the cost of other title insurance claims.</p>
             <EscalationExplainer />
@@ -149,21 +157,27 @@ export default function ProtectAgainstDeedFraud() {
             </div>
             <p className="text-[10px] text-alta-gray italic mt-3">Sources: Milliman, Analysis of Claims and Claims-Related Losses in the Land Title Insurance Industry (commissioned by ALTA, May 2024); FBI IC3 2024 &amp; 2025 Internet Crime Reports; NAR 2025 Deed &amp; Title Fraud Survey.</p>
           </Section>
+          </SectionGate>
 
           {/* ═══ SECTION: Title insurance coverage ═══ */}
+          <SectionGate page="/protect-against-deed-fraud" id="title-insurance">
           <Section id="title-insurance" expanded={expandedSection} toggle={toggle} title="What does my title insurance cover?">
             <p className="text-sm text-alta-gray leading-relaxed mb-3">An <strong className="text-alta-navy">owner&apos;s title insurance policy</strong> protects you against title defects — including fraud and forgery — that existed <em>before</em> your policy was issued. Standard owner&apos;s policies typically do <strong>not</strong> cover fraudulent deeds recorded <em>after</em> your policy was issued. That&apos;s where monitoring comes in.</p>
             <div className="p-4 bg-[#e8f0f5] rounded-xl border border-[#c5d8e4] border-l-4 border-l-[#1a5276] mb-3">
               <p className="text-sm text-alta-gray leading-relaxed"><strong className="text-alta-navy">Important:</strong> Some title insurance companies offer enhanced policies that include coverage for certain forgeries recorded after the policy is issued. Contact your title insurance company and ask which policy you have and whether an upgrade is available.</p>
             </div>
           </Section>
+          </SectionGate>
 
           {/* ═══ SECTION: Free monitoring ═══ */}
+          <SectionGate page="/protect-against-deed-fraud" id="free-monitoring">
           <Section id="free-monitoring" expanded={expandedSection} toggle={toggle} title="Set up free monitoring in about 10 minutes">
             <p className="text-sm text-alta-gray leading-relaxed mb-4">Many counties and several states now offer <strong className="text-alta-navy">free</strong> property fraud alert services. When a document is recorded against your property, you get an email, text, or phone call — usually within 24 to 48 hours. No subscription, no monthly fee.</p>
           </Section>
+          </SectionGate>
 
           {/* ═══ COUNTY LOOKUP TOOL ═══ */}
+          <SectionGate page="/protect-against-deed-fraud" id="county-lookup">
           <CountyLookup
             selectedState={selectedState}
             setSelectedState={(v: string) => { setSelectedState(v); setSelectedCounty(""); setCustomCounty(""); setLookupResult(null); }}
@@ -174,22 +188,28 @@ export default function ProtectAgainstDeedFraud() {
             lookupResult={lookupResult}
             handleLookup={handleLookup}
           />
+          </SectionGate>
 
-          <InlineAd />
+          <AdGate name="InlineAd"><InlineAd /></AdGate>
 
           {/* ═══ SECTION: Phone call script ═══ */}
+          <SectionGate page="/protect-against-deed-fraud" id="call-script">
           <Section id="call-script" expanded={expandedSection} toggle={toggle} title="What to say if you have to call your county">
             <p className="text-sm text-alta-gray leading-relaxed mb-4">If your county doesn&apos;t have online registration or you prefer to call, use this script. You can also print it from the export button below.</p>
             <CallScript />
           </Section>
+          </SectionGate>
 
           {/* ═══ SECTION: Safe sender setup ═══ */}
+          <SectionGate page="/protect-against-deed-fraud" id="safe-sender">
           <Section id="safe-sender" expanded={expandedSection} toggle={toggle} title="Make sure alerts reach your inbox">
             <p className="text-sm text-alta-gray leading-relaxed mb-4">An alert that lands in your spam folder is worse than no alert — it gives you false security. After you register, add the alert sender to your email&apos;s safe-senders list:</p>
             <SafeSenderSetup />
           </Section>
+          </SectionGate>
 
           {/* ═══ SECTION: Additional steps ═══ */}
+          <SectionGate page="/protect-against-deed-fraud" id="additional-steps">
           <Section id="additional-steps" expanded={expandedSection} toggle={toggle} title="Additional free protection steps">
             <ul className="space-y-3">
               {[
@@ -206,8 +226,10 @@ export default function ProtectAgainstDeedFraud() {
               ))}
             </ul>
           </Section>
+          </SectionGate>
 
           {/* ═══ SECTION: If targeted ═══ */}
+          <SectionGate page="/protect-against-deed-fraud" id="if-targeted">
           <Section id="if-targeted" expanded={expandedSection} toggle={toggle} title="If you suspect you've been targeted">
             <div className="space-y-3">
               {[
@@ -228,8 +250,10 @@ export default function ProtectAgainstDeedFraud() {
               ))}
             </div>
           </Section>
+          </SectionGate>
 
           {/* ═══ SECTION: Paid services ═══ */}
+          <SectionGate page="/protect-against-deed-fraud" id="paid-services">
           <Section id="paid-services" expanded={expandedSection} toggle={toggle} title="What about paid monitoring services?">
             <p className="text-sm text-alta-gray leading-relaxed mb-3">Several companies offer paid property monitoring subscriptions, typically $10–$30 per month. Before subscribing, consider:</p>
             <ul className="space-y-2 mb-3">
@@ -244,10 +268,12 @@ export default function ProtectAgainstDeedFraud() {
             </ul>
             <p className="text-sm text-alta-gray leading-relaxed">A paid service is a personal choice, not a necessity. The toolkit below helps you track your protection steps regardless of which approach you choose.</p>
           </Section>
+          </SectionGate>
 
-          <InlineAd />
+          <AdGate name="InlineAd"><InlineAd /></AdGate>
 
           {/* ═══ PROTECTION TOOLKIT ═══ */}
+          <SectionGate page="/protect-against-deed-fraud" id="toolkit">
           <div className="mb-10">
             <div className="flex items-center justify-between mb-4">
               <h2 className="text-xl font-bold text-alta-navy">My Title Fraud Protection Toolkit</h2>
@@ -259,14 +285,18 @@ export default function ProtectAgainstDeedFraud() {
             <p className="text-sm text-alta-gray mb-4">Track your protection steps. Your progress is saved in your browser — nothing is sent to ALTA. Use the Export button to save a PDF or email yourself a copy.</p>
             {mounted && <ProtectionToolkit checklist={checklist} toggleItem={toggleItem} updateNotes={updateNotes} stats={stats} />}
           </div>
+          </SectionGate>
 
           {/* Disclaimer */}
+          <SectionGate page="/protect-against-deed-fraud" id="disclaimer">
           <div className="p-4 bg-gray-50 rounded-xl border border-gray-200 mb-8 text-xs text-alta-gray leading-relaxed">
             <p className="font-semibold text-alta-navy mb-1">Disclaimer</p>
             <p>This page is provided for educational purposes by the American Land Title Association (ALTA). It does not constitute legal advice. ALTA does not issue title insurance policies or have access to policies issued. For policy inquiries, contact your settlement agent or title insurance company directly. County program information was verified as of the dates shown and may change. Always confirm details directly with your county recorder&apos;s office.</p>
           </div>
+          </SectionGate>
 
           {/* Related Topics */}
+          <SectionGate page="/protect-against-deed-fraud" id="related-topics">
           <div className="mb-8">
             <h2 className="text-lg font-bold text-alta-navy mb-4">Related Topics</h2>
             <div className="grid sm:grid-cols-3 gap-3">
@@ -284,8 +314,9 @@ export default function ProtectAgainstDeedFraud() {
               </Link>
             </div>
           </div>
+          </SectionGate>
 
-          <FirstTimeBuyerCTA />
+          <ModuleGate name="FirstTimeBuyerCTA"><FirstTimeBuyerCTA /></ModuleGate>
         </div>
       </div>
 

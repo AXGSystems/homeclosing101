@@ -4,6 +4,7 @@ import { InlineAd } from "@/components/EliteProviders";
 import ExpandableSafeguards from "@/components/ExpandableSafeguards";
 import FirstTimeBuyerCTA from "@/components/FirstTimeBuyerCTA";
 import ContextualSponsor from "@/components/ContextualSponsor";
+import { SectionGate, AdGate, ModuleGate } from "@/components/Gate";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -22,27 +23,32 @@ const safeguards = [
 export default function ProtectYourMoneyPage() {
   return (
     <>
-      <PageHero
-        title="Protect Your Money"
-        subtitle="Wire fraud is the #1 financial threat facing homebuyers. Criminals stole $275.1 million from real estate transactions in 2025 alone."
-        image="https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=1920&q=80"
-        breadcrumb={[{ label: "Protect Your Property", href: "/protect-your-rights" }]}
-      />
+      <SectionGate page="/protect-your-money" id="hero">
+        <PageHero
+          title="Protect Your Money"
+          subtitle="Wire fraud is the #1 financial threat facing homebuyers. Criminals stole $275.1 million from real estate transactions in 2025 alone."
+          image="https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=1920&q=80"
+          breadcrumb={[{ label: "Protect Your Property", href: "/protect-your-rights" }]}
+        />
+      </SectionGate>
 
       <div className="py-1.5 lg:py-2">
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
-          <div className="mb-6 p-4 bg-[#f5e8e8] rounded-2xl border border-[#e4c5c5] border-l-4 border-l-[#943030] sm:sticky sm:top-[142px] z-20 shadow-md">
-            <div className="flex items-start gap-4">
-              <div className="w-12 h-12 rounded-xl bg-[#943030]/10 flex items-center justify-center text-[#943030] shrink-0">
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" /></svg>
-              </div>
-              <div>
-                <h2 className="font-bold text-alta-navy mb-1">Don&apos;t Become a Victim</h2>
-                <p className="text-sm text-alta-gray leading-relaxed">Real estate wire fraud is rising fast — fueled by AI, deepfakes, and business email compromise. This page explains how the scam works, the 5 safeguards you must follow, and exactly what to do if you suspect you&apos;re being targeted. Share this with everyone involved in your transaction.</p>
+          <SectionGate page="/protect-your-money" id="intro">
+            <div className="mb-6 p-4 bg-[#f5e8e8] rounded-2xl border border-[#e4c5c5] border-l-4 border-l-[#943030] sm:sticky sm:top-[142px] z-20 shadow-md">
+              <div className="flex items-start gap-4">
+                <div className="w-12 h-12 rounded-xl bg-[#943030]/10 flex items-center justify-center text-[#943030] shrink-0">
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" /></svg>
+                </div>
+                <div>
+                  <h2 className="font-bold text-alta-navy mb-1">Don&apos;t Become a Victim</h2>
+                  <p className="text-sm text-alta-gray leading-relaxed">Real estate wire fraud is rising fast — fueled by AI, deepfakes, and business email compromise. This page explains how the scam works, the 5 safeguards you must follow, and exactly what to do if you suspect you&apos;re being targeted. Share this with everyone involved in your transaction.</p>
+                </div>
               </div>
             </div>
-          </div>
+          </SectionGate>
           {/* Real Wire Fraud Timeline */}
+          <SectionGate page="/protect-your-money" id="fraud-timeline">
           <div className="mb-8">
             <h2 className="text-lg font-bold text-alta-navy mb-3">Real Wire Fraud Timeline: How Fast It Happens</h2>
             <div className="relative bg-white rounded-2xl border border-gray-200 shadow-sm p-5 overflow-hidden">
@@ -98,8 +104,10 @@ export default function ProtectYourMoneyPage() {
               <p className="text-[10px] text-alta-teal font-medium mt-4 text-center">Source: FBI IC3 2025 Internet Crime Report, CertifID 2026 State of Wire Fraud Report</p>
             </div>
           </div>
+          </SectionGate>
 
           {/* Big warning */}
+          <SectionGate page="/protect-your-money" id="critical-warning">
           <div className="bg-red-50 border-2 border-red-200 rounded-2xl p-6 lg:p-8 mb-12">
             <div className="flex items-start gap-4">
               <div className="w-12 h-12 rounded-full bg-red-100 flex items-center justify-center shrink-0">
@@ -112,16 +120,23 @@ export default function ProtectYourMoneyPage() {
               </div>
             </div>
           </div>
+          </SectionGate>
 
           {/* Interactive fraud flow + safeguards with expandable modals */}
-          <ExpandableSafeguards />
+          <SectionGate page="/protect-your-money" id="safeguards">
+            <ExpandableSafeguards />
+          </SectionGate>
 
-          <ContextualSponsor context="fraud" />
+          <AdGate name="ContextualSponsor">
+            <ContextualSponsor context="fraud" />
+          </AdGate>
 
           {/* Legitimate vs fraudulent communications */}
+          <SectionGate page="/protect-your-money" id="legit-vs-fraud">
           <h2 className="text-2xl font-bold text-alta-navy mb-4">How to Tell Legitimate from Fraudulent Communications</h2>
           <p className="text-sm text-alta-gray mb-4 leading-relaxed">Criminals are sophisticated — their emails can look nearly identical to real ones. Here are the key differences to watch for:</p>
           <div className="grid md:grid-cols-2 gap-4 mb-10">
+            <SectionGate page="/protect-your-money" id="legit-vs-fraud" sub="legitimate">
             <div className="p-5 bg-green-50 rounded-2xl border border-green-200">
               <h3 className="font-bold text-green-700 mb-3 flex items-center gap-2">
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
@@ -137,6 +152,8 @@ export default function ProtectYourMoneyPage() {
                 <li>- Has adopted ALTA Best Practices for cybersecurity</li>
               </ul>
             </div>
+            </SectionGate>
+            <SectionGate page="/protect-your-money" id="legit-vs-fraud" sub="fraudulent">
             <div className="p-5 bg-red-50 rounded-2xl border border-red-200">
               <h3 className="font-bold text-red-700 mb-3 flex items-center gap-2">
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126z" /></svg>
@@ -152,11 +169,14 @@ export default function ProtectYourMoneyPage() {
                 <li>- May use AI-generated deepfake voice or video to impersonate agents</li>
               </ul>
             </div>
+            </SectionGate>
           </div>
+          </SectionGate>
 
           <div className="h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent my-8" />
 
           {/* What your title company should do */}
+          <SectionGate page="/protect-your-money" id="title-company-checklist">
           <h2 className="text-2xl font-bold text-alta-navy mb-4">What Your Title Company Should Be Doing</h2>
           <p className="text-sm text-alta-gray mb-4 leading-relaxed">When choosing a title company, ask about their fraud prevention practices. Companies that follow ALTA Best Practices (Pillar 3: Privacy and Data Security) should have robust measures in place. Here&apos;s what to look for:</p>
           <div className="grid sm:grid-cols-2 gap-3 mb-10">
@@ -174,12 +194,15 @@ export default function ProtectYourMoneyPage() {
               </div>
             ))}
           </div>
+          </SectionGate>
 
           <div className="h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent my-8" />
 
           {/* Recovery timeline */}
+          <SectionGate page="/protect-your-money" id="recovery-timeline">
           <h2 className="text-2xl font-bold text-alta-navy mb-4">If You&apos;re a Victim: Recovery Timeline</h2>
           <p className="text-sm text-alta-gray mb-4 leading-relaxed">Speed is everything. The FBI reports that the likelihood of recovering funds drops dramatically over time. Here&apos;s the data from the FBI&apos;s Internet Crime Complaint Center (IC3):</p>
+          <SectionGate page="/protect-your-money" id="recovery-timeline" sub="recovery-rates">
           <div className="grid grid-cols-3 gap-3 mb-6">
             <div className="p-4 bg-green-50 rounded-xl border border-green-200 text-center">
               <p className="text-2xl font-bold text-green-700">~20%</p>
@@ -197,7 +220,9 @@ export default function ProtectYourMoneyPage() {
               <p className="text-[10px] text-red-600">After 48 hours</p>
             </div>
           </div>
+          </SectionGate>
 
+          <SectionGate page="/protect-your-money" id="recovery-timeline" sub="immediate-steps">
           <div className="p-5 bg-gradient-to-br from-red-50 to-white rounded-2xl border border-red-200 mb-6">
             <h3 className="font-bold text-alta-navy mb-3">Immediate Steps If You Suspect Fraud</h3>
             <div className="space-y-3">
@@ -224,11 +249,16 @@ export default function ProtectYourMoneyPage() {
               ))}
             </div>
           </div>
+          </SectionGate>
 
           <p className="text-[10px] text-alta-teal font-medium mb-8">Source: FBI IC3 2025 Report, CertifID 2026 State of Wire Fraud Report, ALTA Best Practices Pillar 3, NAR Consumer Guide on Wire Fraud</p>
+          </SectionGate>
 
-          <InlineAd />
+          <AdGate name="InlineAd">
+            <InlineAd />
+          </AdGate>
 
+          <SectionGate page="/protect-your-money" id="cta-links">
           <div className="flex flex-col sm:flex-row gap-3 mt-6">
             <Link href="/stop-fraud" className="px-5 py-2.5 bg-alta-red text-white font-semibold rounded-lg hover:bg-red-700 transition-colors text-center text-sm">
               Stop Fraud 101 — 10 Prevention Steps
@@ -243,9 +273,12 @@ export default function ProtectYourMoneyPage() {
               View Sources
             </Link>
           </div>
+          </SectionGate>
 
+          <SectionGate page="/protect-your-money" id="related">
           <div className="mt-8 mb-4">
             {/* Deed fraud protection callout */}
+            <SectionGate page="/protect-your-money" id="related" sub="deed-fraud-callout">
             <Link href="/protect-against-deed-fraud" className="block p-5 mb-6 bg-gradient-to-r from-alta-navy to-[#0d3a5c] rounded-2xl text-white hover:shadow-lg transition-shadow group">
               <div className="flex items-center gap-4">
                 <div className="w-12 h-12 rounded-xl bg-white/15 flex items-center justify-center shrink-0">
@@ -258,7 +291,9 @@ export default function ProtectYourMoneyPage() {
                 <svg className="w-5 h-5 text-white/60 group-hover:translate-x-1 transition-transform shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
               </div>
             </Link>
+            </SectionGate>
 
+            <SectionGate page="/protect-your-money" id="related" sub="related-topics">
             <h2 className="text-lg font-bold text-alta-navy mb-4">Related Topics</h2>
             <div className="grid sm:grid-cols-3 gap-3">
               <Link href="/stop-fraud" className="p-4 bg-[#e8f0f5] rounded-xl border border-[#c5d8e4] border-l-4 border-l-[#1a5276] tile-interactive group">
@@ -274,9 +309,13 @@ export default function ProtectYourMoneyPage() {
                 <p className="text-xs text-alta-gray mt-1">Search for ALTA member title and settlement companies near you</p>
               </Link>
             </div>
+            </SectionGate>
           </div>
+          </SectionGate>
 
-          <FirstTimeBuyerCTA />
+          <ModuleGate name="FirstTimeBuyerCTA">
+            <FirstTimeBuyerCTA />
+          </ModuleGate>
         </div>
       </div>
     </>

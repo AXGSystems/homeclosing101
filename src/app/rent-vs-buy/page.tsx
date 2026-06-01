@@ -5,6 +5,7 @@ import Link from "next/link";
 import PageHero from "@/components/PageHero";
 import { InlineAd } from "@/components/EliteProviders";
 import FirstTimeBuyerCTA from "@/components/FirstTimeBuyerCTA";
+import { SectionGate, AdGate, ModuleGate } from "@/components/Gate";
 
 const fmt = (n: number) => Math.round(n).toLocaleString();
 const fmtDollar = (n: number) => `$${fmt(Math.abs(n))}`;
@@ -131,19 +132,22 @@ export default function RentVsBuyPage() {
 
   return (
     <>
-      <PageHero
-        title="Rent vs. Buy Calculator"
-        subtitle="Compare the true cost of renting versus buying a home over time. Factor in equity, appreciation, taxes, and maintenance to find your break-even point."
-        image="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1920&q=80"
-        breadcrumb={[
-          { label: "Resources", href: "/resources" },
-          { label: "Rent vs Buy", href: "/rent-vs-buy" },
-        ]}
-      />
+      <SectionGate page="/rent-vs-buy" id="hero">
+        <PageHero
+          title="Rent vs. Buy Calculator"
+          subtitle="Compare the true cost of renting versus buying a home over time. Factor in equity, appreciation, taxes, and maintenance to find your break-even point."
+          image="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1920&q=80"
+          breadcrumb={[
+            { label: "Resources", href: "/resources" },
+            { label: "Rent vs Buy", href: "/rent-vs-buy" },
+          ]}
+        />
+      </SectionGate>
 
       <div className="py-1.5 lg:py-2">
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
           {/* Intro card */}
+          <SectionGate page="/rent-vs-buy" id="intro">
           <div className="mb-6 p-4 bg-[#e6f1f5] rounded-2xl border border-[#b4d8e8] border-l-4 border-l-[#0a7ea8] shadow-md">
             <div className="flex items-start gap-4">
               <div className="w-12 h-12 rounded-xl bg-[#0a7ea8]/10 flex items-center justify-center text-[#0a7ea8] shrink-0">
@@ -161,9 +165,12 @@ export default function RentVsBuyPage() {
               </div>
             </div>
           </div>
+          </SectionGate>
 
+          <SectionGate page="/rent-vs-buy" id="calculator">
           <div className="grid lg:grid-cols-[1fr_420px] gap-6">
             {/* Inputs */}
+            <SectionGate page="/rent-vs-buy" id="calculator" sub="inputs">
             <div className="space-y-5">
               <div className="bg-white rounded-2xl border border-gray-100 border-l-4 border-l-[#0a7ea8] shadow-sm p-5">
                 <h3 className="font-bold text-alta-navy mb-4">Rental Costs</h3>
@@ -323,8 +330,10 @@ export default function RentVsBuyPage() {
                 </div>
               </div>
             </div>
+            </SectionGate>
 
             {/* Results panel */}
+            <SectionGate page="/rent-vs-buy" id="calculator" sub="results">
             <div className="space-y-5">
               {/* Verdict card */}
               <div
@@ -472,11 +481,16 @@ export default function RentVsBuyPage() {
                 </div>
               </div>
 
-              <InlineAd />
+              <AdGate name="InlineAd">
+                <InlineAd />
+              </AdGate>
             </div>
+            </SectionGate>
           </div>
+          </SectionGate>
 
           {/* Key Assumptions */}
+          <SectionGate page="/rent-vs-buy" id="key-assumptions">
           <div className="mt-8 bg-alta-light rounded-2xl border border-gray-200 p-5">
             <h3 className="font-bold text-alta-navy mb-3 flex items-center gap-2">
               <svg className="w-4 h-4 text-alta-teal" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
@@ -527,10 +541,14 @@ export default function RentVsBuyPage() {
               </div>
             </div>
           </div>
+          </SectionGate>
 
-          <FirstTimeBuyerCTA />
+          <ModuleGate name="FirstTimeBuyerCTA">
+            <FirstTimeBuyerCTA />
+          </ModuleGate>
 
           {/* Related Topics */}
+          <SectionGate page="/rent-vs-buy" id="related-topics">
           <div className="mt-8 mb-8">
             <h3 className="font-bold text-alta-navy mb-4">Related Topics</h3>
             <div className="grid sm:grid-cols-3 gap-3">
@@ -577,6 +595,7 @@ export default function RentVsBuyPage() {
               ))}
             </div>
           </div>
+          </SectionGate>
         </div>
       </div>
     </>

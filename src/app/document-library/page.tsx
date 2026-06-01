@@ -6,6 +6,7 @@ import PageHero from "@/components/PageHero";
 import { InlineAd } from "@/components/EliteProviders";
 import FirstTimeBuyerCTA from "@/components/FirstTimeBuyerCTA";
 import ResourcesContent from "@/components/ResourcesContent";
+import { SectionGate, AdGate, ModuleGate } from "@/components/Gate";
 
 const documentSections = [
   {
@@ -125,30 +126,34 @@ export default function DocumentLibraryPage() {
 
   return (
     <>
-      <PageHero
-        title="Document & Resource Library"
-        subtitle="Official forms, sample documents, checklists, guides, and trusted external resources — all in one place."
-        image="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=1920&q=80"
-        breadcrumb={[{ label: "Resources", href: "/document-library" }, { label: "Document & Resource Library", href: "/document-library" }]}
-      />
+      <SectionGate page="/document-library" id="hero">
+        <PageHero
+          title="Document & Resource Library"
+          subtitle="Official forms, sample documents, checklists, guides, and trusted external resources — all in one place."
+          image="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=1920&q=80"
+          breadcrumb={[{ label: "Resources", href: "/document-library" }, { label: "Document & Resource Library", href: "/document-library" }]}
+        />
+      </SectionGate>
 
       <div className="py-1.5 lg:py-2">
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
           {/* Tab bar */}
-          <div className="flex gap-1 mb-6 bg-alta-light rounded-xl p-1">
-            <button
-              onClick={() => setActiveTab("documents")}
-              className={`flex-1 px-4 py-2.5 rounded-lg text-sm font-semibold transition-all ${activeTab === "documents" ? "bg-white text-alta-navy shadow-sm" : "text-alta-gray hover:text-alta-navy"}`}
-            >
-              Document Library
-            </button>
-            <button
-              onClick={() => setActiveTab("resources")}
-              className={`flex-1 px-4 py-2.5 rounded-lg text-sm font-semibold transition-all ${activeTab === "resources" ? "bg-white text-alta-navy shadow-sm" : "text-alta-gray hover:text-alta-navy"}`}
-            >
-              External Resources
-            </button>
-          </div>
+          <SectionGate page="/document-library" id="tab-bar">
+            <div className="flex gap-1 mb-6 bg-alta-light rounded-xl p-1">
+              <button
+                onClick={() => setActiveTab("documents")}
+                className={`flex-1 px-4 py-2.5 rounded-lg text-sm font-semibold transition-all ${activeTab === "documents" ? "bg-white text-alta-navy shadow-sm" : "text-alta-gray hover:text-alta-navy"}`}
+              >
+                Document Library
+              </button>
+              <button
+                onClick={() => setActiveTab("resources")}
+                className={`flex-1 px-4 py-2.5 rounded-lg text-sm font-semibold transition-all ${activeTab === "resources" ? "bg-white text-alta-navy shadow-sm" : "text-alta-gray hover:text-alta-navy"}`}
+              >
+                External Resources
+              </button>
+            </div>
+          </SectionGate>
 
           {activeTab === "resources" && <ResourcesContent />}
         </div>
@@ -157,19 +162,22 @@ export default function DocumentLibraryPage() {
       {activeTab === "documents" && <>
       <div className="py-1.5 lg:py-2">
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
-          <div className="mb-6 p-4 bg-[#e6f1f5] rounded-2xl border border-[#b4d8e8] border-l-4 border-l-[#0a7ea8] sm:sticky sm:top-[142px] z-20 shadow-md">
-            <div className="flex items-start gap-4">
-              <div className="w-12 h-12 rounded-xl bg-alta-teal/10 flex items-center justify-center text-alta-teal shrink-0">
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" /></svg>
-              </div>
-              <div>
-                <h2 className="font-bold text-alta-navy mb-1">Your Closing Document Hub</h2>
-                <p className="text-sm text-alta-gray leading-relaxed">Every document and tool linked below is from an official, verified source — government agencies, ALTA, or directly from HomeClosing101. <span className="text-alta-teal font-medium">Click any document for details on what it is, when you need it, and what to look for.</span> PDFs can be downloaded and printed. Web tools are interactive and available 24/7.</p>
+          <SectionGate page="/document-library" id="intro">
+            <div className="mb-6 p-4 bg-[#e6f1f5] rounded-2xl border border-[#b4d8e8] border-l-4 border-l-[#0a7ea8] sm:sticky sm:top-[142px] z-20 shadow-md">
+              <div className="flex items-start gap-4">
+                <div className="w-12 h-12 rounded-xl bg-alta-teal/10 flex items-center justify-center text-alta-teal shrink-0">
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" /></svg>
+                </div>
+                <div>
+                  <h2 className="font-bold text-alta-navy mb-1">Your Closing Document Hub</h2>
+                  <p className="text-sm text-alta-gray leading-relaxed">Every document and tool linked below is from an official, verified source — government agencies, ALTA, or directly from HomeClosing101. <span className="text-alta-teal font-medium">Click any document for details on what it is, when you need it, and what to look for.</span> PDFs can be downloaded and printed. Web tools are interactive and available 24/7.</p>
+                </div>
               </div>
             </div>
-          </div>
+          </SectionGate>
 
           {/* Document count summary */}
+          <SectionGate page="/document-library" id="stats">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-8">
             <div className="p-4 bg-[#e8f0f5] rounded-xl border border-[#c5d8e4] shadow-sm text-center tile-interactive">
               <p className="text-2xl font-bold text-[#1a5276]">{documentSections.reduce((a, s) => a + s.docs.length, 0)}</p>
@@ -188,8 +196,10 @@ export default function DocumentLibraryPage() {
               <p className="text-xs text-alta-gray font-medium mt-1">Education & Tools</p>
             </div>
           </div>
+          </SectionGate>
 
           {/* Document sections */}
+          <SectionGate page="/document-library" id="document-sections">
           <div className="space-y-10">
             {documentSections.map((section) => (
               <div key={section.title}>
@@ -269,9 +279,13 @@ export default function DocumentLibraryPage() {
               </div>
             ))}
           </div>
+          </SectionGate>
 
-          <InlineAd />
+          <AdGate name="InlineAd">
+            <InlineAd />
+          </AdGate>
 
+          <SectionGate page="/document-library" id="actions">
           <div className="mt-6 flex flex-col sm:flex-row gap-3">
             <Link href="/sources" className="px-5 py-2.5 bg-alta-teal text-white font-semibold rounded-lg hover:bg-alta-teal-dark transition-colors text-center text-sm">
               View All Sources
@@ -280,7 +294,9 @@ export default function DocumentLibraryPage() {
               Interactive Checklist
             </Link>
           </div>
+          </SectionGate>
 
+          <SectionGate page="/document-library" id="related-topics">
           <div className="mt-8 mb-4">
             <h2 className="text-lg font-bold text-alta-navy mb-4">Related Topics</h2>
             <div className="grid sm:grid-cols-3 gap-3">
@@ -298,8 +314,11 @@ export default function DocumentLibraryPage() {
               </Link>
             </div>
           </div>
+          </SectionGate>
 
-          <FirstTimeBuyerCTA />
+          <ModuleGate name="FirstTimeBuyerCTA">
+            <FirstTimeBuyerCTA />
+          </ModuleGate>
         </div>
       </div>
       </>}

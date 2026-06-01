@@ -4,6 +4,7 @@ import Link from "next/link";
 import PageHero from "@/components/PageHero";
 import { InlineAd } from "@/components/EliteProviders";
 import FirstTimeBuyerCTA from "@/components/FirstTimeBuyerCTA";
+import { SectionGate, AdGate, ModuleGate } from "@/components/Gate";
 
 const vulnerabilities = [
   {
@@ -71,20 +72,23 @@ const resources = [
 export default function IdentityProtectionPage() {
   return (
     <>
-      <PageHero
-        title="Protecting Your Identity During Your Home Purchase"
-        subtitle="During a home purchase, you share your most sensitive personal information with multiple parties. Learn how to protect yourself before, during, and after closing."
-        image="https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=1920&q=80"
-        breadcrumb={[
-          { label: "Protect Your Property", href: "/protect-your-rights" },
-          { label: "Identity Protection", href: "/identity-protection" },
-        ]}
-      />
+      <SectionGate page="/identity-protection" id="hero">
+        <PageHero
+          title="Protecting Your Identity During Your Home Purchase"
+          subtitle="During a home purchase, you share your most sensitive personal information with multiple parties. Learn how to protect yourself before, during, and after closing."
+          image="https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=1920&q=80"
+          breadcrumb={[
+            { label: "Protect Your Property", href: "/protect-your-rights" },
+            { label: "Identity Protection", href: "/identity-protection" },
+          ]}
+        />
+      </SectionGate>
 
       <div className="py-1.5 lg:py-2">
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
 
           {/* Intro callout */}
+          <SectionGate page="/identity-protection" id="intro">
           <div className="mb-6 p-4 bg-[#f5e8e8] rounded-2xl border border-[#e4c5c5] border-l-4 border-l-[#943030] sm:sticky sm:top-[142px] z-20 shadow-md">
             <div className="flex items-start gap-4">
               <div className="w-12 h-12 rounded-xl bg-[#943030]/10 flex items-center justify-center text-[#943030] shrink-0">
@@ -98,8 +102,10 @@ export default function IdentityProtectionPage() {
               </div>
             </div>
           </div>
+          </SectionGate>
 
           {/* Section 1: Why Real Estate Makes You Vulnerable */}
+          <SectionGate page="/identity-protection" id="why-vulnerable">
           <h2 className="text-2xl font-bold text-alta-navy mb-4">Why Real Estate Makes You Vulnerable</h2>
           <p className="text-sm text-alta-gray mb-4">A home purchase is one of the most information-intensive transactions you will ever complete. Here is why it creates unique identity theft risks:</p>
           <div className="grid sm:grid-cols-2 gap-3 mb-10">
@@ -114,13 +120,16 @@ export default function IdentityProtectionPage() {
               </div>
             ))}
           </div>
+          </SectionGate>
 
           <div className="h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent my-8" />
 
           {/* Section 2: Who Has Your Information */}
+          <SectionGate page="/identity-protection" id="who-has-info">
           <h2 className="text-2xl font-bold text-alta-navy mb-4">Who Has Your Information</h2>
           <p className="text-sm text-alta-gray mb-4">During a typical home purchase, your sensitive personal and financial data is shared with all of these parties:</p>
           <div className="relative mb-10">
+            <SectionGate page="/identity-protection" id="who-has-info" sub="you-node">
             <div className="flex flex-col items-center mb-6">
               <div className="w-20 h-20 rounded-full bg-[#943030] flex items-center justify-center shadow-lg">
                 <svg className="w-9 h-9 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
@@ -130,6 +139,8 @@ export default function IdentityProtectionPage() {
               <p className="text-sm font-bold text-alta-navy mt-2">You (The Buyer)</p>
               <p className="text-[10px] text-alta-gray">SSN, bank accounts, tax returns, pay stubs, ID</p>
             </div>
+            </SectionGate>
+            <SectionGate page="/identity-protection" id="who-has-info" sub="parties-grid">
             {/* Connection lines visual */}
             <div className="hidden sm:block h-6 w-px bg-gray-300 mx-auto" />
             <div className="hidden sm:block h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent mx-8 mb-2" />
@@ -140,11 +151,15 @@ export default function IdentityProtectionPage() {
                 </div>
               ))}
             </div>
+            </SectionGate>
           </div>
+
+          </SectionGate>
 
           <div className="h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent my-8" />
 
           {/* Section 3: How to Protect Yourself */}
+          <SectionGate page="/identity-protection" id="how-to-protect">
           <h2 className="text-2xl font-bold text-alta-navy mb-4">How to Protect Yourself</h2>
           <p className="text-sm text-alta-gray mb-4">Take these steps before and during your transaction to minimize identity theft risk:</p>
           <div className="space-y-3 mb-10">
@@ -159,9 +174,12 @@ export default function IdentityProtectionPage() {
             ))}
           </div>
 
+          </SectionGate>
+
           <div className="h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent my-8" />
 
           {/* Section 4: After-Closing Identity Checklist */}
+          <SectionGate page="/identity-protection" id="after-closing">
           <h2 className="text-2xl font-bold text-alta-navy mb-4">After-Closing Identity Checklist</h2>
           <p className="text-sm text-alta-gray mb-4">Your personal information does not become less valuable after closing. Stay vigilant:</p>
           <div className="bg-[#e6f1f5] rounded-2xl border border-[#b4d8e8] p-6 mb-10">
@@ -177,9 +195,12 @@ export default function IdentityProtectionPage() {
             </div>
           </div>
 
+          </SectionGate>
+
           <div className="h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent my-8" />
 
           {/* Section 5: Red Flags During Your Transaction */}
+          <SectionGate page="/identity-protection" id="red-flags">
           <h2 className="text-2xl font-bold text-alta-navy mb-4">Red Flags During Your Transaction</h2>
           <p className="text-sm text-alta-gray mb-4">If you encounter any of these during your transaction, stop and verify before proceeding:</p>
           <div className="space-y-2 mb-10">
@@ -193,9 +214,12 @@ export default function IdentityProtectionPage() {
             ))}
           </div>
 
+          </SectionGate>
+
           <div className="h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent my-8" />
 
           {/* Section 6: Resources */}
+          <SectionGate page="/identity-protection" id="resources">
           <h2 className="text-2xl font-bold text-alta-navy mb-4">Identity Protection Resources</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-10">
             {resources.map((r) => (
@@ -209,12 +233,16 @@ export default function IdentityProtectionPage() {
               </a>
             ))}
           </div>
+          </SectionGate>
 
+          <AdGate name="InlineAd">
           <InlineAd />
+          </AdGate>
 
           <div className="h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent my-8" />
 
           {/* Related Topics */}
+          <SectionGate page="/identity-protection" id="related-topics">
           <h2 className="text-lg font-bold text-alta-navy mb-4">Related Topics</h2>
           <div className="grid sm:grid-cols-3 gap-3">
             <Link href="/protect-your-money" className="p-4 bg-[#f5e8e8] rounded-xl border border-[#e4c5c5] border-l-4 border-l-[#943030] tile-interactive group">
@@ -230,8 +258,11 @@ export default function IdentityProtectionPage() {
               <p className="text-[10px] text-alta-gray mt-1">Every document you need for closing and how to keep them secure</p>
             </Link>
           </div>
+          </SectionGate>
 
+          <ModuleGate name="FirstTimeBuyerCTA">
           <FirstTimeBuyerCTA />
+          </ModuleGate>
         </div>
       </div>
     </>

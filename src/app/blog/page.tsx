@@ -7,6 +7,7 @@ import { InlineAd } from "@/components/EliteProviders";
 import FirstTimeBuyerCTA from "@/components/FirstTimeBuyerCTA";
 import SaveToFolderBtn from "@/components/SaveToFolderBtn";
 import ShareButtons from "@/components/ShareButtons";
+import { SectionGate, AdGate, ModuleGate } from "@/components/Gate";
 
 interface Article {
   title: string;
@@ -446,12 +447,14 @@ export default function BlogPage() {
 
   return (
     <>
-      <PageHero
-        title="Industry News & Advice"
-        subtitle="Real articles sourced from ALTA, CFPB, FBI IC3, NAR, and industry professionals. Click any article to read the full summary."
-        image="https://images.unsplash.com/photo-1504711434969-e33886168d6c?w=1920&q=80"
-        breadcrumb={[{ label: "News & Advice", href: "/blog" }]}
-      />
+      <SectionGate page="/blog" id="hero">
+        <PageHero
+          title="Industry News & Advice"
+          subtitle="Real articles sourced from ALTA, CFPB, FBI IC3, NAR, and industry professionals. Click any article to read the full summary."
+          image="https://images.unsplash.com/photo-1504711434969-e33886168d6c?w=1920&q=80"
+          breadcrumb={[{ label: "News & Advice", href: "/blog" }]}
+        />
+      </SectionGate>
 
       {/* Right-side slide-out panel */}
       {selectedArticle && (
@@ -723,6 +726,7 @@ export default function BlogPage() {
 
       <div className="py-1.5 lg:py-2">
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
+          <SectionGate page="/blog" id="intro-banner">
           <div className="mb-6 p-4 bg-[#e6f1f5] rounded-2xl border border-[#b4d8e8] border-l-4 border-l-[#0a7ea8] sm:sticky sm:top-[142px] z-20 shadow-md">
             <div className="flex items-start gap-4">
               <div className="w-12 h-12 rounded-xl bg-[#0a7ea8]/10 flex items-center justify-center text-[#0a7ea8] shrink-0">
@@ -753,8 +757,10 @@ export default function BlogPage() {
               </div>
             </div>
           </div>
+          </SectionGate>
 
           {/* Category filter tabs */}
+          <SectionGate page="/blog" id="filter-toolbar">
           <div className="mb-5 flex flex-wrap gap-2">
             {allCategories.map((cat) => (
               <button
@@ -773,8 +779,10 @@ export default function BlogPage() {
               </button>
             ))}
           </div>
+          </SectionGate>
 
           {/* Article count */}
+          <SectionGate page="/blog" id="articles">
           {activeCategory !== "All" && (
             <p className="mb-4 text-sm text-alta-gray">
               Showing{" "}
@@ -841,7 +849,11 @@ export default function BlogPage() {
             </div>
           )}
 
-          {gridArticles.length > 4 && <InlineAd />}
+          {gridArticles.length > 4 && (
+            <AdGate name="InlineAd">
+              <InlineAd />
+            </AdGate>
+          )}
 
           {/* More articles */}
           {gridArticles.length > 4 && (
@@ -855,8 +867,10 @@ export default function BlogPage() {
               ))}
             </div>
           )}
+          </SectionGate>
 
           {/* Quick links */}
+          <SectionGate page="/blog" id="explore-more">
           <div className="p-6 bg-gradient-to-br from-alta-light to-white rounded-2xl border border-gray-100">
             <h2 className="text-xl font-bold text-alta-navy mb-4">
               Explore More
@@ -942,8 +956,10 @@ export default function BlogPage() {
               </Link>
             </div>
           </div>
+          </SectionGate>
 
           {/* Subscribe callout */}
+          <SectionGate page="/blog" id="subscribe">
           <div className="mt-6 p-6 bg-gradient-to-br from-[#e6f1f5] to-white rounded-2xl border border-[#b4d8e8] shadow-sm">
             <div className="flex items-start gap-4">
               <div className="w-12 h-12 rounded-xl bg-[#0a7ea8]/10 flex items-center justify-center text-[#0a7ea8] shrink-0">
@@ -986,8 +1002,11 @@ export default function BlogPage() {
               </div>
             </div>
           </div>
+          </SectionGate>
 
-          <FirstTimeBuyerCTA />
+          <ModuleGate name="FirstTimeBuyerCTA">
+            <FirstTimeBuyerCTA />
+          </ModuleGate>
         </div>
       </div>
     </>

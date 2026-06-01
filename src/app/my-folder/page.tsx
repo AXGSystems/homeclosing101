@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useMemo } from "react";
 import PageHero from "@/components/PageHero";
+import { SectionGate } from "@/components/Gate";
 import type { ClosingFolderItem } from "@/components/ClosingFolderProvider";
 import { useClosingFolder } from "@/components/ClosingFolderProvider";
 
@@ -44,17 +45,20 @@ export default function MyFolderPage() {
 
   return (
     <>
-      <PageHero
-        title="My Closing Folder"
-        subtitle="Your personalized collection of glossary terms, checklist items, questions, and notes saved from across HomeClosing101."
-        image="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=1920&q=80"
-        breadcrumb={[
-          { label: "Resources", href: "/resources" },
-          { label: "My Closing Folder", href: "/my-folder" },
-        ]}
-      />
+      <SectionGate page="/my-folder" id="hero">
+        <PageHero
+          title="My Closing Folder"
+          subtitle="Your personalized collection of glossary terms, checklist items, questions, and notes saved from across HomeClosing101."
+          image="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=1920&q=80"
+          breadcrumb={[
+            { label: "Resources", href: "/resources" },
+            { label: "My Closing Folder", href: "/my-folder" },
+          ]}
+        />
+      </SectionGate>
 
       {/* Print-only branded header */}
+      <SectionGate page="/my-folder" id="print-header">
       <div className="hidden print:block mb-6 px-6">
         <div className="flex items-center justify-between border-b-2 border-[#0a7ea8] pb-4 mb-4">
           <div className="flex items-center gap-3">
@@ -77,10 +81,12 @@ export default function MyFolderPage() {
           <p className="text-[9px] text-gray-500 leading-relaxed">This personalized report was generated from HomeClosing101 (homeclosing101.org), an educational initiative of the American Land Title Association (ALTA). Content is for educational purposes only and does not constitute legal, financial, or insurance advice. Consult qualified professionals for guidance specific to your transaction.</p>
         </div>
       </div>
+      </SectionGate>
 
       <main className="max-w-4xl mx-auto px-4 sm:px-6 py-10 print:py-0 print:px-0">
         {/* Action bar — hidden on print */}
         {hydrated && !isEmpty && (
+          <SectionGate page="/my-folder" id="action-bar">
           <div className="flex flex-wrap items-center gap-3 mb-8 print:hidden">
             <button
               onClick={() => window.print()}
@@ -105,10 +111,12 @@ export default function MyFolderPage() {
               {items.length} item{items.length !== 1 ? "s" : ""} saved
             </span>
           </div>
+          </SectionGate>
         )}
 
         {/* Empty state */}
         {hydrated && isEmpty && (
+          <SectionGate page="/my-folder" id="empty-state">
           <div className="text-center py-20 print:hidden">
             <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-gray-100 flex items-center justify-center">
               <svg className="w-10 h-10 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -120,19 +128,23 @@ export default function MyFolderPage() {
               Browse the site and save glossary terms, checklist items, and questions. They will appear here, ready to print as a personalized report.
             </p>
           </div>
+          </SectionGate>
         )}
 
         {/* Loading skeleton */}
         {!hydrated && (
+          <SectionGate page="/my-folder" id="loading-skeleton">
           <div className="space-y-6 animate-pulse print:hidden">
             {[1, 2, 3].map((i) => (
               <div key={i} className="h-24 bg-gray-100 rounded-lg" />
             ))}
           </div>
+          </SectionGate>
         )}
 
         {/* Grouped items */}
         {hydrated && !isEmpty && (
+          <SectionGate page="/my-folder" id="saved-items">
           <div className="space-y-10">
             {TYPE_ORDER.filter((type) => grouped[type]?.length).map((type) => {
               const config = TYPE_CONFIG[type];
@@ -197,10 +209,12 @@ export default function MyFolderPage() {
               );
             })}
           </div>
+          </SectionGate>
         )}
 
         {/* Print-only branded footer */}
         {hydrated && !isEmpty && (
+          <SectionGate page="/my-folder" id="print-footer">
           <div className="hidden print:block mt-12 pt-4 border-t-2 border-[#0a7ea8] px-6">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
@@ -217,6 +231,7 @@ export default function MyFolderPage() {
             </div>
             <p className="text-[7px] text-gray-400 text-center mt-3">© {new Date().getFullYear()} American Land Title Association. HomeClosing101 is an educational initiative of ALTA. All content is for informational purposes only.</p>
           </div>
+          </SectionGate>
         )}
       </main>
     </>

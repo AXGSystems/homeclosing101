@@ -5,6 +5,7 @@ import TrustedALTAMembers from "@/components/TrustedALTAMembers";
 import { DeferredInspectionAreas, DeferredInspectionTiles } from "@/components/LazyInspection";
 import FirstTimeBuyerCTA from "@/components/FirstTimeBuyerCTA";
 import SponsorTip from "@/components/SponsorTip";
+import { SectionGate, AdGate, ModuleGate } from "@/components/Gate";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -57,15 +58,18 @@ const specialtyInspections = [
 export default function HomeInspectionPage() {
   return (
     <>
-      <PageHero
-        title="Home Inspection Guide"
-        subtitle="A thorough home inspection is one of the most important investments you'll make in the homebuying process. Here's everything you need to know."
-        image="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1920&q=80"
-        breadcrumb={[{ label: "The Closing Process", href: "/closing-process" }, { label: "Home Inspection", href: "/home-inspection" }]}
-      />
+      <SectionGate page="/home-inspection" id="hero">
+        <PageHero
+          title="Home Inspection Guide"
+          subtitle="A thorough home inspection is one of the most important investments you'll make in the homebuying process. Here's everything you need to know."
+          image="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1920&q=80"
+          breadcrumb={[{ label: "The Closing Process", href: "/closing-process" }, { label: "Home Inspection", href: "/home-inspection" }]}
+        />
+      </SectionGate>
 
       <div className="py-1.5 lg:py-2">
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
+          <SectionGate page="/home-inspection" id="why-it-matters">
           <div className="mb-6 p-4 bg-[#faf4e4] rounded-2xl border border-[#e8d9a8] border-l-4 border-l-[#8b6914] sm:sticky sm:top-[142px] z-20 shadow-md">
             <div className="flex items-start gap-4">
               <div className="w-12 h-12 rounded-xl bg-[#8b6914]/10 flex items-center justify-center text-[#8b6914] shrink-0">
@@ -77,8 +81,10 @@ export default function HomeInspectionPage() {
               </div>
             </div>
           </div>
+          </SectionGate>
 
           {/* Key stats */}
+          <SectionGate page="/home-inspection" id="key-stats">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-10">
             {[
               { val: "$400", label: "Average inspection cost", bg: "bg-blue-50", border: "border-blue-200", text: "text-blue-700" },
@@ -92,15 +98,19 @@ export default function HomeInspectionPage() {
               </div>
             ))}
           </div>
+          </SectionGate>
 
           {/* What inspectors look at — expandable deep-dive tiles */}
+          <SectionGate page="/home-inspection" id="what-examined">
           <h2 className="text-2xl font-bold text-alta-navy mb-2">What a Home Inspector Examines</h2>
           <p className="text-sm text-alta-gray mb-6 leading-relaxed">Click any area below for the full breakdown — what inspectors look for, red flags that could cost thousands, and what questions to ask. A general inspection covers all six of these areas in a 2-4 hour visit.</p>
           <DeferredInspectionAreas />
+          </SectionGate>
 
-          <InlineAd />
+          <AdGate name="InlineAd"><InlineAd /></AdGate>
 
           {/* By home type */}
+          <SectionGate page="/home-inspection" id="by-home-type">
           <h2 className="text-2xl font-bold text-alta-navy mb-4">Inspection Guide by Home Type</h2>
           <p className="text-sm text-alta-gray mb-4 leading-relaxed">The type of home you&apos;re buying determines what inspections you need, when to schedule them, and what to focus on. Each type presents different risks:</p>
           <div className="space-y-5 mb-10">
@@ -131,15 +141,20 @@ export default function HomeInspectionPage() {
               </div>
             ))}
           </div>
+          </SectionGate>
 
           {/* Specialty inspections */}
+          <SectionGate page="/home-inspection" id="specialty-inspections">
           <h2 className="text-2xl font-bold text-alta-navy mb-4">Specialty Inspections: When You Need More</h2>
           <p className="text-sm text-alta-gray mb-4 leading-relaxed">A general home inspection doesn&apos;t cover everything. Click any inspection below for full details on when it&apos;s needed, what it reveals, and what problems cost to fix.</p>
           <DeferredInspectionTiles />
+          </SectionGate>
 
           {/* How to choose an inspector */}
+          <SectionGate page="/home-inspection" id="choosing-inspector">
           <h2 className="text-2xl font-bold text-alta-navy mb-4">Choosing an Independent Home Inspector</h2>
           <div className="grid md:grid-cols-2 gap-5 mb-10">
+            <SectionGate page="/home-inspection" id="choosing-inspector" sub="what-to-look-for">
             <div className="p-5 bg-green-50 rounded-2xl border border-green-200">
               <h3 className="font-bold text-green-700 mb-3">What to Look For</h3>
               <ul className="space-y-2 text-xs text-green-800">
@@ -151,6 +166,8 @@ export default function HomeInspectionPage() {
                 <li className="flex items-start gap-2"><svg className="w-3.5 h-3.5 text-green-600 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>Has no financial relationship with the seller or listing agent</li>
               </ul>
             </div>
+            </SectionGate>
+            <SectionGate page="/home-inspection" id="choosing-inspector" sub="things-to-consider">
             <div className="p-5 bg-amber-50 rounded-2xl border border-amber-100">
               <h3 className="font-bold text-amber-700 mb-3 flex items-center gap-2">
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 18v-5.25m0 0a6.01 6.01 0 001.5-.189m-1.5.189a6.01 6.01 0 01-1.5-.189m3.75 7.478a12.06 12.06 0 01-4.5 0m3.75 2.383a14.406 14.406 0 01-3 0M14.25 18v-.192c0-.983.658-1.823 1.508-2.316a7.5 7.5 0 10-7.517 0c.85.493 1.509 1.333 1.509 2.316V18" /></svg>
@@ -164,11 +181,14 @@ export default function HomeInspectionPage() {
                 <li className="flex items-start gap-2"><svg className="w-3.5 h-3.5 text-amber-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 18v-5.25m0 0a6.01 6.01 0 001.5-.189m-1.5.189a6.01 6.01 0 01-1.5-.189m3.75 7.478a12.06 12.06 0 01-4.5 0m3.75 2.383a14.406 14.406 0 01-3 0M14.25 18v-.192c0-.983.658-1.823 1.508-2.316a7.5 7.5 0 10-7.517 0c.85.493 1.509 1.333 1.509 2.316V18" /></svg>An inspection is NOT a pass/fail test — it&apos;s an informed assessment that helps you make decisions</li>
               </ul>
             </div>
+            </SectionGate>
           </div>
+          </SectionGate>
 
-          <TrustedALTAMembers />
+          <AdGate name="TrustedALTAMembers"><TrustedALTAMembers /></AdGate>
 
           {/* Who pays */}
+          <SectionGate page="/home-inspection" id="who-pays">
           <h2 className="text-2xl font-bold text-alta-navy mb-4">Who Pays for the Home Inspection?</h2>
           <div className="p-5 bg-gradient-to-br from-blue-50 to-white rounded-2xl border border-blue-100 mb-10">
             <p className="text-sm text-alta-gray leading-relaxed mb-3">
@@ -181,8 +201,10 @@ export default function HomeInspectionPage() {
               <strong className="text-alta-navy">Negotiating repairs:</strong> After the inspection, you can negotiate with the seller to fix issues, reduce the price, provide credits at closing, or walk away entirely (if you have an inspection contingency). Your agent will help you determine which issues are worth negotiating and which are normal wear and tear.
             </p>
           </div>
+          </SectionGate>
 
           {/* What happens after */}
+          <SectionGate page="/home-inspection" id="after-inspection">
           <h2 className="text-2xl font-bold text-alta-navy mb-4">After the Inspection: Your Options</h2>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-10">
             {[
@@ -197,16 +219,22 @@ export default function HomeInspectionPage() {
               </div>
             ))}
           </div>
+          </SectionGate>
 
-          <InlineAd />
+          <AdGate name="InlineAd"><InlineAd /></AdGate>
 
+          <SectionGate page="/home-inspection" id="never-waive-warning">
           <div className="p-5 bg-gradient-to-br from-red-50 to-white rounded-2xl border border-red-200 mb-6">
             <h3 className="font-bold text-alta-navy mb-2">Never Waive the Inspection Contingency</h3>
             <p className="text-sm text-alta-gray leading-relaxed">In competitive markets, some buyers waive the inspection contingency to make their offer more attractive. This is extremely risky. Without an inspection contingency, you cannot walk away or renegotiate if the inspection reveals major problems — you&apos;re legally obligated to buy the home regardless. If you feel pressured to waive, consider a &quot;pass/fail&quot; inspection contingency instead, where you can only cancel for major structural or safety issues, not cosmetic concerns.</p>
           </div>
+          </SectionGate>
 
+          <SectionGate page="/home-inspection" id="sources">
           <p className="text-xs text-alta-gray mb-6">Sources: American Society of Home Inspectors (ASHI), International Association of Certified Home Inspectors (InterNACHI), EPA (radon, mold, well water), National Pest Management Association (NPMA), Chimney Safety Institute of America (CSIA)</p>
+          </SectionGate>
 
+          <SectionGate page="/home-inspection" id="cta-links">
           <div className="flex flex-col sm:flex-row gap-3">
             <Link href="/closing-process/closing-checklist" className="px-5 py-2.5 bg-alta-teal text-white font-semibold rounded-lg hover:bg-alta-teal-dark transition-colors text-center text-sm">
               Closing Checklist
@@ -218,7 +246,9 @@ export default function HomeInspectionPage() {
               Closing Costs Calculator
             </Link>
           </div>
+          </SectionGate>
 
+          <SectionGate page="/home-inspection" id="related-topics">
           <div className="mt-8 mb-4">
             <h2 className="text-lg font-bold text-alta-navy mb-4">Related Topics</h2>
             <div className="grid sm:grid-cols-3 gap-3">
@@ -236,10 +266,11 @@ export default function HomeInspectionPage() {
               </Link>
             </div>
           </div>
+          </SectionGate>
 
-          <SponsorTip context="insurance" />
+          <AdGate name="SponsorTip"><SponsorTip context="insurance" /></AdGate>
 
-          <FirstTimeBuyerCTA />
+          <ModuleGate name="FirstTimeBuyerCTA"><FirstTimeBuyerCTA /></ModuleGate>
         </div>
       </div>
     </>

@@ -7,6 +7,7 @@ import PrintButton from "@/components/PrintButton";
 import SaveToFolderBtn from "@/components/SaveToFolderBtn";
 import { InlineAd } from "@/components/EliteProviders";
 import FirstTimeBuyerCTA from "@/components/FirstTimeBuyerCTA";
+import { SectionGate, AdGate, ModuleGate } from "@/components/Gate";
 
 /* ------------------------------------------------------------------ */
 /*  Data: comparison checklist rows                                    */
@@ -226,20 +227,23 @@ export default function LEVsCDPage() {
 
   return (
     <>
-      <PageHero
-        title="Loan Estimate vs Closing Disclosure: Side-by-Side Guide"
-        subtitle="The CFPB says comparing these two documents line by line is the single most important step you can take before closing. Use this interactive checklist to make sure nothing changed without your knowledge."
-        image="/images/hero-closing.jpg"
-        breadcrumb={[
-          { label: "Closing Process", href: "/closing-process" },
-          { label: "LE vs CD Comparison", href: "/le-vs-cd" },
-        ]}
-      />
+      <SectionGate page="/le-vs-cd" id="hero">
+        <PageHero
+          title="Loan Estimate vs Closing Disclosure: Side-by-Side Guide"
+          subtitle="The CFPB says comparing these two documents line by line is the single most important step you can take before closing. Use this interactive checklist to make sure nothing changed without your knowledge."
+          image="/images/hero-closing.jpg"
+          breadcrumb={[
+            { label: "Closing Process", href: "/closing-process" },
+            { label: "LE vs CD Comparison", href: "/le-vs-cd" },
+          ]}
+        />
+      </SectionGate>
 
       <main className="max-w-4xl mx-auto px-4 sm:px-6 py-10 space-y-14">
         {/* -------------------------------------------------------- */}
         {/*  Section 1: Why This Comparison Matters                   */}
         {/* -------------------------------------------------------- */}
+        <SectionGate page="/le-vs-cd" id="why-it-matters">
         <section>
           <h2 className="text-2xl font-bold text-alta-navy mb-4">
             Why This Comparison Matters
@@ -272,12 +276,16 @@ export default function LEVsCDPage() {
             </p>
           </div>
         </section>
+        </SectionGate>
 
-        <InlineAd />
+        <AdGate name="InlineAd">
+          <InlineAd />
+        </AdGate>
 
         {/* -------------------------------------------------------- */}
         {/*  Section 2: Interactive Comparison Checklist               */}
         {/* -------------------------------------------------------- */}
+        <SectionGate page="/le-vs-cd" id="checklist">
         <section>
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-6">
             <h2 className="text-2xl font-bold text-alta-navy">
@@ -415,10 +423,12 @@ export default function LEVsCDPage() {
             </div>
           )}
         </section>
+        </SectionGate>
 
         {/* -------------------------------------------------------- */}
         {/*  Section 3: Red Flags                                     */}
         {/* -------------------------------------------------------- */}
+        <SectionGate page="/le-vs-cd" id="red-flags">
         <section>
           <h2 className="text-2xl font-bold text-alta-navy mb-4">
             Red Flags: What Should Make You Ask Questions
@@ -461,12 +471,16 @@ export default function LEVsCDPage() {
             ))}
           </div>
         </section>
+        </SectionGate>
 
-        <InlineAd />
+        <AdGate name="InlineAd">
+          <InlineAd />
+        </AdGate>
 
         {/* -------------------------------------------------------- */}
         {/*  Section 4: What to Do If Something Doesn't Match         */}
         {/* -------------------------------------------------------- */}
+        <SectionGate page="/le-vs-cd" id="what-to-do">
         <section>
           <h2 className="text-2xl font-bold text-alta-navy mb-4">
             What to Do If Something Doesn't Match
@@ -493,10 +507,12 @@ export default function LEVsCDPage() {
             ))}
           </ol>
         </section>
+        </SectionGate>
 
         {/* -------------------------------------------------------- */}
         {/*  Section 5: Tolerance Rules Table                         */}
         {/* -------------------------------------------------------- */}
+        <SectionGate page="/le-vs-cd" id="tolerance-rules">
         <section>
           <h2 className="text-2xl font-bold text-alta-navy mb-4">
             TRID Tolerance Rules at a Glance
@@ -545,10 +561,12 @@ export default function LEVsCDPage() {
             ))}
           </div>
         </section>
+        </SectionGate>
 
         {/* -------------------------------------------------------- */}
         {/*  Section 6: Related Guides                                */}
         {/* -------------------------------------------------------- */}
+        <SectionGate page="/le-vs-cd" id="related-guides">
         <section className="grid sm:grid-cols-2 gap-4">
           <Link
             href="/loan-estimate"
@@ -573,10 +591,12 @@ export default function LEVsCDPage() {
             </p>
           </Link>
         </section>
+        </SectionGate>
 
         {/* -------------------------------------------------------- */}
         {/*  Actions: Print, Save, CTA                                */}
         {/* -------------------------------------------------------- */}
+        <SectionGate page="/le-vs-cd" id="actions">
         <div className="flex flex-wrap items-center gap-3 no-print">
           <PrintButton label="Print This Checklist" />
           <SaveToFolderBtn
@@ -587,8 +607,11 @@ export default function LEVsCDPage() {
             label="Save to Folder"
           />
         </div>
+        </SectionGate>
 
-        <FirstTimeBuyerCTA />
+        <ModuleGate name="FirstTimeBuyerCTA">
+          <FirstTimeBuyerCTA />
+        </ModuleGate>
       </main>
     </>
   );

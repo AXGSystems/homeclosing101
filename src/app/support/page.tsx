@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import PageHero from "@/components/PageHero";
+import { SectionGate } from "@/components/Gate";
 
 const topics = [
   "General Question",
@@ -46,17 +47,22 @@ export default function SupportPage() {
 
   return (
     <>
-      <PageHero
-        title="Questions & Support"
-        subtitle="Can't find what you're looking for? Our team is here to help."
-        image="https://images.unsplash.com/photo-1423666639041-f56000c27a9a?w=1200&h=400&fit=crop&q=80"
-      />
+      <SectionGate page="/support" id="hero">
+        <PageHero
+          title="Questions & Support"
+          subtitle="Can't find what you're looking for? Our team is here to help."
+          image="https://images.unsplash.com/photo-1423666639041-f56000c27a9a?w=1200&h=400&fit=crop&q=80"
+        />
+      </SectionGate>
 
+      <SectionGate page="/support" id="contact">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 py-10 sm:py-16">
         <div className="grid md:grid-cols-5 gap-8 sm:gap-12">
 
           {/* Left column — info */}
+          <SectionGate page="/support" id="contact" sub="info">
           <div className="md:col-span-2 space-y-6">
+            <SectionGate page="/support" id="contact" sub="how-we-help">
             <div>
               <h2 className="text-xl font-bold text-alta-navy mb-3">How Can We Help?</h2>
               <p className="text-sm text-alta-gray leading-relaxed">
@@ -64,7 +70,9 @@ export default function SupportPage() {
                 or want to share feedback about HomeClosing101, we&apos;d love to hear from you.
               </p>
             </div>
+            </SectionGate>
 
+            <SectionGate page="/support" id="contact" sub="before-you-write">
             <div className="bg-alta-light rounded-2xl p-5 space-y-4">
               <h3 className="text-sm font-bold text-alta-navy">Before You Write</h3>
               <div className="space-y-3">
@@ -94,7 +102,9 @@ export default function SupportPage() {
                 </a>
               </div>
             </div>
+            </SectionGate>
 
+            <SectionGate page="/support" id="contact" sub="response-time">
             <div className="bg-gradient-to-br from-alta-navy to-[#0d3a5c] rounded-2xl p-5 text-white">
               <h3 className="text-sm font-bold mb-2">Response Time</h3>
               <p className="text-xs text-white/70 leading-relaxed">
@@ -102,9 +112,12 @@ export default function SupportPage() {
                 We typically respond within 1&ndash;2 business days.
               </p>
             </div>
+            </SectionGate>
           </div>
+          </SectionGate>
 
           {/* Right column — form */}
+          <SectionGate page="/support" id="contact" sub="form">
           <div className="md:col-span-3">
             {submitted ? (
               <div className="bg-white rounded-2xl border border-gray-200 shadow-sm p-8 sm:p-12 text-center">
@@ -212,8 +225,10 @@ export default function SupportPage() {
               </form>
             )}
           </div>
+          </SectionGate>
         </div>
       </div>
+      </SectionGate>
     </>
   );
 }

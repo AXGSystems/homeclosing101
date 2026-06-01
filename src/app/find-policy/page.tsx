@@ -7,6 +7,7 @@ import { stateInsuranceData, callingScript, type StateInsuranceDept } from "@/da
 import { stateFlags } from "@/data/stateFlags";
 import FirstTimeBuyerCTA from "@/components/FirstTimeBuyerCTA";
 import SaveToFolderBtn from "@/components/SaveToFolderBtn";
+import { SectionGate, AdGate, ModuleGate } from "@/components/Gate";
 
 // State colors inspired by state flags/identity
 const stateColors: Record<string, { bg: string; accent: string; text: string }> = {
@@ -153,16 +154,19 @@ export default function FindPolicyPage() {
 
   return (
     <>
-      <PageHero
-        title="Find My Title Policy"
-        subtitle="Locate your existing title insurance policy or contact your state's insurance department for help."
-        image="https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=1920&q=80"
-        breadcrumb={[{ label: "Find My Policy", href: "/find-policy" }]}
-      />
+      <SectionGate page="/find-policy" id="hero">
+        <PageHero
+          title="Find My Title Policy"
+          subtitle="Locate your existing title insurance policy or contact your state's insurance department for help."
+          image="https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=1920&q=80"
+          breadcrumb={[{ label: "Find My Policy", href: "/find-policy" }]}
+        />
+      </SectionGate>
 
       <div className="py-1.5 lg:py-2">
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
           {/* Page intro */}
+          <SectionGate page="/find-policy" id="intro">
           <div className="mb-6 p-4 bg-[#f0ecf6] rounded-2xl border border-[#d4c8e4] border-l-4 border-l-[#5b3a8c] sm:sticky sm:top-[142px] z-20 shadow-md">
             <div className="flex items-start gap-4">
               <div className="w-12 h-12 rounded-xl bg-[#5b3a8c]/10 flex items-center justify-center text-[#5b3a8c] shrink-0">
@@ -174,8 +178,10 @@ export default function FindPolicyPage() {
               </div>
             </div>
           </div>
+          </SectionGate>
 
           {/* Quick Stats */}
+          <SectionGate page="/find-policy" id="quick-stats">
           <div className="grid grid-cols-3 gap-3 mb-6">
             {[
               { icon: <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M9 6.75V15m6-6v8.25m.503 3.498l4.875-2.437c.381-.19.622-.58.622-1.006V4.82c0-.836-.88-1.38-1.628-1.006l-3.869 1.934c-.317.159-.69.159-1.006 0L9.503 3.252a1.125 1.125 0 00-1.006 0L3.622 5.689C3.24 5.88 3 6.27 3 6.695V19.18c0 .836.88 1.38 1.628 1.006l3.869-1.934c.317-.159.69-.159 1.006 0l4.994 2.497c.317.158.69.158 1.006 0z" /></svg>, label: "50 state departments + DC", color: "text-[#1a5276]" },
@@ -188,8 +194,10 @@ export default function FindPolicyPage() {
               </div>
             ))}
           </div>
+          </SectionGate>
 
           {/* Steps */}
+          <SectionGate page="/find-policy" id="steps">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-12">
             {steps.map((s) => (
               <div
@@ -234,8 +242,10 @@ export default function FindPolicyPage() {
               </div>
             ))}
           </div>
+          </SectionGate>
 
           {/* Interactive Map */}
+          <SectionGate page="/find-policy" id="interactive-map">
           <div className="bg-[#e8f0f5] rounded-2xl border border-[#c5d8e4] shadow-sm p-6 mb-8">
             <h2 className="text-xl font-bold text-alta-navy mb-4">Click Your State</h2>
             <div className="relative w-full" style={{ paddingBottom: "60%" }}>
@@ -340,8 +350,10 @@ export default function FindPolicyPage() {
               );
             })()}
           </div>
+          </SectionGate>
 
           {/* Compare States */}
+          <SectionGate page="/find-policy" id="compare-states">
           <div className="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden mb-8">
             <button
               onClick={() => setCompareMode(!compareMode)}
@@ -438,10 +450,14 @@ export default function FindPolicyPage() {
               </div>
             )}
           </div>
+          </SectionGate>
 
+          <AdGate name="InlineAd">
           <InlineAd />
+          </AdGate>
 
           {/* Calling Script */}
+          <SectionGate page="/find-policy" id="calling-script">
           <div className="bg-[#f0ecf6] rounded-2xl border border-[#d4c8e4] shadow-sm overflow-hidden mb-8">
             <button
               onClick={() => setShowScript(!showScript)}
@@ -470,8 +486,10 @@ export default function FindPolicyPage() {
               </div>
             )}
           </div>
+          </SectionGate>
 
           {/* Searchable Directory */}
+          <SectionGate page="/find-policy" id="directory">
           <div className="bg-white rounded-2xl border border-[#bddcc7] shadow-sm overflow-hidden mb-8">
             <div className="p-5 border-b border-[#bddcc7]">
               <h2 className="text-xl font-bold text-alta-navy mb-2">Full State Insurance Directory</h2>
@@ -517,7 +535,9 @@ export default function FindPolicyPage() {
               )}
             </div>
           </div>
+          </SectionGate>
 
+          <SectionGate page="/find-policy" id="notes">
           <div className="p-5 bg-blue-50 rounded-xl border border-blue-100 mb-4">
             <p className="text-sm text-alta-gray">
               <strong className="text-alta-navy">Note:</strong> ALTA does not issue title insurance policies or have access to policies that have been issued. Directory data sourced from the I.I.I. and NAIC, verified as of February 2026.
@@ -528,8 +548,11 @@ export default function FindPolicyPage() {
               <strong className="text-alta-navy">Disclaimer:</strong> We recommend confirming contact details via your state&apos;s official .gov website before calling.
             </p>
           </div>
+          </SectionGate>
 
+          <ModuleGate name="FirstTimeBuyerCTA">
           <FirstTimeBuyerCTA />
+          </ModuleGate>
         </div>
       </div>
 

@@ -3,26 +3,39 @@
 import PageHero from "@/components/PageHero";
 import JourneyTracker from "@/components/JourneyTracker";
 import FirstTimeBuyerCTA from "@/components/FirstTimeBuyerCTA";
+import { SectionGate, AdGate, ModuleGate } from "@/components/Gate";
 
 export default function MyJourneyPage() {
   return (
     <>
-      <PageHero
-        title="My Homebuying Journey"
-        subtitle="Track your progress through the 8 key steps of buying a home. Click each step to mark it complete — your progress is saved automatically."
-        image="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1920&q=80"
-        breadcrumb={[
-          { label: "Resources", href: "/resources" },
-          { label: "My Homebuying Journey", href: "/my-journey" },
-        ]}
-      />
+      <SectionGate page="/my-journey" id="hero">
+        <PageHero
+          title="My Homebuying Journey"
+          subtitle="Track your progress through the 8 key steps of buying a home. Click each step to mark it complete — your progress is saved automatically."
+          image="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1920&q=80"
+          breadcrumb={[
+            { label: "Resources", href: "/resources" },
+            { label: "My Homebuying Journey", href: "/my-journey" },
+          ]}
+        />
+      </SectionGate>
 
-      <section className="py-12 bg-alta-light">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6">
-          <JourneyTracker />
-          <FirstTimeBuyerCTA />
-        </div>
-      </section>
+      <SectionGate page="/my-journey" id="journey">
+        <section className="py-12 bg-alta-light">
+          <div className="max-w-3xl mx-auto px-4 sm:px-6">
+            <SectionGate page="/my-journey" id="journey" sub="tracker">
+              <ModuleGate name="JourneyTracker">
+                <JourneyTracker />
+              </ModuleGate>
+            </SectionGate>
+            <SectionGate page="/my-journey" id="journey" sub="cta">
+              <ModuleGate name="FirstTimeBuyerCTA">
+                <FirstTimeBuyerCTA />
+              </ModuleGate>
+            </SectionGate>
+          </div>
+        </section>
+      </SectionGate>
     </>
   );
 }
