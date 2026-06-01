@@ -25,6 +25,7 @@ import {
 export type VersionId =
   | "full"
   | "moderate"
+  | "industry"
   | "light"
   | "streamlined"
   | "education";
@@ -76,6 +77,31 @@ export const VERSIONS: Record<VersionId, VersionDef> = {
       "The complete site as it stands today — every page, tool, protection resource, sponsor format and interactive feature enabled.",
     accent: "bg-[#1a5276]",
     off: [],
+  },
+
+  /* ----------------------------------------------------------------
+     Industry — launch-ready, member / title-industry facing. Keeps all
+     the fundamentals and essentially the full site (so it can go live
+     today), with a LIGHT, dignified sponsor presence (industry partners,
+     footer sponsors, members strip, inline/contextual) and the intrusive
+     formats dropped. Only the consumer gamification toys come off.
+  ---------------------------------------------------------------- */
+  industry: {
+    id: "industry",
+    label: "Industry",
+    tagline: "Launch-ready, member-facing",
+    description:
+      "A polished, go-live-today edition for the title industry and ALTA members: all fundamentals and core content intact, with a light, dignified sponsor presence. Drops only the consumer gamification (trivia, achievements, journey, folder) and the pushy pop-up ads.",
+    accent: "bg-[#8b6914]",
+    off: [
+      ...["/trivia", "/achievements", "/my-journey", "/my-folder"].map(
+        pageKey
+      ),
+      ...modulesOff(["AchievementSystem", "MiniQuiz", "JourneyTracker"]),
+      // light ads — keep IndustryPartners, footer sponsors, members strip,
+      // inline & contextual; drop the intrusive pop-up / badge formats
+      ...adsOff(["StickyBottomAd", "SponsorTip", "SponsorBadge", "SponsorShowcase"]),
+    ],
   },
 
   /* ----------------------------------------------------------------
@@ -269,6 +295,7 @@ export const VERSIONS: Record<VersionId, VersionDef> = {
 export const VERSION_IDS: VersionId[] = [
   "full",
   "moderate",
+  "industry",
   "light",
   "streamlined",
   "education",

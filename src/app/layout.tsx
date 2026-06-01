@@ -24,7 +24,7 @@ import "./globals.css";
  * injects a <style> hiding those units. Flash-free + hydration-safe — the
  * server always renders everything ON and CSS does the hiding.
  */
-const GATE_BOOT_SCRIPT = `(function(){try{var off=[];var m=/[?&]v=(full|moderate|light|streamlined|education)/.exec(location.search);if(m){var by=JSON.parse(localStorage.getItem('hc101-cc-offbyver')||'{}');off=by[m[1]]||[];}else{off=JSON.parse(localStorage.getItem('hc101-cc-off')||'[]');}if(off&&off.length){var css=off.map(function(k){return '[data-gate="'+String(k).replace(/["\\\\]/g,'')+'"]{display:none!important}';}).join('');var s=document.createElement('style');s.id='hc-gate-style';s.textContent=css;document.head.appendChild(s);document.documentElement.setAttribute('data-hc-off',off.join(' '));}}catch(e){}})();`;
+const GATE_BOOT_SCRIPT = `(function(){try{var off=[];var m=/[?&]v=(full|moderate|industry|light|streamlined|education)/.exec(location.search);if(m){var by=JSON.parse(localStorage.getItem('hc101-cc-offbyver')||'{}');off=by[m[1]]||[];}else{off=JSON.parse(localStorage.getItem('hc101-cc-off')||'[]');}if(off&&off.length){var css=off.map(function(k){return '[data-gate="'+String(k).replace(/["\\\\]/g,'')+'"]{display:none!important}';}).join('');var s=document.createElement('style');s.id='hc-gate-style';s.textContent=css;document.head.appendChild(s);document.documentElement.setAttribute('data-hc-off',off.join(' '));}}catch(e){}})();`;
 
 const geistSans = Geist({
   variable: "--font-geist-sans",

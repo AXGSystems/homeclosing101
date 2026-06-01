@@ -121,7 +121,7 @@ function readCache(): { version: VersionId; toggles: Toggles } {
 
 function parsePreview(): VersionId | null {
   try {
-    const m = /[?&]v=(full|moderate|light|streamlined|education)/.exec(
+    const m = /[?&]v=(full|moderate|industry|light|streamlined|education)/.exec(
       window.location.search
     );
     return m ? (m[1] as VersionId) : null;
