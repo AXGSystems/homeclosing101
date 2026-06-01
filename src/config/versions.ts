@@ -22,7 +22,12 @@ import {
   adKey,
 } from "./siteStructure";
 
-export type VersionId = "full" | "moderate" | "light" | "education";
+export type VersionId =
+  | "full"
+  | "moderate"
+  | "light"
+  | "streamlined"
+  | "education";
 
 export type VersionDef = {
   id: VersionId;
@@ -154,6 +159,70 @@ export const VERSIONS: Record<VersionId, VersionDef> = {
   },
 
   /* ----------------------------------------------------------------
+     Streamlined — the middle ground between Light and Education-First.
+     Leaner than the full education library, fuller than the bare Light
+     spine: keeps the essentials, the complete protection suite, the two
+     core calculators, glossary/FAQ and support. Trims niche tools, the
+     long-tail education pages, gamification and the pushier sponsors.
+  ---------------------------------------------------------------- */
+  streamlined: {
+    id: "streamlined",
+    label: "Streamlined",
+    tagline: "Lean, but stands on its own",
+    description:
+      "A clean, self-sufficient site: the closing essentials, the full fraud-protection suite, the two core calculators, glossary/FAQ and support. Trims the deep education library, niche tools, gamification and intrusive ads.",
+    accent: "bg-[#2a8f86]",
+    off: [
+      ...pagesOffExcept([
+        "/",
+        "/closing-process",
+        "/find-company",
+        "/protect-your-rights",
+        "/protect-against-deed-fraud",
+        "/first-time-buyers",
+        "/closing-disclosure",
+        "/closing-day-prep",
+        "/closing-process/closing-costs",
+        "/closing-process/what-to-expect",
+        "/closing-process/closing-checklist",
+        "/deed-theft",
+        "/stop-fraud",
+        "/protect-your-money",
+        "/identity-protection",
+        "/property-rights",
+        "/mortgage-calculator",
+        "/affordability",
+        "/glossary",
+        "/faq",
+        "/resources",
+        "/sources",
+        "/support",
+        "/join-alta",
+        "/emergency-contacts",
+      ]),
+      ...modulesOff([
+        "AchievementSystem",
+        "MiniQuiz",
+        "OnboardingTour",
+        "MarketStats",
+        "HomepageTestimonials",
+        "JourneyTracker",
+        "NewsTicker",
+      ]),
+      ...adsOff([
+        "StickyBottomAd",
+        "SponsorTip",
+        "SponsorBadge",
+        "InlineAd",
+        "ContextualSponsor",
+        "SponsorShowcase",
+      ]),
+      // homepage trim — drop the interactive-tools block (few tools here)
+      sectionKey("/", "tools"),
+    ],
+  },
+
+  /* ----------------------------------------------------------------
      Education-First — learning front and centre. Closing explainers,
      glossary, FAQ, blog and protection education lead; calculators and
      utility/gamification features and sponsors step back.
@@ -197,7 +266,13 @@ export const VERSIONS: Record<VersionId, VersionDef> = {
   },
 };
 
-export const VERSION_IDS: VersionId[] = ["full", "moderate", "light", "education"];
+export const VERSION_IDS: VersionId[] = [
+  "full",
+  "moderate",
+  "light",
+  "streamlined",
+  "education",
+];
 
 export function versionOffSet(id: VersionId): Set<string> {
   return new Set(VERSIONS[id].off.filter((k) => !isFundamental(k)));
