@@ -1,7 +1,6 @@
 import PageHero from "@/components/PageHero";
 import { InlineAd } from "@/components/EliteProviders";
 import FirstTimeBuyerCTA from "@/components/FirstTimeBuyerCTA";
-import { SectionGate, AdGate, ModuleGate } from "@/components/Gate";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -25,6 +24,8 @@ const sources = [
     category: "Industry Trade Associations",
     items: [
       { name: "American Land Title Association (ALTA)", url: "https://www.alta.org/", used: "Title search issue rates (1 in 3 transactions), Best Practices framework v4.2 (Aug 2025), member directory data, title insurance policy forms, industry statistics, 6,000+ member count, RON state availability, ALTA ONE/EDge conference data, Good Deeds Foundation ($1.3M+ awarded), TAN (5,159 members), NTP designation requirements, membership dues, 2026 advocacy priorities, TIPAC" },
+      { name: "Mortgage Bankers Association (MBA)", url: "https://www.mba.org/", used: "RON advocacy co-leadership with ALTA, 2017 model RON legislation, SECURE Notarization Act support, Weekly Applications Survey (75% of retail residential mortgage applications since 1990), mortgage market forecasts, Home Loan Learning Center (consumer education)" },
+      { name: "MISMO (Mortgage Industry Standards Maintenance Organization)", url: "https://www.mismo.org/", used: "ALTA dataset standards for title and closing modernization (March 2026), Mortgage Ready Workshop, industry data standards" },
       { name: "National Association of Realtors (NAR)", url: "https://www.nar.realtor/", used: "Home sales volume (4.2M in 2025), median home prices ($400K), wire fraud consumer guide, deepfake scam consumer guide, Code of Ethics" },
       { name: "National Association of Insurance Commissioners (NAIC)", url: "https://content.naic.org/", used: "State insurance department directory (all 51 jurisdictions), regulatory framework, insurance department contact verification" },
       { name: "Insurance Information Institute (I.I.I.)", url: "https://www.iii.org/", used: "State insurance department addresses, phone numbers, and website URLs — verified February 2026" },
@@ -72,7 +73,6 @@ const sources = [
       { name: "Alliant National Title Insurance Co.", url: "https://alliantnational.com/", used: "2026 fraud and notarization law changes" },
       { name: "Plymouth Title Insurance", url: "https://www.plymouthtitleinsurance.com/", used: "2026 wire fraud protection strategies" },
       { name: "Flagpedia.net", url: "https://flagpedia.net/", used: "U.S. state flag images (public domain)" },
-      { name: "Unsplash", url: "https://unsplash.com/", used: "Photography used in hero banners, feature cards, and section headers (Unsplash License — free for commercial use)" },
     ],
   },
 ];
@@ -80,18 +80,15 @@ const sources = [
 export default function SourcesPage() {
   return (
     <>
-      <SectionGate page="/sources" id="hero">
-        <PageHero
-          title="Source Index"
-          subtitle="Every fact, statistic, and resource on HomeClosing101 is sourced from verified government agencies, industry authorities, and public data. Nothing on this site is fabricated."
-          image="https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=1920&q=80"
-          breadcrumb={[{ label: "Resources", href: "/resources" }, { label: "Sources", href: "/sources" }]}
-        />
-      </SectionGate>
+      <PageHero
+        title="Source Index"
+        subtitle="Every fact, statistic, and resource on HomeClosing101 is sourced from verified government agencies, industry authorities, and public data. Nothing on this site is fabricated."
+        image="https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=1920&q=80"
+        breadcrumb={[{ label: "Resources", href: "/resources" }, { label: "Sources", href: "/sources" }]}
+      />
 
       <div className="py-1.5 lg:py-2">
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
-          <SectionGate page="/sources" id="commitment-banner">
           <div className="mb-6 p-4 bg-[#e6f1f5] rounded-2xl border border-[#b4d8e8] border-l-4 border-l-[#0a7ea8] sm:sticky sm:top-[142px] z-20 shadow-md">
             <div className="flex items-start gap-4">
               <div className="w-12 h-12 rounded-xl bg-alta-teal/10 flex items-center justify-center text-alta-teal shrink-0">
@@ -103,9 +100,7 @@ export default function SourcesPage() {
               </div>
             </div>
           </div>
-          </SectionGate>
 
-          <SectionGate page="/sources" id="source-list">
           <div className="space-y-8">
             {sources.map((section) => (
               <div key={section.category}>
@@ -128,22 +123,15 @@ export default function SourcesPage() {
               </div>
             ))}
           </div>
-          </SectionGate>
 
-          <AdGate name="InlineAd">
-            <InlineAd />
-          </AdGate>
+          <InlineAd />
 
-          <SectionGate page="/sources" id="report-error">
           <div className="mt-10 p-5 bg-gradient-to-br from-blue-50 to-white rounded-2xl border border-blue-100">
             <h3 className="font-bold text-alta-navy mb-2">Report an Error</h3>
             <p className="text-sm text-alta-gray">If you find any information on HomeClosing101 that is inaccurate, outdated, or improperly sourced, please contact ALTA at <strong>202.296.3671</strong> or visit <a href="https://www.alta.org" target="_blank" rel="noopener noreferrer" className="text-alta-teal font-medium hover:underline">alta.org</a>. We take accuracy seriously and will correct any verified errors promptly.</p>
           </div>
-          </SectionGate>
 
-          <ModuleGate name="FirstTimeBuyerCTA">
-            <FirstTimeBuyerCTA />
-          </ModuleGate>
+          <FirstTimeBuyerCTA />
         </div>
       </div>
     </>

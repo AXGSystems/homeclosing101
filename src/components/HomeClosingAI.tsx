@@ -2,8 +2,9 @@
 
 import { useState, useRef, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
-import { X, Send, Sparkles, Download, Loader2 } from 'lucide-react';
+import { X, Send, Sparkles, Download, Loader2, GripHorizontal, Maximize2, Minimize2, RotateCcw } from 'lucide-react';
 import DateWeatherWidget from '@/components/DateWeatherWidget';
+import { trackAdEvent } from '@/components/Analytics';
 
 const sponsors = [
   { name: "First American Title", logo: "https://www.alta.org/images/wplogos/0000226.png", url: "https://www.firstam.com/", blurb: "Nation's leading provider of title insurance, settlement services, and risk solutions." },
@@ -161,7 +162,7 @@ function generateResponse(question: string): string {
 
   // Loan types / compare
   if (q.includes('loan type') || q.includes('compare loan') || q.includes('fha vs') || q.includes('conventional vs') || q.includes('va vs')) {
-    return `**Comparing Common Loan Types**\n\n**Conventional Loan**\n- Down payment: 3%–20%\n- Credit score: 620+ typical\n- PMI required if < 20% down (removable)\n- Best for: Strong credit, decent savings\n\n**FHA Loan**\n- Down payment: 3.5% (580+ score) or 10% (500-579)\n- Credit score: 580+ (some lenders allow 500)\n- MIP required for life of loan (if < 10% down)\n- Best for: Lower credit scores, smaller down payment\n\n**VA Loan**\n- Down payment: 0%\n- Credit score: No VA minimum (lenders often want 620+)\n- No PMI/MIP — but has a funding fee\n- Best for: Veterans, active military, eligible spouses\n\n**USDA Loan**\n- Down payment: 0%\n- Credit score: 640+ typical\n- Must be in eligible rural/suburban area\n- Income limits apply\n- Best for: Moderate-income buyers in qualifying areas\n\n**Tip:** Get pre-approved with 2-3 lenders to compare rates and terms. Even a 0.25% rate difference can save thousands over the life of the loan.\n\nVisit our **First-Time Buyers Guide** at /first-time-buyers for more details!\n\n_Source: HC101 First-Time Buyers page — all data verified._`;
+    return `**Comparing Common Loan Types**\n\n**Conventional Loan**\n- Down payment: 3%–20%\n- Credit score: 620+ typical\n- PMI required if < 20% down (removable)\n- Best for: Strong credit, decent savings\n\n**FHA Loan**\n- Down payment: 3.5% (580+ score) or 10% (500-579)\n- Credit score: 580+ (some lenders allow 500)\n- MIP required for life of loan (if < 10% down)\n- Best for: Lower credit scores, smaller down payment\n\n**VA Loan**\n- Down payment: 0%\n- Credit score: No VA minimum (lenders often want 620+)\n- No PMI/MIP — but has a funding fee\n- Best for: Veterans, active military, eligible spouses\n\n**USDA Loan**\n- Down payment: 0%\n- Credit score: 640+ typical\n- Must be in eligible rural/suburban area\n- Income limits apply\n- Best for: Moderate-income buyers in qualifying areas\n\n**Tip:** Get pre-approved with 2-3 lenders to compare rates and terms. Even a 0.25% rate difference can save thousands over the life of the loan.\n\nVisit our **First-Time Buyers Guide** at /first-time-buyers for more details. For deeper mortgage-side education, the MBA Home Loan Learning Center (ALTA's title-industry partner on RON advocacy) is the authoritative consumer reference at mba.org/home-loan-learning-center.\n\n_Source: HC101 First-Time Buyers page + MBA Home Loan Learning Center — all data verified._`;
   }
 
   // CertifID
@@ -308,6 +309,20 @@ export default function HomeClosingAI() {
   const chatBodyRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    const lastMsg = messages[messages.length - 1];
+    // For a new assistant response, scroll to the top of that message so
+    // the user reads it from the beginning instead of landing at the end.
+    if (lastMsg?.role === 'assistant' && !loading && !typing) {
+      const chat = chatBodyRef.current;
+      if (chat) {
+        const nodes = chat.querySelectorAll('[data-message-role="assistant"]');
+        const last = nodes[nodes.length - 1] as HTMLElement | undefined;
+        if (last) {
+          last.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          return;
+        }
+      }
+    }
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages, typing, loading]);
 
@@ -353,7 +368,134 @@ export default function HomeClosingAI() {
 
   const sponsor = sponsors[sponsorIdx];
 
+  useEffect(() => {
+    trackAdEvent('HomeClosingAI', sponsor.name, 'impression');
+  }, [sponsor]);
+
   const [minimized, setMinimized] = useState(false);
+
+  // Drag / resize / expand state
+  const [position, setPosition] = useState<{ x: number; y: number } | null>(null);
+  const [size, setSize] = useState<{ width: number; height: number } | null>(null);
+  const [isExpanded, setIsExpanded] = useState(false);
+
+  useEffect(() => {
+    try {
+      // One-time layout reset: clear any saved position/size from prior
+      // versions so everyone gets the new landscape default.
+      const LAYOUT_VERSION = '4';
+      if (localStorage.getItem('hc101-ai-layout-v') !== LAYOUT_VERSION) {
+        localStorage.removeItem('hc101-ai-position');
+        localStorage.removeItem('hc101-ai-size');
+        localStorage.setItem('hc101-ai-layout-v', LAYOUT_VERSION);
+        return;
+      }
+      const p = localStorage.getItem('hc101-ai-position');
+      if (p) {
+        const pos = JSON.parse(p);
+        if (
+          typeof pos.x === 'number' &&
+          typeof pos.y === 'number' &&
+          pos.x >= 0 && pos.x < window.innerWidth - 100 &&
+          pos.y >= 0 && pos.y < window.innerHeight - 100
+        ) {
+          setPosition(pos);
+        } else {
+          localStorage.removeItem('hc101-ai-position');
+        }
+      }
+      const s = localStorage.getItem('hc101-ai-size');
+      if (s) {
+        const sz = JSON.parse(s);
+        if (
+          typeof sz.width === 'number' &&
+          typeof sz.height === 'number' &&
+          sz.width >= 320 && sz.width <= window.innerWidth &&
+          sz.height >= 380 && sz.height <= window.innerHeight
+        ) {
+          setSize(sz);
+        } else {
+          localStorage.removeItem('hc101-ai-size');
+        }
+      }
+    } catch { /* ignore */ }
+  }, []);
+
+  const startDrag = (e: React.PointerEvent, element: HTMLElement | null) => {
+    if (!element || isExpanded) return;
+    const rect = element.getBoundingClientRect();
+    const offsetX = e.clientX - rect.left;
+    const offsetY = e.clientY - rect.top;
+    const width = rect.width;
+    const height = rect.height;
+    let latest = { x: rect.left, y: rect.top };
+    setPosition(latest);
+
+    const handleMove = (ev: PointerEvent) => {
+      const newX = Math.max(0, Math.min(window.innerWidth - width, ev.clientX - offsetX));
+      const newY = Math.max(0, Math.min(window.innerHeight - height, ev.clientY - offsetY));
+      latest = { x: newX, y: newY };
+      setPosition(latest);
+    };
+    const handleUp = () => {
+      document.removeEventListener('pointermove', handleMove);
+      document.removeEventListener('pointerup', handleUp);
+      try { localStorage.setItem('hc101-ai-position', JSON.stringify(latest)); } catch { /* ignore */ }
+    };
+    document.addEventListener('pointermove', handleMove);
+    document.addEventListener('pointerup', handleUp);
+    e.preventDefault();
+    e.stopPropagation();
+  };
+
+  const startResize = (e: React.PointerEvent, element: HTMLElement | null) => {
+    if (!element || isExpanded) return;
+    const rect = element.getBoundingClientRect();
+    if (!position) setPosition({ x: rect.left, y: rect.top });
+    const startX = e.clientX;
+    const startY = e.clientY;
+    const startW = rect.width;
+    const startH = rect.height;
+    let latest = { width: startW, height: startH };
+    setSize(latest);
+
+    const handleMove = (ev: PointerEvent) => {
+      const newW = Math.max(320, Math.min(window.innerWidth - 20, startW + (ev.clientX - startX)));
+      const newH = Math.max(380, Math.min(window.innerHeight - 20, startH + (ev.clientY - startY)));
+      latest = { width: newW, height: newH };
+      setSize(latest);
+    };
+    const handleUp = () => {
+      document.removeEventListener('pointermove', handleMove);
+      document.removeEventListener('pointerup', handleUp);
+      try { localStorage.setItem('hc101-ai-size', JSON.stringify(latest)); } catch { /* ignore */ }
+    };
+    document.addEventListener('pointermove', handleMove);
+    document.addEventListener('pointerup', handleUp);
+    e.preventDefault();
+    e.stopPropagation();
+  };
+
+  const resetLayout = () => {
+    setPosition(null);
+    setSize(null);
+    setIsExpanded(false);
+    try {
+      localStorage.removeItem('hc101-ai-position');
+      localStorage.removeItem('hc101-ai-size');
+    } catch { /* ignore */ }
+  };
+
+  const collapsedStyle: React.CSSProperties = position
+    ? { left: position.x, top: position.y, right: 'auto', transform: 'none' }
+    : {};
+
+  const chatPanelStyle: React.CSSProperties = isExpanded
+    ? { top: '5vh', left: '5vw', right: 'auto', width: '90vw', height: '90vh', maxWidth: 'none', maxHeight: 'none', transform: 'none' }
+    : {
+        ...(position ? { left: position.x, top: position.y, right: 'auto', transform: 'none' } : {}),
+        ...(size ? { width: size.width, height: size.height, maxWidth: 'none', maxHeight: 'none' } : {}),
+      };
 
   return (
     <div id="home-closing-ai" className="print:hidden">
@@ -387,26 +529,53 @@ export default function HomeClosingAI() {
         </button>
 
         {/* Desktop: sponsor + AI button with minimize option */}
-        <div className="hidden sm:block fixed top-1/2 -translate-y-1/2 right-4 z-[600] w-[260px] group/widget">
-          {/* Minimize button */}
-          <button
-            onClick={() => setMinimized(true)}
-            className="absolute -top-2 -left-2 w-6 h-6 rounded-full bg-gray-400 hover:bg-gray-600 text-white flex items-center justify-center opacity-0 group-hover/widget:opacity-100 transition-opacity z-10"
-            aria-label="Minimize"
-            title="Minimize"
+        <div
+          className={`hidden sm:block fixed z-[600] w-[290px] group/widget ${position ? '' : 'top-1/2 -translate-y-1/2 right-4'}`}
+          style={collapsedStyle}
+          data-ai-container
+        >
+          {/* Drag handle bar */}
+          <div
+            onPointerDown={(e) => {
+              const container = (e.currentTarget.parentElement) as HTMLElement | null;
+              startDrag(e, container);
+            }}
+            className="flex items-center justify-center h-4 bg-gradient-to-b from-gray-100 to-gray-50 rounded-t-xl border border-gray-100 border-b-0 cursor-move hover:bg-gray-100 transition-colors"
+            title="Drag to move"
           >
-            <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-            </svg>
-          </button>
+            <GripHorizontal className="w-3.5 h-3.5 text-gray-400" />
+          </div>
+          {/* Control buttons (hover to reveal) */}
+          <div className="absolute -top-2 -left-2 flex items-center gap-1 opacity-0 group-hover/widget:opacity-100 transition-opacity z-10">
+            {position && (
+              <button
+                onClick={resetLayout}
+                className="w-6 h-6 rounded-full bg-alta-teal hover:bg-alta-teal-dark text-white flex items-center justify-center shadow"
+                aria-label="Reset position"
+                title="Reset to default position"
+              >
+                <RotateCcw className="w-3 h-3" />
+              </button>
+            )}
+            <button
+              onClick={() => setMinimized(true)}
+              className="w-6 h-6 rounded-full bg-gray-400 hover:bg-gray-600 text-white flex items-center justify-center shadow"
+              aria-label="Minimize"
+              title="Minimize"
+            >
+              <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+          </div>
           {/* Sponsor top half */}
           <div className="relative">
             <a
               href={sponsor.url}
               target="_blank"
               rel="noopener noreferrer"
-              onClick={(e) => e.stopPropagation()}
-              className={`peer flex items-center gap-3 bg-white rounded-t-xl px-4 py-3 shadow-lg border border-gray-100 border-b-0 hover:bg-gray-50 transition-all w-full ${sponsorFading ? 'opacity-0' : 'opacity-100'}`}
+              onClick={(e) => { e.stopPropagation(); trackAdEvent('HomeClosingAI', sponsor.name, 'click'); }}
+              className={`peer flex items-center gap-3 bg-white px-4 py-3 shadow-lg border border-gray-100 border-t-0 border-b-0 hover:bg-gray-50 transition-all w-full ${sponsorFading ? 'opacity-0' : 'opacity-100'}`}
               style={{ transition: 'opacity 350ms ease' }}
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -434,13 +603,30 @@ export default function HomeClosingAI() {
               <div className="absolute bottom-0 right-8 translate-y-1/2 rotate-45 w-3 h-3 bg-white border-r border-b border-gray-100"></div>
             </div>
           </div>
-          {/* AI button middle */}
+          {/* AI button middle — click-to-chat CTA */}
           <button
             onClick={() => setOpen(true)}
-            className="bg-gradient-to-r from-alta-navy to-alta-teal text-white px-5 py-3 shadow-2xl hover:brightness-110 transition-all duration-300 flex items-center gap-2.5 group w-full justify-center"
+            className="relative bg-gradient-to-r from-alta-navy to-alta-teal text-white px-5 py-3.5 shadow-2xl hover:brightness-110 transition-all duration-300 flex items-center gap-2.5 group w-full justify-center overflow-hidden"
+            aria-label="Open HomeClosing101 AI chat"
           >
-            <Sparkles className="w-4 h-4 text-white/80 group-hover:rotate-12 transition-transform" />
-            <span className="font-bold text-sm">Ask HomeClosing101</span>
+            {/* Live pulse dot — signals the assistant is ready */}
+            <span className="absolute top-2 right-2 flex h-2.5 w-2.5">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#4ade80] opacity-75" />
+              <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-[#22c55e] shadow-[0_0_8px_rgba(74,222,128,0.9)]" />
+            </span>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/logos/alta.svg"
+              alt="ALTA"
+              className="h-4 w-auto group-hover:scale-105 transition-transform"
+              style={{ filter: "brightness(0) invert(1)" }}
+            />
+            <span className="w-px h-4 bg-white/30" />
+            <Sparkles className="w-4 h-4 text-white/90 animate-pulse group-hover:rotate-12 transition-transform" />
+            <div className="flex flex-col items-start leading-tight">
+              <span className="font-bold text-sm">Ask HomeClosing101</span>
+              <span className="text-[10px] text-white/70 font-medium tracking-wide">Click to chat →</span>
+            </div>
           </button>
           {/* Date & weather bottom tab */}
           <DateWeatherWidget />
@@ -450,12 +636,23 @@ export default function HomeClosingAI() {
 
       {/* Chat panel — with sponsor inside header */}
       {open && (
-        <div className="fixed top-1/2 -translate-y-1/2 right-2 sm:right-6 z-[600] w-[calc(100vw-1rem)] sm:w-[420px] max-w-[420px] h-[70vh] sm:h-[580px] max-h-[calc(100vh-6rem)] bg-white rounded-2xl shadow-2xl border border-gray-200 flex flex-col overflow-hidden">
+        <div
+          className={`fixed z-[600] bg-white rounded-2xl shadow-2xl border border-gray-200 flex flex-col overflow-hidden ${
+            isExpanded
+              ? ''
+              : position
+                ? ''
+                : 'top-1/2 -translate-y-1/2 right-4 sm:right-8 w-[calc(100vw-1rem)] sm:w-[540px] max-w-[540px] h-[calc(100vh-6rem)] sm:h-[580px] max-h-[calc(100vh-6rem)]'
+          }`}
+          style={chatPanelStyle}
+          data-ai-container
+        >
           {/* Sponsor banner — compact on mobile, full showcase on desktop */}
           <a
             href={sponsor.url}
             target="_blank"
             rel="noopener noreferrer"
+            onClick={() => trackAdEvent('HomeClosingAI', sponsor.name, 'click')}
             className={`flex-shrink-0 block border-b border-gray-100 hover:bg-gray-50 transition-all ${sponsorFading ? 'opacity-0' : 'opacity-100'}`}
             style={{ transition: 'opacity 350ms ease' }}
           >
@@ -482,17 +679,32 @@ export default function HomeClosingAI() {
             </div>
           </a>
           {/* Header */}
-          <div className="bg-gradient-to-r from-alta-navy to-[#0d3a5c] text-white px-5 py-3 flex items-center justify-between flex-shrink-0">
-            <div className="flex items-center gap-3">
-              <div className="w-8 h-8 rounded-xl bg-alta-teal/30 flex items-center justify-center">
-                <Sparkles className="w-4 h-4 text-white" />
+          <div
+            onPointerDown={(e) => {
+              if ((e.target as HTMLElement).closest('button')) return;
+              const container = (e.currentTarget.parentElement) as HTMLElement | null;
+              startDrag(e, container);
+            }}
+            className={`bg-gradient-to-r from-alta-teal/80 via-[#0a8ebc]/75 to-[#077a9e]/80 backdrop-blur-xl border-b border-white/20 text-white px-5 py-3 flex items-center justify-between flex-shrink-0 ${isExpanded ? '' : 'cursor-move'}`}
+            title={isExpanded ? '' : 'Drag to move'}
+          >
+            <div className="flex items-center gap-3 pointer-events-none min-w-0">
+              <div className="w-9 h-9 rounded-xl bg-white/15 border border-white/25 backdrop-blur-xl flex items-center justify-center shrink-0">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/logos/alta.svg"
+                  alt="ALTA"
+                  className="h-3.5 w-auto"
+                  style={{ filter: "brightness(0) invert(1)" }}
+                />
               </div>
-              <div>
-                <div className="font-bold text-sm">HomeClosing101</div>
-                <div className="text-[10px] text-white/50">Your Closing Assistant</div>
+              <div className="flex items-baseline gap-2 min-w-0">
+                <span className="font-bold text-sm whitespace-nowrap">HomeClosing101</span>
+                <span className="text-white/40 text-xs">·</span>
+                <span className="text-xs text-white/85 truncate">Your Closing Assistant</span>
               </div>
             </div>
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-1.5">
               <button onClick={() => {
                 const welcomeText = 'AI: Welcome to HomeClosing101 — your personal closing assistant.\n\n';
                 const text = welcomeText + messages.map(m => `${m.role === 'user' ? 'You' : 'AI'}: ${m.content}`).join('\n\n');
@@ -502,6 +714,24 @@ export default function HomeClosingAI() {
                 a.href = url; a.download = 'HomeClosing101_Conversation.txt'; a.click();
               }} className="p-1.5 rounded-lg bg-white/10 hover:bg-white/20 transition-colors" title="Download conversation" aria-label="Download conversation">
                 <Download className="w-4 h-4" />
+              </button>
+              {(position || size || isExpanded) && (
+                <button
+                  onClick={resetLayout}
+                  className="p-1.5 rounded-lg bg-white/10 hover:bg-white/20 transition-colors"
+                  title="Reset to default position"
+                  aria-label="Reset layout"
+                >
+                  <RotateCcw className="w-4 h-4" />
+                </button>
+              )}
+              <button
+                onClick={() => setIsExpanded(!isExpanded)}
+                className="p-1.5 rounded-lg bg-white/10 hover:bg-white/20 transition-colors"
+                title={isExpanded ? 'Collapse' : 'Expand'}
+                aria-label={isExpanded ? 'Collapse panel' : 'Expand panel'}
+              >
+                {isExpanded ? <Minimize2 className="w-4 h-4" /> : <Maximize2 className="w-4 h-4" />}
               </button>
               <button onClick={() => setOpen(false)} className="p-1.5 rounded-lg bg-white/10 hover:bg-white/20 transition-colors" aria-label="Close chat">
                 <X className="w-4 h-4" />
@@ -520,7 +750,11 @@ export default function HomeClosingAI() {
               </div>
             )}
             {messages.map((msg, i) => (
-              <div key={i} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
+              <div
+                key={i}
+                data-message-role={msg.role}
+                className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
+              >
                 <div className={`max-w-[85%] rounded-2xl px-4 py-3 text-sm leading-relaxed ${
                   msg.role === 'user'
                     ? 'bg-alta-navy text-white rounded-br-md'
@@ -615,6 +849,21 @@ export default function HomeClosingAI() {
               <Send className="w-4 h-4" />
             </button>
           </div>
+          {/* Resize handle (bottom-right) */}
+          {!isExpanded && (
+            <div
+              onPointerDown={(e) => {
+                const container = (e.currentTarget.parentElement) as HTMLElement | null;
+                startResize(e, container);
+              }}
+              className="hidden sm:block absolute bottom-0 right-0 w-4 h-4 cursor-nwse-resize z-10 group/resize"
+              title="Drag to resize"
+            >
+              <svg className="w-4 h-4 text-gray-300 group-hover/resize:text-alta-teal transition-colors" viewBox="0 0 16 16" fill="currentColor">
+                <path d="M11 5L5 11M13 9L9 13M13 13L13 13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" fill="none" />
+              </svg>
+            </div>
+          )}
         </div>
       )}
     </div>

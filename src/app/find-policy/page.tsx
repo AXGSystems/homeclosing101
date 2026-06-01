@@ -7,7 +7,7 @@ import { stateInsuranceData, callingScript, type StateInsuranceDept } from "@/da
 import { stateFlags } from "@/data/stateFlags";
 import FirstTimeBuyerCTA from "@/components/FirstTimeBuyerCTA";
 import SaveToFolderBtn from "@/components/SaveToFolderBtn";
-import { SectionGate, AdGate, ModuleGate } from "@/components/Gate";
+import StatePartners from "@/components/StatePartners";
 
 // State colors inspired by state flags/identity
 const stateColors: Record<string, { bg: string; accent: string; text: string }> = {
@@ -131,9 +131,6 @@ export default function FindPolicyPage() {
   const [selectedState, setSelectedState] = useState<string | null>(null);
   const [showScript, setShowScript] = useState(false);
   const [activeModal, setActiveModal] = useState<{title: string; gradient: string; content: React.ReactNode} | null>(null);
-  const [compareMode, setCompareMode] = useState(false);
-  const [compareA, setCompareA] = useState<string>("");
-  const [compareB, setCompareB] = useState<string>("");
 
   const filtered = stateInsuranceData.filter((s) =>
     s.state.toLowerCase().includes(search.toLowerCase()) ||
@@ -146,27 +143,22 @@ export default function FindPolicyPage() {
 
   const colors = selectedState ? stateColors[selectedState] : null;
 
-  const compareDeptA = compareA ? stateInsuranceData.find((s) => s.abbr === compareA) : null;
-  const compareDeptB = compareB ? stateInsuranceData.find((s) => s.abbr === compareB) : null;
 
   const closingTypeLabel = (t?: string) => t === "attorney" ? "Attorney State" : t === "title" ? "Title State" : t === "either" ? "Attorney or Title" : "Not available";
   const rateTypeLabel = (t?: string) => t === "regulated" ? "Regulated" : t === "competitive" ? "Competitive" : "Not available";
 
   return (
     <>
-      <SectionGate page="/find-policy" id="hero">
-        <PageHero
-          title="Find My Title Policy"
-          subtitle="Locate your existing title insurance policy or contact your state's insurance department for help."
-          image="https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=1920&q=80"
-          breadcrumb={[{ label: "Find My Policy", href: "/find-policy" }]}
-        />
-      </SectionGate>
+      <PageHero
+        title="Find My Title Policy"
+        subtitle="Locate your existing title insurance policy or contact your state's insurance department for help."
+        image="https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=1920&q=80"
+        breadcrumb={[{ label: "Find My Policy", href: "/find-policy" }]}
+      />
 
       <div className="py-1.5 lg:py-2">
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
           {/* Page intro */}
-          <SectionGate page="/find-policy" id="intro">
           <div className="mb-6 p-4 bg-[#f0ecf6] rounded-2xl border border-[#d4c8e4] border-l-4 border-l-[#5b3a8c] sm:sticky sm:top-[142px] z-20 shadow-md">
             <div className="flex items-start gap-4">
               <div className="w-12 h-12 rounded-xl bg-[#5b3a8c]/10 flex items-center justify-center text-[#5b3a8c] shrink-0">
@@ -178,10 +170,8 @@ export default function FindPolicyPage() {
               </div>
             </div>
           </div>
-          </SectionGate>
 
           {/* Quick Stats */}
-          <SectionGate page="/find-policy" id="quick-stats">
           <div className="grid grid-cols-3 gap-3 mb-6">
             {[
               { icon: <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M9 6.75V15m6-6v8.25m.503 3.498l4.875-2.437c.381-.19.622-.58.622-1.006V4.82c0-.836-.88-1.38-1.628-1.006l-3.869 1.934c-.317.159-.69.159-1.006 0L9.503 3.252a1.125 1.125 0 00-1.006 0L3.622 5.689C3.24 5.88 3 6.27 3 6.695V19.18c0 .836.88 1.38 1.628 1.006l3.869-1.934c.317-.159.69-.159 1.006 0l4.994 2.497c.317.158.69.158 1.006 0z" /></svg>, label: "50 state departments + DC", color: "text-[#1a5276]" },
@@ -194,10 +184,8 @@ export default function FindPolicyPage() {
               </div>
             ))}
           </div>
-          </SectionGate>
 
           {/* Steps */}
-          <SectionGate page="/find-policy" id="steps">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-12">
             {steps.map((s) => (
               <div
@@ -242,10 +230,8 @@ export default function FindPolicyPage() {
               </div>
             ))}
           </div>
-          </SectionGate>
 
           {/* Interactive Map */}
-          <SectionGate page="/find-policy" id="interactive-map">
           <div className="bg-[#e8f0f5] rounded-2xl border border-[#c5d8e4] shadow-sm p-6 mb-8">
             <h2 className="text-xl font-bold text-alta-navy mb-4">Click Your State</h2>
             <div className="relative w-full" style={{ paddingBottom: "60%" }}>
@@ -300,7 +286,7 @@ export default function FindPolicyPage() {
                   <div className="flex-1 px-5 py-4 text-white min-w-0">
                     <p className="text-[10px] font-semibold uppercase tracking-widest text-white/60">{sf?.nickname || ''}</p>
                     <h3 className="text-xl sm:text-2xl font-bold truncate">{selectedDept.state}</h3>
-                    <p className="text-xs text-white/70 mt-0.5">{selectedDept.department}</p>
+                    <p className="text-sm sm:text-base font-semibold text-white/95 mt-0.5 truncate">{selectedDept.department}</p>
                   </div>
                   {/* Stats */}
                   <div className="hidden sm:flex flex-col items-center justify-center px-5 border-l border-white/20">
@@ -309,155 +295,244 @@ export default function FindPolicyPage() {
                   </div>
                 </div>
                 {/* Details */}
-                <div className="bg-white p-5">
-                  <div className="flex items-start gap-3 mb-4">
-                    <svg className="w-4 h-4 text-alta-gray shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" /><path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" /></svg>
-                    <p className="text-sm text-alta-gray">{selectedDept.address}</p>
-                  </div>
-                  {/* State closing details */}
-                  {selectedDept.closingType && (
-                    <div className="flex flex-wrap gap-2 mb-4">
-                      <span className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold ${selectedDept.closingType === "attorney" ? "bg-amber-50 text-amber-700 border border-amber-200" : selectedDept.closingType === "title" ? "bg-blue-50 text-blue-700 border border-blue-200" : "bg-purple-50 text-purple-700 border border-purple-200"}`}>
-                        <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0012 9.75c-2.551 0-5.056.2-7.5.582V21" /></svg>
-                        {closingTypeLabel(selectedDept.closingType)}
-                      </span>
-                      <span className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold ${selectedDept.ronAvailable ? "bg-green-50 text-green-700 border border-green-200" : "bg-red-50 text-red-700 border border-red-200"}`}>
-                        <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M9 17.25v1.007a3 3 0 01-.879 2.122L7.5 21h9l-.621-.621A3 3 0 0115 18.257V17.25m6-12V15a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 15V5.25A2.25 2.25 0 015.25 3h13.5A2.25 2.25 0 0121 5.25z" /></svg>
-                        RON {selectedDept.ronAvailable ? "Available" : "Not Available"}
-                      </span>
-                      <span className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold ${selectedDept.rateType === "regulated" ? "bg-slate-50 text-slate-700 border border-slate-200" : "bg-teal-50 text-teal-700 border border-teal-200"}`}>
-                        <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                        Rates: {rateTypeLabel(selectedDept.rateType)}
-                      </span>
+                <div className="bg-white p-5 grid grid-cols-1 lg:grid-cols-[1fr_280px] gap-5">
+                  <div className="flex flex-col justify-center">
+                    <div className="flex items-center gap-3 mb-4">
+                      <svg className="w-4 h-4 text-alta-gray shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" /><path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" /></svg>
+                      <p className="text-sm text-alta-navy leading-tight">
+                        <span className="font-bold">{selectedDept.state} {selectedDept.department}</span>
+                        <span className="text-alta-gray"> — {selectedDept.address}</span>
+                      </p>
                     </div>
-                  )}
-                  <div className="flex flex-wrap gap-3">
-                    <a href={`tel:${selectedDept.phone}`} className="inline-flex items-center gap-2 px-5 py-2.5 bg-alta-teal text-white rounded-lg font-semibold text-sm hover:bg-alta-teal-dark transition-colors">
-                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" /></svg>
-                      Call {selectedDept.phone}
-                    </a>
-                    <a href={selectedDept.website} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-5 py-2.5 border-2 border-alta-teal text-alta-teal rounded-lg font-semibold text-sm hover:bg-alta-teal hover:text-white transition-colors">
-                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
-                      Visit Website
-                    </a>
-                    <a href={`/find-company?state=${selectedDept.abbr}`} className="inline-flex items-center gap-2 px-5 py-2.5 border-2 border-alta-navy text-alta-navy rounded-lg font-semibold text-sm hover:bg-alta-navy hover:text-white transition-colors">
-                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
-                      Find Companies in {selectedDept.abbr}
-                    </a>
+                    {/* State closing details */}
+                    {selectedDept.closingType && (
+                      <div className="flex flex-wrap gap-2 mb-4">
+                        <span className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold ${selectedDept.closingType === "attorney" ? "bg-amber-50 text-amber-700 border border-amber-200" : selectedDept.closingType === "title" ? "bg-blue-50 text-blue-700 border border-blue-200" : "bg-purple-50 text-purple-700 border border-purple-200"}`}>
+                          <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0012 9.75c-2.551 0-5.056.2-7.5.582V21" /></svg>
+                          {closingTypeLabel(selectedDept.closingType)}
+                        </span>
+                        <span className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold ${selectedDept.ronAvailable ? "bg-green-50 text-green-700 border border-green-200" : "bg-red-50 text-red-700 border border-red-200"}`}>
+                          <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M9 17.25v1.007a3 3 0 01-.879 2.122L7.5 21h9l-.621-.621A3 3 0 0115 18.257V17.25m6-12V15a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 15V5.25A2.25 2.25 0 015.25 3h13.5A2.25 2.25 0 0121 5.25z" /></svg>
+                          RON {selectedDept.ronAvailable ? "Available" : "Not Available"}
+                        </span>
+                        <span className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold ${selectedDept.rateType === "regulated" ? "bg-slate-50 text-slate-700 border border-slate-200" : "bg-teal-50 text-teal-700 border border-teal-200"}`}>
+                          <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                          Rates: {rateTypeLabel(selectedDept.rateType)}
+                        </span>
+                      </div>
+                    )}
+                    <div className="flex flex-nowrap items-center gap-2 overflow-x-auto">
+                      <a href={`tel:${selectedDept.phone}`} className="inline-flex items-center gap-1.5 px-3.5 py-2 bg-alta-teal text-white rounded-lg font-semibold text-xs whitespace-nowrap hover:bg-alta-teal-dark transition-colors shrink-0">
+                        <svg className="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" /></svg>
+                        Call {selectedDept.phone}
+                      </a>
+                      <a href={selectedDept.website} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 px-3.5 py-2 border-2 border-alta-teal text-alta-teal rounded-lg font-semibold text-xs whitespace-nowrap hover:bg-alta-teal hover:text-white transition-colors shrink-0">
+                        <svg className="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
+                        Visit Website
+                      </a>
+                      <a href={`/find-company?state=${selectedDept.abbr}`} className="inline-flex items-center gap-1.5 px-3.5 py-2 border-2 border-alta-navy text-alta-navy rounded-lg font-semibold text-xs whitespace-nowrap hover:bg-alta-navy hover:text-white transition-colors shrink-0">
+                        <svg className="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
+                        Find Companies
+                      </a>
+                    </div>
+                  </div>
+                  {/* Right column — state partner ads */}
+                  <div className="lg:border-l lg:border-gray-100 lg:pl-5">
+                    <StatePartners stateCode={selectedDept.abbr} stateName={selectedDept.state} />
                   </div>
                 </div>
               </div>
               );
             })()}
           </div>
-          </SectionGate>
 
-          {/* Compare States */}
-          <SectionGate page="/find-policy" id="compare-states">
+          {/* When to Contact Your State Insurance Department */}
           <div className="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden mb-8">
-            <button
-              onClick={() => setCompareMode(!compareMode)}
-              className="w-full flex items-center justify-between p-5 hover:bg-alta-light/50 transition-colors"
-            >
+            <div className="px-5 py-4 border-b border-gray-100 bg-gradient-to-r from-[#5b3a8c]/10 to-transparent">
               <div className="flex items-center gap-3">
-                <svg className="w-5 h-5 text-[#5b3a8c]" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M7.5 21L3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5" /></svg>
-                <span className="font-semibold text-alta-navy">Compare Two States Side-by-Side</span>
+                <svg className="w-5 h-5 text-[#5b3a8c]" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
+                </svg>
+                <span className="font-semibold text-alta-navy">When to Contact Your State Insurance Department</span>
               </div>
-              <svg className={`w-5 h-5 text-alta-gray transition-transform ${compareMode ? "rotate-180" : ""}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-              </svg>
-            </button>
-            {compareMode && (
-              <div className="px-5 pb-5 border-t border-gray-100">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
-                  <div>
-                    <label className="block text-xs font-semibold text-alta-navy mb-1.5">First State</label>
-                    <select
-                      value={compareA}
-                      onChange={(e) => setCompareA(e.target.value)}
-                      className="w-full px-3 py-2.5 border border-gray-200 rounded-lg text-sm bg-white"
-                    >
-                      <option value="">Select a state...</option>
-                      {stateInsuranceData.map((s) => (
-                        <option key={s.abbr} value={s.abbr}>{s.state}</option>
-                      ))}
-                    </select>
-                  </div>
-                  <div>
-                    <label className="block text-xs font-semibold text-alta-navy mb-1.5">Second State</label>
-                    <select
-                      value={compareB}
-                      onChange={(e) => setCompareB(e.target.value)}
-                      className="w-full px-3 py-2.5 border border-gray-200 rounded-lg text-sm bg-white"
-                    >
-                      <option value="">Select a state...</option>
-                      {stateInsuranceData.map((s) => (
-                        <option key={s.abbr} value={s.abbr}>{s.state}</option>
-                      ))}
-                    </select>
-                  </div>
-                </div>
-
-                {compareDeptA && compareDeptB && (
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-5">
-                    {[compareDeptA, compareDeptB].map((dept) => {
-                      const sf = stateFlags[dept.abbr];
-                      const primary = sf?.colors[0] || '#002868';
-                      const secondary = sf?.colors[1] || '#ce1126';
-                      return (
-                        <div key={dept.abbr} className="rounded-xl overflow-hidden border border-gray-200 shadow-sm">
-                          <div className="flex items-center gap-3 px-4 py-3 text-white" style={{ background: `linear-gradient(135deg, ${primary}, ${secondary})` }}>
-                            <div className="w-10 h-7 rounded overflow-hidden bg-white/20 shrink-0 flex items-center justify-center">
-                              {/* eslint-disable-next-line @next/next/no-img-element */}
-                              <img src={sf?.flag || ""} alt={`${dept.state} flag`} className="w-full h-full object-cover" onError={(e) => { e.currentTarget.style.display = 'none'; }} />
-                            </div>
-                            <div className="min-w-0">
-                              <h4 className="font-bold text-sm truncate">{dept.state}</h4>
-                              <p className="text-[10px] text-white/70 truncate">{dept.department}</p>
-                            </div>
+              <p className="text-xs text-alta-gray mt-2">Most homebuyers never interact with their state&apos;s insurance office, but it exists specifically to protect you. Here are the most common reasons consumers reach out.</p>
+            </div>
+            <div className="p-5 grid grid-cols-1 sm:grid-cols-2 gap-3">
+              {[
+                {
+                  title: "Verify a Title Company's License",
+                  body: "Confirm the company is licensed in your state and has no open disciplinary actions before you hand over wire funds.",
+                  color: "#0a7ea8",
+                  gradient: "from-[#0a7ea8] to-[#077a9e]",
+                  guidance: "Every state requires title agents, escrow officers, and title insurance underwriters to hold an active license. Before you share personal information or wire a down payment, confirm the company and the individual handling your closing are both in good standing with your state insurance department — and that no disciplinary actions are open against them.",
+                  checklist: [
+                    "Company legal name (not just a DBA) and business address",
+                    "License number and NAIC code of the underwriter",
+                    "Name of the agent handling your specific file",
+                    "Whether the company is ALTA Best Practices certified",
+                  ],
+                  tips: [
+                    "Use the NAIC's Consumer Information Source at insurance.naic.org to cross-check licenses across states.",
+                    "Disciplinary actions are public record — ask for a certified status letter if anything looks off.",
+                    "If the company cannot provide a license number on request, that alone is a red flag.",
+                  ],
+                },
+                {
+                  title: "File a Complaint",
+                  body: "If a title or settlement agent misled you, overcharged, or mishandled escrow, your state department investigates formally.",
+                  color: "#943030",
+                  gradient: "from-[#943030] to-[#7f1d1d]",
+                  guidance: "State insurance departments have formal authority to investigate title and settlement agents. A written complaint triggers a record the department keeps on file, and the company is required to respond within a statutory window (usually 15–30 days). Even if your specific issue is not resolved your way, the filing contributes to a pattern the department tracks.",
+                  checklist: [
+                    "A clear, chronological timeline of what happened",
+                    "Names of every person involved (agent, lender, seller, attorney)",
+                    "Specific dollar amounts in dispute",
+                    "Copies of emails, the Loan Estimate, the Closing Disclosure, and your HUD-1 if applicable",
+                  ],
+                  tips: [
+                    "File in writing for a formal record — most states offer an online complaint portal.",
+                    "Keep a copy of everything you submit, and note the complaint tracking number.",
+                    "Be factual, not emotional. Investigators respond faster to concise timelines than long narratives.",
+                  ],
+                },
+                {
+                  title: "Verify Filed Rates",
+                  body: "Some states set title insurance premiums by law. Confirm you were charged the correct rate for your transaction.",
+                  color: "#2d6b3f",
+                  gradient: "from-[#2d6b3f] to-[#1e4a2a]",
+                  guidance: "About 20 states operate under filed-rate or promulgated-rate title insurance, where every licensed underwriter must charge the same premium for a given purchase price and policy type. If you were charged more than the filed rate, the state department can confirm the correct amount and, depending on the situation, compel a refund.",
+                  checklist: [
+                    "Your Closing Disclosure (CD) showing every fee line",
+                    "Purchase price of the home and loan amount",
+                    "Owner's policy vs. lender's policy amounts (they are separate)",
+                    "Whether you received a simultaneous-issue discount",
+                  ],
+                  tips: [
+                    "In regulated-rate states, the insurance department publishes the filed rate table online.",
+                    "Simultaneous-issue discounts on an owner's policy purchased with a lender's policy are common — verify you got it.",
+                    "If your state is competitive-rate (filed rates vary by company), rate comparison is on you — shop at least 2–3 quotes.",
+                  ],
+                },
+                {
+                  title: "Report Wire or Closing Fraud",
+                  body: "State insurance fraud units coordinate with the FBI IC3 and your title insurer's claims team when you are targeted.",
+                  color: "#8b6914",
+                  gradient: "from-[#8b6914] to-[#705410]",
+                  guidance: "Real estate wire fraud losses topped $275 million in 2025. Your state insurance department has a dedicated fraud unit that coordinates with the FBI's Internet Crime Complaint Center (IC3), your title insurer's claims team, and — if acted on fast enough — the receiving bank to potentially freeze and recover stolen funds.",
+                  checklist: [
+                    "When the fraudulent wire instructions first arrived",
+                    "Exact email addresses used (including any that looked legitimate but were spoofed)",
+                    "Wire routing and account numbers where the money was sent",
+                    "Any follow-up communication from the criminal",
+                  ],
+                  tips: [
+                    "Report immediately — the first 24–72 hours are critical for fund recovery.",
+                    "Also file with IC3 at ic3.gov and notify your bank's fraud department the same day.",
+                    "Do not delete anything — preserve emails, texts, and voicemails as evidence.",
+                  ],
+                },
+                {
+                  title: "Dispute a Claim Denial",
+                  body: "If you filed a title insurance claim and the carrier denied or underpaid it, the department can review and mediate.",
+                  color: "#5b3a8c",
+                  gradient: "from-[#5b3a8c] to-[#4c2f72]",
+                  guidance: "If your title insurer denied a claim — for an unknown lien, boundary dispute, forged deed, undisclosed heir, etc. — or paid you less than expected, your state department can review the carrier's determination, request the claim file, and mediate between you and the insurer. This is often faster and cheaper than litigation.",
+                  checklist: [
+                    "Claim number and date filed",
+                    "Copy of the written denial or underpayment letter",
+                    "Your policy declarations page and full policy",
+                    "Any correspondence with the insurer's claims team",
+                  ],
+                  tips: [
+                    "Always request an internal appeal with the insurer first — most have a formal appeal process.",
+                    "If the internal appeal fails, the state department is your next step before hiring an attorney.",
+                    "Watch the policy's statute of limitations for disputing a claim — typically 1–3 years.",
+                  ],
+                },
+                {
+                  title: "Ask Pre-Closing Questions",
+                  body: "Call before you close if something feels off — they can clarify what your state requires and what protections apply.",
+                  color: "#0a8ebc",
+                  gradient: "from-[#0a8ebc] to-[#0d3a5c]",
+                  guidance: "You don't have to wait until something goes wrong. State insurance departments answer pre-closing questions — from whether a specific fee is customary to whether a closing structure is even legal in your state. They cannot give you legal advice, but they can tell you what consumer protections apply and what the standard practices look like.",
+                  checklist: [
+                    "Your Loan Estimate and (if you have it) Closing Disclosure",
+                    "The name of the title company and closing agent",
+                    "A specific written question — not just 'does this seem right'",
+                    "Your closing date so they know the timeline",
+                  ],
+                  tips: [
+                    "You have the legal right to delay closing if something is unclear — do not feel rushed.",
+                    "Under RESPA you can choose your own title company. If you are being pressured to a specific one, ask why.",
+                    "Document the call — date, name of the person you spoke with, and a summary of their guidance.",
+                  ],
+                },
+              ].map((item) => (
+                <button
+                  key={item.title}
+                  onClick={() =>
+                    setActiveModal({
+                      title: item.title,
+                      gradient: item.gradient,
+                      content: (
+                        <div className="space-y-5">
+                          <div>
+                            <h3 className="text-sm font-bold text-alta-navy mb-2">Detailed Guidance</h3>
+                            <p className="text-sm text-alta-gray leading-relaxed">{item.guidance}</p>
                           </div>
-                          <div className="bg-white p-4 space-y-3">
-                            <div className="flex items-start gap-2">
-                              <svg className="w-3.5 h-3.5 text-alta-gray shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" /></svg>
-                              <p className="text-sm font-semibold text-alta-teal">{dept.phone}</p>
-                            </div>
-                            <div className="space-y-2">
-                              <div className="flex items-center justify-between text-xs">
-                                <span className="text-alta-gray">Closing Type</span>
-                                <span className="font-semibold text-alta-navy">{dept.closingType ? closingTypeLabel(dept.closingType) : "---"}</span>
-                              </div>
-                              <div className="flex items-center justify-between text-xs">
-                                <span className="text-alta-gray">RON Available</span>
-                                <span className={`font-semibold ${dept.ronAvailable === true ? "text-green-600" : dept.ronAvailable === false ? "text-red-600" : "text-alta-gray"}`}>{dept.ronAvailable === true ? "Yes" : dept.ronAvailable === false ? "No" : "---"}</span>
-                              </div>
-                              <div className="flex items-center justify-between text-xs">
-                                <span className="text-alta-gray">Rate Type</span>
-                                <span className="font-semibold text-alta-navy">{dept.rateType ? rateTypeLabel(dept.rateType) : "---"}</span>
-                              </div>
-                            </div>
-                            <a href={dept.website} target="_blank" rel="noopener noreferrer" className="block text-center text-xs font-semibold text-alta-teal hover:text-alta-teal-dark mt-2">
-                              Visit Website
-                            </a>
+                          <div>
+                            <h3 className="text-sm font-bold text-[#2d6b3f] mb-2">What to Have Ready</h3>
+                            <ul className="space-y-2">
+                              {item.checklist.map((c, i) => (
+                                <li key={i} className="flex items-start gap-2 text-sm text-alta-gray">
+                                  <svg className="w-4 h-4 text-[#2d6b3f] shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75" />
+                                  </svg>
+                                  {c}
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                          <div className="p-4 bg-[#faf4e4] rounded-xl border border-[#e8d9a8]">
+                            <h3 className="text-sm font-bold text-[#8b6914] mb-2">Tips &amp; Best Practices</h3>
+                            <ul className="space-y-2">
+                              {item.tips.map((t, i) => (
+                                <li key={i} className="flex items-start gap-2 text-sm text-alta-gray">
+                                  <span className="w-1.5 h-1.5 rounded-full bg-[#8b6914] mt-1.5 shrink-0" />
+                                  <span>{t}</span>
+                                </li>
+                              ))}
+                            </ul>
                           </div>
                         </div>
-                      );
-                    })}
+                      ),
+                    })
+                  }
+                  className="text-left p-3.5 rounded-xl border border-gray-100 bg-gradient-to-br from-white to-gray-50/50 hover:shadow-md hover:border-gray-200 transition-all border-l-4 group relative"
+                  style={{ borderLeftColor: item.color }}
+                >
+                  <div className="flex items-start justify-between gap-2">
+                    <div className="flex-1">
+                      <h4 className="text-xs font-bold text-alta-navy mb-1">{item.title}</h4>
+                      <p className="text-[11px] text-alta-gray leading-relaxed">{item.body}</p>
+                    </div>
+                    <svg className="w-4 h-4 text-alta-gray/60 shrink-0 group-hover:text-alta-teal transition-colors mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" />
+                    </svg>
                   </div>
-                )}
-                {((compareA && !compareB) || (!compareA && compareB)) && (
-                  <p className="text-xs text-alta-gray mt-4 text-center">Select both states to see a side-by-side comparison.</p>
-                )}
+                </button>
+              ))}
+            </div>
+            <div className="px-5 pb-5">
+              <div className="p-3 bg-[#f0ecf6] rounded-xl border border-[#d4c8e4] text-[11px] text-alta-gray leading-relaxed">
+                <strong className="text-[#5b3a8c]">Before you call:</strong> have your property address, the name of the title/settlement company, your closing date (or HUD-1/Closing Disclosure), and any documents or emails related to your concern. A concise timeline helps the investigator move faster.
               </div>
-            )}
+            </div>
           </div>
-          </SectionGate>
 
-          <AdGate name="InlineAd">
           <InlineAd />
-          </AdGate>
 
           {/* Calling Script */}
-          <SectionGate page="/find-policy" id="calling-script">
           <div className="bg-[#f0ecf6] rounded-2xl border border-[#d4c8e4] shadow-sm overflow-hidden mb-8">
             <button
               onClick={() => setShowScript(!showScript)}
@@ -486,10 +561,8 @@ export default function FindPolicyPage() {
               </div>
             )}
           </div>
-          </SectionGate>
 
           {/* Searchable Directory */}
-          <SectionGate page="/find-policy" id="directory">
           <div className="bg-white rounded-2xl border border-[#bddcc7] shadow-sm overflow-hidden mb-8">
             <div className="p-5 border-b border-[#bddcc7]">
               <h2 className="text-xl font-bold text-alta-navy mb-2">Full State Insurance Directory</h2>
@@ -535,9 +608,7 @@ export default function FindPolicyPage() {
               )}
             </div>
           </div>
-          </SectionGate>
 
-          <SectionGate page="/find-policy" id="notes">
           <div className="p-5 bg-blue-50 rounded-xl border border-blue-100 mb-4">
             <p className="text-sm text-alta-gray">
               <strong className="text-alta-navy">Note:</strong> ALTA does not issue title insurance policies or have access to policies that have been issued. Directory data sourced from the I.I.I. and NAIC, verified as of February 2026.
@@ -548,11 +619,8 @@ export default function FindPolicyPage() {
               <strong className="text-alta-navy">Disclaimer:</strong> We recommend confirming contact details via your state&apos;s official .gov website before calling.
             </p>
           </div>
-          </SectionGate>
 
-          <ModuleGate name="FirstTimeBuyerCTA">
           <FirstTimeBuyerCTA />
-          </ModuleGate>
         </div>
       </div>
 

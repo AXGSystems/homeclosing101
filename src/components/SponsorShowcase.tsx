@@ -1,6 +1,8 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useAdEnabled } from "@/lib/adminConfig";
+import { trackAdEvent } from "@/components/Analytics";
 
 /**
  * SponsorShowcase — A premium full-width showcase ad for high-visibility placements.
@@ -66,6 +68,7 @@ const showcaseSponsors = [
 ];
 
 export default function SponsorShowcase() {
+  const enabled = useAdEnabled("SponsorShowcase");
   const [sponsor, setSponsor] = useState(showcaseSponsors[0]);
   const [fading, setFading] = useState(false);
 
@@ -83,12 +86,20 @@ export default function SponsorShowcase() {
     return () => clearInterval(interval);
   }, []);
 
+  useEffect(() => {
+    if (!enabled) return;
+    trackAdEvent("SponsorShowcase", sponsor.name, "impression");
+  }, [enabled, sponsor]);
+
+  if (!enabled) return null;
+
   return (
     <section className="my-12 print:hidden">
       <a
         href={sponsor.url}
         target="_blank"
         rel="noopener noreferrer"
+        onClick={() => trackAdEvent("SponsorShowcase", sponsor.name, "click")}
         className={`block rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 ${fading ? 'opacity-0' : 'opacity-100'}`}
         style={{ transition: "opacity 500ms ease, box-shadow 300ms ease" }}
       >

@@ -164,16 +164,16 @@ export default function DateWeatherWidget() {
   }, []);
 
   return (
-    <div className="bg-white border border-gray-100 border-t-0 rounded-b-xl px-4 py-3 shadow-lg flex items-center justify-between w-full">
+    <div className="bg-white border border-gray-100 border-t-0 rounded-b-xl px-3 py-3 shadow-lg flex items-center justify-between w-full gap-2">
       {/* Date & time */}
       <div className="min-w-0">
-        <p className="text-[13px] text-alta-navy font-bold leading-snug truncate">{formatDate(now)}</p>
-        <p className="text-[11px] text-gray-500 font-medium">{formatTime(now)}{city ? ` \u00B7 ${city}` : ""}</p>
+        <p className="text-[12px] text-alta-navy font-bold leading-snug whitespace-nowrap">{formatDate(now)}</p>
+        <p className="text-[10px] text-gray-500 font-medium truncate">{formatTime(now)}{city ? ` \u00B7 ${city}` : ""}</p>
       </div>
 
       {/* Weather */}
       {weather ? (
-        <div className="flex items-center gap-2 shrink-0 ml-3">
+        <div className="flex items-center gap-1.5 shrink-0">
           <WeatherIcon type={weather.icon} className="w-7 h-7 text-alta-teal" />
           <div className="text-right">
             <p className="text-[15px] text-alta-navy font-bold leading-none">{weather.temp}&deg;F</p>
@@ -181,7 +181,7 @@ export default function DateWeatherWidget() {
           </div>
         </div>
       ) : (
-        <div className="flex items-center gap-2 shrink-0 ml-3">
+        <div className="flex items-center gap-1.5 shrink-0">
           <div className="w-7 h-7 rounded-full bg-gray-100 animate-pulse" />
           <div className="text-right">
             <div className="w-10 h-4 bg-gray-100 rounded animate-pulse mb-0.5" />

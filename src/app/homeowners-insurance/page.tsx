@@ -4,11 +4,11 @@ import { useState } from "react";
 import Link from "next/link";
 import PageHero from "@/components/PageHero";
 import { InlineAd } from "@/components/EliteProviders";
+import SponsorTip from "@/components/SponsorTip";
 import FirstTimeBuyerCTA from "@/components/FirstTimeBuyerCTA";
 import MiniQuiz from "@/components/MiniQuiz";
 import ContextualSponsor from "@/components/ContextualSponsor";
 import SaveToFolderBtn from "@/components/SaveToFolderBtn";
-import { SectionGate, AdGate, ModuleGate } from "@/components/Gate";
 
 const insuranceQuiz = [
   {
@@ -178,18 +178,15 @@ export default function HomeownersInsurancePage() {
 
   return (
     <>
-      <SectionGate page="/homeowners-insurance" id="hero">
       <PageHero
         title="Homeowner's Insurance Guide"
         subtitle="Your lender requires proof of insurance before closing. Here's what you need to know about coverage, costs, and how to shop."
         image="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1920&q=80"
         breadcrumb={[{ label: "The Closing Process", href: "/closing-process" }, { label: "Homeowner's Insurance", href: "/homeowners-insurance" }]}
       />
-      </SectionGate>
 
       <div className="py-1.5 lg:py-2">
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
-          <SectionGate page="/homeowners-insurance" id="intro-callout">
           <div className="mb-6 p-4 bg-[#e6f1f5] rounded-2xl border border-[#b4d8e8] border-l-4 border-l-[#0a7ea8] sm:sticky sm:top-[142px] z-20 shadow-md">
             <div className="flex items-start gap-4">
               <div className="w-12 h-12 rounded-xl bg-alta-teal/10 flex items-center justify-center text-alta-teal shrink-0">
@@ -201,15 +198,12 @@ export default function HomeownersInsurancePage() {
               </div>
             </div>
           </div>
-          </SectionGate>
 
           {/* ══ COMPREHENSIVE COMPARISON ══ */}
-          <SectionGate page="/homeowners-insurance" id="comparison">
           <h2 className="text-xl font-bold text-alta-navy mb-2">Homeowner&apos;s Insurance vs Title Insurance — Complete Breakdown</h2>
           <p className="text-sm text-alta-gray mb-5 leading-relaxed">These are two completely different products that protect against completely different risks. One does not replace the other. A homebuyer needs both.</p>
 
           {/* Side-by-side cards */}
-          <SectionGate page="/homeowners-insurance" id="comparison" sub="side-by-side-cards">
           <div className="grid md:grid-cols-2 gap-4 mb-6">
             <div className="rounded-2xl border-2 border-[#1a5276]/30 overflow-hidden">
               <div className="bg-gradient-to-r from-[#1a5276] to-[#0a7ea8] px-5 py-3 flex items-center gap-2">
@@ -246,10 +240,8 @@ export default function HomeownersInsurancePage() {
               </div>
             </div>
           </div>
-          </SectionGate>
 
           {/* Head-to-head comparison table */}
-          <SectionGate page="/homeowners-insurance" id="comparison" sub="comparison-table">
           <div className="overflow-x-auto mb-6">
             <table className="w-full text-xs border border-gray-200 rounded-xl overflow-hidden">
               <thead>
@@ -270,10 +262,8 @@ export default function HomeownersInsurancePage() {
               </tbody>
             </table>
           </div>
-          </SectionGate>
 
           {/* Real-world scenarios */}
-          <SectionGate page="/homeowners-insurance" id="comparison" sub="real-world-scenarios">
           <h3 className="text-lg font-bold text-alta-navy mb-3">Real-World Scenarios: Which Policy Pays?</h3>
           <div className="grid sm:grid-cols-2 gap-3 mb-6">
             {[
@@ -293,10 +283,8 @@ export default function HomeownersInsurancePage() {
               </div>
             ))}
           </div>
-          </SectionGate>
 
           {/* What happens without */}
-          <SectionGate page="/homeowners-insurance" id="comparison" sub="without-each">
           <div className="grid md:grid-cols-2 gap-4 mb-6">
             <div className="p-5 bg-gradient-to-br from-[#f5e8e8] to-white rounded-2xl border border-[#e4c5c5]">
               <h3 className="text-sm font-bold text-[#943030] mb-2">Without Homeowner&apos;s Insurance</h3>
@@ -317,10 +305,8 @@ export default function HomeownersInsurancePage() {
               </ul>
             </div>
           </div>
-          </SectionGate>
 
           {/* Bottom line */}
-          <SectionGate page="/homeowners-insurance" id="comparison" sub="bottom-line">
           <div className="p-5 bg-gradient-to-r from-alta-navy to-alta-teal rounded-2xl mb-10">
             <h3 className="text-base font-bold text-white mb-2">Bottom Line: You Need Both</h3>
             <p className="text-sm text-gray-200 leading-relaxed mb-3">Homeowner&apos;s insurance protects the physical property. Title insurance protects your legal right to own it. A house can burn down AND have a title defect — they are completely independent risks. One doesn&apos;t substitute for the other any more than health insurance substitutes for car insurance.</p>
@@ -333,17 +319,12 @@ export default function HomeownersInsurancePage() {
               </div>
             </div>
           </div>
-          </SectionGate>
-          </SectionGate>
 
           <div className="h-1 bg-gradient-to-r from-transparent via-alta-teal/20 to-transparent my-10" />
 
-          <AdGate name="ContextualSponsor">
           <ContextualSponsor context="insurance" />
-          </AdGate>
 
           {/* What homeowner's insurance covers */}
-          <SectionGate page="/homeowners-insurance" id="what-it-covers">
           <h2 className="text-xl font-bold text-alta-navy mb-4">What Homeowner&apos;s Insurance Covers</h2>
           <p className="text-sm text-alta-gray mb-4 leading-relaxed">A standard homeowner&apos;s policy (HO-3) has six coverage areas. Understanding each helps you choose the right policy and avoid gaps. <span className="text-alta-teal font-medium">Click any coverage for full details.</span></p>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 mb-10">
@@ -384,12 +365,10 @@ export default function HomeownersInsurancePage() {
               </div>
             ))}
           </div>
-          </SectionGate>
 
           <div className="h-1 bg-gradient-to-r from-transparent via-alta-teal/20 to-transparent my-10" />
 
           {/* What it does NOT cover */}
-          <SectionGate page="/homeowners-insurance" id="what-it-does-not-cover">
           <h2 className="text-xl font-bold text-alta-navy mb-4">What It Does NOT Cover</h2>
           <p className="text-sm text-alta-gray mb-4 leading-relaxed"><span className="text-alta-teal font-medium">Click any exclusion for details on how to close the coverage gap.</span></p>
           <div className="grid sm:grid-cols-2 gap-3 mb-10">
@@ -432,12 +411,10 @@ export default function HomeownersInsurancePage() {
               </div>
             ))}
           </div>
-          </SectionGate>
 
           <div className="h-1 bg-gradient-to-r from-transparent via-alta-teal/20 to-transparent my-10" />
 
           {/* How to shop */}
-          <SectionGate page="/homeowners-insurance" id="how-to-shop">
           <h2 className="text-xl font-bold text-alta-navy mb-4">How to Shop for Homeowner&apos;s Insurance</h2>
           <div className="space-y-3 mb-10">
             {[
@@ -456,12 +433,10 @@ export default function HomeownersInsurancePage() {
               </div>
             ))}
           </div>
-          </SectionGate>
 
           <div className="h-1 bg-gradient-to-r from-transparent via-alta-teal/20 to-transparent my-10" />
 
           {/* Cost breakdown */}
-          <SectionGate page="/homeowners-insurance" id="cost-breakdown">
           <h2 className="text-xl font-bold text-alta-navy mb-4">What Does Homeowner&apos;s Insurance Cost?</h2>
           <div className="p-5 bg-[#e8f0f5] rounded-2xl border border-[#c5d8e4] shadow-sm mb-10">
             <div className="grid grid-cols-3 gap-4 text-center mb-4">
@@ -480,10 +455,8 @@ export default function HomeownersInsurancePage() {
             </div>
             <p className="text-sm text-alta-gray leading-relaxed">Factors affecting your premium: location (weather risk, crime rate), home age and construction type, coverage amount, deductible, claims history, credit score (in most states), and proximity to fire stations/hydrants. Rates vary dramatically by state — Florida and Louisiana are among the most expensive due to hurricane risk.</p>
           </div>
-          </SectionGate>
 
           {/* The Declarations Page */}
-          <SectionGate page="/homeowners-insurance" id="declarations-page">
           <h2 className="text-xl font-bold text-alta-navy mb-4">Understanding Your Declarations Page</h2>
           <div className="p-5 bg-[#faf4e4] rounded-2xl border border-[#e8d9a8] shadow-sm mb-10">
             <p className="text-sm text-alta-gray leading-relaxed mb-4">The declarations page (or &quot;dec page&quot;) is the summary page of your insurance policy. Your lender will require a copy before closing. It is typically 1-2 pages and contains all the key details of your coverage:</p>
@@ -506,12 +479,10 @@ export default function HomeownersInsurancePage() {
             </div>
             <p className="text-[10px] text-alta-teal font-medium mt-3">Tip: Request your declarations page from your insurance agent at least 1 week before closing. Your lender and title company both need a copy.</p>
           </div>
-          </SectionGate>
 
           <div className="h-1 bg-gradient-to-r from-transparent via-alta-teal/20 to-transparent my-10" />
 
           {/* How to File a Claim */}
-          <SectionGate page="/homeowners-insurance" id="how-to-file-claim">
           <h2 className="text-xl font-bold text-alta-navy mb-4">How to File a Homeowner&apos;s Insurance Claim</h2>
           <div className="space-y-3 mb-10">
             {[
@@ -531,13 +502,11 @@ export default function HomeownersInsurancePage() {
             ))}
           </div>
           <p className="text-xs text-alta-gray mb-8">Source: Insurance Information Institute (III) -- Filing a homeowner's insurance claim. Note: Filing a claim may affect your future premiums. For damage under $2,000-$3,000, consider whether filing is worth a potential rate increase.</p>
-          </SectionGate>
 
-          <AdGate name="InlineAd">
           <InlineAd />
-          </AdGate>
 
-          <SectionGate page="/homeowners-insurance" id="cta-links">
+          <SponsorTip context="insurance" />
+
           <div className="flex flex-col sm:flex-row gap-3">
             <Link href="/protect-your-rights" className="px-5 py-2.5 bg-alta-teal text-white font-semibold rounded-lg hover:bg-alta-teal-dark transition-colors text-center text-sm">
               Title Insurance Guide
@@ -549,9 +518,7 @@ export default function HomeownersInsurancePage() {
               Closing Checklist
             </Link>
           </div>
-          </SectionGate>
 
-          <SectionGate page="/homeowners-insurance" id="related-topics">
           <div className="mt-8 mb-4">
             <h2 className="text-lg font-bold text-alta-navy mb-4">Related Topics</h2>
             <div className="grid sm:grid-cols-3 gap-3">
@@ -569,15 +536,10 @@ export default function HomeownersInsurancePage() {
               </Link>
             </div>
           </div>
-          </SectionGate>
 
-          <ModuleGate name="MiniQuiz">
           <MiniQuiz title="Test Your Knowledge: Homeowners Insurance" questions={insuranceQuiz} />
-          </ModuleGate>
 
-          <ModuleGate name="FirstTimeBuyerCTA">
           <FirstTimeBuyerCTA />
-          </ModuleGate>
         </div>
       </div>
 

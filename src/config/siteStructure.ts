@@ -687,6 +687,7 @@ export const MODULES: { key: string; label: string; category: string }[] = [
   { key: "ScrollToTop", label: "Back to Top Button", category: "Global" },
   { key: "OnboardingTour", label: "First-Visit Onboarding", category: "Global" },
   { key: "SponsorFooterStrip", label: "Footer Sponsor Strip", category: "Global" },
+  { key: "IndustryPartnersStrip", label: "Industry Partners Strip", category: "Global" },
   { key: "FirstTimeBuyerCTA", label: "First-Time Buyer CTA", category: "Global" },
   { key: "ClosingFolderButton", label: "My Folder Button", category: "Global" },
   { key: "FeedbackWidget", label: "Feedback Widget", category: "Global" },

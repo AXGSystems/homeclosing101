@@ -2,11 +2,11 @@ import Link from "next/link";
 import PageHero from "@/components/PageHero";
 import AchievementTrigger from "@/components/AchievementTrigger";
 import { InlineAd } from "@/components/EliteProviders";
+import SponsorTip from "@/components/SponsorTip";
 import TrustedALTAMembers from "@/components/TrustedALTAMembers";
 import { DeferredTimeline, DeferredLoanChart } from "@/components/LazyFirstTimeBuyer";
 import ShareButtons from "@/components/ShareButtons";
 import SponsorShowcase from "@/components/SponsorShowcase";
-import { SectionGate, AdGate, ModuleGate } from "@/components/Gate";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -35,19 +35,16 @@ export default function FirstTimeBuyersPage() {
   return (
     <>
       <AchievementTrigger id="first-steps" />
-      <SectionGate page="/first-time-buyers" id="hero">
-        <PageHero
-          title="First-Time Homebuyer Guide"
-          subtitle="Everything you need to know about buying your first home — from building credit to getting the keys. A complete timeline and resource guide."
-          image="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1920&q=80"
-          breadcrumb={[{ label: "First-Time Buyers", href: "/first-time-buyers" }]}
-        />
-      </SectionGate>
+      <PageHero
+        title="First-Time Homebuyer Guide"
+        subtitle="Everything you need to know about buying your first home — from building credit to getting the keys. A complete timeline and resource guide."
+        image="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1920&q=80"
+        breadcrumb={[{ label: "First-Time Buyers", href: "/first-time-buyers" }]}
+      />
 
       <div className="py-1.5 lg:py-2">
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
           {/* Welcome intro */}
-          <SectionGate page="/first-time-buyers" id="welcome">
           <div className="mb-10">
             <div className="grid md:grid-cols-[1fr_280px] gap-6 items-center mb-6">
               <div>
@@ -62,10 +59,7 @@ export default function FirstTimeBuyersPage() {
               </div>
             </div>
           </div>
-          </SectionGate>
 
-          <SectionGate page="/first-time-buyers" id="quick-tools">
-          <SectionGate page="/first-time-buyers" id="quick-tools" sub="intro-banner">
           <div className="mb-6 p-4 bg-[#e6f1f5] rounded-2xl border border-[#b4d8e8] border-l-4 border-l-[#0a7ea8] sm:sticky sm:top-[142px] z-20 shadow-md">
             <div className="flex items-start gap-4">
               <div className="w-12 h-12 rounded-xl bg-alta-teal/10 flex items-center justify-center text-alta-teal shrink-0">
@@ -77,10 +71,8 @@ export default function FirstTimeBuyersPage() {
               </div>
             </div>
           </div>
-          </SectionGate>
 
           {/* Quick tools */}
-          <SectionGate page="/first-time-buyers" id="quick-tools" sub="tool-grid">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-10">
             {[
               { label: "Affordability", href: "/affordability", icon: "M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" },
@@ -96,42 +88,32 @@ export default function FirstTimeBuyersPage() {
               </Link>
             ))}
           </div>
-          </SectionGate>
-          </SectionGate>
 
           <div className="h-1 bg-gradient-to-r from-transparent via-alta-teal/20 to-transparent my-10" />
 
           {/* Timeline */}
-          <SectionGate page="/first-time-buyers" id="timeline">
           <h2 className="text-2xl font-bold text-alta-navy mb-2">Your Homebuying Timeline</h2>
           <p className="text-sm text-alta-gray mb-6 leading-relaxed">Click any item to expand the full breakdown — what it means, why it matters, and exactly what to do.</p>
           <div className="mb-12">
             <DeferredTimeline />
           </div>
-          </SectionGate>
 
-          <AdGate name="InlineAd">
           <InlineAd />
-          </AdGate>
 
-          <SectionGate page="/first-time-buyers" id="did-you-know-nar">
+          <SponsorTip context="closing" />
+
           <div className="p-4 bg-[#faf4e4] rounded-xl border border-[#e8d9a8] border-l-4 border-l-[#8b6914] my-6">
             <p className="text-xs text-alta-gray"><strong className="text-[#8b6914]">Did you know?</strong> According to NAR, 24% of homebuyers in 2024 were first-time buyers — the lowest share since NAR began tracking in 1981. Rising prices and mortgage rates have made it harder, but down payment assistance programs continue to help hundreds of thousands of buyers close each year (NCSHA).</p>
           </div>
-          </SectionGate>
 
           <div className="h-1 bg-gradient-to-r from-transparent via-alta-teal/20 to-transparent my-10" />
 
           {/* Loan Types */}
-          <SectionGate page="/first-time-buyers" id="loan-types">
           {/* Interactive loan comparison chart */}
-          <SectionGate page="/first-time-buyers" id="loan-types" sub="loan-chart">
           <DeferredLoanChart />
-          </SectionGate>
 
           <h2 className="text-2xl font-bold text-alta-navy mb-4">Understanding Loan Types</h2>
           <p className="text-alta-gray mb-6">The type of mortgage you choose affects your down payment, monthly payment, and total cost. Here&apos;s how they compare:</p>
-          <SectionGate page="/first-time-buyers" id="loan-types" sub="comparison-table">
           <div className="overflow-x-auto mb-12">
             <table className="w-full text-sm border border-gray-100 rounded-2xl overflow-hidden">
               <thead className="bg-alta-navy text-white">
@@ -156,17 +138,12 @@ export default function FirstTimeBuyersPage() {
               </tbody>
             </table>
           </div>
-          </SectionGate>
-          </SectionGate>
 
-          <AdGate name="SponsorShowcase">
           <SponsorShowcase />
-          </AdGate>
 
           <div className="h-1 bg-gradient-to-r from-transparent via-alta-teal/20 to-transparent my-10" />
 
           {/* Common Mistakes */}
-          <SectionGate page="/first-time-buyers" id="common-mistakes">
           <h2 className="text-2xl font-bold text-alta-navy mb-4">6 Costly Mistakes First-Time Buyers Make</h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 mb-10">
             {mistakes.map((m, i) => (
@@ -179,20 +156,41 @@ export default function FirstTimeBuyersPage() {
               </div>
             ))}
           </div>
-          </SectionGate>
 
-          <AdGate name="TrustedALTAMembers">
           <TrustedALTAMembers />
-          </AdGate>
 
-          <SectionGate page="/first-time-buyers" id="did-you-know-cfpb">
           <div className="p-4 bg-[#faf4e4] rounded-xl border border-[#e8d9a8] border-l-4 border-l-[#8b6914] my-6">
             <p className="text-xs text-alta-gray"><strong className="text-[#8b6914]">Did you know?</strong> The CFPB found that buyers who compared Loan Estimates from 3 or more lenders saved an average of $300 per year — roughly $3,500 over the first five years — compared to those who went with the first lender they contacted.</p>
           </div>
-          </SectionGate>
+
+          {/* MBA Home Loan Learning Center cross-reference */}
+          <div className="my-6 p-5 rounded-2xl border border-[#c5cfe4] bg-gradient-to-br from-[#e8ecf5] to-white shadow-sm">
+            <div className="flex items-start gap-4">
+              <div className="w-12 h-12 rounded-xl bg-[#003366]/10 text-[#003366] flex items-center justify-center shrink-0">
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0012 9.75c-2.551 0-5.056.2-7.5.582V21" />
+                </svg>
+              </div>
+              <div className="flex-1">
+                <p className="text-[10px] font-semibold text-[#003366] uppercase tracking-widest mb-1">Complementary Resource</p>
+                <h3 className="text-base font-bold text-alta-navy mb-1.5">MBA Home Loan Learning Center</h3>
+                <p className="text-sm text-alta-gray leading-relaxed mb-3">
+                  HomeClosing101 covers your closing — but once you&apos;re comparing lenders and loan products, head to the Mortgage Bankers Association&apos;s consumer education site for credit-report guidance, rent-vs-own analysis, and plain-English mortgage explainers. MBA and ALTA partner on industry advocacy (including RON in 45 states).
+                </p>
+                <a
+                  href="https://www.mba.org/home-loan-learning-center"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#003366] hover:text-alta-teal transition-colors"
+                >
+                  Visit MBA Home Loan Learning Center
+                  <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
+                </a>
+              </div>
+            </div>
+          </div>
 
           {/* Down payment assistance */}
-          <SectionGate page="/first-time-buyers" id="down-payment-assistance">
           <h2 className="text-2xl font-bold text-alta-navy mb-4">Down Payment Assistance Programs</h2>
           <p className="text-sm text-alta-gray mb-4 leading-relaxed">Many first-time buyers don&apos;t realize that thousands of programs exist to help with down payments and closing costs. These programs are offered by state housing finance agencies, counties, cities, and nonprofits. Eligibility typically depends on income, purchase price, and location.</p>
           <div className="grid sm:grid-cols-2 gap-4 mb-10">
@@ -211,12 +209,10 @@ export default function FirstTimeBuyersPage() {
               </div>
             ))}
           </div>
-          </SectionGate>
 
           <div className="h-1 bg-gradient-to-r from-transparent via-alta-teal/20 to-transparent my-10" />
 
           {/* Credit score guidance */}
-          <SectionGate page="/first-time-buyers" id="credit-score">
           <h2 className="text-2xl font-bold text-alta-navy mb-4">Understanding Your Credit Score</h2>
           <p className="text-sm text-alta-gray mb-4 leading-relaxed">Your credit score is the single biggest factor in the interest rate you&apos;ll receive — and even a small rate difference adds up to thousands over the life of your loan. Here&apos;s what the ranges mean for mortgage eligibility:</p>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-10">
@@ -233,16 +229,12 @@ export default function FirstTimeBuyersPage() {
               </div>
             ))}
           </div>
-          </SectionGate>
 
-          <AdGate name="InlineAd">
           <InlineAd />
-          </AdGate>
 
           <div className="h-1 bg-gradient-to-r from-transparent via-alta-teal/20 to-transparent my-10" />
 
           {/* What buyers wish they knew */}
-          <SectionGate page="/first-time-buyers" id="buyers-wish-they-knew">
           <h2 className="text-2xl font-bold text-alta-navy mb-4">What First-Time Buyers Wish They Knew</h2>
           <p className="text-sm text-alta-gray mb-4 leading-relaxed">Based on surveys of recent homebuyers by NAR and CFPB, these are the most common regrets and surprises. Learn from their experience.</p>
           <div className="grid sm:grid-cols-2 gap-3 mb-10">
@@ -266,18 +258,14 @@ export default function FirstTimeBuyersPage() {
               </div>
             ))}
           </div>
-          </SectionGate>
 
           <div className="h-1 bg-gradient-to-r from-transparent via-alta-teal/20 to-transparent my-10" />
 
-          <ModuleGate name="ShareButtons">
           <ShareButtons path="/first-time-buyers" title="First-Time Homebuyer Guide — HomeClosing101" />
-          </ModuleGate>
 
           <div className="h-1 bg-gradient-to-r from-transparent via-alta-teal/20 to-transparent my-10" />
 
           {/* CTAs */}
-          <SectionGate page="/first-time-buyers" id="cta">
           <div className="flex flex-col sm:flex-row gap-3">
             <Link href="/closing-process/closing-checklist" className="px-5 py-2.5 bg-alta-teal text-white font-semibold rounded-lg hover:bg-alta-teal-dark transition-colors text-center text-sm">
               Interactive Closing Checklist
@@ -292,7 +280,6 @@ export default function FirstTimeBuyersPage() {
               Stop Fraud 101
             </Link>
           </div>
-          </SectionGate>
         </div>
       </div>
     </>

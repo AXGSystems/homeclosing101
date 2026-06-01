@@ -1,6 +1,8 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useAdEnabled } from "@/lib/adminConfig";
+import { trackAdEvent } from "@/components/Analytics";
 
 const sponsors = [
   { name: "First American Title", logo: "https://www.alta.org/images/wplogos/0000226.png", url: "https://www.firstam.com/", cta: "Get Title Insurance" },
@@ -12,9 +14,11 @@ const sponsors = [
 ];
 
 export default function StickyBottomAd() {
+  const enabled = useAdEnabled("StickyBottomAd");
   const [visible, setVisible] = useState(false);
   const [dismissed, setDismissed] = useState(false);
   const [sponsor] = useState(() => sponsors[Math.floor(Math.random() * sponsors.length)]);
+  const [impressionFired, setImpressionFired] = useState(false);
 
   useEffect(() => {
     // Don't show if user already dismissed this session
@@ -29,7 +33,13 @@ export default function StickyBottomAd() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  if (dismissed) return null;
+  useEffect(() => {
+    if (!enabled || !visible || impressionFired) return;
+    trackAdEvent("StickyBottomAd", sponsor.name, "impression");
+    setImpressionFired(true);
+  }, [enabled, visible, sponsor, impressionFired]);
+
+  if (!enabled || dismissed) return null;
 
   return (
     <div
@@ -44,6 +54,7 @@ export default function StickyBottomAd() {
             href={sponsor.url}
             target="_blank"
             rel="noopener noreferrer"
+            onClick={() => trackAdEvent("StickyBottomAd", sponsor.name, "click")}
             className="flex items-center gap-3 flex-1 min-w-0 group"
           >
             <div className="w-8 h-8 rounded-lg bg-white border border-gray-100 shadow-sm flex items-center justify-center shrink-0 overflow-hidden">

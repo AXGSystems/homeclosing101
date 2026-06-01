@@ -4,7 +4,6 @@ import { InlineAd } from "@/components/EliteProviders";
 import FirstTimeBuyerCTA from "@/components/FirstTimeBuyerCTA";
 import ClosingFlowNav from "@/components/ClosingFlowNav";
 import ShareButtons from "@/components/ShareButtons";
-import { SectionGate, AdGate, ModuleGate } from "@/components/Gate";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -90,22 +89,19 @@ const documents = [
 export default function WhatToExpectPage() {
   return (
     <>
-      <SectionGate page="/closing-process/what-to-expect" id="hero">
-        <PageHero
-          title="Beginning Your Journey"
-          subtitle="Closing is the final phase of your home purchase — where you legally commit to your mortgage loan and become the official property owner. Here's what the journey looks like."
-          image="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1920&q=80"
-          breadcrumb={[
-            { label: "The Closing Process", href: "/closing-process" },
-            { label: "Beginning Your Journey", href: "/closing-process/what-to-expect" },
-          ]}
-        />
-      </SectionGate>
+      <PageHero
+        title="Beginning Your Journey"
+        subtitle="Closing is the final phase of your home purchase — where you legally commit to your mortgage loan and become the official property owner. Here's what the journey looks like."
+        image="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1920&q=80"
+        breadcrumb={[
+          { label: "The Closing Process", href: "/closing-process" },
+          { label: "Beginning Your Journey", href: "/closing-process/what-to-expect" },
+        ]}
+      />
 
       <div className="py-1.5 lg:py-2">
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
           {/* Page intro */}
-          <SectionGate page="/closing-process/what-to-expect" id="intro">
           <div className="mb-6 p-4 bg-[#e6f1f5] rounded-2xl border border-[#b4d8e8] border-l-4 border-l-[#0a7ea8] sm:sticky sm:top-[142px] z-20 shadow-md">
             <div className="flex items-start gap-4">
               <div className="w-12 h-12 rounded-xl bg-alta-teal/10 flex items-center justify-center text-alta-teal shrink-0">
@@ -117,11 +113,8 @@ export default function WhatToExpectPage() {
               </div>
             </div>
           </div>
-          </SectionGate>
 
           {/* Steps */}
-          <SectionGate page="/closing-process/what-to-expect" id="steps">
-          <div>
           <h2 className="text-2xl font-bold text-alta-navy mb-8 flex items-center gap-2">8 Keys to Getting the Keys {/* eslint-disable-next-line @next/next/no-img-element */}<img src="https://images.unsplash.com/photo-1582139329536-e7284fece509?w=80&q=80" alt="House keys" className="w-9 h-9 rounded-lg object-cover shadow-sm" loading="lazy" /></h2>
           <div className="space-y-6 mb-16">
             {steps.map((step, i) => (
@@ -131,9 +124,6 @@ export default function WhatToExpectPage() {
                   <div className="relative h-48 md:h-56 rounded-2xl overflow-hidden shadow-md">
                     <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url('${step.image}')` }} />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
-                    <div className="absolute top-3 left-3 w-9 h-9 rounded-full bg-alta-teal text-white flex items-center justify-center font-bold text-sm shadow-lg">
-                      {i + 1}
-                    </div>
                   </div>
                 </div>
                 {/* Content */}
@@ -157,18 +147,12 @@ export default function WhatToExpectPage() {
               </div>
             ))}
           </div>
-          </div>
-          </SectionGate>
 
-          <AdGate name="InlineAd">
-            <InlineAd />
-          </AdGate>
+          <InlineAd />
 
           <div className="h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent my-8" />
 
           {/* Key Documents */}
-          <SectionGate page="/closing-process/what-to-expect" id="key-documents">
-          <div>
           <h2 className="text-2xl font-bold text-alta-navy mb-6">Key Closing Documents</h2>
           <div className="grid md:grid-cols-3 gap-4 mb-12">
             {documents.map((doc) => (
@@ -189,11 +173,8 @@ export default function WhatToExpectPage() {
               </Link>
             ))}
           </div>
-          </div>
-          </SectionGate>
 
           {/* CTAs */}
-          <SectionGate page="/closing-process/what-to-expect" id="cta">
           <div className="flex flex-col sm:flex-row gap-4">
             <Link href="/closing-process/closing-options" className="px-6 py-3 bg-alta-teal text-white font-semibold rounded-lg hover:bg-alta-teal-dark transition-colors text-center">
               Explore Closing Options
@@ -202,19 +183,12 @@ export default function WhatToExpectPage() {
               Get Your Checklist
             </Link>
           </div>
-          </SectionGate>
 
-          <SectionGate page="/closing-process/what-to-expect" id="closing-flow-nav">
-            <ClosingFlowNav currentStep={1} />
-          </SectionGate>
+          <ClosingFlowNav currentStep={1} />
 
-          <ModuleGate name="ShareButtons">
-            <ShareButtons path="/closing-process/what-to-expect" title="What to Expect at Closing — HomeClosing101" />
-          </ModuleGate>
+          <ShareButtons path="/closing-process/what-to-expect" title="What to Expect at Closing — HomeClosing101" />
 
-          <ModuleGate name="FirstTimeBuyerCTA">
-            <FirstTimeBuyerCTA />
-          </ModuleGate>
+          <FirstTimeBuyerCTA />
         </div>
       </div>
     </>

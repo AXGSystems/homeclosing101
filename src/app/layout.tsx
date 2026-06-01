@@ -10,6 +10,7 @@ import AchievementProvider from "@/components/AchievementSystem";
 import LayoutOverlays from "@/components/LayoutOverlays";
 import StickyBottomAd from "@/components/StickyBottomAd";
 import SponsorFooterStrip from "@/components/SponsorFooterStrip";
+import IndustryPartnersStrip from "@/components/IndustryPartnersStrip";
 import AnalyticsProvider from "@/components/Analytics";
 import FeedbackWidget from "@/components/FeedbackWidget";
 import { SiteConfigProvider } from "@/components/SiteConfigProvider";
@@ -128,6 +129,7 @@ export default function RootLayout({
           <div className="print-footer hidden">
             HomeClosing101 — An educational initiative of the American Land Title Association (ALTA) — homeclosing101.vercel.app
           </div>
+          <ModuleGate name="IndustryPartnersStrip"><IndustryPartnersStrip /></ModuleGate>
           <ModuleGate name="SponsorFooterStrip"><SponsorFooterStrip /></ModuleGate>
           <AltaDisclaimer />
           <Footer />

@@ -5,10 +5,10 @@ import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import PageHero from "@/components/PageHero";
 import SponsorSidebar from "@/components/SponsorSidebar";
+import StatePartners from "@/components/StatePartners";
 import FirstTimeBuyerCTA from "@/components/FirstTimeBuyerCTA";
 import { InlineAd } from "@/components/EliteProviders";
 import SaveToFolderBtn from "@/components/SaveToFolderBtn";
-import { SectionGate, AdGate, ModuleGate } from "@/components/Gate";
 
 const states = [
   {code:"AL",name:"Alabama"},{code:"AK",name:"Alaska"},{code:"AZ",name:"Arizona"},{code:"AR",name:"Arkansas"},
@@ -96,7 +96,7 @@ const tips = [
     desc: "A good title company will have wire verification technology and clear fraud prevention processes.",
     gradient: "from-[#943030] to-[#5b3a8c]",
     modalContent: {
-      guidance: "Wire fraud is one of the biggest threats in real estate transactions. Criminals intercept emails between buyers and settlement agents, then send fraudulent wire instructions. According to the FBI's Internet Crime Complaint Center (IC3), real estate wire fraud losses exceeded $446 million in 2023. A reputable title company will have multiple layers of protection and will never send wire instructions by email alone.",
+      guidance: "Wire fraud is one of the biggest threats in real estate transactions. Criminals intercept emails between buyers and settlement agents, then send fraudulent wire instructions. According to the FBI's Internet Crime Complaint Center (IC3), real estate wire fraud losses topped $275.1 million in 2025. A reputable title company will have multiple layers of protection and will never send wire instructions by email alone.",
       questions: [
         "How do you transmit wire instructions to buyers?",
         "Do you use a secure wire verification platform (such as CertifID or similar)?",
@@ -193,20 +193,17 @@ function FindCompanyContent() {
 
   return (
     <>
-    <SectionGate page="/find-company" id="hero">
     <PageHero
       title="Find a Title Company"
       subtitle="Search the ALTA member directory to find title insurance and settlement companies near you. You have the right to choose your own title company."
       image="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1920&q=80"
       breadcrumb={[{ label: "Find a Company", href: "/find-company" }]}
     />
-    </SectionGate>
     <div className="py-1.5 lg:py-2">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <div className="grid lg:grid-cols-[1fr_280px] gap-8">
           {/* Main content */}
           <div>
-            <SectionGate page="/find-company" id="intro">
             <div className="mb-6 p-4 bg-[#e8f0f5] rounded-2xl border border-[#c5d8e4] border-l-4 border-l-[#1a5276] sm:sticky sm:top-[142px] z-20 shadow-md">
               <div className="flex items-start gap-4">
                 <div className="w-12 h-12 rounded-xl bg-[#1a5276]/10 flex items-center justify-center text-[#1a5276] shrink-0">
@@ -218,10 +215,8 @@ function FindCompanyContent() {
                 </div>
               </div>
             </div>
-            </SectionGate>
 
             {/* Search controls */}
-            <SectionGate page="/find-company" id="search">
             <div className="bg-[#e8f0f5] rounded-2xl border border-[#c5d8e4] shadow-sm p-5 mb-6">
               <h2 className="text-lg font-bold text-alta-navy mb-4">Search ALTA Member Directory</h2>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mb-4">
@@ -271,10 +266,48 @@ function FindCompanyContent() {
                 Results show ALTA member companies with offices in your area, plus additional members serving your market. Data sourced from the ALTA membership directory.
               </p>
             </div>
-            </SectionGate>
+
+            {/* Results — Feature Pending placeholder (member directory not yet loaded) */}
+            <div className="bg-white rounded-2xl border border-[#c5d8e4] shadow-sm overflow-hidden mb-6">
+              <div className="px-5 py-3 border-b border-[#c5d8e4]">
+                <h3 className="text-sm font-semibold text-alta-navy">
+                  {hasSearched
+                    ? `Results for ${states.find(s => s.code === selectedState)?.name}${city ? `, ${city}` : ''}`
+                    : "Search Results"}
+                </h3>
+              </div>
+              <div className="px-6 py-14 flex flex-col items-center text-center">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/logos/alta.svg"
+                  alt="American Land Title Association"
+                  className="h-20 w-auto mb-6 opacity-95"
+                />
+                <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#e8f0f5] text-[#1a5276] text-xs font-bold uppercase tracking-widest mb-3">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#1a5276] animate-pulse" />
+                  Feature Pending
+                </span>
+                <h4 className="text-lg font-bold text-alta-navy mb-2">Member directory loading soon</h4>
+                <p className="text-sm text-alta-gray max-w-md leading-relaxed">
+                  We&apos;re finalizing the ALTA member data for this search experience. In the
+                  meantime, you can browse the full directory on alta.org or review the tips below
+                  for choosing a trusted title professional.
+                </p>
+                <a
+                  href={`https://www.alta.org/consumer/find-a-title-company.cfm`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 mt-5 px-5 py-2.5 bg-alta-teal text-white rounded-lg font-semibold text-sm hover:bg-alta-teal-dark transition-colors"
+                >
+                  Visit ALTA.org directory
+                  <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                  </svg>
+                </a>
+              </div>
+            </div>
 
             {/* 5 Questions to Ask */}
-            <SectionGate page="/find-company" id="five-questions">
             <div className="bg-white rounded-2xl border border-gray-100 border-l-4 border-l-[#1a5276] shadow-sm p-5 mb-6">
               <h3 className="text-sm font-bold text-alta-navy mb-3">5 Questions to Ask Your Title Company</h3>
               <div className="space-y-2.5">
@@ -300,42 +333,9 @@ function FindCompanyContent() {
                 </div>
               </div>
             </div>
-            </SectionGate>
-
-            {/* Results iframe */}
-            {hasSearched && iframeUrl && (
-              <SectionGate page="/find-company" id="results" sub="directory-iframe">
-              <div className="bg-white rounded-2xl border border-[#c5d8e4] shadow-sm overflow-hidden mb-8">
-                <div className="px-5 py-3 border-b border-[#c5d8e4] flex items-center justify-between">
-                  <h3 className="text-sm font-semibold text-alta-navy">
-                    Results for {states.find(s => s.code === selectedState)?.name}{city ? `, ${city}` : ''}
-                  </h3>
-                  <a
-                    href={iframeUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-xs text-alta-teal hover:text-alta-teal-dark font-medium flex items-center gap-1"
-                  >
-                    Open full page
-                    <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                    </svg>
-                  </a>
-                </div>
-                <iframe
-                  src={iframeUrl}
-                  className="w-full border-0"
-                  style={{ height: '600px' }}
-                  title="ALTA Member Directory Results"
-                  sandbox="allow-same-origin allow-scripts allow-popups allow-forms"
-                />
-              </div>
-              </SectionGate>
-            )}
 
             {/* ALTA Best Practices callout after search results */}
             {hasSearched && (
-              <SectionGate page="/find-company" id="results" sub="best-practices-callout">
               <div className="mb-8 p-4 bg-[#e9f5ed] rounded-xl border border-[#bddcc7]">
                 <div className="flex items-start gap-3 mb-3">
                   <svg className="w-5 h-5 text-[#2d6b3f] shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" /></svg>
@@ -358,32 +358,13 @@ function FindCompanyContent() {
                   ))}
                 </div>
               </div>
-              </SectionGate>
             )}
 
-            {/* Empty state */}
-            {!hasSearched && (
-              <SectionGate page="/find-company" id="results" sub="empty-state">
-              <div className="p-12 bg-alta-light rounded-2xl text-center mb-8">
-                <svg className="w-16 h-16 text-alta-gray/30 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
-                </svg>
-                <h3 className="text-lg font-semibold text-alta-navy mb-2">Select a state to search</h3>
-                <p className="text-sm text-alta-gray max-w-md mx-auto">
-                  Choose your state above to browse ALTA member title companies. Add a city to narrow results to your area.
-                </p>
-              </div>
-              </SectionGate>
-            )}
-
-            <SectionGate page="/find-company" id="respa-note">
             <div className="p-4 bg-[#faf4e4] rounded-xl border border-[#e8d9a8] border-l-4 border-l-[#8b6914] my-6">
               <p className="text-xs text-alta-gray"><strong className="text-[#8b6914]">Did you know?</strong> Under federal law (RESPA Section 9), you have the right to choose your own title insurance company. The seller cannot require you to use a specific provider as a condition of sale. Shopping around can save you hundreds of dollars in settlement fees.</p>
             </div>
-            </SectionGate>
 
             {/* ALTA Membership Callout */}
-            <SectionGate page="/find-company" id="why-alta">
             <div className="p-5 bg-gradient-to-br from-[#e8f0f5] to-white rounded-2xl border border-[#c5d8e4] mb-8">
               <div className="flex items-start gap-3">
                 <div className="w-10 h-10 rounded-xl bg-[#1a5276]/10 flex items-center justify-center text-[#1a5276] shrink-0">
@@ -398,11 +379,8 @@ function FindCompanyContent() {
                 </div>
               </div>
             </div>
-            </SectionGate>
 
             {/* Tips */}
-            <SectionGate page="/find-company" id="tips">
-            <>
             <h2 className="text-2xl font-bold text-alta-navy mb-2">Tips for Choosing a Title Company</h2>
             <p className="text-sm text-alta-gray mb-4 leading-relaxed"><span className="text-alta-teal font-medium">Click any tip for deeper guidance, questions to ask, and red flags to watch for.</span></p>
             <div className="grid sm:grid-cols-2 gap-3 mb-8">
@@ -466,14 +444,9 @@ function FindCompanyContent() {
                 </div>
               ))}
             </div>
-            </>
-            </SectionGate>
 
-            <AdGate name="InlineAd">
             <InlineAd />
-            </AdGate>
 
-            <SectionGate page="/find-company" id="right-to-shop">
             <div className="p-5 bg-blue-50 rounded-xl border border-blue-100">
               <h3 className="font-semibold text-alta-navy mb-2">Your Right to Shop</h3>
               <p className="text-sm text-alta-gray">
@@ -486,26 +459,28 @@ function FindCompanyContent() {
                 </svg>
               </Link>
             </div>
-            </SectionGate>
 
-            <ModuleGate name="FirstTimeBuyerCTA">
             <FirstTimeBuyerCTA />
-            </ModuleGate>
           </div>
 
-          {/* Right sidebar — sponsor ads */}
-          <SectionGate page="/find-company" id="sidebar">
+          {/* Right sidebar — sponsor ads + state partners */}
           <aside className="hidden lg:block">
             <SponsorSidebar />
+            {hasSearched && selectedState && (
+              <div className="mt-6">
+                <StatePartners
+                  stateCode={selectedState}
+                  stateName={states.find((s) => s.code === selectedState)?.name || selectedState}
+                />
+              </div>
+            )}
           </aside>
-          </SectionGate>
         </div>
       </div>
     </div>
 
     {/* Modal */}
     {activeModal && (
-      <SectionGate page="/find-company" id="tip-modal">
       <div className="fixed inset-0 z-[700] flex items-end sm:items-center justify-center sm:p-4" onClick={() => setActiveModal(null)}>
         <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" />
         <div className="relative bg-white rounded-t-2xl sm:rounded-2xl shadow-2xl max-w-2xl w-full max-h-[90vh] sm:max-h-[85vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
@@ -523,7 +498,6 @@ function FindCompanyContent() {
           </div>
         </div>
       </div>
-      </SectionGate>
     )}
     </>
   );

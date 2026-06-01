@@ -7,7 +7,8 @@ import { useAchievements } from "@/components/AchievementSystem";
 import FirstTimeBuyerCTA from "@/components/FirstTimeBuyerCTA";
 import SaveToFolderBtn from "@/components/SaveToFolderBtn";
 import ShareButtons from "@/components/ShareButtons";
-import { SectionGate, ModuleGate } from "@/components/Gate";
+import { InlineAd } from "@/components/EliteProviders";
+import SponsorTip from "@/components/SponsorTip";
 
 /* ═══════════════════════════════════════════════════════
    ACHIEVEMENTS SECTION
@@ -338,14 +339,12 @@ export default function TriviaPage() {
 
   return (
     <>
-      <SectionGate page="/trivia" id="hero">
-        <PageHero
-          title="Trivia & Achievements"
-          subtitle="Test your homebuying knowledge with our Jeopardy-style trivia challenge, then track your learning achievements across HomeClosing101."
-          image="https://images.unsplash.com/photo-1606326608606-aa0b62935f2b?w=1920&q=80"
-          breadcrumb={[{ label: "Resources", href: "/document-library" }, { label: "Trivia & Achievements", href: "/trivia" }]}
-        />
-      </SectionGate>
+      <PageHero
+        title="Trivia & Achievements"
+        subtitle="Test your homebuying knowledge with our Jeopardy-style trivia challenge, then track your learning achievements across HomeClosing101."
+        image="https://images.unsplash.com/photo-1606326608606-aa0b62935f2b?w=1920&q=80"
+        breadcrumb={[{ label: "Resources", href: "/document-library" }, { label: "Trivia & Achievements", href: "/trivia" }]}
+      />
 
       {showConfetti && <Confetti />}
 
@@ -370,7 +369,6 @@ export default function TriviaPage() {
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
 
           {/* Scoreboard */}
-          <SectionGate page="/trivia" id="scoreboard">
           <div className="mb-6 p-4 bg-gradient-to-r from-alta-navy to-[#0d3a5c] rounded-2xl shadow-lg flex flex-wrap items-center justify-between gap-4">
             <div className="flex items-center gap-4">
               <div className="text-center">
@@ -392,11 +390,11 @@ export default function TriviaPage() {
               Reset Game
             </button>
           </div>
-          </SectionGate>
+
+          <SponsorTip context="closing" />
 
           {/* ══ GAME OVER SCREEN ══ */}
           {gameOver && (
-            <SectionGate page="/trivia" id="game-over">
             <div className="mb-10 p-8 bg-gradient-to-br from-alta-light to-white rounded-2xl border border-gray-100 shadow-lg text-center">
               <div className="w-20 h-20 rounded-full bg-gradient-to-br from-[#d4a843] to-[#8b6914] flex items-center justify-center mx-auto mb-4 shadow-lg">
                 <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M16.5 18.75h-9m9 0a3 3 0 013 3h-15a3 3 0 013-3m9 0v-3.375c0-.621-.503-1.125-1.125-1.125h-.871M7.5 18.75v-3.375c0-.621.504-1.125 1.125-1.125h.872m5.007 0H9.497m5.007 0a7.454 7.454 0 01-.982-3.172M9.497 14.25a7.454 7.454 0 00.981-3.172M5.25 4.236c-.982.143-1.954.317-2.916.52A6.003 6.003 0 007.73 9.728M5.25 4.236V4.5c0 2.108.966 3.99 2.48 5.228M5.25 4.236V2.721C7.456 2.41 9.71 2.25 12 2.25c2.291 0 4.545.16 6.75.47v1.516M18.75 4.236c.982.143 1.954.317 2.916.52A6.003 6.003 0 0016.27 9.728M18.75 4.236V4.5c0 2.108-.966 3.99-2.48 5.228m0 0a6.003 6.003 0 01-2.52.952m0 0a6.003 6.003 0 01-2.52-.952" /></svg>
@@ -405,7 +403,6 @@ export default function TriviaPage() {
               <p className={`text-2xl font-bold ${getGrade().color} mb-2`}>{getGrade().label}</p>
               <p className="text-sm text-alta-gray mb-6">{getGrade().desc}</p>
 
-              <SectionGate page="/trivia" id="game-over" sub="results-stats">
               <div className="grid grid-cols-3 gap-4 max-w-md mx-auto mb-6">
                 <div className="p-4 bg-white rounded-xl border border-gray-100 shadow-sm">
                   <p className="text-2xl font-bold text-[#d4a843]">${score.toLocaleString()}</p>
@@ -420,7 +417,6 @@ export default function TriviaPage() {
                   <p className="text-xs text-alta-gray">Accuracy</p>
                 </div>
               </div>
-              </SectionGate>
 
               {/* Share Your Score */}
               <ShareScore score={score} />
@@ -435,9 +431,7 @@ export default function TriviaPage() {
               </div>
 
               <div className="flex justify-center mb-4">
-                <ModuleGate name="ShareButtons">
-                  <ShareButtons path="/trivia" title="HomeClosing101 Trivia — Test Your Closing Knowledge" />
-                </ModuleGate>
+                <ShareButtons path="/trivia" title="HomeClosing101 Trivia — Test Your Closing Knowledge" />
               </div>
 
               <div className="flex flex-wrap gap-3 justify-center">
@@ -449,12 +443,10 @@ export default function TriviaPage() {
                 </Link>
               </div>
             </div>
-            </SectionGate>
           )}
 
           {/* ══ JEOPARDY BOARD ══ */}
           {!gameOver && (
-            <SectionGate page="/trivia" id="jeopardy-board">
             <div className="overflow-x-auto mb-8 -mx-4 px-4 sm:mx-0 sm:px-0">
               <div className="min-w-[700px]">
                 {/* Category headers */}
@@ -497,7 +489,6 @@ export default function TriviaPage() {
                 ))}
               </div>
             </div>
-            </SectionGate>
           )}
 
           {/* ══ QUESTION MODAL ══ */}
@@ -628,7 +619,6 @@ export default function TriviaPage() {
 
           {/* How to play */}
           {!gameOver && answered.size === 0 && (
-            <SectionGate page="/trivia" id="how-to-play">
             <div className="p-5 bg-gradient-to-br from-alta-light to-white rounded-2xl border border-gray-100 mb-8">
               <h3 className="font-bold text-alta-navy mb-2">How to Play</h3>
               <div className="grid sm:grid-cols-3 gap-4 text-xs text-alta-gray">
@@ -646,19 +636,16 @@ export default function TriviaPage() {
                 </div>
               </div>
             </div>
-            </SectionGate>
           )}
 
-          <ModuleGate name="FirstTimeBuyerCTA">
-            <FirstTimeBuyerCTA />
-          </ModuleGate>
+          <InlineAd />
+
+          <FirstTimeBuyerCTA />
         </div>
       </div>
 
       {/* Achievements section */}
-      <SectionGate page="/trivia" id="achievements">
-        <AchievementsSection />
-      </SectionGate>
+      <AchievementsSection />
     </>
   );
 }

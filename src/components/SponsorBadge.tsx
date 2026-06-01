@@ -1,6 +1,8 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useAdEnabled } from "@/lib/adminConfig";
+import { trackAdEvent } from "@/components/Analytics";
 
 /**
  * SponsorBadge — A tiny inline badge that sits next to a section heading.
@@ -25,19 +27,26 @@ const badgeSponsors = [
 ];
 
 export default function SponsorBadge() {
+  const enabled = useAdEnabled("SponsorBadge");
   const [sponsor, setSponsor] = useState<typeof badgeSponsors[0] | null>(null);
 
   useEffect(() => {
     setSponsor(badgeSponsors[Math.floor(Math.random() * badgeSponsors.length)]);
   }, []);
 
-  if (!sponsor) return null;
+  useEffect(() => {
+    if (!enabled || !sponsor) return;
+    trackAdEvent("SponsorBadge", sponsor.name, "impression");
+  }, [enabled, sponsor]);
+
+  if (!enabled || !sponsor) return null;
 
   return (
     <a
       href={sponsor.url}
       target="_blank"
       rel="noopener noreferrer"
+      onClick={() => trackAdEvent("SponsorBadge", sponsor.name, "click")}
       className="inline-flex items-center gap-1.5 print:hidden opacity-60 hover:opacity-100 transition-opacity"
       title={`Presented by ${sponsor.name}`}
     >

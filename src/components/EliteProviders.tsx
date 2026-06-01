@@ -1,6 +1,8 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useAdEnabled } from "@/lib/adminConfig";
+import { trackAdEvent } from "@/components/Analytics";
 
 const sponsors = [
   { name: "First American Title", logo: "https://www.alta.org/images/wplogos/0000226.png", url: "https://www.firstam.com/", blurb: "Nation's leading provider of title insurance, settlement services, and risk solutions for real estate transactions." },
@@ -19,6 +21,7 @@ const sponsors = [
 
 // Show 3 at a time, rotate every 5 seconds
 export default function EliteProviders() {
+  const enabled = useAdEnabled("EliteProviders");
   const [activeSet, setActiveSet] = useState(0);
   const [fading, setFading] = useState(false);
   const setsCount = Math.ceil(sponsors.length / 3);
@@ -36,6 +39,14 @@ export default function EliteProviders() {
 
   const currentSponsors = sponsors.slice(activeSet * 3, activeSet * 3 + 3);
 
+  useEffect(() => {
+    if (!enabled) return;
+    currentSponsors.forEach((s) => trackAdEvent("EliteProviders", s.name, "impression"));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [enabled, activeSet]);
+
+  if (!enabled) return null;
+
   return (
     <section className="print:hidden py-6 bg-alta-light/50 border-t border-gray-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
@@ -46,6 +57,7 @@ export default function EliteProviders() {
               href={s.url}
               target="_blank"
               rel="noopener noreferrer"
+              onClick={() => trackAdEvent("EliteProviders", s.name, "click")}
               className="flex items-center justify-center h-10 opacity-100 hover:scale-105 transition-all duration-300"
               title={s.name}
             >
@@ -66,6 +78,7 @@ export default function EliteProviders() {
 
 // Full-width inline sponsor banner for content pages
 export function InlineAd() {
+  const enabled = useAdEnabled("InlineAd");
   const [sponsor, setSponsor] = useState(sponsors[0]);
   const [fading, setFading] = useState(false);
 
@@ -83,32 +96,40 @@ export function InlineAd() {
     return () => clearInterval(interval);
   }, []);
 
+  useEffect(() => {
+    if (!enabled) return;
+    trackAdEvent("InlineAd", sponsor.name, "impression");
+  }, [enabled, sponsor]);
+
+  if (!enabled) return null;
+
   return (
-    <div className="inline-ad print:hidden my-10">
+    <div className="inline-ad print:hidden my-10 @container">
       <a
         href={sponsor.url}
         target="_blank"
         rel="noopener noreferrer"
+        onClick={() => trackAdEvent("InlineAd", sponsor.name, "click")}
         className={`block rounded-2xl border border-gray-100 bg-gradient-to-br from-alta-light to-white shadow-sm hover:shadow-lg hover:border-alta-teal/30 transition-all overflow-hidden ${fading ? "opacity-0" : "opacity-100"}`}
         style={{ transition: "opacity 400ms ease, box-shadow 200ms ease" }}
       >
-        <div className="flex flex-col sm:flex-row items-center gap-5 p-6 sm:p-8">
+        <div className="flex flex-col @xl:flex-row @xl:items-center gap-5 p-5 @sm:p-6 @xl:p-8">
           {/* Logo */}
-          <div className="w-full sm:w-44 flex items-center justify-center shrink-0">
+          <div className="w-full @xl:w-40 flex items-center justify-center shrink-0">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={sponsor.logo} alt={sponsor.name} className="h-14 sm:h-16 w-auto object-contain max-w-[160px]" loading="lazy" onError={(e) => { e.currentTarget.style.display = 'none'; }} />
+            <img src={sponsor.logo} alt={sponsor.name} className="h-14 @sm:h-16 w-auto object-contain max-w-[140px]" loading="lazy" onError={(e) => { e.currentTarget.style.display = 'none'; }} />
           </div>
           {/* Content */}
-          <div className="flex-1 text-center sm:text-left">
+          <div className="flex-1 min-w-0 text-center @xl:text-left">
             <p className="text-[9px] font-semibold text-alta-teal uppercase tracking-widest mb-1">ALTA Member Spotlight</p>
             <h3 className="text-lg font-bold text-alta-navy mb-1.5">{sponsor.name}</h3>
             <p className="text-sm text-alta-gray leading-relaxed">{sponsor.blurb}</p>
           </div>
           {/* CTA */}
-          <div className="shrink-0">
-            <span className="inline-flex items-center gap-1.5 px-5 py-2.5 bg-alta-teal text-white rounded-lg font-semibold text-sm hover:bg-alta-teal-dark transition-colors">
+          <div className="shrink-0 w-full @xl:w-auto flex justify-center @xl:justify-end">
+            <span className="inline-flex items-center gap-1.5 px-5 py-2.5 bg-alta-teal text-white rounded-lg font-semibold text-sm hover:bg-alta-teal-dark transition-colors whitespace-nowrap">
               Learn More
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
+              <svg className="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
             </span>
           </div>
         </div>

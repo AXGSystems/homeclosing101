@@ -5,7 +5,6 @@ import Link from "next/link";
 import PageHero from "@/components/PageHero";
 import { InlineAd } from "@/components/EliteProviders";
 import FirstTimeBuyerCTA from "@/components/FirstTimeBuyerCTA";
-import { SectionGate, AdGate, ModuleGate } from "@/components/Gate";
 
 const fmt = (n: number) => Math.round(n).toLocaleString();
 const fmtDollar = (n: number) => `$${fmt(Math.abs(n))}`;
@@ -251,22 +250,19 @@ export default function TrueCostPage() {
 
   return (
     <>
-      <SectionGate page="/true-cost" id="hero">
-        <PageHero
-          title="The True Cost of Homeownership"
-          subtitle="Your mortgage payment is just the beginning. Bankrate's 2025 study found hidden homeownership costs average $21,000 per year beyond the mortgage. Find out what your real monthly cost will be."
-          image="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1920&q=80"
-          breadcrumb={[
-            { label: "Tools & Calculators", href: "/mortgage-calculator" },
-            { label: "True Cost of Homeownership", href: "/true-cost" },
-          ]}
-        />
-      </SectionGate>
+      <PageHero
+        title="The True Cost of Homeownership"
+        subtitle="Your mortgage payment is just the beginning. Bankrate's 2025 study found hidden homeownership costs average $21,000 per year beyond the mortgage. Find out what your real monthly cost will be."
+        image="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1920&q=80"
+        breadcrumb={[
+          { label: "Tools & Calculators", href: "/mortgage-calculator" },
+          { label: "True Cost of Homeownership", href: "/true-cost" },
+        ]}
+      />
 
       <div className="py-1.5 lg:py-2">
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
           {/* Stat callout */}
-          <SectionGate page="/true-cost" id="stat-callout">
           <div className="mb-6 p-4 bg-[#fdf6e3] rounded-2xl border border-[#e8d5a0] border-l-4 border-l-[#d4a843] shadow-md">
             <div className="flex items-start gap-4">
               <div className="w-12 h-12 rounded-xl bg-[#d4a843]/10 flex items-center justify-center text-[#d4a843] shrink-0">
@@ -284,12 +280,9 @@ export default function TrueCostPage() {
               </div>
             </div>
           </div>
-          </SectionGate>
 
-          <SectionGate page="/true-cost" id="calculator">
           <div className="grid lg:grid-cols-[1fr_420px] gap-6">
             {/* Inputs */}
-            <SectionGate page="/true-cost" id="calculator" sub="inputs">
             <div className="space-y-5">
               {/* Home & Mortgage */}
               <div className="bg-white rounded-2xl border border-gray-100 border-l-4 border-l-[#0a7ea8] shadow-sm p-5">
@@ -474,11 +467,63 @@ export default function TrueCostPage() {
                   </div>
                 </div>
               </div>
+
+              {/* Budget Rule Callout — moved into left column to fill space */}
+              <div className="p-5 bg-gradient-to-r from-[#0a7ea8]/10 to-[#2d6b3f]/10 rounded-2xl border-2 border-[#0a7ea8]/30 shadow-md">
+                <div className="flex items-start gap-4">
+                  <div className="w-14 h-14 rounded-2xl bg-[#0a7ea8] flex items-center justify-center text-white shrink-0">
+                    <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-alta-navy text-lg mb-1">The 35% Budget Rule</h3>
+                    <p className="text-sm text-alta-gray leading-relaxed mb-3">
+                      Financial advisors recommend that your <strong className="text-alta-navy">total housing cost</strong> -- not just your mortgage -- should
+                      stay below <strong className="text-alta-navy">35% of your take-home pay</strong>. That includes property taxes, insurance, maintenance, HOA, and utilities.
+                    </p>
+                    <div className="bg-white/60 rounded-xl p-3 border border-gray-200">
+                      <p className="text-xs text-alta-gray mb-1">Based on your calculated total of <strong className="text-alta-navy">{fmtDollar(results.monthlyTotalCost)}/month</strong>, you would need:</p>
+                      <p className="text-lg font-bold text-alta-navy">
+                        {fmtDollar(results.monthlyTotalCost / 0.35)}/month take-home pay
+                      </p>
+                      <p className="text-[11px] text-alta-gray">
+                        That is {fmtDollar((results.monthlyTotalCost / 0.35) * 12)}/year after taxes to comfortably afford this home
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* What counts as hidden costs — short educational block */}
+              <div className="bg-white rounded-2xl border border-gray-100 border-l-4 border-l-[#d4a843] shadow-sm p-5">
+                <h3 className="font-bold text-alta-navy mb-3 text-sm">What Counts as a &ldquo;Hidden&rdquo; Cost?</h3>
+                <ul className="space-y-2.5 text-xs text-alta-gray">
+                  <li className="flex items-start gap-2">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#0a7ea8] mt-1.5 shrink-0" />
+                    <span><strong className="text-alta-navy">Property taxes</strong> vary widely by county — from under 0.5% in low-tax states to over 2.2% in New Jersey or Illinois.</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#2d6b3f] mt-1.5 shrink-0" />
+                    <span><strong className="text-alta-navy">Homeowner&apos;s insurance</strong> averages $1,800/yr but can triple in high-risk areas (hurricane, wildfire, flood).</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#d4a843] mt-1.5 shrink-0" />
+                    <span><strong className="text-alta-navy">Maintenance &amp; repairs</strong> typically run 1%–3% of the home&apos;s value each year — older homes lean higher.</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#8b6914] mt-1.5 shrink-0" />
+                    <span><strong className="text-alta-navy">HOA dues</strong> apply to 44% of U.S. homes; condos and planned communities often exceed $400/mo.</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#5b3a8c] mt-1.5 shrink-0" />
+                    <span><strong className="text-alta-navy">Utilities</strong> (electric, gas, water, trash, internet) average $300–$450/mo depending on home size and climate.</span>
+                  </li>
+                </ul>
+              </div>
             </div>
-            </SectionGate>
 
             {/* Results panel */}
-            <SectionGate page="/true-cost" id="calculator" sub="results">
             <div className="space-y-5">
               {/* Mortgage Only vs Real Cost */}
               <div className="rounded-2xl border-2 border-[#d4a843] bg-gradient-to-br from-[#d4a843]/5 to-[#d4a843]/10 p-5 shadow-md">
@@ -581,43 +626,11 @@ export default function TrueCostPage() {
                 </div>
               </div>
 
-              <AdGate name="InlineAd"><InlineAd /></AdGate>
-            </div>
-            </SectionGate>
-          </div>
-          </SectionGate>
-
-          {/* Budget Rule Callout */}
-          <SectionGate page="/true-cost" id="budget-rule">
-          <div className="mt-8 p-5 bg-gradient-to-r from-[#0a7ea8]/10 to-[#2d6b3f]/10 rounded-2xl border-2 border-[#0a7ea8]/30 shadow-md">
-            <div className="flex items-start gap-4">
-              <div className="w-14 h-14 rounded-2xl bg-[#0a7ea8] flex items-center justify-center text-white shrink-0">
-                <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-              </div>
-              <div>
-                <h3 className="font-bold text-alta-navy text-lg mb-1">The 35% Budget Rule</h3>
-                <p className="text-sm text-alta-gray leading-relaxed mb-3">
-                  Financial advisors recommend that your <strong className="text-alta-navy">total housing cost</strong> -- not just your mortgage -- should
-                  stay below <strong className="text-alta-navy">35% of your take-home pay</strong>. That includes property taxes, insurance, maintenance, HOA, and utilities.
-                </p>
-                <div className="bg-white/60 rounded-xl p-3 border border-gray-200">
-                  <p className="text-xs text-alta-gray mb-1">Based on your calculated total of <strong className="text-alta-navy">{fmtDollar(results.monthlyTotalCost)}/month</strong>, you would need:</p>
-                  <p className="text-lg font-bold text-alta-navy">
-                    {fmtDollar(results.monthlyTotalCost / 0.35)}/month take-home pay
-                  </p>
-                  <p className="text-[11px] text-alta-gray">
-                    That is {fmtDollar((results.monthlyTotalCost / 0.35) * 12)}/year after taxes to comfortably afford this home
-                  </p>
-                </div>
-              </div>
+              <InlineAd />
             </div>
           </div>
-          </SectionGate>
 
           {/* Hidden Costs Section */}
-          <SectionGate page="/true-cost" id="hidden-costs">
           <div className="mt-10 mb-6">
             <h2 className="text-xl font-bold text-alta-navy mb-1">Hidden Costs Most Buyers Miss</h2>
             <p className="text-sm text-alta-gray mb-6">
@@ -668,10 +681,8 @@ export default function TrueCostPage() {
               ))}
             </div>
           </div>
-          </SectionGate>
 
           {/* Key Assumptions */}
-          <SectionGate page="/true-cost" id="assumptions">
           <div className="mt-8 bg-alta-light rounded-2xl border border-gray-200 p-5">
             <h3 className="font-bold text-alta-navy mb-3 flex items-center gap-2">
               <svg className="w-4 h-4 text-alta-teal" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
@@ -697,12 +708,10 @@ export default function TrueCostPage() {
               ))}
             </div>
           </div>
-          </SectionGate>
 
-          <ModuleGate name="FirstTimeBuyerCTA"><FirstTimeBuyerCTA /></ModuleGate>
+          <FirstTimeBuyerCTA />
 
           {/* Related Topics */}
-          <SectionGate page="/true-cost" id="related-topics">
           <div className="mt-8 mb-8">
             <h3 className="font-bold text-alta-navy mb-4">Related Topics</h3>
             <div className="grid sm:grid-cols-3 gap-3">
@@ -749,7 +758,6 @@ export default function TrueCostPage() {
               ))}
             </div>
           </div>
-          </SectionGate>
         </div>
       </div>
     </>

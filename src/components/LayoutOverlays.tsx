@@ -5,6 +5,7 @@ import {
   LazyOnboardingTour,
   LazyScrollToTop,
   LazyClosingFolderButton,
+  LazyCookieConsent,
 } from "@/components/lazy";
 import { ModuleGate } from "@/components/Gate";
 
@@ -21,6 +22,8 @@ export default function LayoutOverlays() {
       <ModuleGate name="HomeClosingAI"><LazyHomeClosingAI /></ModuleGate>
       <ModuleGate name="ClosingFolderButton"><LazyClosingFolderButton /></ModuleGate>
       <ModuleGate name="OnboardingTour"><LazyOnboardingTour /></ModuleGate>
+      {/* Cookie consent is a compliance element — always rendered (not gated). */}
+      <LazyCookieConsent />
     </>
   );
 }
