@@ -38,57 +38,24 @@ const geistMono = Geist_Mono({
   display: "swap",
 });
 
-const siteUrl = "https://homeclosing101.vercel.app";
-
+// HC101 is a PRIVATE, ultra-admin-only environment. Metadata is intentionally
+// BLANK/generic and hard-noindexed — no title, description, keywords, or OG data
+// that could surface in Google or an AI search. Crawlers only ever reach /login.
 export const metadata: Metadata = {
-  metadataBase: new URL(siteUrl),
-  title: {
-    default: "HomeClosing101 | Find. Buy. Protect.",
-    template: "%s | HomeClosing101",
-  },
-  description:
-    "An educational initiative of the American Land Title Association helping homebuyers understand the closing process and protect their property investment.",
-  keywords: [
-    "home closing",
-    "title insurance",
-    "real estate closing",
-    "property rights",
-    "ALTA",
-    "homebuyer education",
-    "closing costs",
-    "first time homebuyer",
-    "title search",
-    "escrow",
-  ],
-  openGraph: {
-    type: "website",
-    locale: "en_US",
-    url: siteUrl,
-    siteName: "HomeClosing101",
-    title: "HomeClosing101 | Find. Buy. Protect.",
-    description:
-      "An educational initiative of the American Land Title Association helping homebuyers understand the closing process and protect their property investment.",
-    images: [
-      {
-        url: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1200&h=630&fit=crop&q=80",
-        width: 1200,
-        height: 630,
-        alt: "HomeClosing101 - Your guide to the home closing process",
-      },
-    ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "HomeClosing101 | Find. Buy. Protect.",
-    description:
-      "An educational initiative of the American Land Title Association helping homebuyers understand the closing process and protect their property investment.",
-    images: [
-      "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1200&h=630&fit=crop&q=80",
-    ],
-  },
+  title: "Private",
+  description: "",
   robots: {
-    index: true,
-    follow: true,
+    index: false,
+    follow: false,
+    nocache: true,
+    googleBot: {
+      index: false,
+      follow: false,
+      noimageindex: true,
+      "max-snippet": 0,
+      "max-image-preview": "none",
+      "max-video-preview": 0,
+    },
   },
 };
 

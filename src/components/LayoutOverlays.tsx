@@ -3,7 +3,6 @@
 import { usePathname } from "next/navigation";
 import {
   LazyHomeClosingAI,
-  LazyOnboardingTour,
   LazyScrollToTop,
   LazyClosingFolderButton,
   LazyCookieConsent,
@@ -28,7 +27,9 @@ export default function LayoutOverlays() {
       <ModuleGate name="ScrollToTop"><LazyScrollToTop /></ModuleGate>
       <ModuleGate name="HomeClosingAI"><LazyHomeClosingAI /></ModuleGate>
       <ModuleGate name="ClosingFolderButton"><LazyClosingFolderButton /></ModuleGate>
-      <ModuleGate name="OnboardingTour"><LazyOnboardingTour /></ModuleGate>
+      {/* Onboarding tour ("what's new" overlay) removed for now — was bleeding
+          through over content. Restore this line to bring it back. */}
+      {/* <ModuleGate name="OnboardingTour"><LazyOnboardingTour /></ModuleGate> */}
       {/* Cookie consent is a compliance element — always rendered (not gated). */}
       <LazyCookieConsent />
     </>
